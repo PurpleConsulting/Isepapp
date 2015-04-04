@@ -3,21 +3,21 @@
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-		<link rel="stylesheet" href="../css/bootstrap.min.css">
+		<link rel="stylesheet" href="./css/bootstrap.min.css">
 		<title>Form</title>
 	</head>
 	<body>
 		<div class="container-fluid">
 			<h1>Form</h1>
 			<div class="col-md-6">
-			<form>
+			<form method="post" action="/Isepapp/Signin">
 			  <div class="form-group">
-			    <label for="exampleInputEmail1">Email address</label>
-			    <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter email">
+			    <label for="id">Id</label>
+			    <input type="text" class="form-control" name="id" id="id" placeholder="Enter id">
 			  </div>
 			  <div class="form-group">
-			    <label for="exampleInputPassword1">Password</label>
-			    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+			    <label for="password">Password</label>
+			    <input type="password" class="form-control" name="password" id="password" placeholder="Password">
 			  </div>
 			  <button type="submit" class="btn btn-default">Submit</button>
 			</form>
