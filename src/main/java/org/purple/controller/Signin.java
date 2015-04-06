@@ -3,6 +3,11 @@ package org.purple.controller;
 import java.io.IOException;
 
 
+
+import java.util.ArrayList;
+import java.util.List;
+
+
 /*** servlet import ***/
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -11,8 +16,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 
+
+
+
 /*** Purple import ***/
 import org.purple.model.Connection;
+import org.purple.model.Page;
 import org.purple.model.User;
 
 /**
@@ -43,8 +52,19 @@ public class Signin extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		
+		//Ajouter tous les CSS et JS qu'on a besoin pour les afficher dans template.jsp
+		String css[] = {"maincss1.css", "maincss2.css"};
+		String js[] = {"mainjs1.js", "mainjs2.js"};
+
+		
+		//On cree le constructeur page qui va contenir tous les pages
+		Page p = new Page(css, js);		
+		request.setAttribute("pages", p);
+		
 		if(request.getParameter("id").equals("") ||  request.getParameter("password").equals("")){
 			this.getServletContext().getRequestDispatcher("/jsp/signin.jsp").forward(request, response);
+			
 		} else {
 			String url = "";
 			Connection c = new Connection();
@@ -55,12 +75,15 @@ public class Signin extends HttpServlet {
 				url = "/template.jsp";
 				User user = c.buildUser(id);
 				request.getSession(true).setAttribute("user", user);
+				
 			} else {
 				url = "/jsp/signin.jsp";
 			}
 		
 			this.getServletContext().getRequestDispatcher(url).forward(request, response);
+			
 		}
+		
 		
 	}
 
