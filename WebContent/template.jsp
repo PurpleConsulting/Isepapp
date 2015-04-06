@@ -18,8 +18,7 @@
 		<c:forEach var="currentName" items="${pages.css}" varStatus="status">
       		<link rel="stylesheet" href="./css/<c:out value="${currentName}"/>">
    	 	</c:forEach>
-  
-  
+    
 	</head>
 	<body>
 		<header class="container-fluid">
