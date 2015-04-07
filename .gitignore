@@ -36,5 +36,8 @@
 ehthumbs.db
 Thumbs.db
 
-# 
+# Custom #
+##########
 *.MF
+*.properties
+/target/
