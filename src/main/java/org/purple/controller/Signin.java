@@ -1,9 +1,9 @@
 package org.purple.controller;
+
 /*** java import ***/
 import java.io.IOException;
-
-
-
+import java.util.ArrayList;
+import java.util.List;
 
 /*** servlet import ***/
 import javax.servlet.ServletException;
@@ -11,9 +11,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-
-
 
 import org.purple.bean.User;
 import org.purple.constant.Bdd;
@@ -26,30 +23,49 @@ import org.purple.model.DaoUsers;
 @WebServlet("/Signin")
 public class Signin extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public Signin() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#HttpServlet()
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		this.getServletContext().getRequestDispatcher("/jsp/signin.jsp").forward(request, response);
+	public Signin() {
+		super();
+		// TODO Auto-generated constructor stub
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		if(request.getParameter("id").equals("") ||  request.getParameter("password").equals("")){
-			this.getServletContext().getRequestDispatcher("/jsp/signin.jsp").forward(request, response);
+		this.getServletContext().getRequestDispatcher("/jsp/signin.jsp")
+				.forward(request, response);
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void doPost(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+
+		// On cree le constructeur page qui va contenir tous les pages
+		Page p = new Page();
+
+		// On ajout le css
+
+		p.setCss("maincss1.css", "maincss2.css");
+		p.setJs("mainjs1.js", "mainjs2.js");
+		p.setContent("testContent.jsp");
+		request.setAttribute("pages", p);
+
+		if (request.getParameter("id").equals("")
+				|| request.getParameter("password").equals("")) {
+			this.getServletContext().getRequestDispatcher("/jsp/signin.jsp")
+					.forward(request, response);
+
 		} else {
 			String url = "";
 			DaoUsers c = new DaoUsers(Bdd.getCo());
@@ -59,12 +75,16 @@ public class Signin extends HttpServlet {
 				url = "/template.jsp";
 				User user = c.select(id);
 				request.getSession(true).setAttribute("user", user);
+
 			} else {
 				url = "/jsp/signin.jsp";
 			}
-			this.getServletContext().getRequestDispatcher(url).forward(request, response);
+
+			this.getServletContext().getRequestDispatcher(url)
+					.forward(request, response);
+
 		}
-		
+
 	}
 
 }
