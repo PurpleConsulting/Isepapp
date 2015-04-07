@@ -3,6 +3,8 @@ package org.purple.controller;
 import java.io.IOException;
 
 
+
+
 /*** servlet import ***/
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -11,9 +13,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 
+
+
+import org.purple.bean.User;
+import org.purple.constant.Bdd;
 /*** Purple import ***/
-import org.purple.model.Connection;
-import org.purple.model.User;
+import org.purple.model.DaoUsers;
 
 /**
  * Servlet implementation class Signin
@@ -47,13 +52,12 @@ public class Signin extends HttpServlet {
 			this.getServletContext().getRequestDispatcher("/jsp/signin.jsp").forward(request, response);
 		} else {
 			String url = "";
-			Connection c = new Connection();
-			String pwd = request.getParameter("password");
-			String id = request.getParameter("id");
+			DaoUsers c = new DaoUsers(Bdd.getCo());
+			int id = Integer.parseInt(request.getParameter("id"));
 			
-			if(c.signIn(id, pwd)){
+			if(c.find(id)){
 				url = "/template.jsp";
-				User user = c.buildUser(id);
+				User user = c.select(id);
 				request.getSession(true).setAttribute("user", user);
 			} else {
 				url = "/jsp/signin.jsp";

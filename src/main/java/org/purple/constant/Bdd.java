@@ -1,17 +1,32 @@
 package org.purple.constant;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 public class Bdd {
 
 	/**
 	 * 
 	 */
 	
-	public static final String bddConnector = "com.myDatabase.myjbdc.Driver";
+	public static final String BDDCLIENT = "com.mysql.jdbc.Driver";
 	
-	public static final String bddUser = "root";
-	public static final String bddPasswd = "root";
-	public static final String bddHost = "127.0.0.1";
-	public static final String bddPort = "8080";
-	public static final String bddUrl = ""; 
+	public static final String BDDUSER = "isep";
+	public static final String BDDPASSWRD = "paris06";
+	public static final String BDDHOST = "ns370799.ip-91-121-193.eu";
+	public static final String BDDPORT = "6311";
+	public static final String BDDSCHEMA = "APPDB";
+	public static final String BDDURL = "jdbc:mysql://" + BDDHOST + ":"+ BDDPORT + "/" + BDDSCHEMA;
+	
+	public static final Connection getCo(){
+		Connection co = null;
+		try {
+			co = DriverManager.getConnection(Bdd.BDDURL, Bdd.BDDUSER, Bdd.BDDPASSWRD);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return co;
+	}
 	
 }
