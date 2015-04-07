@@ -1,5 +1,7 @@
 package org.purple.model;
 
+import org.purple.bean.User;
+
 public class Connection {
 
 	private String testId = "abc";

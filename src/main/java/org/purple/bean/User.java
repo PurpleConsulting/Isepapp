@@ -1,4 +1,4 @@
-package org.purple.model;
+package org.purple.bean;
 
 public class User {
 

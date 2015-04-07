@@ -4,9 +4,9 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
+import org.purple.bean.User;
 /*** Purple import ***/
 import org.purple.model.Connection;
-import org.purple.model.User;
 
 public class testConnection {
 
