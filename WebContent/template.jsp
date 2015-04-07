@@ -12,7 +12,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" href="./css/bootstrap.min.css">
-<jsp:useBean id="pages" type="org.purple.model.Page" scope="request" />
+<jsp:useBean id="pages" type="org.purple.bean.Page" scope="request" />
 
 <!-- On affiche tous les css -->
 
@@ -29,9 +29,7 @@
 	</header>
 
 	<div id="content" class="container-fluid">
-		<c:forEach var="content" items="${pages.getContent()}">
-			<c:import url="jsp/${content}"></c:import>
-		</c:forEach>
+		<c:import url="jsp/${pages.getContent()}"></c:import>
 	</div>
 
 	<footer> </footer>
