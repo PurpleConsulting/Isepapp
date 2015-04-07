@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+
 /*** servlet import ***/
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -12,6 +13,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.purple.bean.Page;
 import org.purple.bean.User;
 import org.purple.constant.Bdd;
 /*** Purple import ***/
@@ -53,9 +55,7 @@ public class Signin extends HttpServlet {
 
 		// On cree le constructeur page qui va contenir tous les pages
 		Page p = new Page();
-
 		// On ajout le css
-
 		p.setCss("maincss1.css", "maincss2.css");
 		p.setJs("mainjs1.js", "mainjs2.js");
 		p.setContent("testContent.jsp");
