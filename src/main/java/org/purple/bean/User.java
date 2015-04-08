@@ -17,12 +17,8 @@ public class User {
 		 * Constructor with all the user parameters 
 		 * (V1.0 only 3 parameters firstName, lastName, position)
 		 */
-		public User(int id, String firstName, String lastName, String position ){
-			setId(id);
-			setFirstName(firstName);
-			setFirstName(firstName);
-			setLastName(lastName);
-			setPosition(position);
+		public User(int id){
+			
 		}
 		
 		public int getId() {

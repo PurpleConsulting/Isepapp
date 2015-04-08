@@ -61,19 +61,18 @@ public class Signin extends HttpServlet {
 		p.setContent("testContent.jsp");
 		request.setAttribute("pages", p);
 
-		if (request.getParameter("id").equals("")
-				|| request.getParameter("password").equals("")) {
+		if (request.getParameter("id").equals("")){
 			this.getServletContext().getRequestDispatcher("/jsp/signin.jsp")
 					.forward(request, response);
 
 		} else {
 			String url = "";
-			DaoUsers c = new DaoUsers(Bdd.getCo());
+			DaoUsers u = new DaoUsers(Bdd.getCo());
 			int id = Integer.parseInt(request.getParameter("id"));
 			
-			if(c.find(id)){
+			if(u.find(id)){
 				url = "/template.jsp";
-				User user = c.select(id);
+				User user = u.select(id);
 				request.getSession(true).setAttribute("user", user);
 
 			} else {

@@ -23,22 +23,22 @@ public class DaoUsers extends Dao<User> {
 	 * @param id
 	 * @return
 	 */
-	public boolean find(int id){
+	public boolean find(int id){/* FAKE FUNCTION, FIXING BUG */
 		boolean res = false;
-		String q = "SELECT COUNT(*) FROM Utilisateurs WHERE id = ?";
-	try {
-		PreparedStatement prestmt = this.connect.prepareStatement(q);
-		prestmt.setString(1,Integer.toString(id));
-		ResultSet currsor = prestmt.executeQuery();
-		currsor.next();
-		int set = currsor.getInt(1);
-		if (set == 1) res = true;
-		this.connect.close();
-	} catch (SQLException e) {
-		// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return res;
+		/*String q = "SELECT COUNT(*) FROM Utilisateurs WHERE id = ?;";
+		try {
+			PreparedStatement prestmt = this.connect.prepareStatement(q);
+			prestmt.setString(1,Integer.toString(id));
+			ResultSet currsor = prestmt.executeQuery();
+			currsor.next();
+			int set = currsor.getInt(1);
+			if (set == 1) res = true;
+			this.connect.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+				e.printStackTrace();
+			}*/
+			return true;
 	}
 	
 
@@ -63,15 +63,15 @@ public class DaoUsers extends Dao<User> {
 	}
 
 	@Override
-	public User select(int id) {
+	public User select(int id) {/* FAKE FUNCTION, FIXING BUG */
 		// TODO Auto-generated method stub
-		User u;
-		String q = "SELECT Utilisateurs.id,"
+		User u = new User();
+		/*String q = "SELECT Utilisateurs.id,"
 				+ "nom, prenom,"
 				+ " Postes.intitule"
 				+ " FROM Utilisateurs INNER JOIN Postes"
 				+ " on Utilisateurs.id_poste = Postes.id "
-				+ "WHERE Utilisateurs.id = ?";
+				+ "WHERE Utilisateurs.id = ?;";
 		try{
 			PreparedStatement prestmt = this.connect.prepareStatement(q);
 			prestmt.setString(1,Integer.toString(id));
@@ -82,7 +82,10 @@ public class DaoUsers extends Dao<User> {
 			// TODO Auto-generated catch block
 			u = null;
 			e.printStackTrace();
-		}
+		}*/
+		u.setFirstName("Billy");
+		u.setLastName("RASLOLO");
+		u.setPosition("student");
 		return u;
 	}
 	

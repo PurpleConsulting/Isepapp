@@ -4,6 +4,7 @@ import java.sql.*;
 
 /*** Junit import ***/
 import junit.framework.TestCase;
+
 import org.junit.Test;
 
 /*** Purple import ***/
@@ -26,7 +27,10 @@ public class TestDaoUser extends TestCase{
 			Connection co = DriverManager.getConnection(Bdd.BDDURL, Bdd.BDDUSER, Bdd.BDDPASSWRD);
 			co.close();
 		} catch(SQLException e){
-			System.out.print(e);
+			e.printStackTrace();
+			fail();
+		} catch(NullPointerException e){
+			e.printStackTrace();
 			fail();
 		}
 	}
