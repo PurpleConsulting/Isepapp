@@ -35,14 +35,14 @@ public abstract class Dao<T> {
   * @param id
   * @return T
   */
-  public abstract T select(int id);
+  public abstract T select(String id);
   
   /**
    * Retourne un boolean si l'élément id est en base
    * @param id
    * @return T
    */
-  public abstract boolean find(int id);
+  public abstract boolean find(String id);
   
   /**
    * Compte le nombre de tuple d'id
