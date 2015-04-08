@@ -23,7 +23,7 @@ public class DaoUsers extends Dao<User> {
 	 * @param id
 	 * @return
 	 */
-	public boolean find(int id){/* FAKE FUNCTION, FIXING BUG */
+	public boolean find(String id){/* FAKE FUNCTION, FIXING BUG */
 		boolean res = false;
 		/*String q = "SELECT COUNT(*) FROM Utilisateurs WHERE id = ?;";
 		try {
@@ -63,7 +63,7 @@ public class DaoUsers extends Dao<User> {
 	}
 
 	@Override
-	public User select(int id) {/* FAKE FUNCTION, FIXING BUG */
+	public User select(String id) {/* FAKE FUNCTION, FIXING BUG */
 		// TODO Auto-generated method stub
 		User u = new User();
 		/*String q = "SELECT Utilisateurs.id,"

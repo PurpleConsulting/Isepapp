@@ -68,7 +68,7 @@ public class Signin extends HttpServlet {
 		} else {
 			String url = "";
 			DaoUsers u = new DaoUsers(Bdd.getCo());
-			int id = Integer.parseInt(request.getParameter("id"));
+			String id = request.getParameter("id");
 			
 			if(u.find(id)){
 				url = "/template.jsp";
