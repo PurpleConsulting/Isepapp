@@ -2,7 +2,7 @@ package org.purple.bean;
 
 public class User {
 	
-		private int id;
+		private String id;
 		
 		private String firstName;
 		private String lastName;
@@ -21,10 +21,10 @@ public class User {
 			
 		}
 		
-		public int getId() {
+		public String getId() {
 			return id;
 		}
-		public void setId(int id) {
+		public void setId(String id) {
 			this.id = id;
 		}
 		public String getFirstName() {

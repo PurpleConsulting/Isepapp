@@ -25,10 +25,10 @@ public class DaoUsers extends Dao<User> {
 	 */
 	public boolean find(String id){/* FAKE FUNCTION, FIXING BUG */
 		boolean res = false;
-		/*String q = "SELECT COUNT(*) FROM Utilisateurs WHERE id = ?;";
+		String q = "SELECT COUNT(*) FROM Utilisateurs WHERE id = ?;";
 		try {
 			PreparedStatement prestmt = this.connect.prepareStatement(q);
-			prestmt.setString(1,Integer.toString(id));
+			prestmt.setString(1,id);
 			ResultSet currsor = prestmt.executeQuery();
 			currsor.next();
 			int set = currsor.getInt(1);
@@ -37,8 +37,8 @@ public class DaoUsers extends Dao<User> {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 				e.printStackTrace();
-			}*/
-			return true;
+			}
+			return res;
 	}
 	
 
@@ -66,7 +66,7 @@ public class DaoUsers extends Dao<User> {
 	public User select(String id) {/* FAKE FUNCTION, FIXING BUG */
 		// TODO Auto-generated method stub
 		User u = new User();
-		/*String q = "SELECT Utilisateurs.id,"
+		String q = "SELECT Utilisateurs.id,"
 				+ "nom, prenom,"
 				+ " Postes.intitule"
 				+ " FROM Utilisateurs INNER JOIN Postes"
@@ -74,18 +74,21 @@ public class DaoUsers extends Dao<User> {
 				+ "WHERE Utilisateurs.id = ?;";
 		try{
 			PreparedStatement prestmt = this.connect.prepareStatement(q);
-			prestmt.setString(1,Integer.toString(id));
+			prestmt.setString(1,id);
 			ResultSet currsor = prestmt.executeQuery();
 			currsor.next();
-			u = new User(currsor.getInt(1), currsor.getString(2), currsor.getString(3), currsor.getString(4));
+			u.setId(currsor.getString(1));
+			u.setFirstName(currsor.getString(2));
+			u.setLastName(currsor.getString(3));
+			u.setPosition(currsor.getString(4));
 		}catch (SQLException e){
 			// TODO Auto-generated catch block
 			u = null;
 			e.printStackTrace();
-		}*/
-		u.setFirstName("Billy");
+		}
+		/*u.setFirstName("Billy");
 		u.setLastName("RASLOLO");
-		u.setPosition("student");
+		u.setPosition("student");*/
 		return u;
 	}
 	
