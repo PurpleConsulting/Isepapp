@@ -42,7 +42,7 @@ public class TestDaoUser extends TestCase{
 		assertTrue(u.find(id));		
 	}
 	
-	
+
 	@Test
 	public void testSelect() {
 		String id = "8333";
@@ -52,5 +52,6 @@ public class TestDaoUser extends TestCase{
 		assertEquals(beanUser.getFirstName(), "DVD");
 		assertEquals(beanUser.getLastName(), "ldi");
 	}*/
+
 
 }
