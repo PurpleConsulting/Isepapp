@@ -2,8 +2,10 @@ package org.purple.controller;
 
 /*** java import ***/
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
+
 
 
 /*** servlet import ***/
@@ -52,7 +54,7 @@ public class Signin extends HttpServlet {
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-
+		
 		// On cree le constructeur page qui va contenir tous les pages
 		Page p = new Page();
 		// On ajout le css
@@ -60,8 +62,17 @@ public class Signin extends HttpServlet {
 		p.setJs("mainjs1.js", "mainjs2.js");
 		p.setContent("testContent.jsp");
 		request.setAttribute("pages", p);
+		
 
-		if (request.getParameter("pseudo").equals("")){
+		if (request.getParameter("Ajaxpseudo") != null){
+			Boolean res = false;
+			DaoUsers u = new DaoUsers(Bdd.getCo());
+			String param = request.getParameter("Ajaxpseudo");
+			if(u.find(param)) res = true;
+			response.setHeader("content-type", "application/json");
+			response.getWriter().write("{\"result\": {\"find\": \"" + res.toString() +"\" }}");
+			
+		} else if (request.getParameter("pseudo") == null){
 			this.getServletContext().getRequestDispatcher("/jsp/signin.jsp")
 					.forward(request, response);
 
