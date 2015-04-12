@@ -1,21 +1,20 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="sql" uri="http://java.sun.com/jsp/jstl/sql"%>
-
+<!doctype html>
 <c:if test="${sessionScope.user == null}">
 	<c:redirect url="/Signin" />
 </c:if>
-<!doctype html>
+<c:if test="${pages == null}">
+	<jsp:useBean id="pages" class="org.purple.bean.Page"></jsp:useBean>  
+	<jsp:setProperty property="content" value="home.jsp" name="pages"  />  
+</c:if>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" href="./css/bootstrap.min.css">
-<jsp:useBean id="pages" type="org.purple.bean.Page" scope="request" />
-
 <!-- On affiche tous les css -->
-
 <c:forEach var="currentName" items="${pages.getCss()}"
 	varStatus="status">
 	<link rel="stylesheet" href="./css/<c:out value="${currentName}"/>">

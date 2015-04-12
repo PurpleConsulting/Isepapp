@@ -5,5 +5,6 @@
   		<li role="presentation"><a href="#">du menu</a></li>
   		<li role="presentation"><a href="#">pour</a></li>
   		<li role="presentation"><a href="#">etudiant</a></li>
+  		<li role="presentation"><a href="Signout">Déconnection</a></li>
 	</ul>
 </nav>

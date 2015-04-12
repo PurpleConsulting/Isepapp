@@ -42,12 +42,5 @@ public abstract class Dao<T> {
    * @param id
    * @return T
    */
-  public abstract boolean find(String id);
-  
-  /**
-   * Compte le nombre de tuple d'id
-   * @param id
-   * @return T
-   */
-  public abstract int count(int id);
+
 }

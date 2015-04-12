@@ -1,3 +1,0 @@
-<!--<c:if test="${response.session.user == null}">
-	 <c:redirect url="/jsp/login.jsp"/> 
-</c:if>-->
