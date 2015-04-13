@@ -56,12 +56,12 @@ public class Signin extends HttpServlet {
 		// TODO Auto-generated method stub
 		
 		// On cree le constructeur page qui va contenir tous les pages
-		Page p = new Page();
+		Page pp = new Page();
 		// On ajout le css
-		p.setCss("maincss1.css", "maincss2.css");
-		p.setJs("mainjs1.js", "mainjs2.js");
-		p.setContent("testContent.jsp");
-		request.setAttribute("pages", p);
+		pp.setCss("maincss1.css", "maincss2.css");
+		pp.setJs("mainjs1.js", "mainjs2.js");
+		pp.setContent("testContent.jsp");
+		request.setAttribute("pages", pp);
 		
 
 		if (request.getParameter("Ajaxpseudo") != null){
@@ -82,11 +82,18 @@ public class Signin extends HttpServlet {
 			String pseudo = request.getParameter("pseudo");
 			User user = u.select(pseudo);
 			if(user != null){
+				
 				url = "/template.jsp";
 				request.getSession(true).setAttribute("user", user);
 
 			} else {
+				Page p = new Page();
+				p.setError(true);
+				p.setErrorMessage("Un problème est survenu lors de l'établissement de la connection. "
+						+ "Pour toute récupération de mot de passe veuillez vous rapprocher de l'administration de l'ISEP.");
+				request.setAttribute("pages", p);
 				url = "/jsp/signin.jsp";
+				
 			}
 	
 			u.close();
