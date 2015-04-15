@@ -43,6 +43,10 @@ public class Signin extends HttpServlet {
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		Page p = new Page();
+		p.setContent("signin.jsp");
+		p.setTitle("ISEP / APP - Connection");
+		request.setAttribute("pages", p);
 		this.getServletContext().getRequestDispatcher("/jsp/signin.jsp")
 				.forward(request, response);
 	}
@@ -56,7 +60,7 @@ public class Signin extends HttpServlet {
 		// TODO Auto-generated method stub
 		
 		// On cree le constructeur page qui va contenir tous les pages
-		Page pp = new Page();
+		Page pp = new Page();                            
 		// On ajout le css
 		pp.setCss("maincss1.css", "maincss2.css");
 		pp.setJs("mainjs1.js", "mainjs2.js");
@@ -88,11 +92,13 @@ public class Signin extends HttpServlet {
 
 			} else {
 				Page p = new Page();
+				p.setTitle("ISEP / APP - Connection");
+				p.setContent("signin.jsp");
 				p.setError(true);
 				p.setErrorMessage("Un problème est survenu lors de l'établissement de la connection. "
 						+ "Pour toute récupération de mot de passe veuillez vous rapprocher de l'administration de l'ISEP.");
 				request.setAttribute("pages", p);
-				url = "/jsp/signin.jsp";
+				url = "/jsp/sigin.jsp";
 				
 			}
 	

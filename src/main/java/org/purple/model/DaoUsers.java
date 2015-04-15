@@ -70,6 +70,7 @@ public class DaoUsers extends Dao<User> {
 		return false;
 	}
 
+
 	@Override
 	public User select(String pseudo) {/* FAKE FUNCTION, FIXING BUG */
 		// TODO Auto-generated method stub

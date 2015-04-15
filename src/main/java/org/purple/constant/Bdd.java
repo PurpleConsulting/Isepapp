@@ -10,17 +10,17 @@ import javax.sql.DataSource;
 
 @Resource(name="jdbc/APPDB")
 public class Bdd {
-  
-//	public static final String BDDUSER = "root";
-//	public static final String BDDPASSWRD = "root";
-//	public static final String BDDHOST = "127.0.0.1";
-//	public static final String BDDPORT = "3030";
-  
+/**
+ * 
+ */
+
+	public static final String BDDHOST = "172.16.179.8";
+	
+//	public static final String BDDHOST = "ns370799.ip-91-121-193.eu";
 
 	public static final String BDDCLIENT = "com.mysql.jdbc.Driver";
 	public static final String BDDUSER = "isep";
 	public static final String BDDPASSWRD = "paris06";
-	public static final String BDDHOST = "ns370799.ip-91-121-193.eu";
 	public static final String BDDPORT = "6311";
 	public static final String BDDSCHEMA = "APPDB";
 	public static final String BDDURL = "jdbc:mysql://" + BDDHOST + ":"+ BDDPORT + "/" + BDDSCHEMA;

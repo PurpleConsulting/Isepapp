@@ -1,0 +1,22 @@
+@CHARSET "UTF-8";
+/*** - - - HEADER  - - - ***/
+header{
+	background-color: #246482;
+	height: 160px;
+	margin-bottom:10px;
+}
+header h1{
+	color: white;
+}
+header h1, header span{
+	display: inline-block;
+	margin-right: 20px;
+	margin-top: 20px;
+}
+span.fa{
+	vertical-align: middle;
+}
+#formblock{
+	margin-top: 10px;
+	margin-bottom: 20px;
+}

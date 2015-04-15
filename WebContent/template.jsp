@@ -14,17 +14,23 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<title>Insert title here</title>
 		<link rel="stylesheet" href="./css/bootstrap.min.css">
+		<link rel="stylesheet" href="./css/font-awesome.min.css">
+		<link rel="stylesheet" href="./css/main.css">
 		<!-- On affiche tous les css -->
-		<c:forEach var="currentName" items="${pages.getCss()}"
-			varStatus="status">
+		<c:forEach var="currentName" items="${pages.getCss()}" varStatus="status">
 			<link rel="stylesheet" href="./css/<c:out value="${currentName}"/>">
 		</c:forEach>
 	</head>
 	<body>
-		<header class="container-fluid">
-			<h1>Isep App</h1>
-			<c:import url="jsp/nav_${sessionScope.user.position}.jsp"></c:import>
+		<header>
+			<div class="container-fluid">
+				<div class="col-md-offset-2">
+					<span style="color:white;" class="fa fa-flag fa-5x"></span>
+					<h1>ISEP - APP</h1>
+				</div>
+			</div>
 		</header>
+		<c:import url="jsp/nav_${sessionScope.user.position}.jsp"></c:import>
 		<div id="content" class="container-fluid">
 			<c:import url="jsp/${pages.getContent()}"></c:import>
 		</div>
@@ -33,10 +39,8 @@
 		<script type="text/javascript" src="./js/jquery-ui.min.js"></script>
 		<script type="text/javascript" src="./js/bootstrap.min.js"></script>
 		<!-- On affiche tous les js -->
-		<c:forEach var="currentName" items="${pages.getJs()}"
-			varStatus="status">
-			<script type="text/javascript"
-				src="./js/<c:out value="${currentName}"/>"></script>
+		<c:forEach var="currentName" items="${pages.getJs()}" varStatus="status">
+			<script type="text/javascript" src="./js/<c:out value="${currentName}"/>"></script>
 		</c:forEach>
 	</body>
 </html>
