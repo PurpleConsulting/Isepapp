@@ -5,57 +5,17 @@
 	<c:redirect url="/Home" />
 </c:if>
 <c:if test="${pages == null}">
-	<jsp:useBean id="pages" class="org.purple.bean.Page"></jsp:useBean>   
+	<jsp:useBean id="pages" class="org.purple.bean.Page"></jsp:useBean>  
+	<jsp:setProperty property="title" value="***ISEP / APP - Connection" name="pages"  />
 </c:if>
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-		<title>ISEP / APP - Connection</title>
+		<title><c:out value="${pages.getTitle()}"></c:out></title>
 		<link rel="stylesheet" href="./css/bootstrap.min.css">
 		<link rel="stylesheet" href="./css/font-awesome.min.css">
-		<style>
-			header{
-
-				background-color: #246482;
-				height: 160px;
-				margin-bottom:10px;
-			}
-			header h1{
-				color: white;
-			}
-			header h1, header span{
-				display: inline-block;
-				margin-right: 20px;
-				margin-top: 20px;
-			}
-			span.fa{
-				vertical-align: middle;
-			}
-			#formblock{
-				margin-top: 10px;
-				margin-bottom: 20px;
-			}
-			#formblock .alert-danger{
-			
-			}
-			form{
-				margin-top: 100px;
-				border-radius: 4px;
-				border: 0.5px #CCC solid;
-				padding: 50px;
-			}
-			.alert_input{
-				height: 34px;
-				margin-top:24px;
-				margin-bottom: 0px;
-				padding-bottom: 0px;
-			}
-			.alert_input p{
-				position: absolute;
-				top: 6px;
-				left: 10px;
-			}
-		</style>
+		<link rel="stylesheet" href="./css/main.css">
+		<link rel="stylesheet" href="./css/signin/style.css">
 	</head>
 	<body>
 		<header>
@@ -100,6 +60,6 @@
 		<script type="text/javascript" src="./js/jquery-2.1.3.min.js"></script>
 		<script type="text/javascript" src="./js/jquery-ui.min.js"></script>
 		<script type="text/javascript" src="./js/bootstrap.min.js"></script>
-		<script type="text/javascript" src="./js/signin.js"></script>
+		<script type="text/javascript" src="./js/signin/script.js"></script>
 	</body>
 </html>

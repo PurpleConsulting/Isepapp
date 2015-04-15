@@ -58,15 +58,6 @@ public class Signin extends HttpServlet {
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		
-		// On cree le constructeur page qui va contenir tous les pages
-		Page pp = new Page();                            
-		// On ajout le css
-		pp.setCss("maincss1.css", "maincss2.css");
-		pp.setJs("mainjs1.js", "mainjs2.js");
-		pp.setContent("testContent.jsp");
-		request.setAttribute("pages", pp);
-		
 
 		if (request.getParameter("Ajaxpseudo") != null){
 			Boolean res = false;
@@ -77,6 +68,8 @@ public class Signin extends HttpServlet {
 			response.getWriter().write("{\"result\": {\"find\": \"" + res.toString() +"\" }}");
 			
 		} else if (request.getParameter("pseudo") == null){
+			Page p = new Page();
+			p.setTitle("ISEP / APP - Connection");
 			this.getServletContext().getRequestDispatcher("/jsp/signin.jsp")
 					.forward(request, response);
 
@@ -86,14 +79,15 @@ public class Signin extends HttpServlet {
 			String pseudo = request.getParameter("pseudo");
 			User user = u.select(pseudo);
 			if(user != null){
-				
+				Page p = new Page();
+				p.setTitle("ISEP / APP - Home");
+				p.setContent("home.jsp");
 				url = "/template.jsp";
 				request.getSession(true).setAttribute("user", user);
 
 			} else {
 				Page p = new Page();
 				p.setTitle("ISEP / APP - Connection");
-				p.setContent("signin.jsp");
 				p.setError(true);
 				p.setErrorMessage("Un problème est survenu lors de l'établissement de la connection. "
 						+ "Pour toute récupération de mot de passe veuillez vous rapprocher de l'administration de l'ISEP.");
@@ -106,7 +100,5 @@ public class Signin extends HttpServlet {
 			this.getServletContext().getRequestDispatcher(url)
 					.forward(request, response);
 		}
-
 	}
-
 }

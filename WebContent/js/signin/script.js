@@ -1,3 +1,4 @@
+/*** JAVASCRIPT MODULE SIGNIN ***/
 var alert_re = new RegExp(/\^alert-/i);
 
 

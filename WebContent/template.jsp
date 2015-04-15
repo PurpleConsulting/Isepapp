@@ -7,12 +7,13 @@
 </c:if>
 <c:if test="${pages == null}">
 	<jsp:useBean id="pages" class="org.purple.bean.Page"></jsp:useBean>  
-	<jsp:setProperty property="content" value="home.jsp" name="pages"  />  
+	<jsp:setProperty property="content" value="home.jsp" name="pages"  />
+	<jsp:setProperty property="title" value="ISEP / APP - Home" name="pages"  />  
 </c:if>
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-		<title>Insert title here</title>
+		<title><c:out value="${pages.getTitle()}"></c:out></title>
 		<link rel="stylesheet" href="./css/bootstrap.min.css">
 		<link rel="stylesheet" href="./css/font-awesome.min.css">
 		<link rel="stylesheet" href="./css/main.css">
