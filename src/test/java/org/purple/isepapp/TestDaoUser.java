@@ -35,14 +35,23 @@ public class TestDaoUser extends TestCase{
 		}
 	}
 	
-	@Test
+	/*@Test
 	public void testFind() {
 		DaoUsers u = new DaoUsers(Bdd.getCo());
-		String  id = "8333";
+		String id = "8333";
 		assertTrue(u.find(id));		
 	}
 	
-	
+
+	@Test
+	public void testSelect() {
+		String id = "8333";
+		DaoUsers u = new DaoUsers(Bdd.getCo());
+		User beanUser = u.select(id);
+		
+		assertEquals(beanUser.getFirstName(), "DVD");
+		assertEquals(beanUser.getLastName(), "ldi");
+	}*/
 
 
 }

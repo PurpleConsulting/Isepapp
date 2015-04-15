@@ -1,0 +1,18 @@
+/*** CSS SINGIN MODULE ***/
+form{
+	margin-top: 100px;
+	border-radius: 4px;
+	border: 0.5px #CCC solid;
+	padding: 50px;
+}
+.alert_input{
+	height: 34px;
+	margin-top:24px;
+	margin-bottom: 0px;
+	padding-bottom: 0px;
+}
+.alert_input p{
+	position: absolute;
+	top: 6px;
+	left: 10px;
+}

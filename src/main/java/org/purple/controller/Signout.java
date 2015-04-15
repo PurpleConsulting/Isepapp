@@ -7,20 +7,19 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import org.purple.bean.Page;
+import javax.servlet.http.HttpSession;
 
 /**
- * Servlet implementation class Home
+ * Servlet implementation class Signout
  */
-@WebServlet("/Home")
-public class Home extends HttpServlet {
+@WebServlet("/Signout")
+public class Signout extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public Home() {
+    public Signout() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,10 +29,9 @@ public class Home extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		Page p = new Page();
-		p.setContent("testContent.jsp");
-		request.setAttribute("pages", p);
-		response.sendRedirect("/Isepapp/template.jsp");
+		HttpSession session = request.getSession();
+		session.invalidate();
+		request.getRequestDispatcher("/").forward(request, response);
 	}
 
 	/**

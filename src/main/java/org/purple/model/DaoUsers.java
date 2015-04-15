@@ -17,6 +17,15 @@ public class DaoUsers extends Dao<User> {
 		// TODO Auto-generated constructor stub
 	}
 	
+	public void close() {
+		try {
+			this.connect.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
 	/**
 	 * A minimalist function for connection. Should be replace by the LDAP protocol.
 	 * NEED TO CLEAN UP THIS FUNCTION!!!
@@ -25,20 +34,19 @@ public class DaoUsers extends Dao<User> {
 	 */
 	public boolean find(String id){/* FAKE FUNCTION, FIXING BUG */
 		boolean res = false;
-		/*String q = "SELECT COUNT(*) FROM Utilisateurs WHERE id = ?;";
+		String q = "SELECT COUNT(*) FROM Users WHERE pseudo = ?;";
 		try {
 			PreparedStatement prestmt = this.connect.prepareStatement(q);
-			prestmt.setString(1,Integer.toString(id));
+			prestmt.setString(1,id);
 			ResultSet currsor = prestmt.executeQuery();
 			currsor.next();
 			int set = currsor.getInt(1);
 			if (set == 1) res = true;
-			this.connect.close();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 				e.printStackTrace();
-			}*/
-			return true;
+			}
+			return res;
 	}
 	
 
@@ -62,30 +70,32 @@ public class DaoUsers extends Dao<User> {
 		return false;
 	}
 
+
 	@Override
-	public User select(String id) {/* FAKE FUNCTION, FIXING BUG */
+	public User select(String pseudo) {/* FAKE FUNCTION, FIXING BUG */
 		// TODO Auto-generated method stub
-		User u = new User();
-		/*String q = "SELECT Utilisateurs.id,"
-				+ "nom, prenom,"
-				+ " Postes.intitule"
-				+ " FROM Utilisateurs INNER JOIN Postes"
-				+ " on Utilisateurs.id_poste = Postes.id "
-				+ "WHERE Utilisateurs.id = ?;";
+		User u = null;
+		String q = "SELECT Users.id,"
+				+ "Users.last_name, Users.first_name,"
+				+ " Positions.title"
+				+ " FROM Users INNER JOIN Positions"
+				+ " on Users.id_post = Positions.id "
+				+ "WHERE Users.pseudo = ? ";
 		try{
 			PreparedStatement prestmt = this.connect.prepareStatement(q);
-			prestmt.setString(1,Integer.toString(id));
+			prestmt.setString(1,pseudo);
 			ResultSet currsor = prestmt.executeQuery();
-			currsor.next();
-			u = new User(currsor.getInt(1), currsor.getString(2), currsor.getString(3), currsor.getString(4));
+			if(!currsor.next()) return u;
+			u = new User();
+			u.setId(currsor.getInt(1));
+			u.setFirstName(currsor.getString(2));
+			u.setLastName(currsor.getString(3));
+			u.setPosition(currsor.getString(4));
 		}catch (SQLException e){
 			// TODO Auto-generated catch block
 			u = null;
 			e.printStackTrace();
-		}*/
-		u.setFirstName("Billy");
-		u.setLastName("RASLOLO");
-		u.setPosition("student");
+		}
 		return u;
 	}
 	
@@ -93,7 +103,7 @@ public class DaoUsers extends Dao<User> {
 		return null;
 	}
 
-	@Override
+	
 	public int count(int id) {
 		// TODO Auto-generated method stub
 		return 0;

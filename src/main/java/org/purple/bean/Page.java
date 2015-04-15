@@ -9,8 +9,10 @@ public class Page {
 		this.css = new ArrayList<String>();
 		this.js = new ArrayList<String>();
 		this.content="";
+		this.title = "ISEP - APP";
 	}
 
+	private String title;
 	private boolean error;
 	private String errorMessage;
 	private boolean warning;
@@ -26,6 +28,14 @@ public class Page {
 
 	public void setContent(String content) {
 		this.content = content;
+	}
+	
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
 	}
 
 	public ArrayList<String> getCss() {

@@ -40,5 +40,5 @@ Thumbs.db
 ##########
 *.MF
 *.properties
-/target/*
-/target/
+target/*
+target/

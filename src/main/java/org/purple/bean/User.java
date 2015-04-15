@@ -3,7 +3,7 @@ package org.purple.bean;
 public class User {
 	
 		private int id;
-		
+		private String pseudo;
 		private String firstName;
 		private String lastName;
 		private int status;
