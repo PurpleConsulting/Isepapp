@@ -6,7 +6,7 @@
 </c:if>
 <c:if test="${pages == null}">
 	<jsp:useBean id="pages" class="org.purple.bean.Page"></jsp:useBean>  
-	<jsp:setProperty property="title" value="***ISEP / APP - Connection" name="pages"  />
+	<jsp:setProperty property="title" value="ISEP / APP - Connection" name="pages"  />
 </c:if>
 <html>
 	<head>
@@ -15,12 +15,12 @@
 		<link rel="stylesheet" href="./css/bootstrap.min.css">
 		<link rel="stylesheet" href="./css/font-awesome.min.css">
 		<link rel="stylesheet" href="./css/main.css">
-		<link rel="stylesheet" href="./css/signin/style.css">
+		<link rel="stylesheet" href="./css/signin.css">
 	</head>
 	<body>
 		<header>
 			<div class="container-fluid">
-				<div class="col-md-offset-2">
+				<div class="col-md-offset-1">
 					<span style="color:white;" class="fa fa-flag fa-5x"></span>
 					<h1>ISEP - APP</h1>	
 				</div>
@@ -60,6 +60,6 @@
 		<script type="text/javascript" src="./js/jquery-2.1.3.min.js"></script>
 		<script type="text/javascript" src="./js/jquery-ui.min.js"></script>
 		<script type="text/javascript" src="./js/bootstrap.min.js"></script>
-		<script type="text/javascript" src="./js/signin/script.js"></script>
+		<script type="text/javascript" src="./js/signin.js"></script>
 	</body>
 </html>

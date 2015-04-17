@@ -13,11 +13,10 @@
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-  		<li><a href="#">items</a></li>
-  		<li><a href="#">du menu</a></li>
-  		<li><a href="#">pour</a></li>
-  		<li><a href="#">Tuteur</a></li>
-  		<li><a href="Signout">Déconnection</a></li>
+  		<li><a href="#">Le sujet</a></li>
+  		<li><a href="#">Les résultats</a></li>
+  		<li><a href="#">Les Deadlines</a></li>
+  		<li><a href="Signout">Déconnexion</a></li>
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Fourtout Modules<span class="caret"></span></a>
           <ul class="dropdown-menu" role="menu">

@@ -21,11 +21,25 @@ public class User {
 			
 		}
 		
+		public User(int id, String pseudo, String firtstName, String lastName, String position){
+			this.setId(id);
+			this.setPseudo(pseudo);
+			this.setFirstName(lastName);
+			this.setLastName(lastName);
+			this.setPosition(position);
+		}
+
 		public int getId() {
 			return id;
 		}
 		public void setId(int id) {
 			this.id = id;
+		}
+		public String getPseudo() {
+			return pseudo;
+		}
+		public void setPseudo(String pseudo) {
+			this.pseudo = pseudo;
 		}
 		public String getFirstName() {
 			return firstName;

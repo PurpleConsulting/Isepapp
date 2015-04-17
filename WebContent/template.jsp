@@ -25,7 +25,7 @@
 	<body>
 		<header>
 			<div class="container-fluid">
-				<div class="col-md-offset-2">
+				<div class="col-md-offset-1">
 					<span style="color:white;" class="fa fa-flag fa-5x"></span>
 					<h1>ISEP - APP</h1>
 				</div>

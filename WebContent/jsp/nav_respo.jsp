@@ -3,7 +3,7 @@
     <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header">
       <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-        <span class="sr-only">Toggle navigation</span>
+        <span class="sr-only"></span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
@@ -11,13 +11,28 @@
       <a class="navbar-brand" href="Home">ISEP/APP</a>
     </div>
     <!-- Collect the nav links, forms, and other content for toggling -->
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <div class="collapse navbar-collapse col-md-offset-1" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-  		<li><a href="#">items</a></li>
-  		<li><a href="#">du menu</a></li>
-  		<li><a href="#">pour</a></li>
-  		<li><a href="#">responsable</a></li>
-  		<li><a href="Signout">Déconnection</a></li>
+  		<li><a href="#">Le sujet</a></li>
+  		<li class="dropdown">
+  			<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Les groupes <span class="caret"></span></a>
+  			<ul class="dropdown-menu" role="menu">
+            <li><a href="#">Les Classes</a></li>
+            <li><a href="#">Groupes d'APP</a></li>
+            <li class="divider"></li>
+            <li><a href="Student?pseudo=ldivad">Recherche d'étudiant</a></li>
+            <li><a href="#">Recherche d'un tuteur</a></li>
+          </ul>
+  		</li>
+  		<li><a href="#">Les résultats</a></li>
+  		<li class="dropdown">
+  			<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Les livrables<span class="caret"></span></a>
+  			<ul class="dropdown-menu" role="menu">
+	            <li><a href="#">Deadlines</a></li>
+	            <li><a href="#">Dépots</a></li>
+          </ul>
+  		</li>
+  		<li><a href="Signout">Déconnexion</a></li>
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Fourtout Modules<span class="caret"></span></a>
           <ul class="dropdown-menu" role="menu">
