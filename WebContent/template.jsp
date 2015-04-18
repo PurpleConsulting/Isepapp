@@ -26,14 +26,14 @@
 		<header>
 			<div class="container-fluid">
 				<div class="col-md-offset-1">
-					<span style="color:white;" class="fa fa-flag fa-5x"></span>
+					<a href="Home"><span style="color:white;" class="fa fa-flag fa-5x"></span></a>
 					<h1>ISEP - APP</h1>
 				</div>
 			</div>
 		</header>
-		<c:import url="jsp/nav_${sessionScope.user.position}.jsp"></c:import>
-		<div id="content" class="container-fluid">
-			<c:import url="jsp/${pages.getContent()}"></c:import>
+		<c:import url="jsp/nav_${sessionScope.user.position}.jsp" charEncoding="UTF-8"></c:import>
+		<div id="content" class="container-fluid content">
+			<c:import url="jsp/${pages.getContent()}" charEncoding="UTF-8"></c:import>
 		</div>
 		<footer> </footer>
 		<script type="text/javascript" src="./js/jquery-2.1.3.min.js"></script>

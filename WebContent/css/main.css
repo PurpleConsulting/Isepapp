@@ -1,4 +1,11 @@
 @CHARSET "UTF-8";
+html {
+    margin: 0px;
+    min-height:520px;
+}
+body{
+	height:100%;
+}
 /*** - - - HEADER  - - - ***/
 header{
 	background-color: #246482;
@@ -21,6 +28,25 @@ span.fa{
 }
 
 /*** - - - NAV  - - - ***/
-nav{	
-	margin-bottom:10px;
+#navmain{	
+	margin-bottom:40px;
+}
+
+#bs-example-navbar-collapse-1{
+	padding-left: 0px;
+	margin-left: 8.33333%;		
+}
+
+#bs-example-navbar-collapse-1 ul.nav.navbar-nav li:first-child a.link1nav{
+	padding-left: 0px;
+}
+
+/*** - - - FOOTER - - - ***/
+footer{
+	min-height: 16px;
+	width:100%;
+	background-color: #bdbdbd;
+	margin-top: 10px;
+	position: relative;
+	bottom: 0;
 }

@@ -1,4 +1,4 @@
-<nav class="navbar navbar-default">
+<nav class="navbar navbar-default" id="navmain">
   <div class="container-fluid">
     <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header">
@@ -8,12 +8,12 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="Home">ISEP/APP</a>
+      <!-- <a class="navbar-brand" href="Home">ISEP/APP</a>   -->
     </div>
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-  		<li><a href="#">items</a></li>
+  		<li><a class="link1nav" href="#">items</a></li>
   		<li><a href="#">du menu</a></li>
   		<li><a href="#">pour</a></li>
   		<li><a href="#">etudiant</a></li>

@@ -31,23 +31,26 @@ public class Student extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		if(!Auth.isConnect(request)) request.getRequestDispatcher("/signin.jsp").forward(request, response);
-		Page p = new Page();
-		String student = request.getParameter("pseudo");
-		if(student != null){
-			p.setContent("student/body.jsp");
-			p.setTitle("ISEP / APP - Etudiants");
-			p.setCss("student.css");
-			p.setJs("student.js");
+		if(!Auth.isConnect(request)){ request.getRequestDispatcher("/jsp/signin.jsp").forward(request, response);
+		
 		} else {
-			p.setContent("student/body.jsp");
-			p.setTitle("ISEP / APP - Home");
-			p.setCss("student.css");
-			p.setJs("student.js");
+			Page p = new Page();
+			String student = request.getParameter("pseudo");
+			if(student != null){
+				p.setContent("student/student_body.jsp");
+				p.setTitle("ISEP / APP - Etudiants");
+				p.setCss("student.css");
+				p.setJs("student.js");
+			} else {
+				p.setContent("student/student_body.jsp");
+				p.setTitle("ISEP / APP - Home");
+				p.setCss("student.css");
+				p.setJs("student.js");
+				request.setAttribute("pages", p);
+			}
 			request.setAttribute("pages", p);
+			request.getRequestDispatcher("/template.jsp").forward(request, response);
 		}
-		request.setAttribute("pages", p);
-		request.getRequestDispatcher("/template.jsp").forward(request, response);
 	}
 
 	/**

@@ -1,1 +1,49 @@
 @CHARSET "UTF-8";
+div.row{
+	margin-bottom:20px;	
+}
+
+div.container-fluid.content div.row div{
+	padding-left: 0px;
+	padding-right: 0px;
+}
+div.idcard, div.mark, div.crossmark, div.missing{
+	border: solid #ccc 1px;
+	min-height: 260px;
+	border-radius: 6px;
+	padding: 20px;
+	background-color: transparent;
+	padding: 10px;
+}
+
+div.cell{
+	border: solid 1px #bdbdbd;
+	border-radius: 4px;
+	background-color: #F8F8F8;
+	margin-bottom: 4px;  
+	color: #777777; 
+}
+
+div.cell p{
+	margin-top: 5px;
+	margin-bottom: 5px;
+}
+
+img{
+	border-radius: 6px;
+	display: block;
+	margin: auto;
+	height:210px;
+	margin-bottom:10px;
+}
+
+div.mark div, h4{
+	margin-left:10px;
+	margin-right:10px;
+}
+
+h4{
+	color: #777777
+}
+
+
