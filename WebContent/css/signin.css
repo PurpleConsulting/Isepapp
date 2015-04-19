@@ -16,3 +16,7 @@ form{
 	top: 6px;
 	left: 10px;
 }
+
+#formblock{
+	min-height: 600px;	
+}

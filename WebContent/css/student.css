@@ -7,9 +7,9 @@ div.container-fluid.content div.row div{
 	padding-left: 0px;
 	padding-right: 0px;
 }
-div.idcard, div.mark, div.crossmark, div.missing{
+div.idcard, div.mark, div.crossmark, div.missing, div.delivery{
 	border: solid #ccc 1px;
-	min-height: 260px;
+	min-height: 230px;
 	border-radius: 6px;
 	padding: 20px;
 	background-color: transparent;
@@ -42,8 +42,40 @@ div.mark div, h4{
 	margin-right:10px;
 }
 
+h1{
+	margin-top: 20px;
+	margin-bottom: 20px;
+}
+
 h4{
 	color: #777777
 }
 
+div.container-fluid.content div.row div.missing .alert{
+	margin-left: 2%;
+	margin-right: 2%;
+	padding-left: 2%;
+	padding-right: 2%;
+	padding-top:5px;
+	padding-bottom:5px;
+}
 
+div.container-fluid.content div.row div.missing nav{
+	margin-left: 2%;
+}
+
+div.missing div[id^='blk']{
+	display:none;
+}
+
+div.missing div[id^='blk'].active{
+	display:block;
+}
+
+div.delivery button{
+	margin: 30px
+}
+div.container-fluid.content div.row div.tooltip-inner{
+	padding-left:10px;
+	padding-right:10px;
+}
