@@ -89,7 +89,7 @@
 </div>
 <div class="row">
 	<div class="col-md-offset-1 col-md-10 col-sm-offset-1 col-sm-10 col-xs-offset-1 col-xs-10 missing" >
-		<h4>Les absences - 36</h4>
+		<h4>Les absences - <c:out value="${missingCount}"></c:out></h4>
 		<br/>
 		<c:set var="rowNum" scope="request" value="${1}"/>
 		<c:forEach var="missingRow" items="${missingGrid}" varStatus="status">

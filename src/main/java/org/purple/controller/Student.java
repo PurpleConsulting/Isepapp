@@ -87,6 +87,8 @@ public class Student extends HttpServlet {
 					p.setJs("student.js");
 					request.setAttribute("student", s);// -- we send the student
 					request.setAttribute("missingGrid", missingGrid);// -- we send the his missing
+					request.setAttribute("missingCount", missings.length);
+					
 					
 				} else {
 					
