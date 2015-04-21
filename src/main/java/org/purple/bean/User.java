@@ -1,5 +1,12 @@
 package org.purple.bean;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+import org.purple.constant.Bdd;
+
 public class User {
 	
 		private int id;
@@ -8,6 +15,9 @@ public class User {
 		private String lastName;
 		private int status;
 		private String position;
+		private String group;
+		private String mail;
+		private String tel;
 		
 		public User(){
 			
@@ -64,6 +74,24 @@ public class User {
 		}
 		public void setPosition(String position) {
 			this.position = position;
+		}
+		public String getGroup() {
+			return group;
+		}
+		public void setGroup(String group) {
+			this.group = group;
+		}
+		public String getMail() {
+			return mail;
+		}
+		public void setMail(String mail) {
+			this.mail = mail;
+		}
+		public String getTel() {
+			return tel;
+		}
+		public void setTel(String tel) {
+			this.tel = tel;
 		}
 		
 		

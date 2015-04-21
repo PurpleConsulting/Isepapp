@@ -35,6 +35,12 @@
 						<c:out value="${pages.getErrorMessage()}"></c:out>
 					</div>
 				</c:if>
+				<c:if test="${pages.getWarning()}">
+					<div class="alert alert-warning col-md-offset-1 col-md-10">
+						<strong>Attention</strong>,
+						<c:out value="${pages.getWarningMessage()}"></c:out>
+					</div>
+				</c:if>
 			</div>
 			<form method="post" action="/Isepapp/Signin">
 				<div class="row">

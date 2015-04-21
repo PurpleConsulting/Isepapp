@@ -21,7 +21,8 @@ div.cell{
 	border-radius: 4px;
 	background-color: #F8F8F8;
 	margin-bottom: 4px;  
-	color: #777777; 
+	color: #777777;
+	overflow-x: scroll; 
 }
 
 div.cell p{

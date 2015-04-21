@@ -7,9 +7,8 @@ import java.sql.*;
 public class Main {
 
 	public static void main(String[] args) {
-		Connection co = Bdd.getCo();
-		DaoUsers u = new DaoUsers(co);
-		System.out.print(u.find("833"));
+		double i = Math.ceil((19 / 3.0));
+		System.out.println(i);
 	}
 
 }

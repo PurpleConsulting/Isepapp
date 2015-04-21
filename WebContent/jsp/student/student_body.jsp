@@ -1,18 +1,19 @@
 <!--  BODY PART STUDENT MODULE  -->
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<h1 class="col-md-offset-1 col-md-10 col-sm-offset-1 col-sm-10 col-xs-offset-1 col-xs-10">Fiche étudiant<small> - Divad λoïc</small></h1>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<h1 class="col-md-offset-1 col-md-10 col-sm-offset-1 col-sm-10 col-xs-offset-1 col-xs-10">Fiche étudiant<small> - <c:out value="${student.getLastName()} ${student.getFirstName()}"></c:out></small></h1>
 <div class="row">	
 	<div class="col-md-offset-1 col-md-10 col-sm-offset-1 col-sm-10 col-xs-offset-1 col-xs-10 idcard">
 		<div class="col-md-offset-1 col-md-4 col-sm-offset-1 col-sm-10 col-xs-offset-1 col-xs-10  ">
 			<img src="./img/photo.jpg" alt="" />
 		</div>
 		<div class="col-md-offset-1 col-md-4 col-sm-offset-1 col-sm-10 col-xs-offset-1 col-xs-10">
-			<div class="cell"><p><span class="col-md-1">Nom:</span><span class="col-md-offset-2">Divad</span></p></div>
-			<div class="cell"><p><span class="col-md-1">Prénom:</span><span class="col-md-offset-2"> λoïc</span></p></div>
-			<div class="cell"><p><span class="col-md-1">Groupe:</span><span class="col-md-offset-2"> <a href="#">G8B</a></span></p></div>
-			<div class="cell"><p><span class="col-md-1">Isepid:</span><span class="col-md-offset-2"> ldivad</span></p></div>
-			<div class="cell"><p><span class="col-md-1">Email:</span><span class="col-md-offset-2"> emailbidon@gmail.com</span></p></div>
-			<div class="cell"><p><span class="col-md-1">Tel:</span><span class="col-md-offset-2"> 0690007007</span></p></div>
+			<div class="cell"><p><span class="col-md-1">Nom:</span><span class="col-md-offset-2"><c:out value="${student.getLastName()}"></c:out></span></p></div>
+			<div class="cell"><p><span class="col-md-1">Prénom:</span><span class="col-md-offset-2"><c:out value="${student.getFirstName()}"></c:out></span></p></div>
+			<div class="cell"><p><span class="col-md-1">Groupe:</span><span class="col-md-offset-2"><a href="Group?id=<c:out value="${student.getGroup()}"></c:out>"><c:out value="${student.getGroup()}"></c:out></a></span></p></div>
+			<div class="cell"><p><span class="col-md-1">Isepid:</span><span class="col-md-offset-2"><c:out value="${student.getPseudo()}"></c:out></span></p></div>
+			<div class="cell"><p><span class="col-md-1">Email:</span><span class="col-md-offset-2"><c:out value="${student.getMail()}"></c:out></span></p></div>
+			<div class="cell"><p><span class="col-md-1">Tel:</span><span class="col-md-offset-2"><c:out value="${student.getTel()}"></c:out></span></p></div>
 		</div>
 	</div>
 </div>
@@ -90,22 +91,21 @@
 	<div class="col-md-offset-1 col-md-10 col-sm-offset-1 col-sm-10 col-xs-offset-1 col-xs-10 missing" >
 		<h4>Les absences - 36</h4>
 		<br/>
-		<div id="blk1" class="active">
-			<div class="alert alert-warning" role="alert"><strong>Absence</strong>: 2015-06-24, Aucun justificatif.</div>
-			<div class="alert alert-warning" role="alert"><strong>Absence</strong>: 2015-06-14, Absence due à des raisons de santé.</div>
-			<div class="alert alert-info" role="alert"><strong>Retard</strong>: 2015-06-24, Retard lié à des problème de transports.</div>
-		</div>
-		<div id="blk2">
-			<div class="alert alert-info" role="alert"><strong>Retard</strong>: 2015-05-24, Aucun justificatif.</div>
-			<div class="alert alert-info" role="alert"><strong>Retard</strong>: 2015-04-14, "Mon chien à manger mon ppt."</div>
-			<div class="alert alert-warning" role="alert"><strong>Absence</strong>: 2015-04-24, "Embouteillage dans ma résidence".</div>
-		</div>
-		<div id="blk3">
-			<div class="alert alert-warning" role="alert"><strong>Absence</strong>: 2015-03-24, Aucun justificatif.</div>
-			<div class="alert alert-warning" role="alert"><strong>Absence</strong>: 2015-02-14, Aucun justificatif.</div>
-		</div>
-		<div>
-		</div>
+		<c:set var="rowNum" scope="request" value="${1}"/>
+		<c:forEach var="missingRow" items="${missingGrid}" varStatus="status">
+			<div id="blk${rowNum}" ${rowNum == 1 ? 'class="active"' : ''}>
+				<c:forEach var="missingLine" items="${missingRow}" varStatus="status">
+					<c:if test="${missingLine != null }">
+						<div class="alert alert-${missingLine.getLate() ? 'info' : 'warning'}" role="alert">
+							<strong><c:out value="${missingLine.getLate() ? 'Retard' : 'Absence'}"></c:out></strong>:
+							<c:out value="${missingLine.getDate()}"></c:out>, 
+							<c:out value="${missingLine.getSupporting()}"></c:out>
+						</div>
+					</c:if>
+				</c:forEach>
+			</div>
+			<c:set var="rowNum" scope="request" value="${rowNum + 1}"/>
+		</c:forEach>
 		<nav>
 		  <ul class="pagination">
 		    <li>
@@ -113,9 +113,13 @@
 		        <span aria-hidden="true">&laquo;</span>
 		      </a>
 		    </li>
-		    <li class="active"><a data-target="1" href="#">1</a></li>
-		    <li><a data-target="2" href="#" class="">2</a></li>
-		    <li><a data-target="3" href="#">3</a></li>
+		    <c:set var="rowNum" scope="request" value="${1}"/>
+		    <c:forEach var="missingRow" items="${missingGrid}" varStatus="status">
+		    	<li ${rowNum == 1 ? 'class="active"' : ''}>
+		    		<a data-target="${rowNum}" href="#">${rowNum}</a>
+		    	</li>
+		    	<c:set var="rowNum" scope="request" value="${rowNum + 1}"/>
+		    </c:forEach>
 		    <li>
 		      <a data-target="3" href="#" aria-label="Next">
 		        <span aria-hidden="true">&raquo;</span>

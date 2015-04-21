@@ -6,8 +6,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-
 import org.purple.bean.User;
+import org.purple.constant.Bdd;
 /*** Purple import ***/
 
 public class DaoUsers extends Dao<User> {
@@ -45,7 +45,7 @@ public class DaoUsers extends Dao<User> {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 				e.printStackTrace();
-			}
+		}
 			return res;
 	}
 	
@@ -77,7 +77,7 @@ public class DaoUsers extends Dao<User> {
 		User u = null;
 		String q = "SELECT Users.id,"
 				+ "Users.last_name, Users.first_name,"
-				+ " Positions.title"
+				+ " Positions.title, Users.pseudo"
 				+ " FROM Users INNER JOIN Positions"
 				+ " on Users.id_post = Positions.id "
 				+ "WHERE Users.pseudo = ? ";
@@ -91,6 +91,7 @@ public class DaoUsers extends Dao<User> {
 			u.setFirstName(currsor.getString(2));
 			u.setLastName(currsor.getString(3));
 			u.setPosition(currsor.getString(4));
+			u.setPseudo(currsor.getString(5));
 		}catch (SQLException e){
 			// TODO Auto-generated catch block
 			u = null;
@@ -107,5 +108,37 @@ public class DaoUsers extends Dao<User> {
 	public int count(int id) {
 		// TODO Auto-generated method stub
 		return 0;
+	}
+	
+	
+	public void addGroup(User u){
+		String q = "SELECT Groups.name FROM Groups INNER JOIN Users "
+				+ "ON Groups.id = Users.id_group "
+				+ "WHERE Users.id = " + Integer.toString(u.getId());
+		try {
+			ResultSet currsor = this.connect.createStatement().executeQuery(q);
+			currsor.next();
+			u.setGroup(currsor.getString(1));
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+				e.printStackTrace();
+				u.setGroup("");
+		}
+	}
+	
+	public void addTelMail(User u){
+		Connection c = Bdd.getCo();
+		String q = "SELECT tel, mail FROM Users WHERE Users.id = " + Integer.toString(u.getId());
+		try {
+			ResultSet currsor = c.createStatement().executeQuery(q);
+			currsor.next();
+			u.setTel(currsor.getString(1));
+			u.setMail(currsor.getString(2));
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+				e.printStackTrace();
+				u.setTel("");
+				u.setMail("");
+		}
 	}
 }

@@ -69,6 +69,8 @@ public class Signin extends HttpServlet {
 			
 		} else if (request.getParameter("pseudo") == null){
 			Page p = new Page();
+			p.setWarning(true);
+			p.setWarningMessage("Vos identifiants n'ont pas été correctement récupérés. Veuillez vous connecter à nouveau.");
 			p.setTitle("ISEP / APP - Connection");
 			this.getServletContext().getRequestDispatcher("/jsp/signin.jsp")
 					.forward(request, response);
@@ -92,7 +94,7 @@ public class Signin extends HttpServlet {
 				p.setErrorMessage("Un problème est survenu lors de l'établissement de la connection. "
 						+ "Pour toute récupération de mot de passe veuillez vous rapprocher de l'administration de l'ISEP.");
 				request.setAttribute("pages", p);
-				url = "/jsp/sigin.jsp";
+				url = "/jsp/signin.jsp";
 				
 			}
 	
