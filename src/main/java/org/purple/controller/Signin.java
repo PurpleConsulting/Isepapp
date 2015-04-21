@@ -78,13 +78,13 @@ public class Signin extends HttpServlet {
 			DaoUsers u = new DaoUsers(Bdd.getCo());
 			String pseudo = request.getParameter("pseudo");
 			User user = u.select(pseudo);
+			
 			if(user != null){
 				Page p = new Page();
 				p.setTitle("ISEP / APP - Home");
 				p.setContent("home.jsp");
 				url = "/template.jsp";
 				request.getSession(true).setAttribute("user", user);
-
 			} else {
 				Page p = new Page();
 				p.setTitle("ISEP / APP - Connection");

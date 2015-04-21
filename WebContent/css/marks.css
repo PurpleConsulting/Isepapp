@@ -1,0 +1,12 @@
+@CHARSET "ISO-8859-1";
+
+#marktab {
+	width: 400px;
+	margin-left: 300px;
+	margin-top: 30px;
+}
+
+button#ModifierNot {
+	margin-left: 622px;
+	margin-top: 15px;
+}
