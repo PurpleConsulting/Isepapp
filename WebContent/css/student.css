@@ -65,11 +65,11 @@ div.container-fluid.content div.row div.missing nav{
 	margin-left: 2%;
 }
 
-div.missing div[id^='blk']{
+div.missing div#blk-missing div[id^='blk']{
 	display:none;
 }
 
-div.missing div[id^='blk'].active{
+div.missing div#blk-missing div[id^='blk'].active{
 	display:block;
 }
 

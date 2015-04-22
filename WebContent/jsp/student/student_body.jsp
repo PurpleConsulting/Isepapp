@@ -1,6 +1,7 @@
 <!--  BODY PART STUDENT MODULE  -->
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <h1 class="col-md-offset-1 col-md-10 col-sm-offset-1 col-sm-10 col-xs-offset-1 col-xs-10">Fiche étudiant<small> - <c:out value="${student.getLastName()} ${student.getFirstName()}"></c:out></small></h1>
 <div class="row">	
 	<div class="col-md-offset-1 col-md-10 col-sm-offset-1 col-sm-10 col-xs-offset-1 col-xs-10 idcard">
@@ -89,44 +90,45 @@
 </div>
 <div class="row">
 	<div class="col-md-offset-1 col-md-10 col-sm-offset-1 col-sm-10 col-xs-offset-1 col-xs-10 missing" >
-		<h4>Les absences - <c:out value="${missingCount}"></c:out></h4>
+		<h4>Les absences - <c:out value="${fn:length(missingGrid)}"></c:out></h4>
 		<br/>
 		<c:set var="rowNum" scope="request" value="${1}"/>
+		<div id="blk-missing"> <!-- " ${rowNum == 1 ? 'class="active"' : ''} -->
 		<c:forEach var="missingRow" items="${missingGrid}" varStatus="status">
-			<div id="blk${rowNum}" ${rowNum == 1 ? 'class="active"' : ''}>
-				<c:forEach var="missingLine" items="${missingRow}" varStatus="status">
-					<c:if test="${missingLine != null }">
-						<div class="alert alert-${missingLine.getLate() ? 'info' : 'warning'}" role="alert">
-							<strong><c:out value="${missingLine.getLate() ? 'Retard' : 'Absence'}"></c:out></strong>:
-							<c:out value="${missingLine.getDate()}"></c:out>, 
-							<c:out value="${missingLine.getSupporting()}"></c:out>
+					<c:if test="${missingRow != null }">
+						<div class="alert alert-${missingRow.getLate() ? 'info' : 'warning'}${rowNum <= 3 ? ' active' : ''}" 
+							role="alert" id="blk${rowNum}">
+							<strong><c:out value="${missingRow.getLate() ? 'Retard' : 'Absence'}"></c:out></strong>:
+							<c:out value="${missingRow.getDate()}"></c:out>, 
+							<c:out value="${missingRow.getSupporting()}"></c:out>
 						</div>
 					</c:if>
-				</c:forEach>
-			</div>
-			<c:set var="rowNum" scope="request" value="${rowNum + 1}"/>
+			<c:set var="rowNum" scope="request" value="${rowNum + 1}"/>	
 		</c:forEach>
-		<nav>
-		  <ul class="pagination">
-		    <li>
-		      <a data-target="1" href="#" aria-label="Previous">
-		        <span aria-hidden="true">&laquo;</span>
-		      </a>
-		    </li>
-		    <c:set var="rowNum" scope="request" value="${1}"/>
-		    <c:forEach var="missingRow" items="${missingGrid}" varStatus="status">
-		    	<li ${rowNum == 1 ? 'class="active"' : ''}>
-		    		<a data-target="${rowNum}" href="#">${rowNum}</a>
-		    	</li>
-		    	<c:set var="rowNum" scope="request" value="${rowNum + 1}"/>
-		    </c:forEach>
-		    <li>
-		      <a data-target="3" href="#" aria-label="Next">
-		        <span aria-hidden="true">&raquo;</span>
-		      </a>
-		    </li>
-		  </ul>
-		</nav>
+		</div>
+		<c:if test="${fn:length(missingGrid) > 3 }">
+			<nav>
+			  <ul class="pagination">
+			    <li>
+			      <a data-target="1" href="#" aria-label="Previous">
+			        <span aria-hidden="true">&laquo;</span>
+			      </a>
+			    </li>
+			    <c:set var="rowNum" scope="request" value="${1}"/>
+			    <c:forEach var="i" begin="1" end="${fn:length(missingGrid)}" step="3">
+			    	<li ${rowNum == 1 ? 'class="active"' : ''}>
+			    		<a data-target="${rowNum}" href="#">${rowNum}</a>
+			    	</li>
+			    	<c:set var="rowNum" scope="request" value="${rowNum + 1}"/>
+			    </c:forEach>
+			    <li>
+			      <a data-target="${rowNum - 1}" href="#" aria-label="Next">
+			        <span aria-hidden="true">&raquo;</span>
+			      </a>
+			    </li>
+			  </ul>
+			</nav>
+		</c:if>
 	</div>
 </div>
 <div class="row">

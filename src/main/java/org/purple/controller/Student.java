@@ -69,17 +69,8 @@ public class Student extends HttpServlet {
 					
 					// -- we get the missing of the student
 					DaoMissing dm = new DaoMissing(Bdd.getCo());
-					Missing[] missings = dm.selectAll(Integer.toString(s.getId()));// -- we prepare the data format for the view
-					int tabnum = (int)Math.ceil(missings.length / 3.0);
-					Missing[][] missingGrid = new Missing[3][tabnum];
-					int i = 0, j = 0;
-					for(Missing m : missings){
-						missingGrid[i][j] = m;
-						j++;
-						if(j % 3 == 0){
-							j = 0; i = i + 1;
-						}
-					}
+					Missing[] missingGrid = dm.selectAll(Integer.toString(s.getId()));// -- we prepare the data format for the view
+					if(missingGrid == null) missingGrid = new Missing[0];// -- He never skip class, he win an empty array
 					
 					p.setContent("student/student_body.jsp");
 					p.setTitle("ISEP / APP - Etudiants");
@@ -87,7 +78,6 @@ public class Student extends HttpServlet {
 					p.setJs("student.js");
 					request.setAttribute("student", s);// -- we send the student
 					request.setAttribute("missingGrid", missingGrid);// -- we send the his missing
-					request.setAttribute("missingCount", missings.length);
 					
 					
 				} else {

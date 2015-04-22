@@ -9,15 +9,24 @@
 
 $(document).ready(function(){
 // Pagination for the missing part
-	var missing = $(".missing");
-	var missinNav = $(".missing nav");
+	var missing = $("#blk-missing");
+	var missinNav = $("#blk-missing nav");
 	
 	
 	$(".missing nav ul li a").on("click", function(event){
-		var pattern = $(this).attr("data-target");
 		event.preventDefault();
+		var pattern = $(this).attr("data-target");
+		var targets = [];
+		for(var i = (3 * (pattern - 1)) + 1,j = 0; j < 3; i++,j++){
+
+			targets.push(i);
+		}
+
 		missing.children(".active").removeClass('active');
-		missing.children("#blk" + pattern).addClass('active');
+		targets.forEach(function(t){
+			missing.children("#blk" + t).addClass('active');
+		})
+		
 		$(".missing nav ul li.active").removeClass('active');
 		if($(this).attr("aria-label") =="Previous"){
 			$(".missing nav ul li").first().next().addClass('active');
