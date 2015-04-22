@@ -8,7 +8,7 @@
 <c:if test="${pages == null}">
 	<jsp:useBean id="pages" class="org.purple.bean.Page"></jsp:useBean>  
 	<jsp:setProperty property="content" value="home.jsp" name="pages"  />
-	<jsp:setProperty property="title" value="ISEP / APP - Home" name="pages"  />  
+	<jsp:setProperty property="title" value="ISEP / APP - Home" name="pages"  />
 </c:if>
 <html>
 	<head>
@@ -33,6 +33,8 @@
 		</header>
 		<c:import url="jsp/nav_${sessionScope.user.position}.jsp"></c:import>
 		<div id="content" class="container-fluid">
+			
+		
 			<c:import url="jsp/${pages.getContent()}"></c:import>
 		</div>
 		<footer> </footer>

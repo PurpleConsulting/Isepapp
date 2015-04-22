@@ -35,7 +35,7 @@ public class ValuesController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		System.out.print("heyhey");
+	
 		Page p = new Page();
 		// On ajout le css
 		p.setCss("marks.css");
@@ -48,7 +48,8 @@ public class ValuesController extends HttpServlet {
 		//Afficher les values
 		Values[] value= v.selectAllValues();
 		request.setAttribute("valeur", value);
-		
+		int i= value.length;//a essayer
+		request.setAttribute("i", i);
 		
 			this.getServletContext().getRequestDispatcher("/template.jsp")
 					.forward(request, response);

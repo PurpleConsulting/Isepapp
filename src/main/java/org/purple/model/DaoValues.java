@@ -53,7 +53,8 @@ public class DaoValues extends Dao<Values> {
 	public Values[] selectAllValues (){
 		Values[] val=null;
 		String q = "SELECT id,title, points "
-				+ "FROM `Values` ";
+				+ "FROM `Values` "
+				+ "ORDER BY points";
 		
 		try{
 			PreparedStatement prestmt = this.connect.prepareStatement(q);

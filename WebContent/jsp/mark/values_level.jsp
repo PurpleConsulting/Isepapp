@@ -8,8 +8,8 @@
 				<th>Note:</th>
 				
 			</tr>
-			
-			<c:forEach var="i" begin="0" end="2">
+							
+			<c:forEach var="i" begin="0" end='${i}'>
 				<tr>
 					<td><c:out value="${valeur[i].getTitle()}"></c:out></td>
 					<td><c:out value="${valeur[i].getPoints()}"></c:out></td>
