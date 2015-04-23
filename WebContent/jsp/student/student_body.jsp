@@ -2,7 +2,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<h1 class="col-md-offset-1 col-md-10 col-sm-offset-1 col-sm-10 col-xs-offset-1 col-xs-10">Fiche étudiant<small> - <c:out value="${student.getLastName()} ${student.getFirstName()}"></c:out></small></h1>
+<h1 class="col-md-offset-1 col-md-10 col-sm-offset-1 col-sm-10 col-xs-offset-1 col-xs-10">
+	Fiche étudiant
+	<small> - <c:out value="${student.getLastName()} ${student.getFirstName()}"></c:out></small>
+	<a class="btn btn-default" href="#" role="button"><span class="fa fa-pencil"> </span>  Editer</a>
+</h1>
 <div class="row">	
 	<div class="col-md-offset-1 col-md-10 col-sm-offset-1 col-sm-10 col-xs-offset-1 col-xs-10 idcard">
 		<div class="col-md-offset-1 col-md-4 col-sm-offset-1 col-sm-10 col-xs-offset-1 col-xs-10  ">
@@ -33,8 +37,81 @@
 		  </ul>
 		  <!-- Tab panes -->
 		  <div class="tab-content">
-		    <div role="tabpanel" class="tab-pane active" id="tab1">tab1</div>
-		    <div role="tabpanel" class="tab-pane" id="tab2">tab2</div>
+		    <div role="tabpanel" class="tab-pane active" id="tab1">
+		    	<div class="col-sm-offset-1 col-sm-2 global-average">
+		    		<div>13,5</div>
+		    	</div>
+		    	<div class="col-sm-offset-4 col-sm-9">
+		    		<div>
+		    			<div class="col-sm-4">Travail en groupe:</div><span class="badge">10</span>
+						<div class="progress">
+						  <div class="progress-bar" role="progressbar" aria-valuenow="10" aria-valuemin="0" aria-valuemax="20" style="width: 60%;"></div>
+						</div>
+		    		</div>
+		    		<div>
+		    			<div class="col-sm-4">Communication:</div><span class="badge">15</span>
+						<div class="progress">
+						  <div class="progress-bar" role="progressbar" aria-valuenow="15" aria-valuemin="0" aria-valuemax="20" style="width:0%;"></div>
+						</div>
+		    		</div>
+		    		<div>
+		    			<div class="col-sm-4">Conduite de projet:</div><span class="badge">18</span>
+						<div class="progress">
+						  <div class="progress-bar" role="progressbar" aria-valuenow="18" aria-valuemin="0" aria-valuemax="20" style="width:0%;"></div>
+						</div>
+		    		</div>
+		    		<div>
+		    			<div class="col-sm-4">Conception/réalisation:</div><span class="badge">06</span>
+						<div class="progress">
+						  <div class="progress-bar" role="progressbar" aria-valuenow="6" aria-valuemin="0" aria-valuemax="20" style="width:0%;"></div>
+						</div>
+		    		</div>
+		    		<div>
+		    			<div class="col-sm-4">Professionnel responsable:</div><span class="badge">20</span>
+						<div class="progress">
+						  <div class="progress-bar" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="20" style="width:0%;"></div>
+						</div>
+		    		</div>
+		    		<div>
+		    			<div class="col-sm-4">Evaluation croisée:</div><span class="badge">12</span>
+						<div class="progress">
+						  <div class="progress-bar" role="progressbar" aria-valuenow="12" aria-valuemin="0" aria-valuemax="20" style="width:0%;"></div>
+						</div>
+		    		</div>
+		    	</div>
+		    </div>
+		    <div role="tabpanel" class="tab-pane" id="tab2">
+		    	<div class="panel panel-primary">
+		    		<div class="panel-heading">
+		    			<h3 class="panel-title">Sous compétences n° ... : bla bla bla</h3>
+		    		</div>
+		    		<div class="panel-body">Aquis... ou pas?! -  5 pts </div>
+		    	 </div>
+		    	 <div class="panel panel-primary">
+		    		<div class="panel-heading">
+		    			<h3 class="panel-title">Sous compétences n° ... : bla bla bla</h3>
+		    		</div>
+		    		<div class="panel-body">Aquis... ou pas?! -  5 pts </div>
+		    	 </div>
+		    	 <div class="panel panel-primary">
+		    		<div class="panel-heading">
+		    			<h3 class="panel-title">Sous compétences n° ... : bla bla bla</h3>
+		    		</div>
+		    		<div class="panel-body">Aquis... ou pas?! -  5 pts </div>
+		    	 </div>
+		    	 <div class="panel panel-primary">
+		    		<div class="panel-heading">
+		    			<h3 class="panel-title">Sous compétences n° ... : bla bla bla</h3>
+		    		</div>
+		    		<div class="panel-body">Aquis... ou pas?! -  5 pts </div>
+		    	 </div>
+		    	 <div class="panel panel-primary">
+		    		<div class="panel-heading">
+		    			<h3 class="panel-title">Sous compétences n° ... : bla bla bla</h3>
+		    		</div>
+		    		<div class="panel-body">Aquis... ou pas?! -  5 pts </div>
+		    	 </div>
+		    </div>
 		    <div role="tabpanel" class="tab-pane" id="tab3">tab3</div>
 		    <div role="tabpanel" class="tab-pane" id="tab4">tab4</div>
 		    <div role="tabpanel" class="tab-pane" id="tab5">tab5</div>

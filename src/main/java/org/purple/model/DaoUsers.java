@@ -42,10 +42,12 @@ public class DaoUsers extends Dao<User> {
 			currsor.next();
 			int set = currsor.getInt(1);
 			if (set == 1) res = true;
+			prestmt.close();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 				e.printStackTrace();
 		}
+			
 			return res;
 	}
 	
@@ -92,6 +94,7 @@ public class DaoUsers extends Dao<User> {
 			u.setLastName(currsor.getString(3));
 			u.setPosition(currsor.getString(4));
 			u.setPseudo(currsor.getString(5));
+			prestmt.close();
 		}catch (SQLException e){
 			// TODO Auto-generated catch block
 			u = null;
@@ -127,10 +130,9 @@ public class DaoUsers extends Dao<User> {
 	}
 	
 	public void addTelMail(User u){
-		Connection c = Bdd.getCo();
 		String q = "SELECT tel, mail FROM Users WHERE Users.id = " + Integer.toString(u.getId());
 		try {
-			ResultSet currsor = c.createStatement().executeQuery(q);
+			ResultSet currsor = this.connect.createStatement().executeQuery(q);
 			currsor.next();
 			u.setTel(currsor.getString(1));
 			u.setMail(currsor.getString(2));

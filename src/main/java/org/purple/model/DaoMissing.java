@@ -63,7 +63,7 @@ public class DaoMissing extends Dao<Missing>{
 				i = i + 1;
 			}
 				
-			
+			prestmt.close();
 		}catch (SQLException e){
 			// TODO Auto-generated catch block
 			ms = null;
@@ -72,4 +72,12 @@ public class DaoMissing extends Dao<Missing>{
 		return ms;
 	}
 
+	public void close() {
+		try {
+			this.connect.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 }

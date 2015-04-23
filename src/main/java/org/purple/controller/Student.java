@@ -60,6 +60,7 @@ public class Student extends HttpServlet {
 				
 				// -- Lets see if the pseudo is in the data base.
 				DaoUsers du = new DaoUsers(Bdd.getCo());
+				DaoMissing dm = new DaoMissing(Bdd.getCo());
 				User s = du.select(student);
 				
 				if(s != null && s.getPosition().equals("student")){
@@ -68,7 +69,6 @@ public class Student extends HttpServlet {
 					du.addGroup(s); du.addTelMail(s);// -- we retrive his group, his tel, and his mail
 					
 					// -- we get the missing of the student
-					DaoMissing dm = new DaoMissing(Bdd.getCo());
 					Missing[] missingGrid = dm.selectAll(Integer.toString(s.getId()));// -- we prepare the data format for the view
 					if(missingGrid == null) missingGrid = new Missing[0];// -- He never skip class, he win an empty array
 					
@@ -89,10 +89,12 @@ public class Student extends HttpServlet {
 					p.setContent("home.jsp");
 					
 				}
+				dm.close();
 				du.close(); // -- we close the connection <-- THIS IS REALY IMPORTANT
 			}
 			
 		}
+		
 		
 		request.setAttribute("pages", p);
 		request.getRequestDispatcher("/template.jsp").forward(request, response);

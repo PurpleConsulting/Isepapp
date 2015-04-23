@@ -8,6 +8,17 @@
 })*/
 
 $(document).ready(function(){
+//  -- Marks: Global averages
+	$("div.progress-bar").each(function(i){
+		max = $(this).attr("aria-valuemax");
+		mark = $(this).attr("aria-valuenow");
+		
+		per = (mark * 100) / max;
+		
+		$(this).css("width", per+"%");
+		
+	});
+	
 // Pagination for the missing part
 	var missing = $("#blk-missing");
 	var missinNav = $("#blk-missing nav");
