@@ -13,6 +13,7 @@ import java.sql.SQLException;
 
 
 
+
 import org.purple.bean.User;
 import org.purple.bean.Values;
 /*** Purple import ***/
@@ -27,9 +28,26 @@ public class DaoValues extends Dao<Values> {
 	}
 
 	@Override
-	public boolean create(Values obj) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean create(Values val) {
+		boolean r=false;
+		String q = "INSERT INTO `Values`(title, points) "
+				+ "VALUES (?, ?) ";	
+		try{
+			PreparedStatement prestmt = this.connect.prepareStatement(q);
+			prestmt.setString(1, val.getTitle());
+			prestmt.setInt(2, val.getPoints());
+			
+			prestmt.execute();
+			
+			r=true;
+			
+
+		}catch (SQLException e){
+			// TODO Auto-generated catch block
+			r = false;
+			e.printStackTrace();
+		}
+		return r;
 	}
 
 	@Override
@@ -54,8 +72,7 @@ public class DaoValues extends Dao<Values> {
 		Values[] val=null;
 		String q = "SELECT id,title, points "
 				+ "FROM `Values` "
-				+ "ORDER BY points";
-		
+				+ "ORDER BY points";		
 		try{
 			PreparedStatement prestmt = this.connect.prepareStatement(q);
 			ResultSet currsor = prestmt.executeQuery();
@@ -76,8 +93,6 @@ public class DaoValues extends Dao<Values> {
 				val[i] = v;
 				i = i + 1;
 			}
-			
-		
 		}catch (SQLException e){
 			// TODO Auto-generated catch block
 			val = null;
@@ -86,4 +101,29 @@ public class DaoValues extends Dao<Values> {
 		return val;
 	}
 	
+	public boolean updateValues (Values[] v){
+		boolean val=false;
+		String q = "UPDATE `Values` "
+				+ "SET title=? , points= ? "
+				+ "WHERE id=?";		
+		try{
+			PreparedStatement prestmt = this.connect.prepareStatement(q);
+					
+									
+			for(int i=0; i< v.length ;i++){
+				prestmt.setString(1, v[i].getTitle());
+				prestmt.setInt(2, v[i].getPoints());
+				prestmt.setInt(3, v[i].getId());
+				prestmt.execute();
+			}
+			val=true;
+			
+
+		}catch (SQLException e){
+			// TODO Auto-generated catch block
+			val = false;
+			e.printStackTrace();
+		}
+		return val;
+	}
 }

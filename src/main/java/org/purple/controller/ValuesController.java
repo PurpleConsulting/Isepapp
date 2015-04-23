@@ -48,7 +48,7 @@ public class ValuesController extends HttpServlet {
 		//Afficher les values
 		Values[] value= v.selectAllValues();
 		request.setAttribute("valeur", value);
-		int i= value.length;//a essayer
+		int i= value.length-1;//a essayer
 		request.setAttribute("i", i);
 		
 			this.getServletContext().getRequestDispatcher("/template.jsp")
@@ -60,6 +60,45 @@ public class ValuesController extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		//Modifier une value
+	if(Integer.parseInt(request.getParameter("modify"))==1){
+		String nombre=request.getParameter("int");
+		Values[] val=new Values[Integer.parseInt(nombre)+1];
+		
+		for(int i=0; i<=Integer.parseInt(nombre); i++){
+		
+		String title = request.getParameter("title"+i);
+		String points = request.getParameter("points"+i);
+		String id = request.getParameter("id"+i);
+				
+		Values v = new Values();
+		v.setId(Integer.parseInt(id));
+		v.setTitle(title);
+		v.setPoints(Integer.parseInt(points));
+		val[i] = v;
+			
+		}		
+			
+		DaoValues v = new DaoValues(Bdd.getCo());
+		v.updateValues(val);
+		}
+	
+		//getServletContext().getRequestDispatcher("/ValuesController").forward(request, response);
+		
+		
+		//Ajouter une value
+		if(Integer.parseInt(request.getParameter("add"))==2){
+			String title = request.getParameter("newtitle");
+			String points = request.getParameter("newpoints");
+			
+			Values val = new Values();
+			val.setTitle(title);
+			val.setPoints(Integer.parseInt(points));
+			DaoValues v = new DaoValues(Bdd.getCo());
+			v.create(val);
+		}
+	
+		
 	}
 
 }
