@@ -43,13 +43,12 @@ public class ValuesController extends HttpServlet {
 		p.setContent("/mark/values_level.jsp");
 		request.setAttribute("pages", p);
 		
+		
 		DaoValues v = new DaoValues(Bdd.getCo());
-	
 		//Afficher les values
 		Values[] value= v.selectAllValues();
 		request.setAttribute("valeur", value);
-		int i= value.length-1;//a essayer
-		request.setAttribute("i", i);
+		
 		
 			this.getServletContext().getRequestDispatcher("/template.jsp")
 					.forward(request, response);
@@ -60,10 +59,13 @@ public class ValuesController extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		
+	DaoValues v = new DaoValues(Bdd.getCo());
+		
 		//Modifier une value
-	if(Integer.parseInt(request.getParameter("modify"))==1){
+	if(request.getParameter("modify").equals("1")){
 		String nombre=request.getParameter("int");
-		Values[] val=new Values[Integer.parseInt(nombre)+1];
+		Values[] valu=new Values[Integer.parseInt(nombre)+1];
 		
 		for(int i=0; i<=Integer.parseInt(nombre); i++){
 		
@@ -71,33 +73,47 @@ public class ValuesController extends HttpServlet {
 		String points = request.getParameter("points"+i);
 		String id = request.getParameter("id"+i);
 				
-		Values v = new Values();
-		v.setId(Integer.parseInt(id));
-		v.setTitle(title);
-		v.setPoints(Integer.parseInt(points));
-		val[i] = v;
+		Values val = new Values();
+		val.setId(Integer.parseInt(id));
+		val.setTitle(title);
+		val.setPoints(Integer.parseInt(points));
+		valu[i] = val;
 			
 		}		
-			
-		DaoValues v = new DaoValues(Bdd.getCo());
-		v.updateValues(val);
+					
+		v.updateValues(valu);
 		}
 	
-		//getServletContext().getRequestDispatcher("/ValuesController").forward(request, response);
-		
-		
+				
 		//Ajouter une value
-		if(Integer.parseInt(request.getParameter("add"))==2){
+		if(request.getParameter("modify").equals("2")){
 			String title = request.getParameter("newtitle");
 			String points = request.getParameter("newpoints");
-			
+			String nombre=request.getParameter("number");
 			Values val = new Values();
 			val.setTitle(title);
 			val.setPoints(Integer.parseInt(points));
-			DaoValues v = new DaoValues(Bdd.getCo());
+			val.setId(Integer.parseInt(nombre));
+			
 			v.create(val);
 		}
 	
+		//Appel à la page affichage value
+		Page p = new Page();
+		// On ajout le css
+		p.setCss("marks.css");
+		p.setJs("marks.js");
+		p.setContent("/mark/values_level.jsp");
+		request.setAttribute("pages", p);
+			
+	
+		//Afficher les values
+		Values[] value= v.selectAllValues();
+		request.setAttribute("valeur", value);
+		
+			this.getServletContext().getRequestDispatcher("/template.jsp")
+					.forward(request, response);
+		
 		
 	}
 
