@@ -1,12 +1,5 @@
 package org.purple.bean;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-
-import org.purple.constant.Bdd;
-
 public class User {
 	
 		private int id;

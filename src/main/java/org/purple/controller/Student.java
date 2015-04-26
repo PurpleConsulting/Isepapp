@@ -124,7 +124,6 @@ public class Student extends HttpServlet {
 			
 		}
 		
-		
 		request.setAttribute("pages", p);
 		request.getRequestDispatcher("/template.jsp").forward(request, response);
 	}

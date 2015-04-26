@@ -1,6 +1,5 @@
 package org.purple.model;
 import org.purple.bean.Mark;
-import org.purple.bean.User;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

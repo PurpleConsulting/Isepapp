@@ -106,6 +106,7 @@ div.mark div div.progress-bar{
 
 div.mark div p, div.mark div span{
 	display: inline-block;
+	min-width: 30px;
 }
 
 div.mark span.badge{
@@ -121,4 +122,25 @@ a.btn.btn-default span{
 div.mark div div.panel.panel-primary div{
 	margin-left: 0px;
 	margin-right: 0px;
+}
+
+div.alert-mark{
+	border: solid 1px #bdbdbd;
+	border-radius: 4px;
+	background-color: #F8F8F8;
+	margin-bottom: 12px;  
+	color: #777777;
+	padding:6px;
+}
+
+div.alert-mark span{
+	margin-left: 20px;
+}
+div.alert-mark.global{
+	background-color:#D9EDF7;
+	color: #31708F;
+	border: solid 1px #31708F;
+}
+span.alert-mark-result{
+	color: #337AB7;
 }

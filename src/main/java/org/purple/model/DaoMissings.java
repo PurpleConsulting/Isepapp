@@ -6,7 +6,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import org.purple.bean.Missing; 
-import org.purple.bean.User;
 
 public class DaoMissings extends Dao<Missing>{
 

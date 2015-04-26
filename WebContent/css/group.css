@@ -1,0 +1,41 @@
+@CHARSET "UTF-8";
+div.row{
+	margin-bottom:20px;	
+}
+div.idcard, div.groupmark, div.delivery{
+	border: solid #ccc 1px;
+	min-height: 230px;
+	border-radius: 6px;
+	padding: 20px;
+	padding: 10px;
+}
+div.idcard{
+	background-color: #F8F8F8;
+}
+div.idcard div.label-group{
+	border: solid 1px #BCE8F1;
+	background-color: #D9EDF7;
+	color: #31708F;
+	border-radius:6px;
+	margin-bottom:6px;
+	padding: 4px;
+}
+div.idcard div.label-group a{
+	text-decoration: underline;
+	
+}
+div.idcard div.label-group span.fa{
+	margin-bottom: 6px;
+	margin-top: 6px;
+	margin-right: 6px;
+}
+
+div.student-cell{
+	border: solid 1px #bdbdbd;
+	border-radius: 4px;
+	background-color: white;
+	padding: 6px;
+	margin-bottom: 6px;  
+	color: #777777;
+	overflow-x: scroll; 
+}

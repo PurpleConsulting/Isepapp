@@ -2,6 +2,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<!--<c:out value="${average.getTitle()}"></c:out>: ===> <c:out value="${average.compute()}"></c:out><br/>
+<c:forEach var="skill_mark" items="${average.grid}" varStatus="status">
+- - - ><c:out value="${skill_mark.getTitle()}"></c:out>: <c:out value="${skill_mark.compute()}"></c:out><br/>
+<c:forEach var="sub_skill_mark" items="${skill_mark.grid}" varStatus="status">
+- - - - - - ><c:out value="${sub_skill_mark.getSubSkill()}"></c:out> => <c:out value="${sub_skill_mark.getTitle()}"></c:out>: <c:out value="${sub_skill_mark.compute()}"></c:out><br/>
+</c:forEach>
+</c:forEach>-->
 <h1 class="col-md-offset-1 col-md-10 col-sm-offset-1 col-sm-10 col-xs-offset-1 col-xs-10">
 	Fiche étudiant
 	<small> - <c:out value="${student.getLastName()} ${student.getFirstName()}"></c:out></small>
@@ -15,7 +22,7 @@
 		<div class="col-md-offset-1 col-md-4 col-sm-offset-1 col-sm-10 col-xs-offset-1 col-xs-10">
 			<div class="cell"><p><span class="col-md-1">Nom:</span><span class="col-md-offset-2"><c:out value="${student.getLastName()}"></c:out></span></p></div>
 			<div class="cell"><p><span class="col-md-1">Prénom:</span><span class="col-md-offset-2"><c:out value="${student.getFirstName()}"></c:out></span></p></div>
-			<div class="cell"><p><span class="col-md-1">Groupe:</span><span class="col-md-offset-2"><a href="Group?id=<c:out value="${student.getGroup()}"></c:out>"><c:out value="${student.getGroup()}"></c:out></a></span></p></div>
+			<div class="cell"><p><span class="col-md-1">Groupe:</span><span class="col-md-offset-2"><a href="Groups?scope=<c:out value="${student.getGroup()}"></c:out>"><c:out value="${student.getGroup()}"></c:out></a></span></p></div>
 			<div class="cell"><p><span class="col-md-1">Isepid:</span><span class="col-md-offset-2"><c:out value="${student.getPseudo()}"></c:out></span></p></div>
 			<div class="cell"><p><span class="col-md-1">Email:</span><span class="col-md-offset-2"><c:out value="${student.getMail()}"></c:out></span></p></div>
 			<div class="cell"><p><span class="col-md-1">Tel:</span><span class="col-md-offset-2"><c:out value="${student.getTel()}"></c:out></span></p></div>
@@ -35,95 +42,47 @@
 					<a href="#tab${rowNum}" aria-controls="tab3" role="tab" data-toggle="tab"><c:out value="${skill.getTitle()}"></c:out></a>
 				</li>
 				<c:set var="rowNum" scope="request" value="${rowNum + 1}"/>
-			</c:forEach>
-				
-		    <!--<li role="presentation"><a href="#tab2" aria-controls="tab2" role="tab" data-toggle="tab">Travail en groupe</a></li>
-		    <li role="presentation"><a href="#tab3" aria-controls="tab3" role="tab" data-toggle="tab">Communication</a></li>
-		    <li role="presentation"><a href="#tab4" aria-controls="tab4" role="tab" data-toggle="tab">Conduite de projet</a></li>
-		  	<li role="presentation"><a href="#tab5" aria-controls="tab5" role="tab" data-toggle="tab">Conception/réalisation</a></li>
-		  	<li role="presentation"><a href="#tab6" aria-controls="tab6" role="tab" data-toggle="tab">Professionnel responsable</a></li>-->
-		  </ul>
+			</c:forEach>	
+		    </ul>
 		  <!-- Tab panes -->
 		  <div class="tab-content">
 		    <div role="tabpanel" class="tab-pane active" id="tab1">
 		    	<div class="col-sm-offset-1 col-sm-2 global-average">
-		    		<div>13,5</div>
+		    		<div><c:out value="${average.compute()}"></c:out></div>
 		    	</div>
 		    	<div class="col-sm-offset-4 col-sm-9">
-		    		<div>
-		    			<div class="col-sm-4">Travail en groupe:</div><span class="badge">10</span>
-						<div class="progress">
-						  <div class="progress-bar" role="progressbar" aria-valuenow="10" aria-valuemin="0" aria-valuemax="20" style="width: 60%;"></div>
+    				<c:forEach var="skill_mark" items="${average.grid}" varStatus="status">
+		    			<div>
+		    				<div class="col-sm-4"><c:out value="${skill_mark.getTitle()}"></c:out>:</div>
+		    				<span class="badge"><c:out value="${skill_mark.compute().intValue()}"></c:out></span>
+							<div class="progress">
+						  		<div class="progress-bar" role="progressbar" aria-valuenow="${skill_mark.compute()}" aria-valuemin="0" aria-valuemax="20" style="width: 60%;"></div>
+							</div>
 						</div>
-		    		</div>
-		    		<div>
-		    			<div class="col-sm-4">Communication:</div><span class="badge">15</span>
-						<div class="progress">
-						  <div class="progress-bar" role="progressbar" aria-valuenow="15" aria-valuemin="0" aria-valuemax="20" style="width:0%;"></div>
-						</div>
-		    		</div>
-		    		<div>
-		    			<div class="col-sm-4">Conduite de projet:</div><span class="badge">18</span>
-						<div class="progress">
-						  <div class="progress-bar" role="progressbar" aria-valuenow="18" aria-valuemin="0" aria-valuemax="20" style="width:0%;"></div>
-						</div>
-		    		</div>
-		    		<div>
-		    			<div class="col-sm-4">Conception/réalisation:</div><span class="badge">06</span>
-						<div class="progress">
-						  <div class="progress-bar" role="progressbar" aria-valuenow="6" aria-valuemin="0" aria-valuemax="20" style="width:0%;"></div>
-						</div>
-		    		</div>
-		    		<div>
-		    			<div class="col-sm-4">Professionnel responsable:</div><span class="badge">20</span>
-						<div class="progress">
-						  <div class="progress-bar" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="20" style="width:0%;"></div>
-						</div>
-		    		</div>
-		    		<div>
-		    			<div class="col-sm-4">Evaluation croisée:</div><span class="badge">12</span>
-						<div class="progress">
-						  <div class="progress-bar" role="progressbar" aria-valuenow="12" aria-valuemin="0" aria-valuemax="20" style="width:0%;"></div>
-						</div>
-		    		</div>
+					</c:forEach>
 		    	</div>
 		    </div>
-		    <div role="tabpanel" class="tab-pane" id="tab2">
-		    	<div class="panel panel-primary">
-		    		<div class="panel-heading">
-		    			<h3 class="panel-title">Sous compétences n° ... : bla bla bla</h3>
+		    <c:set var="rowNum" scope="request" value="${2}"/>
+		    <c:forEach var="skill_mark" items="${average.grid}" varStatus="status">
+		    	<div role="tabpanel" class="tab-pane" id="tab${rowNum}">
+		    		<div class="alert alert-mark global">
+		    		<span class="alert-mark-result">
+		    			<c:out value="${skill_mark.getTitle()}"></c:out>: 
+		    			<strong><c:out value="${skill_mark.compute()}"></c:out></strong>
+		    		</span>
 		    		</div>
-		    		<div class="panel-body">Aquis... ou pas?! -  5 pts </div>
-		    	 </div>
-		    	 <div class="panel panel-primary">
-		    		<div class="panel-heading">
-		    			<h3 class="panel-title">Sous compétences n° ... : bla bla bla</h3>
-		    		</div>
-		    		<div class="panel-body">Aquis... ou pas?! -  5 pts </div>
-		    	 </div>
-		    	 <div class="panel panel-primary">
-		    		<div class="panel-heading">
-		    			<h3 class="panel-title">Sous compétences n° ... : bla bla bla</h3>
-		    		</div>
-		    		<div class="panel-body">Aquis... ou pas?! -  5 pts </div>
-		    	 </div>
-		    	 <div class="panel panel-primary">
-		    		<div class="panel-heading">
-		    			<h3 class="panel-title">Sous compétences n° ... : bla bla bla</h3>
-		    		</div>
-		    		<div class="panel-body">Aquis... ou pas?! -  5 pts </div>
-		    	 </div>
-		    	 <div class="panel panel-primary">
-		    		<div class="panel-heading">
-		    			<h3 class="panel-title">Sous compétences n° ... : bla bla bla</h3>
-		    		</div>
-		    		<div class="panel-body">Aquis... ou pas?! -  5 pts </div>
-		    	 </div>
-		    </div>
-		    <div role="tabpanel" class="tab-pane" id="tab3">tab3</div>
-		    <div role="tabpanel" class="tab-pane" id="tab4">tab4</div>
-		    <div role="tabpanel" class="tab-pane" id="tab5">tab5</div>
-		    <div role="tabpanel" class="tab-pane" id="tab6">tab6</div>
+		    		<c:forEach var="sub_skill_mark" items="${skill_mark.grid}" varStatus="status">
+		    			<div class="alert alert-mark">
+		    				<span><c:out value="${sub_skill_mark.getSubSkill()}">:</c:out></span>
+		    				<span class="alert-mark-result">
+		    					<c:out value="${sub_skill_mark.getTitle()}"></c:out> - 
+		    					<c:out value="${sub_skill_mark.compute()}"></c:out>
+		    				</span>
+		    			</div>
+		    		</c:forEach>
+		    	</div>
+		    	<c:set var="rowNum" scope="request" value="${rowNum + 1}"/>
+			</c:forEach>
 		  </div>
 		</div>
 	</div>

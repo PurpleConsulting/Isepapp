@@ -7,7 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import org.purple.bean.User;
-import org.purple.constant.Bdd;
+
 /*** Purple import ***/
 
 public class DaoUsers extends Dao<User> {
