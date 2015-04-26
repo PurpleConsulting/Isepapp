@@ -12,11 +12,11 @@ import org.purple.model.DaoUsers;
 import org.purple.bean.User;
 import org.purple.constant.Bdd;
 
-public class TestDaoUser extends TestCase{
+public class TestDaoUsers extends TestCase{
 
-	@Test
+	//@Test
 	public void test() {
-		//fail("Not yet implemented");
+		fail("Not yet implemented");
 	}
 	/**
 	 * Place temporaire pour ce test.
@@ -35,23 +35,25 @@ public class TestDaoUser extends TestCase{
 		}
 	}
 	
-	/*@Test
+	@Test
 	public void testFind() {
-		DaoUsers u = new DaoUsers(Bdd.getCo());
-		String id = "8333";
-		assertTrue(u.find(id));		
+		DaoUsers u = new DaoUsers(Bdd.getSecureCo());
+		String id = "ldivad";
+		assertTrue(u.find(id));
+		u.close();
 	}
 	
 
 	@Test
 	public void testSelect() {
-		String id = "8333";
-		DaoUsers u = new DaoUsers(Bdd.getCo());
-		User beanUser = u.select(id);
+		String pseudo = "ldivad";
+		DaoUsers u = new DaoUsers(Bdd.getSecureCo());
+		User beanUser = u.select(pseudo);
 		
-		assertEquals(beanUser.getFirstName(), "DVD");
-		assertEquals(beanUser.getLastName(), "ldi");
-	}*/
+		assertEquals(beanUser.getFirstName(), "Divad");
+		assertEquals(beanUser.getLastName(), "loïc");
+		u.close();
+	}
 
 
 }

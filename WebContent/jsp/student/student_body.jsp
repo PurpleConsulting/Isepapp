@@ -24,16 +24,24 @@
 </div>
 <div class="row">
 	<div class="col-md-offset-1 col-md-10 col-sm-offset-1 col-sm-10 col-xs-offset-1 col-xs-10 mark" >
-		<h4>Compétences</h4>
+		<h4>Compétences - <a class="btn btn-default" href="#" role="button"><span class="fa fa-pencil"> </span>  Noter</a></h4> 
 		<div role="tabpanel">
 		  <!-- Nav tabs -->
 		  <ul class="nav nav-tabs" role="tablist">
 		    <li role="presentation" class="active"><a href="#tab1" aria-controls="tab1" role="tab" data-toggle="tab">Global</a></li>
-		    <li role="presentation"><a href="#tab2" aria-controls="tab2" role="tab" data-toggle="tab">Travail en groupe</a></li>
+		    <c:set var="rowNum" scope="request" value="${2}"/>
+			<c:forEach var="skill" items="${skills}" varStatus="status">
+				<li role="presentation">
+					<a href="#tab${rowNum}" aria-controls="tab3" role="tab" data-toggle="tab"><c:out value="${skill.getTitle()}"></c:out></a>
+				</li>
+				<c:set var="rowNum" scope="request" value="${rowNum + 1}"/>
+			</c:forEach>
+				
+		    <!--<li role="presentation"><a href="#tab2" aria-controls="tab2" role="tab" data-toggle="tab">Travail en groupe</a></li>
 		    <li role="presentation"><a href="#tab3" aria-controls="tab3" role="tab" data-toggle="tab">Communication</a></li>
 		    <li role="presentation"><a href="#tab4" aria-controls="tab4" role="tab" data-toggle="tab">Conduite de projet</a></li>
 		  	<li role="presentation"><a href="#tab5" aria-controls="tab5" role="tab" data-toggle="tab">Conception/réalisation</a></li>
-		  	<li role="presentation"><a href="#tab6" aria-controls="tab6" role="tab" data-toggle="tab">Professionnel responsable</a></li>
+		  	<li role="presentation"><a href="#tab6" aria-controls="tab6" role="tab" data-toggle="tab">Professionnel responsable</a></li>-->
 		  </ul>
 		  <!-- Tab panes -->
 		  <div class="tab-content">

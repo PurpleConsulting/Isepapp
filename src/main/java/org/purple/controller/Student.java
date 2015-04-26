@@ -1,6 +1,7 @@
 package org.purple.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -8,12 +9,17 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.purple.bean.Mark;
 import org.purple.bean.Missing;
 import org.purple.bean.Page;
+import org.purple.bean.Skill;
 import org.purple.bean.User;
 import org.purple.constant.Bdd;
 import org.purple.model.Auth;
-import org.purple.model.DaoMissing;
+import org.purple.model.Average;
+import org.purple.model.DaoMarks;
+import org.purple.model.DaoMissings;
+import org.purple.model.DaoSkills;
 import org.purple.model.DaoUsers;
 
 /**
@@ -60,23 +66,45 @@ public class Student extends HttpServlet {
 				
 				// -- Lets see if the pseudo is in the data base.
 				DaoUsers du = new DaoUsers(Bdd.getCo());
-				DaoMissing dm = new DaoMissing(Bdd.getCo());
-				User s = du.select(student);
+				DaoMissings dm = new DaoMissings(Bdd.getCo());
+				DaoMarks dmk = new DaoMarks(Bdd.getCo());
+				User std = du.select(student);
 				
-				if(s != null && s.getPosition().equals("student")){
+				if(std != null && std.getPosition().equals("student")){
 					
 					// -- we get he/she from the data base
-					du.addGroup(s); du.addTelMail(s);// -- we retrive his group, his tel, and his mail
+					du.addGroup(std); du.addTelMail(std);// -- we retrieve his group, his tel, and his mail
+					
+					// -- we deal with the skills
+					Skill[] skills = DaoSkills.allSkill();// -- get all the skill for this session
+					ArrayList<Mark> marks = dmk.selectByStudent(Integer.toString(std.getId()));// -- get all the mark for this student
+					ArrayList<Average> sklAverage = new ArrayList<Average>();// -- 
+					Average average = new Average("Moyenne: "+std.getPseudo(), false);
+					for(Skill s : skills){
+						sklAverage.add(new Average(s.getTitle(),true));
+					}
+					for(Average av : sklAverage){
+						for(Mark note : marks){
+							if(av.getTitle().equals(note.getSkill())){
+								av.push(note);
+							}
+						}
+						average.push(av);
+					}
+					
+					
+					request.setAttribute("average", average);
+					request.setAttribute("skills", skills);
 					
 					// -- we get the missing of the student
-					Missing[] missingGrid = dm.selectAll(Integer.toString(s.getId()));// -- we prepare the data format for the view
+					Missing[] missingGrid = dm.selectAll(Integer.toString(std.getId()));// -- we prepare the data format for the view
 					if(missingGrid == null) missingGrid = new Missing[0];// -- He never skip class, he win an empty array
 					
 					p.setContent("student/student_body.jsp");
 					p.setTitle("ISEP / APP - Etudiants");
 					p.setCss("student.css");
 					p.setJs("student.js");
-					request.setAttribute("student", s);// -- we send the student
+					request.setAttribute("student", std);// -- we send the student
 					request.setAttribute("missingGrid", missingGrid);// -- we send the his missing
 					
 					
@@ -89,6 +117,7 @@ public class Student extends HttpServlet {
 					p.setContent("home.jsp");
 					
 				}
+				dmk.close();
 				dm.close();
 				du.close(); // -- we close the connection <-- THIS IS REALY IMPORTANT
 			}

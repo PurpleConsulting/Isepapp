@@ -10,8 +10,6 @@ import org.mockito.MockitoAnnotations;
 import org.purple.bean.User;
 import org.purple.model.Auth;
 
-
-
 public class TestAuth {
 	private HttpServletRequest[] reqs = new HttpServletRequest[4];
 	private HttpSession[] sess = new HttpSession[4];

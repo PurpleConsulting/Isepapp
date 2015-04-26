@@ -8,9 +8,9 @@ import java.sql.SQLException;
 import org.purple.bean.Missing; 
 import org.purple.bean.User;
 
-public class DaoMissing extends Dao<Missing>{
+public class DaoMissings extends Dao<Missing>{
 
-	public DaoMissing(Connection co) {
+	public DaoMissings(Connection co) {
 		super(co);
 		// TODO Auto-generated constructor stub
 	}
@@ -72,12 +72,4 @@ public class DaoMissing extends Dao<Missing>{
 		return ms;
 	}
 
-	public void close() {
-		try {
-			this.connect.close();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
 }

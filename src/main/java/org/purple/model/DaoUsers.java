@@ -17,15 +17,6 @@ public class DaoUsers extends Dao<User> {
 		// TODO Auto-generated constructor stub
 	}
 	
-	public void close() {
-		try {
-			this.connect.close();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
-	
 	/**
 	 * A minimalist function for connection. Should be replace by the LDAP protocol.
 	 * NEED TO CLEAN UP THIS FUNCTION!!!
@@ -47,8 +38,7 @@ public class DaoUsers extends Dao<User> {
 			// TODO Auto-generated catch block
 				e.printStackTrace();
 		}
-			
-			return res;
+		return res;
 	}
 	
 
