@@ -2,13 +2,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<!--<c:out value="${average.getTitle()}"></c:out>: ===> <c:out value="${average.compute()}"></c:out><br/>
-<c:forEach var="skill_mark" items="${average.grid}" varStatus="status">
-- - - ><c:out value="${skill_mark.getTitle()}"></c:out>: <c:out value="${skill_mark.compute()}"></c:out><br/>
-<c:forEach var="sub_skill_mark" items="${skill_mark.grid}" varStatus="status">
-- - - - - - ><c:out value="${sub_skill_mark.getSubSkill()}"></c:out> => <c:out value="${sub_skill_mark.getTitle()}"></c:out>: <c:out value="${sub_skill_mark.compute()}"></c:out><br/>
-</c:forEach>
-</c:forEach>-->
 <h1 class="col-md-offset-1 col-md-10 col-sm-offset-1 col-sm-10 col-xs-offset-1 col-xs-10">
 	Fiche étudiant
 	<small> - <c:out value="${student.getLastName()} ${student.getFirstName()}"></c:out></small>
