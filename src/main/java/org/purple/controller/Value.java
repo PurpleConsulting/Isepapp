@@ -9,23 +9,21 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.purple.bean.Page;
-import org.purple.bean.User;
 import org.purple.bean.Values;
 import org.purple.constant.Bdd;
-import org.purple.model.DaoUsers;
 import org.purple.model.DaoValues;
 
 /**
- * Servlet implementation class ValuesController
+ * Servlet implementation class Value
  */
-@WebServlet("/ValuesController")
-public class ValuesController extends HttpServlet {
+@WebServlet("/Value")
+public class Value extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ValuesController() {
+    public Value() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -35,12 +33,11 @@ public class ValuesController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-	
 		Page p = new Page();
 		// On ajout le css
 		p.setCss("marks.css");
 		p.setJs("marks.js");
-		p.setContent("/mark/values_level.jsp");
+		p.setContent("/mark/values.jsp");
 		request.setAttribute("pages", p);
 		
 		
@@ -59,8 +56,7 @@ public class ValuesController extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		
-	DaoValues v = new DaoValues(Bdd.getCo());
+DaoValues v = new DaoValues(Bdd.getCo());
 		
 		//Modifier une value
 	if(request.getParameter("modify").equals("1")){
@@ -72,7 +68,7 @@ public class ValuesController extends HttpServlet {
 		String title = request.getParameter("title"+i);
 		String points = request.getParameter("points"+i);
 		String id = request.getParameter("id"+i);
-				
+		
 		Values val = new Values();
 		val.setId(Integer.parseInt(id));
 		val.setTitle(title);
@@ -94,19 +90,27 @@ public class ValuesController extends HttpServlet {
 			val.setTitle(title);
 			val.setPoints(Integer.parseInt(points));
 			val.setId(Integer.parseInt(nombre));
-			
 			v.create(val);
+			
 		}
+		
 	
+		//Supprimer les values
+		if(request.getParameter("modify").equals("3")){
+			String id=request.getParameter("idSupp");	
+			v.deleteId(Integer.parseInt(id));
+		}
+		
 		//Appel à la page affichage value
 		Page p = new Page();
 		// On ajout le css
 		p.setCss("marks.css");
 		p.setJs("marks.js");
-		p.setContent("/mark/values_level.jsp");
+		p.setContent("/mark/values.jsp");
 		request.setAttribute("pages", p);
 			
-	
+		
+		
 		//Afficher les values
 		Values[] value= v.selectAllValues();
 		request.setAttribute("valeur", value);
@@ -115,6 +119,7 @@ public class ValuesController extends HttpServlet {
 					.forward(request, response);
 		
 		
+	
 	}
 
 }

@@ -1,21 +1,66 @@
 @CHARSET "ISO-8859-1";
 
-#marktab {
-	width: 400px;
-	margin-left: 300px;
-	margin-top: 30px;
+/*NOUVEAU */
+
+div.cascade-warning{
+	display: none;
 }
 
-button#ModifierNot {
-	margin-left: 622px;
-	margin-top: 15px;
-}
-button#ModifierNotM {
-	margin-left: 622px;
-	margin-top: 15px;
+div.values{
+	border: solid #ccc 1px;
+	min-height: 230px;
+	border-radius: 6px;
+	padding: 20px;
+	background-color: transparent;
+	padding: 40px;
 }
 
-button#AjouterB {
-  margin-left: 540px;
-  margin-top: -54px;
+div.line{
+  margin-bottom:12px;
+}
+
+div.line a.add:hover{
+	color: #3E753F;
+	border-color: #3E753F;
+	background-color: #DFF0D9;
+}
+
+div input.form-control{
+	text-align: center;
+}
+
+span.danger{
+  color:red;
+}
+span.safe{
+  color:#31708F;
+}
+/*input.form-control.title{
+  width:200px;
+}
+input.form-control.value{
+  width: 60px
+}*/
+
+form.form-inline.off div.line div.form-group input{
+	border: solid 0px white;
+	box-shadow: none;
+}
+form.off a.remove, form.off button.btn{
+	display: none;
+}
+
+form.off div.form-group input[disabled]{
+	background-color: #F2DEDE;
+	background-color: white;
+}
+
+div.has-error input[disabled]{
+	background-color: #F2DEDE;
+	color: #A94442;
+}
+
+div#modaladd form{
+	margin-top: 50px;
+	margin-bottom: 50px;
 }

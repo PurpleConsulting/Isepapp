@@ -38,7 +38,6 @@ public class DaoValues extends Dao<Values> {
 			prestmt.setString(2, val.getTitle());
 			prestmt.setInt(3, val.getPoints());
 			
-			
 			prestmt.execute();
 			
 			r=true;
@@ -53,9 +52,9 @@ public class DaoValues extends Dao<Values> {
 	}
 
 	@Override
-	public boolean delete(Values obj) {
+	public boolean delete(Values val) {
 		// TODO Auto-generated method stub
-		return false;
+		return false;	
 	}
 
 	@Override
@@ -74,7 +73,7 @@ public class DaoValues extends Dao<Values> {
 		Values[] val=null;
 		String q = "SELECT id,title, points "
 				+ "FROM `Values` "
-				+ "ORDER BY points";		
+				+ "ORDER BY id";		
 		try{
 			PreparedStatement prestmt = this.connect.prepareStatement(q);
 			ResultSet currsor = prestmt.executeQuery();
@@ -103,6 +102,7 @@ public class DaoValues extends Dao<Values> {
 		return val;
 	}
 	
+	
 	public boolean updateValues (Values[] v){
 		boolean val=false;
 		String q = "UPDATE `Values` "
@@ -130,4 +130,23 @@ public class DaoValues extends Dao<Values> {
 	}
 
 	
-}
+ public boolean deleteId(int id){
+	 boolean r=false;
+	 String q = "DELETE FROM `Values`"
+				+ "WHERE id=?";	
+		try{
+			PreparedStatement prestmt = this.connect.prepareStatement(q);
+			prestmt.setInt(1, id);
+			prestmt.execute();
+			
+			r=true;
+			
+		}catch (SQLException e){
+			// TODO Auto-generated catch block
+			r = false;
+			e.printStackTrace();
+		}
+		return r;
+	}
+ 
+ }

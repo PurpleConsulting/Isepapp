@@ -21,7 +21,7 @@
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Fourtout Modules<span class="caret"></span></a>
           <ul class="dropdown-menu" role="menu">
-            <li><a href="ValuesController">Values</a></li>
+            <li><a href="Value">Values</a></li>
             <li><a href="#">Module2</a></li>
             <li><a href="#">Module3</a></li>
             <li class="divider"></li>
