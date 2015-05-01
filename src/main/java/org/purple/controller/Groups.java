@@ -63,6 +63,7 @@ public class Groups extends HttpServlet {
 					dg.completeMemebers(group);
 					p.setContent("group/group_body.jsp");
 					p.setCss("group.css");
+					p.setJs("group.js");
 					
 					request.setAttribute("pages", p);
 					request.setAttribute("group", group);

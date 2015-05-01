@@ -12,13 +12,31 @@
 		<div class="col-md-offset-1 col-md-4 col-sm-offset-1 col-sm-10 col-xs-offset-1 col-xs-10  ">
 			<img src="./img/photo.jpg" alt="" />
 		</div>
-		<div class="col-md-offset-1 col-md-4 col-sm-offset-1 col-sm-10 col-xs-offset-1 col-xs-10">
-			<div class="cell"><p><span class="col-md-1">Nom:</span><span class="col-md-offset-2"><c:out value="${student.getLastName()}"></c:out></span></p></div>
-			<div class="cell"><p><span class="col-md-1">Prénom:</span><span class="col-md-offset-2"><c:out value="${student.getFirstName()}"></c:out></span></p></div>
-			<div class="cell"><p><span class="col-md-1">Groupe:</span><span class="col-md-offset-2"><a href="Groups?scope=<c:out value="${student.getGroup()}"></c:out>"><c:out value="${student.getGroup()}"></c:out></a></span></p></div>
-			<div class="cell"><p><span class="col-md-1">Isepid:</span><span class="col-md-offset-2"><c:out value="${student.getPseudo()}"></c:out></span></p></div>
-			<div class="cell"><p><span class="col-md-1">Email:</span><span class="col-md-offset-2"><c:out value="${student.getMail()}"></c:out></span></p></div>
-			<div class="cell"><p><span class="col-md-1">Tel:</span><span class="col-md-offset-2"><c:out value="${student.getTel()}"></c:out></span></p></div>
+		<div class="col-md-offset-1 col-md-5 col-sm-offset-1 col-sm-10 col-xs-offset-1 col-xs-10">
+			<div class="cell"><p>
+				<span class="col-xs-4 col-sm-2">Nom:</span>
+				<span class="col-xs-4 col-sm-offset-1 col-md-offset-1"><c:out value="${student.getLastName()}"></c:out></span>
+			</p></div>
+			<div class="cell"><p>
+				<span class="col-xs-4 col-sm-2">Prénom:</span>
+				<span class="col-xs-4 col-sm-offset-1 col-md-offset-1"><c:out value="${student.getFirstName()}"></c:out></span>
+			</p></div>
+			<div class="cell"><p>
+				<span class="col-xs-4 col-sm-2">Groupe:</span>
+				<span class="col-xs-4 col-sm-offset-1 col-md-offset-1"><a href="Groups?scope=<c:out value="${student.getGroup()}"></c:out>"><c:out value="${student.getGroup()}"></c:out></a>
+			</span></p></div>
+			<div class="cell"><p>
+				<span class="col-xs-4 col-sm-2">Isepid:</span>
+				<span class="col-xs-4 col-sm-offset-1 col-md-offset-1"><c:out value="${student.getPseudo()}"></c:out></span>
+			</p></div>
+			<div class="cell"><p>
+				<span class="col-xs-4 col-sm-2">Email:</span>
+				<span class="col-xs-4 col-sm-offset-1 col-md-offset-1"><a href="mailto:${student.getMail()}"><c:out value="${student.getMail()}"></c:out></a></span>
+			</p></div>
+			<div class="cell"><p>
+				<span class="col-xs-4 col-sm-2">Tel:</span>
+				<span class="col-xs-4 col-sm-offset-1 col-md-offset-1"><c:out value="${student.getTel()}"></c:out></span>
+			</p></div>
 		</div>
 	</div>
 </div>
@@ -41,7 +59,7 @@
 		  <div class="tab-content">
 		    <div role="tabpanel" class="tab-pane active" id="tab1">
 		    	<div class="col-sm-offset-1 col-sm-2 global-average">
-		    		<div><c:out value="${fn:substring(average.compute(),0,4)}"></c:out></div>
+		    		<div><c:out value="${fn:substring(average.compute(),0,4)}"></c:out></div><!--  -->
 		    	</div>
 		    	<div class="col-sm-offset-4 col-sm-9">
     				<c:forEach var="skill_mark" items="${average.grid}" varStatus="status">

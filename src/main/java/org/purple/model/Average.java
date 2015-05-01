@@ -47,21 +47,25 @@ public class Average extends Avg{
 	}
 	@Override
 	public double compute() {
-		// TODO Auto-generated method stub		
-		double sum = 0.0;
-		for(Avg mark : this.grid){
-			sum = sum + mark.compute();
-		}// --
-		
-		double res = (sum / (double)this.grid.size());
-		// -- Average for a skill:
-		if(Double.compare(Isep.LANDMARK, this.maxVal) != 0){
-			res = (res * Isep.LANDMARK) / this.maxVal;
+		// TODO Auto-generated method stub
+		if(this.grid.size() > 0){
+			double sum = 0.0;
+			for(Avg mark : this.grid){
+				sum = sum + mark.compute();
+			}// --
+			
+			double res = (sum / (double)this.grid.size());
+			// -- Average for a skill:
+			if(Double.compare(Isep.LANDMARK, this.maxVal) != 0){
+				res = (res * Isep.LANDMARK) / this.maxVal;
+			}
+			
+			// -- Average for Student / group / prom
+			this.value = res;
+			return Isep.round(res, 2);
+		} else {
+			return 0.0;
 		}
-		
-		// -- Average for Student / group / prom
-		this.value = res;
-		return Isep.round(res, 2);
 		
 	}
 	
