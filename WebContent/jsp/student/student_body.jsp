@@ -41,7 +41,7 @@
 		  <div class="tab-content">
 		    <div role="tabpanel" class="tab-pane active" id="tab1">
 		    	<div class="col-sm-offset-1 col-sm-2 global-average">
-		    		<div><c:out value="${average.compute()}"></c:out></div>
+		    		<div><c:out value="${fn:substring(average.compute(),0,4)}"></c:out></div>
 		    	</div>
 		    	<div class="col-sm-offset-4 col-sm-9">
     				<c:forEach var="skill_mark" items="${average.grid}" varStatus="status">
@@ -136,8 +136,11 @@
 						<div class="alert alert-${missingRow.getLate() ? 'info' : 'warning'}${rowNum <= 3 ? ' active' : ''}" 
 							role="alert" id="blk${rowNum}">
 							<strong><c:out value="${missingRow.getLate() ? 'Retard' : 'Absence'}"></c:out></strong>:
-							<c:out value="${missingRow.getDate()}"></c:out>, 
+							<c:out value="${missingRow.printDate()}"></c:out>, 
 							<c:out value="${missingRow.getSupporting()}"></c:out>
+							<c:if test="${missingRow.getLate()}">
+								/ Heure d'arrivé: <strong><c:out value="${missingRow.printLate()}"/></strong>
+							</c:if>
 						</div>
 					</c:if>
 			<c:set var="rowNum" scope="request" value="${rowNum + 1}"/>	

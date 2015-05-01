@@ -26,16 +26,21 @@
      		<scope>provided</scope>
    		</dependency>
    		<dependency>
+    		<groupId>javax.servlet</groupId>
+    		<artifactId>jstl</artifactId>
+    		<version>1.2</version>
+		</dependency>
+		<dependency>
+			<groupId>joda-time</groupId>
+			<artifactId>joda-time</artifactId>
+			<version>2.7</version>
+		</dependency>
+		<dependency>
     		<groupId>org.apache.tomcat.maven</groupId>
     		<artifactId>tomcat7-maven-plugin</artifactId>
     		<version>2.2</version>
     		<type>maven-plugin</type>
    		</dependency>
-   		<dependency>
-    		<groupId>javax.servlet</groupId>
-    		<artifactId>jstl</artifactId>
-    		<version>1.2</version>
-		</dependency>
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>

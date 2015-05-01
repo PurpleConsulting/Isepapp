@@ -5,4 +5,5 @@ public abstract class Avg {
 		protected double value;
 		
 		public abstract double compute();
+		
 }

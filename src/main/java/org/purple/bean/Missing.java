@@ -1,11 +1,22 @@
 package org.purple.bean;
 
+import org.joda.time.DateTime;
+import org.joda.time.DateTimeZone;
+import org.joda.time.format.DateTimeFormat;
+import org.joda.time.format.DateTimeFormatter;
+import org.purple.constant.Isep;
+
 public class Missing {
 	
 	private String id;
-	private String date;
+	private DateTime date = new DateTime(2000, 01,01, 0,0,0);
+	// -- initialise at 1st Jan 2000 ... we never know;
 	private Boolean late;
 	private String supporting;
+	
+	public Missing(){
+		
+	}
 	
 	public String getId() {
 		return id;
@@ -13,11 +24,18 @@ public class Missing {
 	public void setId(String id) {
 		this.id = id;
 	}
-	public String getDate() {
+	public DateTime getDate() {
 		return date;
 	}
+	public String printDate() {
+		return date.toString("d MMM Y");
+	}
+	public String printLate() {
+		return date.toString("HH:mm");
+	}
 	public void setDate(String date) {
-		this.date = date;
+		this.date = DateTime.parse(date, DateTimeFormat.forPattern(Isep.JODA_UTC));
+		this.date = this.date.withZone(DateTimeZone.forID(Isep.LOCATION));
 	}
 	public Boolean getLate() {
 		return late;

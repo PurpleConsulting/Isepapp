@@ -2,28 +2,28 @@ package org.purple.model;
 
 import java.util.ArrayList;
 
+import org.purple.constant.Isep;
+
 public class Average extends Avg{
 
 	private ArrayList<Avg> grid = new ArrayList<Avg>();
-	private boolean scaleD20;
 	private String title;
+	private double maxVal;
 	
 	public Average(){
 		this.value = 0.0;
-		this.setScaleD20(false);
 		/**
 		 * If the value of the scale is false
 		 * We divide by the number of composite to get the average.
 		 */
 	}
-	public Average(boolean scaleD20){
+	public Average(boolean unit){
 		this.value = 0.0;
-		this.setScaleD20(scaleD20);
 	}
-	public Average(String title, boolean scaleD20){
+	public Average(String title, double maxVal){
 		this.setTitle(title);
 		this.value = 0.0;
-		this.setScaleD20(scaleD20);
+		this.setMaxVal(maxVal);
 	}
 	
 	
@@ -39,26 +39,30 @@ public class Average extends Avg{
 	public void setGrid(ArrayList<Avg> grid) {
 		this.grid = grid;
 	}
-	public boolean isScaleD20() {
-		return scaleD20;
+	public double getMaxVal() {
+		return maxVal;
 	}
-	public void setScaleD20(boolean scaleD20) {
-		this.scaleD20 = scaleD20;
+	public void setMaxVal(double maxVal) {
+		this.maxVal = maxVal;
 	}
-	
 	@Override
 	public double compute() {
-		// TODO Auto-generated method stub
-		double res = 0.0;
+		// TODO Auto-generated method stub		
+		double sum = 0.0;
 		for(Avg mark : this.grid){
-			res = res + mark.compute();
+			sum = sum + mark.compute();
+		}// --
+		
+		double res = (sum / (double)this.grid.size());
+		// -- Average for a skill:
+		if(Double.compare(Isep.LANDMARK, this.maxVal) != 0){
+			res = (res * Isep.LANDMARK) / this.maxVal;
 		}
+		
+		// -- Average for Student / group / prom
 		this.value = res;
-		if(!this.scaleD20){// -- the sum is > 20 / we divide to get an average
-			return (res / (double)this.grid.size());
-		} else {// --  the sum is < 20 we take the sum to get an mark
-			return res;
-		}
+		return Isep.round(res, 2);
+		
 	}
 	
 	public void push(Avg mark){

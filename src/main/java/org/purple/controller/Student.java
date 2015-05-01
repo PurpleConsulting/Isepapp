@@ -15,6 +15,7 @@ import org.purple.bean.Page;
 import org.purple.bean.Skill;
 import org.purple.bean.User;
 import org.purple.constant.Bdd;
+import org.purple.constant.Isep;
 import org.purple.model.Auth;
 import org.purple.model.Average;
 import org.purple.model.DaoMarks;
@@ -79,9 +80,9 @@ public class Student extends HttpServlet {
 					Skill[] skills = DaoSkills.allSkill();// -- get all the skill for this session
 					ArrayList<Mark> marks = dmk.selectByStudent(Integer.toString(std.getId()));// -- get all the mark for this student
 					ArrayList<Average> sklAverage = new ArrayList<Average>();// -- 
-					Average average = new Average("Moyenne: "+std.getPseudo(), false);
+					Average average = new Average("Moyenne: "+std.getPseudo(), Isep.LANDMARK);
 					for(Skill s : skills){
-						sklAverage.add(new Average(s.getTitle(),true));
+						sklAverage.add(new Average(s.getTitle(), 3.0));
 					}
 					for(Average av : sklAverage){
 						for(Mark note : marks){

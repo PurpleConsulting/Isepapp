@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import org.purple.bean.Missing; 
+import org.purple.constant.Isep;
 
 public class DaoMissings extends Dao<Missing>{
 
@@ -40,7 +41,7 @@ public class DaoMissings extends Dao<Missing>{
 	
 	public Missing[] selectAll(String idStudent){
 		Missing[] ms = null;
-		String q = "SELECT id, date, late, supporting"
+		String q = "SELECT id, DATE_FORMAT(date, '"+ Isep.MYSQL_UTC +"') , late, supporting"
 				+ " FROM Missing WHERE id_student = ? ";
 		try{
 			PreparedStatement prestmt = this.connect.prepareStatement(q);
