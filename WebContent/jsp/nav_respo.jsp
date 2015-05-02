@@ -28,7 +28,7 @@
 	            <li><a href="#">Les classes</a></li>
 	            <li><a href="#">Groupes d'APP</a></li>
 	            <li class="divider"></li>
-	            <li><a href="Student?pseudo=ldivad">Recherche d'étudiant</a></li>
+	            <li><a href="Students?pseudo=ldivad">Recherche d'étudiant</a></li>
 	            <li><a href="#">Recherche d'un tuteur</a></li>
           	</ul>
   		</li>

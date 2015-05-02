@@ -22,13 +22,17 @@ div.cell{
 	background-color: #F8F8F8;
 	margin-bottom: 4px;  
 	color: #777777;
-	overflow-x: scroll; 
+	overflow: hidden;
 }
+
+div.cell p:hover{
+	overflow: auto;
+} 
 
 div.cell p{
 	margin-top: 5px;
 	margin-bottom: 5px;
-	overflow: inherit;
+	overflow: hidden;
 }
 
 img{

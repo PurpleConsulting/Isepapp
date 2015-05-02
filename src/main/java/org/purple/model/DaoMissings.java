@@ -39,7 +39,7 @@ public class DaoMissings extends Dao<Missing>{
 		return null;
 	}
 	
-	public Missing[] selectAll(String idStudent){
+	public Missing[] selectForStudent(String idStudent){
 		Missing[] ms = null;
 		String q = "SELECT id, DATE_FORMAT(date, '"+ Isep.MYSQL_UTC +"') , late, supporting"
 				+ " FROM Missing WHERE id_student = ? ";
@@ -59,6 +59,39 @@ public class DaoMissings extends Dao<Missing>{
 				m.setDate(currsor.getString(2));
 				m.setLate(currsor.getBoolean(3));
 				m.setSupporting(currsor.getString(4));
+				ms[i] = m;
+				i = i + 1;
+			}
+				
+			prestmt.close();
+		}catch (SQLException e){
+			// TODO Auto-generated catch block
+			ms = null;
+			e.printStackTrace();
+		}
+		return ms;
+	}
+	
+	public Missing[] selectForGroup(String idGroup){
+		Missing[] ms = null;
+		String q = "SELECT Users.pseudo, Missing.late FROM Missing"
+				+ " INNER JOIN  Users on Missing.id_student = Users.id"
+				+ " WHERE Users.id_group ="
+				+ " (SELECT Groups.id  FROM Groups WHERE Groups.`name` = ?);";
+		try{
+			PreparedStatement prestmt = this.connect.prepareStatement(q);
+			prestmt.setString(1,idGroup);
+			ResultSet currsor = prestmt.executeQuery();
+			if(!currsor.next()) return ms;
+			if (currsor.last()) {
+				ms = new Missing[currsor.getRow()];
+				currsor.beforeFirst(); 
+			}
+			int i = 0;
+			while(currsor.next()){
+				Missing m = new Missing();
+				m.setStudent(currsor.getString(1));
+				m.setLate(currsor.getBoolean(2));
 				ms[i] = m;
 				i = i + 1;
 			}

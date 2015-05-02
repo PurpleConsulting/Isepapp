@@ -9,10 +9,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.purple.bean.Group;
+import org.purple.bean.Missing;
 import org.purple.bean.Page;
 import org.purple.constant.Bdd;
 import org.purple.model.Auth;
 import org.purple.model.DaoGroups;
+import org.purple.model.DaoMissings;
+import org.purple.model.DaoUsers;
 
 /**
  * Servlet implementation class Group
@@ -37,38 +40,47 @@ public class Groups extends HttpServlet {
 		Page p = new Page();
 		// -- Authentication --
 		if(!Auth.isRespo(request) && !Auth.isTutor(request) && !Auth.isAdmin(request)){ 
+			
 			// -- Back to the home page with an warning message.
 			p.setWarning(true);
 			p.setWarningMessage("La page sur laquelle vous tentez de vous rendre ne vous est pas accessible. "
 					+ "Pour toute réclamation, prenez contact avec le responsable d'APP actuel.");
 			p.setContent("home.jsp");
+			
 		} else {
 			// -- We assume we are Admin or tutor or Respo, Now Does the student exist?
 			// -- Which group is required
 			String scope = request.getParameter("scope");
 			if(scope == null || scope == "_all"){
 				
+				p.setContent("home.jsp");
 			} else {
 				
 				DaoGroups dg = new DaoGroups(Bdd.getCo());
 				Group group = dg.select(scope);  
 				if(group == null){
-					// -- Incorrect data, the group is missing.
-					p.setWarning(true);
-					p.setWarningMessage("Ce groupe n'exite pas... page bientôt remplcé par une liste de groupe");
-					p.setContent("home.jsp");
 					
+					// -- Incorrect data, the group is missing.
+					p.setError(true);
+					p.setErrorMessage("Le groupe demandé n'a pas été retrouvé dans la base.");
+					p.setContent("home.jsp");
 					request.setAttribute("pages", p);
+					
 				} else {
 					dg.completeMemebers(group);
+					DaoMissings dm = new DaoMissings(Bdd.getCo());
+					Missing[] allmissings = dm.selectForGroup(group.getName());
+					
 					p.setContent("group/group_body.jsp");
 					p.setCss("group.css");
 					p.setJs("group.js");
 					
 					request.setAttribute("pages", p);
 					request.setAttribute("group", group);
+					request.setAttribute("missings", allmissings);
 				}
 				
+
 				dg.close();
 			}
 		}

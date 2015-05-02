@@ -68,11 +68,12 @@ public class DaoUsers extends Dao<User> {
 		// TODO Auto-generated method stub
 		User u = null;
 		String q = "SELECT Users.id,"
-				+ "Users.last_name, Users.first_name,"
-				+ " Positions.title, Users.pseudo"
+				+ " Users.last_name, Users.first_name,"
+				+ " Positions.title, Users.pseudo,"
+				+ " Users.tel, Users.mail"
 				+ " FROM Users INNER JOIN Positions"
-				+ " on Users.id_post = Positions.id "
-				+ "WHERE Users.pseudo = ? ";
+				+ " on Users.id_post = Positions.id"
+				+ " WHERE Users.pseudo = ? ";
 		try{
 			PreparedStatement prestmt = this.connect.prepareStatement(q);
 			prestmt.setString(1,pseudo);
@@ -84,6 +85,8 @@ public class DaoUsers extends Dao<User> {
 			u.setLastName(currsor.getString(3));
 			u.setPosition(currsor.getString(4));
 			u.setPseudo(currsor.getString(5));
+			u.setTel(currsor.getString(6));
+			u.setMail(currsor.getString(7));
 			prestmt.close();
 		}catch (SQLException e){
 			// TODO Auto-generated catch block
@@ -118,19 +121,5 @@ public class DaoUsers extends Dao<User> {
 				u.setGroup("");
 		}
 	}
-	
-	public void addTelMail(User u){
-		String q = "SELECT tel, mail FROM Users WHERE Users.id = " + Integer.toString(u.getId());
-		try {
-			ResultSet currsor = this.connect.createStatement().executeQuery(q);
-			currsor.next();
-			u.setTel(currsor.getString(1));
-			u.setMail(currsor.getString(2));
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-				e.printStackTrace();
-				u.setTel("");
-				u.setMail("");
-		}
-	}
+
 }

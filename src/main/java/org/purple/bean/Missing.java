@@ -13,6 +13,7 @@ public class Missing {
 	// -- initialise at 1st Jan 2000 ... we never know;
 	private Boolean late;
 	private String supporting;
+	private String student;
 	
 	public Missing(){
 		
@@ -50,5 +51,12 @@ public class Missing {
 		this.supporting = supporting;
 	}
 
+	public String getStudent() {
+		return student;
+	}
+	public void setStudent(String student) {
+		this.student = student;
+	}
+	
 	
 }

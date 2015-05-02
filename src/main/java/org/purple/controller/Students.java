@@ -26,14 +26,14 @@ import org.purple.model.DaoUsers;
 /**
  * Servlet implementation class Student
  */
-@WebServlet("/Student")
-public class Student extends HttpServlet {
+@WebServlet("/Students")
+public class Students extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public Student() {
+    public Students() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -74,7 +74,7 @@ public class Student extends HttpServlet {
 				if(std != null && std.getPosition().equals("student")){
 					
 					// -- we get he/she from the data base
-					du.addGroup(std); du.addTelMail(std);// -- we retrieve his group, his tel, and his mail
+					du.addGroup(std);// -- we retrieve his group.
 					
 					// -- we deal with the skills
 					Skill[] skills = DaoSkills.allSkill();// -- get all the skill for this session
@@ -98,7 +98,7 @@ public class Student extends HttpServlet {
 					request.setAttribute("skills", skills);
 					
 					// -- we get the missing of the student
-					Missing[] missingGrid = dm.selectAll(Integer.toString(std.getId()));// -- we prepare the data format for the view
+					Missing[] missingGrid = dm.selectForStudent(Integer.toString(std.getId()));// -- we prepare the data format for the view
 					if(missingGrid == null) missingGrid = new Missing[0];// -- He never skip class, he win an empty array
 					
 					p.setContent("student/student_body.jsp");

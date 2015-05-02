@@ -34,14 +34,15 @@ div.idcard div.label-group span.fa{
 }
 
 div.student-cell{
-	min-height: 100px;
+	min-height: 112px;
 	border: solid 1px #bdbdbd;
 	border-radius: 4px;
 	background-color: white;
 	padding: 6px;
+	margin-top: 6px;
 	margin-bottom: 6px;  
 	color: #777777;
-	overflow-x: scroll; 
+	overflow: auto;
 }
 div.idcard div.student-cell div.picture{
 	display: inline-block;
@@ -65,6 +66,8 @@ div.idcard div.student-cell div.picture img{
 div.student-cell div{
 	background-color: tranparent;
 	height: 90px;
+	margin-bottom: 8px;
+	margin-right: 2px;
 }
 div.student-cell div span:not(.badge){
 	display: block

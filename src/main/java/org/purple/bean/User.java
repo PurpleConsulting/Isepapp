@@ -27,7 +27,7 @@ public class User {
 		public User(int id, String pseudo, String firtstName, String lastName, String position){
 			this.setId(id);
 			this.setPseudo(pseudo);
-			this.setFirstName(lastName);
+			this.setFirstName(firtstName);
 			this.setLastName(lastName);
 			this.setPosition(position);
 		}

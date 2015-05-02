@@ -11,77 +11,35 @@
 	<div class="col-md-offset-1 col-md-10 col-sm-offset-1 col-sm-10 col-xs-offset-1 col-xs-10 idcard">
 		<div class="col-sm-12 label-group">
 			<div class="col-sm-offset-0 col-sm-2" ><span class="fa fa-users fa-2x"></span>Groupe G2B</div>
-			<div class="col-sm-offset-1 col-sm-3"><span class="fa fa-user fa-2x"></span>Tuteur: <a href="#"> mmenceny</a>.</div>
+			<div class="col-sm-offset-1 col-sm-3"><span class="fa fa-user fa-2x"></span>Tuteur: <a href="#${group.getTutor()}"><c:out value="${group.getTutor()}"></c:out> </a>.</div>
 			<div class="col-sm-offset-0 col-sm-2"><span class="fa fa-file-text fa-2x"></span> Moyenne: <strong> 3.0 </strong></div>
-			<div class="col-sm-offset-1 col-sm-2"><span class="fa fa-bed fa-2x"></span> Absences: <strong> 6 </strong></div>
+			<div class="col-sm-offset-1 col-sm-2"><span class="fa fa-bed fa-2x"></span> Absences: <strong><c:out value="${fn:length(missings)}"></c:out> </strong></div>
 		</div>
-		<div class="col-md-5 col-sm-12 student-cell">
-			<div class="picture">
-				<img src="./img/photo.jpg" alt="" />
+		<c:set var="i" scope="request" value="${0}"/>
+		<c:set var="abs" scope="request" value="${0}"/>
+		<c:forEach var="student" items="${group.getMembers()}" varStatus="status">
+			<c:forEach var="miss" items="${missings}" varStatus="status">
+				<c:if test="${miss.getStudent() == student.getPseudo()}"><c:set var="abs" value="${abs + 1}"/></c:if>
+			</c:forEach>
+			<div class="${i%2 == 0 ? '' : 'col-sm-offset-0 col-md-offset-1'} col-md-5 col-sm-12 student-cell">
+				<div class="picture">
+					<img src="./img/photo.jpg" alt="" />
+				</div>
+				<div class="col-xs-offset-0 col-xs-12 col-sm-6">
+					<span><c:out value="${student.getFirstName()} ${student.getLastName()}"></c:out> - 
+					<a href="Students?pseudo=${student.getPseudo()}">
+						<em><c:out value="${student.getPseudo()}"></c:out></em>
+					</a></span>
+					<span><a href="mailto:${student.getMail()}">
+						<c:out value="${student.getMail()}"></c:out>
+					</a></span>
+					<span>Absences: <span class="badge missing"><c:out value="${abs}"></c:out></span> </span>
+					<span>Moyenne: <span class="badge mark">10</span></span>
+				</div>
 			</div>
-			<div class="col-xs-offset-0 col-xs-12 col-sm-8">
-				<span>Divad Loïc - <a href="Student?pseudo=ldivad"><em>ldivad</em></a></span>
-				<span><a href="mailto:loicm.divad@gmail.com">delphine.chanthavong@gmail.com</a></span>
-				<span>Absences: <span class="badge missing">40</span> </span>
-				<span>Moyenne: <span class="badge mark">10</span></span>
-			</div>
-		</div>
-		<div class="col-sm-offset-0 col-md-offset-1 col-md-5 col-sm-12 student-cell">
-			<div class="picture">
-				<img src="./img/photo.jpg" alt="" />
-			</div>
-			<div class="col-xs-offset-0 col-xs-12 col-sm-8">
-				<span>Divad Loïc - <a href="Student?pseudo=ldivad"><em>ldivad</em></a></span>
-				<span><a href="mailto:loicm.divad@gmail.com">loicm.divad@gmail.com</a></span>
-				<span>Absences: <span class="badge missing">40</span> </span>
-				<span>Moyenne: <span class="badge mark">10</span></span>
-			</div>
-		</div>
-		<div class="col-md-5 col-sm-12 student-cell">
-			<div class="picture">
-				<img src="./img/photo.jpg" alt="" />
-			</div>
-			<div class="col-xs-offset-0 col-xs-12 col-sm-8">
-				<span>Divad Loïc - <a href="Student?pseudo=ldivad"><em>ldivad</em></a></span>
-				<span><a href="mailto:loicm.divad@gmail.com">loicm.divad@gmail.com</a></span>
-				<span>Absences: <span class="badge missing">40</span> </span>
-				<span>Moyenne: <span class="badge mark">10</span></span>
-			</div>
-		</div>
-		<div class="col-sm-offset-0 col-md-offset-1 col-md-5 col-sm-12 student-cell">
-			<div class="picture">
-				<img src="./img/photo.jpg" alt="" />
-			</div>
-			<div class="col-xs-offset-0 col-xs-12 col-sm-8">
-				<span>Divad Loïc - <a href="Student?pseudo=ldivad"><em>ldivad</em></a></span>
-				<span><a href="mailto:loicm.divad@gmail.com">loicm.divad@gmail.com</a></span>
-				<span>Absences: <span class="badge missing">40</span> </span>
-				<span>Moyenne: <span class="badge mark">10</span></span>
-			</div>
-		</div>
-		<div class="col-md-5 col-sm-12 student-cell">
-			<div class="picture">
-				<img src="./img/photo.jpg" alt="" />
-			</div>
-			<div class="col-xs-offset-0 col-xs-12 col-sm-8">
-				<span>Divad Loïc - <a href="Student?pseudo=ldivad"><em>ldivad</em></a></span>
-				<span><a href="mailto:loicm.divad@gmail.com">loicm.divad@gmail.com</a></span>
-				<span>Absences: <span class="badge missing">40</span> </span>
-				<span>Moyenne: <span class="badge mark">10</span></span>
-			</div>
-		</div>
-		<div class="col-sm-offset-0 col-md-offset-1 col-md-5 col-sm-12 student-cell">
-			<div class="picture">
-				<img src="./img/photo.jpg" alt="" />
-			</div>
-			<div class="col-xs-offset-0 col-xs-12 col-sm-8">
-				<span>Divad Loïc - <a href="Student?pseudo=ldivad"><em>ldivad</em></a></span>
-				<span><a href="mailto:loicm.divad@gmail.com">loicm.divad@gmail.com</a></span>
-				<span>Absences: <span class="badge missing">40</span> </span>
-				<span>Moyenne: <span class="badge mark">10</span></span>
-			</div>
-		</div>
-
+			<c:set var="i" scope="request" value="${i + 1}"/>
+			<c:set var="abs" scope="request" value="${ 0 }"/>
+		</c:forEach>
 	</div>
 </div>
 <div class="row">
