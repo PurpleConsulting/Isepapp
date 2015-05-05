@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.purple.bean.Deadline;
 import org.purple.bean.Mark;
 import org.purple.bean.Missing;
 import org.purple.bean.Page;
@@ -18,6 +19,7 @@ import org.purple.constant.Bdd;
 import org.purple.constant.Isep;
 import org.purple.model.Auth;
 import org.purple.model.Average;
+import org.purple.model.DaoDeadline;
 import org.purple.model.DaoMarks;
 import org.purple.model.DaoMissings;
 import org.purple.model.DaoSkills;
@@ -69,6 +71,7 @@ public class Students extends HttpServlet {
 				DaoUsers du = new DaoUsers(Bdd.getCo());
 				DaoMissings dm = new DaoMissings(Bdd.getCo());
 				DaoMarks dmk = new DaoMarks(Bdd.getCo());
+				DaoDeadline ddl = new DaoDeadline(Bdd.getCo());
 				User std = du.select(student);
 				
 				if(std != null && std.getPosition().equals("student")){
@@ -93,6 +96,8 @@ public class Students extends HttpServlet {
 						average.push(av);
 					}
 					
+					// -- we retreve all the deadline
+					Deadline[] deadlines = ddl.selectByGroup(std.getGroup());
 					
 					request.setAttribute("average", average);
 					request.setAttribute("skills", skills);
@@ -101,12 +106,14 @@ public class Students extends HttpServlet {
 					Missing[] missingGrid = dm.selectForStudent(Integer.toString(std.getId()));// -- we prepare the data format for the view
 					if(missingGrid == null) missingGrid = new Missing[0];// -- He never skip class, he win an empty array
 					
-					p.setContent("student/student_body.jsp");
+					p.setContent("users/student.jsp");
 					p.setTitle("ISEP / APP - Etudiants");
 					p.setCss("student.css");
 					p.setJs("student.js");
+					
 					request.setAttribute("student", std);// -- we send the student
 					request.setAttribute("missingGrid", missingGrid);// -- we send the his missing
+					request.setAttribute("deadlines", deadlines);
 					
 					
 				} else {

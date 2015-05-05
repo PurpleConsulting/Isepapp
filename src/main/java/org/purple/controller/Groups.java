@@ -8,14 +8,16 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.purple.bean.Deadline;
 import org.purple.bean.Group;
 import org.purple.bean.Missing;
 import org.purple.bean.Page;
 import org.purple.constant.Bdd;
 import org.purple.model.Auth;
+import org.purple.model.DaoDeadline;
 import org.purple.model.DaoGroups;
 import org.purple.model.DaoMissings;
-import org.purple.model.DaoUsers;
+
 
 /**
  * Servlet implementation class Group
@@ -57,6 +59,9 @@ public class Groups extends HttpServlet {
 			} else {
 				
 				DaoGroups dg = new DaoGroups(Bdd.getCo());
+				DaoDeadline ddl = new DaoDeadline(Bdd.getCo());
+				DaoMissings dm = new DaoMissings(Bdd.getCo());
+				
 				Group group = dg.select(scope);  
 				if(group == null){
 					
@@ -67,21 +72,30 @@ public class Groups extends HttpServlet {
 					request.setAttribute("pages", p);
 					
 				} else {
+					
 					dg.completeMemebers(group);
-					DaoMissings dm = new DaoMissings(Bdd.getCo());
+					
+					// -- Retreve all missings
 					Missing[] allmissings = dm.selectForGroup(group.getName());
 					
-					p.setContent("group/group_body.jsp");
+					// -- Rereve all deadlines
+					Deadline[] deadlines = ddl.selectByGroup(group.getName());
+					
+					
+					p.setTitle("ISEP/APP - Group "+group.getName());
+					p.setContent("users/group.jsp");
 					p.setCss("group.css");
 					p.setJs("group.js");
 					
 					request.setAttribute("pages", p);
 					request.setAttribute("group", group);
 					request.setAttribute("missings", allmissings);
+					request.setAttribute("deadlines", deadlines);
 				}
 				
-
-				dg.close();
+				ddl.close(); // -- close Deadline Dao
+				dm.close();  // -- close Missings Dao
+				dg.close();  // -- close Group Dao
 			}
 		}
 		

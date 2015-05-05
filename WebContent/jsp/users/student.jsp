@@ -190,16 +190,23 @@
 	</div>
 </div>
 <div class="row">
-	<div class="col-md-offset-1 col-md-10 col-sm-offset-1 col-sm-10 col-xs-offset-1 col-xs-10 delivery">
+	<div class="col-xs-offset-1 col-xs-10 delivery">
 		<h4>Les livrables</h4>
-		<div class="col-md-3 col-sm-6" >
-			<button type="button" class="btn btn-default" data-toggle="tooltip" data-placement="right" title="Ok: Rendu le 24/03">CR d'avancement</button>
-		</div>
-		<div class="col-md-3 col-sm-6" >
-			<button type="button" class="btn btn-default" data-toggle="tooltip" data-placement="right" title="Ok: Rendu le 02/05">Livrale toto</button>
-		</div>
-		<div class="col-md-3 col-sm-6" >
-			<button type="button" class="btn btn-default" data-toggle="" data-placement="right" title="">Résumé tutu</button>
-		</div>
+		<c:forEach var="dead" items="${deadlines}" varStatus="ddElem">
+			<div class="col-md-3 col-sm-6" >
+				<c:choose>
+    				<c:when test="${dead.getCompleted()}">
+    					<button type="button" class="btn btn-default" data-toggle="tooltip" data-placement="right" title="Ok, rendu le: ${dead.printDateLimit()}">
+    						<c:out value="${dead.getDescription()}"></c:out>
+    					</button>
+    				</c:when>
+    				<c:otherwise>
+    					<button type="button" class="btn btn-default" data-toggle="tooltip" data-placement="right" title="">
+    						<c:out value="${dead.getDescription()}"></c:out>
+    					</button>
+    				</c:otherwise>
+    			</c:choose>
+			</div>
+		</c:forEach>
 	</div>
 </div>

@@ -95,7 +95,7 @@ public class DaoMissings extends Dao<Missing>{
 				ms[i] = m;
 				i = i + 1;
 			}
-				
+			currsor.close();	
 			prestmt.close();
 		}catch (SQLException e){
 			// TODO Auto-generated catch block
