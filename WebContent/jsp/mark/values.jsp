@@ -18,7 +18,7 @@
 	</div>
 	<div class="row">
 		<div class="col-xs-offset-1 col-xs-10 values">
-			<form class="form-inline off" method="post" action="Value">
+			<form class="form-inline off" method="post" action="Values">
 				<div class="line">
 					<a data-toggle="modal" data-target="#modaladd" class="btn btn-default add" href="#" role="button"><span class="fa fa-plus"></span>  Ajouter</a>
 					<a class="btn btn-default modify" href="#" role="button"><span class="fa fa-pencil"></span> <span>Modifier</span></a>
@@ -34,11 +34,14 @@
 					    <input  type="text" class="form-control value" name="points${i}" value="<c:out value="${valeur[i].getPoints()}"></c:out>">
 					  </div>
 						<div class="form-group">
-							<a class="remove" href="#"><span class="fa fa-times danger col-xs-offset-6"></span></a>
+						<!-- style="visibility:hidden" -->
+							<input type="checkbox" id="delete${i}" name="delete${i}" value="<c:out value="${valeur[i].getId()}"></c:out>" >
+							<a class="remove" id="del${i}" href="#"><span class="fa fa-times danger col-xs-offset-6"></span></a>
+							<input type="hidden" name="id${i}" class="display" id="id${i}" value="<c:out value="${valeur[i].getId()}"></c:out>" />
 						</div>
+						
 					</div>
-					<input type="hidden" name="id${i}" class="display" id="id${i}" value="<c:out value="${valeur[i].getId()}"></c:out>" />
-				</c:forEach>
+					</c:forEach>
 				  	<button type="submit" class="btn btn-default" id="modifyValue"><span class="fa fa-check">  </span>  Valider</button>
 				
 			</form>

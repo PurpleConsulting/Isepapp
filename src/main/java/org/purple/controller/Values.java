@@ -9,21 +9,21 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.purple.bean.Page;
-import org.purple.bean.Values;
+import org.purple.bean.Value;
 import org.purple.constant.Bdd;
 import org.purple.model.DaoValues;
 
 /**
  * Servlet implementation class Value
  */
-@WebServlet("/Value")
-public class Value extends HttpServlet {
+@WebServlet("/Values")
+public class Values extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public Value() {
+    public Values() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -43,7 +43,7 @@ public class Value extends HttpServlet {
 		
 		DaoValues v = new DaoValues(Bdd.getCo());
 		//Afficher les values
-		Values[] value= v.selectAllValues();
+		Value[] value= v.selectAllValues();
 		request.setAttribute("valeur", value);
 		
 		
@@ -61,15 +61,23 @@ DaoValues v = new DaoValues(Bdd.getCo());
 		//Modifier une value
 	if(request.getParameter("modify").equals("1")){
 		String nombre=request.getParameter("int");
-		Values[] valu=new Values[Integer.parseInt(nombre)+1];
+		Value[] valu=new Value[Integer.parseInt(nombre)+1];
+		
+		/*	String[] radio = request.getParameterValues("delete");
+			if (radio != null && radio.length != 0) {
+				System.out.println("You have selected: ");
+				for (int i = 0; i < radio.length; i++) {
+					System.out.println(radio[i]);
+				}
+				}*/
+			
 		
 		for(int i=0; i<=Integer.parseInt(nombre); i++){
 		
 		String title = request.getParameter("title"+i);
 		String points = request.getParameter("points"+i);
 		String id = request.getParameter("id"+i);
-		
-		Values val = new Values();
+		Value val = new Value();
 		val.setId(Integer.parseInt(id));
 		val.setTitle(title);
 		val.setPoints(Integer.parseInt(points));
@@ -86,7 +94,7 @@ DaoValues v = new DaoValues(Bdd.getCo());
 			String title = request.getParameter("newtitle");
 			String points = request.getParameter("newpoints");
 			String nombre=request.getParameter("number");
-			Values val = new Values();
+			Value val = new Value();
 			val.setTitle(title);
 			val.setPoints(Integer.parseInt(points));
 			val.setId(Integer.parseInt(nombre));
@@ -98,7 +106,7 @@ DaoValues v = new DaoValues(Bdd.getCo());
 		//Supprimer les values
 		if(request.getParameter("modify").equals("3")){
 			String id=request.getParameter("idSupp");	
-			v.deleteId(Integer.parseInt(id));
+		//	v.deleteId(Integer.parseInt(id));
 		}
 		
 		//Appel à la page affichage value
@@ -112,7 +120,7 @@ DaoValues v = new DaoValues(Bdd.getCo());
 		
 		
 		//Afficher les values
-		Values[] value= v.selectAllValues();
+		Value[] value= v.selectAllValues();
 		request.setAttribute("valeur", value);
 		
 			this.getServletContext().getRequestDispatcher("/template.jsp")

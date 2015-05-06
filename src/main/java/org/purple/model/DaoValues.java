@@ -14,11 +14,13 @@ import java.sql.SQLException;
 
 
 
+
 import org.purple.bean.User;
-import org.purple.bean.Values;
+import org.purple.bean.Value;
+
 /*** Purple import ***/
 
-public class DaoValues extends Dao<Values> {
+public class DaoValues extends Dao<Value> {
 
 	
 	
@@ -28,7 +30,7 @@ public class DaoValues extends Dao<Values> {
 	}
 
 	@Override
-	public boolean create(Values val) {
+	public boolean create(Value val) {
 		boolean r=false;
 		String q = "INSERT INTO `Values`"
 				+ "VALUES (?, ?, ?) ";	
@@ -52,25 +54,40 @@ public class DaoValues extends Dao<Values> {
 	}
 
 	@Override
-	public boolean delete(Values val) {
-		// TODO Auto-generated method stub
-		return false;	
+	public boolean delete(Value val) {
+		 boolean r=false;
+		 String q = "DELETE FROM `Values`"
+					+ "WHERE id=?";	
+			try{
+				PreparedStatement prestmt = this.connect.prepareStatement(q);
+				prestmt.setInt(1, val.getId());
+				prestmt.execute();
+				
+				r=true;
+				
+			}catch (SQLException e){
+				// TODO Auto-generated catch block
+				r = false;
+				e.printStackTrace();
+			}
+			return r;
+		
 	}
 
 	@Override
-	public boolean update(Values obj) {
+	public boolean update(Value obj) {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
-	public Values select(String id) {
+	public Value select(String id) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 	
-	public Values[] selectAllValues (){
-		Values[] val=null;
+	public Value[] selectAllValues (){
+		Value[] val=null;
 		String q = "SELECT id,title, points "
 				+ "FROM `Values` "
 				+ "ORDER BY id";		
@@ -82,12 +99,12 @@ public class DaoValues extends Dao<Values> {
 			
 			if(!currsor.next()) return val;
 			if (currsor.last()) {
-				val = new Values[currsor.getRow()];
+				val = new Value[currsor.getRow()];
 				currsor.beforeFirst(); 
 			}
 			
 			while(currsor.next()){
-				Values v = new Values();
+				Value v = new Value();
 				v.setId(currsor.getInt(1));
 				v.setTitle(currsor.getString(2));
 				v.setPoints(currsor.getInt(3));
@@ -103,7 +120,7 @@ public class DaoValues extends Dao<Values> {
 	}
 	
 	
-	public boolean updateValues (Values[] v){
+	public boolean updateValues (Value[] v){
 		boolean val=false;
 		String q = "UPDATE `Values` "
 				+ "SET title=? , points= ? "
@@ -130,7 +147,7 @@ public class DaoValues extends Dao<Values> {
 	}
 
 	
- public boolean deleteId(int id){
+/* public boolean deleteId(int id){
 	 boolean r=false;
 	 String q = "DELETE FROM `Values`"
 				+ "WHERE id=?";	
@@ -147,6 +164,6 @@ public class DaoValues extends Dao<Values> {
 			e.printStackTrace();
 		}
 		return r;
-	}
+	}*/
  
  }

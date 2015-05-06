@@ -21,7 +21,6 @@ $(document).ready(function(){
   });
 
 
-
   $("a.modify, a.cancel").on("click",function(event){
     event.preventDefault();
     $("form.form-inline").toggleClass("off");
@@ -34,13 +33,14 @@ $(document).ready(function(){
       $(this).children("span").eq(0).switchClass("fa-undo", "fa-pencil", 0);
       $(this).children("span").eq(1).text("Modifier");
     } else {
-      $("form input").attr("disabled",false);
+     $("form input").attr("disabled",false);
       $(this).children("span").eq(1).text("Annuler");
       $(this).children("span").eq(0).switchClass("fa-pencil", "fa-undo",0);
     }
   });
-
-  $("a.remove, a.reset").on("click",function(event){
+  
+ 
+   $("a.remove, a.reset").on("click",function(event){
     event.preventDefault();
     //-- definition
     $("div.cascade-warning").css("display", "inline-block")
@@ -48,6 +48,8 @@ $(document).ready(function(){
     var icon = $(this).children("span");
 
     if($(this).hasClass("remove")){
+    	alert("hel");
+       // $("#delete1").prop(checked, true);
       var idValue = line.attr("id");
       line.addClass("has-error");
       line.children("div").each(function(i){
@@ -74,7 +76,7 @@ $(document).ready(function(){
  
  
  $("#add").on('click', function(){
-	$.post("/Isepapp/Value", {
+	$.post("/Isepapp/Values", {
 	    	newtitle :$("#newtitle").val(),
 	    	newpoints:$("#newpoints").val(),
 	    	number:$("#number").val(),

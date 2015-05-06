@@ -1,8 +1,8 @@
 package org.purple.bean;
 
-public class Values {
+public class Value {
 
-	public Values(){
+	public Value(){
 		
 	}
 	
