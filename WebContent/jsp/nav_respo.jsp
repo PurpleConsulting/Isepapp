@@ -25,7 +25,7 @@
   		<li class="dropdown">
   			<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Les groupes <span class="caret"></span></a>
   			<ul class="dropdown-menu" role="menu">
-	            <li><a href="#">Les classes</a></li>
+	            <li><a href="Promo">Les classes</a></li>
 	            <li><a href="#">Groupes d'APP</a></li>
 	            <li class="divider"></li>
 	            <li><a href="Students?pseudo=ldivad">Recherche d'étudiant</a></li>

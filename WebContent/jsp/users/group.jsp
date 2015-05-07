@@ -12,7 +12,7 @@
 		<div class="col-sm-12 label-group">
 			<div class="col-sm-offset-0 col-sm-2" ><span class="fa fa-users fa-2x"></span>Groupe G2B</div>
 			<div class="col-sm-offset-1 col-sm-3"><span class="fa fa-user fa-2x"></span>Tuteur: <a href="#${group.getTutor()}"><c:out value="${group.getTutor()}"></c:out> </a>.</div>
-			<div class="col-sm-offset-0 col-sm-2"><span class="fa fa-file-text fa-2x"></span> Moyenne: <strong> 3.0 </strong></div>
+			<div class="col-sm-offset-0 col-sm-2"><span class="fa fa-file-text fa-2x"></span> Moyenne: <strong><c:out value="${average.compute()}"></c:out> </strong></div>
 			<div class="col-sm-offset-1 col-sm-2"><span class="fa fa-bed fa-2x"></span> Absences: <strong><c:out value="${fn:length(missings)}"></c:out> </strong></div>
 		</div>
 		<c:set var="abs" value="${0}"/>
@@ -33,7 +33,13 @@
 						<c:out value="${student.getMail()}"></c:out>
 					</a></span>
 					<span>Absences: <span class="badge missing"><c:out value="${abs}"></c:out></span> </span>
-					<span>Moyenne: <span class="badge mark">10</span></span>
+					<span>Moyenne: <span class="badge mark">
+						<c:forEach var="stdAvg" items="${average.getGrid()}">
+							<c:if test="${stdAvg.getTitle() == student.getPseudo()}">
+								<c:out value="${stdAvg.compute()}"></c:out>
+							</c:if>
+						</c:forEach>
+					</span></span>
 				</div>
 			</div>
 			<c:set var="abs" value="${0}"/>
@@ -62,7 +68,7 @@
 	</div>
 </div>
 <div class="row">
-	<div class="col-md-offset-1 col-md-10 col-sm-offset-1 col-sm-10 col-xs-offset-1 col-xs-10 groupmark">
+	<div class="col-xs-offset-1 col-xs-10 groupmark">
 		<h4>Les stats</h4>
 	</div>
 </div>

@@ -85,7 +85,7 @@ public class Students extends HttpServlet {
 					ArrayList<Average> sklAverage = new ArrayList<Average>();// -- 
 					Average average = new Average("Moyenne: "+std.getPseudo(), Isep.LANDMARK);
 					for(Skill s : skills){
-						sklAverage.add(new Average(s.getTitle(), 3.0));
+						sklAverage.add(new Average(s.getTitle(), 4.0));
 					}
 					for(Average av : sklAverage){
 						for(Mark note : marks){
