@@ -4,6 +4,7 @@ public class Skills {
 	
 	private int id;
 	private String title;
+	private String subtitle; //add in the database
 	private String type;
 	private int id_respo;
 	private int coefficient;
@@ -20,6 +21,12 @@ public class Skills {
 	}
 	public void setTitle(String title) {
 		this.title = title;
+	}
+	public String getSubtitle() {
+		return subtitle;
+	}
+	public void setSubtitle(String subtitle) {
+		this.subtitle = subtitle;
 	}
 	public String getType() {
 		return type;
