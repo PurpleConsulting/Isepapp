@@ -45,7 +45,7 @@ public class Controls extends HttpServlet {
 		DaoGroups dgp = new DaoGroups(Bdd.getCo());
 		
 		//Display group name
-		HttpSession s= request.getSession();
+		HttpSession s = request.getSession();
 		User u = (User)s.getAttribute("user");
 
 		String[] gp_name = dgp.selectAllName(u.getPseudo());

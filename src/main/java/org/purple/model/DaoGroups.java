@@ -62,9 +62,6 @@ public class DaoGroups extends Dao<Group>{
 		
 		String[] gp_name = null;
 		
-		//Connection co = Bdd.getCo();
-		Connection co = Bdd.getSecureCo();
-		
 		String q = "SELECT Groups.`name` FROM Groups INNER JOIN Users ON Users.id = Groups.id_tutor WHERE Users.pseudo = ? ;";
 		try {
 			PreparedStatement prestmt = this.connect.prepareStatement(q);
@@ -80,7 +77,6 @@ public class DaoGroups extends Dao<Group>{
 				i++;
 			}
 			cursor.close();
-			co.close();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			gp_name = null;

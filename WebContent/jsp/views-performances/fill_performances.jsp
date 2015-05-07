@@ -11,15 +11,14 @@
 			<input type="hidden" value="3" name="int">
 			<select class="form-control">
 				<option>Sélectionnez un groupe</option>
-				<c:forEach var="i" begin="0" end="3">
-					<option value="<c:out value="${name[i].getName()}"></c:out>"><c:out value="${name[i].getName()}"></c:out></option>
-				
-				</c:forEach>
-				
-
+				<c:forEach var="group" items="${group_names}" varStatus="status">
+					<option value="${group}"><c:out value="${group}"></c:out></option>
+					
+				</c:forEach>			
 			</select>
 			<button type="submit" class="btn btn-default">OK</button>
 		</div>
 	</form>
-	<c:out value="${group_names[0]}"></c:out>
+
+
 </div>
