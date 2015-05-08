@@ -11,3 +11,7 @@ $("#sidebar").affix({
       top: 210
     }
 });
+
+$("a.list-group-item").on("click", function(e){
+	e.preventDefault();
+})

@@ -4,13 +4,13 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <h1 class="col-md-offset-1 col-md-10 col-sm-offset-1 col-sm-10 col-xs-offset-1 col-xs-10">
 	Fiche Groupe
-	<small> - G2B</small>
+	<small> - <c:out value="${group.getName()}"></c:out></small>
 	<a class="btn btn-default" href="#" role="button"><span class="fa fa-pencil"> </span>  Editer</a>
 </h1>
 <div class="row">
 	<div class="col-md-offset-1 col-md-10 col-sm-offset-1 col-sm-10 col-xs-offset-1 col-xs-10 idcard">
 		<div class="col-sm-12 label-group">
-			<div class="col-sm-offset-0 col-sm-2" ><span class="fa fa-users fa-2x"></span>Groupe G2B</div>
+			<div class="col-sm-offset-0 col-sm-2" ><span class="fa fa-users fa-2x"></span>Groupe <c:out value="${group.getName()}"></c:out></div>
 			<div class="col-sm-offset-1 col-sm-3"><span class="fa fa-user fa-2x"></span>Tuteur: <a href="#${group.getTutor()}"><c:out value="${group.getTutor()}"></c:out> </a>.</div>
 			<div class="col-sm-offset-0 col-sm-2"><span class="fa fa-file-text fa-2x"></span> Moyenne: <strong><c:out value="${average.compute()}"></c:out> </strong></div>
 			<div class="col-sm-offset-1 col-sm-2"><span class="fa fa-bed fa-2x"></span> Absences: <strong><c:out value="${fn:length(missings)}"></c:out> </strong></div>

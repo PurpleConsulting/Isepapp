@@ -83,6 +83,7 @@ public class Groups extends HttpServlet {
 				} else {
 					
 					dg.completeMemebers(group);
+					dg.completeTutor(group);
 					
 					// -- Retrieve all missings
 					Missing[] allmissings = dm.selectForGroup(group.getName());

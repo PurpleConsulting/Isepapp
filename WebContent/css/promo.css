@@ -9,7 +9,7 @@ hr{
     width: 100%;
 
 }
-.group .subgroup {
+.subgroup {
     background: #F8F8F8;
     border: solid 1px #bdbdbd;
 	border-radius: 6px;
@@ -81,11 +81,17 @@ h2{
 }
 
 div.info-checkpoint{
-	width: 80%;
+	width: 100%;
 	padding: 10px 20px;
 	border: 1px solid #5BC0DE;
 	border-left: 6px solid #5BC0DE;
 	border-radius:6px;
+}
+div.info-checkpoint div.text h5{
+	color: #5BC0DE;
+}
+div.info-checkpoint div.text{
+	width: 80%;
 }
 
 div.class-checkpoint{
@@ -115,4 +121,11 @@ div.medal span.fa{
 
 div.medal span.badge{
 	background-color: #337AB7;
+}
+
+span.list-group-item:hover {
+	color: #555;
+    text-decoration: none;
+    background-color: #F5F5F5;
+}
 }
