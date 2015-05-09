@@ -14,6 +14,8 @@
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
+      	<li><a class="navbar-brand icon_isep" href="#"><img  src="img/icon_isep.png" alt="logo isep"></a></li>
+      	<li><a class="link1nav" href="Home">Home</a></li>
   		<li><a class="link1nav" href="Subject">Le sujet</a></li>
   		<li class="dropdown">
   			<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">La gestion <span class="caret"></span></a>
@@ -32,7 +34,6 @@
 	            <li><a href="#">Recherche d'un tuteur</a></li>
           	</ul>
   		</li>
-  		<li><a href="#">Les résultats</a></li>
   		<li class="dropdown">
   			<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Les livrables<span class="caret"></span></a>
   			<ul class="dropdown-menu" role="menu">

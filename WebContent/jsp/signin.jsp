@@ -48,7 +48,7 @@
 				    <label for="id">Identifiant: </label>
 				    <input type="text" class="form-control" name="pseudo" id="pseudo" placeholder="Ex: Luc MARTIN -> lmartin">
 				  </div>
-				  <div style="display:none" class="col-md-4 alert alert-warning alert_input" role="alert">
+				  <div style="display:none" class="col-xs-offset-1 col-xs-10 col-md-offset-0 col-md-5 alert alert-warning alert_input" role="alert">
 
 				</div>
 				</div>
@@ -58,7 +58,7 @@
 				    <input type="password" class="form-control" name="password" id="password" placeholder="Password">
 				  </div>
 				</div>
-			  <button disabled type="submit" class="btn btn-default">Entrer</button>
+			  <button type="submit" class="btn btn-default">Entrer</button>
 			</form>
 			</div>
 		</div>

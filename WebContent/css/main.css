@@ -41,6 +41,17 @@ span.fa{
 	padding-left: 0px;
 }
 
+ul.nav.navbar-nav a.icon_isep{
+	padding: 0px;
+	margin:0px;
+}
+
+a.icon_isep img{
+	width: 45px;
+	height: 45px;
+}
+
+
 /*** - - - FOOTER - - - ***/
 footer{
 	min-height: 16px;

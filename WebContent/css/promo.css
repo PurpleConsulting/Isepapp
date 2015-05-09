@@ -3,7 +3,6 @@ hr{
 	margin-top: 20px;
 	margin-bottom: 20px;
 	
-	
 }
 .group {
     width: 100%;
@@ -17,7 +16,7 @@ hr{
 	margin: 20px 0px;
 }
 #sidebar.affix {
-    top: 20px;
+    top: 90px;
 }
 
 .bs-docs-sidebar {
@@ -127,5 +126,4 @@ span.list-group-item:hover {
 	color: #555;
     text-decoration: none;
     background-color: #F5F5F5;
-}
 }

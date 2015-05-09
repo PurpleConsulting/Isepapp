@@ -8,7 +8,7 @@ $('body').scrollspy({
 });
 $("#sidebar").affix({
     offset: {
-      top: 210
+      top: 162
     }
 });
 
