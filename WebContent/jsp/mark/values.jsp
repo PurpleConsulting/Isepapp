@@ -15,6 +15,12 @@
 				<strong>Attention</strong>: la suppression d'une valeur possible supprimera également
 				les notes correspondantes affectés aux élèves.
 			</div>
+			<c:if test="${pages.getError()}">
+			<div class="alert alert-danger col-md-offset-1 col-md-10">
+						<strong>Attention</strong>,
+						<c:out value="${pages.getErrorMessage()}"></c:out>
+					</div>
+			</c:if>
 			<div style="display:none" class="alert alert-warning cascade-warning col-xs-offset-1 col-xs-10 warning_modify" >
 						</div>
 	</div>
@@ -68,8 +74,11 @@
 											<input class="form-control" placeholder="rentrer un nombre" id="newpoints" />
 											<input type="hidden" value='${fn:length(valeur)+1}' id="number">
 										</div>
-										<div style="display:none" class="warning" >
+										<div style="display:none" class="alert alert-danger col-md-offset-1 col-md-10 warning">
+											<strong>Attention</strong>,
+											
 										</div>
+										
 										
 									</form>
 					      </div>

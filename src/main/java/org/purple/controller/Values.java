@@ -93,6 +93,7 @@ DaoValues v = new DaoValues(Bdd.getCo());
 		
 		if(CountTrue==Integer.parseInt(nombre)+1){
 			v.updateValues(valu);
+			p.setError(false);
 			
 		}else{
 			p.setError(true);
