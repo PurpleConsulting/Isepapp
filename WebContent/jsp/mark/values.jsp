@@ -15,6 +15,8 @@
 				<strong>Attention</strong>: la suppression d'une valeur possible supprimera également
 				les notes correspondantes affectés aux élèves.
 			</div>
+			<div style="display:none" class="alert alert-warning cascade-warning col-xs-offset-1 col-xs-10 warning_modify" >
+						</div>
 	</div>
 	<div class="row">
 		<div class="col-xs-offset-1 col-xs-10 values">
@@ -34,10 +36,11 @@
 					    <input  type="text" class="form-control value" name="points${i}" value="<c:out value="${valeur[i].getPoints()}"></c:out>">
 					  </div>
 						<div class="form-group">
-						<!-- style="visibility:hidden" -->
-							<input type="checkbox" id="delete${i}" name="delete${i}" value="<c:out value="${valeur[i].getId()}"></c:out>" >
-							<a class="remove" id="del${i}" href="#"><span class="fa fa-times danger col-xs-offset-6"></span></a>
+						<a class="remove" id="del${i}" href="#"><span class="fa fa-times danger col-xs-offset-6"></span></a>
 							<input type="hidden" name="id${i}" class="display" id="id${i}" value="<c:out value="${valeur[i].getId()}"></c:out>" />
+						</div>
+						<div class="form-group">
+						<input type="checkbox" name="delete" value="<c:out value="${valeur[i].getId()}"></c:out>" style="visibility:hidden" >
 						</div>
 						
 					</div>
@@ -58,13 +61,16 @@
 		      </div>
 					      <div class="modal-body">
 									<form>
-  									<div class="form-group">
-											<input class="form-control" placeholder="titre, exemple acquis" id="newtitle"/>
+										<div class="form-group">
+											<input class="form-control" placeholder="titre, exemple acquis" id="newtitle" maxlength="30"/>
 										</div>
 										<div class="form-group">
-											<input  class="form-control" placeholder="valeur exemple 30%" id="newpoints"/>
+											<input class="form-control" placeholder="rentrer un nombre" id="newpoints" />
+											<input type="hidden" value='${fn:length(valeur)+1}' id="number">
 										</div>
-										<input type="hidden" value='${fn:length(valeur)+1}' id="number">
+										<div style="display:none" class="warning" >
+										</div>
+										
 									</form>
 					      </div>
 		      <div class="modal-footer">

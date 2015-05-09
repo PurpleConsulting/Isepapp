@@ -55,22 +55,7 @@ public class DaoValues extends Dao<Value> {
 
 	@Override
 	public boolean delete(Value val) {
-		 boolean r=false;
-		 String q = "DELETE FROM `Values`"
-					+ "WHERE id=?";	
-			try{
-				PreparedStatement prestmt = this.connect.prepareStatement(q);
-				prestmt.setInt(1, val.getId());
-				prestmt.execute();
-				
-				r=true;
-				
-			}catch (SQLException e){
-				// TODO Auto-generated catch block
-				r = false;
-				e.printStackTrace();
-			}
-			return r;
+		return false;
 		
 	}
 
@@ -147,7 +132,7 @@ public class DaoValues extends Dao<Value> {
 	}
 
 	
-/* public boolean deleteId(int id){
+ public boolean deleteId(int id){
 	 boolean r=false;
 	 String q = "DELETE FROM `Values`"
 				+ "WHERE id=?";	
@@ -164,6 +149,6 @@ public class DaoValues extends Dao<Value> {
 			e.printStackTrace();
 		}
 		return r;
-	}*/
+	}
  
  }

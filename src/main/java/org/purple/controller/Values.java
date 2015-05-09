@@ -58,35 +58,30 @@ public class Values extends HttpServlet {
 		// TODO Auto-generated method stub
 DaoValues v = new DaoValues(Bdd.getCo());
 		
-		//Modifier une value
+		//Modifier et supprimer une value
 	if(request.getParameter("modify").equals("1")){
 		String nombre=request.getParameter("int");
 		Value[] valu=new Value[Integer.parseInt(nombre)+1];
 		
-		/*	String[] radio = request.getParameterValues("delete");
-			if (radio != null && radio.length != 0) {
-				System.out.println("You have selected: ");
-				for (int i = 0; i < radio.length; i++) {
-					System.out.println(radio[i]);
-				}
-				}*/
-			
-		
+		String[] checkbox = request.getParameterValues("delete");
+		if(checkbox!=null){
+		for (int i = 0; i < checkbox.length; ++i){ 
+			v.deleteId(Integer.parseInt(checkbox[i])); 
+			} 
+		}
 		for(int i=0; i<=Integer.parseInt(nombre); i++){
 		
-		String title = request.getParameter("title"+i);
-		String points = request.getParameter("points"+i);
-		String id = request.getParameter("id"+i);
-		Value val = new Value();
-		val.setId(Integer.parseInt(id));
-		val.setTitle(title);
-		val.setPoints(Integer.parseInt(points));
-		valu[i] = val;
-			
+			String title = request.getParameter("title"+i);
+			String points = request.getParameter("points"+i);
+			String id = request.getParameter("id"+i);
+			Value val = new Value();
+			val.setId(Integer.parseInt(id));
+			val.setTitle(title);
+			val.setPoints(Integer.parseInt(points));
+			valu[i] = val;
 		}		
-					
-		v.updateValues(valu);
-		}
+			v.updateValues(valu);
+	}
 	
 				
 		//Ajouter une value
@@ -95,19 +90,14 @@ DaoValues v = new DaoValues(Bdd.getCo());
 			String points = request.getParameter("newpoints");
 			String nombre=request.getParameter("number");
 			Value val = new Value();
+			val.setId(Integer.parseInt(nombre));
 			val.setTitle(title);
 			val.setPoints(Integer.parseInt(points));
-			val.setId(Integer.parseInt(nombre));
+			
 			v.create(val);
 			
 		}
-		
 	
-		//Supprimer les values
-		if(request.getParameter("modify").equals("3")){
-			String id=request.getParameter("idSupp");	
-		//	v.deleteId(Integer.parseInt(id));
-		}
 		
 		//Appel à la page affichage value
 		Page p = new Page();
@@ -117,8 +107,6 @@ DaoValues v = new DaoValues(Bdd.getCo());
 		p.setContent("/mark/values.jsp");
 		request.setAttribute("pages", p);
 			
-		
-		
 		//Afficher les values
 		Value[] value= v.selectAllValues();
 		request.setAttribute("valeur", value);
