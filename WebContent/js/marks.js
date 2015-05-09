@@ -75,8 +75,17 @@ $(document).ready(function(){
 	    	newpoints:$("#newpoints").val(),
 	    	number:$("#number").val(),
 	    	modify:"2"
-	    	})
-	    	location.reload();
+	    	}).done(function(data){
+	    		if(data=="0"){
+	    			  $("div.warning").css("display", "none");
+	    			  location.reload();
+				}else{
+					 $("div.warning").css("display", "inline-block");
+					 $("div.warning").html('<p><strong>La valeur n\'est pas correct</strong> </p>')
+					 $("div.warning").css('display', 'block');
+				}
+	    	});
+	    	
 });
    
    
@@ -94,14 +103,14 @@ $(document).ready(function(){
 		   $("div.warning_modify").css("display", "inline-block");
 		   $("div.warning_modify").html('<p><strong>Veuillez saisir un nombre valide</strong> </p>')
 			$("div.warning_modify").css('display', 'block');
-		   $('#modifyValue').attr('disabled', true);
+		 //  $('#modifyValue').attr('disabled', true);
 		 
 	   }else{
 		   
 		   $(this).parent().addClass('has-success');
 		   $(this).parent().removeClass('has-error');
 		   $("div.warning_modify").css("display", "none");
-		   $('#modifyValue').attr('disabled', false);
+		  // $('#modifyValue').attr('disabled', false);
 	   }
 	   
 	   });

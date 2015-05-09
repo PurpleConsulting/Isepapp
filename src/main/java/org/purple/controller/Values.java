@@ -1,6 +1,7 @@
 package org.purple.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -62,7 +63,7 @@ DaoValues v = new DaoValues(Bdd.getCo());
 	if(request.getParameter("modify").equals("1")){
 		String nombre=request.getParameter("int");
 		Value[] valu=new Value[Integer.parseInt(nombre)+1];
-		
+		int CountTrue=0;
 		String[] checkbox = request.getParameterValues("delete");
 		if(checkbox!=null){
 		for (int i = 0; i < checkbox.length; ++i){ 
@@ -74,48 +75,69 @@ DaoValues v = new DaoValues(Bdd.getCo());
 			String title = request.getParameter("title"+i);
 			String points = request.getParameter("points"+i);
 			String id = request.getParameter("id"+i);
+			char point=points.charAt(0);
+			boolean chara=Character.isDigit(point);
 			Value val = new Value();
+			if(chara==true && Integer.parseInt(points)!=0 ){
+				CountTrue++;
+				val.setPoints(Integer.parseInt(points));
+			}
+			
 			val.setId(Integer.parseInt(id));
 			val.setTitle(title);
-			val.setPoints(Integer.parseInt(points));
+			
 			valu[i] = val;
 		}		
+		//Appel à la page affichage value
+		Page p = new Page();
+		
+		if(CountTrue==Integer.parseInt(nombre)+1){
 			v.updateValues(valu);
+			
+		}else{
+			p.setError(true);
+			p.setErrorMessage("Vous avez rentrer une valeur incorrect.");
+		}
+			
+			// On ajout le css
+			p.setCss("marks.css");
+			p.setJs("marks.js");
+			p.setContent("/mark/values.jsp");
+			request.setAttribute("pages", p);
+				
+			//Afficher les values
+			Value[] value= v.selectAllValues();
+			request.setAttribute("valeur", value);
+			
+				this.getServletContext().getRequestDispatcher("/template.jsp")
+						.forward(request, response);
+			
 	}
 	
 				
 		//Ajouter une value
 		if(request.getParameter("modify").equals("2")){
+			response.setContentType("text/html");
+			PrintWriter out = response.getWriter();
+			
 			String title = request.getParameter("newtitle");
 			String points = request.getParameter("newpoints");
 			String nombre=request.getParameter("number");
 			Value val = new Value();
-			val.setId(Integer.parseInt(nombre));
-			val.setTitle(title);
-			val.setPoints(Integer.parseInt(points));
 			
-			v.create(val);
+			char point=points.charAt(0);
+			boolean chara=Character.isDigit(point);
 			
+			if(chara==true && Integer.parseInt(points)!=0 ){
+				out.write("0");
+				val.setId(Integer.parseInt(nombre));
+				val.setTitle(title);
+				val.setPoints(Integer.parseInt(points));
+				v.create(val);
+			}else{
+				out.write("1");
+			}
 		}
-	
-		
-		//Appel à la page affichage value
-		Page p = new Page();
-		// On ajout le css
-		p.setCss("marks.css");
-		p.setJs("marks.js");
-		p.setContent("/mark/values.jsp");
-		request.setAttribute("pages", p);
-			
-		//Afficher les values
-		Value[] value= v.selectAllValues();
-		request.setAttribute("valeur", value);
-		
-			this.getServletContext().getRequestDispatcher("/template.jsp")
-					.forward(request, response);
-		
-		
-	
 	}
 
 }
