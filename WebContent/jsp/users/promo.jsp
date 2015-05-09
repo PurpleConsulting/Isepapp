@@ -67,6 +67,7 @@
 				</c:if>
 			</c:forEach>
 		</div>
+		<hr/>
 	</c:forEach>
 </div>
 <div class="col-md-3" role="complementary">

@@ -47,12 +47,10 @@
 		  <!-- Nav tabs -->
 		  <ul class="nav nav-tabs" role="tablist">
 		    <li role="presentation" class="active"><a href="#tab1" aria-controls="tab1" role="tab" data-toggle="tab">Global</a></li>
-		    <c:set var="rowNum" scope="request" value="${2}"/>
 			<c:forEach var="skill" items="${skills}" varStatus="status">
 				<li role="presentation">
-					<a href="#tab${rowNum}" aria-controls="tab3" role="tab" data-toggle="tab"><c:out value="${skill.getTitle()}"></c:out></a>
+					<a href="#tab${status.count + 1}" aria-controls="tab3" role="tab" data-toggle="tab"><c:out value="${skill.getTitle()}"></c:out></a>
 				</li>
-				<c:set var="rowNum" scope="request" value="${rowNum + 1}"/>
 			</c:forEach>	
 		    </ul>
 		  <!-- Tab panes -->
@@ -73,9 +71,8 @@
 					</c:forEach>
 		    	</div>
 		    </div>
-		    <c:set var="rowNum" scope="request" value="${2}"/>
 		    <c:forEach var="skill_mark" items="${average.grid}" varStatus="status">
-		    	<div role="tabpanel" class="tab-pane" id="tab${rowNum}">
+		    	<div role="tabpanel" class="tab-pane" id="tab${status.count + 1}">
 		    		<div class="alert alert-mark global">
 		    		<span class="alert-mark-result">
 		    			<c:out value="${skill_mark.getTitle()}"></c:out>: 
@@ -92,7 +89,6 @@
 		    			</div>
 		    		</c:forEach>
 		    	</div>
-		    	<c:set var="rowNum" scope="request" value="${rowNum + 1}"/>
 			</c:forEach>
 		  </div>
 		</div>
@@ -147,21 +143,19 @@
 	<div class="col-md-offset-1 col-md-10 col-sm-offset-1 col-sm-10 col-xs-offset-1 col-xs-10 missing" >
 		<h4>Les absences - <c:out value="${fn:length(missingGrid)}"></c:out></h4>
 		<br/>
-		<c:set var="rowNum" scope="request" value="${1}"/>
-		<div id="blk-missing"> <!-- " ${rowNum == 1 ? 'class="active"' : ''} -->
+		<div id="blk-missing">
 		<c:forEach var="missingRow" items="${missingGrid}" varStatus="status">
-					<c:if test="${missingRow != null }">
-						<div class="alert alert-${missingRow.getLate() ? 'info' : 'warning'}${rowNum <= 3 ? ' active' : ''}" 
-							role="alert" id="blk${rowNum}">
-							<strong><c:out value="${missingRow.getLate() ? 'Retard' : 'Absence'}"></c:out></strong>:
-							<c:out value="${missingRow.printDate()}"></c:out>, 
-							<c:out value="${missingRow.getSupporting()}"></c:out>
-							<c:if test="${missingRow.getLate()}">
-								/ Heure d'arrivé: <strong><c:out value="${missingRow.printLate()}"/></strong>
-							</c:if>
-						</div>
+			<c:if test="${missingRow != null }">
+				<div class="alert alert-${missingRow.getLate() ? 'info' : 'warning'}${status.count <= 3 ? ' active' : ''}" 
+					role="alert" id="blk${status.count}">
+					<strong><c:out value="${missingRow.getLate() ? 'Retard' : 'Absence'}"></c:out></strong>:
+					<c:out value="${missingRow.printDate()}"></c:out>, 
+					<c:out value="${missingRow.getSupporting()}"></c:out>
+					<c:if test="${missingRow.getLate()}">
+						/ Heure d'arrivé: <strong><c:out value="${missingRow.printLate()}"/></strong>
 					</c:if>
-			<c:set var="rowNum" scope="request" value="${rowNum + 1}"/>	
+				</div>
+			</c:if>
 		</c:forEach>
 		</div>
 		<c:if test="${fn:length(missingGrid) > 3 }">
@@ -174,13 +168,13 @@
 			    </li>
 			    <c:set var="rowNum" scope="request" value="${1}"/>
 			    <c:forEach var="i" begin="1" end="${fn:length(missingGrid)}" step="3">
-			    	<li ${rowNum == 1 ? 'class="active"' : ''}>
+			    	<li ${i == 1 ? 'class="active"' : ''}>
 			    		<a data-target="${rowNum}" href="#">${rowNum}</a>
 			    	</li>
-			    	<c:set var="rowNum" scope="request" value="${rowNum + 1}"/>
+			    <c:set var="rowNum" scope="request" value="${rowNum + 1}"/>
 			    </c:forEach>
 			    <li>
-			      <a data-target="${rowNum - 1}" href="#" aria-label="Next">
+			      <a data-target="${rowNum -1}" href="#" aria-label="Next">
 			        <span aria-hidden="true">&raquo;</span>
 			      </a>
 			    </li>

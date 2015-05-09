@@ -13,7 +13,7 @@
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-  		<li><a class="link1nav" href="#">Le sujet</a></li>
+  		<li><a class="link1nav" href="Subject">Le sujet</a></li>
   		<li><a href="#">Les résultats</a></li>
   		<li><a href="#">Les Deadlines</a></li>
   		<li><a href="Signout">Déconnexion</a></li>

@@ -1,0 +1,28 @@
+@CHARSET "UTF-8";
+span.fa-download{
+	font-size: 9em;
+	width:120px;
+	display: block;
+	margin:auto;
+	opacity: 0.8;
+	transition: 0.7s;
+	color: #BDBDBD;
+	cursor: pointer
+}
+
+span.fa-download:hover, span.fa-download:active{
+	opacity: 1;
+	color:#337AB7;
+}
+
+canvas, #pagination{
+	display: block;
+	margin:auto;
+}
+ #pagination{
+ 	width: 100px;
+ 	text-align: center;
+ }
+ a:hover, a:active{
+ 	text-decoration:none;
+ }
