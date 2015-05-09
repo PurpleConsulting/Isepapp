@@ -35,13 +35,13 @@ public class DaoSkills extends Dao<Skills> {
 		return null;
 	}
 
-	@Override
+	
 	public boolean find(String id) {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
-	@Override
+	
 	public int count(int id) {
 		// TODO Auto-generated method stub
 		return 0;
