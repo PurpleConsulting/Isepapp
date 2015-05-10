@@ -16,7 +16,7 @@ public class TestDaoUsers extends TestCase{
 
 	//@Test
 	public void test() {
-		fail("Not yet implemented");
+		//fail("Not yet implemented");
 	}
 	/**
 	 * Place temporaire pour ce test.
@@ -50,8 +50,8 @@ public class TestDaoUsers extends TestCase{
 		DaoUsers u = new DaoUsers(Bdd.getSecureCo());
 		User beanUser = u.select(pseudo);
 		
-		assertEquals(beanUser.getFirstName(), "Divad");
-		assertEquals(beanUser.getLastName(), "loïc");
+		assertEquals(beanUser.getFirstName(), "DIVAD");
+		assertEquals(beanUser.getLastName(), "Loïc");
 		u.close();
 	}
 

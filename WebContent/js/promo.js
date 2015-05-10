@@ -4,7 +4,7 @@
 
 $('body').scrollspy({
     target: '.bs-docs-sidebar',
-    offset: 0
+    offset: 62
 });
 $("#sidebar").affix({
     offset: {

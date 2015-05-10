@@ -1,7 +1,7 @@
 @CHARSET "UTF-8";
 html {
     margin: 0px;
-    min-height:520px;
+    min-height:570px;
 }
 body{
 	height:100%;
@@ -50,6 +50,61 @@ a.icon_isep img{
 	width: 45px;
 	height: 45px;
 }
+div.collapse.navbar-collapse.in ul.nav.navbar-nav a.icon_isep img{
+	margin-left: 20px;
+	
+}
+/*** - - - TYPEAHEAD - - - ***/
+.tt-menu.tt-open{
+	background-color: white;
+	border: 1px solid #BDBDBD;
+	border-radius: 6px;
+	width: 100%;
+	position: absolute;
+	top: 100px;
+	margin-top: 8px;
+}
+.tt-menu.tt-open div.tt-suggestion{
+	padding: 6px 12px;
+	border-radius: 4px;
+	cursor: pointer;
+		
+}
+div.tt-menu.tt-open div.tt-suggestion.tt-suggestion-header{
+	border-bottom: 1px solid #BDBDBD;
+	border-radius: 0px;
+	cursor: crosshair;
+	border-radius: 4px 4px 0px 0px;
+}
+div.tt-dataset{
+	padding:0px;
+	margin:0px;
+}
+div.tt-cursor{
+	color: white;
+	background-color: #337AB7;
+	cursor: pointer;
+}
+
+
+
+/***OFFICIAL***/
+/*span.twitter-typeahead{
+  width: 100%;
+  
+}
+.input-group span.twitter-typeahead {
+  display: block !important;
+}
+.input-group span.twitter-typeahead .tt-dropdown-menu{
+  top: 32px !important;
+}
+.input-group.input-group-lg span.twitter-typeahead .tt-dropdown-menu {
+  top: 44px !important;
+}
+.input-group.input-group-sm span.twitter-typeahead .tt-dropdown-menu{
+  top: 28px !important;
+}*/
 
 
 /*** - - - FOOTER - - - ***/
