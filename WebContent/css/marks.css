@@ -30,17 +30,12 @@ div input.form-control{
 }
 
 span.danger{
-  color:red;
+  color:#d9534f;
 }
 span.safe{
   color:#31708F;
 }
-/*input.form-control.title{
-  width:200px;
-}
-input.form-control.value{
-  width: 60px
-}*/
+
 
 form.form-inline.off div.line div.form-group input{
 	border: solid 0px white;

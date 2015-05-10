@@ -16,7 +16,7 @@ $(document).ready(function(){
     event.preventDefault();
     $("form.form-inline").toggleClass("off");
     if($(this).closest("form").hasClass("off")){
-    	
+    	location.reload();
       $("div.cascade-warning").removeAttr('style');
       $("div.values").attr("disabled",true);
       $("a.remove, a.reset").children("span").switchClass("safe","danger",0);
@@ -26,6 +26,7 @@ $(document).ready(function(){
       $(this).children("span").eq(0).switchClass("fa-undo", "fa-pencil", 0);
       $(this).children("span").eq(1).text("Modifier");
     } else {
+    	
       $("form input").attr("disabled",false);
       $(this).children("span").eq(1).text("Annuler");
       $(this).children("span").eq(0).switchClass("fa-pencil", "fa-undo",0);
@@ -37,7 +38,7 @@ $(document).ready(function(){
 
     event.preventDefault();
     //-- definition
-    $("div.cascade-warning").css("display", "inline-block");
+    $("div.suppression").css("display", "inline-block");
     var line = $(this).closest("div.line");
     var icon = $(this).children("span");
 
@@ -95,22 +96,21 @@ $(document).ready(function(){
    $(".value").blur(function() {
 	   
 	   var number= isNaN($(this).val());
-	   alert(number);
-	   if(number==true){ 
-		   
-		   $(this).parent().addClass('has-error');
+	   var line= $(this).parent();
+	   if(number==true || $(this).val()==""){ 
+		   $(this).val(0);
+		   $(this).parent().addClass('has-warning');
 		   $(this).parent().removeClass('has-success');
-		   $("div.warning_modify").css("display", "inline-block");
-		   $("div.warning_modify").html('<p><strong>Veuillez saisir un nombre valide</strong> </p>')
-			$("div.warning_modify").css('display', 'block');
-		 //  $('#modifyValue').attr('disabled', true);
+		   line.parent().children().children("div.warning_modify").css("display", "inline-block");
+		line.parent().children().children("div.warning_modify").css('display', 'block');
+		   $("div.warning_modify").html('<p><strong>Attention:</strong> Veuillez saisir un nombre valide </p>')
+		   $('#modifyValue').attr('disabled', false);
 		 
 	   }else{
 		   
-		   $(this).parent().addClass('has-success');
-		   $(this).parent().removeClass('has-error');
+		  $(this).parent().removeClass('has-warning');
 		   $("div.warning_modify").css("display", "none");
-		  // $('#modifyValue').attr('disabled', false);
+		   $('#modifyValue').attr('disabled', false);
 	   }
 	   
 	   });
@@ -118,18 +118,19 @@ $(document).ready(function(){
  $("#newpoints").blur(function() {
 	   
 	   var number= isNaN($(this).val());
-	   alert(number);
-	   if(number==true){ 
-		   $(this).parent().addClass('has-error');
+	  
+	   if(number==true || $(this).val()==""){ 
+		   $(this).val(0);
+		   $(this).parent().addClass('has-warning');
 		   $(this).parent().removeClass('has-success');
-		   $("div.warning").css("display", "inline-block");
-		   $("div.warning").html('<p class="bg-danger"><strong>Veuillez saisir un nombre valide</strong> </p>')
-			$("div.warning").css('display', 'block');
+		   $("div.warningadd").css("display", "inline-block");
+		   $("div.warningadd").html('<p class="bg-warning"><strong>Attention: </strong>Veuillez saisir un nombre valide </p>')
+			$("div.warningadd").css('display', 'block');
+		   $('#add').attr('disabled', false);
 		 
 	   }else{
-		   $(this).parent().addClass('has-success');
-		   $(this).parent().removeClass('has-error');
-		   $("div.warning").css("display", "none");
+		   $(this).parent().removeClass('has-warning');
+		   $("div.warningadd").css("display", "none");
 		   $('#add').attr('disabled', false);
 	   }
 	   

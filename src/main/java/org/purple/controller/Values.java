@@ -78,7 +78,7 @@ DaoValues v = new DaoValues(Bdd.getCo());
 			char point=points.charAt(0);
 			boolean chara=Character.isDigit(point);
 			Value val = new Value();
-			if(chara==true && Integer.parseInt(points)!=0 ){
+			if(chara==true  ){
 				CountTrue++;
 				val.setPoints(Integer.parseInt(points));
 			}
@@ -129,7 +129,7 @@ DaoValues v = new DaoValues(Bdd.getCo());
 			char point=points.charAt(0);
 			boolean chara=Character.isDigit(point);
 			
-			if(chara==true && Integer.parseInt(points)!=0 ){
+			if(chara==true ){
 				out.write("0");
 				val.setId(Integer.parseInt(nombre));
 				val.setTitle(title);

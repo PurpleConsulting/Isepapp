@@ -11,7 +11,7 @@
 				<strong>Aide</strong>: Les notes présente ici sont à la disposition des tutors lorsqu'il notent les étudiants.
 				Toute modification des valeurs associées au notes auront un effet sur les moyennes.
 			</div>
-			<div class="alert alert-warning cascade-warning col-xs-offset-1 col-xs-10">
+			<div class="alert alert-warning cascade-warning col-xs-offset-1 col-xs-10 suppression">
 				<strong>Attention</strong>: la suppression d'une valeur possible supprimera également
 				les notes correspondantes affectés aux élèves.
 			</div>
@@ -21,8 +21,7 @@
 						<c:out value="${pages.getErrorMessage()}"></c:out>
 					</div>
 			</c:if>
-			<div style="display:none" class="alert alert-warning cascade-warning col-xs-offset-1 col-xs-10 warning_modify" >
-						</div>
+			
 	</div>
 	<div class="row">
 		<div class="col-xs-offset-1 col-xs-10 values">
@@ -48,7 +47,10 @@
 						<div class="form-group">
 						<input type="checkbox" name="delete" value="<c:out value="${valeur[i].getId()}"></c:out>" style="visibility:hidden" >
 						</div>
-						
+						<div class="form-group">
+						<div style="display:none" class="warning alert-warning cascade-warning .col-md-6 warning_modify" >
+						</div>
+						</div>
 					</div>
 					</c:forEach>
 				  	<button type="submit" class="btn btn-default" id="modifyValue"><span class="fa fa-check">  </span>  Valider</button>
@@ -63,7 +65,7 @@
 		    <div class="modal-content">
 		      <div class="modal-header">
 		        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-		        <h4 class="modal-title">Ajouter une note</h4>
+		        <h4 class="modal-title">Ajouter une value</h4>
 		      </div>
 					      <div class="modal-body">
 									<form>
@@ -74,9 +76,7 @@
 											<input class="form-control" placeholder="rentrer un nombre" id="newpoints" />
 											<input type="hidden" value='${fn:length(valeur)+1}' id="number">
 										</div>
-										<div style="display:none" class="alert alert-danger col-md-offset-1 col-md-10 warning">
-											<strong>Attention</strong>,
-											
+										<div style="display:none" class="warning alert-warning cascade-warning .col-md-6 warningadd">
 										</div>
 										
 										
