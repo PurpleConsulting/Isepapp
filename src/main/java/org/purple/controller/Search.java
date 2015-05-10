@@ -1,12 +1,16 @@
 package org.purple.controller;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import org.json.JSONObject;
+import org.purple.bean.Page;
+import org.purple.model.Research;
 
 /**
  * Servlet implementation class Search
@@ -28,6 +32,18 @@ public class Search extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		Page p = new Page();
+		if(request.getParameter("keyword") != null){
+			String keyword = request.getParameter("keyword");
+			if(keyword.length() == 3){
+				response.sendRedirect("Groups?scope=" + keyword );
+			} else {
+				response.sendRedirect("Students?pseudo=" + keyword );
+			}
+			
+		} else {
+			
+		}
 	}
 
 	/**
@@ -38,8 +54,10 @@ public class Search extends HttpServlet {
 		if(request.getParameter("query") != null){
 			JSONObject result = new JSONObject();
 			JSONObject js = new JSONObject();
-			String[] array = {"ldivad","ldchanta","ldzozo","ldbilly","ldldldl","ldtruc"};
-			js.put("pseudo", array);
+			String[] pseudos = Research.pseudoResearch();
+			String[] groups = Research.groupResearch();
+			js.put("pseudo", pseudos);
+			js.put("group", groups);
 			result.put("result", js);
 			
 			response.setHeader("content-type", "application/json");

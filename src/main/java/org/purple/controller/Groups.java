@@ -75,8 +75,8 @@ public class Groups extends HttpServlet {
 				if(group == null){
 					
 					// -- Incorrect data, the group is missing.
-					p.setError(true);
-					p.setErrorMessage("Le groupe demandé n'a pas été retrouvé dans la base.");
+					p.setWarning(true);
+					p.setWarningMessage("Le groupe demandé n'a pas été retrouvé dans la base.");
 					p.setContent("home.jsp");
 					request.setAttribute("pages", p);
 					

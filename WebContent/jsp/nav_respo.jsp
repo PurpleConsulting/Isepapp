@@ -43,9 +43,10 @@
   		</li>
   		<li><a href="Signout">Déconnexion</a></li>
       </ul>
-      <form class="navbar-form navbar-left" role="search">
+      <form class="navbar-form navbar-left" role="search" action="Search" method="GET">
         <div class="form-group">
-          <input type="text" class="form-control typeahead search-virgin" placeholder="Search">
+          <input name="keyword" type="text" class="form-control typeahead search-virgin" placeholder="Search">
+          <button style="Display:none;" type="submit" class="btn btn-default">Submit</button>
         </div>
       </form>
     </div><!-- /.navbar-collapse -->

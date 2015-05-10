@@ -6,7 +6,7 @@
 	 
 	// -- fixed nav bar
     $(window).scroll(function () {
-        if ($(window).scrollTop() > '162') {
+        if ($(window).scrollTop() > '160') {
             $('#navmain').addClass('navbar-fixed-top');
             //$('#navmain').removeClass('navbar-static-top');                  
         } else {
@@ -22,30 +22,45 @@
     });
     
     $(".typeahead.search-virgin").one("focus", function(){
-    	console.log("///////////////////////////////////");
+    	
     	$.post("Search", {
 			query : "autocomplete",
 			}, function(data, status){
-				console.log(data);
-				var pseudo = new Bloodhound({
+				
+				var pseudos = new Bloodhound({
 				  datumTokenizer: Bloodhound.tokenizers.whitespace,
 				  queryTokenizer: Bloodhound.tokenizers.whitespace,
 				  local: data.result.pseudo
 				});
 				
+				var groups = new Bloodhound({
+					  datumTokenizer: Bloodhound.tokenizers.whitespace,
+					  queryTokenizer: Bloodhound.tokenizers.whitespace,
+					  local: data.result.group
+					});
+				
 				$('.typeahead').typeahead({
 			    	  minLength: 1,
 			    	  highlight: true
 			        },{
+			    	  name: 'Groups',
+			    	  source: groups,
+			    	  limit: 2,
+			    	  templates: {
+			    	  header: '<div class="tt-suggestion tt-suggestion-header"><em>Groupes</em></div>'
+			    	  }
+			        },{
 			    	  name: 'Students',
-			    	  source: pseudo,
+			    	  source: pseudos,
 			    	  templates: {
 			    	    header: '<div class="tt-suggestion tt-suggestion-header"><em>Etudiants</em></div>'
 			    	  }
-			        });
+				    });
 				
 			});
-    	$(this).removeClass("search-virgin");
+    	
+    	//$(this).removeClass("search-virgin");
+    	$(".typeahead.search-virgin").focus();
     });
     /* autocomplete search input
         $('.typeahead').typeahead({
