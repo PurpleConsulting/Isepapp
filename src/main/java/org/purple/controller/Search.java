@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.json.JSONObject;
 import org.purple.bean.Page;
+import org.purple.constant.Bdd;
 import org.purple.model.Research;
 
 /**
@@ -35,14 +36,19 @@ public class Search extends HttpServlet {
 		Page p = new Page();
 		if(request.getParameter("keyword") != null){
 			String keyword = request.getParameter("keyword");
-			if(keyword.length() == 3){
-				response.sendRedirect("Groups?scope=" + keyword );
-			} else {
+			if(keyword.length() == 2){
+				keyword = keyword.toUpperCase();
+				if(Research.isRealVal("Groups","class",keyword)) response.sendRedirect("Promo#Group" + keyword );
+			} else if(keyword.length() == 3){
+				keyword = keyword.toUpperCase();
+				if(Research.isRealVal("Groups","`name`",keyword)) response.sendRedirect("Groups?scope=" + keyword );
+			} else if(Research.isRealVal("Users","CONCAT(first_name, ' ', last_name)",keyword)){
+				
 				response.sendRedirect("Students?pseudo=" + keyword );
 			}
 			
 		} else {
-			
+			response.sendRedirect("Home");
 		}
 	}
 
@@ -54,10 +60,12 @@ public class Search extends HttpServlet {
 		if(request.getParameter("query") != null){
 			JSONObject result = new JSONObject();
 			JSONObject js = new JSONObject();
-			String[] pseudos = Research.pseudoResearch();
-			String[] groups = Research.groupResearch();
-			js.put("pseudo", pseudos);
+			String[] students = Research.pseudoResearch("CONCAT(first_name, ' ', last_name)", "Users", "WHERE id_post = 4");
+			String[] groups = Research.pseudoResearch("DISTINCT `name`", "Groups", "");
+			String[] classes = Research.pseudoResearch("DISTINCT class", "Groups", "");
+			js.put("student", students);
 			js.put("group", groups);
+			js.put("classes", classes);
 			result.put("result", js);
 			
 			response.setHeader("content-type", "application/json");

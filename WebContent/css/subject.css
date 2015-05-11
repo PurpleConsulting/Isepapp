@@ -1,40 +1,7 @@
 @CHARSET "UTF-8";
-span.fa-download, span.fa-eye{
-	font-size: 9em;
-	width:120px;
-	margin:12px;
-	opacity: 0.8;
-	transition: 0.7s;
-	color: #BDBDBD;
-	cursor: pointer
+nav#navmain.navbar{
+	margin-bottom: 0px;
 }
-
-span.fa-download:hover, span.fa-download:active,
-span.fa-eye:hover, span.fa-eye:active{
-	opacity: 1;
-	color:#337AB7;
+div#content.container-fluid.content{
+	padding: 0px;
 }
-
-canvas, #pagination{
-	display: block;
-	margin:auto;
-}
- #pagination{
- 	width: 100px;
- 	text-align: center;
- }
- div.fadiv{
- 	text-align:center;
- 	width:300px;
-	display:block;
-	margin:auto;
- }
- a:hover, a:active{
- 	text-decoration:none;
- }
- 
-div.pager{
- 	position: fixed;
- 	top: 300px;
- 	width:80%;
- }

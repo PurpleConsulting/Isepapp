@@ -61,6 +61,7 @@ public class Bdd {
 		try {
 			stmt = co.createStatement();
 			rs = stmt.executeQuery(query);
+			//stmt.close();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -78,6 +79,7 @@ public class Bdd {
 				i++; prestmt.setString(i,p);
 			}
 			rs = prestmt.executeQuery();
+			//prestmt.close();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

@@ -33,10 +33,6 @@
 				<span class="col-xs-4 col-sm-2">Email:</span>
 				<span class="col-xs-4 col-sm-offset-1 col-md-offset-1"><a href="mailto:${student.getMail()}"><c:out value="${student.getMail()}"></c:out></a></span>
 			</p></div>
-			<div class="cell"><p>
-				<span class="col-xs-4 col-sm-2">Tel:</span>
-				<span class="col-xs-4 col-sm-offset-1 col-md-offset-1"><c:out value="${student.getTel()}"></c:out></span>
-			</p></div>
 		</div>
 	</div>
 </div>
