@@ -59,31 +59,8 @@
 				
 			});
     	
-    	//$(this).removeClass("search-virgin");
-    	$(".typeahead.search-virgin").focus();
+    	$(this).removeClass("search-virgin");
+    	$(".typeahead").focus();
     });
-    /* autocomplete search input
-        $('.typeahead').typeahead({
-    	  minLength: 1,
-    	  highlight: true
-        },{
-    	  name: 'cars',
-    	  source: cars,
-    	  templates: {
-    	    header: '<div class="tt-suggestion tt-suggestion-header"><em>Cars</em></div>'
-    	  }
-        },{
-    	  name: 'girls',
-    	  source: girls,
-    	  templates: {
-    	    header: '<div class="tt-suggestion tt-suggestion-header"><em>Girs</em></div>'
-    	  }
-        },{
-		  name: 'boys',
-		  source: boys,
-		  templates: {
-		    header: '<div class="tt-suggestion tt-suggestion-header"><em>Boys</em></div>'
-		  }
-		});*/
 
 });

@@ -32,9 +32,6 @@ public class Bdd {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} catch (NullPointerException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		}
 		return co;
 	}
@@ -50,14 +47,57 @@ public class Bdd {
 		} catch (SQLException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
-		} catch (NullPointerException e2) {
+		} catch (NullPointerException | NamingException e3 ) {
 			// TODO Auto-generated catch block
-			e2.printStackTrace();
-		} catch (NamingException e3) {
-			// TODO Auto-generated catch block
-			e3.printStackTrace();
+			//e3.printStackTrace();
+			co = getSecureCo();
 		}
 		return co;
 	}
 	
+	public static final ResultSet exec(Connection co, String query) throws NullPointerException{
+		ResultSet rs = null;
+		Statement stmt = null;
+		try {
+			stmt = co.createStatement();
+			rs = stmt.executeQuery(query);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return rs;
+	}
+	
+	public static final ResultSet prepareExec(Connection co, String query, String[] params) throws NullPointerException{
+		ResultSet rs = null;
+		PreparedStatement prestmt = null;
+		try {
+			prestmt = co.prepareStatement(query);
+			int i = 0;
+			for(String p : params){
+				i++; prestmt.setString(i,p);
+			}
+			rs = prestmt.executeQuery();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}	
+		return rs;
+	}
+	
+	public static final String[] rsToStringTab(ResultSet rs){
+		String[] tab = {};
+		String chain = "";
+		try {
+			while(rs.next()){
+				chain = chain + "&" + rs.getString(1);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		chain = chain.substring(1);
+		tab = chain.split("&");
+		return tab;
+	}
 }

@@ -5,6 +5,7 @@ import java.io.IOException;
 
 
 
+
 /*** servlet import ***/
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -12,6 +13,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.json.JSONObject;
 import org.purple.bean.Page;
 import org.purple.bean.User;
 import org.purple.constant.Bdd;
@@ -61,8 +63,13 @@ public class Signin extends HttpServlet {
 			DaoUsers u = new DaoUsers(Bdd.getCo());
 			String param = request.getParameter("Ajaxpseudo");
 			if(u.find(param)) res = true;
+			
 			response.setHeader("content-type", "application/json");
-			response.getWriter().write("{\"result\": {\"find\": \"" + res.toString() +"\" }}");
+			JSONObject result = new JSONObject();
+			JSONObject js = new JSONObject();
+			js.put("find", res.toString());
+			result.put("result", js);
+			response.getWriter().write(result.toString());
 			
 		} else if (request.getParameter("pseudo") == null){
 			Page p = new Page();

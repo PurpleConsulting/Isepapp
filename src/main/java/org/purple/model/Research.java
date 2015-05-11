@@ -11,13 +11,13 @@ public class Research {
 		public static final String[] pseudoResearch(){
 			Connection co = Bdd.getCo();
 			String[] res = null;
-			String q = "SELECT pseudo FROM Users WHERE id_post = 4;";
-			
+			String q = "SELECT CONCAT(first_name, ' ', last_name, ' ', pseudo) as Student FROM Users WHERE id_post = 4;";
+			String[] test = null;
 			try {
 				Statement stmt = co.createStatement();
 				ResultSet currsor = stmt.executeQuery(q);
 				if(!currsor.next()) return null;
-				//String[] test = (String[])currsor.getArray(1).getArray();
+				//test = (String[])currsor.getArray("Student").getArray();
 				if (currsor.last()) {
 					res = new String[currsor.getRow()];
 					currsor.beforeFirst(); 
