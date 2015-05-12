@@ -6,13 +6,15 @@ form{
 	padding: 50px;
 }
 .alert_input{
-	height: 34px;
+	min-height: 34px;
 	margin-top:24px;
-	margin-bottom: 0px;
-	padding-bottom: 0px;
+	margin-bottom: 24px;
+	padding: 6px;
 }
 .alert_input p{
-	position: absolute;
-	top: 6px;
-	left: 10px;
+
+}
+
+#formblock{
+	min-height: 600px;	
 }

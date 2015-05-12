@@ -6,8 +6,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-
 import org.purple.bean.User;
+
 /*** Purple import ***/
 
 public class DaoUsers extends Dao<User> {
@@ -15,15 +15,6 @@ public class DaoUsers extends Dao<User> {
 	public DaoUsers(Connection co) {
 		super(co);
 		// TODO Auto-generated constructor stub
-	}
-	
-	public void close() {
-		try {
-			this.connect.close();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 	}
 	
 	/**
@@ -42,11 +33,12 @@ public class DaoUsers extends Dao<User> {
 			currsor.next();
 			int set = currsor.getInt(1);
 			if (set == 1) res = true;
+			prestmt.close();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 				e.printStackTrace();
-			}
-			return res;
+		}
+		return res;
 	}
 	
 
@@ -76,11 +68,12 @@ public class DaoUsers extends Dao<User> {
 		// TODO Auto-generated method stub
 		User u = null;
 		String q = "SELECT Users.id,"
-				+ "Users.last_name, Users.first_name,"
-				+ " Positions.title"
+				+ " Users.last_name, Users.first_name,"
+				+ " Positions.title, Users.pseudo,"
+				+ " Users.tel, Users.mail"
 				+ " FROM Users INNER JOIN Positions"
-				+ " on Users.id_post = Positions.id "
-				+ "WHERE Users.pseudo = ? ";
+				+ " on Users.id_post = Positions.id"
+				+ " WHERE Users.pseudo = ? ";
 		try{
 			PreparedStatement prestmt = this.connect.prepareStatement(q);
 			prestmt.setString(1,pseudo);
@@ -91,6 +84,10 @@ public class DaoUsers extends Dao<User> {
 			u.setFirstName(currsor.getString(2));
 			u.setLastName(currsor.getString(3));
 			u.setPosition(currsor.getString(4));
+			u.setPseudo(currsor.getString(5));
+			u.setTel(currsor.getString(6));
+			u.setMail(currsor.getString(7));
+			prestmt.close();
 		}catch (SQLException e){
 			// TODO Auto-generated catch block
 			u = null;
@@ -108,4 +105,21 @@ public class DaoUsers extends Dao<User> {
 		// TODO Auto-generated method stub
 		return 0;
 	}
+	
+	
+	public void addGroup(User u){
+		String q = "SELECT Groups.name FROM Groups INNER JOIN Users "
+				+ "ON Groups.id = Users.id_group "
+				+ "WHERE Users.id = " + Integer.toString(u.getId());
+		try {
+			ResultSet currsor = this.connect.createStatement().executeQuery(q);
+			currsor.next();
+			u.setGroup(currsor.getString(1));
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+				e.printStackTrace();
+				u.setGroup("");
+		}
+	}
+
 }

@@ -1,0 +1,7 @@
+@CHARSET "UTF-8";
+nav#navmain.navbar{
+	margin-bottom: 0px;
+}
+div#content.container-fluid.content{
+	padding: 0px;
+}

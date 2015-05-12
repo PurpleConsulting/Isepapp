@@ -1,3 +1,4 @@
+import org.json.JSONObject;
 import org.purple.bean.User;
 import org.purple.constant.Bdd;
 import org.purple.model.*;
@@ -7,9 +8,13 @@ import java.sql.*;
 public class Main {
 
 	public static void main(String[] args) {
-		Connection co = Bdd.getCo();
-		DaoUsers u = new DaoUsers(co);
-		System.out.print(u.find("833"));
+		JSONObject result = new JSONObject();
+		JSONObject js = new JSONObject();
+		String[] array = {"ldivad","ldchanta","ldzozo","ldbilly","ldldldl","ldtruc"};
+		js.put("pseudo", array);
+		result.put("result", js);
+		
+		System.out.print(result.toString());
 	}
 
 }
