@@ -50,7 +50,7 @@ public class Promo extends HttpServlet {
 			// -- the user acces to the prom page
 			p.setCss("promo.css"); p.setJs("promo.js");
 			p.setContent("users/promo.jsp");
-			p.setTitle("ISEP / APP - Pomotion");
+			p.setTitle("ISEP / APP - Promotion");
 			
 			DaoGroups dg = new DaoGroups(Bdd.getCo());
 			

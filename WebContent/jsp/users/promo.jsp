@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <div id="prom" class="col-md-offset-1 col-md-8">
-	<h1>La Promotion</h1>
+	<h1>La promotion</h1>
 	<div class="info-checkpoint">
 		<div class="text">
 			<h5> -- Page promo: La notice --</h5>

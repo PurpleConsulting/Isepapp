@@ -32,9 +32,9 @@ public class Subject extends HttpServlet {
 		// TODO Auto-generated method stub
 		Page p = new Page();
 		p.setCss("subject.css"); 
-		p.setJs("pdf/pdf.js","subject.js");
+		p.setJs("subject.js");
 		p.setContent("subject.jsp");
-		p.setTitle("ISEP / APP - Le Sujet");
+		p.setTitle("ISEP / APP - Le sujet");
 		
 		request.setAttribute("pages", p);
 		request.getRequestDispatcher("/template.jsp").forward(request, response);
