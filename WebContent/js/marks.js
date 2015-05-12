@@ -125,7 +125,7 @@ $(document).ready(function(){
 		   $(this).parent().removeClass('has-success');
 		   $("div.warningadd").css("display", "inline-block");
 		   $("div.warningadd").html('<p class="bg-warning"><strong>Attention: </strong>Veuillez saisir un nombre valide </p>')
-			$("div.warningadd").css('display', 'block');
+			$("div.warningadd").css('display', 'inline-block');
 		   $('#add').attr('disabled', false);
 		 
 	   }else{

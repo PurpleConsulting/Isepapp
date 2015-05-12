@@ -7,7 +7,7 @@ div.cascade-warning{
 }
 
 div.values{
-	border: solid #ccc 1px;
+	/*border: solid #ccc 1px;*/
 	min-height: 230px;
 	border-radius: 6px;
 	padding: 20px;
@@ -30,7 +30,7 @@ div input.form-control{
 }
 
 span.danger{
-  color:#d9534f;
+  color:#A94442;
 }
 span.safe{
   color:#31708F;
@@ -50,6 +50,10 @@ form.off div.form-group input[disabled]{
 	background-color: white;
 }
 
+div.form-group{
+	margin-bottom: 6px;
+}
+
 div.has-error input[disabled]{
 	background-color: #F2DEDE;
 	color: #A94442;
@@ -60,3 +64,10 @@ div#modaladd form{
 	margin-bottom: 50px;
 }
 
+div.alert.alert-warning.warning_modify{
+	width: auto;
+	vertical-align: middle;
+	margin-bottom: 0px;
+	padding-top: 5px;
+	padding-bottom: 5px;
+}

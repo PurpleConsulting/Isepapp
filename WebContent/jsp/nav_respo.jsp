@@ -21,6 +21,7 @@
   			<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">La gestion <span class="caret"></span></a>
   			<ul class="dropdown-menu" role="menu">
 	            <li><a href="#">Les compétences</a></li>
+	            <li><a href="Values">Valeurs des notes </a></li>
 	            <li><a href="#">Notes et<br/>coefficients </a></li>
           	</ul>
   		</li>
@@ -38,7 +39,7 @@
   			<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Les livrables<span class="caret"></span></a>
   			<ul class="dropdown-menu" role="menu">
 	            <li><a href="#">Deadlines</a></li>
-	            <li><a href="#">D�pots</a></li>
+	            <li><a href="#">Dépots</a></li>
           </ul>
   		</li>
   		<li><a href="Signout">Déconnexion</a></li>
