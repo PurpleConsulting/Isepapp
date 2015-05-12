@@ -21,59 +21,56 @@
     	$(this).toggleClass("tt-cursor");
     });
     
-    $(".typeahead.search-virgin").one("focus", function(){
-    	
-    	$.post("Search", {
-			query : "autocomplete",
-			}, function(data, status){
-				
-				var pseudos = new Bloodhound({
+ 	
+	$.post("Search", {
+		query : "autocomplete",
+		}, function(data, status){
+			
+			var pseudos = new Bloodhound({
+			  datumTokenizer: Bloodhound.tokenizers.whitespace,
+			  queryTokenizer: Bloodhound.tokenizers.whitespace,
+			  local: data.result.student
+			});
+			
+			var groups = new Bloodhound({
 				  datumTokenizer: Bloodhound.tokenizers.whitespace,
 				  queryTokenizer: Bloodhound.tokenizers.whitespace,
-				  local: data.result.student
-				});
-				
-				var groups = new Bloodhound({
-					  datumTokenizer: Bloodhound.tokenizers.whitespace,
-					  queryTokenizer: Bloodhound.tokenizers.whitespace,
-					  local: data.result.group
-				});
-				
-				var classes = new Bloodhound({
-					  datumTokenizer: Bloodhound.tokenizers.whitespace,
-					  queryTokenizer: Bloodhound.tokenizers.whitespace,
-					  local: data.result.classes
-				});
-				
-				$('.typeahead').typeahead({
-			    	  minLength: 1,
-			    	  highlight: true
-			        },{
-			    	  name: 'Classes',
-			    	  source: classes,
-			    	  limit: 1,
-			    	  templates: {
-			    	    header: '<div class="tt-suggestion tt-suggestion-header"><em>Classes</em></div>'
-			    	  }
-				    },{
-			    	  name: 'Groups',
-			    	  source: groups,
-			    	  limit: 3,
-			    	  templates: {
-			    	  header: '<div class="tt-suggestion tt-suggestion-header"><em>Groupes</em></div>'
-			    	  }
-			        },{
-			    	  name: 'Students',
-			    	  source: pseudos,
-			    	  templates: {
-			    	    header: '<div class="tt-suggestion tt-suggestion-header"><em>Etudiants</em></div>'
-			    	  }
-				    });
-				
+				  local: data.result.group
 			});
-    	
-    	$(this).removeClass("search-virgin");
-    	$(".typeahead").focus();
-    });
+			
+			var classes = new Bloodhound({
+				  datumTokenizer: Bloodhound.tokenizers.whitespace,
+				  queryTokenizer: Bloodhound.tokenizers.whitespace,
+				  local: data.result.classes
+			});
+			
+			$('.typeahead').typeahead({
+		    	  minLength: 1,
+		    	  highlight: true
+		        },{
+		    	  name: 'Classes',
+		    	  source: classes,
+		    	  limit: 1,
+		    	  templates: {
+		    	    header: '<div class="tt-suggestion tt-suggestion-header"><em class="Bloodhound">Classes</em></div>'
+		    	  }
+			    },{
+		    	  name: 'Groups',
+		    	  source: groups,
+		    	  limit: 3,
+		    	  templates: {
+		    	  header: '<div class="tt-suggestion tt-suggestion-header"><em class="Bloodhound">Groupes</em></div>'
+		    	  }
+		        },{
+		    	  name: 'Students',
+		    	  source: pseudos,
+		    	  templates: {
+		    	    header: '<div class="tt-suggestion tt-suggestion-header"><em class="Bloodhound">Etudiants</em></div>'
+		    	  }
+			    });
+			
+		});
+	$(".typeahead").focus();
+
 
 });

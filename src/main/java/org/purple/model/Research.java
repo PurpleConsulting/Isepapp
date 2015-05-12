@@ -17,7 +17,6 @@ public class Research {
 			try {
 				if(currsor.next()){
 					total = currsor.getInt(1);
-					System.out.print(total);
 				}
 				currsor.close();
 				co.close();
@@ -54,6 +53,29 @@ public class Research {
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
+			}
+			return res;
+		}
+		
+		
+		public static final String nameToSpeudo(String name){
+			Connection co = Bdd.getCo();
+			String res = null;
+			String q = "SELECT pseudo FROM Users WHERE CONCAT(first_name, ' ', last_name) = ?";
+			String[] args = {name};
+			ResultSet currsor  = Bdd.prepareExec(co, q, args);
+			try {
+				if(currsor.next()){
+					res = currsor.getString(1);
+				} else {
+					res = "";
+				}
+				currsor.close();
+				co.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				res = "";
 			}
 			return res;
 		}

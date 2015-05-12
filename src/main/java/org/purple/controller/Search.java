@@ -36,6 +36,7 @@ public class Search extends HttpServlet {
 		Page p = new Page();
 		if(request.getParameter("keyword") != null){
 			String keyword = request.getParameter("keyword");
+			keyword = keyword.trim();
 			if(keyword.length() == 2){
 				keyword = keyword.toUpperCase();
 				if(Research.isRealVal("Groups","class",keyword)) response.sendRedirect("Promo#Group" + keyword );
@@ -43,8 +44,8 @@ public class Search extends HttpServlet {
 				keyword = keyword.toUpperCase();
 				if(Research.isRealVal("Groups","`name`",keyword)) response.sendRedirect("Groups?scope=" + keyword );
 			} else if(Research.isRealVal("Users","CONCAT(first_name, ' ', last_name)",keyword)){
-				
-				response.sendRedirect("Students?pseudo=" + keyword );
+				String pseudo = Research.nameToSpeudo(keyword);
+				response.sendRedirect("Students?pseudo=" + pseudo );
 			}
 			
 		} else {
