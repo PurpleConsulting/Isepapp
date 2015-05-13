@@ -48,7 +48,7 @@ public class Controls extends HttpServlet {
 		HttpSession s = request.getSession();
 		User u = (User)s.getAttribute("user");
 
-		String[] gp_name = dgp.selectAllName(u.getPseudo());
+		String[] gp_name = dgp.selectAllName(Integer.toString(u.getId()));
 		
 		request.setAttribute("group_names", gp_name);
 		
@@ -60,6 +60,8 @@ public class Controls extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		//String a = request.getParameter("group");
+		//System.out.print(a);
 	}
 
 }
