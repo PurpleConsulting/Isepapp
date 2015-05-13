@@ -35,15 +35,6 @@ public class User {
 		public int getId() {
 			return id;
 		}
-		
-		public String getPseudo() {
-			return pseudo;
-		}
-
-		public void setPseudo(String pseudo) {
-			this.pseudo = pseudo;
-		}
-
 		public void setId(int id) {
 			this.id = id;
 		}
