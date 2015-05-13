@@ -62,7 +62,7 @@ public class DaoGroups extends Dao<Group>{
 		
 		String[] gp_name = null;
 		
-		String q = "SELECT Groups.`name` FROM Groups INNER JOIN Users ON Users.id = Groups.id_tutor WHERE Users.pseudo = ? ;";
+		String q = "SELECT Groups.`name` FROM Groups INNER JOIN Users ON Users.id = Groups.id_tutor WHERE Users.id = ? ORDER BY Groups.name;";
 		try {
 			PreparedStatement prestmt = this.connect.prepareStatement(q);
 			prestmt.setString(1,pseudo);
@@ -78,13 +78,12 @@ public class DaoGroups extends Dao<Group>{
 			}
 			cursor.close();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			gp_name = null;
 			e.printStackTrace();
 		}
 		return gp_name;
 	}
 	
-
+	//Select 
 
 }
