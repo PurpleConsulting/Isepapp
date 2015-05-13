@@ -25,20 +25,22 @@
 	<body>
 		<header>
 			<div class="container-fluid">
-				<div class="col-md-offset-2">
-					<span style="color:white;" class="fa fa-flag fa-5x"></span>
+				<div class="col-md-offset-1">
+					<a href="Home"><span style="color:white;" class="fa fa-flag fa-5x"></span></a>
 					<h1>ISEP - APP</h1>
 				</div>
 			</div>
 		</header>
-		<c:import url="jsp/nav_${sessionScope.user.position}.jsp"></c:import>
-		<div id="content" class="container-fluid">
-			<c:import url="jsp/${pages.getContent()}"></c:import>
+		<c:import url="jsp/nav_${sessionScope.user.position}.jsp" charEncoding="UTF-8"></c:import>
+		<div id="content" class="container-fluid content">
+			<c:import url="jsp/${pages.getContent()}" charEncoding="UTF-8"></c:import>
 		</div>
 		<footer> </footer>
 		<script type="text/javascript" src="./js/jquery-2.1.3.min.js"></script>
 		<script type="text/javascript" src="./js/jquery-ui.min.js"></script>
 		<script type="text/javascript" src="./js/bootstrap.min.js"></script>
+		<script type="text/javascript" src="./js/typeahead.bundle.min.js"></script>
+		<script type="text/javascript" src="./js/main.js"></script>
 		<!-- On affiche tous les js -->
 		<c:forEach var="currentName" items="${pages.getJs()}" varStatus="status">
 			<script type="text/javascript" src="./js/<c:out value="${currentName}"/>"></script>

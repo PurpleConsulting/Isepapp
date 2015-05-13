@@ -14,7 +14,7 @@ public class Group {
 		this.members = new ArrayList<User>();
 	}
 	
-	public Group(int id, String name, String _class, String tutor){
+	public Group(int id, String name, String _class){
 		this.setId(id);
 		this.setName(name);
 		this.set_class(_class);
@@ -53,5 +53,4 @@ public class Group {
 		this.members.add(members);
 	}
 	
-	
-}
+

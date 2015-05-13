@@ -2,9 +2,7 @@ package org.purple.controller;
 
 /*** java import ***/
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.List;
+
 
 
 
@@ -15,6 +13,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.json.JSONObject;
 import org.purple.bean.Page;
 import org.purple.bean.User;
 import org.purple.constant.Bdd;
@@ -64,11 +63,18 @@ public class Signin extends HttpServlet {
 			DaoUsers u = new DaoUsers(Bdd.getCo());
 			String param = request.getParameter("Ajaxpseudo");
 			if(u.find(param)) res = true;
+			
 			response.setHeader("content-type", "application/json");
-			response.getWriter().write("{\"result\": {\"find\": \"" + res.toString() +"\" }}");
+			JSONObject result = new JSONObject();
+			JSONObject js = new JSONObject();
+			js.put("find", res.toString());
+			result.put("result", js);
+			response.getWriter().write(result.toString());
 			
 		} else if (request.getParameter("pseudo") == null){
 			Page p = new Page();
+			p.setWarning(true);
+			p.setWarningMessage("Vos identifiants n'ont pas été correctement récupérés. Veuillez vous connecter à nouveau.");
 			p.setTitle("ISEP / APP - Connection");
 			this.getServletContext().getRequestDispatcher("/jsp/signin.jsp")
 					.forward(request, response);
@@ -92,7 +98,7 @@ public class Signin extends HttpServlet {
 				p.setErrorMessage("Un problème est survenu lors de l'établissement de la connection. "
 						+ "Pour toute récupération de mot de passe veuillez vous rapprocher de l'administration de l'ISEP.");
 				request.setAttribute("pages", p);
-				url = "/jsp/sigin.jsp";
+				url = "/jsp/signin.jsp";
 				
 			}
 	

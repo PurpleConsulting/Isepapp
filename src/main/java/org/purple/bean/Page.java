@@ -1,7 +1,6 @@
 package org.purple.bean;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class Page {
 
