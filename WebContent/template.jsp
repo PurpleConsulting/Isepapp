@@ -26,10 +26,12 @@
 		<header>
 			<div class="container-fluid">
 				<div class="col-md-offset-1">
-					<a href="Home"><span style="color:white;" class="fa fa-flag fa-5x"></span></a>
-					<h1>ISEP - APP</h1>
+					<img src="img/logoisepapp.png" style="height:140px; width:140px;"/>
+					<div class="title"><span class="appname">Isep.<em>app</em></span><br/>
+					 Les points, les livrables <br/>
+					 et les compétences en une seul application.</div>
+					</div>
 				</div>
-			</div>
 		</header>
 		<c:import url="jsp/nav_${sessionScope.user.position}.jsp" charEncoding="UTF-8"></c:import>
 		<div id="content" class="container-fluid content">

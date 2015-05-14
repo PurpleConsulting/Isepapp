@@ -1,0 +1,22 @@
+@CHARSET "UTF-8";
+div.form-group input, div.bootstrap-select button{
+	margin-top: 2px;
+	margin-bottom: 2px;
+}
+
+ul span.fa{
+	cursor: pointer;
+	float: right;
+}
+
+ul li.std span.fa{
+	transition: 0.6s;
+	opacity: 0.4;
+	color: #A94442;
+	
+}
+
+ul li.std span.fa:hover{
+	opacity: 1;
+	text-shadow: 0 0 50px #F2DEDE;
+}

@@ -20,122 +20,123 @@ import org.purple.model.DaoValues;
 @WebServlet("/Values")
 public class Values extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public Values() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#HttpServlet()
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		Page p = new Page();
-		// On ajout le css
-		p.setCss("marks.css");
-		p.setJs("marks.js");
-		p.setContent("/mark/values.jsp");
-		request.setAttribute("pages", p);
-		
-		
-		DaoValues v = new DaoValues(Bdd.getCo());
-		//Afficher les values
-		Value[] value= v.selectAllValues();
-		request.setAttribute("valeur", value);
-		
-		
-			this.getServletContext().getRequestDispatcher("/template.jsp")
-					.forward(request, response);
+	public Values() {
+		super();
+		// TODO Auto-generated constructor stub
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-DaoValues v = new DaoValues(Bdd.getCo());
-		
-		//Modifier et supprimer une value
-	if(request.getParameter("modify").equals("1")){
-		String nombre=request.getParameter("int");
-		Value[] valu=new Value[Integer.parseInt(nombre)+1];
-		int CountTrue=0;
-		String[] checkbox = request.getParameterValues("delete");
-		if(checkbox!=null){
-		for (int i = 0; i < checkbox.length; ++i){ 
-			v.deleteId(Integer.parseInt(checkbox[i])); 
-			} 
-		}
-		for(int i=0; i<=Integer.parseInt(nombre); i++){
-		
-			String title = request.getParameter("title"+i);
-			String points = request.getParameter("points"+i);
-			String id = request.getParameter("id"+i);
-			char point=points.charAt(0);
-			boolean chara=Character.isDigit(point);
-			Value val = new Value();
-			if(chara==true  ){
-				CountTrue++;
-				val.setPoints(Integer.parseInt(points));
-			}
-			
-			val.setId(Integer.parseInt(id));
-			val.setTitle(title);
-			
-			valu[i] = val;
-		}		
-		//Appel à la page affichage value
 		Page p = new Page();
-		
-		if(CountTrue==Integer.parseInt(nombre)+1){
-			v.updateValues(valu);
-			p.setError(false);
-			
-		}else{
-			p.setError(true);
-			p.setErrorMessage("Vous avez rentrer une valeur incorrect.");
-		}
-			
+		// On ajout le css
+		p.setCss("values.css");
+		p.setJs("values.js");
+		p.setContent("/mark/values.jsp");
+		request.setAttribute("pages", p);
+
+		DaoValues v = new DaoValues(Bdd.getCo());
+		// Afficher les values
+		Value[] value = v.selectAllValues();
+		request.setAttribute("valeur", value);
+
+		this.getServletContext().getRequestDispatcher("/template.jsp")
+				.forward(request, response);
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void doPost(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		DaoValues v = new DaoValues(Bdd.getCo());
+
+		// Modifier et supprimer une value
+		if (request.getParameter("modify").equals("1")) {
+			String nombre = request.getParameter("int");
+			Value[] valu = new Value[Integer.parseInt(nombre) + 1];
+			int CountTrue = 0;
+			String[] checkbox = request.getParameterValues("delete");
+			if (checkbox != null) {
+				for (int i = 0; i < checkbox.length; ++i) {
+					v.deleteId(Integer.parseInt(checkbox[i]));
+				}
+			}
+			for (int i = 0; i <= Integer.parseInt(nombre); i++) {
+
+				String title = request.getParameter("title" + i);
+				String points = request.getParameter("points" + i);
+				String id = request.getParameter("id" + i);
+				char point = points.charAt(0);
+				boolean chara = Character.isDigit(point);
+				Value val = new Value();
+				if (chara == true) {
+					CountTrue++;
+					val.setPoints(Integer.parseInt(points));
+				}
+
+				val.setId(Integer.parseInt(id));
+				val.setTitle(title);
+
+				valu[i] = val;
+			}
+			// Appel ï¿½ la page affichage value
+			Page p = new Page();
+
+			if (CountTrue == Integer.parseInt(nombre) + 1) {
+				v.updateValues(valu);
+				p.setError(false);
+
+			} else {
+				p.setError(true);
+				p.setErrorMessage("Vous avez rentrer une valeur incorrect.");
+			}
+
 			// On ajout le css
 			p.setCss("marks.css");
 			p.setJs("marks.js");
 			p.setContent("/mark/values.jsp");
 			request.setAttribute("pages", p);
-				
-			//Afficher les values
-			Value[] value= v.selectAllValues();
+
+			// Afficher les values
+			Value[] value = v.selectAllValues();
 			request.setAttribute("valeur", value);
-			
-				this.getServletContext().getRequestDispatcher("/template.jsp")
-						.forward(request, response);
-			
-	}
-	
-				
-		//Ajouter une value
-		if(request.getParameter("modify").equals("2")){
+
+			this.getServletContext().getRequestDispatcher("/template.jsp")
+					.forward(request, response);
+
+		}
+
+		// Ajouter une value
+		if (request.getParameter("modify").equals("2")) {
 			response.setContentType("text/html");
 			PrintWriter out = response.getWriter();
-			
+
 			String title = request.getParameter("newtitle");
 			String points = request.getParameter("newpoints");
-			String nombre=request.getParameter("number");
+			String nombre = request.getParameter("number");
 			Value val = new Value();
-			
-			char point=points.charAt(0);
-			boolean chara=Character.isDigit(point);
-			
-			if(chara==true ){
+
+			char point = points.charAt(0);
+			boolean chara = Character.isDigit(point);
+
+			if (chara == true) {
 				out.write("0");
 				val.setId(Integer.parseInt(nombre));
 				val.setTitle(title);
 				val.setPoints(Integer.parseInt(points));
 				v.create(val);
-			}else{
+			} else {
 				out.write("1");
 			}
 		}
