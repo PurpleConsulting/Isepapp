@@ -45,9 +45,20 @@ public class DaoUsers extends Dao<User> {
 	
 
 	@Override
-	public boolean create(User obj) {
+	public boolean create(User u) {
 		// TODO Auto-generated method stub
-		return false;
+		boolean res = false;
+		String[] params = { u.getPseudo(),
+							u.getFirstName(), u.getLastName(),
+							u.getMail(), u.getPosition(), u.getGroup()};
+		String q = "INSERT INTO Users (pseudo, first_name, last_name, mail, add_date, id_post, id_group)"
+				+ " VALUES (?, ?, ?, ?, CURDATE(),"
+				+ " (SELECT Positions.id FROM Positions WHERE Positions.title = ?),"
+				+ " (SELECT Groups.id FROM Groups WHERE Groups.`name` = ?))";
+		
+		int affected = Bdd.preparePerform(this.connect, q, params);
+		if(affected == 1) res = true;
+		return res;
 	}
 
 
@@ -101,7 +112,7 @@ public class DaoUsers extends Dao<User> {
 				+ " Users.tel, Users.mail"
 				+ " FROM Users INNER JOIN Positions"
 				+ " on Users.id_post = Positions.id"
-				+ " WHERE Users.id_post = 3 ";
+				+ " WHERE (Users.id_post = 3 OR Users.id_post = 2) ";
 		ResultSet currsor = Bdd.exec(this.connect, q);
 		try {
 			if(!currsor.next()) return new User[0];

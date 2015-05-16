@@ -6,7 +6,6 @@ public class User {
 		private String pseudo;
 		private String firstName;
 		private String lastName;
-		private int status;
 		private String position;
 		private String group;
 		private String mail;
@@ -32,7 +31,15 @@ public class User {
 			this.setLastName(lastName);
 			this.setPosition(position);
 		}
-
+		
+		public User(String firtstName, String lastName, String pseudo, String email,  String position){
+			this.setPseudo(pseudo);
+			this.setFirstName(firtstName);
+			this.setLastName(lastName);
+			this.setPosition(position);
+			this.setMail(email);
+		}
+		
 		public int getId() {
 			return id;
 		}
@@ -56,12 +63,6 @@ public class User {
 		}
 		public void setLastName(String lastName) {
 			this.lastName = lastName;
-		}
-		public int getStatus() {
-			return status;
-		}
-		public void setStatus(int status) {
-			this.status = status;
 		}
 		public String getPosition() {
 			return position;

@@ -33,6 +33,7 @@ public class Search extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		request.setCharacterEncoding("UTF-8");
 		Page p = new Page();
 		if(request.getParameter("keyword") != null){
 			String keyword = request.getParameter("keyword");
@@ -58,6 +59,7 @@ public class Search extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		request.setCharacterEncoding("UTF-8");
 		if(request.getParameter("query") != null){
 			JSONObject result = new JSONObject();
 			JSONObject js = new JSONObject();

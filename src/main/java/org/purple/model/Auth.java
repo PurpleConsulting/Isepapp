@@ -40,14 +40,14 @@ public class Auth {
 	}
 	
 	public static boolean isRespo(HttpServletRequest request){
-		return isUser(request, "respo");
+		return isUser(request, Auth.respo);
 	}
 	
 	public static boolean isTutor(HttpServletRequest request){
-		return isUser(request, "tutor");
+		return isUser(request, Auth.tutor);
 	}
 	public static boolean isTutor(HttpServletRequest request, String group){
-		if(isUser(request, "tutor")){
+		if(isUser(request, Auth.tutor)){
 			return isGroupOwner(request, group);
 		} else{
 			return false;
@@ -55,10 +55,10 @@ public class Auth {
 	}
 	
 	public static boolean isStudent(HttpServletRequest request){
-		return isUser(request, "student");
+		return isUser(request, Auth.student);
 	}
 	
 	public static boolean isAdmin(HttpServletRequest request){
-		return isUser(request, "administration");
+		return isUser(request, Auth.admin);
 	}
 }

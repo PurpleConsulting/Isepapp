@@ -41,6 +41,7 @@ public class Values extends HttpServlet {
 		p.setCss("values.css");
 		p.setJs("values.js");
 		p.setContent("/mark/values.jsp");
+		p.setTitle("ISEP / APP - Notation");
 		request.setAttribute("pages", p);
 
 		DaoValues v = new DaoValues(Bdd.getCo());
@@ -103,9 +104,10 @@ public class Values extends HttpServlet {
 			}
 
 			// On ajout le css
-			p.setCss("marks.css");
-			p.setJs("marks.js");
+			p.setCss("values.css");
+			p.setJs("values.js");
 			p.setContent("/mark/values.jsp");
+			p.setTitle("ISEP / APP - Notation");
 			request.setAttribute("pages", p);
 
 			// Afficher les values

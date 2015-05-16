@@ -26,3 +26,8 @@ div.form-group input, div.bootstrap-select button{
 	margin-top: 0px;
 	margin-bottom: 0px;
 }
+
+a.chameleon, a.chameleon:hover, a.chameleon:active{
+	color: inherit;
+	text-decoration: none;
+}

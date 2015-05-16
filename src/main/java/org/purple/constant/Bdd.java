@@ -55,7 +55,7 @@ public class Bdd {
 		return co;
 	}
 	
-	public static final ResultSet exec(Connection co, String query) throws NullPointerException{
+	public static final ResultSet exec(Connection co, String query){
 		ResultSet rs = null;
 		Statement stmt = null;
 		try {
@@ -69,7 +69,7 @@ public class Bdd {
 		return rs;
 	}
 	
-	public static final ResultSet prepareExec(Connection co, String query, String[] params) throws NullPointerException{
+	public static final ResultSet prepareExec(Connection co, String query, String[] params){
 		ResultSet rs = null;
 		PreparedStatement prestmt = null;
 		try {
@@ -87,7 +87,7 @@ public class Bdd {
 		return rs;
 	}
 	
-	public static final int preparePerform(Connection co, String query, String[] params) throws NullPointerException{
+	public static final int preparePerform(Connection co, String query, String[] params){
 		PreparedStatement prestmt = null;
 		int change = 0;
 		try {

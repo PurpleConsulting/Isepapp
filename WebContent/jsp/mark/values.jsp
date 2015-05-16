@@ -92,8 +92,6 @@
 					</div>
 					<div style="display: none"
 						class="warning alert-warning cascade-warning warningadd"></div>
-
-
 				</form>
 			</div>
 			<div class="modal-footer">
