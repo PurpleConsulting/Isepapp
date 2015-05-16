@@ -27,7 +27,7 @@ public class DaoMarks extends Dao<Mark>{
 	}
 
 	@Override
-	public boolean update(Mark obj) {
+	public boolean update(Mark obj, String where) {
 		// TODO Auto-generated method stub
 		return false;
 	}

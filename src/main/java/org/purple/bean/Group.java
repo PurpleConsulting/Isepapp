@@ -22,6 +22,10 @@ public class Group {
 		this.members = new ArrayList<User>();
 	}
 	
+	public Group(String name, String tutor){
+		this.setName(name);
+		this.setTutor(tutor);
+	}
 	public String getName() {
 		return name;
 	}

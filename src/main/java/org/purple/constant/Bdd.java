@@ -87,6 +87,24 @@ public class Bdd {
 		return rs;
 	}
 	
+	public static final int preparePerform(Connection co, String query, String[] params) throws NullPointerException{
+		PreparedStatement prestmt = null;
+		int change = 0;
+		try {
+			prestmt = co.prepareStatement(query);
+			int i = 0;
+			for(String p : params){
+				i++; prestmt.setString(i,p);
+			}
+			change = prestmt.executeUpdate();
+			//prestmt.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}	
+		return change;
+	}
+	
 	public static final String[] rsToStringTab(ResultSet rs){
 		String[] tab = {};
 		String chain = "";

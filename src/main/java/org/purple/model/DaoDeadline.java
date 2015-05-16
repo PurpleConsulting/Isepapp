@@ -30,7 +30,7 @@ public class DaoDeadline extends Dao<Deadline>{
 	}
 
 	@Override
-	public boolean update(Deadline obj) {
+	public boolean update(Deadline obj, String where) {
 		// TODO Auto-generated method stub
 		return false;
 	}

@@ -23,6 +23,7 @@ public class User {
 		public User(int id){
 			
 		}
+
 		
 		public User(int id, String pseudo, String firtstName, String lastName, String position){
 			this.setId(id);

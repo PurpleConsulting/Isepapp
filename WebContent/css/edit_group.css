@@ -6,7 +6,8 @@ div.form-group input, div.bootstrap-select button{
 
 ul span.fa{
 	cursor: pointer;
-	float: right;
+	margin-right:2%;
+	/*float: right;*/
 }
 
 ul li.std span.fa{
@@ -19,4 +20,9 @@ ul li.std span.fa{
 ul li.std span.fa:hover{
 	opacity: 1;
 	text-shadow: 0 0 50px #F2DEDE;
+}
+
+div.form-group input, div.bootstrap-select button{
+	margin-top: 0px;
+	margin-bottom: 0px;
 }

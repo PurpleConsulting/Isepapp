@@ -15,6 +15,7 @@ import java.sql.SQLException;
 
 
 
+
 import org.purple.bean.User;
 import org.purple.bean.Value;
 
@@ -60,7 +61,7 @@ public class DaoValues extends Dao<Value> {
 	}
 
 	@Override
-	public boolean update(Value obj) {
+	public boolean update(Value obj, String where) {
 		// TODO Auto-generated method stub
 		return false;
 	}

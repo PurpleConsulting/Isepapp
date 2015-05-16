@@ -28,7 +28,7 @@ public class DaoMissings extends Dao<Missing>{
 	}
 
 	@Override
-	public boolean update(Missing obj) {
+	public boolean update(Missing obj, String where) {
 		// TODO Auto-generated method stub
 		return false;
 	}

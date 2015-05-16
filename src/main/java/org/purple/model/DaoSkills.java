@@ -3,6 +3,7 @@ package org.purple.model;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+
 import org.purple.bean.Skill;
 import org.purple.constant.Bdd;
 
@@ -27,7 +28,7 @@ public class DaoSkills extends Dao<Skill>{
 	}
 
 	@Override
-	public boolean update(Skill obj) {
+	public boolean update(Skill obj, String where) {
 		// TODO Auto-generated method stub
 		return false;
 	}

@@ -29,7 +29,7 @@ public abstract class Dao<T> {
   *
   * 
   */
-  public abstract boolean update(T obj);
+  public abstract boolean update(T obj, String where);
 
   /**
   * 
