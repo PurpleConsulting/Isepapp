@@ -90,20 +90,28 @@ public class AlterGroups extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		Page p = new Page();
 		
-		// -- First form alternative
+		// -- First form alternative -- modify group
 		String scope = request.getParameter("scope");
 		String newName = request.getParameter("new_name");
 		String newTutor = request.getParameter("new_tutor");
 		
-		// -- Second form alternative
+		// -- Second form alternative -- add a user to a group
 		String stdFirstName = request.getParameter("std_first_name");
 		String stdLastName = request.getParameter("std_last_name");
 		String stdPseudo = request.getParameter("std_pseudo");
 		String stdEmail = request.getParameter("std_email");
 		
-		// -- Third form alternative
+		// -- Third form alternative -- delete a user from a group
 		String deleteStd = request.getParameter("delete-std");
 		String suggestionDeleteStd = request.getParameter("suggestion-std");
+		
+		// -- forth form alternative -- delete an entire group
+		String deleteGrp = request.getParameter("delete-grp");
+		String suggestionGroup = request.getParameter("suggestion-grp");
+		
+		// -- fith form alternative -- add a group
+		String newGrp = request.getParameter("new_grp");
+		String newGrpTutor = request.getParameter("new_grp_tutor");
 		
 		if(Auth.isTutor(request, scope) || Auth.isRespo(request)){
 			
@@ -138,6 +146,10 @@ public class AlterGroups extends HttpServlet {
 					redirectionGroup = dg.select(scope); 			// -- Get the group 
 				}
 				
+				p.setCss("bootstrap-select.min.css", "edit_group.css"); 
+				p.setJs("bootstrap-select.min.js","bootbox.min.js", "edit_group.js");
+				p.setTitle("ISEP / APP - Edition de group");
+				p.setContent("editor/edit_group.jsp");
 				
 			} else if(!Isep.nullOrEmpty(stdFirstName, stdLastName, stdPseudo, stdEmail, scope)) {
 				/**
@@ -158,6 +170,10 @@ public class AlterGroups extends HttpServlet {
 							+ "Veuillez vérifier que ces pseudo et numéro isep ne soit pas déjà utilisés.");
 				}
 				
+				p.setCss("bootstrap-select.min.css", "edit_group.css"); 
+				p.setJs("bootstrap-select.min.js","bootbox.min.js", "edit_group.js");
+				p.setTitle("ISEP / APP - Edition de group");
+				p.setContent("editor/edit_group.jsp");
 			} else if(!Isep.nullOrEmpty(deleteStd, suggestionDeleteStd)){
 				/**
 				 * HERE THE USER WAN TO DELETE A USER FROM THE GROUP.
@@ -171,21 +187,70 @@ public class AlterGroups extends HttpServlet {
 						p.setSuccess(true);
 						p.setSuccessMessage("la suppréssion de l'étudiant " + exStudent.getFirstName() + " " + exStudent.getLastName() + " à bien été réalisée.");
 					} else{
-						p.setSuccess(true);
-						p.setSuccessMessage("Une erreur est survenue lors de la suppréssion de l'étudiant.");
+						p.setError(true);
+						p.setErrorMessage("Une erreur est survenue lors de la suppréssion de l'étudiant.");
 					}
-					
 					redirectionGroup = dg.select(exStudent.getGroup());
-				} 
+					
+				} else{
+					p.setWarning(true);
+					p.setWarningMessage("l'oppération à mal été éffectuée, veuillez répéter l'oppération en remplissant correctement les champs proposés.");
+					
+				}
+					p.setCss("bootstrap-select.min.css", "edit_group.css"); 
+					p.setJs("bootstrap-select.min.js","bootbox.min.js", "edit_group.js");
+					p.setTitle("ISEP / APP - Edition de group");
+					p.setContent("editor/edit_group.jsp");
+					
+					
+			}else if(!Isep.nullOrEmpty(deleteGrp, suggestionGroup) && Auth.isRespo(request)){
+				if(deleteGrp.equals(suggestionGroup)){
+					Group exGrp = dg.select(deleteGrp);
+					boolean querrySucces = dg.delete(exGrp);
+					if(querrySucces){
+						p.setSuccess(true);
+						p.setSuccessMessage("Le groupe demendé à bien été supprimé.");
+						p.setCss("bootstrap-select.min.css", "home_respo.css"); 
+						p.setJs("bootstrap-select.min.js","bootbox.min.js", "home_respo.js");
+						p.setTitle("ISEP / APP - Accueil");
+						p.setContent("home/respo.jsp");
+					} else{
+						p.setWarning(true);
+						p.setWarningMessage("ce groupe n'a pas peu être supprimé car une erreur c'est produite.");
+						p.setCss("bootstrap-select.min.css", "edit_group.css"); 
+						p.setJs("bootstrap-select.min.js","bootbox.min.js", "edit_group.js");
+						p.setTitle("ISEP / APP - Edition de group");
+						p.setContent("editor/edit_group.jsp");
+					}
+				}
 				
-			} else{
+			} else if(!Isep.nullOrEmpty(newGrp, newGrpTutor) && Auth.isRespo(request)){
+				if(!newGrp.substring(0, 1).equals("G")) newGrp = "G" + newGrp; 
+				if(newGrpTutor.equals("(vide)")) newGrpTutor = "null";
+				/**
+				 * HERE THE USER WANT TO ADD A GROUP
+				 */// -- We prepare the group for the SQL INSERT
+				Group newG = new Group(newGrp, newGrpTutor);
+				boolean querrySucces = dg.create(newG);
+				if(querrySucces){
+					
+					p.setSuccess(true);p.setSuccessMessage("Le groupe " + newGrp +" viens d' être crée. Vous pouvez dès maintenant y ajouter des étudiants.");
+					redirectionGroup = dg.select(newGrp);
+					p.setCss("bootstrap-select.min.css", "edit_group.css"); 
+					p.setJs("bootstrap-select.min.js","bootbox.min.js", "edit_group.js");
+					p.setTitle("ISEP / APP - Edition de group");
+					p.setContent("editor/edit_group.jsp");
+				} else {
+					p.setError(true);p.setErrorMessage("Il s'est produit une erreur lors de l'ajourt du groupe."
+							+ " Assurez vous que le nom de groupe soit au format 'G1A' et qu'il n'est pas encore utilisé.");
+					p.setCss("bootstrap-select.min.css", "home_respo.css"); 
+					p.setJs("bootstrap-select.min.js","bootbox.min.js", "home_respo.js");
+					p.setTitle("ISEP / APP - Accueil");
+					p.setContent("home/respo.jsp");
+					
+				}
 				
 			}
-			
-			p.setCss("bootstrap-select.min.css", "edit_group.css"); 
-			p.setJs("bootstrap-select.min.js","bootbox.min.js", "edit_group.js");
-			p.setTitle("ISEP / APP - Edition de group");
-			p.setContent("editor/edit_group.jsp");
 			
 			User[] teachers = du.selectAllTutor(); 		// -- We need to display all tutors
 			dg.completeMemebers(redirectionGroup);

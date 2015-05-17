@@ -25,6 +25,7 @@ public class Group {
 	public Group(String name, String tutor){
 		this.setName(name);
 		this.setTutor(tutor);
+		this.members = new ArrayList<User>();
 	}
 	public String getName() {
 		return name;

@@ -6,7 +6,7 @@
 		Modification du Groupe
 		<small> 
 			- <a class="chameleon" href="Groups?scope=${group.getName()}"><c:out value="${group.getName()}"></c:out></a> - 
-			<span class="fa fa-trash-o fa-2x"></span></small>
+			<span data-delete="${group.getName()}" class="fa fa-trash-o fa-2x link-dialog-grp"></span></small>
 	</h1>
 </div>
 <c:import url="/jsp/alert.jsp" charEncoding="UTF-8"></c:import>
@@ -48,7 +48,7 @@
 			</li>
 			<c:forEach var="student" items="${group.getMembers()}" varStatus="status">
 				<li class="list-group-item std">
-					<a class="chameleon link-dialog-std" href="#" data-delete="${student.getPseudo()}"><span class="fa fa-user-times fa-2x prompt"></span></a> 
+					<a class="chameleon link-dialog-std" href="#" data-delete="${student.getPseudo()}"><span class="fa fa-user-times fa-2x"></span></a> 
 					<c:out value="${student.getFirstName()}"></c:out>
 					<c:out value="${student.getLastName()}"></c:out> - 
 					<a href="Students?pseudo=${student.getPseudo()}">

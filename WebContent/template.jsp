@@ -26,7 +26,7 @@
 		<header>
 			<div class="container-fluid">
 				<div class="col-md-offset-1">
-					<img class="col-xs-10 col-sm-5" src="img/BANNERISEPAPP.svg"  style="min-width:320px;"/><!--  style="width:40%;"-->
+					<img class="" src="img/BANNERISEPAPP.svg"  style="heigth:150px;"/><!--  style="width:40%;"-->
 					</div>
 				</div>
 		</header>

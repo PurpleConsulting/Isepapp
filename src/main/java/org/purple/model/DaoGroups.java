@@ -20,15 +20,44 @@ public class DaoGroups extends Dao<Group>{
 	}
 
 	@Override
-	public boolean create(Group obj) {
+	public boolean create(Group group) {
 		// TODO Auto-generated method stub
-		return false;
+		String _class = "";
+		String q = "";
+		String[] params;
+		try {
+			_class = group.getName().substring(0, 2);
+		} catch(IndexOutOfBoundsException e) {
+			return false;
+		}
+		if(group.getTutor().equals("null")){
+			q = "INSERT INTO Groups (`name`, class) VALUE (? , ?)";
+			params = new String[2];
+			params[0] = group.getName(); params[1] =  _class;
+		} else {
+			q = "INSERT INTO Groups (`name`, class, id_tutor) VALUE (? , ?, "
+					+ " (SELECT Users.id FROM Users WHERE Users.pseudo = ?))";
+			params = new String[3];
+			params[0] = group.getName(); params[1] =  _class; params[2] =  group.getTutor();
+		}
+		
+		int affected = Bdd.preparePerform(this.connect, q, params);
+		if(affected == 1){
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 	@Override
-	public boolean delete(Group obj) {
+	public boolean delete(Group group) {
 		// TODO Auto-generated method stub
-		return false;
+		boolean res = false;
+		String[] params = { Integer.toString(group.getId())};
+		String q = "DELETE FROM Groups WHERE Groups.`id` = ?;" ;
+		int affected = Bdd.preparePerform(this.connect, q, params);
+		if(affected == 1) res = true;
+		return res;
 	}
 
 	@Override

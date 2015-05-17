@@ -77,7 +77,7 @@
 					aria-label="Close">
 					<span aria-hidden="true">&times;</span>
 				</button>
-				<h4 class="modal-title">Ajouter une value</h4>
+				<h4 class="modal-title">Ajouter une valeur.</h4>
 			</div>
 			<div class="modal-body">
 				<form>
