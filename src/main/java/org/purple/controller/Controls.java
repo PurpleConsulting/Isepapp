@@ -9,10 +9,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.json.JSONObject;
+import org.purple.bean.Group;
 import org.purple.bean.Page;
+import org.purple.bean.Skill;
 import org.purple.bean.User;
 import org.purple.constant.Bdd;
 import org.purple.model.DaoGroups;
+import org.purple.model.DaoSkills;
 
 /**
  * Servlet implementation class Skills
@@ -41,8 +45,9 @@ public class Controls extends HttpServlet {
 		p.setContent("/views-performances/fill_performances.jsp");
 		request.setAttribute("pages", p);
 		
-		//Create instance DaoGroups
+		//Create instance Dao
 		DaoGroups dgp = new DaoGroups(Bdd.getCo());
+		DaoSkills ds = new DaoSkills(Bdd.getCo());
 		
 		//Display group name
 		HttpSession s = request.getSession();
@@ -52,7 +57,14 @@ public class Controls extends HttpServlet {
 		
 		request.setAttribute("group_names", gp_name);
 		
+		//Display skills in tab
+		Skill[] skills = ds.selectAllSkills();
+		request.setAttribute("skills", skills);
+		
 		this.getServletContext().getRequestDispatcher("/template.jsp").forward(request, response);
+		
+		dgp.close();  // -- close Groups Dao
+		ds.close();
 	}
 
 	/**
@@ -60,8 +72,37 @@ public class Controls extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		//String a = request.getParameter("group");
-		//System.out.print(a);
+		String str = request.getParameter("string");
+		
+		if (str != null){
+			DaoGroups dgroup = new DaoGroups(Bdd.getCo());
+			
+			Group g = new Group();
+			
+			String[] name = null;
+			
+			if (g != null){
+				str=str.trim();
+				g = dgroup.select(str);
+				dgroup.completeMemebers(g);
+				name = new String[g.getMembers().size()];
+				int i=0;
+				for(User u : g.getMembers()){		
+					name[i] = u.getFirstName() + " ";
+					i++;
+				}
+			}
+			
+			JSONObject result = new JSONObject();
+			JSONObject list = new JSONObject();
+			
+			list.put("groups", name);
+			result.put("result", list);
+			
+			response.setHeader("content-type", "application/json");
+			response.getWriter().write(result.toString());
+			
+			dgroup.close();  // -- close Groups Dao
+		}
 	}
-
 }

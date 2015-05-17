@@ -1,8 +1,10 @@
 package org.purple.model;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+
 import org.purple.bean.Skill;
 import org.purple.constant.Bdd;
 
@@ -63,5 +65,34 @@ public class DaoSkills extends Dao<Skill>{
 		}
 		return skills;
 	}
+	
+	public Skill[] selectAllSkills(){
+		Skill[] skills = null;
 
+		String q = "SELECT title, sub_title, id FROM Skills ORDER BY id";
+		
+		try {
+			PreparedStatement prestmt = this.connect.prepareStatement(q);
+			ResultSet cursor = prestmt.executeQuery();
+			if (cursor.last()) {
+				skills = new Skill[cursor.getRow()];
+				cursor.beforeFirst(); 
+			}
+			int i = 0;
+			while(cursor.next()){
+				Skill s = new Skill();
+				s.setTitle(cursor.getString(1));
+				s.setSub_title(cursor.getString(2));
+				s.setId(cursor.getInt(3));
+				skills[i] = s;
+				i++;
+			}
+			cursor.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			skills = null;
+			e.printStackTrace();
+		}
+		return skills;
+	}
 }
