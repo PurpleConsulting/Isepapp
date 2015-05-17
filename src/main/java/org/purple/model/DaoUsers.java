@@ -45,12 +45,12 @@ public class DaoUsers extends Dao<User> {
 	
 
 	@Override
-	public boolean create(User u) {
+	public boolean create(User usr) {
 		// TODO Auto-generated method stub
 		boolean res = false;
-		String[] params = { u.getPseudo(),
-							u.getFirstName(), u.getLastName(),
-							u.getMail(), u.getPosition(), u.getGroup()};
+		String[] params = { usr.getPseudo(),
+							usr.getFirstName(), usr.getLastName(),
+							usr.getMail(), usr.getPosition(), usr.getGroup()};
 		String q = "INSERT INTO Users (pseudo, first_name, last_name, mail, add_date, id_post, id_group)"
 				+ " VALUES (?, ?, ?, ?, CURDATE(),"
 				+ " (SELECT Positions.id FROM Positions WHERE Positions.title = ?),"
@@ -63,9 +63,14 @@ public class DaoUsers extends Dao<User> {
 
 
 	@Override
-	public boolean delete(User obj) {
+	public boolean delete(User usr) {
 		// TODO Auto-generated method stub
-		return false;
+		boolean res = false;
+		String[] params = { Integer.toString(usr.getId())};
+		String q = "DELETE FROM Users WHERE Users.`id` = ?;" ;
+		int affected = Bdd.preparePerform(this.connect, q, params);
+		if(affected == 1) res = true;
+		return res;
 	}
 
 

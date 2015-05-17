@@ -45,7 +45,7 @@
 		    <li role="presentation" class="active"><a href="#tab1" aria-controls="tab1" role="tab" data-toggle="tab">Global</a></li>
 			<c:forEach var="skill" items="${skills}" varStatus="status">
 				<li role="presentation">
-					<a href="#tab${status.count + 1}" aria-controls="tab3" role="tab" data-toggle="tab"><c:out value="${skill.getTitle()}"></c:out></a>
+					<a href="#tab${status.count + 1}" aria-controls="tab${status.count + 1}" role="tab" data-toggle="tab"><c:out value="${skill.getTitle()}"></c:out></a>
 				</li>
 			</c:forEach>	
 		    </ul>

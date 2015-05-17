@@ -15,8 +15,14 @@ public class Isep {
 		
 		public static final double round(double value, int places) {
 		    if (places < 0) throw new IllegalArgumentException();
-		    // -- Just to round with a number of decimal	
-		    BigDecimal bd = new BigDecimal(value);
+		    // -- Just to round with a number of decimal
+		    BigDecimal bd;
+		    try{
+		    	bd = new BigDecimal(value);
+		    } catch(NumberFormatException e){
+		    	//e.printStackTrace();
+		    	bd = new BigDecimal(0);
+		    }
 		    bd = bd.setScale(places, RoundingMode.HALF_UP);
 		    return bd.doubleValue();
 		}

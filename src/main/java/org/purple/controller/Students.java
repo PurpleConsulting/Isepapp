@@ -24,6 +24,7 @@ import org.purple.model.DaoMarks;
 import org.purple.model.DaoMissings;
 import org.purple.model.DaoSkills;
 import org.purple.model.DaoUsers;
+import org.purple.model.DaoValues;
 
 /**
  * Servlet implementation class Student
@@ -80,12 +81,13 @@ public class Students extends HttpServlet {
 					du.addGroup(std);// -- we retrieve his group.
 					
 					// -- we deal with the skills
+					double maxMark = DaoValues.fetchMax();
 					Skill[] skills = DaoSkills.allSkill();// -- get all the skill for this session
 					ArrayList<Mark> marks = dmk.selectByStudent(Integer.toString(std.getId()));// -- get all the mark for this student
 					ArrayList<Average> sklAverage = new ArrayList<Average>();// -- 
 					Average average = new Average("Moyenne: "+std.getPseudo(), Isep.LANDMARK);
 					for(Skill s : skills){
-						sklAverage.add(new Average(s.getTitle(), 4.0));
+						sklAverage.add(new Average(s.getTitle(), maxMark));
 					}
 					for(Average av : sklAverage){
 						for(Mark note : marks){

@@ -48,7 +48,7 @@
 			</li>
 			<c:forEach var="student" items="${group.getMembers()}" varStatus="status">
 				<li class="list-group-item std">
-					<span class="fa fa-user-times fa-2x"></span> 
+					<a class="chameleon link-dialog-std" href="#" data-delete="${student.getPseudo()}"><span class="fa fa-user-times fa-2x prompt"></span></a> 
 					<c:out value="${student.getFirstName()}"></c:out>
 					<c:out value="${student.getLastName()}"></c:out> - 
 					<a href="Students?pseudo=${student.getPseudo()}">
@@ -126,14 +126,17 @@
 								placeholder="Email">
 						</div>
 					</div>
-					<button style="Display:none;" type="submit" class="btn btn-primary" id="add"></button>
+					<button style="Display:none;" type="submit" class="btn btn-primary no-btn" id="addin"></button>
 				</form>
 			</div>
 			<div class="modal-footer">
 				<span style="display: none;"><input type="checkbox" /></span>
 				<button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
-				<button type="submit" class="btn btn-primary" id="add">Ajouter</button>
+				<button onclick="$('form#adduser').submit();" type="submit" class="btn btn-primary" id="adduser">Ajouter</button>
 			</div>
 		</div>
 	</div>
 </div>
+
+
+

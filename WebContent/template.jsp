@@ -26,10 +26,7 @@
 		<header>
 			<div class="container-fluid">
 				<div class="col-md-offset-1">
-					<img src="img/logoisepapp.png" style="height:140px; width:140px;"/>
-					<div class="title"><span class="appname">Isep.<em>app</em></span><br/>
-					 Les points, les livrables <br/>
-					 et les compétences en une seul application.</div>
+					<img class="col-xs-10 col-sm-5" src="img/BANNERISEPAPP.svg"  style="min-width:320px;"/><!--  style="width:40%;"-->
 					</div>
 				</div>
 		</header>

@@ -8,6 +8,9 @@
 })*/
 
 $(document).ready(function(){
+// -- Display the delivery	
+$('button').tooltip({placement: 'bottom',trigger: 'manual'}).tooltip('show');
+
 //  -- Marks: Global averages
 	$("div.progress-bar").each(function(i){
 		max = $(this).attr("aria-valuemax");
@@ -51,10 +54,3 @@ $(document).ready(function(){
 
 });
 
-
-/*$(function () {
-	  $('[data-toggle="tooltip"]').tooltip()
-});*/
-
-$('button').tooltip({placement: 'bottom',trigger: 'manual'}).tooltip('show');
-$('button').on('click',function(){$(this).tooltip('destroy');});

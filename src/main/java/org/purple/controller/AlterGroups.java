@@ -49,7 +49,7 @@ public class AlterGroups extends HttpServlet {
 				// -- reday to perfom query on the database
 				
 				p.setCss("bootstrap-select.min.css", "edit_group.css"); 
-				p.setJs("bootstrap-select.min.js", "edit_group.js");
+				p.setJs("bootstrap-select.min.js","bootbox.min.js", "edit_group.js");
 				p.setTitle("ISEP / APP - Edition de group");
 				p.setContent("editor/edit_group.jsp");
 				
@@ -61,6 +61,9 @@ public class AlterGroups extends HttpServlet {
 				request.setAttribute("teachers", teachers);
 				request.setAttribute("group", group);
 				
+				du.close();
+				dg.close(); // -- we close the connection
+				
 			} else if(!Auth.isTutor(request, thegroup) && Auth.isTutor(request)) {
 				p.setCss(""); p.setJs("");
 				p.setContent("home.jsp");
@@ -70,6 +73,7 @@ public class AlterGroups extends HttpServlet {
 						+ "propres groupes. Vous remarquez une erreur sur un group? Contactez le reponsable d'APP.");
 				
 			}
+			
 		} else {
 			
 		}
@@ -85,16 +89,22 @@ public class AlterGroups extends HttpServlet {
 		// TODO Auto-generated method stub
 		request.setCharacterEncoding("UTF-8");
 		Page p = new Page();
+		
 		// -- First form alternative
 		String scope = request.getParameter("scope");
 		String newName = request.getParameter("new_name");
 		String newTutor = request.getParameter("new_tutor");
-		// -- Second  form alternative
+		
+		// -- Second form alternative
 		String stdFirstName = request.getParameter("std_first_name");
 		String stdLastName = request.getParameter("std_last_name");
 		String stdPseudo = request.getParameter("std_pseudo");
 		String stdEmail = request.getParameter("std_email");
-					
+		
+		// -- Third form alternative
+		String deleteStd = request.getParameter("delete-std");
+		String suggestionDeleteStd = request.getParameter("suggestion-std");
+		
 		if(Auth.isTutor(request, scope) || Auth.isRespo(request)){
 			
 			DaoUsers du = new DaoUsers(Bdd.getCo());
@@ -102,18 +112,20 @@ public class AlterGroups extends HttpServlet {
 			// -- we are ready to perform query on the database
 			
 			Group redirectionGroup = new Group();
+			redirectionGroup.setId(0);// -- security measure
 			// -- since the user is authorize on the page we already know 
 			//    he will be able to return on a altergroup page
 			
 			if(!Isep.nullOrEmpty(scope, newName, newTutor)){
+				/**
+				 * HERE THE USER WANT TO CHANGE THE GROUP PROPERTY
+				 * GROUP NAME AND TUTOR
+				 */
+				
 				// --  The form is completed, We Do the modifications!
 				Group newGroup = new Group(newName, newTutor);
 				
 				boolean querrySucces  =  dg.update(newGroup, scope);
-					p.setCss("bootstrap-select.min.css", "edit_group.css"); 
-					p.setJs("bootstrap-select.min.js", "edit_group.js");
-					p.setTitle("ISEP / APP - Edition de group");
-					p.setContent("editor/edit_group.jsp");
 				if(querrySucces){
 					p.setSuccess(true);
 					p.setSuccessMessage("La mise à jour du group à bien été éffectuée.");
@@ -128,6 +140,9 @@ public class AlterGroups extends HttpServlet {
 				
 				
 			} else if(!Isep.nullOrEmpty(stdFirstName, stdLastName, stdPseudo, stdEmail, scope)) {
+				/**
+				 * HERE THE USER WANT TU ADD A STUDENT IN THE GROUP
+				 */
 				redirectionGroup = dg.select(scope); 				// -- Get the group 
 				User newUser = new User(stdFirstName, stdLastName, stdPseudo, stdEmail, Auth.student);
 				newUser.setGroup(scope);
@@ -143,15 +158,34 @@ public class AlterGroups extends HttpServlet {
 							+ "Veuillez vérifier que ces pseudo et numéro isep ne soit pas déjà utilisés.");
 				}
 				
-				p.setCss("bootstrap-select.min.css", "edit_group.css"); 
-				p.setJs("bootstrap-select.min.js", "edit_group.js");
-				p.setTitle("ISEP / APP - Edition de group");
-				p.setContent("editor/edit_group.jsp");
+			} else if(!Isep.nullOrEmpty(deleteStd, suggestionDeleteStd)){
+				/**
+				 * HERE THE USER WAN TO DELETE A USER FROM THE GROUP.
+				 * 
+				 */
+				if(deleteStd.equals(suggestionDeleteStd)){
+					User exStudent = du.select(deleteStd);
+					du.addGroup(exStudent);
+					boolean querrySucces = du.delete(exStudent);
+					if(querrySucces){
+						p.setSuccess(true);
+						p.setSuccessMessage("la suppréssion de l'étudiant " + exStudent.getFirstName() + " " + exStudent.getLastName() + " à bien été réalisée.");
+					} else{
+						p.setSuccess(true);
+						p.setSuccessMessage("Une erreur est survenue lors de la suppréssion de l'étudiant.");
+					}
+					
+					redirectionGroup = dg.select(exStudent.getGroup());
+				} 
 				
-				redirectionGroup = dg.select(scope);
-			} else {
-			
+			} else{
+				
 			}
+			
+			p.setCss("bootstrap-select.min.css", "edit_group.css"); 
+			p.setJs("bootstrap-select.min.js","bootbox.min.js", "edit_group.js");
+			p.setTitle("ISEP / APP - Edition de group");
+			p.setContent("editor/edit_group.jsp");
 			
 			User[] teachers = du.selectAllTutor(); 		// -- We need to display all tutors
 			dg.completeMemebers(redirectionGroup);
@@ -163,7 +197,7 @@ public class AlterGroups extends HttpServlet {
 			dg.close(); // -- We close the Dao connection
 			
 		} else if(!Auth.isTutor(request, scope) && Auth.isTutor(request)) {
-
+			
 			
 		}
 		
