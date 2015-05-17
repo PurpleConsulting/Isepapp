@@ -25,26 +25,34 @@
 	<!-- Nav tabs -->
 	<div role="tabpanel">
 		<ul class="nav nav-tabs" role="tablist" id="tabs">
-			<li role="presentation" class="active">
-				<a href='#tab1' aria-controls="#tab1" role="tab" data-toggle="tab">
-					Mettre la première compétence ici ...
-				</a>
-			</li>
 			<c:forEach var="skill" items="${skills}" varStatus="status">
-				<li role="presentation"><a href='#tab${status.count + 1}' aria-controls="#tab1" role="tab" data-toggle="tab">
-				  	<c:out value="${skill.getTitle()}"></c:out>
-				</a></li>
+				<li role="presentation" class='${status.count==1 ? "active":""}'>
+					<a href="#tab${status.count}" role="tab" data-toggle="tab">
+				  		<c:out value="${status.count}. ${skill.getTitle()}"></c:out>
+					</a>
+				</li>
 			</c:forEach>
 		</ul>
 	
 		 <!-- Tab panes -->
 		  <div class="tab-content">
-		    <div role="tabpanel" class="tab-pane active" id="${skill}">
-		    Travail en groupe
-		    </div>
-		    <div role="tabpanel" class="tab-pane" id="Communication">Communication</div>
-		    <div role="tabpanel" class="tab-pane" id="messages">...</div>
-		    <div role="tabpanel" class="tab-pane" id="settings">...</div>
+		  	<form action="Controls" method="post">
+		  		<c:forEach var="skill_sub_title" items="${skills}" varStatus="status">
+			    	<div role="tabpanel" class="tab-pane" id="tab${status.count}">
+			    		<h3>
+			    			<c:out value='${status.count} - ${skill_sub_title.getSub_title()}'></c:out>
+			    		</h3>
+				  		<fieldset>
+				  			<legend>
+				  				
+				  				Test
+				  			</legend>
+				  		</fieldset>
+				  	</div>
+				</c:forEach>
+		  	</form>
+			    <div role="tabpanel" class="tab-pane active" id="${skill}">
+			    </div>
 		  </div>
 	</div>
 </div>
