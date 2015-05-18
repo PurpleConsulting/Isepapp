@@ -11,6 +11,7 @@ $('#tabs').click(function (e) {
 	  $(this).tab('show')
 });
 
+//Select group name
 $("select").change(function () {
     var str = "";
     str=$("select option:selected").text();
@@ -20,3 +21,15 @@ $("select").change(function () {
 	 })	    	
 });
 
+$("#btn-test").on("click",function () {
+	var i;
+	var tab = document.getElementsByName('${sub_skill.getTitle().replaceAll("[^\\w]","")}');
+	for (i=0;i<tab.length;i++)
+	{
+		if(tab[i].checked)
+		{
+			var s = tab[i].value;
+			break;
+		}
+	}
+});
