@@ -5,7 +5,7 @@
 <h1 class="col-md-offset-1 col-md-10 col-sm-offset-1 col-sm-10 col-xs-offset-1 col-xs-10">
 	Fiche étudiant
 	<small> - <c:out value="${student.getLastName()} ${student.getFirstName()}"></c:out></small>
-	<a class="btn btn-default" href="#" role="button"><span class="fa fa-pencil"> </span>  Editer</a>
+	<a class="btn btn-default link-dialog-std" href="#" role="button"><span class="fa fa-pencil"> </span>  Editer</a>
 </h1>
 <div class="row">	
 	<div class="col-md-offset-1 col-md-10 col-sm-offset-1 col-sm-10 col-xs-offset-1 col-xs-10 idcard">

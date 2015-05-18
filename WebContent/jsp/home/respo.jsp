@@ -15,8 +15,10 @@
 			<div class="alert alert-info"> Groupe G4C - Nombre de note: 0  - Absences: 0  - les livrables(0) - tuteur: ldivad</div>
 			<div class="alert alert-info"> Groupe G4C - Nombre de note: 0  - Absences: 0  - les livrables(0) - tuteur: ldivad</div>
 			<div class="alert alert-info"> Groupe G4C - Nombre de note: 0  - Absences: 0  - les livrables(0) - tuteur: ldivad</div>
-			<a href="#"><em>Voir plus de group...</em></a>
+			<a href="Promo"><em>Voir plus de group...</em></a>
 		</div>
+		<hr/>
+		<em style="color:#337AB7">Ajouter un groupe...</em>
 		<form class="form-inline" method="post" action="AlterGroups">
 		  <div class="form-group">
 		    <div class="input-group">

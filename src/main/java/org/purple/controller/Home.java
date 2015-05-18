@@ -46,7 +46,8 @@ public class Home extends HttpServlet {
 				
 				request.setAttribute("teachers", teachers);
 				p.setJs("bootstrap-select.min.js","home_reso.js"); 
-				p.setCss("bootstrap-select.min.css","home_respo.css"); p.setContent("home/respo.jsp"); 
+				p.setCss("bootstrap-select.min.css","home_respo.css"); p.setContent("home/respo.jsp");
+				p.setTitle("ISEP / APP - Accueil");
 			} else if(Auth.isTutor(request)){
 				
 			} else if(Auth.isAdmin(request)){

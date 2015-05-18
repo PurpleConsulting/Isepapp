@@ -111,7 +111,7 @@ public class Students extends HttpServlet {
 					p.setContent("users/student.jsp");
 					p.setTitle("ISEP / APP - Etudiants");
 					p.setCss("student.css");
-					p.setJs("student.js");
+					p.setJs("bootbox.min.js", "student.js");
 					
 					request.setAttribute("student", std);// -- we send the student
 					request.setAttribute("missingGrid", missingGrid);// -- we send the his missing
