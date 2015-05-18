@@ -120,7 +120,6 @@ public class AlterGroups extends HttpServlet {
 			// -- we are ready to perform query on the database
 			
 			Group redirectionGroup = new Group();
-			redirectionGroup.setId(0);// -- security measure
 			// -- since the user is authorize on the page we already know 
 			//    he will be able to return on a altergroup page
 			

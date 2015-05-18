@@ -2,7 +2,7 @@ package org.purple.bean;
 
 public class Skill {
 
-		private String title;
+		private String title = "null";
 		
 		public Skill(){
 			

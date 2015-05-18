@@ -3,14 +3,14 @@
 		<p>
 			Voulez vous <u style="color:#A94442;">vraiment</u> supprimer <u style="color:#A94442;">tout</u>
 			ce groupe?  <span class="fa fa-exclamation-triangle"></span><br/>
-			La suppréssion d'un group entier entrainera la suppréssion<br/>
+			La suppression d'un group entier entrainera la suppréssion<br/>
 			<ul>
-			<li>de chaqu'un des membres du groupe</li>
+			<li>de chacun des membres du groupe</li>
  			<li>de <strong>toutes</strong> les notes</li>
  			<li>de <strong>toutes</strong> leurs abscences</li>
  			<li>et de leurs livrables</li>
 			</ul>
-			Si même après avoir vu cette petite inconne: <span class="fa fa-exclamation-triangle"></span><br/>
+			Si même après avoir vu cette petite iconne: <span class="fa fa-exclamation-triangle"></span><br/>
 			vous voulez poursuivre la suppréssion du groupe vous pouver recopier le nom du groupe:
 			<strong><em class="todel"> </em></strong>, ici.
 		</p>

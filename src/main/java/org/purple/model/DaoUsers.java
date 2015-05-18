@@ -84,7 +84,7 @@ public class DaoUsers extends Dao<User> {
 	@Override
 	public User select(String pseudo) {/* FAKE FUNCTION, FIXING BUG */
 		// TODO Auto-generated method stub
-		User u = null;
+		User u = new User();
 		String q = "SELECT Users.id,"
 				+ " Users.first_name, Users.last_name,"
 				+ " Positions.title, Users.pseudo,"
@@ -156,8 +156,9 @@ public class DaoUsers extends Dao<User> {
 				+ "WHERE Users.id = " + Integer.toString(u.getId());
 		try {
 			ResultSet currsor = this.connect.createStatement().executeQuery(q);
-			currsor.next();
-			u.setGroup(currsor.getString(1));
+			if(currsor.next()){
+				u.setGroup(currsor.getString(1));
+			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 				e.printStackTrace();

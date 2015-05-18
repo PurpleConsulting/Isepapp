@@ -2,14 +2,14 @@ package org.purple.bean;
 
 public class User {
 	
-		private int id;
-		private String pseudo;
-		private String firstName;
-		private String lastName;
-		private String position;
-		private String group;
-		private String mail;
-		private String tel;
+		private int id = 0;
+		private String pseudo = "null";
+		private String firstName = "null";
+		private String lastName = "null";
+		private String position = "null";
+		private String group = "null";
+		private String mail = "null";
+		private String tel = "null";
 		
 		public User(){
 			

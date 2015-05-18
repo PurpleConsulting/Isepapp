@@ -6,10 +6,10 @@ public class Value {
 		
 	}
 	
-	private int id;
-	private String title;
-	private int points;
-	
+	private int id = 0;
+	private int points = 0;
+	private String title = "null";
+
 	
 	public int getId() {
 		return id;

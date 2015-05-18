@@ -8,7 +8,7 @@
  			<li>des évaluations <strong>croisées</strong></li>
  			<li>et des autres informations liées à létudiant</li>
 			</ul>
-			Pour coufirmer la suppéssion copier le pseudo ISEP: <strong><em class="pop"> </em></strong>.
+			Pour coufirmer la suppession copier le pseudo ISEP: <strong><em class="pop"> </em></strong>
 		</p>
 	</div>
 	<div class="form-group has-error" style="margin-left:10%; width:80%">

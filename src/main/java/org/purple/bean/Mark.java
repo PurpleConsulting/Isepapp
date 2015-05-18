@@ -4,11 +4,11 @@ import org.purple.model.Avg;
 
 public class Mark extends Avg{
 	
-	private String title;
-	private String subSkill;
-	private String skill;
-	private String owner;
-	private String ownerPseudo;
+	private String title = "null";
+	private String subSkill = "null";
+	private String skill = "null";
+	private String owner = "null";
+	private String ownerPseudo = "null";
 	
 	public Mark(){
 		

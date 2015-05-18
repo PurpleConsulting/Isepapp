@@ -85,7 +85,7 @@ public class DaoGroups extends Dao<Group>{
 	@Override
 	public Group select(String name) {
 		// TODO Auto-generated method stub
-		Group g = null;
+		Group g = new Group();
 		String q = "SELECT Groups.id, Groups.`name`, Groups.class"
 				+ " FROM APPDB.Groups"
 				+ " WHERE Groups.`name` =  ? ;";
