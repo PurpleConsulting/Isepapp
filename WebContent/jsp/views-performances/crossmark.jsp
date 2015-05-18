@@ -4,19 +4,19 @@
     
 <div>
 
-		<h1>Evaluation croisée : Groupe (nom du groupe)</h1>
+		<h1>Evaluation croisée : </h1>
 
 		<div class="deadline">Deadline à (heure de depot)</div>
 
 		<div class="nom">
 			<button type="button" class="btn btn-default"><</button>
-			Léa
+			<c:forEach var="group" items="${nom}" varStatus="status"><c:out value="${group}"></c:out></c:forEach>
 			<button type="button" class="btn btn-default">></button>
 		</div>
 
 	</div>
 
-<div id="formulaire">svv
+<div id="formulaire">
 
 	<form method="post" action="traitement.php">
 

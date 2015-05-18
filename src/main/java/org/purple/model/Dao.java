@@ -10,35 +10,35 @@ public abstract class Dao<T> {
   }
    
   /**
-  * MÃ©thode de crÃ©ation
+  * Méthode de création
   * @param obj
   * @return boolean 
   */
   public abstract boolean create(T obj);
 
   /**
-  * MÃ©thode pour effacer
+  * Méthode pour effacer
   * @param obj
   * @return boolean 
   */
   public abstract boolean delete(T obj);
 
   /**
-  * MÃ©thode de mise Ã  jour
+  * Méthode de mise à jour
   * @param obj
   * @return boolean
   */
   public abstract boolean update(T obj);
 
   /**
-  * MÃ©thode de recherche des informations
+  * Méthode de recherche des informations
   * @param id
   * @return T
   */
   public abstract T select(String id);
   
   /**
-   * Retourne un boolean si l'Ã©lÃ©ment id est en base
+   * Retourne un boolean si l'élément id est en base
    * @param id
    * @return T
    */

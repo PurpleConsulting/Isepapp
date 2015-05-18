@@ -7,8 +7,13 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import org.purple.bean.Group;
 import org.purple.bean.Page;
+import org.purple.bean.User;
+import org.purple.constant.Bdd;
+import org.purple.model.DaoGroups;
 
 /**
  * Servlet implementation class Crossmark
@@ -16,33 +21,67 @@ import org.purple.bean.Page;
 @WebServlet("/Crossmark")
 public class Crossmark extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public Crossmark() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#HttpServlet()
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public Crossmark() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void doGet(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		Page p = new Page();
 		p.setContent("views-performances/crossmark.jsp");
 		p.setCss("crossmark.css");
-//		p.setTitle("");
+		// p.setTitle("");
+
+		// Create instance Dao
+		DaoGroups dgp = new DaoGroups(Bdd.getCo());
+
+		// Display group name
+		HttpSession s = request.getSession();
+		User u = (User) s.getAttribute("user");
+
+		String str = request.getParameter("string"); //"G5A";
+		if (str != null) {
+			DaoGroups dgroup = new DaoGroups(Bdd.getCo());
+
+			Group g = new Group();
+
+			String[] name = null;
+
+			if (g != null) {
+				str = str.trim();
+				g = dgroup.select(str);
+				dgroup.completeMemebers(g);
+				name = new String[g.getMembers().size()];
+				int i = 0;
+				for (User us : g.getMembers()) {
+					name[i] = us.getFirstName() + " ";
+					i++;
+				}
+			}
+			request.setAttribute("nom", name);
+		}
+
 		request.setAttribute("pages", p);
 		this.getServletContext().getRequestDispatcher("/template.jsp")
-		.forward(request, response);
+				.forward(request, response);
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 	}
 

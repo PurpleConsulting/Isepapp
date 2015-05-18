@@ -8,7 +8,7 @@ public class Page {
 	public Page() {
 		this.css = new ArrayList<String>();
 		this.js = new ArrayList<String>();
-		this.content="";
+		this.content = "";
 		this.title = "ISEP - APP";
 	}
 
@@ -29,7 +29,7 @@ public class Page {
 	public void setContent(String content) {
 		this.content = content;
 	}
-	
+
 	public String getTitle() {
 		return title;
 	}
