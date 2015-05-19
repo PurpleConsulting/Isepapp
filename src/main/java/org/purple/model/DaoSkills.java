@@ -1,9 +1,15 @@
 package org.purple.model;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+
+import org.purple.bean.Group;
 import org.purple.bean.Skill;
+import org.purple.bean.Skills;
+import org.purple.bean.Sub_skill;
+import org.purple.bean.User;
 import org.purple.constant.Bdd;
 
 public class DaoSkills extends Dao<Skill>{
@@ -30,6 +36,43 @@ public class DaoSkills extends Dao<Skill>{
 	public boolean update(Skill obj) {
 		// TODO Auto-generated method stub
 		return false;
+	}
+	
+	//Function which select all skills in table Skills
+	public Skills[] selectAllValues (){
+		Skills[] skills = null;
+		String q = "SELECT id,title, points "
+				+ "FROM `Values` "
+				+ "ORDER BY points";
+		
+		try{
+			PreparedStatement prestmt = this.connect.prepareStatement(q);
+			ResultSet cursor = prestmt.executeQuery();
+			
+			int i = 0;
+			
+			if(!cursor.next()) return skills;
+			if (cursor.last()) {
+				skills = new Skills[cursor.getRow()];
+				cursor.beforeFirst(); 
+			}
+			
+			while(cursor.next()){
+				Skills v = new Skills();
+				v.setId(cursor.getInt(1));
+				v.setTitle(cursor.getString(2));
+				v.setSubtitle(cursor.getString(3));
+				skills[i] = v;
+				i = i + 1;
+			}
+			
+		
+		}catch (SQLException e){
+			// TODO Auto-generated catch block
+			skills = null;
+			e.printStackTrace();
+		}
+		return skills;
 	}
 
 	@Override
@@ -64,4 +107,61 @@ public class DaoSkills extends Dao<Skill>{
 		return skills;
 	}
 
+
+
+	public boolean find(String id) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+	
+	public Skill[] selectAllSkills(){
+		Skill[] skills = null;
+		String q = "SELECT title, sub_title, id FROM Skills ORDER BY id";
+		
+		try {
+			PreparedStatement prestmt = this.connect.prepareStatement(q);
+			ResultSet cursor = prestmt.executeQuery();
+			if (cursor.last()) {
+				skills = new Skill[cursor.getRow()];
+				cursor.beforeFirst(); 
+			}
+			int i = 0;
+			while(cursor.next()){
+				Skill s = new Skill();
+				s.setTitle(cursor.getString(1));
+				s.setSub_title(cursor.getString(2));
+				s.setId(cursor.getInt(3));
+				skills[i] = s;
+				i++;
+			}
+			cursor.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			skills = null;
+			e.printStackTrace();
+		}
+		return skills;
+	}
+
+
+	public int count(int id) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+	
+	public void completeSub_skills(Skill s){
+        String q = "SELECT Sub_skills.id, Sub_skills.id_skills, Sub_skills.title"
+        + " FROM APPDB.Sub_skills INNER JOIN APPDB.Skills "
+        + " ON Skills.id = Sub_skills.id_skills WHERE Skills.id = "+ Integer.toString(s.getId()) + ";";
+        try{
+            ResultSet cursor = this.connect.createStatement().executeQuery(q);
+            while(cursor.next()){
+                Sub_skill ss = new Sub_skill(cursor.getInt(1), cursor.getInt(2), cursor.getString(3));
+                s.setSub_skills(ss);
+            }
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+    }
 }
