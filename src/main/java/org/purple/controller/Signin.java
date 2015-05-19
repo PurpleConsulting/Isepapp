@@ -58,7 +58,11 @@ public class Signin extends HttpServlet {
 			HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 
+		/**
+		 * AJAX HANDLER PART
+		 */
 		if (request.getParameter("Ajaxpseudo") != null){
+			
 			Boolean res = false;
 			DaoUsers u = new DaoUsers(Bdd.getCo());
 			String param = request.getParameter("Ajaxpseudo");
@@ -70,14 +74,16 @@ public class Signin extends HttpServlet {
 			js.put("find", res.toString());
 			result.put("result", js);
 			response.getWriter().write(result.toString());
-			
+		
+			/**
+			 * AJAX HANDLER END
+			 */
 		} else if (request.getParameter("pseudo") == null){
 			Page p = new Page();
 			p.setWarning(true);
 			p.setWarningMessage("Vos identifiants n'ont pas été correctement récupérés. Veuillez vous connecter à nouveau.");
 			p.setTitle("ISEP / APP - Connection");
-			this.getServletContext().getRequestDispatcher("/jsp/signin.jsp")
-					.forward(request, response);
+			this.getServletContext().getRequestDispatcher("/jsp/signin.jsp").forward(request, response);
 
 		} else {
 			String url = "";
@@ -85,26 +91,27 @@ public class Signin extends HttpServlet {
 			String pseudo = request.getParameter("pseudo");
 			User user = u.select(pseudo);
 			
-			if(user != null){
+			if(user.getId() !=  0){
 				Page p = new Page();
 				p.setTitle("ISEP / APP - Home");
 				p.setContent("home.jsp");
 				url = "/template.jsp";
 				request.getSession(true).setAttribute("user", user);
+				request.setAttribute("pages", p);
+				response.sendRedirect("/Isepapp/Home");
 			} else {
 				Page p = new Page();
 				p.setTitle("ISEP / APP - Connection");
 				p.setError(true);
 				p.setErrorMessage("Un problème est survenu lors de l'établissement de la connection. "
 						+ "Pour toute récupération de mot de passe veuillez vous rapprocher de l'administration de l'ISEP.");
-				request.setAttribute("pages", p);
-				url = "/jsp/signin.jsp";
 				
+				url = "/jsp/signin.jsp";
+				request.setAttribute("pages", p);
+				this.getServletContext().getRequestDispatcher(url).forward(request, response);
 			}
 	
 			u.close();
-			this.getServletContext().getRequestDispatcher(url)
-					.forward(request, response);
 		}
 	}
 }

@@ -121,14 +121,14 @@ public class CsvReader {
 		
 		
 		Connection connect = Bdd.getSecureCo();
-		String q = "INSERT INTO `APPDB`.`Users` (`id`, `pseudo`, `id_group`, `promo`,"
+		String q = "INSERT INTO `APPDB`.`Users` (`isep_no`, `pseudo`, `id_group`, `promo`,"
 				+ " `last_name`, `firts_name`, `mail`,"
 				+ " `password`, `add_date`, `id_respo`,`id_post`, `tel)"
 				+ "  VALUES (?,?,?,?,?,?,?,?,?,?,?,?); ";
 		
-		String q2 = "INSERT INTO `APPDB`.`Users` (`id`, `pseudo`, `id_group`, `promo`,"
+		String q2 = "INSERT INTO `APPDB`.`Users` (`isep_no`, `pseudo`, `id_group`, `promo`,"
 				+ " `last_name`, `first_name`, `mail`,"
-				+ " `password`, `add_date`, `id_respo`,`id_post`, `tel`)"
+				+ " `password`, `add_date`, `id_post`, `tel`)"
 				+ "  VALUES ("+ line.get(2) +","
 				+ " \""+ line.get(4) +"\","
 			    + " "+ gr +","
@@ -138,7 +138,6 @@ public class CsvReader {
 			    + " \""+ line.get(5) +"\","
 			    + " \"password\","
 			    + " CURDATE(),"
-			    + " 0,"
 			    + " 4,"
 			    + " \"7778880690\"); ";
 		try {

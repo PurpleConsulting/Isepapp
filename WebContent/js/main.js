@@ -5,6 +5,7 @@
  $(document).ready(function(e) {
 	 
 	// -- fixed nav bar
+	 
     $(window).scroll(function () {
         if ($(window).scrollTop() > '160') {
             $('#navmain').addClass('navbar-fixed-top');
@@ -14,13 +15,14 @@
             //$('#navmain').addClass('navbar-static-top');     
         }
     });
-    
-
     $(document).on("mouseenter mouseleave", "div.tt-suggestion.tt-selectable",function(){
     	$(".tt-cursor").removeClass("tt-cursor");
     	$(this).toggleClass("tt-cursor");
     });
     
+    
+    
+    // -- Search Bar
  	
 	$.post("Search", {
 		query : "autocomplete",

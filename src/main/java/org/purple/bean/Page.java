@@ -13,10 +13,14 @@ public class Page {
 
 	private String title;
 	private boolean error;
-	private String errorMessage;
 	private boolean warning;
+	private boolean success;
+	private boolean info;
+	private String errorMessage;
 	private String warningMessage;
+	private String successMessage;
 	private String infoMessage;
+
 	private ArrayList<String> css;
 	private ArrayList<String> js;
 	private String content;
@@ -97,4 +101,31 @@ public class Page {
 		this.infoMessage = infoMessage;
 	}
 
+	public boolean getSuccess() {
+		return success;
+	}
+
+	public void setSuccess(boolean success) {
+		this.success = success;
+	}
+
+	public String getSuccessMessage() {
+		return successMessage;
+	}
+
+	public void setSuccessMessage(String successMessage) {
+		this.successMessage = successMessage;
+	}
+	
+	public boolean getInfo() {
+		return info;
+	}
+
+	public void setInfo(boolean info) {
+		this.info = info;
+	}
+	
+	
+
 }
+

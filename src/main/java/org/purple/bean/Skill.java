@@ -4,10 +4,12 @@ import java.util.ArrayList;
 
 public class Skill {
 
-		private String title;
-		private String sub_title;
+		private String title = "null";
+		private String sub_title = "null";
 		private int id;
 		private ArrayList<Sub_skill> sub_skills;
+		private String title = "null";
+
 		
 		public Skill(){
 			this.sub_skills = new ArrayList<Sub_skill>();

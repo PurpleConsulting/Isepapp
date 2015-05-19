@@ -14,7 +14,6 @@ public class Bdd {
  * 
  */
 
-
 	//public static final String BDDHOST = "172.16.179.5";
 	
 	public static final String BDDHOST = "ns370799.ip-91-121-193.eu";
@@ -56,7 +55,7 @@ public class Bdd {
 		return co;
 	}
 	
-	public static final ResultSet exec(Connection co, String query) throws NullPointerException{
+	public static final ResultSet exec(Connection co, String query){
 		ResultSet rs = null;
 		Statement stmt = null;
 		try {
@@ -70,7 +69,7 @@ public class Bdd {
 		return rs;
 	}
 	
-	public static final ResultSet prepareExec(Connection co, String query, String[] params) throws NullPointerException{
+	public static final ResultSet prepareExec(Connection co, String query, String[] params){
 		ResultSet rs = null;
 		PreparedStatement prestmt = null;
 		try {
@@ -86,6 +85,24 @@ public class Bdd {
 			e.printStackTrace();
 		}	
 		return rs;
+	}
+	
+	public static final int preparePerform(Connection co, String query, String[] params){
+		PreparedStatement prestmt = null;
+		int change = 0;
+		try {
+			prestmt = co.prepareStatement(query);
+			int i = 0;
+			for(String p : params){
+				i++; prestmt.setString(i,p);
+			}
+			change = prestmt.executeUpdate();
+			//prestmt.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}	
+		return change;
 	}
 	
 	public static final String[] rsToStringTab(ResultSet rs){

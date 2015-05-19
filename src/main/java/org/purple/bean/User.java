@@ -2,15 +2,14 @@ package org.purple.bean;
 
 public class User {
 	
-		private int id;
-		private String pseudo;
-		private String firstName;
-		private String lastName;
-		private int status;
-		private String position;
-		private String group;
-		private String mail;
-		private String tel;
+		private int id = 0;
+		private String pseudo = "null";
+		private String firstName = "null";
+		private String lastName = "null";
+		private String position = "null";
+		private String group = "null";
+		private String mail = "null";
+		private String tel = "null";
 		
 		public User(){
 			
@@ -23,6 +22,7 @@ public class User {
 		public User(int id){
 			
 		}
+
 		
 		public User(int id, String pseudo, String firtstName, String lastName, String position){
 			this.setId(id);
@@ -31,7 +31,15 @@ public class User {
 			this.setLastName(lastName);
 			this.setPosition(position);
 		}
-
+		
+		public User(String firtstName, String lastName, String pseudo, String email,  String position){
+			this.setPseudo(pseudo);
+			this.setFirstName(firtstName);
+			this.setLastName(lastName);
+			this.setPosition(position);
+			this.setMail(email);
+		}
+		
 		public int getId() {
 			return id;
 		}
@@ -55,12 +63,6 @@ public class User {
 		}
 		public void setLastName(String lastName) {
 			this.lastName = lastName;
-		}
-		public int getStatus() {
-			return status;
-		}
-		public void setStatus(int status) {
-			this.status = status;
 		}
 		public String getPosition() {
 			return position;

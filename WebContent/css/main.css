@@ -11,14 +11,33 @@ header{
 	background-color: #246482;
 	height: 160px;
 }
-header h1{
-	color: white;
-}
-header h1, header span{
+header img{
 	display: inline-block;
-	margin-right: 20px;
-	margin-top: 20px;
+	vertical-align: top;
+	margin-top:5px;
+	height: 150px;
 }
+@media only screen and (max-width:675px) {
+ header img {
+	width: 100%
+ }
+}
+span.appname{
+	opacity: 1;
+}
+header div.title{
+	color: #FFFFFF;
+}
+
+header h1, header h3{
+	color: white;
+	margin-top: 0px;
+}
+header h3{
+ opacity: 0.7;
+}
+
+
 span.fa{
 	vertical-align: middle;
 }

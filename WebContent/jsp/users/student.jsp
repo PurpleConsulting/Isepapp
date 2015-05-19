@@ -5,7 +5,7 @@
 <h1 class="col-md-offset-1 col-md-10 col-sm-offset-1 col-sm-10 col-xs-offset-1 col-xs-10">
 	Fiche étudiant
 	<small> - <c:out value="${student.getLastName()} ${student.getFirstName()}"></c:out></small>
-	<a class="btn btn-default" href="#" role="button"><span class="fa fa-pencil"> </span>  Editer</a>
+	<a class="btn btn-default link-dialog-std" href="#" role="button"><span class="fa fa-pencil"> </span>  Editer</a>
 </h1>
 <div class="row">	
 	<div class="col-md-offset-1 col-md-10 col-sm-offset-1 col-sm-10 col-xs-offset-1 col-xs-10 idcard">
@@ -45,7 +45,7 @@
 		    <li role="presentation" class="active"><a href="#tab1" aria-controls="tab1" role="tab" data-toggle="tab">Global</a></li>
 			<c:forEach var="skill" items="${skills}" varStatus="status">
 				<li role="presentation">
-					<a href="#tab${status.count + 1}" aria-controls="tab3" role="tab" data-toggle="tab"><c:out value="${skill.getTitle()}"></c:out></a>
+					<a href="#tab${status.count + 1}" aria-controls="tab${status.count + 1}" role="tab" data-toggle="tab"><c:out value="${skill.getTitle()}"></c:out></a>
 				</li>
 			</c:forEach>	
 		    </ul>

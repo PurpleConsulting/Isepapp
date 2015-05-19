@@ -29,7 +29,7 @@ public abstract class Dao<T> {
   * @param obj
   * @return boolean
   */
-  public abstract boolean update(T obj);
+  public abstract boolean update(T obj, String where);
 
   /**
   * Méthode de recherche des informations

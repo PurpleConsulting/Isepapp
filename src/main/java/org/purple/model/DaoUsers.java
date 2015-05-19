@@ -6,7 +6,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import org.purple.bean.Group;
 import org.purple.bean.User;
+import org.purple.constant.Bdd;
 
 /*** Purple import ***/
 
@@ -43,21 +45,37 @@ public class DaoUsers extends Dao<User> {
 	
 
 	@Override
-	public boolean create(User obj) {
+	public boolean create(User usr) {
 		// TODO Auto-generated method stub
-		return false;
+		boolean res = false;
+		String[] params = { usr.getPseudo(),
+							usr.getFirstName(), usr.getLastName(),
+							usr.getMail(), usr.getPosition(), usr.getGroup()};
+		String q = "INSERT INTO Users (pseudo, first_name, last_name, mail, add_date, id_post, id_group)"
+				+ " VALUES (?, ?, ?, ?, CURDATE(),"
+				+ " (SELECT Positions.id FROM Positions WHERE Positions.title = ?),"
+				+ " (SELECT Groups.id FROM Groups WHERE Groups.`name` = ?))";
+		
+		int affected = Bdd.preparePerform(this.connect, q, params);
+		if(affected == 1) res = true;
+		return res;
 	}
 
 
 	@Override
-	public boolean delete(User obj) {
+	public boolean delete(User usr) {
 		// TODO Auto-generated method stub
-		return false;
+		boolean res = false;
+		String[] params = { Integer.toString(usr.getId())};
+		String q = "DELETE FROM Users WHERE Users.`id` = ?;" ;
+		int affected = Bdd.preparePerform(this.connect, q, params);
+		if(affected == 1) res = true;
+		return res;
 	}
 
 
 	@Override
-	public boolean update(User obj) {
+	public boolean update(User obj, String where) {
 		// TODO Auto-generated method stub
 		return false;
 	}
@@ -66,9 +84,9 @@ public class DaoUsers extends Dao<User> {
 	@Override
 	public User select(String pseudo) {/* FAKE FUNCTION, FIXING BUG */
 		// TODO Auto-generated method stub
-		User u = null;
+		User u = new User();
 		String q = "SELECT Users.id,"
-				+ " Users.last_name, Users.first_name,"
+				+ " Users.first_name, Users.last_name,"
 				+ " Positions.title, Users.pseudo,"
 				+ " Users.tel, Users.mail"
 				+ " FROM Users INNER JOIN Positions"
@@ -79,21 +97,46 @@ public class DaoUsers extends Dao<User> {
 			prestmt.setString(1,pseudo);
 			ResultSet currsor = prestmt.executeQuery();
 			if(!currsor.next()) return u;
-			u = new User();
-			u.setId(currsor.getInt(1));
-			u.setFirstName(currsor.getString(2));
-			u.setLastName(currsor.getString(3));
-			u.setPosition(currsor.getString(4));
-			u.setPseudo(currsor.getString(5));
+			u = new User(currsor.getInt(1), currsor.getString(5), currsor.getString(2), currsor.getString(3), currsor.getString(4));
 			u.setTel(currsor.getString(6));
 			u.setMail(currsor.getString(7));
 			prestmt.close();
 		}catch (SQLException e){
 			// TODO Auto-generated catch block
-			u = null;
+			u = new User();
 			e.printStackTrace();
 		}
 		return u;
+	}
+	
+	public User[] selectAllTutor() {
+		User[] us = new User[0]; 
+		String q = "SELECT Users.id,"
+				+ " Users.first_name, Users.last_name,"
+				+ " Positions.title, Users.pseudo,"
+				+ " Users.tel, Users.mail"
+				+ " FROM Users INNER JOIN Positions"
+				+ " on Users.id_post = Positions.id"
+				+ " WHERE (Users.id_post = 3 OR Users.id_post = 2) ";
+		ResultSet currsor = Bdd.exec(this.connect, q);
+		try {
+			if(!currsor.next()) return new User[0];
+			if (currsor.last()) {
+				us = new User[currsor.getRow()];
+				currsor.beforeFirst(); 
+			}
+			int i = 0;
+			while(currsor.next()){
+				User u = new User(currsor.getInt(1), currsor.getString(5), currsor.getString(2), currsor.getString(3), currsor.getString(4));
+				us[i] = u;
+				i++;
+			}
+			currsor.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return us;
 	}
 	
 	public User[] selectBy(String field, String value) {
@@ -113,8 +156,9 @@ public class DaoUsers extends Dao<User> {
 				+ "WHERE Users.id = " + Integer.toString(u.getId());
 		try {
 			ResultSet currsor = this.connect.createStatement().executeQuery(q);
-			currsor.next();
-			u.setGroup(currsor.getString(1));
+			if(currsor.next()){
+				u.setGroup(currsor.getString(1));
+			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 				e.printStackTrace();

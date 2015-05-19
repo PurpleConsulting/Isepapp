@@ -27,7 +27,7 @@ public class DaoMarks extends Dao<Mark>{
 	}
 
 	@Override
-	public boolean update(Mark obj) {
+	public boolean update(Mark obj, String where) {
 		// TODO Auto-generated method stub
 		return false;
 	}
@@ -35,7 +35,7 @@ public class DaoMarks extends Dao<Mark>{
 	@Override
 	public Mark select(String id) {
 		// TODO Auto-generated method stub
-		Mark m = null;
+		Mark m = new Mark();
 		String q = "SELECT Users.pseudo, `Values`.points, `Values`.title, Skills.title, Sub_skills.title FROM APPDB.Marks "
 				+ "INNER JOIN APPDB.Users ON Users.id = Marks.id_student "
 				+ "INNER JOIN APPDB.`Values` ON `Values`.id = Marks.id_value "
@@ -76,8 +76,8 @@ public class DaoMarks extends Dao<Mark>{
 			prestmt.close();
 		}catch (SQLException e){
 			// TODO Auto-generated catch block
-			allMarks = null;
 			e.printStackTrace();
+			return allMarks;
 		}
 		return allMarks;
 	}

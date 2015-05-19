@@ -33,7 +33,7 @@ public class DaoSkills extends Dao<Skill>{
 	}
 
 	@Override
-	public boolean update(Skill obj) {
+	public boolean update(Skill obj, String where) {
 		// TODO Auto-generated method stub
 		return false;
 	}
@@ -82,7 +82,7 @@ public class DaoSkills extends Dao<Skill>{
 	}
 	
 	public static Skill[] allSkill(){
-		Skill[] skills = null;
+		Skill[] skills = new Skill[0];
 		//Connection co = Bdd.getCo();
 		Connection co = Bdd.getSecureCo();
 		String q = "SELECT title FROM Skills";
@@ -101,7 +101,6 @@ public class DaoSkills extends Dao<Skill>{
 			co.close();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
-			skills = null;
 			e.printStackTrace();
 		}
 		return skills;

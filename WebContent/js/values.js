@@ -5,7 +5,7 @@ $(document).ready(function(){
   $("form.form-inline input").attr("disabled", true);
 
   $('#modaladd').on('shown.bs.modal', function () {
-    $('#myInput').focus()
+    $('#newtitle').focus();
   });
  
   $('#modifyValue').click(function(){

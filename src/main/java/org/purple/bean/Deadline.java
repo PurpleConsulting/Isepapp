@@ -7,11 +7,11 @@ import org.purple.constant.Isep;
 
 public class Deadline {
 
-		private int id; 
-		private String description;
-		private Boolean status;
-		private String group;
-		private DateTime dateLimit;
+		private int id = 0; 
+		private String description = "null";
+		private String group = "null";
+		private Boolean status = false;
+		private DateTime dateLimit = new DateTime(2000, 01,01, 0,0,0);
 		private DateTime deliveryDate = new DateTime(2000, 01,01, 0,0,0);
 		private Boolean completed = false;
 		

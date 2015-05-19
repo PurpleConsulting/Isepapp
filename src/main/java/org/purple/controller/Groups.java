@@ -25,6 +25,7 @@ import org.purple.model.DaoGroups;
 import org.purple.model.DaoMarks;
 import org.purple.model.DaoMissings;
 import org.purple.model.DaoSkills;
+import org.purple.model.DaoValues;
 
 
 /**
@@ -92,6 +93,7 @@ public class Groups extends HttpServlet {
 					Deadline[] deadlines = ddl.selectByGroup(group.getName());
 					
 					// -- Retrieve the group average
+					double maxMark = DaoValues.fetchMax();
 					Skill[] skills = DaoSkills.allSkill();// -- get all the skill for this session
 					Average grpAverage = new Average("Moyenne: "+group.getName(), Isep.LANDMARK);
 					for(User u : group.getMembers()){
@@ -99,7 +101,7 @@ public class Groups extends HttpServlet {
 						Average stdAverage = new Average(u.getPseudo(), Isep.LANDMARK);
 						ArrayList<Mark> marks = dmk.selectByStudent(Integer.toString(u.getId()));
 						for(Skill skill : skills){
-							Average skillAvg = new Average(skill.getTitle(), 4.0);
+							Average skillAvg = new Average(skill.getTitle(), maxMark);
 							for(Mark m : marks){
 								if(skillAvg.getTitle().equals(m.getSkill())){
 									skillAvg.push(m);

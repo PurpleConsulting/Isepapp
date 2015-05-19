@@ -12,7 +12,8 @@ div.values{
 	border-radius: 6px;
 	padding: 20px;
 	background-color: transparent;
-	padding: 40px;
+	padding: 20px;
+	padding-top:0px;
 }
 
 div.line{
@@ -25,7 +26,7 @@ div.line a.add:hover{
 	background-color: #DFF0D9;
 }
 
-div input.form-control{
+form.form-inline div input.form-control{
 	text-align: center;
 }
 

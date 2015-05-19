@@ -3,16 +3,16 @@ package org.purple.bean;
 import java.util.ArrayList;
 
 public class Group {
-    
-	private String name;
-	private String _class;
-	private int id;
-	private String tutor;
-	private ArrayList<User> members;
+	
+	private int id = 0;
+	private String name = "null";
+	private String _class = "null";
+	private String tutor = "null";
+	private ArrayList<User> members = new ArrayList<User>();
 
 	
 	public Group(){
-		this.members = new ArrayList<User>();
+		
 	}
 
 	public Group(int id, String name, String _class) {
@@ -21,7 +21,11 @@ public class Group {
 		this.setName(name);
 		this.set_class(_class);
 		this.setTutor(tutor);
-		this.members = new ArrayList<User>();
+	}
+	
+	public Group(String name, String tutor){
+		this.setName(name);
+		this.setTutor(tutor);
 	}
 
 	

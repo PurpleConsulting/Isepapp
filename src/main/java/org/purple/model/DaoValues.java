@@ -15,8 +15,11 @@ import java.sql.SQLException;
 
 
 
+
+
 import org.purple.bean.User;
 import org.purple.bean.Value;
+import org.purple.constant.Bdd;
 
 /*** Purple import ***/
 
@@ -60,7 +63,7 @@ public class DaoValues extends Dao<Value> {
 	}
 
 	@Override
-	public boolean update(Value obj) {
+	public boolean update(Value obj, String where) {
 		// TODO Auto-generated method stub
 		return false;
 	}
@@ -72,7 +75,7 @@ public class DaoValues extends Dao<Value> {
 	}
 	
 	public Value[] selectAllValues (){
-		Value[] val=null;
+		Value[] val = new Value[0];
 		String q = "SELECT id,title, points "
 				+ "FROM `Values` "
 				+ "ORDER BY id";		
@@ -98,7 +101,6 @@ public class DaoValues extends Dao<Value> {
 			}
 		}catch (SQLException e){
 			// TODO Auto-generated catch block
-			val = null;
 			e.printStackTrace();
 		}
 		return val;
@@ -132,23 +134,37 @@ public class DaoValues extends Dao<Value> {
 	}
 
 	
- public boolean deleteId(int id){
-	 boolean r=false;
-	 String q = "DELETE FROM `Values`"
-				+ "WHERE id=?";	
-		try{
-			PreparedStatement prestmt = this.connect.prepareStatement(q);
-			prestmt.setInt(1, id);
-			prestmt.execute();
-			
-			r=true;
-			
-		}catch (SQLException e){
+	 public boolean deleteId(int id){
+		 boolean r = false;
+		 String q = "DELETE FROM `Values`"
+					+ "WHERE id=?";	
+			try{
+				PreparedStatement prestmt = this.connect.prepareStatement(q);
+				prestmt.setInt(1, id);
+				prestmt.execute();
+				
+				r=true;
+				
+			}catch (SQLException e){
+				// TODO Auto-generated catch block
+				r = false;
+				e.printStackTrace();
+			}
+			return r;
+		}
+	 
+	 public static double fetchMax(){
+		 Connection co = Bdd.getCo();
+		 double res = 1.0;
+		 String q = "SELECT MAX(`Values`.points) FROM `Values` ;";
+		 ResultSet currsor = Bdd.exec(co, q);
+		 try {
+			if(currsor.next()){ res = currsor.getDouble(1);}
+		} catch (SQLException e) {
 			// TODO Auto-generated catch block
-			r = false;
 			e.printStackTrace();
 		}
-		return r;
-	}
+		 return res;
+	 }
  
  }

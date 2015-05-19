@@ -30,7 +30,7 @@ public class DaoDeadline extends Dao<Deadline>{
 	}
 
 	@Override
-	public boolean update(Deadline obj) {
+	public boolean update(Deadline obj, String where) {
 		// TODO Auto-generated method stub
 		return false;
 	}
@@ -43,7 +43,7 @@ public class DaoDeadline extends Dao<Deadline>{
 	
 	public Deadline[] selectByGroup(String name) {
 		// TODO Auto-generated method stub
-		Deadline[] dls = null;
+		Deadline[] dls = new Deadline[0];
 		String q = "SELECT Deadlines.id, Deadlines.description, DATE_FORMAT(Deadlines.date_limit, '"+ Isep.MYSQL_UTC +"'), Deadlines.`status`, Groups.`name`"
 				+ " FROM Deadlines INNER JOIN Groups ON Deadlines.id_group = Groups.id"
 				+ " WHERE Groups.`name` = ? ;";
@@ -71,7 +71,7 @@ public class DaoDeadline extends Dao<Deadline>{
 			currsor.close();
 			prestmt.close();
 		} catch(SQLException e) {
-			
+			e.printStackTrace();
 		}
 		
 		return dls;

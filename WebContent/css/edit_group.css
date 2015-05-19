@@ -1,0 +1,57 @@
+@CHARSET "UTF-8";
+div.form-group input, div.bootstrap-select button{
+	margin-top: 2px;
+	margin-bottom: 2px;
+}
+
+ul span.fa, h1 span.fa{
+	cursor: pointer;
+	transition: 0.4s;
+}
+ul span.fa{	
+	margin-right:2%;
+	/*float: right;*/
+}
+
+ul li.std span.fa{
+	opacity: 0.4;
+	color: #A94442;
+	
+}
+h1 span.fa{
+	vertical-align: text-bottom;
+}
+h1 span.fa:hover{
+	color: #A94442;
+	text-shadow: 2px 2px 2px #F2DEDE;
+}
+ul li.std span.fa:hover{
+	opacity: 1;
+	text-shadow: 0 0 50px #F2DEDE;
+}
+
+div.form-group input, div.bootstrap-select button{
+	margin-top: 0px;
+	margin-bottom: 0px;
+}
+
+a.chameleon, a.chameleon:hover, a.chameleon:active{
+	color: inherit;
+	text-decoration: none;
+}
+
+
+.bootbox.modal .modal-header{
+	background-color: #D9534F;
+	color: #FFFFFF;
+	border-radius: 4px 4px 0px 0px;
+}
+
+.bootbox.modal .modal-header button{
+	opacity: 0.8;
+	color: #FFFFFF;
+}
+
+.bootbox.modal span.fa-exclamation-triangle{
+	color: #D9534F;
+}
