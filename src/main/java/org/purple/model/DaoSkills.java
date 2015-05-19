@@ -7,6 +7,7 @@ import java.sql.SQLException;
 
 import org.purple.bean.Group;
 import org.purple.bean.Skill;
+import org.purple.bean.Skills;
 import org.purple.bean.Sub_skill;
 import org.purple.bean.User;
 import org.purple.constant.Bdd;
@@ -104,6 +105,7 @@ public class DaoSkills extends Dao<Skill>{
 			e.printStackTrace();
 		}
 		return skills;
+	}
 
 
 
@@ -139,6 +141,7 @@ public class DaoSkills extends Dao<Skill>{
 			e.printStackTrace();
 		}
 		return skills;
+	}
 
 
 	public int count(int id) {
