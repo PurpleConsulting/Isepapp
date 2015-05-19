@@ -36,23 +36,30 @@
 	
 		 <!-- Tab panes -->
 		  <div class="tab-content">
-		  	<form action="Controls" method="post">
-		  		<c:forEach var="skill_sub_title" items="${skills}" varStatus="status">
-			    	<div role="tabpanel" class="tab-pane" id="tab${status.count}">
-			    		<h3>
-			    			<c:out value='${status.count} - ${skill_sub_title.getSub_title()}'></c:out>
-			    		</h3>
-				  		<fieldset>
-				  			<legend>
-				  				
-				  				Test
-				  			</legend>
-				  		</fieldset>
-				  	</div>
+		  		<c:forEach var="skill" items="${skills}" varStatus="status">
+		  			<form action= "Controls" method="post" id="form${skill.getId()}">
+				    	<div role="tabpanel" class='tab-pane ${status.count==1 ? "active":""}' id="tab${status.count}">
+				    		<h3>
+				    			<c:out value='${status.count} - ${skill.getSub_title()}'></c:out>
+				    		</h3>
+				    		<c:forEach var="sub_skill" items="${skill.getSub_skills()}" varStatus="status">
+						  		<hr /><c:out value='${sub_skill.getTitle()} : '></c:out>
+							  	<div class="radio" class="line">
+							  		<c:forEach var="value" items="${values}" varStatus="status">
+									  <label>
+									    <input type="radio" name='${sub_skill.getId()}' id="value${status.count}" value='${value.getId()}'  ${status.count==1 ? "checked":""}>
+									    <c:out value='${value.getTitle()}'></c:out>
+									  </label>
+									  <input type="hidden" value='${sub_skill.getId()}' class="val">
+									  
+									</c:forEach>
+									<c:set var="val"  value="${skill.getId()}"/>
+								</div>
+						  	</c:forEach>
+					  	</div>
+					  	<button class="btn btn-default btn-test" value="${val}">Bouton</button>
+					</form>
 				</c:forEach>
-		  	</form>
-			    <div role="tabpanel" class="tab-pane active" id="${skill}">
-			    </div>
 		  </div>
 	</div>
 </div>

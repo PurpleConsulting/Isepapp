@@ -1,13 +1,16 @@
 package org.purple.bean;
 
+import java.util.ArrayList;
+
 public class Skill {
 
 		private String title;
 		private String sub_title;
 		private int id;
+		private ArrayList<Sub_skill> sub_skills;
 		
 		public Skill(){
-			
+			this.sub_skills = new ArrayList<Sub_skill>();
 		}
 		
 		public Skill(String title){
@@ -35,5 +38,13 @@ public class Skill {
 
 		public void setId(int id) {
 			this.id = id;
+		}
+		
+		public ArrayList<Sub_skill> getSub_skills() {
+			return sub_skills;
+		}
+		
+		public void setSub_skills(Sub_skill sub_skills) {
+			this.sub_skills.add(sub_skills);
 		}
 }

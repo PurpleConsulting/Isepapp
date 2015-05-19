@@ -5,7 +5,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import org.purple.bean.Group;
 import org.purple.bean.Skill;
+import org.purple.bean.Sub_skill;
+import org.purple.bean.User;
 import org.purple.constant.Bdd;
 
 public class DaoSkills extends Dao<Skill>{
@@ -142,4 +145,20 @@ public class DaoSkills extends Dao<Skill>{
 		// TODO Auto-generated method stub
 		return 0;
 	}
+	
+	public void completeSub_skills(Skill s){
+        String q = "SELECT Sub_skills.id, Sub_skills.id_skills, Sub_skills.title"
+        + " FROM APPDB.Sub_skills INNER JOIN APPDB.Skills "
+        + " ON Skills.id = Sub_skills.id_skills WHERE Skills.id = "+ Integer.toString(s.getId()) + ";";
+        try{
+            ResultSet cursor = this.connect.createStatement().executeQuery(q);
+            while(cursor.next()){
+                Sub_skill ss = new Sub_skill(cursor.getInt(1), cursor.getInt(2), cursor.getString(3));
+                s.setSub_skills(ss);
+            }
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+    }
 }
