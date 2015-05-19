@@ -1,0 +1,35 @@
+@CHARSET "ISO-8859-1";
+
+h1 {
+	color : red;
+	margin-left: 8%;
+}
+
+.deadline {
+	margin-left: 72%;
+	margin-right: 8%;
+	border: 3px red double;
+	padding-left: 1%;
+	font-size: 20px;
+}
+
+.nom {
+	text-align: center;
+	margin-top: 2%;
+	margin-bottom: 2%;
+	padding-left: 1%;
+	font-size: 30px;
+}
+
+#formulaire {
+	border-top: 3px black solid;
+	border-bottom: 3px black solid;
+	margin-left: 8%;
+	margin-right: 8%;
+	padding-top: 1%;
+	padding-bottom: 1%;
+}
+
+body {
+    background-color: rgb(190,190,230); /* Le fond de la page sera noir */
+}
