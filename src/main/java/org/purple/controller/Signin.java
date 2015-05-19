@@ -58,7 +58,11 @@ public class Signin extends HttpServlet {
 			HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 
+		/**
+		 * AJAX HANDLER PART
+		 */
 		if (request.getParameter("Ajaxpseudo") != null){
+			
 			Boolean res = false;
 			DaoUsers u = new DaoUsers(Bdd.getCo());
 			String param = request.getParameter("Ajaxpseudo");
@@ -70,14 +74,16 @@ public class Signin extends HttpServlet {
 			js.put("find", res.toString());
 			result.put("result", js);
 			response.getWriter().write(result.toString());
-			
+		
+			/**
+			 * AJAX HANDLER END
+			 */
 		} else if (request.getParameter("pseudo") == null){
 			Page p = new Page();
 			p.setWarning(true);
 			p.setWarningMessage("Vos identifiants n'ont pas été correctement récupérés. Veuillez vous connecter à nouveau.");
 			p.setTitle("ISEP / APP - Connection");
-			this.getServletContext().getRequestDispatcher("/jsp/signin.jsp")
-					.forward(request, response);
+			this.getServletContext().getRequestDispatcher("/jsp/signin.jsp").forward(request, response);
 
 		} else {
 			String url = "";
@@ -92,6 +98,7 @@ public class Signin extends HttpServlet {
 				url = "/template.jsp";
 				request.getSession(true).setAttribute("user", user);
 				request.setAttribute("pages", p);
+				response.sendRedirect("/Isepapp/Home");
 			} else {
 				Page p = new Page();
 				p.setTitle("ISEP / APP - Connection");
@@ -101,12 +108,10 @@ public class Signin extends HttpServlet {
 				
 				url = "/jsp/signin.jsp";
 				request.setAttribute("pages", p);
+				this.getServletContext().getRequestDispatcher(url).forward(request, response);
 			}
 	
 			u.close();
-			
-			this.getServletContext().getRequestDispatcher(url)
-					.forward(request, response);
 		}
 	}
 }

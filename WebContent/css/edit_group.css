@@ -6,7 +6,7 @@ div.form-group input, div.bootstrap-select button{
 
 ul span.fa, h1 span.fa{
 	cursor: pointer;
-	transition: 0.6s;
+	transition: 0.4s;
 }
 ul span.fa{	
 	margin-right:2%;
@@ -18,9 +18,12 @@ ul li.std span.fa{
 	color: #A94442;
 	
 }
+h1 span.fa{
+	vertical-align: text-bottom;
+}
 h1 span.fa:hover{
 	color: #A94442;
-	text-shadow: 4px 4px 2px #F2DEDE;
+	text-shadow: 2px 2px 2px #F2DEDE;
 }
 ul li.std span.fa:hover{
 	opacity: 1;

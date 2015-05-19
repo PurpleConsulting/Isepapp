@@ -6,7 +6,7 @@
 		Modification du Groupe
 		<small> 
 			- <a class="chameleon" href="Groups?scope=${group.getName()}"><c:out value="${group.getName()}"></c:out></a> - 
-			<span data-delete="${group.getName()}" class="fa fa-trash-o fa-2x link-dialog-grp"></span></small>
+			<span data-delete="${group.getName()}" class="fa fa-trash-o link-dialog-grp"></span></small>
 	</h1>
 </div>
 <c:import url="/jsp/alert.jsp" charEncoding="UTF-8"></c:import>

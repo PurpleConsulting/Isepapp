@@ -173,23 +173,26 @@ public class AlterGroups extends HttpServlet {
 				p.setJs("bootstrap-select.min.js","bootbox.min.js", "edit_group.js");
 				p.setTitle("ISEP / APP - Edition de group");
 				p.setContent("editor/edit_group.jsp");
+				
 			} else if(!Isep.nullOrEmpty(deleteStd, suggestionDeleteStd)){
 				/**
-				 * HERE THE USER WAN TO DELETE A USER FROM THE GROUP.
+				 * HERE THE USER WANT TO DELETE A USER FROM THE GROUP.
 				 * 
 				 */
 				if(deleteStd.equals(suggestionDeleteStd)){
 					User exStudent = du.select(deleteStd);
 					du.addGroup(exStudent);
 					boolean querrySucces = du.delete(exStudent);
+					redirectionGroup = dg.select(exStudent.getGroup());
 					if(querrySucces){
 						p.setSuccess(true);
 						p.setSuccessMessage("la suppréssion de l'étudiant " + exStudent.getFirstName() + " " + exStudent.getLastName() + " à bien été réalisée.");
 					} else{
 						p.setError(true);
 						p.setErrorMessage("Une erreur est survenue lors de la suppréssion de l'étudiant.");
+						redirectionGroup.setId(-1);
 					}
-					redirectionGroup = dg.select(exStudent.getGroup());
+					
 					
 				} else{
 					p.setWarning(true);
@@ -203,16 +206,21 @@ public class AlterGroups extends HttpServlet {
 					
 					
 			}else if(!Isep.nullOrEmpty(deleteGrp, suggestionGroup) && Auth.isRespo(request)){
+				/**
+				 * HERE THE USER WANT TO DELETE A GROUP
+				 */
 				if(deleteGrp.equals(suggestionGroup)){
 					Group exGrp = dg.select(deleteGrp);
 					boolean querrySucces = dg.delete(exGrp);
+					redirectionGroup = dg.select(deleteGrp);
 					if(querrySucces){
 						p.setSuccess(true);
-						p.setSuccessMessage("Le groupe demendé à bien été supprimé.");
+						p.setSuccessMessage("le groupe demendé à bien été supprimé.");
 						p.setCss("bootstrap-select.min.css", "home_respo.css"); 
 						p.setJs("bootstrap-select.min.js","bootbox.min.js", "home_respo.js");
 						p.setTitle("ISEP / APP - Accueil");
 						p.setContent("home/respo.jsp");
+						redirectionGroup.setId(-1); // -- we skip the error, there is no group because we just deleted it 
 					} else{
 						p.setWarning(true);
 						p.setWarningMessage("ce groupe n'a pas peu être supprimé car une erreur c'est produite.");
@@ -234,7 +242,6 @@ public class AlterGroups extends HttpServlet {
 				if(querrySucces){
 					
 					p.setSuccess(true);p.setSuccessMessage("Le groupe " + newGrp +" viens d' être crée. Vous pouvez dès maintenant y ajouter des étudiants.");
-					redirectionGroup = dg.select(newGrp);
 					p.setCss("bootstrap-select.min.css", "edit_group.css"); 
 					p.setJs("bootstrap-select.min.js","bootbox.min.js", "edit_group.js");
 					p.setTitle("ISEP / APP - Edition de group");
@@ -248,12 +255,19 @@ public class AlterGroups extends HttpServlet {
 					p.setContent("home/respo.jsp");
 					
 				}
+				redirectionGroup = dg.select(newGrp);
 				
 			}
 			
 			User[] teachers = du.selectAllTutor(); 		// -- We need to display all tutors
-			dg.completeMemebers(redirectionGroup);
-			dg.completeTutor(redirectionGroup);
+			if(redirectionGroup.getId() == 0){
+				// -- Last verification
+				p.setContent("error/500.jsp"); 
+				p.setTitle("ISEP / APP - Erreur");
+			} else { 
+				dg.completeMemebers(redirectionGroup); 
+				dg.completeTutor(redirectionGroup); 
+			}
 			request.setAttribute("teachers", teachers);
 			request.setAttribute("group", redirectionGroup);
 			
