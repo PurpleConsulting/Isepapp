@@ -5,37 +5,37 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import org.purple.bean.Sub_skill;
+import org.purple.bean.SubSkill;
 
-public class DaoSub_skills extends Dao<Sub_skill>{
+public class DaoSubSkills extends Dao<SubSkill>{
 
-	public DaoSub_skills(Connection co) {
+	public DaoSubSkills(Connection co) {
 		super(co);
 		// TODO Auto-generated constructor stub
 	}
 
 	@Override
-	public boolean create(Sub_skill obj) {
+	public boolean create(SubSkill obj) {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
-	public boolean delete(Sub_skill obj) {
+	public boolean delete(SubSkill obj) {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
-	public boolean update(Sub_skill obj) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public Sub_skill select(String id) {
+	public SubSkill select(String id) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public boolean update(SubSkill obj, String where) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 	
 	/*public Sub_skill[] selectAllSub_skillsBySkillsId(int id_skills){

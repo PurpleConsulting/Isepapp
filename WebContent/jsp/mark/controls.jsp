@@ -40,7 +40,7 @@
 		  			<form action= "Controls" method="post" id="form${skill.getId()}">
 				    	<div role="tabpanel" class='tab-pane ${status.count==1 ? "active":""}' id="tab${status.count}">
 				    		<h3>
-				    			<c:out value='${status.count} - ${skill.getSub_title()}'></c:out>
+				    			<c:out value='${status.count} - ${skill.getSubtitle()}'></c:out>
 				    		</h3>
 				    		<c:forEach var="sub_skill" items="${skill.getSub_skills()}" varStatus="status">
 						  		<hr /><c:out value='${sub_skill.getTitle()} : '></c:out>

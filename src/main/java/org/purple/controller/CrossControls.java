@@ -18,14 +18,14 @@ import org.purple.model.DaoGroups;
 /**
  * Servlet implementation class Crossmark
  */
-@WebServlet("/Crossmark")
-public class Crossmark extends HttpServlet {
+@WebServlet("/CrossControls")
+public class CrossControls extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public Crossmark() {
+	public CrossControls() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -38,7 +38,7 @@ public class Crossmark extends HttpServlet {
 			HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		Page p = new Page();
-		p.setContent("views-performances/crossmark.jsp");
+		p.setContent("mark/cross_controls.jsp");
 		p.setCss("crossmark.css");
 		// p.setTitle("");
 

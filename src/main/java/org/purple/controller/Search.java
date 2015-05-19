@@ -10,7 +10,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.json.JSONObject;
 import org.purple.bean.Page;
-import org.purple.constant.Bdd;
 import org.purple.model.Research;
 
 /**

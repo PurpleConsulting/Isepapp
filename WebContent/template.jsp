@@ -30,7 +30,7 @@
 					</div>
 				</div>
 		</header>
-		<c:import url="jsp/nav_${sessionScope.user.position}.jsp" charEncoding="UTF-8"></c:import>
+		<c:import url="jsp/nav/nav_${sessionScope.user.position}.jsp" charEncoding="UTF-8"></c:import>
 		<div id="content" class="container-fluid content">
 			<c:import url="jsp/${pages.getContent()}" charEncoding="UTF-8"></c:import>
 		</div>

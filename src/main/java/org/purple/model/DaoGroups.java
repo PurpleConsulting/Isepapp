@@ -6,7 +6,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import org.purple.bean.Group;
-import org.purple.bean.Missing;
 import org.purple.bean.User;
 import org.purple.constant.Bdd;
 
@@ -17,24 +16,6 @@ public class DaoGroups extends Dao<Group>{
     public DaoGroups(Connection co) {
         super(co);
         // TODO Auto-generated constructor stub
-    }
-    
-    @Override
-    public boolean create(Group obj) {
-        // TODO Auto-generated method stub
-        return false;
-    }
-    
-    @Override
-    public boolean delete(Group obj) {
-        // TODO Auto-generated method stub
-        return false;
-    }
-    
-    @Override
-    public boolean update(Group obj) {
-        // TODO Auto-generated method stub
-        return false;
     }
 
 

@@ -5,11 +5,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import org.purple.bean.Group;
 import org.purple.bean.Skill;
-import org.purple.bean.Skills;
-import org.purple.bean.Sub_skill;
-import org.purple.bean.User;
+import org.purple.bean.SubSkill;
 import org.purple.constant.Bdd;
 
 public class DaoSkills extends Dao<Skill>{
@@ -39,8 +36,8 @@ public class DaoSkills extends Dao<Skill>{
 	}
 	
 	//Function which select all skills in table Skills
-	public Skills[] selectAllValues (){
-		Skills[] skills = null;
+	public Skill[] selectAllValues (){
+		Skill[] skills = null;
 		String q = "SELECT id,title, points "
 				+ "FROM `Values` "
 				+ "ORDER BY points";
@@ -53,12 +50,12 @@ public class DaoSkills extends Dao<Skill>{
 			
 			if(!cursor.next()) return skills;
 			if (cursor.last()) {
-				skills = new Skills[cursor.getRow()];
+				skills = new Skill[cursor.getRow()];
 				cursor.beforeFirst(); 
 			}
 			
 			while(cursor.next()){
-				Skills v = new Skills();
+				Skill v = new Skill();
 				v.setId(cursor.getInt(1));
 				v.setTitle(cursor.getString(2));
 				v.setSubtitle(cursor.getString(3));
@@ -128,7 +125,7 @@ public class DaoSkills extends Dao<Skill>{
 			while(cursor.next()){
 				Skill s = new Skill();
 				s.setTitle(cursor.getString(1));
-				s.setSub_title(cursor.getString(2));
+				s.setSubtitle(cursor.getString(2));
 				s.setId(cursor.getInt(3));
 				skills[i] = s;
 				i++;
@@ -155,7 +152,7 @@ public class DaoSkills extends Dao<Skill>{
         try{
             ResultSet cursor = this.connect.createStatement().executeQuery(q);
             while(cursor.next()){
-                Sub_skill ss = new Sub_skill(cursor.getInt(1), cursor.getInt(2), cursor.getString(3));
+                SubSkill ss = new SubSkill(cursor.getInt(1), cursor.getInt(2), cursor.getString(3));
                 s.setSub_skills(ss);
             }
         } catch (SQLException e) {

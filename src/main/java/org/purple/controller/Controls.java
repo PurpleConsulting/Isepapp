@@ -14,13 +14,13 @@ import org.json.JSONObject;
 import org.purple.bean.Group;
 import org.purple.bean.Page;
 import org.purple.bean.Skill;
-import org.purple.bean.Sub_skill;
+import org.purple.bean.SubSkill;
 import org.purple.bean.User;
 import org.purple.bean.Value;
 import org.purple.constant.Bdd;
 import org.purple.model.DaoGroups;
 import org.purple.model.DaoSkills;
-import org.purple.model.DaoSub_skills;
+import org.purple.model.DaoSubSkills;
 import org.purple.model.DaoValues;
 
 /**
@@ -47,7 +47,7 @@ public class Controls extends HttpServlet {
 		
 		//p.setCss(".css");
 		p.setJs("fill_performances.js");
-		p.setContent("/views-performances/fill_performances.jsp");
+		p.setContent("mark/controls.jsp");
 		request.setAttribute("pages", p);
 		
 		//Create instance Dao

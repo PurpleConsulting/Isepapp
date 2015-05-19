@@ -1,6 +1,6 @@
 package org.purple.bean;
 
-public class Sub_skill {
+public class SubSkill {
 	private int id;
 	private int id_skills;
 	private String title;
@@ -8,11 +8,11 @@ public class Sub_skill {
 	private int note;
 	//Date pour la creation ou modif ?
 	
-	public Sub_skill(){
+	public SubSkill(){
 		
 	}
 	
-	public Sub_skill(int id, int id_skills, String title){
+	public SubSkill(int id, int id_skills, String title){
 		this.setId(id);
 		this.setId_skills(id_skills);
 		this.setTitle(title);
