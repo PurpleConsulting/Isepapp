@@ -21,15 +21,33 @@ $("select").change(function () {
 	 })	    	
 });
 
-$("#btn-test").on("click",function () {
+$(document).ready(function(){ //If page is ready
+	$(".btn-test").click(function (){ //When click on the button send
+		
+		var a= $(this).val();
+		alert($("#form"+a).serialize());
+		$.ajax({ 
+		  method: "POST",
+		  url: "/Isepapp/Controls",
+		  data: $("#form"+a).serialize() //Retrieve all info in form
+		})
+		  
+	});
+});	
+
+/*$(".btn-test").on("click",function () {
 	var i;
-	var tab = document.getElementsByName('${sub_skill.getTitle().replaceAll("[^\\w]","")}');
+	var str = $("form").serialize();
+	var tab = $(this).val();
+	var a= $('input[type=radio][name=tab]:checked').attr('value');
+	alert(a);
 	for (i=0;i<tab.length;i++)
 	{
 		if(tab[i].checked)
 		{
 			var s = tab[i].value;
+			alert(s);
 			break;
 		}
 	}
-});
+});*/

@@ -1,6 +1,7 @@
 package org.purple.controller;
 
 import java.io.IOException;
+import java.util.Enumeration;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -91,6 +92,28 @@ public class Controls extends HttpServlet {
 		// TODO Auto-generated method stub
 		String str = request.getParameter("string");
 		
+		Enumeration<String> NomsParam = request.getParameterNames();
+		while(NomsParam.hasMoreElements()) {
+			  String NomParam = (String)NomsParam.nextElement();
+
+			  System.out.println("un " + NomParam );
+
+			  String[] ValeursParam = request.getParameterValues(NomParam);
+
+			  if (ValeursParam.length == 0)		  
+				  System.out.println("<td><b>Aucune valeur</i></td>");
+
+					 
+				 	
+				//for(int i=0; i < ValeursParam.length; i++) {
+					System.out.println("valeur " + ValeursParam[0] );		
+				//}
+			
+			  }	
+			
+		 // String[] ValeursParam = request.getParameterValues(NomParam);
+		//  System.out.println( ValeursParam[0]);
+		
 		if (str != null){
 			DaoGroups dgroup = new DaoGroups(Bdd.getCo());
 			
@@ -118,6 +141,8 @@ public class Controls extends HttpServlet {
 			
 			response.setHeader("content-type", "application/json");
 			response.getWriter().write(result.toString());
+			
+			
 			
 			dgroup.close();  // -- close Groups Dao
 		}

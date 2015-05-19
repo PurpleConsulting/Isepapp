@@ -37,7 +37,7 @@
 		 <!-- Tab panes -->
 		  <div class="tab-content">
 		  		<c:forEach var="skill" items="${skills}" varStatus="status">
-		  			<form action= "Controls" method="post" id="form-performances">
+		  			<form action= "Controls" method="post" id="form${skill.getId()}">
 				    	<div role="tabpanel" class='tab-pane ${status.count==1 ? "active":""}' id="tab${status.count}">
 				    		<h3>
 				    			<c:out value='${status.count} - ${skill.getSub_title()}'></c:out>
@@ -47,14 +47,17 @@
 							  	<div class="radio" class="line">
 							  		<c:forEach var="value" items="${values}" varStatus="status">
 									  <label>
-									    <input type="radio" name='${sub_skill.getTitle().replaceAll("[^\\w]","")}' id="value${status.count}" value='${value.getPoints()}'  ${status.count==1 ? "checked":""}>
+									    <input type="radio" name='${sub_skill.getId()}' id="value${status.count}" value='${value.getId()}'  ${status.count==1 ? "checked":""}>
 									    <c:out value='${value.getTitle()}'></c:out>
 									  </label>
+									  <input type="hidden" value='${sub_skill.getId()}' class="val">
+									  
 									</c:forEach>
+									<c:set var="val"  value="${skill.getId()}"/>
 								</div>
 						  	</c:forEach>
 					  	</div>
-					  	<button class="btn btn-default" id="btn-test">Bouton</button>
+					  	<button class="btn btn-default btn-test" value="${val}">Bouton</button>
 					</form>
 				</c:forEach>
 		  </div>
