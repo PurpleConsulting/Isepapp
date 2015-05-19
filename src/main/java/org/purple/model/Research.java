@@ -30,13 +30,12 @@ public class Research {
 		
 		public static final String[] pseudoResearch(String field, String table, String filter){
 			Connection co = Bdd.getCo();
-			String[] res = null;
+			String[] res = new String[0];
 			String q = "SELECT " + field + " FROM " + table +" "+ filter +" ;";
-			String[] test = null;
 			try {
 				Statement stmt = co.createStatement();
 				ResultSet currsor = stmt.executeQuery(q);
-				if(!currsor.next()) return null;
+				if(!currsor.next()) return new String[0];
 				//test = (String[])currsor.getArray("Student").getArray();
 				if (currsor.last()) {
 					res = new String[currsor.getRow()];
@@ -60,7 +59,7 @@ public class Research {
 		
 		public static final String nameToSpeudo(String name){
 			Connection co = Bdd.getCo();
-			String res = null;
+			String res = "";
 			String q = "SELECT pseudo FROM Users WHERE CONCAT(first_name, ' ', last_name) = ?";
 			String[] args = {name};
 			ResultSet currsor  = Bdd.prepareExec(co, q, args);

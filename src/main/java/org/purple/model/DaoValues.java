@@ -75,7 +75,7 @@ public class DaoValues extends Dao<Value> {
 	}
 	
 	public Value[] selectAllValues (){
-		Value[] val=null;
+		Value[] val = new Value[0];
 		String q = "SELECT id,title, points "
 				+ "FROM `Values` "
 				+ "ORDER BY id";		
@@ -101,7 +101,6 @@ public class DaoValues extends Dao<Value> {
 			}
 		}catch (SQLException e){
 			// TODO Auto-generated catch block
-			val = null;
 			e.printStackTrace();
 		}
 		return val;
@@ -136,7 +135,7 @@ public class DaoValues extends Dao<Value> {
 
 	
 	 public boolean deleteId(int id){
-		 boolean r=false;
+		 boolean r = false;
 		 String q = "DELETE FROM `Values`"
 					+ "WHERE id=?";	
 			try{

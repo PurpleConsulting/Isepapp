@@ -98,8 +98,8 @@ public class DaoGroups extends Dao<Group>{
 			prestmt.close();
 		}catch (SQLException e){
 			// TODO Auto-generated catch block
-			g = null;
 			e.printStackTrace();
+			g = new Group();
 		}
 		return g;
 	}
@@ -125,7 +125,7 @@ public class DaoGroups extends Dao<Group>{
 	
 	public Group[] selectAll() {
 		// TODO Auto-generated method stub
-		Group[] gs = null;
+		Group[] gs = new Group[0];
 		String q = "SELECT Groups.id, Groups.`name`, Groups.class"
 				+ " FROM APPDB.Groups;";
 		try{

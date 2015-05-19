@@ -103,14 +103,14 @@ public class DaoUsers extends Dao<User> {
 			prestmt.close();
 		}catch (SQLException e){
 			// TODO Auto-generated catch block
-			u = null;
+			u = new User();
 			e.printStackTrace();
 		}
 		return u;
 	}
 	
 	public User[] selectAllTutor() {
-		User[] us = null; 
+		User[] us = new User[0]; 
 		String q = "SELECT Users.id,"
 				+ " Users.first_name, Users.last_name,"
 				+ " Positions.title, Users.pseudo,"

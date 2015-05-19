@@ -40,7 +40,7 @@ public class DaoMissings extends Dao<Missing>{
 	}
 	
 	public Missing[] selectForStudent(String idStudent){
-		Missing[] ms = null;
+		Missing[] ms = new Missing[0];
 		String q = "SELECT id, DATE_FORMAT(date, '"+ Isep.MYSQL_UTC +"') , late, supporting"
 				+ " FROM Missing WHERE id_student = ? ";
 		try{
@@ -66,14 +66,13 @@ public class DaoMissings extends Dao<Missing>{
 			prestmt.close();
 		}catch (SQLException e){
 			// TODO Auto-generated catch block
-			ms = null;
 			e.printStackTrace();
 		}
 		return ms;
 	}
 	
 	public Missing[] selectForGroup(String idGroup){
-		Missing[] ms = null;
+		Missing[] ms = new Missing[0];
 		String q = "SELECT Users.pseudo, Missing.late FROM Missing"
 				+ " INNER JOIN  Users on Missing.id_student = Users.id"
 				+ " WHERE Users.id_group ="
@@ -99,7 +98,6 @@ public class DaoMissings extends Dao<Missing>{
 			prestmt.close();
 		}catch (SQLException e){
 			// TODO Auto-generated catch block
-			ms = null;
 			e.printStackTrace();
 		}
 		return ms;
