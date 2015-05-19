@@ -4,7 +4,7 @@
     
 <div>
 
-		<h1>Evaluation croisée : </h1>
+		<h1>Evaluation croisée : [Groupe XX]</h1>
 
 		<div class="deadline">Deadline à (heure de depot)</div>
 
