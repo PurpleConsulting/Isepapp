@@ -4,13 +4,13 @@
     
 <div>
 
-		<h1>Evaluation croisée : [Groupe XX]</h1>
+		<h1>Evaluation croisée : <c:out value="${group.getName()}"></c:out></h1>
 
 		<div class="deadline">Deadline à (heure de depot)</div>
 
 		<div class="nom">
 			<button type="button" class="btn btn-default"><</button>
-			<c:forEach var="group" items="${nom}" varStatus="status"><c:out value="${group}"></c:out></c:forEach>
+			<c:forEach var="group" items="${group.getMembers()}" varStatus="status"><c:out value="${group}"></c:out></c:forEach>
 			<button type="button" class="btn btn-default">></button>
 		</div>
 

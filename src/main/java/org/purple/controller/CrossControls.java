@@ -14,6 +14,7 @@ import org.purple.bean.Page;
 import org.purple.bean.User;
 import org.purple.constant.Bdd;
 import org.purple.model.DaoGroups;
+import org.purple.model.DaoUsers;
 
 /**
  * Servlet implementation class Crossmark
@@ -44,33 +45,16 @@ public class CrossControls extends HttpServlet {
 
 		// Create instance Dao
 		DaoGroups dgp = new DaoGroups(Bdd.getCo());
-
+		DaoUsers dusr = new DaoUsers(Bdd.getCo());
 		// Display group name
 		HttpSession s = request.getSession();
 		User u = (User) s.getAttribute("user");
-
-		String str = request.getParameter("string"); //"G5A";
-		if (str != null) {
-			DaoGroups dgroup = new DaoGroups(Bdd.getCo());
-
-			Group g = new Group();
-
-			String[] name = null;
-
-			if (g != null) {
-				str = str.trim();
-				g = dgroup.select(str);
-				dgroup.completeMemebers(g);
-				name = new String[g.getMembers().size()];
-				int i = 0;
-				for (User us : g.getMembers()) {
-					name[i] = us.getFirstName() + " ";
-					i++;
-				}
-			}
-			request.setAttribute("nom", name);
-		}
-
+		dusr.addGroup(u);
+		String str = u.getGroup();
+		Group g = dgp.select(str);
+		dgp.completeMemebers(g);
+		
+		request.setAttribute("group", g);
 		request.setAttribute("pages", p);
 		this.getServletContext().getRequestDispatcher("/template.jsp")
 				.forward(request, response);
