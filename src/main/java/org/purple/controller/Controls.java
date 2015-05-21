@@ -12,6 +12,7 @@ import javax.servlet.http.HttpSession;
 
 import org.json.JSONObject;
 import org.purple.bean.Group;
+import org.purple.bean.Mark;
 import org.purple.bean.Page;
 import org.purple.bean.Skill;
 import org.purple.bean.SubSkill;
@@ -90,29 +91,11 @@ public class Controls extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		
+		//Retrieve group name selected
 		String str = request.getParameter("string");
 		
-		Enumeration<String> NomsParam = request.getParameterNames();
-		while(NomsParam.hasMoreElements()) {
-			  String NomParam = (String)NomsParam.nextElement();
-
-			  System.out.println("un " + NomParam );
-
-			  String[] ValeursParam = request.getParameterValues(NomParam);
-
-			  if (ValeursParam.length == 0)		  
-				  System.out.println("<td><b>Aucune valeur</i></td>");
-
-					 
-				 	
-				//for(int i=0; i < ValeursParam.length; i++) {
-					System.out.println("valeur " + ValeursParam[0] );		
-				//}
-			
-			  }	
-			
-		 // String[] ValeursParam = request.getParameterValues(NomParam);
-		//  System.out.println( ValeursParam[0]);
+		//String[] pseudo = null; 
 		
 		if (str != null){
 			DaoGroups dgroup = new DaoGroups(Bdd.getCo());
@@ -129,6 +112,7 @@ public class Controls extends HttpServlet {
 				int i=0;
 				for(User u : g.getMembers()){		
 					name[i] = u.getFirstName() + " ";
+					//pseudo[i] = u.getPseudo();
 					i++;
 				}
 			}
@@ -142,9 +126,9 @@ public class Controls extends HttpServlet {
 			response.setHeader("content-type", "application/json");
 			response.getWriter().write(result.toString());
 			
-			
-			
 			dgroup.close();  // -- close Groups Dao
 		}
+		
+		
 	}
 }

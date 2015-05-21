@@ -17,7 +17,27 @@ public class DaoMarks extends Dao<Mark>{
 	@Override
 	public boolean create(Mark obj) {
 		// TODO Auto-generated method stub
-		return false;
+		boolean res = false;
+
+		//date et id_tutor à ajouter dans la requête
+		String q = "INSERT INTO Marks (id_student, id_value, id_sub_skill, cross)"
+				+ " VALUES ("
+				+ " (SELECT id FROM APPDB.Users WHERE pseudo = ?), ?, ?, 0)";
+		
+		try{
+			PreparedStatement prestmt = this.connect.prepareStatement(q);
+			prestmt.setDouble(1, obj.getValue());
+			prestmt.setInt(2, obj.getIdSubSkill());
+			
+			prestmt.execute();
+			
+			res=true;
+		}catch (SQLException e){
+			// TODO Auto-generated catch block
+			res = false;
+			e.printStackTrace();
+		}
+		return res;
 	}
 
 	@Override

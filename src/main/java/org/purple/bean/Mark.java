@@ -9,6 +9,7 @@ public class Mark extends Avg{
 	private String skill = "null";
 	private String owner = "null";
 	private String ownerPseudo = "null";
+	private int idSubSkill;
 	
 	public Mark(){
 		
@@ -67,6 +68,14 @@ public class Mark extends Avg{
 	public double compute() {
 		// TODO Auto-generated method stub
 		return this.value;
+	}
+
+	public int getIdSubSkill() {
+		return idSubSkill;
+	}
+
+	public void setIdSubSkill(int idSubSkill) {
+		this.idSubSkill = idSubSkill;
 	}
 	
 }

@@ -50,8 +50,6 @@
 									    <input type="radio" name='${sub_skill.getId()}' id="value${status.count}" value='${value.getId()}'  ${status.count==1 ? "checked":""}>
 									    <c:out value='${value.getTitle()}'></c:out>
 									  </label>
-									  <input type="hidden" value='${sub_skill.getId()}' class="val">
-									  
 									</c:forEach>
 									<c:set var="val"  value="${skill.getId()}"/>
 								</div>

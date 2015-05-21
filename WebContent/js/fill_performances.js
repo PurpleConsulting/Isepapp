@@ -22,18 +22,24 @@ $("select").change(function () {
 });
 
 $(document).ready(function(){ //If page is ready
-	$(".btn-test").click(function (){ //When click on the button send
-		
-		var a= $(this).val();
-		alert($("#form"+a).serialize());
-		$.ajax({ 
-		  method: "POST",
-		  url: "/Isepapp/Controls",
-		  data: $("#form"+a).serialize() //Retrieve all info in form
+
+	$(".btn-test").click(function (){ //When click on the button send	
+		var skill = $(this).val();
+		var subskill ="";
+		var value = "";
+		$("#form"+skill+" input[type=radio]:checked").each(function(){
+			value = value +"|"+ $(this).val();
+			subskill =  subskill+"|"+$(this).attr("name");
 		})
-		  
+		
+		$.post("Isepapp/Controls", {value:value, subskill:subskill}, function(data,status){
+			//var resv = data.result.value;
+			//var res = data.result.subskill;
+		})
 	});
 });	
+
+
 
 /*$(".btn-test").on("click",function () {
 	var i;
