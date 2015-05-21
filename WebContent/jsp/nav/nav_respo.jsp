@@ -38,7 +38,7 @@
   		<li class="dropdown">
   			<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Les livrables<span class="caret"></span></a>
   			<ul class="dropdown-menu" role="menu">
-	            <li><a href="#">Deadlines</a></li>
+	            <li><a href="Deadlines">Deadlines</a></li>
 	            <li><a href="#">Dépots</a></li>
           </ul>
   		</li>

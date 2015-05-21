@@ -15,13 +15,13 @@
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
   		<li><a class="link1nav" href="Subject">Le sujet</a></li>
-  		<li><a href="#">Les résultats</a></li>
+  		<li><a href="#">Les rï¿½sultats</a></li>
   		<li><a href="#">Les Deadlines</a></li>
-  		<li><a href="Signout">Déconnexion</a></li>
+  		<li><a href="Signout">Dï¿½connexion</a></li>
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Fourtout Modules<span class="caret"></span></a>
           <ul class="dropdown-menu" role="menu">
-            <li><a href="Controls">Remplir la grille de compétences</a></li>
+            <li><a href="Controls">Remplir la grille de compï¿½tences</a></li>
             <li><a href="#">Module2</a></li>
             <li><a href="#">Module3</a></li>
             <li class="divider"></li>

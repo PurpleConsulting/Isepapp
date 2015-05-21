@@ -14,7 +14,7 @@ public class Deadline {
 		private DateTime dateLimit = new DateTime(2000, 01,01, 0,0,0);
 		private DateTime deliveryDate = new DateTime(2000, 01,01, 0,0,0);
 		private Boolean completed = false;
-		
+		private int tuteur=0;
 		public Deadline(){
 			
 		}
@@ -67,6 +67,13 @@ public class Deadline {
 		public void setCompleted(Boolean completed) {
 			this.completed = completed;
 		}
+		public int getTuteur() {
+			return tuteur;
+		}
+		public void setTuteur(int tuteur) {
+			this.tuteur = tuteur;
+		}
+		
 		
 		
 		

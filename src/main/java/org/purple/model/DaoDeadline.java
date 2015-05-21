@@ -7,6 +7,7 @@ import java.sql.SQLException;
 
 import org.purple.bean.Deadline;
 import org.purple.bean.Missing;
+import org.purple.bean.Value;
 import org.purple.constant.Isep;
 
 
@@ -18,9 +19,27 @@ public class DaoDeadline extends Dao<Deadline>{
 	}
 
 	@Override
-	public boolean create(Deadline obj) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean create(Deadline dl) {
+		boolean r=false;
+		String q = "INSERT INTO `Deadlines`(id, description, id_group)"
+				+ "VALUES (?, ?, ?) ";	
+		try{
+			PreparedStatement prestmt = this.connect.prepareStatement(q);
+			prestmt.setInt(1, dl.getId());
+			prestmt.setString(2, dl.getDescription());
+			prestmt.setInt(3, Integer.parseInt(dl.getGroup()));
+			
+			prestmt.execute();
+			
+			r=true;
+			
+
+		}catch (SQLException e){
+			// TODO Auto-generated catch block
+			r = false;
+			e.printStackTrace();
+		}
+		return r;
 	}
 
 	@Override
@@ -98,6 +117,40 @@ public class DaoDeadline extends Dao<Deadline>{
 			System.out.print(e);
 		}
 		
+	}
+	public Deadline[] selectAllDeadlines (){
+		Deadline[] dl = new Deadline[0];
+		String q = "SELECT `Deadlines`.id, `Deadlines`.description, `Deadlines`.`date_limit`,"
+				+"`Deadlines`.id_createur, `Deadlines`.Status, Groups.name "
+				+ "FROM `Deadlines`INNER JOIN Groups ON  `Deadlines`.id_group = Groups.id";		
+		try{
+			PreparedStatement prestmt = this.connect.prepareStatement(q);
+			ResultSet currsor = prestmt.executeQuery();
+			
+			int i = 0;
+			
+			if(!currsor.next()) return dl;
+			if (currsor.last()) {
+				dl = new Deadline[currsor.getRow()];
+				currsor.beforeFirst(); 
+			}
+			
+			while(currsor.next()){
+				Deadline d = new Deadline();
+				d.setId(currsor.getInt(1));
+				d.setDescription(currsor.getString(2));
+				//d.setDateLimit(Integer.toString(currsor.getInt(3)));
+				d.setTuteur(currsor.getInt(4));
+				d.setStatus(currsor.getBoolean(5));
+				d.setGroup(currsor.getString(6));
+				dl[i] = d;
+				i = i + 1;
+			}
+		}catch (SQLException e){
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return dl;
 	}
 
 }
