@@ -9,7 +9,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.purple.bean.Page;
+import org.purple.bean.Skill;
+import org.purple.constant.Bdd;
 import org.purple.model.Auth;
+import org.purple.model.DaoSkills;
 
 /**
  * Servlet implementation class Skills
@@ -33,11 +36,21 @@ public class Skills extends HttpServlet {
 		// TODO Auto-generated method stub
 		Page p = new Page();
 		if(Auth.isConnect(request)){
+			
+			DaoSkills dsk = new DaoSkills(Bdd.getCo());
+			
+			Skill[] skills =  dsk.selectAllSkills();
+			for(Skill s: skills ){
+				dsk.completeSub_skills(s);
+			}
+			
 			p.setTitle("ISEP / APP - Les compétences");
 			p.setCss("skill_display.css");
-			p.setJs("skill_displey.js");
+			p.setJs("skill_display.js");
 			p.setContent("skills/skill.jsp");
 			
+			dsk.close();
+			request.setAttribute("skills", skills);
 			request.setAttribute("pages", p);
 			request.getRequestDispatcher("/template.jsp").forward(request, response);
 		}
