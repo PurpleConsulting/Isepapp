@@ -1,17 +1,28 @@
+div#content.content{
+	min-height: 800px;
+}
 h1.titlepage{
 	margin-top: 20px;
-margin-bottom: 20px;
+	margin-bottom: 20px;
 }
 
 div.alert-skill, div.alert-sub-skill{
 	background-color: #F8F8F8;
-	color: #575757;
-	border: 2px #BDBDBD solid;
 	font-style: italic;
+	padding: 5px 15px;
+}
+
+div.alert.alert-skill{
+	border: 1px #246482 solid;
+	color: #575757;
+}
+div.alert.alert-sub-skill{
+	border: 1px #BDBDBD solid;
+	color: #575757;
 }
 
 div.alert-skill{
-	font-size: 2em;
+	font-size: 1.1em;
 }
 
 div.alert-sub-skill-box div.alert.alert-sub-skill{
@@ -21,7 +32,7 @@ div.alert-sub-skill-box div.alert.alert-sub-skill{
 
 
 div.alert-sub-skill-box{
-	padding: 15px 0px;
+	padding: 5px 0px;
 }
 
 span.dropdown{
