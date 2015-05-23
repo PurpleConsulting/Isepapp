@@ -26,7 +26,8 @@ public class DaoMarks extends Dao<Mark>{
 				+ "(SELECT Groups.id_tutor FROM Groups WHERE Groups.`name` = "
 				+ "(SELECT Groups.`name` FROM Groups INNER JOIN Users ON Users.id_group = Groups.id WHERE Users.pseudo = ?))) "
 				+ "ON DUPLICATE KEY UPDATE id_value=VALUES(id_value), date=CURDATE(), id_tutor = "
-				+ "(SELECT Groups.`name` FROM Groups INNER JOIN Users ON Users.id_group = Groups.id WHERE Users.pseudo = ?)));";
+				+ "(SELECT Groups.id_tutor FROM Groups WHERE Groups.`name` = "
+				+ "(SELECT Groups.`name` FROM Groups INNER JOIN Users ON Users.id_group = Groups.id WHERE Users.pseudo = ?));";
 		try{
 			String[] params = {
 					obj.getOwner(),

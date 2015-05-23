@@ -15,13 +15,13 @@ $("select").change(function () {
     str=$("select option:selected").text();
    	$.post("/Isepapp/Controls", {string:str}, function(data, status) {
    		var result = data.result.groups.join(", ");
-   		$("div#name_group").html(str+" : "+ result).show("slow");
+   		$("div#name_group").html("<strong>"+str+"</strong> : "+ result).show("slow");
 	 });	    	
 	 if(str != "Sélectionnez un groupe"){
-		$("button.marker").attr("disabled", false);
+		$("button.marker, button.adder").attr("disabled", false);
 		$("form.groupgrid").attr("data-target", str.trim());
 	 } else {
-		$("button.marker").attr("disabled", true);
+		$("button.marker, button.adder").attr("disabled", true);
 		$("form.groupgrid").attr("data-target", "");
 	 }
 });
@@ -38,9 +38,8 @@ $(document).ready(function(){ //If page is ready
 		form.find("div.line label input[type=radio]:checked").each(function(){
 			mrk.push($(this).attr("name")+"&"+$(this).attr("value"));
 		});
-		//
 		$.post("/Isepapp/Controls", {scope: "group", group:grp, marks:mrk.join(";")}, function(data,status){
-			console.log(data);
+			console.log(data);// -- OBLIE PAS DE FAIRE PLEIN DE TRUC ICI
 		});
 	});
 });	

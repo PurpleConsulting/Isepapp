@@ -18,7 +18,7 @@
 				</select>
 			</div>
 		</form>
-		<div class="alert alert-info" id="name_group" style="display:none; font-weight:700;"></div>
+		<div class="alert alert-info" id="name_group" style="display:none;"></div>
 	</div>
 </div>
 <div class="row">
@@ -50,7 +50,7 @@
 									<c:set var="val" value="${skill.getId()}"/>
 								</div>
 					  		</c:forEach>
-					  		<button class="btn btn-default marker" disabled>Noter</button>
+					  		<button class="btn btn-default marker" disabled><span class="fa fa-cog fa-spin"></span>  Noter</button>
 					  		<button class="btn btn-default adder" disabled>Ajouter une note personnel.</button>
 						</form>
 					</div>

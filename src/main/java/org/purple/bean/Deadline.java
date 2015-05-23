@@ -18,7 +18,6 @@ public class Deadline {
 		public Deadline(){
 			
 		}
-
 		
 		public int getId() {
 			return id;
@@ -67,7 +66,5 @@ public class Deadline {
 		public void setCompleted(Boolean completed) {
 			this.completed = completed;
 		}
-		
-		
-		
+			
 }

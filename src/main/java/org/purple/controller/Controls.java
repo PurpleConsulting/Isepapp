@@ -49,45 +49,62 @@ public class Controls extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		Page p = new Page();
-		
-		p.setJs("bootstrap-select.min.js","controls.js");
-		p.setCss("bootstrap-select.min.css","controls.css");
-		p.setContent("mark/controls.jsp");
-		request.setAttribute("pages", p);
-		
-		//Create instance Dao
-		DaoGroups dgp = new DaoGroups(Bdd.getCo());
-		DaoSkills ds = new DaoSkills(Bdd.getCo());
-		DaoValues dv = new DaoValues(Bdd.getCo());
-		
-		//Display group name
-		HttpSession session = request.getSession();
-		User u = (User)session.getAttribute("user");
-
-		String[] gp_name = dgp.selectAllName(Integer.toString(u.getId()));
-		
-		request.setAttribute("group_names", gp_name);
-		
-		//Display skills in tab
-		Skill[] skills = ds.selectAllSkills();
-		if (skills != null){
-			for (int i=0;i<=skills.length-1;i++){
-				ds.completeSub_skills(skills[i]); //Add sub_skills into skills
-			}
-		}
+		if(Auth.isTutor(request) || Auth.isRespo(request)){
 			
-		request.setAttribute("skills", skills);
-		
-		//Display values in radio btn
-		Value[] v= dv.selectAllValues();
-		request.setAttribute("values", v);
-		
-		this.getServletContext().getRequestDispatcher("/template.jsp").forward(request, response);
+			//Create instance Dao
+			DaoGroups dgp = new DaoGroups(Bdd.getCo());
+			DaoSkills ds = new DaoSkills(Bdd.getCo());
+			DaoValues dv = new DaoValues(Bdd.getCo());
+			
+			//Display group name
+			HttpSession session = request.getSession();
+			User u = (User)session.getAttribute("user");
 
-		//Close Dao
-		dgp.close();
-		ds.close();
-		dv.close();
+			String[] gp_name = dgp.selectAllName(Integer.toString(u.getId()));
+			
+			request.setAttribute("group_names", gp_name);
+			
+			//Display skills in tab
+			Skill[] skills = ds.selectAllSkills();
+			if (skills != null){
+				for (int i=0;i<=skills.length-1;i++){
+					ds.completeSub_skills(skills[i]); //Add sub_skills into skills
+				}
+			}
+				
+			request.setAttribute("skills", skills);
+			
+			//Display values in radio btn
+			Value[] v= dv.selectAllValues();
+			request.setAttribute("values", v);
+			
+			p.setJs("bootstrap-select.min.js","controls.js");
+			p.setCss("bootstrap-select.min.css","controls.css");
+			p.setContent("mark/controls.jsp");
+			request.setAttribute("pages", p);
+			
+			this.getServletContext().getRequestDispatcher("/template.jsp").forward(request, response);
+
+			//Close Dao
+			dgp.close();
+			ds.close();
+			dv.close();
+			
+		
+		} else {
+			p.setTitle("ISEP / APP - Home");
+			p.setContent("home/student.jsp");
+			p.setWarning(true);
+			p.setWarningMessage("la page que vous essayer d'atteidre n'est accécible que par les tuteurs d'APP.");
+			request.setAttribute("pages", p);
+			
+			this.getServletContext().getRequestDispatcher("/template.jsp").forward(request, response);
+		}
+		
+		
+
+		
+		
 	}
 
 	/**
@@ -155,9 +172,6 @@ public class Controls extends HttpServlet {
 			dgroup.close();
 			dmrk.close();
 		}
-		
-		
-		
 		
 	}
 }
