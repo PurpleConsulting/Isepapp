@@ -47,7 +47,7 @@ public class Auth {
 		return isUser(request, Auth.tutor);
 	}
 	public static boolean isTutor(HttpServletRequest request, String group){
-		if(isUser(request, Auth.tutor)){
+		if(isConnect(request)){
 			return isGroupOwner(request, group);
 		} else{
 			return false;

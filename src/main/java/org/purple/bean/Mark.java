@@ -8,8 +8,11 @@ public class Mark extends Avg{
 	private String subSkill = "null";
 	private String skill = "null";
 	private String owner = "null";
-	private String ownerPseudo = "null";
+	private String groupOwner = "null";
+	private int idValue;
 	private int idSubSkill;
+	private int idTutor;
+	private boolean cross = false;
 	
 	public Mark(){
 		
@@ -19,10 +22,18 @@ public class Mark extends Avg{
 		this.setValue(value);
 	}
 	
-	public Mark(String ownerPseudo, double value, String title, String skill, String subSkill){
+	public Mark(String groupOwner, int idSubSkill, int idValue){
+		// -- This constructor only prepare mark for INSERTION
+		this.setGroupOwner(groupOwner);
+		this.setIdSubSkill(idSubSkill);
+		this.setIdValue(idValue);
+	}
+	
+	public Mark(String owner, double value, String title, String skill, String subSkill){
+		// -- This constructor only prepare mark for the display and computation
 		this.setValue(value);
 		this.setTitle(title);
-		this.setOwnerPseudo(ownerPseudo);
+		this.setOwner(owner);
 		this.setSkill(skill);
 		this.setSubSkill(subSkill);
 	}
@@ -57,11 +68,29 @@ public class Mark extends Avg{
 	public void setOwner(String owner) {
 		this.owner = owner;
 	}
-	public String getOwnerPseudo() {
-		return ownerPseudo;
+	public String getGroupOwner() {
+		return groupOwner;
 	}
-	public void setOwnerPseudo(String ownerPseudo) {
-		this.ownerPseudo = ownerPseudo;
+	public void setGroupOwner(String groupOwner) {
+		this.groupOwner = groupOwner;
+	}
+	public int getIdTutor() {
+		return idTutor;
+	}
+	public void setIdTutor(int idTutor) {
+		this.idTutor = idTutor;
+	}
+	public boolean isCross() {
+		return cross;
+	}
+	public void setCross(boolean cross) {
+		this.cross = cross;
+	}
+	public int getIdValue() {
+		return idValue;
+	}
+	public void setIdValue(int idValue) {
+		this.idValue = idValue;
 	}
 
 	@Override

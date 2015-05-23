@@ -19,7 +19,10 @@ import org.purple.bean.SubSkill;
 import org.purple.bean.User;
 import org.purple.bean.Value;
 import org.purple.constant.Bdd;
+import org.purple.constant.Isep;
+import org.purple.model.Auth;
 import org.purple.model.DaoGroups;
+import org.purple.model.DaoMarks;
 import org.purple.model.DaoSkills;
 import org.purple.model.DaoSubSkills;
 import org.purple.model.DaoValues;
@@ -30,7 +33,8 @@ import org.purple.model.DaoValues;
 @WebServlet("/Controls")
 public class Controls extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+    private static final String markDelimiter = ";";
+    private static final String skillValueDelimiter = "&";
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -46,8 +50,8 @@ public class Controls extends HttpServlet {
 		// TODO Auto-generated method stub
 		Page p = new Page();
 		
-		//p.setCss(".css");
-		p.setJs("fill_performances.js");
+		p.setJs("bootstrap-select.min.js","controls.js");
+		p.setCss("bootstrap-select.min.css","controls.css");
 		p.setContent("mark/controls.jsp");
 		request.setAttribute("pages", p);
 		
@@ -95,39 +99,64 @@ public class Controls extends HttpServlet {
 		//Retrieve group name selected
 		String str = request.getParameter("string");
 		
-		//String[] pseudo = null; 
+		// -- 
+		String scope = request.getParameter("scope");
+		String group = request.getParameter("group");
+		String marks = request.getParameter("marks");
 		
-		if (str != null){
+		if(Auth.isTutor(request) || Auth.isRespo(request)){
+			// -- Now the user is allowed to perfom queries on the database
 			DaoGroups dgroup = new DaoGroups(Bdd.getCo());
+			DaoMarks dmrk = new DaoMarks(Bdd.getCo());
 			
-			Group g = new Group();
-			
-			String[] name = null; //Store group members
-			
-			if (g != null){
-				str=str.trim(); //Delete spaces before and after
-				g = dgroup.select(str); //Select group id,name, class by group name
-				dgroup.completeMemebers(g); //Add members into the group selected
-				name = new String[g.getMembers().size()];
-				int i=0;
-				for(User u : g.getMembers()){		
-					name[i] = u.getFirstName() + " ";
-					//pseudo[i] = u.getPseudo();
-					i++;
+			if(!Isep.nullOrEmpty(str) && Auth.isTutor(request, str)){
+				// -- Find the group
+				Group g = new Group();
+				String[] name = null; //Store group members
+				
+				if (g != null){
+					str=str.trim(); //Delete spaces before and after
+					g = dgroup.select(str); //Select group id,name, class by group name
+					dgroup.completeMemebers(g); //Add members into the group selected
+					name = new String[g.getMembers().size()];
+					int i=0;
+					for(User u : g.getMembers()){		
+						name[i] = u.getFirstName();
+						//pseudo[i] = u.getPseudo();
+						i++;
+					}
+				}
+				
+				JSONObject result = new JSONObject();
+				JSONObject list = new JSONObject();
+				
+				list.put("groups", name);
+				result.put("result", list);
+				
+				response.setHeader("content-type", "application/json");
+				response.getWriter().write(result.toString());
+				
+			} else if(!Isep.nullOrEmpty(scope, group, marks) && Auth.isTutor(request, group)){
+				boolean querrysuccess = true;
+				if(scope.equals("group")){
+					Group targerGroup = dgroup.select(group);
+					String[] controls = marks.split(this.markDelimiter);
+					for(String c : controls){
+						String[] stringmrk = c.split(this.skillValueDelimiter);
+						Mark mark = new Mark(group, Integer.parseInt(stringmrk[0]), Integer.parseInt(stringmrk[1]));
+						querrysuccess = dmrk.createMulti(mark);
+					}
+					JSONObject result = new JSONObject();
+					result.put("result", querrysuccess);
+					response.setHeader("content-type", "application/json");
+					response.getWriter().write(result.toString());
 				}
 			}
-			
-			JSONObject result = new JSONObject();
-			JSONObject list = new JSONObject();
-			
-			list.put("groups", name);
-			result.put("result", list);
-			
-			response.setHeader("content-type", "application/json");
-			response.getWriter().write(result.toString());
-			
-			dgroup.close();  // -- close Groups Dao
+			dgroup.close();
+			dmrk.close();
 		}
+		
+		
 		
 		
 	}
