@@ -35,8 +35,8 @@ public class DaoMarks extends Dao<Mark>{
 					Integer.toString( obj.getIdSubSkill()),
 					obj.getOwner(),
 					obj.getOwner()};
-			int affected = Bdd.preparePerform(this.connect, q, params); 
-			if(affected == 1) res = true;
+			int affected = Bdd.preparePerform(this.connect, q, params);
+			if(affected == 1 || affected == 2) res = true;
 		}catch (NullPointerException e){
 			// TODO Auto-generated catch block
 			res = false;

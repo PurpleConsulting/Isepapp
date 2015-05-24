@@ -1,4 +1,4 @@
-
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <h1 class="col-md-offset-1 col-md-10 col-sm-offset-1 col-sm-10 col-xs-offset-1 col-xs-10">
@@ -11,7 +11,7 @@
 			<div class="form-group">
 				Recherche par groupe d'APP :
 				<select class="selectpicker" id="group">
-					<option value="init">Sélectionnez un groupe</option>
+					<option value="init">SÃ©lectionnez un groupe</option>
 					<c:forEach var="group" items="${group_names}" varStatus="status">
 						<option value="${group}"><c:out value="${group}"></c:out></option>
 					</c:forEach>			
@@ -50,14 +50,17 @@
 									<c:set var="val" value="${skill.getId()}"/>
 								</div>
 					  		</c:forEach>
-					  		<button class="btn btn-default marker" disabled><span class="fa fa-cog fa-spin"></span>  Noter</button>
-					  		<button class="btn btn-default adder" disabled>Ajouter une note personnel.</button>
+					  		<button class="btn btn-default marker" disabled><span class="fa fa-crosshairs"></span>  Noter</button><!-- fa-cog fa-spin -->
+					  		<button class="btn btn-default adder" disabled><span class="fa fa-plus"></span> Ajouter une note personnelle</button>
 						</form>
 					</div>
 				</c:forEach>
 		 	 </div>
 		</div>
-	</div> 	
+	</div>
+	<div class="conf_box col-xs-offset-1 col-xs-10 alert" id="confirmation_box" style="display:none;" role="alert">
+		<button type="button" class="close"><span aria-hidden="true">&times;</span></button>
+	</div>
 </div>
 
 	

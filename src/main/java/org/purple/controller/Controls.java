@@ -80,6 +80,7 @@ public class Controls extends HttpServlet {
 			
 			p.setJs("bootstrap-select.min.js","controls.js");
 			p.setCss("bootstrap-select.min.css","controls.css");
+			p.setTitle("ISEP / APP - Evaluation");
 			p.setContent("mark/controls.jsp");
 			request.setAttribute("pages", p);
 			
@@ -100,9 +101,6 @@ public class Controls extends HttpServlet {
 			
 			this.getServletContext().getRequestDispatcher("/template.jsp").forward(request, response);
 		}
-		
-		
-
 		
 		
 	}
@@ -132,7 +130,6 @@ public class Controls extends HttpServlet {
 				String[] name = null; //Store group members
 				
 				if (g != null){
-					str=str.trim(); //Delete spaces before and after
 					g = dgroup.select(str); //Select group id,name, class by group name
 					dgroup.completeMemebers(g); //Add members into the group selected
 					name = new String[g.getMembers().size()];
@@ -156,7 +153,6 @@ public class Controls extends HttpServlet {
 			} else if(!Isep.nullOrEmpty(scope, group, marks) && Auth.isTutor(request, group)){
 				boolean querrysuccess = true;
 				if(scope.equals("group")){
-					Group targerGroup = dgroup.select(group);
 					String[] controls = marks.split(this.markDelimiter);
 					for(String c : controls){
 						String[] stringmrk = c.split(this.skillValueDelimiter);
@@ -164,7 +160,12 @@ public class Controls extends HttpServlet {
 						querrysuccess = dmrk.createMulti(mark);
 					}
 					JSONObject result = new JSONObject();
-					result.put("result", querrysuccess);
+					JSONObject field = new JSONObject();
+					
+					result.put("result", field
+							.put("status", querrysuccess)
+							.put("scope", "group")
+							.put("target", group));
 					response.setHeader("content-type", "application/json");
 					response.getWriter().write(result.toString());
 				}
