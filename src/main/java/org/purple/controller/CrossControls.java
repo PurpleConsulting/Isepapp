@@ -11,10 +11,14 @@ import javax.servlet.http.HttpSession;
 
 import org.purple.bean.Group;
 import org.purple.bean.Page;
+import org.purple.bean.Skill;
 import org.purple.bean.User;
+import org.purple.bean.Value;
 import org.purple.constant.Bdd;
 import org.purple.model.DaoGroups;
+import org.purple.model.DaoSkills;
 import org.purple.model.DaoUsers;
+import org.purple.model.DaoValues;
 
 /**
  * Servlet implementation class Crossmark
@@ -46,6 +50,9 @@ public class CrossControls extends HttpServlet {
 		// Create instance Dao
 		DaoGroups dgp = new DaoGroups(Bdd.getCo());
 		DaoUsers dusr = new DaoUsers(Bdd.getCo());
+		DaoSkills ds = new DaoSkills(Bdd.getCo());
+		DaoValues dv = new DaoValues(Bdd.getCo());
+
 		// Display group name
 		HttpSession s = request.getSession();
 		User u = (User) s.getAttribute("user");
@@ -53,11 +60,33 @@ public class CrossControls extends HttpServlet {
 		String str = u.getGroup();
 		Group g = dgp.select(str);
 		dgp.completeMemebers(g);
-		
+
 		request.setAttribute("group", g);
 		request.setAttribute("pages", p);
+
+		// Display skills in tab
+		Skill[] skills = ds.selectCrossSkills();
+		if (skills != null) {
+			for (int i = 0; i <= skills.length - 1; i++) {
+				ds.completeSub_skills(skills[i]); // Add sub_skills into skills
+			}
+		}
+		request.setAttribute("skills", skills);
+		
+		// Display values in radio btn
+		Value[] v = dv.selectAllValues();
+		request.setAttribute("values", v);
+		
+
 		this.getServletContext().getRequestDispatcher("/template.jsp")
 				.forward(request, response);
+		
+		//Close Dao
+				dgp.close();
+				dusr.close();
+				ds.close();
+				dv.close();
+
 	}
 
 	/**
