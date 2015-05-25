@@ -4,7 +4,7 @@
 
 $(document).ready(function(){
 	 
-	var addUserSubmit =  function(){ $("form#adduser").submit(); console.log("OKOKOKOKOKOK");}
+	var addUserSubmit =  function(){ $("form#adduser").submit(); }
 	
 	$('#modaladd').on('shown.bs.modal', function () {
 		 $('#myInput').focus()
@@ -51,7 +51,6 @@ $(document).ready(function(){
 				}
 			});
 			
-			var blink = function(){}
 			setInterval('$(".fa-exclamation-triangle").fadeOut(400).delay(300).fadeIn(400)' ,400);
 			
 		});

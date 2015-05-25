@@ -18,7 +18,8 @@ div.skills-selector form input{
 
 div.skills-selector a.btn,
 div.skills-selector div.bootstrap-select.btn-group,
-div.skills-selector form input{
+div.skills-selector form input,
+form.edit button{
 	margin-bottom: 12px;
 }
 form.edit{
@@ -38,7 +39,6 @@ form.edit div.form-group span.fa.fa-2x{
 	float: right;
 	color: #BDBDBD;
 	opacity: 0.6;
-	transition: 0.8s;
 }
 
 form.edit div.form-group span.fa.fa-2x{
@@ -68,17 +68,31 @@ form.edit[id^=form-skill].active{
 	display: block;
 }
 
-input.subskill_adder:disabled{
-	cursor: pointer;
-	color: #246482;
-}
 form.edit div.form-group span.fa.subskill_adder{
 	color: #246482;
+}
+form.edit div.form-group span.fa.fa-2x, form.edit button.subskill_adder, div.input-group-addon.plus{
+	transition: 0.4s;
+}
+form.edit button.subskill_adder{
+	background-color: #EEEEEE;
+	border:1px solid #CCCCCC;
+	color: #555555;
+}
+form.edit button.subskill_adder:hover, div.input-group-addon.plus:hover{
+	color: #246482;
+	border-color: #246482;
 }
 
 div.modal-header{
 	color: #FFFFFF;
 	background-color: #337AB7;
+	border-radius: 4px 4px 0px 0px;
+}
+
+div.modal-header.modal-header-danger{
+	color: #FFFFFF;
+	background-color: #D9534F;
 	border-radius: 4px 4px 0px 0px;
 }
 

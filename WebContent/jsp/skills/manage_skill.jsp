@@ -40,15 +40,12 @@
 				</div>
 					<c:forEach var="subSkill" items="${skill.getSub_skills()}" varStatus="status">
 					<div class="subskill-group form-group input-group ">
-						<div class="input-group-addon"><span class="fa fa-plus"></span></div>
+						<div class="input-group-addon plus"><span class="fa fa-plus"></span></div>
 						<input name="sub_skill_title${subSkill.getId()}" value="${subSkill.getTitle()}" class="form-control col-xs-offset-0 subskill"/>
 						<span class="fa fa-times-circle-o  fa-2x"></span>
 					</div>
 				</c:forEach>
-				<div class="subskill-group form-group input-group subskill_adder">
-					<div class="input-group-addon"><span class="fa fa-plus subskill_adder"></span></div>
-					<input value="Ajouter une sous compétences" class="form-control col-xs-offset-0 subskill subskill_adder" disabled/>
-				</div>
+				<button type="submit" class="btn btn-default subskill_adder"><span class="fa fa-plus"> </span> Sous compétence</button>
 				<button type="submit" class="btn btn-default"><span class="fa fa-pencil-square-o"> </span> Modifier</button>
 			</form>
 		</c:forEach>
