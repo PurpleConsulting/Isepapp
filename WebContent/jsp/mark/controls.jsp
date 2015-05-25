@@ -10,7 +10,7 @@
 		<form action="Controls" method="post">
 			<div class="form-group">
 				Recherche par groupe d'APP :
-				<select class="selectpicker" id="group">
+				<select class="selectpicker select-group" id="group">
 					<option value="init">Sélectionnez un groupe</option>
 					<c:forEach var="group" items="${group_names}" varStatus="status">
 						<option value="${group}"><c:out value="${group}"></c:out></option>
@@ -37,7 +37,7 @@
 		  		<c:forEach var="skill" items="${skills}" varStatus="status">
 		  			<div role="tabpanel" class='tab-pane ${status.count==1 ? "active":""}' id="tab${status.count}">
 		  				<form id="form${skill.getId()}" class="groupgrid">
-			    			<h4><c:out value='${status.count} - ${skill.getSubtitle()}'></c:out></h4>
+			    			<h4 data-naming="${skill.getTitle()}"><c:out value='${status.count} - ${skill.getSubtitle()}'></c:out></h4>
 			    			<c:forEach var="sub_skill" items="${skill.getSub_skills()}" varStatus="status">
 					  			<hr/><h5><c:out value="${sub_skill.getTitle()}"></c:out></h5>
 						  		<div class="line">

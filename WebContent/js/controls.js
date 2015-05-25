@@ -57,11 +57,44 @@ $(document).ready(function(){ //If page is ready
 				//$('html, body').animate( { scrollTop: $("#name_group").offset().top - 50 }, 800 );
 				$("#confirmation_box").toggleClass("alert-success");
 				$("#confirmation_box").append("<p><span class=\"fa fa-check-circle\" style=\"color:#3E753F;\"></span>   " +
-						"Félicitation, l'ajout de nouvelles notes à bien été effectué. Votre dernière notation se trouve maintenant" +
-						"dans le formutaire. Vous pouvez également dès maitenant consulter la page du group que vous " +
+						"Félicitation, l'ajout de nouvelles notes à bien été effectué. Votre dernière notation se trouve maintenant " +
+						"dans le formutaire. Vous pouvez dès maitenant consulter la page du group que vous " +
 						"venez de noter: <a href=\"/Isepapp/Groups?scope="+ data.result.target +"\">"+ data.result.target +"</a></p>" );
 				$("#confirmation_box").show("slow");
 			}
+		});
+	});
+	
+	
+	// -- bof bof
+	$("form button.adder").click(function(e){
+		e.preventDefault();
+		$.get("jsp/mark/modal_control_addpersonal.jsp", {}, function(data, status){
+			var node = $( data );
+			$("form.groupgrid").each(function(){
+				node.find("ul").append("<li><label><input type=\"checkbox\" value=\"\"/></label>"+ $(this).find("h4").attr("data-naming") +"</li>");
+			});	    	
+			bootbox.dialog({
+			title: 'Ajout de notes personnalisées.',
+			message: node.prop('outerHTML'),
+			buttons: {
+					failure:{ 
+						label: "Annuler",
+		                className: "btn-default",
+		                callback: function () {}
+					},sucess:{
+						label: "Démarrer",
+		                className: "btn-primary",
+		                callback: function () { }
+					}
+				}
+			});
+		});
+		$.post("/Isepapp/Controls", {string: $("select.select-group option:selected").text()}, function(data, status) {
+	   		var res = data.result.groups;
+	   		res.forEach(function(element){
+	   			$("select.select-modal").append("<option value=\"\">"+ element +"</option>");
+	   		});
 		});
 	});
 });	

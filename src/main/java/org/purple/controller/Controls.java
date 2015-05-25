@@ -78,9 +78,9 @@ public class Controls extends HttpServlet {
 			Value[] v= dv.selectAllValues();
 			request.setAttribute("values", v);
 			
-			p.setJs("bootstrap-select.min.js","controls.js");
+			p.setJs("bootbox.min.js", "bootstrap-select.min.js", "controls.js");
 			p.setCss("bootstrap-select.min.css","controls.css");
-			p.setTitle("ISEP / APP - Evaluation");
+			p.setTitle("ISEP / APP - Evaluations");
 			p.setContent("mark/controls.jsp");
 			request.setAttribute("pages", p);
 			
@@ -111,10 +111,10 @@ public class Controls extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		
-		//Retrieve group name selected
+		//Retrieve group name selected (global)
 		String str = request.getParameter("string");
 		
-		// -- 
+		// -- add serie of marks for a group on a skill
 		String scope = request.getParameter("scope");
 		String group = request.getParameter("group");
 		String marks = request.getParameter("marks");
