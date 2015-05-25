@@ -56,15 +56,18 @@ public class Home extends HttpServlet {
 				
 			}
 			
+			
+			request.setAttribute("pages", p);
+			request.getRequestDispatcher("/template.jsp").forward(request, response);
+			
 			du.close();
 		} else {
-			
+			response.sendRedirect("/Isepapp/Signin");
 		}
 		
 		
 		
-		request.setAttribute("pages", p);
-		request.getRequestDispatcher("/template.jsp").forward(request, response);
+
 	}
 
 	/**

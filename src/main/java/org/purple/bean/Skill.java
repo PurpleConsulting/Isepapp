@@ -6,11 +6,31 @@ public class Skill {
 
 		private int id;
 		private String title = "null";
-		private ArrayList<SubSkill> sub_skills;
+		private ArrayList<SubSkill> sub_skills = new ArrayList<SubSkill>();
 		private String subtitle = "null"; // add in the database
 		private String type = "null";
 		private int id_respo = 0;
 		private int coefficient = 0;
+		
+		
+		public Skill(){
+			
+		}
+		
+		public Skill(String title){
+			this.setTitle(title);
+		}
+		
+		public Skill(String title, String subtitle){
+			this.setTitle(title);
+			this.setSubtitle(subtitle);
+		}
+		
+		public Skill(int id, String title, String subtitle){
+			this.setId(id);
+			this.setTitle(title);
+			this.setSubtitle(subtitle);
+		}
 		
 		public String getSubtitle() {
 			return subtitle;
@@ -46,15 +66,6 @@ public class Skill {
 
 		public void setSub_skills(ArrayList<SubSkill> sub_skills) {
 			this.sub_skills = sub_skills;
-		}
-
-		
-		public Skill(){
-			this.sub_skills = new ArrayList<SubSkill>();
-		}
-		
-		public Skill(String title){
-			this.setTitle(title);
 		}
 		
 		public String getTitle() {

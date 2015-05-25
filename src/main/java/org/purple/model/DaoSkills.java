@@ -32,7 +32,13 @@ public class DaoSkills extends Dao<Skill>{
 	@Override
 	public boolean update(Skill obj, String where) {
 		// TODO Auto-generated method stub
-		return false;
+		boolean res = true;
+		String q = "UPDATE Skills SET title = ?, id_respo = (SELECT Users.id FROM Users WHERE Users.id_post = 2),"
+				 + " modification_date = CURDATE(), sub_title = ? WHERE id = ?";
+		String[] params = {obj.getTitle(), obj.getSubtitle(), Integer.toString(obj.getId())};
+		int affected = Bdd.preparePerform(this.connect, q, params);
+		if(affected != 1) res = false;
+		return res;
 	}
 	
 	//Function which select all skills in table Skills

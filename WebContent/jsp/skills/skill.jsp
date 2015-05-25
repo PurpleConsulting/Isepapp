@@ -1,10 +1,9 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <h1 class="col-xs-offset-1 col-xs-10 titlepage">
 	Les compétences. <span class="master-dropdown fa fa-angle-double-down"></span>
-	<a class="btn btn-default" href="#" role="button"><span
+	<a class="btn btn-default" href="ManageSkills" role="button"><span
 		class="fa fa-pencil"> </span> Editer</a>
 </h1>
 <c:forEach var="skill" items="${skills}" varStatus="status">

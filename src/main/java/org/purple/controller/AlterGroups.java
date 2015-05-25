@@ -125,7 +125,7 @@ public class AlterGroups extends HttpServlet {
 			
 			if(!Isep.nullOrEmpty(scope, newName, newTutor)){
 				/**
-				 * HERE THE USER WANT TO CHANGE THE GROUP PROPERTY
+				 * HERE THE USER WANT TO CHANGE THE GROUP PROPERTIES
 				 * GROUP NAME AND TUTOR
 				 */
 				
