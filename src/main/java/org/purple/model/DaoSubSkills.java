@@ -19,7 +19,13 @@ public class DaoSubSkills extends Dao<SubSkill>{
 	@Override
 	public boolean create(SubSkill obj) {
 		// TODO Auto-generated method stub
-		return false;
+		boolean res = true;
+		String q = "INSERT INTO Sub_skills (id_skills, title, note, creation_date, id_respo) VALUE (?, ?, ?, CURDATE(),"
+				+ " (SELECT Users.id FROM Users WHERE Users.id_post = 2));";
+		String[] params = {Integer.toString(obj.getId_skills()), obj.getTitle(), obj.getNote()};
+		int affected = Bdd.preparePerform(this.connect, q, params);
+		if(affected != 1) res = false;
+		return res;
 	}
 
 	@Override

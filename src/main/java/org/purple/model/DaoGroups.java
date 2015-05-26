@@ -67,7 +67,6 @@ public class DaoGroups extends Dao<Group>{
 			params = new String[3];
 			params[0] = group.getName(); params[1] =  _class; params[2] =  group.getTutor();
 		}
-		
 		int affected = Bdd.preparePerform(this.connect, q, params);
 		if(affected == 1){
 			return true;

@@ -102,12 +102,27 @@ public class ManageSkills extends HttpServlet {
 		}
 		for(String s : subSkillParams){
 			subSkillsArgs.put(s.substring(this.paramSubSkillTitle.length()), request.getParameter(s));
-			//System.out.print(s + "\n ");
 		}
 		
 		// -- Add skill request
+		String addSkillFlag = request.getParameter("add_skill_flag");
+		String newSkillTitle = request.getParameter("new_skill_title");
+		String newSkillSubTitle = request.getParameter("new_skill_subtitle");
 		
-		// -- Delet skill request
+		// -- Add sub skill request
+		String addSubSkillFlag = request.getParameter("add_subskill_flag");
+		String newSubSkill = request.getParameter("new_subskill_title");
+		String newDescription = request.getParameter("new_subskill_desc");
+		
+		// -- Delete skill request
+		String delSkillFlag = request.getParameter("");
+		String delSkill = request.getParameter("");
+		
+		// -- Delete skill request
+		String delSubSkillFlag = request.getParameter("");
+		String delSubSkill = request.getParameter("");
+		
+		
 		
 		if(Auth.isRespo(request)){
 			// -- The user can access to the data base
@@ -116,7 +131,9 @@ public class ManageSkills extends HttpServlet {
 			
 			
 			if(!Isep.nullOrEmpty(skillId, skillTitle, skillSubTile)){
-				
+				/**
+				 *  HERE THE USER TRY TO MODIFY AN EXISTING SKILL
+				 */
 				// --  this is a Alter skill/subskill request
 				Skill skillbean = new Skill(Integer.parseInt(skillId), skillTitle, skillSubTile);
 				//ArrayList<SubSkill> subSkilsBeans = new ArrayList<SubSkill>();
@@ -143,16 +160,50 @@ public class ManageSkills extends HttpServlet {
 				p.setContent("/skills/manage_skill.jsp");
 				p.setTitle("ISEP / APP - Gestion des Compétences");
 
-				
-				if(p.getContent().equals("/skills/manage_skill.jsp")){
-					// -- load the content of the redirection page
-					Skill[] allskills = ds.selectAllSkills();
-					for(Skill s : allskills){
-						ds.completeSub_skills(s);
-					}
-					request.setAttribute("skills", allskills);
+			} else if(!Isep.nullOrEmpty(addSkillFlag, newSkillTitle, newSkillSubTitle)) {
+				/**
+				 *  
+				 */
+				Skill skill = new Skill(newSkillTitle, newSkillSubTitle);
+				boolean querysuccess = ds.create(skill);
+				if(querysuccess){
+					p.setSuccess(true);
+					p.setSuccessMessage("l'ajout d'une compétence à bien été effectué. Ajoutez dès mainteant "
+							+ "des sous compétences pour permettre la notation des étudiants.");
+				} else {
+					p.setError(true);
+					p.setErrorMessage("l'ajout d'une compétence à provoqué une erreur interne. Nous vous invitons"
+							+ " à bien vérifier la présence de celle-ci.");
 				}
-			} else {
+				p.setCss("bootstrap-select.min.css", "manage_skills.css");
+				p.setJs("bootbox.min.js","bootstrap-select.min.js", "manage_skills.js");
+				p.setContent("/skills/manage_skill.jsp");
+				p.setTitle("ISEP / APP - Gestion des Compétences");
+			} else if (!Isep.nullOrEmpty(addSubSkillFlag, newSubSkill, newDescription)){
+				SubSkill subSkill = new SubSkill(newSubSkill, newDescription);
+				subSkill.setId_skills(Integer.parseInt(addSubSkillFlag));
+				boolean querysuccess = dss.create(subSkill);
+				if(querysuccess){
+					p.setSuccess(true);
+					p.setSuccessMessage("l'ajout d'une sous-compétence à bien été effectué.");
+				} else {
+					p.setError(true);
+					p.setErrorMessage("l'ajout d'une sous-compétence à provoqué une erreur interne. Nous vous invitons"
+							+ " à bien vérifier la présence de celle-ci.");
+				}
+				p.setCss("bootstrap-select.min.css", "manage_skills.css");
+				p.setJs("bootbox.min.js","bootstrap-select.min.js", "manage_skills.js");
+				p.setContent("/skills/manage_skill.jsp");
+				p.setTitle("ISEP / APP - Gestion des Compétences");
+			}
+			
+			if(p.getContent().equals("/skills/manage_skill.jsp")){
+				// -- load the content of the redirection page
+				Skill[] allskills = ds.selectAllSkills();
+				for(Skill s : allskills){
+					ds.completeSub_skills(s);
+				}
+				request.setAttribute("skills", allskills);
 				
 			}
 			

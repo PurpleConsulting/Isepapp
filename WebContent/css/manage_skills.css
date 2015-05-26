@@ -79,6 +79,9 @@ form.edit button.subskill_adder{
 	border:1px solid #CCCCCC;
 	color: #555555;
 }
+div.input-group-addon.plus{
+	cursor: pointer;	
+}
 form.edit button.subskill_adder:hover, div.input-group-addon.plus:hover{
 	color: #246482;
 	border-color: #246482;

@@ -20,7 +20,13 @@ public class DaoSkills extends Dao<Skill>{
 	@Override
 	public boolean create(Skill obj) {
 		// TODO Auto-generated method stub
-		return false;
+		boolean res = true;
+		String q = "INSERT INTO Skills (title, sub_title, creation_date, id_respo) VALUE (? , ?, CURDATE(),"
+				+ " (SELECT Users.id FROM Users WHERE Users.id_post = 2));";
+		String[] params = {obj.getTitle(), obj.getSubtitle()};
+		int affected = Bdd.preparePerform(this.connect, q, params);
+		if(affected != 1) res = false;
+		return res;
 	}
 
 	@Override
@@ -39,43 +45,6 @@ public class DaoSkills extends Dao<Skill>{
 		int affected = Bdd.preparePerform(this.connect, q, params);
 		if(affected != 1) res = false;
 		return res;
-	}
-	
-	//Function which select all skills in table Skills
-	public Skill[] selectAllValues (){
-		Skill[] skills = null;
-		String q = "SELECT id,title, points "
-				+ "FROM `Values` "
-				+ "ORDER BY points";
-		
-		try{
-			PreparedStatement prestmt = this.connect.prepareStatement(q);
-			ResultSet cursor = prestmt.executeQuery();
-			
-			int i = 0;
-			
-			if(!cursor.next()) return skills;
-			if (cursor.last()) {
-				skills = new Skill[cursor.getRow()];
-				cursor.beforeFirst(); 
-			}
-			
-			while(cursor.next()){
-				Skill v = new Skill();
-				v.setId(cursor.getInt(1));
-				v.setTitle(cursor.getString(2));
-				v.setSubtitle(cursor.getString(3));
-				skills[i] = v;
-				i = i + 1;
-			}
-			
-		
-		}catch (SQLException e){
-			// TODO Auto-generated catch block
-			skills = null;
-			e.printStackTrace();
-		}
-		return skills;
 	}
 
 	@Override

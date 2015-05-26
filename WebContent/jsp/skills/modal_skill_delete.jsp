@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<form action="" class="form-horizontal form-add-skill" id="delete-std" method="post">
+<form action="" class="form-horizontal form-add-skill" id="modal-form-delskill" method="post">
 	<div style="margin-left:10%; width:80%">
 		<p>
 			Voulez vous <u style="color:#A94442;">vraiment</u> supprimer <u style="color:#A94442;">cette</u>
