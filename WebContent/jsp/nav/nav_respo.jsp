@@ -29,10 +29,12 @@
   			<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Les groupes <span class="caret"></span></a>
   			<ul class="dropdown-menu" role="menu">
 	            <li><a href="Promo">Les classes</a></li>
-	            <li><a href="#">Groupes d'APP</a></li>
+	            <li><a href="#">Les Tuteurs</a></li>
+	            <li class="divider"></li>
+	            <li><a href="#">L'appel</a></li>
+	            <li><a href="Controls">Evaluation des Groupes</a></li>
 	            <li class="divider"></li>
 	            <li><a href="Students?pseudo=ldivad">Recherche d'étudiant</a></li>
-	            <li><a href="#">Recherche d'un tuteur</a></li>
           	</ul>
   		</li>
   		<li class="dropdown">

@@ -7,10 +7,10 @@
                driverClassName="com.mysql.jdbc.Driver"
                url="jdbc:mysql://ns370799.ip-91-121-193.eu:6311/APPDB"/>
 
-<!-- <Resource name="jdbc/APPDB" auth="Container" type="javax.sql.DataSource" -->
-<!--                maxActive="50" maxIdle="30" maxWait="10000" -->
-<!--                username="isep" password="paris06"  -->
-<!--                driverClassName="com.mysql.jdbc.Driver" -->
-<!--                url="jdbc:mysql://192.168.56.15:6311/APPDB"/> -->
+<!-- <Resource name="jdbc/APPDB" auth="Container" type="javax.sql.DataSource"  -->
+<!--                 maxActive="50" maxIdle="30" maxWait="10000" -->
+<!--                 username="isep" password="paris06"  -->
+<!--                 driverClassName="com.mysql.jdbc.Driver" -->
+<!--                 url="jdbc:mysql://172.16.179.5:6311/APPDB"/> -->
 
 </Context>

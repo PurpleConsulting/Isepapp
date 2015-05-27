@@ -22,7 +22,7 @@ public class TestDaoMarks {
 	public void TestGetMark(){
 		DaoMarks dm = new DaoMarks(Bdd.getSecureCo());
 		Mark m = dm.select("1");
-		if (m.getValue() != 2.0 && m.getOwnerPseudo() != "ldivad"){
+		if (m.getValue() != 2.0 && m.getOwner() != "ldivad"){
 			fail(Double.toString(m.getValue()));
 		}
 		dm.close();
@@ -33,8 +33,8 @@ public class TestDaoMarks {
 		DaoMarks dm = new DaoMarks(Bdd.getSecureCo());
 		ArrayList<Mark> marks = dm.selectByStudent("1");
 		for(Mark m : marks){
-			if(!m.getOwnerPseudo().equals("_ldivad")){
-				fail(m.getOwnerPseudo());
+			if(!m.getOwner().equals("_ldivad")){
+				fail(m.getOwner());
 			}
 		}
 		dm.close();

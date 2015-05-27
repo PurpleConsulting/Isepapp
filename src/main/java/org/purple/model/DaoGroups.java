@@ -22,7 +22,7 @@ public class DaoGroups extends Dao<Group>{
     //Select all group name
     public String[] selectAllName(String pseudo){
 
-        String[] gp_name = null;
+        String[] gp_name = new String[0];
 
         String q = "SELECT Groups.`name` FROM Groups INNER JOIN Users ON Users.id = Groups.id_tutor WHERE Users.id = ? ORDER BY Groups.name;";
         try {
@@ -40,7 +40,6 @@ public class DaoGroups extends Dao<Group>{
             }
             cursor.close();
         } catch (SQLException e) {
-            gp_name = null;
             e.printStackTrace();
         }
         return gp_name;
@@ -145,7 +144,7 @@ public class DaoGroups extends Dao<Group>{
 			co.close();
 		}catch (SQLException e){
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			//e.printStackTrace();
 		}
 		return res;
 	}

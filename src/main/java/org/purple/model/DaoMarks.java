@@ -1,5 +1,6 @@
 package org.purple.model;
 import org.purple.bean.Mark;
+import org.purple.constant.Bdd;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -17,7 +18,48 @@ public class DaoMarks extends Dao<Mark>{
 	@Override
 	public boolean create(Mark obj) {
 		// TODO Auto-generated method stub
-		return false;
+		boolean res = false;
+		int cross = (obj.isCross()) ? 1 : 0;
+		String q = "INSERT INTO Marks (id_student, id_value, id_sub_skill,`cross`, date, id_tutor)"
+				+ " VALUES ((SELECT id FROM APPDB.Users WHERE pseudo = ?),"
+				+ " ?, ?," + Integer.toString(cross) + ", CURDATE(), "
+				+ "(SELECT Groups.id_tutor FROM Groups WHERE Groups.`name` = "
+				+ "(SELECT Groups.`name` FROM Groups INNER JOIN Users ON Users.id_group = Groups.id WHERE Users.pseudo = ?))) "
+				+ "ON DUPLICATE KEY UPDATE id_value=VALUES(id_value), date=CURDATE(), id_tutor = "
+				+ "(SELECT Groups.id_tutor FROM Groups WHERE Groups.`name` = "
+				+ "(SELECT Groups.`name` FROM Groups INNER JOIN Users ON Users.id_group = Groups.id WHERE Users.pseudo = ?));";
+		try{
+			String[] params = {
+					obj.getOwner(),
+					Double.toString(obj.getIdValue()),
+					Integer.toString( obj.getIdSubSkill()),
+					obj.getOwner(),
+					obj.getOwner()};
+			int affected = Bdd.preparePerform(this.connect, q, params);
+			if(affected == 1 || affected == 2) res = true;
+		}catch (NullPointerException e){
+			// TODO Auto-generated catch block
+			res = false;
+			e.printStackTrace();
+		}
+		return res;
+	}
+	
+	public boolean createMulti(Mark obj) {
+		// -- Note Injection for a group
+		boolean res = false;
+		String q1 = "SELECT Users.pseudo FROM Users WHERE Users.id_group ="
+				+ " (SELECT Groups.id FROM Groups WHERE Groups.`name` =  ?)";
+		String[] params = {obj.getGroupOwner()};
+		ResultSet currsor = Bdd.prepareExec(this.connect, q1, params);
+		String[] pseudos = Bdd.rsToStringTab(currsor);
+		if(pseudos.length > 0) res = true; 
+		for(String student: pseudos){
+			obj.setOwner(student);
+			boolean inserted = this.create(obj);
+			if(!inserted) return false;
+		}
+		return res;
 	}
 
 	@Override

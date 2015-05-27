@@ -1,0 +1,56 @@
+@CHARSET "UTF-8";
+div.row{
+	margin-bottom: 30px;
+}
+
+div.row div[class^='col-']{
+	padding-left:0px;
+	padding-right: 0px;
+}
+
+div.grid{
+	border: solid #ccc 1px;
+	border-radius: 6px;
+	margin-bottom: 30px;
+}
+div.grid div{
+	margin: 10px 15px;
+}
+div.grid ul div{
+	margin: 10px 0px;
+}
+div.grid div ul{
+	margin-top: 30px;
+}
+div.tab-content div form{
+	margin:12px;
+}
+label{
+	margin: 0px 12px;
+	font-weight: inherit;
+}
+div#name_group{
+	padding:5px;
+	border: 1px solid #31708F;
+}
+
+button.marker, button.adder{
+	float: right;
+	margin-left: 16px;
+	margin-bottom: 16px;
+}
+
+button.marker.working{
+	color:#3E753F;
+	border-color:#3E753F;
+	background-color:#DFF0D9;
+}
+div.conf_box{
+	border-color:#3E753F;
+	padding-left: 10px;
+	padding-right: 10px;
+}
+
+button.close{
+	right:0px;
+}
