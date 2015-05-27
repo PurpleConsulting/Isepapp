@@ -10,14 +10,7 @@
 <c:import url="/jsp/alert.jsp" charEncoding="UTF-8"></c:import>
 <div class="row">
 	<div class="col-xs-offset-1 col-xs-10 group">
-		<h4>- Derniers groups consultés -</h4>
-		<div class="latest-group">
-			<div class="alert alert-info"> Groupe G4C - Nombre de note: 0  - Absences: 0  - les livrables(0) - tuteur: ldivad</div>
-			<div class="alert alert-info"> Groupe G4C - Nombre de note: 0  - Absences: 0  - les livrables(0) - tuteur: ldivad</div>
-			<div class="alert alert-info"> Groupe G4C - Nombre de note: 0  - Absences: 0  - les livrables(0) - tuteur: ldivad</div>
-			<a href="Promo"><em>Voir plus de group...</em></a>
-		</div>
-		<hr/>
+		<h4>- Les groups consultés -</h4>
 		<em style="color:#337AB7">Ajouter un groupe...</em>
 		<form class="form-inline" method="post" action="AlterGroups">
 		  <div class="form-group">
@@ -45,6 +38,13 @@
 		  		<a class="btn btn-default" href="#" role="button"><span class="fa fa-plus"> </span>  Ajouter un Tuteur</a>
 		  	</div>
 		</form>
+		<hr/>
+		<div class="latest-group">
+			<div class="alert alert-info"> Groupe G4C - Nombre de note: 0  - Absences: 0  - les livrables(0) - tuteur: ldivad</div>
+			<div class="alert alert-info"> Groupe G4C - Nombre de note: 0  - Absences: 0  - les livrables(0) - tuteur: ldivad</div>
+			<div class="alert alert-info"> Groupe G4C - Nombre de note: 0  - Absences: 0  - les livrables(0) - tuteur: ldivad</div>
+			<a href="Promo"><em>Voir plus de group...</em></a>
+		</div>
 	</div>
 </div>
 <div class="row">

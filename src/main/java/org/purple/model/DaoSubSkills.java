@@ -4,8 +4,10 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import org.purple.bean.SubSkill;
+import org.purple.constant.Bdd;
 
 public class DaoSubSkills extends Dao<SubSkill>{
 
@@ -17,7 +19,13 @@ public class DaoSubSkills extends Dao<SubSkill>{
 	@Override
 	public boolean create(SubSkill obj) {
 		// TODO Auto-generated method stub
-		return false;
+		boolean res = true;
+		String q = "INSERT INTO Sub_skills (id_skills, title, note, creation_date, id_respo) VALUE (?, ?, ?, CURDATE(),"
+				+ " (SELECT Users.id FROM Users WHERE Users.id_post = 2));";
+		String[] params = {Integer.toString(obj.getId_skills()), obj.getTitle(), obj.getNote()};
+		int affected = Bdd.preparePerform(this.connect, q, params);
+		if(affected != 1) res = false;
+		return res;
 	}
 
 	@Override
@@ -35,34 +43,23 @@ public class DaoSubSkills extends Dao<SubSkill>{
 	@Override
 	public boolean update(SubSkill obj, String where) {
 		// TODO Auto-generated method stub
-		return false;
+		boolean res = false;
+		String q = "UPDATE Sub_skills SET title = ?, modification_date = CURDATE() WHERE id = ?";
+		String[] params = {obj.getTitle(), Integer.toString(obj.getId())};
+		int affected = Bdd.preparePerform(this.connect, q, params);
+		if(affected == 1) res = true;
+		return res;
 	}
 	
-	/*public Sub_skill[] selectAllSub_skillsBySkillsId(int id_skills){
-		Sub_skill[] sub_skills = null;
-
-		String q = "SELECT id, id_skills, title FROM Sub_skills WHERE id_skills = ? ORDER BY id";
-		
-		try {
-			PreparedStatement prestmt = this.connect.prepareStatement(q);
-			ResultSet cursor = prestmt.executeQuery();
-			if (cursor.last()) {
-				sub_skills = new Sub_skill[cursor.getRow()];
-				cursor.beforeFirst(); 
-			}
-			int i = 0;
-			while(cursor.next()){
-				Sub_skill s = new Sub_skill(cursor.getInt(1), cursor.getInt(2), cursor.getString(3));
-				sub_skills[i] = s;
-				i++;
-			}
-			cursor.close();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			sub_skills = null;
-			e.printStackTrace();
+	public boolean updateMulti(ArrayList<SubSkill> list){
+		boolean interRes = true;
+		boolean res = true;
+		for(SubSkill l : list){
+			interRes = this.update(l, "");
+			if(!interRes) res = false;
 		}
-		return sub_skills;
-	}*/
+		return res;
+	}
+
 
 }

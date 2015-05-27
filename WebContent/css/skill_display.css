@@ -1,0 +1,65 @@
+div#content.content{
+	min-height: 800px;
+}
+h1.titlepage{
+	margin-top: 20px;
+	margin-bottom: 20px;
+}
+
+div.alert-skill, div.alert-sub-skill{
+	background-color: #F8F8F8;
+	font-style: italic;
+	padding: 5px 15px;
+}
+
+div.alert.alert-skill{
+	border: 1px #246482 solid;
+	color: #575757;
+}
+div.alert.alert-sub-skill{
+	border: 1px #BDBDBD solid;
+	color: #575757;
+}
+
+div.alert-skill{
+	font-size: 1.1em;
+}
+
+div.alert-sub-skill-box div.alert.alert-sub-skill{
+	margin-bottom: 2px;
+	margin-top: 20px;
+}
+
+
+div.alert-sub-skill-box{
+	padding: 5px 0px;
+}
+
+span.dropdown{
+	min-width: 70px;
+	text-align: center;
+	color: #246482;
+	line-height: 1.42857;
+	cursor: pointer;
+}
+
+span.master-dropdown{
+	background-color: #246482;
+	color: #FFFFFF;
+	padding: 0px 6px;
+	border-radius: 100%;
+	cursor: pointer;
+}
+.skill-checkpoint{
+	padding: 10px 20px;
+	border: 1px solid #246482;
+	border-left: 6px solid #246482;
+	border-radius:6px;
+}
+
+.hidden-box, div.alert-sub-skill-box.hidden-box{
+	margin-top:0px;
+	margin-bottom:0px;
+	padding-top:0px;
+	padding-bottom:0px;
+}

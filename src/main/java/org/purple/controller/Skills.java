@@ -9,23 +9,22 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.purple.bean.Page;
-import org.purple.bean.User;
+import org.purple.bean.Skill;
 import org.purple.constant.Bdd;
 import org.purple.model.Auth;
-import org.purple.model.DaoGroups;
-import org.purple.model.DaoUsers;
+import org.purple.model.DaoSkills;
 
 /**
- * Servlet implementation class Home
+ * Servlet implementation class Skills
  */
-@WebServlet("/Home")
-public class Home extends HttpServlet {
+@WebServlet("/Skills")
+public class Skills extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public Home() {
+    public Skills() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -36,38 +35,26 @@ public class Home extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		Page p = new Page();
-		
 		if(Auth.isConnect(request)){
 			
-			DaoUsers du = new DaoUsers(Bdd.getCo());
+			DaoSkills dsk = new DaoSkills(Bdd.getCo());
 			
-			if(Auth.isRespo(request)){
-				User[] teachers = du.selectAllTutor();
-				
-				request.setAttribute("teachers", teachers);
-				p.setJs("bootstrap-select.min.js","home_reso.js"); 
-				p.setCss("bootstrap-select.min.css","home_respo.css"); p.setContent("home/respo.jsp");
-				p.setTitle("ISEP / APP - Accueil");
-			} else if(Auth.isTutor(request)){
-				
-			} else if(Auth.isAdmin(request)){
-				
-			} else if(Auth.isStudent(request)){
-				
+			Skill[] skills =  dsk.selectAllSkills();
+			for(Skill s: skills ){
+				dsk.completeSub_skills(s);
 			}
 			
+			p.setTitle("ISEP / APP - Les compétences");
+			p.setCss("skill_display.css");
+			p.setJs("skill_display.js");
+			p.setContent("skills/skill.jsp");
 			
+			dsk.close();
+			request.setAttribute("skills", skills);
 			request.setAttribute("pages", p);
 			request.getRequestDispatcher("/template.jsp").forward(request, response);
-			
-			du.close();
-		} else {
-			response.sendRedirect("/Isepapp/Signin");
 		}
 		
-		
-		
-
 	}
 
 	/**

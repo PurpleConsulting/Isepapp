@@ -27,7 +27,7 @@ h1 span.fa:hover{
 }
 ul li.std span.fa:hover{
 	opacity: 1;
-	text-shadow: 0 0 50px #F2DEDE;
+	text-shadow: 2px 2px 2px #F2DEDE;
 }
 
 div.form-group input, div.bootstrap-select button{

@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="sql" uri="http://java.sun.com/jsp/jstl/sql"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!doctype html>
 <c:if test="${sessionScope.user == null}">
 	<c:redirect url="/Signin" />
@@ -26,7 +26,7 @@
 		<header>
 			<div class="container-fluid">
 				<div class="col-md-offset-1">
-					<img class="" src="img/BANNERISEPAPP.svg"  style="heigth:150px;"/><!--  style="width:40%;"-->
+					<img class="" src="img/BANNERISEPAPP.svg"  alt ="Bannière du site Isep.app" style="heigth:150px;"/><!--  style="width:40%;"-->
 					</div>
 				</div>
 		</header>

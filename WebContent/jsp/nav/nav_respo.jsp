@@ -20,9 +20,10 @@
   		<li class="dropdown">
   			<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">La gestion <span class="caret"></span></a>
   			<ul class="dropdown-menu" role="menu">
-	            <li><a href="#">Les compétences</a></li>
+	            <li><a href="Skills">Les compétences</a></li>
+	            <li class="divider"></li>
 	            <li><a href="Values">Valeurs des notes </a></li>
-	            <li><a href="#">Notes et<br/>coefficients </a></li>
+	            <li><a href="ManageSkills">Edition de la<br/>grille de compétence</a></li>
           	</ul>
   		</li>
   		<li class="dropdown">
