@@ -1,0 +1,38 @@
+@CHARSET "ISO-8859-1";
+div.list, form.group {
+  border: solid #ccc 1px;
+  border-radius: 6px;
+  background-color: transparent;
+  padding: 10px;
+}
+
+div.list{
+	min-height: 200px;
+}
+form.group{
+	min-height: 60px;
+	margin-bottom:30px;
+}
+div.row {
+  margin-bottom: 20px;
+}
+
+div.form-group input[disabled] {
+   border: solid 0px transparent;
+   background-color: transparent; 
+   box-shadow: none;
+   font-weight:bold;
+   color:#31708f;
+   width: 150px;
+}
+.design{
+	padding:6px;
+}
+.deadline{
+	margin-left:30px;
+}
+
+.form-group.button {
+  margin-top: 10px;
+  margin-bottom: 13px;
+}

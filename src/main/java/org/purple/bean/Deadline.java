@@ -10,15 +10,25 @@ public class Deadline {
 		private int id = 0; 
 		private String description = "null";
 		private String group = "null";
+		private int idgroup=0;
 		private Boolean status = false;
 		private DateTime dateLimit = new DateTime(2000, 01,01, 0,0,0);
 		private DateTime deliveryDate = new DateTime(2000, 01,01, 0,0,0);
 		private Boolean completed = false;
-		private int tuteur=0;
+		private int responsable=0;
 		public Deadline(){
 			
 		}
-
+		public Deadline(int id, String description, String datelimit, int createur, Boolean status, String group){
+			this.setId(id);
+			this.setDescription(description);
+			this.setDateLimit(datelimit);
+			this.setResponsable(createur);
+			this.setStatus(status);
+			this.setGroup(group);
+			
+		}
+		
 		
 		public int getId() {
 			return id;
@@ -67,11 +77,21 @@ public class Deadline {
 		public void setCompleted(Boolean completed) {
 			this.completed = completed;
 		}
-		public int getTuteur() {
-			return tuteur;
+		public int getResponsable() {
+			return responsable;
 		}
-		public void setTuteur(int tuteur) {
-			this.tuteur = tuteur;
+		public void setResponsable(int responsable) {
+			this.responsable = responsable;
+		}
+
+
+		public int getIdgroup() {
+			return idgroup;
+		}
+
+
+		public void setIdgroup(int idgroup) {
+			this.idgroup = idgroup;
 		}
 		
 		

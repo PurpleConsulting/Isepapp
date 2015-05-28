@@ -91,7 +91,7 @@ public class Values extends HttpServlet {
 
 				valu[i] = val;
 			}
-			// Appel ï¿½ la page affichage value
+			// Appel à la page affichage value
 			Page p = new Page();
 
 			if (CountTrue == Integer.parseInt(nombre) + 1) {

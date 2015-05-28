@@ -4,10 +4,14 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 
 import org.purple.bean.Deadline;
+import org.purple.bean.Group;
 import org.purple.bean.Missing;
+import org.purple.bean.User;
 import org.purple.bean.Value;
+import org.purple.constant.Bdd;
 import org.purple.constant.Isep;
 
 
@@ -17,28 +21,18 @@ public class DaoDeadline extends Dao<Deadline>{
 		super(co);
 		// TODO Auto-generated constructor stub
 	}
-
+	
 	@Override
 	public boolean create(Deadline dl) {
 		boolean r=false;
-		String q = "INSERT INTO `Deadlines`(id, description, id_group)"
-				+ "VALUES (?, ?, ?) ";	
-		try{
-			PreparedStatement prestmt = this.connect.prepareStatement(q);
-			prestmt.setInt(1, dl.getId());
-			prestmt.setString(2, dl.getDescription());
-			prestmt.setInt(3, Integer.parseInt(dl.getGroup()));
-			
-			prestmt.execute();
-			
-			r=true;
-			
-
-		}catch (SQLException e){
-			// TODO Auto-generated catch block
-			r = false;
-			e.printStackTrace();
-		}
+		String[]params={dl.getDescription(),
+				Integer.toString(dl.getIdgroup()),
+				Integer.toString(dl.getResponsable()),
+				"1",dl.getDateLimit().toString(Isep.JODA_UTC)};
+		String q = "INSERT INTO `Deadlines`(description, id_group, id_createur, date_creation, Status, date_limit)"
+				+ "VALUES (?, ?, ?, CURDATE(),?,  ?) ";	
+		int affected = Bdd.preparePerform(this.connect, q, params);
+		if(affected == 1) r = true;
 		return r;
 	}
 
@@ -50,8 +44,13 @@ public class DaoDeadline extends Dao<Deadline>{
 
 	@Override
 	public boolean update(Deadline obj, String where) {
-		// TODO Auto-generated method stub
-		return false;
+		boolean r=false;
+		String[]params={obj.getDateLimit().toString(Isep.JODA_UTC), where};
+		String q = "UPDATE `Deadlines` SET Deadlines.date_limit=? "
+				+ "WHERE Deadlines.id=?";	
+		int affected = Bdd.preparePerform(this.connect, q, params);
+		if(affected == 1) r = true;
+		return r;
 	}
 
 	@Override
@@ -118,39 +117,32 @@ public class DaoDeadline extends Dao<Deadline>{
 		}
 		
 	}
-	public Deadline[] selectAllDeadlines (){
+
+	public Deadline[] selectAllDeadlines(){
 		Deadline[] dl = new Deadline[0];
-		String q = "SELECT `Deadlines`.id, `Deadlines`.description, `Deadlines`.`date_limit`,"
+		String q = "SELECT `Deadlines`.id, `Deadlines`.description,  DATE_FORMAT(Deadlines.date_limit, '"+ Isep.MYSQL_UTC +"'),"
 				+"`Deadlines`.id_createur, `Deadlines`.Status, Groups.name "
-				+ "FROM `Deadlines`INNER JOIN Groups ON  `Deadlines`.id_group = Groups.id";		
-		try{
-			PreparedStatement prestmt = this.connect.prepareStatement(q);
-			ResultSet currsor = prestmt.executeQuery();
-			
-			int i = 0;
-			
-			if(!currsor.next()) return dl;
+				+ "FROM `Deadlines`INNER JOIN Groups ON  `Deadlines`.id_group = Groups.id";	
+		ResultSet currsor = Bdd.exec(this.connect, q);
+		try {
+			if(!currsor.next()) return new Deadline[0];
 			if (currsor.last()) {
 				dl = new Deadline[currsor.getRow()];
 				currsor.beforeFirst(); 
 			}
-			
+			int i = 0;
 			while(currsor.next()){
-				Deadline d = new Deadline();
-				d.setId(currsor.getInt(1));
-				d.setDescription(currsor.getString(2));
-				//d.setDateLimit(Integer.toString(currsor.getInt(3)));
-				d.setTuteur(currsor.getInt(4));
-				d.setStatus(currsor.getBoolean(5));
-				d.setGroup(currsor.getString(6));
+				Deadline d = new Deadline(currsor.getInt(1), currsor.getString(2), currsor.getString(3), currsor.getInt(4), currsor.getBoolean(5), currsor.getString(6));
 				dl[i] = d;
-				i = i + 1;
+				i++;
 			}
-		}catch (SQLException e){
+			currsor.close();
+		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return dl;
 	}
 
+	
 }

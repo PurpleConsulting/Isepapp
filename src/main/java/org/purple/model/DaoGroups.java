@@ -175,6 +175,56 @@ public class DaoGroups extends Dao<Group>{
 		return gs;
 	}
 	
+	public Group[] selectGroupbyClass(String classe) {
+		// TODO Auto-generated method stub
+		Group[] gs = new Group[0];
+		String q = "SELECT Groups.id, Groups.`name`, Groups.class"
+				+ " FROM APPDB.Groups WHERE Groups.class= ?;";
+		String[] params = {classe};
+		ResultSet currsor = Bdd.prepareExec(this.connect, q, params);
+		try {
+			if (currsor.last()) {
+				gs = new Group[currsor.getRow()];
+				currsor.beforeFirst(); 
+			}
+			int i = 0;
+			while(currsor.next()){
+				gs[i] = new Group(currsor.getInt(1), currsor.getString(2), currsor.getString(3));
+				i++;
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			gs = new Group[0];
+			e.printStackTrace();
+		}
+		
+		return gs;
+	}
+	
+	public String[] selectAllClass() {
+		// TODO Auto-generated method stub
+		String[] gs = new String[0];
+		String q = "SELECT distinct Groups.class"
+				+ " FROM APPDB.Groups;";
+		try{
+			ResultSet currsor = this.connect.createStatement().executeQuery(q);
+			if (currsor.last()) {
+				gs = new String[currsor.getRow()];
+				currsor.beforeFirst(); 
+			}
+			int i = 0;
+			while(currsor.next()){
+				gs[i] = currsor.getString(1);
+				i++;
+			}
+			currsor.close();
+		}catch (SQLException e){
+			// TODO Auto-generated catch block
+			gs = null;
+			e.printStackTrace();
+		}
+		return gs;
+	}
 	public void completeTutor(Group g){
 		String q = "SELECT Users.pseudo FROM Users INNER JOIN Groups"
 				+ " ON Groups.id_tutor = Users.id"
@@ -213,5 +263,6 @@ public class DaoGroups extends Dao<Group>{
 				e.printStackTrace();
 		}
 	}
+	
 
 }
