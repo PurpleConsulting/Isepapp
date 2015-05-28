@@ -115,14 +115,16 @@ public class ManageSkills extends HttpServlet {
 		String newDescription = request.getParameter("new_subskill_desc");
 		
 		// -- Delete skill request
-		String delSkillFlag = request.getParameter("");
-		String delSkill = request.getParameter("");
+		String delSkillFlag = request.getParameter("del_skill_flag");
+		String delSkill = request.getParameter("del_skill");
 		
-		// -- Delete skill request
-		String delSubSkillFlag = request.getParameter("");
-		String delSubSkill = request.getParameter("");
+		// -- Delete subskill request
+		String delSubSkillFlag = request.getParameter("del_subskill_flag");
+		String delSubSkill = request.getParameter("del_subskill");
 		
-		
+		// --
+		// Start of the opps
+		// --
 		
 		if(Auth.isRespo(request)){
 			// -- The user can access to the data base
@@ -130,7 +132,7 @@ public class ManageSkills extends HttpServlet {
 			DaoSubSkills dss = new DaoSubSkills(Bdd.getCo());
 			
 			
-			if(!Isep.nullOrEmpty(skillId, skillTitle, skillSubTile)){
+			if(!Isep.nullOrEmpty(skillId, skillTitle) && skillSubTile != null){
 				/**
 				 *  HERE THE USER TRY TO MODIFY AN EXISTING SKILL
 				 */
@@ -159,10 +161,13 @@ public class ManageSkills extends HttpServlet {
 				p.setJs("bootbox.min.js","bootstrap-select.min.js", "manage_skills.js");
 				p.setContent("/skills/manage_skill.jsp");
 				p.setTitle("ISEP / APP - Gestion des Compétences");
+				
+				int support = skillbean.getId();
+				request.setAttribute("support", support);
 
-			} else if(!Isep.nullOrEmpty(addSkillFlag, newSkillTitle, newSkillSubTitle)) {
+			} else if(!Isep.nullOrEmpty(addSkillFlag, newSkillTitle) && newSkillSubTitle != null) {
 				/**
-				 *  
+				 *  HERE THE USER WANT TO ADD A NEW SKILL
 				 */
 				Skill skill = new Skill(newSkillTitle, newSkillSubTitle);
 				boolean querysuccess = ds.create(skill);
@@ -179,7 +184,14 @@ public class ManageSkills extends HttpServlet {
 				p.setJs("bootbox.min.js","bootstrap-select.min.js", "manage_skills.js");
 				p.setContent("/skills/manage_skill.jsp");
 				p.setTitle("ISEP / APP - Gestion des Compétences");
+				
+				int support = -1;
+				request.setAttribute("support", support);
+				
 			} else if (!Isep.nullOrEmpty(addSubSkillFlag, newSubSkill, newDescription)){
+				/**
+				 * HERE THE USER WANT TO ADD A NEW SUBSKILL IN AN EXISTING SKILL
+				 */
 				SubSkill subSkill = new SubSkill(newSubSkill, newDescription);
 				subSkill.setId_skills(Integer.parseInt(addSubSkillFlag));
 				boolean querysuccess = dss.create(subSkill);
@@ -191,6 +203,62 @@ public class ManageSkills extends HttpServlet {
 					p.setErrorMessage("l'ajout d'une sous-compétence à provoqué une erreur interne. Nous vous invitons"
 							+ " à bien vérifier la présence de celle-ci.");
 				}
+				p.setCss("bootstrap-select.min.css", "manage_skills.css");
+				p.setJs("bootbox.min.js","bootstrap-select.min.js", "manage_skills.js");
+				p.setContent("/skills/manage_skill.jsp");
+				p.setTitle("ISEP / APP - Gestion des Compétences");
+				
+				int support = Integer.parseInt(addSubSkillFlag);
+				request.setAttribute("support", support);
+				
+			} else if(!Isep.nullOrEmpty(delSkill, delSkillFlag)){
+				/**
+				 * HERE THE USER WANT TO DELETE A SKILL
+				 */
+				if(!delSkillFlag.equals("0")){
+					Skill OldSkill = ds.select(delSkillFlag);
+					boolean querrysuccess = ds.delete(OldSkill);
+					if(querrysuccess){
+						p.setSuccess(true);
+						p.setSuccessMessage("la suppression de la compétence à bien été effectuée. "
+								+ "Les sous compétences associées on bien été effacées elles aussi.");
+					} else {
+						p.setError(true);
+						p.setErrorMessage("Une erreur est survenu lors de la suppression de la compétence.");
+					}
+				} else { p.setWarning(true); p.setWarningMessage("la compétence évaluation croisée ne peut être supprimer."); }
+				p.setCss("bootstrap-select.min.css", "manage_skills.css");
+				p.setJs("bootbox.min.js","bootstrap-select.min.js", "manage_skills.js");
+				p.setContent("/skills/manage_skill.jsp");
+				p.setTitle("ISEP / APP - Gestion des Compétences");
+				
+			} else if(!Isep.nullOrEmpty(delSubSkillFlag, delSubSkill) ) {
+				/**
+				 *  HERE THE USER WANT TO DELETE A SUBSKILL
+				 */
+				SubSkill ss = dss.select(delSubSkillFlag);
+				System.out.print(ss.getId());
+				boolean querrysuccess = dss.delete(ss);
+				if(querrysuccess){
+					p.setSuccess(true);
+					p.setSuccessMessage("la suppression de la sous-compétence à bien été éffectuée.");
+				} else {
+					p.setError(true);
+					p.setErrorMessage("Une erreur est survenu lors de la suppression de la compétence."
+							+ " Nous vous invitons à vérifier que l'oppération ai bien été effectuée.");
+				}
+				
+				p.setCss("bootstrap-select.min.css", "manage_skills.css");
+				p.setJs("bootbox.min.js","bootstrap-select.min.js", "manage_skills.js");
+				p.setContent("/skills/manage_skill.jsp");
+				p.setTitle("ISEP / APP - Gestion des Compétences");
+				
+				int support = ss.getId_skills();
+				request.setAttribute("support", support);
+			} else {
+				p.setWarning(true);
+				p.setWarningMessage("votre préscédente requête n'a pas pue être correctement interprétée."
+						+ " Il y manque peut-être des informations. Veillez à bien remplire les champs des formulaires proposées.");
 				p.setCss("bootstrap-select.min.css", "manage_skills.css");
 				p.setJs("bootbox.min.js","bootstrap-select.min.js", "manage_skills.js");
 				p.setContent("/skills/manage_skill.jsp");
@@ -209,6 +277,14 @@ public class ManageSkills extends HttpServlet {
 			
 			ds.close();
 			dss.close();
+			
+		} else {
+			
+			p.setTitle("ISEP / APP - Accueil");
+			p.setWarning(true); p.setContent("/home/common.jsp");
+			p.setWarningMessage("La page que vous tentez d'atteindre est réservé au tuteur d'APP.");	
+			p.setCss("");
+			p.setJs("");	
 		}
 		
 		request.setAttribute("pages", p);

@@ -32,7 +32,12 @@ public class DaoSkills extends Dao<Skill>{
 	@Override
 	public boolean delete(Skill obj) {
 		// TODO Auto-generated method stub
-		return false;
+		boolean res = false;
+		String[] params = { Integer.toString(obj.getId())};
+		String q = "DELETE FROM Skills WHERE Skills.`id` = ?;" ;
+		int affected = Bdd.preparePerform(this.connect, q, params);
+		if(affected == 1) res = true;
+		return res;
 	}
 
 	@Override
@@ -50,7 +55,17 @@ public class DaoSkills extends Dao<Skill>{
 	@Override
 	public Skill select(String id) {
 		// TODO Auto-generated method stub
-		return null;
+		Skill s = new Skill();
+		String q = "SELECT Skills.title, Skills.title FROM Skills  WHERE Skills.id = ? ;";
+		String [] params = {id};
+		ResultSet currsor = Bdd.prepareExec(this.connect, q, params);
+		try {
+			if(currsor.next()) s = new Skill(Integer.parseInt(id), currsor.getString(1), currsor.getString(2));
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return s;
 	}
 	
 	public static Skill[] allSkill(){
