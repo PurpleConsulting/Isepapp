@@ -113,7 +113,7 @@
 								placeholder="Pseudo ISEP, Julie LUTZ: jlutz">
 						</div>
 						<div class="col-sm-2">
-							<input type="text" class="form-control" name="std_no">
+							<input type="text" class="form-control" name="std_no" placeholder="n° Isep">
 						</div>
 						<div class="col-sm-2">
 							<input type="text" class="form-control" disabled value="${group.getName()}">

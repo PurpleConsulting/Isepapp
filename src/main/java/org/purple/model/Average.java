@@ -7,8 +7,9 @@ import org.purple.constant.Isep;
 public class Average extends Avg{
 
 	private ArrayList<Avg> grid = new ArrayList<Avg>();
-	private String title;
-	private double maxVal;
+	private String title = "null";
+	private double maxVal = 1;
+	private boolean cross = false;
 	
 	public Average(){
 		this.value = 0.0;
@@ -44,6 +45,12 @@ public class Average extends Avg{
 	}
 	public void setMaxVal(double maxVal) {
 		this.maxVal = maxVal;
+	}
+	public boolean isCross() {
+		return cross;
+	}
+	public void setCross(boolean cross) {
+		this.cross = cross;
 	}
 	@Override
 	public double compute() {

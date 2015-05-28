@@ -8,7 +8,7 @@
 	<a class="btn btn-default link-dialog-std" href="#" role="button"><span class="fa fa-pencil"> </span>  Editer</a>
 </h1>
 <div class="row">	
-	<div class="col-md-offset-1 col-md-10 col-sm-offset-1 col-sm-10 col-xs-offset-1 col-xs-10 idcard">
+	<div class="col-xs-offset-1 col-xs-10 idcard">
 		<div class="col-md-offset-1 col-md-4 col-sm-offset-1 col-sm-10 col-xs-offset-1 col-xs-10  ">
 			<img src="./img/photo.jpg" alt="Photo de l'étudiant" />
 		</div>
@@ -37,16 +37,18 @@
 	</div>
 </div>
 <div class="row">
-	<div class="col-md-offset-1 col-md-10 col-sm-offset-1 col-sm-10 col-xs-offset-1 col-xs-10 mark" >
+	<div class="col-xs-offset-1 col-xs-10 mark" >
 		<h4>Compétences - <a class="btn btn-default" href="#" role="button"><span class="fa fa-pencil"> </span>  Noter</a></h4> 
 		<div role="tabpanel">
 		  <!-- Nav tabs -->
 		  <ul class="nav nav-tabs" role="tablist">
 		    <li role="presentation" class="active"><a href="#tab1" aria-controls="tab1" role="tab" data-toggle="tab">Global</a></li>
 			<c:forEach var="skill" items="${skills}" varStatus="status">
+				<c:if test="${skill.getId() != 0}">
 				<li role="presentation">
 					<a href="#tab${status.count + 1}" aria-controls="tab${status.count + 1}" role="tab" data-toggle="tab"><c:out value="${skill.getTitle()}"></c:out></a>
 				</li>
+				</c:if>
 			</c:forEach>	
 		    </ul>
 		  <!-- Tab panes -->
@@ -57,6 +59,7 @@
 		    	</div>
 		    	<div class="col-sm-offset-4 col-sm-9">
     				<c:forEach var="skill_mark" items="${average.grid}" varStatus="status">
+		    			<c:if test="${!skill_mark.isCross()}">
 		    			<div>
 		    				<div class="col-sm-4"><c:out value="${skill_mark.getTitle()}"></c:out>:</div>
 		    				<span class="badge"><c:out value="${skill_mark.compute().intValue()}"></c:out></span>
@@ -64,6 +67,7 @@
 						  		<div class="progress-bar" role="progressbar" aria-valuenow="${skill_mark.compute()}" aria-valuemin="0" aria-valuemax="20" style="width: 60%;"></div>
 							</div>
 						</div>
+						</c:if>
 					</c:forEach>
 		    	</div>
 		    </div>
@@ -91,7 +95,7 @@
 	</div>
 </div>
 <div class="row">
-	<div class="col-md-offset-1 col-md-10 col-sm-offset-1 col-sm-10 col-xs-offset-1 col-xs-10 crossmark" >
+	<div class="col-xs-offset-1 col-xs-10 crossmark" >
 		<h4>Evaluation croisée - 12 / 20</h4>
 		<div class="table-responsive">
 		<table class="table table-hover">
@@ -136,7 +140,7 @@
 	</div>
 </div>
 <div class="row">
-	<div class="col-md-offset-1 col-md-10 col-sm-offset-1 col-sm-10 col-xs-offset-1 col-xs-10 missing" >
+	<div class="col-xs-offset-1 col-xs-10 missing" >
 		<h4>Les absences - <c:out value="${fn:length(missingGrid)}"></c:out></h4>
 		<br/>
 		<div id="blk-missing">

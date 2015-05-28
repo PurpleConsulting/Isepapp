@@ -54,7 +54,7 @@ public class Students extends HttpServlet {
 			p.setWarning(true);
 			p.setWarningMessage("La page sur laquelle vous tentez de vous rendre ne vous est pas accessible. "
 					+ "Pour toute réclamation, prenez contact avec le responsable d'APP actuel.");
-			p.setContent("home.jsp");
+			p.setContent("home/common.jsp");
 		
 		} else {
 			
@@ -87,7 +87,10 @@ public class Students extends HttpServlet {
 					ArrayList<Average> sklAverage = new ArrayList<Average>();// -- 
 					Average average = new Average("Moyenne: "+std.getPseudo(), Isep.LANDMARK);
 					for(Skill s : skills){
-						sklAverage.add(new Average(s.getTitle(), maxMark));
+						Average a = new Average(s.getTitle(), maxMark);
+						if(s.getId() == 0) a.setCross(true);
+						sklAverage.add(a);
+						
 					}
 					for(Average av : sklAverage){
 						for(Mark note : marks){

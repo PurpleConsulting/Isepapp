@@ -72,7 +72,7 @@ public class DaoSkills extends Dao<Skill>{
 		Skill[] skills = new Skill[0];
 		//Connection co = Bdd.getCo();
 		Connection co = Bdd.getSecureCo();
-		String q = "SELECT title FROM Skills";
+		String q = "SELECT id, title, sub_title FROM Skills";
 		try {
 			ResultSet currsor = co.createStatement().executeQuery(q);
 			if (currsor.last()) {
@@ -81,7 +81,7 @@ public class DaoSkills extends Dao<Skill>{
 			}
 			int i = 0;
 			while(currsor.next()){
-				skills[i] = new Skill(currsor.getString(1));
+				skills[i] = new Skill(currsor.getInt(1), currsor.getString(2), currsor.getString(3));
 				i++;
 			}
 			currsor.close();
