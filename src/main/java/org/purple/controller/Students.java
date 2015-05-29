@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.purple.bean.Deadline;
 import org.purple.bean.Mark;
@@ -20,6 +21,7 @@ import org.purple.constant.Isep;
 import org.purple.model.Auth;
 import org.purple.model.Average;
 import org.purple.model.DaoDeadline;
+import org.purple.model.DaoGroups;
 import org.purple.model.DaoMarks;
 import org.purple.model.DaoMissings;
 import org.purple.model.DaoSkills;
@@ -51,6 +53,8 @@ public class Students extends HttpServlet {
 		if(!Auth.isRespo(request)){ 
 			
 			// -- Back to the home page with an warning message.
+			HttpSession s = request.getSession();
+			Isep.bagPackHome(p, s);
 			p.setWarning(true);
 			p.setWarningMessage("La page sur laquelle vous tentez de vous rendre ne vous est pas accessible. "
 					+ "Pour toute réclamation, prenez contact avec le responsable d'APP actuel.");
@@ -73,6 +77,7 @@ public class Students extends HttpServlet {
 				DaoMissings dm = new DaoMissings(Bdd.getCo());
 				DaoMarks dmk = new DaoMarks(Bdd.getCo());
 				DaoDeadline ddl = new DaoDeadline(Bdd.getCo());
+				DaoGroups dgrp = new DaoGroups(Bdd.getCo());
 				User std = du.select(student);
 				
 				if(std != null && std.getPosition().equals("student")){
@@ -111,10 +116,16 @@ public class Students extends HttpServlet {
 					Missing[] missingGrid = dm.selectForStudent(Integer.toString(std.getId()));// -- we prepare the data format for the view
 					if(missingGrid == null) missingGrid = new Missing[0];// -- He never skip class, he win an empty array
 					
+					
+					// -- available group
+					String[] grps = dgrp.allGroups();
+					request.setAttribute("availableGroups", grps);
+					
+					
 					p.setContent("users/student.jsp");
 					p.setTitle("ISEP / APP - Etudiants");
-					p.setCss("student.css");
-					p.setJs("bootbox.min.js", "student.js");
+					p.setCss("bootstrap-select.min.css", "student.css");
+					p.setJs("bootstrap-select.min.js", "bootbox.min.js", "student.js");
 					
 					request.setAttribute("student", std);// -- we send the student
 					request.setAttribute("missingGrid", missingGrid);// -- we send the his missing
@@ -132,7 +143,9 @@ public class Students extends HttpServlet {
 				}
 				dmk.close();
 				dm.close();
-				du.close(); // -- we close the connection <-- THIS IS REALY IMPORTANT
+				du.close();
+				ddl.close();
+				dgrp.close();// -- we close the connection <-- THIS IS REALY IMPORTANT
 			}
 			
 		}

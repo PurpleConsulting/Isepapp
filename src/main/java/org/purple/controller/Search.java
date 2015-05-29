@@ -63,8 +63,8 @@ public class Search extends HttpServlet {
 			JSONObject result = new JSONObject();
 			JSONObject js = new JSONObject();
 			String[] students = Research.pseudoResearch("CONCAT(first_name, ' ', last_name)", "Users", "WHERE id_post = 4");
-			String[] groups = Research.pseudoResearch("DISTINCT `name`", "Groups", "");
-			String[] classes = Research.pseudoResearch("DISTINCT class", "Groups", "");
+			String[] groups = Research.pseudoResearch("DISTINCT `name`", "Groups", "WHERE Groups.`id` > 0");
+			String[] classes = Research.pseudoResearch("DISTINCT class", "Groups", "WHERE Groups.`id` > 0");
 			js.put("student", students);
 			js.put("group", groups);
 			js.put("classes", classes);

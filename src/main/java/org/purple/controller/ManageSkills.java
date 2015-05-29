@@ -14,10 +14,12 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.purple.bean.Page;
 import org.purple.bean.Skill;
 import org.purple.bean.SubSkill;
+import org.purple.bean.User;
 import org.purple.constant.Bdd;
 import org.purple.constant.Isep;
 import org.purple.model.Auth;
@@ -68,7 +70,8 @@ public class ManageSkills extends HttpServlet {
 			ds.close();
 			
 		} else {
-			
+			HttpSession s = request.getSession();
+			Isep.bagPackHome(p, s);
 			p.setTitle("ISEP / APP - Accueil");
 			p.setWarning(true); p.setContent("/home/common.jsp");
 			p.setWarningMessage("La page que vous tentez d'atteindre est réservé au tuteur d'APP.");	
@@ -211,7 +214,7 @@ public class ManageSkills extends HttpServlet {
 				int support = Integer.parseInt(addSubSkillFlag);
 				request.setAttribute("support", support);
 				
-			} else if(!Isep.nullOrEmpty(delSkill, delSkillFlag)){
+			} else if(!Isep.nullOrEmpty(delSkill, delSkillFlag) && !delSkillFlag.equals("0")){
 				/**
 				 * HERE THE USER WANT TO DELETE A SKILL
 				 */
@@ -279,12 +282,11 @@ public class ManageSkills extends HttpServlet {
 			dss.close();
 			
 		} else {
-			
+			HttpSession s = request.getSession();
+			Isep.bagPackHome(p, s);
 			p.setTitle("ISEP / APP - Accueil");
 			p.setWarning(true); p.setContent("/home/common.jsp");
-			p.setWarningMessage("La page que vous tentez d'atteindre est réservé au tuteur d'APP.");	
-			p.setCss("");
-			p.setJs("");	
+			p.setWarningMessage("La page que vous tentez d'atteindre est réservé au tuteur d'APP.");		
 		}
 		
 		request.setAttribute("pages", p);

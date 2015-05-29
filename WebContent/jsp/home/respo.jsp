@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<link rel="stylesheet" href="./css/bootstrap-select.min.css">
+<link rel="stylesheet" href="./css/home_respo.css">
 <div class="row">
 	<h1 class="col-xs-offset-1 col-xs-10">
 		Accueil
@@ -57,3 +59,5 @@
 		<h4>- Organisation du semestre -</h4>
 	</div>
 </div>
+<script type="text/javascript" src="./js/bootstrap-select.min.js"></script>
+<script type="text/javascript" src="./js/home_reso.js"></script>

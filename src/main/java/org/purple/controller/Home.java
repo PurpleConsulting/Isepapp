@@ -7,10 +7,12 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.purple.bean.Page;
 import org.purple.bean.User;
 import org.purple.constant.Bdd;
+import org.purple.constant.Isep;
 import org.purple.model.Auth;
 import org.purple.model.DaoGroups;
 import org.purple.model.DaoUsers;
@@ -40,13 +42,13 @@ public class Home extends HttpServlet {
 		if(Auth.isConnect(request)){
 			
 			DaoUsers du = new DaoUsers(Bdd.getCo());
-			
+			HttpSession s = request.getSession();
 			if(Auth.isRespo(request)){
 				User[] teachers = du.selectAllTutor();
 				
-				request.setAttribute("teachers", teachers);
-				p.setJs("bootstrap-select.min.js","home_reso.js"); 
-				p.setCss("bootstrap-select.min.css","home_respo.css"); p.setContent("home/respo.jsp");
+				request.setAttribute("teachers", teachers); // à rajouter dans le JS !!!
+				Isep.bagPackHome(p, s);
+				p.setContent("home/respo.jsp");
 				p.setTitle("ISEP / APP - Accueil");
 			} else if(Auth.isTutor(request)){
 				

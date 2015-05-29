@@ -21,29 +21,26 @@ public class DaoGroups extends Dao<Group>{
 
     //Select all group name
     public String[] selectAllName(String pseudo){
-
-        String[] gp_name = null;
-
+        String[] gpName = new String[0];
         String q = "SELECT Groups.`name` FROM Groups INNER JOIN Users ON Users.id = Groups.id_tutor WHERE Users.id = ? ORDER BY Groups.name;";
         try {
             PreparedStatement prestmt = this.connect.prepareStatement(q);
             prestmt.setString(1,pseudo);
             ResultSet cursor = prestmt.executeQuery();
             if (cursor.last()) {
-                gp_name = new String[cursor.getRow()];
+                gpName = new String[cursor.getRow()];
                 cursor.beforeFirst();
             }
             int i = 0;
             while(cursor.next()){
-                gp_name[i] = new String(cursor.getString(1));
+                gpName[i] = new String(cursor.getString(1));
                 i++;
             }
             cursor.close();
         } catch (SQLException e) {
-            gp_name = null;
             e.printStackTrace();
         }
-        return gp_name;
+        return gpName;
     }
 
 	@Override
@@ -212,5 +209,15 @@ public class DaoGroups extends Dao<Group>{
 				e.printStackTrace();
 		}
 	}
+	
+	public String[] allGroups(){
+		String [] res = new String[0];
+		String q = "SELECT Groups.`name` FROM Groups WHERE id > 0;";
+		ResultSet currsor = Bdd.exec(this.connect, q);
+		res = Bdd.rsToStringTab(currsor);
+		return res;
+	}
+	
+	
 
 }

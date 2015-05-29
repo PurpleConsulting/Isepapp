@@ -88,7 +88,7 @@ public class DaoUsers extends Dao<User> {
 		String q = "SELECT Users.id,"
 				+ " Users.first_name, Users.last_name,"
 				+ " Positions.title, Users.pseudo,"
-				+ " Users.tel, Users.mail"
+				+ " Users.tel, Users.mail, Users.isep_no"
 				+ " FROM Users INNER JOIN Positions"
 				+ " on Users.id_post = Positions.id"
 				+ " WHERE Users.pseudo = ? ";
@@ -100,6 +100,7 @@ public class DaoUsers extends Dao<User> {
 			u = new User(currsor.getInt(1), currsor.getString(5), currsor.getString(2), currsor.getString(3), currsor.getString(4));
 			u.setTel(currsor.getString(6));
 			u.setMail(currsor.getString(7));
+			u.setIsepNo(currsor.getInt(8));
 			prestmt.close();
 		}catch (SQLException e){
 			// TODO Auto-generated catch block
