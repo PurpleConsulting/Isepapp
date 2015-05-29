@@ -109,6 +109,35 @@ public class DaoUsers extends Dao<User> {
 		return u;
 	}
 	
+	public User[] selectTutorbyGroup(){
+		User[] us = new User[0]; 
+		String q = "SELECT Users.id,"
+				+ " Users.first_name, Users.last_name,"
+				+ " Groups.name"
+				+ " FROM Users INNER JOIN Groups"
+				+ " on Users.id = Groups.id_tutor";
+		ResultSet currsor = Bdd.exec(this.connect, q);
+		try {
+			if(!currsor.next()) return new User[0];
+			if (currsor.last()) {
+				us = new User[currsor.getRow()];
+				currsor.beforeFirst(); 
+			}
+			int i = 0;
+			while(currsor.next()){
+				User u = new User(currsor.getInt(1), currsor.getString(2), currsor.getString(3), currsor.getString(4));
+				us[i] = u;
+				i++;
+			}
+			currsor.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return us;
+	}
+
+	
 	public User[] selectAllTutor() {
 		User[] us = new User[0]; 
 		String q = "SELECT Users.id,"

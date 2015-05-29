@@ -31,6 +31,12 @@ public class User {
 			this.setLastName(lastName);
 			this.setPosition(position);
 		}
+		public User(int id, String firtstName, String lastName, String group){
+			this.setId(id);
+			this.setFirstName(firtstName);
+			this.setLastName(lastName);
+			this.setGroup(group);
+		}
 		
 		public User(String firtstName, String lastName, String pseudo, String email,  String position){
 			this.setPseudo(pseudo);

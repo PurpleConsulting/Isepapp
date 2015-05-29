@@ -17,6 +17,7 @@ $(document).ready(function(){
     $("form.form-inline").toggleClass("off");
     if($(this).closest("form").hasClass("off")){
     	location.reload();
+    	
       $("div.cascade-warning").removeAttr('style');
       $("div.values").attr("disabled",true);
       $("a.remove, a.reset").children("span").switchClass("safe","danger",0);
@@ -26,7 +27,6 @@ $(document).ready(function(){
       $(this).children("span").eq(0).switchClass("fa-undo", "fa-pencil", 0);
       $(this).children("span").eq(1).text("Modifier");
     } else {
-    	
       $("form input").attr("disabled",false);
       $(this).children("span").eq(1).text("Annuler");
       $(this).children("span").eq(0).switchClass("fa-pencil", "fa-undo",0);
@@ -35,7 +35,6 @@ $(document).ready(function(){
   
  
    $("a.remove, a.reset").on("click",function(event){
-
     event.preventDefault();
     //-- definition
     $("div.suppression").css("display", "inline-block");
