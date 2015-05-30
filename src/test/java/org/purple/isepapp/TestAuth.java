@@ -67,6 +67,15 @@ public class TestAuth {
 	}
 	
 	@Test
+	public void testIsUrTutor(){
+		if(Auth.isStudentTutor(reqs[1], "ldivad")){
+			
+		} else {
+			fail();
+		}
+	}
+	
+	@Test
 	public void testIsStudent(){
 		if(Auth.isStudent(reqs[2])){
 			

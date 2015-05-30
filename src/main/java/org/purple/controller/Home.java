@@ -48,8 +48,7 @@ public class Home extends HttpServlet {
 				
 				request.setAttribute("teachers", teachers); // à rajouter dans le JS !!!
 				Isep.bagPackHome(p, s);
-				p.setContent("home/respo.jsp");
-				p.setTitle("ISEP / APP - Accueil");
+				
 			} else if(Auth.isTutor(request)){
 				
 			} else if(Auth.isAdmin(request)){
@@ -58,6 +57,8 @@ public class Home extends HttpServlet {
 				
 			}
 			
+			p.setContent("home/common.jsp");
+			p.setTitle("ISEP / APP - Accueil");
 			
 			request.setAttribute("pages", p);
 			request.getRequestDispatcher("/template.jsp").forward(request, response);

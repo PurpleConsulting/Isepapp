@@ -7,6 +7,7 @@
 	<small> - <c:out value="${student.getLastName()} ${student.getFirstName()}"></c:out></small>
 	<a class="btn btn-default link-dialog-std" href="#" data-toggle="modal" data-target="#modal_alter" role="button"><span class="fa fa-pencil"> </span>  Editer</a>
 </h1>
+<c:import url="/jsp/alert.jsp" charEncoding="UTF-8"></c:import>
 <div class="row">	
 	<div class="col-xs-offset-1 col-xs-10 idcard">
 		<div class="col-md-offset-1 col-md-4 col-sm-offset-1 col-sm-10 col-xs-offset-1 col-xs-10  ">
@@ -218,7 +219,7 @@
 				<h4 class="modal-title">Modification du profil étudiant: <c:out value="${student.getPseudo()}"></c:out></h4>
 			</div>
 			<div class="modal-body">
-				<form id="alteruser" class="form-horizontal" method="post" action="AlterUsers?scope=${student.getPseudo()}">
+				<form id="alteruser" class="form-horizontal" method="post" action="Students?pseudo=${student.getPseudo()}">
 					<div class="form-group">
 						<label for="std_first_name" class="col-sm-2 control-label">Prénom</label>
 						<div class="col-sm-10">
@@ -250,7 +251,7 @@
 								placeholder="Email" value="${student.getMail()}">
 						</div>
 					</div>
-					<div class="form-group">
+					<div class="form-group" ${sessionScope.user.getPosition() == 'respo' ? '' : 'style="display:none;"'}>
 						<label for="std_email" class="col-sm-2 control-label">Groupe</label>
 						<div class="col-sm-4">
 							<select name="std_new_group" class="selectpicker">
