@@ -1,12 +1,9 @@
 @CHARSET "UTF-8";
 div.row{
-	margin-bottom:20px;
-	padding-left: 0px;
-	padding-right: 0px;
+	margin-bottom:20px;	
 }
 
-div.container-fluid.content div.row div div.progress,
-div.container-fluid.content div.row div.crossmark{
+div.container-fluid.content div.row div{
 	padding-left: 0px;
 	padding-right: 0px;
 }
@@ -14,6 +11,7 @@ div.idcard, div.mark, div.crossmark, div.missing, div.delivery{
 	border: solid #ccc 1px;
 	min-height: 200px;
 	border-radius: 6px;
+	padding: 20px;
 	background-color: transparent;
 	padding: 10px;
 }

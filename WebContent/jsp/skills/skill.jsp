@@ -14,7 +14,7 @@
 	<div
 		class="col-xs-offset-2 col-sm-offset-3 col-xs-9 col-sm-7 alert alert-sub-skill-box">
 		<div class="col-xs-12 skill-checkpoint">some random text ... </div>
-		<c:forEach var="subSkill" items="${skill.getSub_skills()}" varStatus="status">
+		<c:forEach var="subSkill" items="${skill.getSubSkills()}" varStatus="status">
 			<div class="col-xs-12 alert alert-sub-skill">
 				<c:out value="${subSkill.getTitle()}"></c:out>
 			</div>

@@ -108,7 +108,7 @@ public class Deadlines extends HttpServlet {
 					Deadline dline=new Deadline();
 					dline.setDescription(desc);
 					dline.setResponsable(Integer.parseInt(tuteur));
-					dline.setIdgroup(gr[i].getId());		 
+					dline.setIdGroup(gr[i].getId());		 
 					dline.setDateLimit(datetime);
 					dl.create(dline);
 				}

@@ -40,7 +40,7 @@
 					<div class="input-group-addon">Sous-titre:</div>
 					<input name="skill_subtitle" value="${skill.getSubtitle()}" class="form-control  col-xs-offset-0 subskill"/>
 				</div>
-					<c:forEach var="subSkill" items="${skill.getSub_skills()}" varStatus="status">
+					<c:forEach var="subSkill" items="${skill.getSubSkills()}" varStatus="status">
 					<div class="subskill-group form-group input-group ">
 						<div class="input-group-addon plus"><span class="fa fa-plus"></span></div>
 						<input name="sub_skill_title${subSkill.getId()}" value="${subSkill.getTitle()}" data-ref="${subSkill.getId()}" class="form-control col-xs-offset-0 subskill"/>

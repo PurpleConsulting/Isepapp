@@ -82,7 +82,7 @@ public class DaoMarks extends Dao<Mark>{
 				+ "INNER JOIN APPDB.Users ON Users.id = Marks.id_student "
 				+ "INNER JOIN APPDB.`Values` ON `Values`.id = Marks.id_value "
 				+ "INNER JOIN APPDB.Sub_skills ON Sub_skills.id = Marks.id_sub_skill "
-				+ "INNER JOIN APPDB.Skills ON Sub_skills.id_skills = Skills.id "
+				+ "INNER JOIN APPDB.Skills ON Sub_skills.id_skill = Skills.id "
 				+ "WHERE Marks.id = ?";
 		try{
 			PreparedStatement prestmt = this.connect.prepareStatement(q);
@@ -106,7 +106,7 @@ public class DaoMarks extends Dao<Mark>{
 				+ "INNER JOIN APPDB.Users ON Users.id = Marks.id_student "
 				+ "INNER JOIN APPDB.`Values` ON `Values`.id = Marks.id_value "
 				+ "INNER JOIN APPDB.Sub_skills ON Sub_skills.id = Marks.id_sub_skill "
-				+ "INNER JOIN APPDB.Skills ON Sub_skills.id_skills = Skills.id "
+				+ "INNER JOIN APPDB.Skills ON Sub_skills.id_skill = Skills.id "
 				+ "WHERE Users.id = ?";
 		try{
 			PreparedStatement prestmt = this.connect.prepareStatement(q);

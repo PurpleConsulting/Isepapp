@@ -145,12 +145,12 @@ public class ManageSkills extends HttpServlet {
 				Iterator i = subSkillsArgs.entrySet().iterator(); 
 				while(i.hasNext()) { 
 					Map.Entry element = (Map.Entry)i.next();
-					skillbean.setSub_skills(new SubSkill(Integer.parseInt((String)element.getKey()),
+					skillbean.setSubSkills(new SubSkill(Integer.parseInt((String)element.getKey()),
 							Integer.parseInt(skillId),
 							(String)element.getValue()));
 				}
 				boolean  querrysuccess = true;
-				querrysuccess = dss.updateMulti(skillbean.getSub_skills());
+				querrysuccess = dss.updateMulti(skillbean.getSubSkills());
 				querrysuccess = querrysuccess & ds.update(skillbean, "");
 				if(querrysuccess){
 					p.setSuccess(true);
@@ -256,7 +256,7 @@ public class ManageSkills extends HttpServlet {
 				p.setContent("/skills/manage_skill.jsp");
 				p.setTitle("ISEP / APP - Gestion des Compétences");
 				
-				int support = ss.getId_skills();
+				int support = ss.getIdSkill();
 				request.setAttribute("support", support);
 			} else {
 				p.setWarning(true);

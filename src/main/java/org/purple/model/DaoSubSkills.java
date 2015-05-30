@@ -20,9 +20,9 @@ public class DaoSubSkills extends Dao<SubSkill>{
 	public boolean create(SubSkill obj) {
 		// TODO Auto-generated method stub
 		boolean res = true;
-		String q = "INSERT INTO Sub_skills (id_skills, title, note, creation_date, id_respo) VALUE (?, ?, ?, CURDATE(),"
+		String q = "INSERT INTO Sub_skills (id_skill, title, note, creation_date, id_respo) VALUE (?, ?, ?, CURDATE(),"
 				+ " (SELECT Users.id FROM Users WHERE Users.id_post = 2));";
-		String[] params = {Integer.toString(obj.getId_skills()), obj.getTitle(), obj.getNote()};
+		String[] params = {Integer.toString(obj.getIdSkill()), obj.getTitle(), obj.getNote()};
 		int affected = Bdd.preparePerform(this.connect, q, params);
 		if(affected != 1) res = false;
 		return res;
@@ -43,7 +43,7 @@ public class DaoSubSkills extends Dao<SubSkill>{
 	public SubSkill select(String id) {
 		// TODO Auto-generated method stub
 		SubSkill res = new SubSkill();
-		String q = "SELECT Sub_skills.id, Sub_skills.id_skills, Sub_skills.title"
+		String q = "SELECT Sub_skills.id, Sub_skills.id_skill, Sub_skills.title"
 				+ " FROM Sub_skills WHERE Sub_skills.id = ? ;";
 		String[] params = {id};
 		ResultSet currsor = Bdd.prepareExec(this.connect, q, params);

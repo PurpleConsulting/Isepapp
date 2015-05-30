@@ -6,10 +6,10 @@ public class Skill {
 
 		private int id;
 		private String title = "null";
-		private ArrayList<SubSkill> sub_skills = new ArrayList<SubSkill>();
+		private ArrayList<SubSkill> subSkills = new ArrayList<SubSkill>();
 		private String subtitle = "null";
 		private String type = "null";
-		private int id_respo = 0;
+		private int idRespo = 0;
 		private int coefficient = 0;
 		
 		
@@ -48,12 +48,12 @@ public class Skill {
 			this.type = type;
 		}
 
-		public int getId_respo() {
-			return id_respo;
+		public int getIdRespo() {
+			return idRespo;
 		}
 
 		public void setId_respo(int id_respo) {
-			this.id_respo = id_respo;
+			this.idRespo = id_respo;
 		}
 
 		public int getCoefficient() {
@@ -64,8 +64,8 @@ public class Skill {
 			this.coefficient = coefficient;
 		}
 
-		public void setSub_skills(ArrayList<SubSkill> sub_skills) {
-			this.sub_skills = sub_skills;
+		public void setSubSkills(ArrayList<SubSkill> sub_skills) {
+			this.subSkills = sub_skills;
 		}
 		
 		public String getTitle() {
@@ -83,11 +83,11 @@ public class Skill {
 			this.id = id;
 		}
 		
-		public ArrayList<SubSkill> getSub_skills() {
-			return sub_skills;
+		public ArrayList<SubSkill> getSubSkills() {
+			return subSkills;
 		}
 		
-		public void setSub_skills(SubSkill sub_skills) {
-			this.sub_skills.add(sub_skills);
+		public void setSubSkills(SubSkill subSkills) {
+			this.subSkills.add(subSkills);
 		}
 }

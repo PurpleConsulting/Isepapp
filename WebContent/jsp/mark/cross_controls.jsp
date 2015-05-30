@@ -37,7 +37,7 @@
 						<h2>
 							<c:out value='${status.count} - ${skill.getSubtitle()}'></c:out>
 						</h2>
-						<c:forEach var="sub_skill" items="${skill.getSub_skills()}"
+						<c:forEach var="sub_skill" items="${skill.getSubSkills()}"
 							varStatus="status">
 
 							<hr />

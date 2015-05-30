@@ -26,7 +26,7 @@ public class DaoDeadline extends Dao<Deadline>{
 	public boolean create(Deadline dl) {
 		boolean r=false;
 		String[]params={dl.getDescription(),
-				Integer.toString(dl.getIdgroup()),
+				Integer.toString(dl.getIdGroup()),
 				Integer.toString(dl.getResponsable()),
 				"1",dl.getDateLimit().toString(Isep.JODA_UTC)};
 		String q = "INSERT INTO `Deadlines`(description, id_group, id_createur, date_creation, Status, date_limit)"

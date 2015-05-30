@@ -167,14 +167,14 @@ public class DaoSkills extends Dao<Skill>{
 	}
 	
 	public void completeSub_skills(Skill s){
-        String q = "SELECT Sub_skills.id, Sub_skills.id_skills, Sub_skills.title"
+        String q = "SELECT Sub_skills.id, Sub_skills.id_skill, Sub_skills.title"
         + " FROM APPDB.Sub_skills INNER JOIN APPDB.Skills "
-        + " ON Skills.id = Sub_skills.id_skills WHERE Skills.id = "+ Integer.toString(s.getId()) + ";";
+        + " ON Skills.id = Sub_skills.id_skill WHERE Skills.id = "+ Integer.toString(s.getId()) + ";";
         try{
             ResultSet cursor = this.connect.createStatement().executeQuery(q);
             while(cursor.next()){
                 SubSkill ss = new SubSkill(cursor.getInt(1), cursor.getInt(2), cursor.getString(3));
-                s.setSub_skills(ss);
+                s.setSubSkills(ss);
             }
         } catch (SQLException e) {
             // TODO Auto-generated catch block

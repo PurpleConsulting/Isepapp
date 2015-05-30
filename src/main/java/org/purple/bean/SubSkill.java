@@ -2,9 +2,9 @@ package org.purple.bean;
 
 public class SubSkill {
 	private int id = 0;
-	private int id_skills = 0;
+	private int idSkill = 0;
 	private String title = "null";
-	private int id_respo = 0;
+	private int idRespo = 0;
 	private String note = "null";
 	//Date pour la creation ou modif ?
 	
@@ -29,11 +29,11 @@ public class SubSkill {
 	public void setId(int id) {
 		this.id = id;
 	}
-	public int getId_skills() {
-		return id_skills;
+	public int getIdSkill() {
+		return idSkill;
 	}
-	public void setId_skills(int id_skills) {
-		this.id_skills = id_skills;
+	public void setId_skills(int idSkill) {
+		this.idSkill = idSkill;
 	}
 	public String getTitle() {
 		return title;
@@ -41,11 +41,11 @@ public class SubSkill {
 	public void setTitle(String title) {
 		this.title = title;
 	}
-	public int getId_respo() {
-		return id_respo;
+	public int getIdRespo() {
+		return idRespo;
 	}
-	public void setId_respo(int id_respo) {
-		this.id_respo = id_respo;
+	public void setIdRespo(int id_respo) {
+		this.idRespo = id_respo;
 	}
 	public String getNote() {
 		return note;

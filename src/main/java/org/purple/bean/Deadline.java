@@ -10,7 +10,7 @@ public class Deadline {
 		private int id = 0; 
 		private String description = "null";
 		private String group = "null";
-		private int idgroup=0;
+		private int idGroup=0;
 		private Boolean status = false;
 		private DateTime dateLimit = new DateTime(2000, 01,01, 0,0,0);
 		private DateTime deliveryDate = new DateTime(2000, 01,01, 0,0,0);
@@ -87,12 +87,12 @@ public class Deadline {
 		}
 
 
-		public int getIdgroup() {
-			return idgroup;
+		public int getIdGroup() {
+			return idGroup;
 		}
 
 
-		public void setIdgroup(int idgroup) {
-			this.idgroup = idgroup;
+		public void setIdGroup(int idGroup) {
+			this.idGroup = idGroup;
 		}
 }

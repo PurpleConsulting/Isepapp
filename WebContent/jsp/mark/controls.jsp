@@ -38,7 +38,7 @@
 		  			<div role="tabpanel" class='tab-pane ${status.count==1 ? "active":""}' id="tab${status.count}">
 		  				<form id="form${skill.getId()}" class="groupgrid">
 			    			<h4 data-naming="${skill.getTitle()}"><c:out value='${status.count} - ${skill.getSubtitle()}'></c:out></h4>
-			    			<c:forEach var="sub_skill" items="${skill.getSub_skills()}" varStatus="status">
+			    			<c:forEach var="sub_skill" items="${skill.getSubSkills()}" varStatus="status">
 					  			<hr/><h5><c:out value="${sub_skill.getTitle()}"></c:out></h5>
 						  		<div class="line">
 						  			<c:forEach var="value" items="${values}" varStatus="status">
