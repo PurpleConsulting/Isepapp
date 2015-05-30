@@ -39,6 +39,16 @@ public class Auth {
 		}
 	}
 	
+	private static boolean isStudentOwner(HttpServletRequest request, String group){
+		User u = (User)request.getSession().getAttribute("user");
+		int id = DaoUsers.returnTutor(group);
+		if(u.getId() == id){
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
 	public static boolean isRespo(HttpServletRequest request){
 		return isUser(request, Auth.respo);
 	}
@@ -49,6 +59,13 @@ public class Auth {
 	public static boolean isTutor(HttpServletRequest request, String group){
 		if(isConnect(request)){
 			return isGroupOwner(request, group);
+		} else{
+			return false;
+		}
+	}
+	public static boolean isStudentTutor(HttpServletRequest request, String student){
+		if(isUser(request, Auth.tutor)){
+			return isStudentOwner(request, student);
 		} else{
 			return false;
 		}

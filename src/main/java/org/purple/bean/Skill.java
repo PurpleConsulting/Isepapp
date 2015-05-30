@@ -7,7 +7,7 @@ public class Skill {
 		private int id;
 		private String title = "null";
 		private ArrayList<SubSkill> sub_skills = new ArrayList<SubSkill>();
-		private String subtitle = "null"; // add in the database
+		private String subtitle = "null";
 		private String type = "null";
 		private int id_respo = 0;
 		private int coefficient = 0;

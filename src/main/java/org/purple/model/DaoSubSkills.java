@@ -31,13 +31,29 @@ public class DaoSubSkills extends Dao<SubSkill>{
 	@Override
 	public boolean delete(SubSkill obj) {
 		// TODO Auto-generated method stub
-		return false;
+		boolean res = false;
+		String[] params = { Integer.toString(obj.getId())};
+		String q = "DELETE FROM Sub_skills WHERE Sub_skills.`id` = ?;" ;
+		int affected = Bdd.preparePerform(this.connect, q, params);
+		if(affected == 1) res = true;
+		return res;
 	}
 
 	@Override
 	public SubSkill select(String id) {
 		// TODO Auto-generated method stub
-		return null;
+		SubSkill res = new SubSkill();
+		String q = "SELECT Sub_skills.id, Sub_skills.id_skills, Sub_skills.title"
+				+ " FROM Sub_skills WHERE Sub_skills.id = ? ;";
+		String[] params = {id};
+		ResultSet currsor = Bdd.prepareExec(this.connect, q, params);
+		try {
+			if(currsor.next()) res = new SubSkill(currsor.getInt(1), currsor.getInt(2), currsor.getString(3));
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return res;
 	}
 
 	@Override

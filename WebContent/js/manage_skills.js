@@ -3,11 +3,18 @@
  */
 
 $(document).ready(function(){
-	$("select").prop("selectedIndex",0);
+	
 	$("select.selectpicker").on("change", function(){
 		$("form[id^=form-skill]").removeClass("active");
-		$("form[id^=form-skill"+ $(this).val() +"]").addClass("active");
+		$("form#form-skill"+ $(this).val()).addClass("active");
 	});
+	//$("select").val(2).change();
+	
+	if($("select.selectpicker").attr("data-target") == -1) {
+    	$("select.selectpicker").val($("select option").last().val()).change();
+	} else {
+    	$("select.selectpicker").val($("select").attr("data-target")).change();
+	}
 	/**
 	 * BOOT BOX ADD SKILL
 	 */
@@ -65,6 +72,7 @@ $(document).ready(function(){
 	 */
 	$("span.fa-times-circle").on("click", function(e){
 		var skill = $(this).prev().val();
+		var idSkill = $(this).prev().attr("data-ref");
 		$.get("jsp/skills/modal_skill_delete.jsp", {}, function(data, status){
 			var node = $( data );
 			node.find("em.todel").text(skill);
@@ -80,10 +88,11 @@ $(document).ready(function(){
 					},sucess:{
 						label: "Supprimer",
 		                className: "btn-danger btn-target",
-		                callback: function () {  }
+		                callback: function () { $("form#modal-form-delskill").submit(); }
 					}
 				}
 			});
+			$("form#modal-form-delskill").find("input[type=hidden]").val(idSkill);
 			$("div.modal-header").addClass("modal-header-danger");
 			setInterval('$(".fa-exclamation-triangle").fadeOut(400).delay(300).fadeIn(400)' ,400);
 			$(".btn-danger.btn-target").attr("disabled", true);
@@ -100,10 +109,11 @@ $(document).ready(function(){
 	 * BOOT BOX DEL SUBSKILL
 	 */
 	$("span.fa-times-circle-o").on("click", function(e){
-		var skill = $(this).prev().val();
+		var idSubSkill = $(this).prev().attr("data-ref");
+		var subSkill = $(this).prev().val();
 		$.get("jsp/skills/modal_subskill_delete.jsp", {}, function(data, status){
 			var node = $( data );
-			node.find("em.todel").text(skill);
+			node.find("em.todel").text(subSkill);
 			// -- we send it
 			bootbox.dialog({
 			title: 'Suppression d\'une sous-compétence.',
@@ -116,15 +126,16 @@ $(document).ready(function(){
 					},sucess:{
 						label: "Supprimer",
 		                className: "btn-danger btn-target",
-		                callback: function () {  }
+		                callback: function () { $("form#modal-form-delsubskill").submit(); }
 					}
 				}
 			});
+			$("form#modal-form-delsubskill").find("input[type=hidden]").val(idSubSkill);
 			$("div.modal-header").addClass("modal-header-danger");
 			setInterval('$(".fa-exclamation-triangle").fadeOut(400).delay(300).fadeIn(400)' ,400);
 			$(".btn-danger.btn-target").attr("disabled", true);
 			$("input.delete-std").on("keyup", function(){
-				if($(this).val() == skill) {
+				if($(this).val() == subSkill) {
 					$(".btn-danger.btn-target").attr("disabled", false);
 				} else {
 					$(".btn-danger.btn-target").attr("disabled", true);

@@ -7,6 +7,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.purple.bean.Group;
 import org.purple.bean.Page;
@@ -48,18 +49,28 @@ public class AlterGroups extends HttpServlet {
 				DaoGroups dg = new DaoGroups(Bdd.getCo());
 				// -- reday to perfom query on the database
 				
-				p.setCss("bootstrap-select.min.css", "edit_group.css"); 
-				p.setJs("bootstrap-select.min.js","bootbox.min.js", "edit_group.js");
-				p.setTitle("ISEP / APP - Edition de group");
-				p.setContent("editor/edit_group.jsp");
-				
-				User[] teachers = du.selectAllTutor(); 		// -- We need to display all tutors
 				Group group = dg.select(thegroup); 			// -- Get the group 
-				dg.completeTutor(group);					// -- add the tutor of the group
-				dg.completeMemebers(group);					// -- add the student of the group
+				if(group.getId() != 0){
+					User[] teachers = du.selectAllTutor(); 		// -- We need to display all tutors
+					dg.completeTutor(group);					// -- add the tutor of the group
+					dg.completeMemebers(group);					// -- add the student of the group
+					
+					request.setAttribute("teachers", teachers);
+					request.setAttribute("group", group);
+					
+					p.setCss("bootstrap-select.min.css", "edit_group.css"); 
+					p.setJs("bootstrap-select.min.js","bootbox.min.js", "edit_group.js");
+					p.setTitle("ISEP / APP - Edition de group");
+					p.setContent("editor/edit_group.jsp");
+				} else {
+					p.setWarning(true);
+					p.setWarningMessage("Le group que vous essayez d'atteindre n'a pas été retrouvé.");
+					HttpSession s = request.getSession();
+					Isep.bagPackHome(p, s);
+					p.setTitle("ISEP / APP - Acceuil");
+					p.setContent("home/common.jsp");
+				}
 				
-				request.setAttribute("teachers", teachers);
-				request.setAttribute("group", group);
 				
 				du.close();
 				dg.close(); // -- we close the connection

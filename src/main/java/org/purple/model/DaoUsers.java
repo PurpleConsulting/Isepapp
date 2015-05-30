@@ -77,7 +77,17 @@ public class DaoUsers extends Dao<User> {
 	@Override
 	public boolean update(User obj, String where) {
 		// TODO Auto-generated method stub
-		return false;
+		boolean res = false;
+		String[] params = {obj.getFirstName(), obj.getLastName(),
+			obj.getPseudo(), obj.getMail(), obj.getGroup(),
+			Integer.toString(obj.getIsepNo()), Integer.toString(obj.getId())};
+		String q = "UPDATE Users SET Users.first_name = ?, Users.last_name = ?,"
+				+ " Users.pseudo = ?, Users.mail = ?, Users.id_group ="
+				+ " (SELECT Groups.`id` FROM Groups WHERE Groups.name = ?),"
+				+ " Users.isep_no = ? WHERE Users.`id` = ? ;";
+		int affected = Bdd.preparePerform(this.connect, q, params);
+		if(affected == 1) res = true; 
+		return res;
 	}
 
 
@@ -88,7 +98,7 @@ public class DaoUsers extends Dao<User> {
 		String q = "SELECT Users.id,"
 				+ " Users.first_name, Users.last_name,"
 				+ " Positions.title, Users.pseudo,"
-				+ " Users.tel, Users.mail"
+				+ " Users.tel, Users.mail, Users.isep_no"
 				+ " FROM Users INNER JOIN Positions"
 				+ " on Users.id_post = Positions.id"
 				+ " WHERE Users.pseudo = ? ";
@@ -100,6 +110,7 @@ public class DaoUsers extends Dao<User> {
 			u = new User(currsor.getInt(1), currsor.getString(5), currsor.getString(2), currsor.getString(3), currsor.getString(4));
 			u.setTel(currsor.getString(6));
 			u.setMail(currsor.getString(7));
+			u.setIsepNo(currsor.getInt(8));
 			prestmt.close();
 		}catch (SQLException e){
 			// TODO Auto-generated catch block
@@ -195,4 +206,20 @@ public class DaoUsers extends Dao<User> {
 		}
 	}
 
+	public static int returnTutor(String pseudo) {
+		// TODO Auto-generated method stub
+		Connection co = Bdd.getSecureCo();
+		int res = 0;
+		String q = "SELECT Users.id FROM Users INNER JOIN Groups"
+				+ " ON Users.id = Groups.id_tutor WHERE Groups.`id` ="
+				+ " (SELECT Users.id_group FROM Users WHERE Users.pseudo = ?)";
+		try{
+			ResultSet currsor = Bdd.prepareExec(co, q, new String[]{pseudo});
+			currsor.next();
+			res = currsor.getInt(1);
+		}catch (SQLException e){
+			// TODO Auto-generated catch block
+		}
+		return res;
+	}
 }

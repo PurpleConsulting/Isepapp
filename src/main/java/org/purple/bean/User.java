@@ -3,6 +3,7 @@ package org.purple.bean;
 public class User {
 	
 		private int id = 0;
+		private int isepNo = 0;
 		private String pseudo = "null";
 		private String firstName = "null";
 		private String lastName = "null";
@@ -14,15 +15,6 @@ public class User {
 		public User(){
 			
 		}
-		
-		/**
-		 * Constructor with all the user parameters 
-		 * (V1.0 only 3 parameters firstName, lastName, position)
-		 */
-		public User(int id){
-			
-		}
-
 		
 		public User(int id, String pseudo, String firtstName, String lastName, String position){
 			this.setId(id);
@@ -93,6 +85,12 @@ public class User {
 		}
 		public void setTel(String tel) {
 			this.tel = tel;
+		}
+		public int getIsepNo() {
+			return isepNo;
+		}
+		public void setIsepNo(int isepNo) {
+			this.isepNo = isepNo;
 		}
 		
 		

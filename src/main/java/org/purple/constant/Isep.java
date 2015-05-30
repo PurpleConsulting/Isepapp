@@ -3,6 +3,11 @@ package org.purple.constant;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
+import javax.servlet.http.HttpSession;
+
+import org.purple.bean.Page;
+import org.purple.bean.User;
+
 public class Isep {
 
 		
@@ -34,5 +39,16 @@ public class Isep {
 				}
 			}
 			return false;
+		}
+		
+		public static final void bagPackHome(Page p, HttpSession s){
+			User u = (User) s.getAttribute("user");
+			try{
+				u.getId();
+			} catch (NullPointerException e) {
+				u = new User();
+			}
+			p.setJs("bootstrap-select.min.js","home_"+u.getPosition()+".js"); 
+			p.setCss("bootstrap-select.min.css","home_"+u.getPosition()+".css");
 		}
 }

@@ -21,6 +21,9 @@
 				</div>
 				<div class="form-group">
 					<select name="new_tutor" class="form-control selectpicker" title="(Vide)" data-header="Selectionnez un Tuteur">
+						<c:if test="${ group.getTutor() == '(Vide)' }">
+							<option selected>Aucun Tuteur</option>
+						</c:if>
 						<c:forEach var="tutor" items="${teachers}" varStatus="status">
 								<option ${tutor.getPseudo() != group.getTutor() ? '' : 'selected'}
 								 value="${tutor.getPseudo()}">
@@ -113,7 +116,7 @@
 								placeholder="Pseudo ISEP, Julie LUTZ: jlutz">
 						</div>
 						<div class="col-sm-2">
-							<input type="text" class="form-control" name="std_no">
+							<input type="text" class="form-control" name="std_no" placeholder="n° Isep">
 						</div>
 						<div class="col-sm-2">
 							<input type="text" class="form-control" disabled value="${group.getName()}">
@@ -137,6 +140,3 @@
 		</div>
 	</div>
 </div>
-
-
-

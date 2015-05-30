@@ -5,10 +5,11 @@
 <h1 class="col-md-offset-1 col-md-10 col-sm-offset-1 col-sm-10 col-xs-offset-1 col-xs-10">
 	Fiche étudiant
 	<small> - <c:out value="${student.getLastName()} ${student.getFirstName()}"></c:out></small>
-	<a class="btn btn-default link-dialog-std" href="#" role="button"><span class="fa fa-pencil"> </span>  Editer</a>
+	<a class="btn btn-default link-dialog-std" href="#" data-toggle="modal" data-target="#modal_alter" role="button"><span class="fa fa-pencil"> </span>  Editer</a>
 </h1>
+<c:import url="/jsp/alert.jsp" charEncoding="UTF-8"></c:import>
 <div class="row">	
-	<div class="col-md-offset-1 col-md-10 col-sm-offset-1 col-sm-10 col-xs-offset-1 col-xs-10 idcard">
+	<div class="col-xs-offset-1 col-xs-10 idcard">
 		<div class="col-md-offset-1 col-md-4 col-sm-offset-1 col-sm-10 col-xs-offset-1 col-xs-10  ">
 			<img src="./img/photo.jpg" alt="Photo de l'étudiant" />
 		</div>
@@ -37,16 +38,18 @@
 	</div>
 </div>
 <div class="row">
-	<div class="col-md-offset-1 col-md-10 col-sm-offset-1 col-sm-10 col-xs-offset-1 col-xs-10 mark" >
+	<div class="col-xs-offset-1 col-xs-10 mark" >
 		<h4>Compétences - <a class="btn btn-default" href="#" role="button"><span class="fa fa-pencil"> </span>  Noter</a></h4> 
 		<div role="tabpanel">
 		  <!-- Nav tabs -->
 		  <ul class="nav nav-tabs" role="tablist">
 		    <li role="presentation" class="active"><a href="#tab1" aria-controls="tab1" role="tab" data-toggle="tab">Global</a></li>
 			<c:forEach var="skill" items="${skills}" varStatus="status">
+				<c:if test="${skill.getId() != 0}">
 				<li role="presentation">
 					<a href="#tab${status.count + 1}" aria-controls="tab${status.count + 1}" role="tab" data-toggle="tab"><c:out value="${skill.getTitle()}"></c:out></a>
 				</li>
+				</c:if>
 			</c:forEach>	
 		    </ul>
 		  <!-- Tab panes -->
@@ -57,6 +60,7 @@
 		    	</div>
 		    	<div class="col-sm-offset-4 col-sm-9">
     				<c:forEach var="skill_mark" items="${average.grid}" varStatus="status">
+		    			<c:if test="${!skill_mark.isCross()}">
 		    			<div>
 		    				<div class="col-sm-4"><c:out value="${skill_mark.getTitle()}"></c:out>:</div>
 		    				<span class="badge"><c:out value="${skill_mark.compute().intValue()}"></c:out></span>
@@ -64,6 +68,7 @@
 						  		<div class="progress-bar" role="progressbar" aria-valuenow="${skill_mark.compute()}" aria-valuemin="0" aria-valuemax="20" style="width: 60%;"></div>
 							</div>
 						</div>
+						</c:if>
 					</c:forEach>
 		    	</div>
 		    </div>
@@ -91,7 +96,7 @@
 	</div>
 </div>
 <div class="row">
-	<div class="col-md-offset-1 col-md-10 col-sm-offset-1 col-sm-10 col-xs-offset-1 col-xs-10 crossmark" >
+	<div class="col-xs-offset-1 col-xs-10 crossmark" >
 		<h4>Evaluation croisée - 12 / 20</h4>
 		<div class="table-responsive">
 		<table class="table table-hover">
@@ -136,7 +141,7 @@
 	</div>
 </div>
 <div class="row">
-	<div class="col-md-offset-1 col-md-10 col-sm-offset-1 col-sm-10 col-xs-offset-1 col-xs-10 missing" >
+	<div class="col-xs-offset-1 col-xs-10 missing" >
 		<h4>Les absences - <c:out value="${fn:length(missingGrid)}"></c:out></h4>
 		<br/>
 		<div id="blk-missing">
@@ -198,5 +203,72 @@
     			</c:choose>
 			</div>
 		</c:forEach>
+	</div>
+</div>
+
+
+<!-- INVISIBLE -->
+<div id="modal_alter" class="modal fade">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"
+					aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+				<h4 class="modal-title">Modification du profil étudiant: <c:out value="${student.getPseudo()}"></c:out></h4>
+			</div>
+			<div class="modal-body">
+				<form id="alteruser" class="form-horizontal" method="post" action="Students?pseudo=${student.getPseudo()}">
+					<div class="form-group">
+						<label for="std_first_name" class="col-sm-2 control-label">Prénom</label>
+						<div class="col-sm-10">
+							<input type="text" class="form-control" name="std_first_name"
+								placeholder="Prénom" value="${student.getFirstName()}">
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="std_name" class="col-sm-2 control-label">Nom</label>
+						<div class="col-sm-10">
+							<input type="text" class="form-control" name="std_last_name"
+								placeholder="Nom" value="${student.getLastName()}">
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="std_pseudo" class="col-sm-2 control-label">Pseudo</label>
+						<div class="col-sm-8">
+							<input type="text" class="form-control" name="std_pseudo"
+								placeholder="Pseudo ISEP, Julie LUTZ: jlutz" value="${student.getPseudo()}">
+						</div>
+						<div class="col-sm-2">
+							<input type="text" class="form-control" name="std_no" placeholder="n° Isep" value="${student.getIsepNo()}">
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="std_email" class="col-sm-2 control-label">Email</label>
+						<div class="col-sm-10">
+							<input type="email" class="form-control" name="std_email"
+								placeholder="Email" value="${student.getMail()}">
+						</div>
+					</div>
+					<div class="form-group" ${sessionScope.user.getPosition() == 'respo' ? '' : 'style="display:none;"'}>
+						<label for="std_email" class="col-sm-2 control-label">Groupe</label>
+						<div class="col-sm-4">
+							<select name="std_new_group" class="selectpicker">
+								<c:forEach var="group" items="${availableGroups}" varStatus="status">
+								<option value="${group}" ${group == student.getGroup() ? 'selected' : '' }><c:out value="${group}"></c:out></option>
+								</c:forEach>
+							</select>
+						</div>
+					</div>
+					<button style="Display:none;" type="submit" class="btn btn-primary no-btn" id="addin"></button>
+				</form>
+			</div>
+			<div class="modal-footer">
+				<span style="display: none;"><input type="checkbox" /></span>
+				<button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
+				<button onclick="$('form#alteruser').submit();" type="submit" class="btn btn-primary" id="alteruserbtn">Ajouter</button>
+			</div>
+		</div>
 	</div>
 </div>

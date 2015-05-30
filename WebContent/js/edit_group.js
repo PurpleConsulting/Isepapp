@@ -6,15 +6,6 @@ $(document).ready(function(){
 	 
 	var addUserSubmit =  function(){ $("form#adduser").submit(); }
 	
-	$('#modaladd').on('shown.bs.modal', function () {
-		 $('#myInput').focus()
-	});
-	
-	$("#add").click(function(){
-		$("form#adduser").submit()
-	});
-
-	
 	$("span.link-dialog-grp").on("click", function(e) {
 		var groupname = $(this).attr("data-delete");
 		$.get("jsp/editor/modal_delete_group.jsp", {}, function(data, status){
@@ -99,8 +90,5 @@ $(document).ready(function(){
 			
 		});
 	});
-	
-	
-	
 	
 });
