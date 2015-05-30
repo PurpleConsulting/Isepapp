@@ -67,11 +67,12 @@ public class Students extends HttpServlet {
 			} else {
 				
 				// -- Lets see if the pseudo is in the data base.
-				DaoUsers du = new DaoUsers(Bdd.getCo());
-				DaoMissings dm = new DaoMissings(Bdd.getCo());
-				DaoMarks dmk = new DaoMarks(Bdd.getCo());
-				DaoDeadline ddl = new DaoDeadline(Bdd.getCo());
-				DaoGroups dgrp = new DaoGroups(Bdd.getCo());
+				Connection bddServletCo = Bdd.getCo();
+				DaoUsers du = new DaoUsers(bddServletCo);
+				DaoMissings dm = new DaoMissings(bddServletCo);
+				DaoMarks dmk = new DaoMarks(bddServletCo);
+				DaoDeadline ddl = new DaoDeadline(bddServletCo);
+				DaoGroups dgrp = new DaoGroups(bddServletCo);
 				User std = du.select(student);
 				
 				if(std != null && std.getPosition().equals("student")){
@@ -135,11 +136,13 @@ public class Students extends HttpServlet {
 					p.setContent("home.jsp");
 					
 				}
-				dmk.close();
-				dm.close();
-				du.close();
-				ddl.close();
-				dgrp.close();// -- we close the connection <-- THIS IS REALY IMPORTANT
+				
+				try {
+					bddServletCo.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 			
 		} else {

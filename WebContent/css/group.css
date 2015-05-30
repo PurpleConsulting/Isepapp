@@ -2,6 +2,12 @@
 div.row{
 	margin-bottom:20px;	
 }
+
+div.row.noborder{
+	margin-bottom:5px;
+	margin-left: 0px;
+	margin-right: 0px;	
+}
 h4{
 	color: #777777
 }

@@ -1,6 +1,8 @@
 package org.purple.controller;
 
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.SQLException;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -47,12 +49,16 @@ public class Promo extends HttpServlet {
 			
 			
 		} else {
+			// -- the user acces to the database
+			Connection bddServletCo = Bdd.getCo();
+			DaoGroups dg = new DaoGroups(bddServletCo);
+			
 			// -- the user acces to the prom page
 			p.setCss("promo.css"); p.setJs("promo.js");
 			p.setContent("users/promo.jsp");
 			p.setTitle("ISEP / APP - Promotion");
 			
-			DaoGroups dg = new DaoGroups(Bdd.getCo());
+			
 			
 			// -- get all the groups
 			Group[] groups = dg.selectAll();
@@ -64,7 +70,12 @@ public class Promo extends HttpServlet {
 			request.setAttribute("groups", groups);
 			request.setAttribute("allClass", allClass);
 			
-			dg.close();
+			try {
+				bddServletCo.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		request.setAttribute("pages", p);
 		this.getServletContext().getRequestDispatcher("/template.jsp").forward(request, response);

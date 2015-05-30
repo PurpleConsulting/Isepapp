@@ -2,6 +2,8 @@ package org.purple.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Connection;
+import java.sql.SQLException;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -43,12 +45,20 @@ public class Values extends HttpServlet {
 		p.setContent("/mark/values.jsp");
 		p.setTitle("ISEP / APP - Notation");
 		request.setAttribute("pages", p);
-
-		DaoValues v = new DaoValues(Bdd.getCo());
+		
+		Connection bddServletCo = Bdd.getCo();
+		DaoValues dv = new DaoValues(bddServletCo);
 		// Afficher les values
-		Value[] value = v.selectAllValues();
+		Value[] value = dv.selectAllValues();
 		request.setAttribute("valeur", value);
-
+		
+		try {
+			bddServletCo.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		this.getServletContext().getRequestDispatcher("/template.jsp")
 				.forward(request, response);
 	}
@@ -60,7 +70,8 @@ public class Values extends HttpServlet {
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		DaoValues v = new DaoValues(Bdd.getCo());
+		Connection bddServletCo = Bdd.getCo();
+		DaoValues dv = new DaoValues(bddServletCo);
 
 		// Modifier et supprimer une value
 		if (request.getParameter("modify").equals("1")) {
@@ -70,7 +81,7 @@ public class Values extends HttpServlet {
 			String[] checkbox = request.getParameterValues("delete");
 			if (checkbox != null) {
 				for (int i = 0; i < checkbox.length; ++i) {
-					v.deleteId(Integer.parseInt(checkbox[i]));
+					dv.deleteId(Integer.parseInt(checkbox[i]));
 				}
 			}
 			for (int i = 0; i <= Integer.parseInt(nombre); i++) {
@@ -91,11 +102,11 @@ public class Values extends HttpServlet {
 
 				valu[i] = val;
 			}
-			// Appel à la page affichage value
+			// Appel  la page affichage value
 			Page p = new Page();
 
 			if (CountTrue == Integer.parseInt(nombre) + 1) {
-				v.updateValues(valu);
+				dv.updateValues(valu);
 				p.setError(false);
 
 			} else {
@@ -111,7 +122,7 @@ public class Values extends HttpServlet {
 			request.setAttribute("pages", p);
 
 			// Afficher les values
-			Value[] value = v.selectAllValues();
+			Value[] value = dv.selectAllValues();
 			request.setAttribute("valeur", value);
 
 			this.getServletContext().getRequestDispatcher("/template.jsp")
@@ -137,10 +148,17 @@ public class Values extends HttpServlet {
 				val.setId(Integer.parseInt(nombre));
 				val.setTitle(title);
 				val.setPoints(Integer.parseInt(points));
-				v.create(val);
+				dv.create(val);
 			} else {
 				out.write("1");
 			}
+		}
+		
+		try {
+			bddServletCo.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 	}
 

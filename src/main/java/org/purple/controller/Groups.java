@@ -1,6 +1,8 @@
 package org.purple.controller;
 
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 import javax.servlet.ServletException;
@@ -66,11 +68,11 @@ public class Groups extends HttpServlet {
 				
 				p.setContent("home.jsp");
 			} else {
-				
-				DaoGroups dg = new DaoGroups(Bdd.getCo());
-				DaoMarks dmk = new DaoMarks(Bdd.getCo());
-				DaoDeadline ddl = new DaoDeadline(Bdd.getCo());
-				DaoMissings dm = new DaoMissings(Bdd.getCo());
+				Connection bddServletCo = Bdd.getCo();
+				DaoGroups dg = new DaoGroups(bddServletCo);
+				DaoMarks dmk = new DaoMarks(bddServletCo);
+				DaoDeadline ddl = new DaoDeadline(bddServletCo);
+				DaoMissings dm = new DaoMissings(bddServletCo);
 				
 				Group group = dg.select(scope);  
 				if(group == null){
@@ -125,10 +127,12 @@ public class Groups extends HttpServlet {
 					request.setAttribute("deadlines", deadlines);
 				}
 				
-				ddl.close(); // -- close Deadline Dao
-				dm.close();  // -- close Missings Dao
-				dg.close();  // -- close Groups Dao
-				dmk.close(); // -- close the Marks Dao
+				try {
+					bddServletCo.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 		}
 		

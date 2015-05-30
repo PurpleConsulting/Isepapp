@@ -18,13 +18,5 @@ public abstract class Dao<T> {
 
   public abstract T select(String id);
   
-  public void close() {
-		try {
-			this.connect.close();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
 
 }

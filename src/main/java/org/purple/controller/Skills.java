@@ -1,6 +1,8 @@
 package org.purple.controller;
 
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.SQLException;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -36,8 +38,8 @@ public class Skills extends HttpServlet {
 		// TODO Auto-generated method stub
 		Page p = new Page();
 		if(Auth.isConnect(request)){
-			
-			DaoSkills dsk = new DaoSkills(Bdd.getCo());
+			Connection bddServletCo = Bdd.getCo();
+			DaoSkills dsk = new DaoSkills(bddServletCo);
 			
 			Skill[] skills =  dsk.selectAllSkills();
 			for(Skill s: skills ){
@@ -49,10 +51,17 @@ public class Skills extends HttpServlet {
 			p.setJs("skill_display.js");
 			p.setContent("skills/skill.jsp");
 			
-			dsk.close();
+			
 			request.setAttribute("skills", skills);
 			request.setAttribute("pages", p);
 			request.getRequestDispatcher("/template.jsp").forward(request, response);
+			
+			try {
+				bddServletCo.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		
 	}

@@ -1,6 +1,8 @@
 package org.purple.controller;
 
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.SQLException;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -39,9 +41,10 @@ public class DeadlinesTuteur extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Page p = new Page();
 		if(Auth.isTutor(request)){
-			DaoGroups dg = new DaoGroups(Bdd.getCo());
-			DaoDeadline dl = new DaoDeadline(Bdd.getCo());
-			DaoUsers u = new DaoUsers(Bdd.getCo());
+			Connection bddServletCo = Bdd.getCo();
+			DaoGroups dg = new DaoGroups(bddServletCo);
+			DaoDeadline dl = new DaoDeadline(bddServletCo);
+			DaoUsers u = new DaoUsers(bddServletCo);
 			
 			p.setCss("deadline.css");
 			p.setJs("deadline.js");
@@ -65,6 +68,13 @@ public class DeadlinesTuteur extends HttpServlet {
 			// get all the deadlines
 			Deadline[] deadline = dl.selectAllDeadlines();
 			request.setAttribute("deadline", deadline);
+			
+			try {
+				bddServletCo.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 	
 		this.getServletContext().getRequestDispatcher("/template.jsp")

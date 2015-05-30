@@ -25,7 +25,7 @@ public class TestDaoMarks {
 		if (m.getValue() != 2.0 && m.getOwner() != "ldivad"){
 			fail(Double.toString(m.getValue()));
 		}
-		dm.close();
+		
 	}
 	
 	@Test
@@ -37,7 +37,6 @@ public class TestDaoMarks {
 				fail(m.getOwner());
 			}
 		}
-		dm.close();
 	}
 	
 	

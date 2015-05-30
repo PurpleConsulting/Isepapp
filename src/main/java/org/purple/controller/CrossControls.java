@@ -1,6 +1,8 @@
 package org.purple.controller;
 
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.SQLException;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -48,10 +50,11 @@ public class CrossControls extends HttpServlet {
 		// p.setTitle("");
 
 		// Create instance Dao
-		DaoGroups dgp = new DaoGroups(Bdd.getCo());
-		DaoUsers dusr = new DaoUsers(Bdd.getCo());
-		DaoSkills ds = new DaoSkills(Bdd.getCo());
-		DaoValues dv = new DaoValues(Bdd.getCo());
+		Connection bddServletCo = Bdd.getCo();
+		DaoGroups dgp = new DaoGroups(bddServletCo);
+		DaoUsers dusr = new DaoUsers(bddServletCo);
+		DaoSkills ds = new DaoSkills(bddServletCo);
+		DaoValues dv = new DaoValues(bddServletCo);
 
 		// Display group name
 		HttpSession s = request.getSession();
@@ -82,10 +85,12 @@ public class CrossControls extends HttpServlet {
 				.forward(request, response);
 		
 		//Close Dao
-				dgp.close();
-				dusr.close();
-				ds.close();
-				dv.close();
+		try {
+			bddServletCo.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 	}
 

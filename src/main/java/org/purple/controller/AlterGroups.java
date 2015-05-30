@@ -1,6 +1,8 @@
 package org.purple.controller;
 
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.SQLException;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -44,9 +46,9 @@ public class AlterGroups extends HttpServlet {
 			String thegroup = request.getParameter("scope");
 			
 			if(Auth.isTutor(request, thegroup) || Auth.isRespo(request)){
-				
-				DaoUsers du = new DaoUsers(Bdd.getCo());
-				DaoGroups dg = new DaoGroups(Bdd.getCo());
+				Connection bddServletCo = Bdd.getCo();
+				DaoUsers du = new DaoUsers(bddServletCo);
+				DaoGroups dg = new DaoGroups(bddServletCo);
 				// -- reday to perfom query on the database
 				
 				Group group = dg.select(thegroup); 			// -- Get the group 
@@ -72,8 +74,12 @@ public class AlterGroups extends HttpServlet {
 				}
 				
 				
-				du.close();
-				dg.close(); // -- we close the connection
+				try {
+					bddServletCo.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 				
 			} else if(!Auth.isTutor(request, thegroup) && Auth.isTutor(request)) {
 				p.setCss(""); p.setJs("");
@@ -126,8 +132,9 @@ public class AlterGroups extends HttpServlet {
 		
 		if(Auth.isTutor(request, scope) || Auth.isRespo(request)){
 			
-			DaoUsers du = new DaoUsers(Bdd.getCo());
-			DaoGroups dg = new DaoGroups(Bdd.getCo());
+			Connection bddServletCo = Bdd.getCo();
+			DaoUsers du = new DaoUsers(bddServletCo);
+			DaoGroups dg = new DaoGroups(bddServletCo);
 			// -- we are ready to perform query on the database
 			
 			Group redirectionGroup = new Group();
@@ -282,8 +289,12 @@ public class AlterGroups extends HttpServlet {
 			request.setAttribute("teachers", teachers);
 			request.setAttribute("group", redirectionGroup);
 			
-			du.close();
-			dg.close(); // -- We close the Dao connection
+			try {
+				bddServletCo.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			
 		} else if(!Auth.isTutor(request, scope) && Auth.isTutor(request)) {
 			

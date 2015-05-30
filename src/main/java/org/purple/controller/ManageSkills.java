@@ -1,6 +1,8 @@
 package org.purple.controller;
 
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -51,7 +53,8 @@ public class ManageSkills extends HttpServlet {
 		Page p = new Page();
 		if(Auth.isRespo(request)){
 			// -- create the dao to perorme queries
-			DaoSkills ds = new DaoSkills(Bdd.getCo());
+			Connection bddServletCo = Bdd.getCo();
+			DaoSkills ds = new DaoSkills(bddServletCo);
 			
 			// -- prepare the skill we need to display
 			Skill[] allskills = ds.selectAllSkills();
@@ -67,7 +70,12 @@ public class ManageSkills extends HttpServlet {
 			p.setContent("/skills/manage_skill.jsp");
 			p.setTitle("ISEP / APP - Gestion des Compétences");
 			
-			ds.close();
+			try {
+				bddServletCo.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			
 		} else {
 			HttpSession s = request.getSession();
@@ -131,8 +139,9 @@ public class ManageSkills extends HttpServlet {
 		
 		if(Auth.isRespo(request)){
 			// -- The user can access to the data base
-			DaoSkills ds = new DaoSkills(Bdd.getCo());
-			DaoSubSkills dss = new DaoSubSkills(Bdd.getCo());
+			Connection bddServletCo = Bdd.getCo();
+			DaoSkills ds = new DaoSkills(bddServletCo);
+			DaoSubSkills dss = new DaoSubSkills(bddServletCo);
 			
 			
 			if(!Isep.nullOrEmpty(skillId, skillTitle) && skillSubTile != null){
@@ -278,8 +287,12 @@ public class ManageSkills extends HttpServlet {
 				
 			}
 			
-			ds.close();
-			dss.close();
+			try {
+				bddServletCo.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			
 		} else {
 			HttpSession s = request.getSession();

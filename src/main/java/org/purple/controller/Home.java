@@ -1,6 +1,8 @@
 package org.purple.controller;
 
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.SQLException;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -40,8 +42,8 @@ public class Home extends HttpServlet {
 		Page p = new Page();
 		
 		if(Auth.isConnect(request)){
-			
-			DaoUsers du = new DaoUsers(Bdd.getCo());
+			Connection bddServletCo = Bdd.getCo();
+			DaoUsers du = new DaoUsers(bddServletCo);
 			HttpSession s = request.getSession();
 			if(Auth.isRespo(request)){
 				User[] teachers = du.selectAllTutor();
@@ -63,7 +65,13 @@ public class Home extends HttpServlet {
 			request.setAttribute("pages", p);
 			request.getRequestDispatcher("/template.jsp").forward(request, response);
 			
-			du.close();
+			try {
+				bddServletCo.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
 		} else {
 			response.sendRedirect("/Isepapp/Signin");
 		}

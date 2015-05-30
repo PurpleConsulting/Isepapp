@@ -20,6 +20,7 @@
 			<c:forEach var="miss" items="${missings}" varStatus="missStat">
 				<c:if test="${miss.getStudent() == student.getPseudo()}"><c:set var="abs" value="${abs + 1}"/></c:if>
 			</c:forEach>
+			<c:if test="${stdElem.index%2 == 0}"><div class="row noborder"></c:if>
 			<div class="${stdElem.index%2 == 0 ? '' : 'col-sm-offset-0 col-md-offset-1'} col-md-5 col-sm-12 student-cell">
 				<div class="picture">
 					<img src="./img/photo.jpg" alt="" />
@@ -42,6 +43,7 @@
 					</span></span>
 				</div>
 			</div>
+			<c:if test="${stdElem.index%2 != 0}"></div></c:if>
 			<c:set var="abs" value="${0}"/>
 		</c:forEach>
 	</div>

@@ -6,6 +6,10 @@ import java.io.IOException;
 
 
 
+import java.sql.Connection;
+import java.sql.SQLException;
+
+
 /*** servlet import ***/
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -64,9 +68,11 @@ public class Signin extends HttpServlet {
 		if (request.getParameter("Ajaxpseudo") != null){
 			
 			Boolean res = false;
-			DaoUsers u = new DaoUsers(Bdd.getCo());
+			
+			Connection bddServletCo = Bdd.getCo();
+			DaoUsers du = new DaoUsers(bddServletCo);
 			String param = request.getParameter("Ajaxpseudo");
-			if(u.find(param)) res = true;
+			if(du.find(param)) res = true;
 			
 			response.setHeader("content-type", "application/json");
 			JSONObject result = new JSONObject();
@@ -78,6 +84,13 @@ public class Signin extends HttpServlet {
 			/**
 			 * AJAX HANDLER END
 			 */
+			
+			try {
+				bddServletCo.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		} else if (request.getParameter("pseudo") == null){
 			Page p = new Page();
 			p.setWarning(true);
@@ -87,9 +100,11 @@ public class Signin extends HttpServlet {
 
 		} else {
 			String url = "";
-			DaoUsers u = new DaoUsers(Bdd.getCo());
+			
+			Connection bddServletCo = Bdd.getCo();
+			DaoUsers du = new DaoUsers(bddServletCo);
 			String pseudo = request.getParameter("pseudo");
-			User user = u.select(pseudo);
+			User user = du.select(pseudo);
 			
 			if(user.getId() !=  0){
 				Page p = new Page();
@@ -111,7 +126,12 @@ public class Signin extends HttpServlet {
 				this.getServletContext().getRequestDispatcher(url).forward(request, response);
 			}
 	
-			u.close();
+			try {
+				bddServletCo.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 	}
 }

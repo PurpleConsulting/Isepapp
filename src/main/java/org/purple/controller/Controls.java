@@ -1,6 +1,8 @@
 package org.purple.controller;
 
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.Enumeration;
 
 import javax.servlet.ServletException;
@@ -52,9 +54,10 @@ public class Controls extends HttpServlet {
 		if(Auth.isTutor(request) || Auth.isRespo(request)){
 			
 			//Create instance Dao
-			DaoGroups dgp = new DaoGroups(Bdd.getCo());
-			DaoSkills ds = new DaoSkills(Bdd.getCo());
-			DaoValues dv = new DaoValues(Bdd.getCo());
+			Connection bddServletCo = Bdd.getCo();
+			DaoGroups dgp = new DaoGroups(bddServletCo);
+			DaoSkills ds = new DaoSkills(bddServletCo);
+			DaoValues dv = new DaoValues(bddServletCo);
 			
 			//Display group name
 			HttpSession session = request.getSession();
@@ -87,9 +90,12 @@ public class Controls extends HttpServlet {
 			this.getServletContext().getRequestDispatcher("/template.jsp").forward(request, response);
 
 			//Close Dao
-			dgp.close();
-			ds.close();
-			dv.close();
+			try {
+				bddServletCo.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			
 		
 		} else {
@@ -121,8 +127,9 @@ public class Controls extends HttpServlet {
 		
 		if(Auth.isTutor(request) || Auth.isRespo(request)){
 			// -- Now the user is allowed to perfom queries on the database
-			DaoGroups dgroup = new DaoGroups(Bdd.getCo());
-			DaoMarks dmrk = new DaoMarks(Bdd.getCo());
+			Connection bddServletCo = Bdd.getCo();
+			DaoGroups dgroup = new DaoGroups(bddServletCo);
+			DaoMarks dmrk = new DaoMarks(bddServletCo);
 			
 			if(!Isep.nullOrEmpty(str) && Auth.isTutor(request, str)){
 				// -- Find the group
@@ -170,8 +177,12 @@ public class Controls extends HttpServlet {
 					response.getWriter().write(result.toString());
 				}
 			}
-			dgroup.close();
-			dmrk.close();
+			try {
+				bddServletCo.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		
 	}

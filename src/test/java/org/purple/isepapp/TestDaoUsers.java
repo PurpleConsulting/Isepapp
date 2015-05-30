@@ -24,7 +24,6 @@ public class TestDaoUsers extends TestCase{
 		DaoUsers u = new DaoUsers(Bdd.getCo());
 		String id = "ldivad";
 		assertTrue(u.find(id));
-		u.close();
 	}
 	
 
@@ -36,7 +35,6 @@ public class TestDaoUsers extends TestCase{
 		
 		assertEquals(beanUser.getFirstName(), "DIVAD");
 		assertEquals(beanUser.getLastName(), "Loïc");
-		u.close();
 	}
 
 
