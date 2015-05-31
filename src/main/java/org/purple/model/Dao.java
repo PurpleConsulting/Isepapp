@@ -14,7 +14,7 @@ public abstract class Dao<T> {
 
   public abstract boolean delete(T obj);
 
-  public abstract boolean update(T obj, String where);
+  public abstract boolean update(T obj);
 
   public abstract T select(String id);
   

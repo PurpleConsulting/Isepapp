@@ -63,7 +63,7 @@ public class DaoValues extends Dao<Value> {
 	}
 
 	@Override
-	public boolean update(Value obj, String where) {
+	public boolean update(Value obj) {
 		// TODO Auto-generated method stub
 		return false;
 	}

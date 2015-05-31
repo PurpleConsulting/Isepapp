@@ -9,9 +9,11 @@
     $(window).scroll(function () {
         if ($(window).scrollTop() > '160') {
             $('#navmain').addClass('navbar-fixed-top');
+            $("#content").css("margin-top","55px");
             //$('#navmain').removeClass('navbar-static-top');                  
         } else {
             $('#navmain').removeClass('navbar-fixed-top');
+            $("#content").css("margin-top","0px");
             //$('#navmain').addClass('navbar-static-top');     
         }
     });

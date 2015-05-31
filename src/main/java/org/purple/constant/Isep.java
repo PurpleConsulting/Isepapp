@@ -48,6 +48,7 @@ public class Isep {
 			} catch (NullPointerException e) {
 				u = new User();
 			}
+			p.setContent("home/common.jsp");
 			p.setJs("bootstrap-select.min.js","home_"+u.getPosition()+".js"); 
 			p.setCss("bootstrap-select.min.css","home_"+u.getPosition()+".css");
 		}

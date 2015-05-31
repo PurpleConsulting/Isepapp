@@ -12,7 +12,7 @@
 <c:import url="/jsp/alert.jsp" charEncoding="UTF-8"></c:import>
 <div class="row">
 	<div class="col-xs-offset-1 col-xs-10 status">
-		<h4>- Propiétés du groupe -</h4>
+		<h4>- Propiétés du groupe - <small>Responsable d'app uniquement</small></h4>
 		<form class="form-inline" method="post" action="AlterGroups">
 			<div class="line">
 				<div class="form-group">

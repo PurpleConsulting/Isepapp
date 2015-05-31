@@ -129,7 +129,7 @@ public class Deadlines extends HttpServlet {
 					Deadline dline=new Deadline();
 					dline.setId(Integer.parseInt(idDeadline));
 					dline.setDateLimit(datetimelimB+":00");
-					dl.update(dline, Integer.toString(dline.getId()));
+					dl.update(dline);
 					}else{
 						p.setWarning(true);
 						p.setWarningMessage("L'oppération à mal été éffectuée, veuillez répéter l'oppération en remplissant correctement les champs proposés.");

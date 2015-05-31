@@ -1,9 +1,4 @@
 import org.json.JSONObject;
-import org.purple.bean.User;
-import org.purple.constant.Bdd;
-import org.purple.model.*;
-
-import java.sql.*;
 
 public class Main {
 

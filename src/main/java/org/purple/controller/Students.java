@@ -52,15 +52,15 @@ public class Students extends HttpServlet {
 		// TODO Auto-generated method stub
 		request.setCharacterEncoding("UTF-8");
 		Page p = new Page();
-		String student = "";
-		student = request.getParameter("pseudo");
+		String student = request.getParameter("pseudo");
 		// -- Authentication --
 		if(Auth.isRespo(request) || Auth.isStudentTutor(request, student)){ 
 			// -- We assume we are Admin or tutor or Respo, Now Does the student exist?
 			
-			if(student.equals("")){
+			if(Isep.nullOrEmpty(student)){
 				// -- Incomplete data, the pseudo is missing.
 				p.setWarning(true);
+				Isep.bagPackHome(p, request.getSession());
 				p.setWarningMessage("La page étudiante n'a été retrouvée.");
 				p.setContent("home/common.jsp");
 				
@@ -147,8 +147,7 @@ public class Students extends HttpServlet {
 			
 		} else {
 			// -- Back to the home page with an warning message.
-			HttpSession s = request.getSession();
-			Isep.bagPackHome(p, s);
+			Isep.bagPackHome(p, request.getSession());
 			p.setWarning(true);
 			p.setWarningMessage("La page sur laquelle vous tentez de vous rendre ne vous est pas accessible. "
 					+ "Pour toute réclamation, prenez contact avec le responsable d'APP actuel.");
@@ -203,7 +202,7 @@ public class Students extends HttpServlet {
 					subjectUser.setMail(stdEmail); subjectUser.setGroup(stdNewGroup);
 					try{ subjectUser.setIsepNo(Integer.parseInt(stdIsepNo));} 
 					catch (NumberFormatException e){ }
-					boolean querysuccess = du.update(subjectUser, "");
+					boolean querysuccess = du.update(subjectUser);
 					if(querysuccess){
 						p.setSuccess(true);
 						p.setSuccessMessage("les modifications sur le profile ont bien été apportées.");
@@ -271,6 +270,11 @@ public class Students extends HttpServlet {
 					p.setWarning(true);
 					p.setWarningMessage("le profil étudiant à modifier n'a pas été trouvé dans la base de donnée.");
 				}
+				
+			} else {
+				
+				p.setError(true);
+				p.setErrorMessage("Votre demande à male été interprétée. veillez à bien remplir les champs des formulaires propsés.");
 				
 			}
 				

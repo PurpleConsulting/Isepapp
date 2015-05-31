@@ -41,7 +41,7 @@ public class DaoSkills extends Dao<Skill>{
 	}
 
 	@Override
-	public boolean update(Skill obj, String where) {
+	public boolean update(Skill obj) {
 		// TODO Auto-generated method stub
 		boolean res = true;
 		String q = "UPDATE Skills SET title = ?, id_respo = (SELECT Users.id FROM Users WHERE Users.id_post = 2),"

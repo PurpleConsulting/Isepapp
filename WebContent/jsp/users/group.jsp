@@ -43,7 +43,7 @@
 					</span></span>
 				</div>
 			</div>
-			<c:if test="${stdElem.index%2 != 0}"></div></c:if>
+			<c:if test="${stdElem.index%2 != 0 || stdElem.last}"></div></c:if>
 			<c:set var="abs" value="${0}"/>
 		</c:forEach>
 	</div>

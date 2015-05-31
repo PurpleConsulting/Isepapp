@@ -57,7 +57,7 @@ public class DaoSubSkills extends Dao<SubSkill>{
 	}
 
 	@Override
-	public boolean update(SubSkill obj, String where) {
+	public boolean update(SubSkill obj) {
 		// TODO Auto-generated method stub
 		boolean res = false;
 		String q = "UPDATE Sub_skills SET title = ?, modification_date = CURDATE() WHERE id = ?";
@@ -71,7 +71,7 @@ public class DaoSubSkills extends Dao<SubSkill>{
 		boolean interRes = true;
 		boolean res = true;
 		for(SubSkill l : list){
-			interRes = this.update(l, "");
+			interRes = this.update(l);
 			if(!interRes) res = false;
 		}
 		return res;

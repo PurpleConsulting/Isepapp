@@ -43,11 +43,11 @@ public class DaoDeadline extends Dao<Deadline>{
 	}
 
 	@Override
-	public boolean update(Deadline obj, String where) {
+	public boolean update(Deadline obj) {
 		boolean r=false;
-		String[]params={obj.getDateLimit().toString(Isep.JODA_UTC), where};
-		String q = "UPDATE `Deadlines` SET Deadlines.date_limit=? "
-				+ "WHERE Deadlines.id=?";	
+		String[]params={obj.getDateLimit().toString(Isep.JODA_UTC), Integer.toString(obj.getId())};
+		String q = "UPDATE `Deadlines` SET Deadlines.date_limit= ? "
+				+ "WHERE Deadlines.id= ?";	
 		int affected = Bdd.preparePerform(this.connect, q, params);
 		if(affected == 1) r = true;
 		return r;

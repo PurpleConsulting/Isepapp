@@ -47,9 +47,11 @@ public class Bdd {
 		} catch (SQLException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
-		} catch (NullPointerException | NamingException e3 ) {
+		} catch (NamingException e3 ) {
 			// TODO Auto-generated catch block
-			//e3.printStackTrace();
+			//e2.printStackTrace();
+			co = getSecureCo();
+		} catch (NullPointerException e2) {
 			co = getSecureCo();
 		}
 		return co;

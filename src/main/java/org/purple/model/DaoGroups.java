@@ -85,7 +85,7 @@ public class DaoGroups extends Dao<Group>{
 	}
 
 	@Override
-	public boolean update(Group group, String where) {
+	public boolean update(Group group) {
 		// TODO Auto-generated method stub
 		String _class = "";
 		try {
@@ -96,8 +96,8 @@ public class DaoGroups extends Dao<Group>{
 		
 		String q = "UPDATE Groups SET Groups.`name` = ? , Groups.class = ?, "
 				+ " id_tutor = (SELECT Users.id FROM Users WHERE Users.pseudo = ?)"
-				+ " WHERE Groups.`name` = ?";
-		String[] params = {group.getName(), _class, group.getTutor(), where};
+				+ " WHERE Groups.`id` = ?";
+		String[] params = {group.getName(), _class, group.getTutor(), Integer.toString(group.getId())};
 		int affected = Bdd.preparePerform(this.connect, q, params);
 		if(affected == 1){
 			return true;

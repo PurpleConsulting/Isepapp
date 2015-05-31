@@ -160,7 +160,7 @@ public class ManageSkills extends HttpServlet {
 				}
 				boolean  querrysuccess = true;
 				querrysuccess = dss.updateMulti(skillbean.getSubSkills());
-				querrysuccess = querrysuccess & ds.update(skillbean, "");
+				querrysuccess = querrysuccess & ds.update(skillbean);
 				if(querrysuccess){
 					p.setSuccess(true);
 					p.setSuccessMessage("la modification de la grille de compétance a bien été éffectuée.");

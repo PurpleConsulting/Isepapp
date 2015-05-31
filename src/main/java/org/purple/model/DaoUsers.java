@@ -75,7 +75,7 @@ public class DaoUsers extends Dao<User> {
 
 
 	@Override
-	public boolean update(User obj, String where) {
+	public boolean update(User obj) {
 		// TODO Auto-generated method stub
 		boolean res = false;
 		String[] params = {obj.getFirstName(), obj.getLastName(),
