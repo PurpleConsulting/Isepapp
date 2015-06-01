@@ -95,6 +95,34 @@ public class DaoDeadline extends Dao<Deadline>{
 		return dls;
 	}
 	
+	public Deadline[] selectGroupbyTutor(String idTutor) {
+		// TODO Auto-generated method stub
+		Deadline[] gs = new Deadline[0];
+		String q = "SELECT Deadlines.id, Deadlines.description, DATE_FORMAT(Deadlines.date_limit, '"+ Isep.MYSQL_UTC +"'), Deadlines.`status`, Groups.`name`, Deadlines.id_createur"
+				+ " FROM Deadlines INNER JOIN Groups ON Deadlines.id_group = Groups.id"
+				+ " WHERE Groups.`id_tutor` = ? ;";
+		String[] params = {idTutor};
+		ResultSet currsor = Bdd.prepareExec(this.connect, q, params);
+		try {
+			if (currsor.last()) {
+				gs = new Deadline[currsor.getRow()];
+				currsor.beforeFirst(); 
+			}
+			int i = 0;
+			while(currsor.next()){
+				
+				gs[i] = new Deadline(currsor.getInt(1), currsor.getString(2), currsor.getString(3), currsor.getInt(6), currsor.getBoolean(4), currsor.getString(5));
+				i++;
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			gs = new Deadline[0];
+			e.printStackTrace();
+		}
+		
+		return gs;
+	}
+	
 	public void checkOut(Deadline dl){
 		
 		String q = "SELECT COUNT(*), DATE_FORMAT(Delivery.`date`, '"+ Isep.MYSQL_UTC +"')"

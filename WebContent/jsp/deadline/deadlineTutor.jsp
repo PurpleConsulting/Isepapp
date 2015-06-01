@@ -11,7 +11,6 @@
 <div class="row">
 	<div class="col-xs-offset-1 col-xs-10">
 		<em style="color:#337AB7">Les deadlines</em>
-			<input type="text" value="${sessionScope.user.getGroup()}">
 			<div class="latest-group list">
 			<input type="hidden" value="${fn:length(deadline)-1}" id="taille"/>
 			<form class="form-inline off deadlineDate" method="post" action="Deadlines">

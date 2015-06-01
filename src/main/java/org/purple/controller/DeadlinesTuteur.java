@@ -48,7 +48,7 @@ public class DeadlinesTuteur extends HttpServlet {
 			
 			p.setCss("deadline.css");
 			p.setJs("deadline.js");
-			p.setContent("/deadline/deadlineTuteur.jsp");
+			p.setContent("/deadline/deadlineTutor.jsp");
 			p.setTitle("ISEP / APP - Deadline");
 			request.setAttribute("pages", p);
 			
