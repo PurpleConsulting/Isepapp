@@ -102,7 +102,7 @@ public class DaoSkills extends Dao<Skill>{
 	
 	public Skill[] selectAllSkills(){
 		Skill[] skills = null;
-		String q = "SELECT title, sub_title, id FROM Skills ORDER BY id";
+		String q = "SELECT title, sub_title, id FROM Skills WHERE id_skills != 0 ORDER BY id";
 		
 		try {
 			PreparedStatement prestmt = this.connect.prepareStatement(q);
@@ -130,33 +130,24 @@ public class DaoSkills extends Dao<Skill>{
 	}
 	
 	//Requete Cross-Skills
-	public Skill[] selectCrossSkills(){
-		Skill[] skills = null;
-		String q = "SELECT title, sub_title, id FROM Skills WHERE id = 6 ORDER BY id";
+	public Skill selectCrossSkills(){
+		Skill skill = new Skill();
+		String q = "SELECT title, sub_title, id FROM Skills WHERE id = 0 ORDER BY id";
 		
 		try {
 			PreparedStatement prestmt = this.connect.prepareStatement(q);
 			ResultSet cursor = prestmt.executeQuery();
-			if (cursor.last()) {
-				skills = new Skill[cursor.getRow()];
-				cursor.beforeFirst(); 
-			}
-			int i = 0;
-			while(cursor.next()){
-				Skill s = new Skill();
-				s.setTitle(cursor.getString(1));
-				s.setSubtitle(cursor.getString(2));
-				s.setId(cursor.getInt(3));
-				skills[i] = s;
-				i++;
-			}
-			cursor.close();
+			if (cursor.next()) { }
+			skill = new Skill();
+			skill.setTitle(cursor.getString(1));
+			skill.setSubtitle(cursor.getString(2));
+			skill.setId(cursor.getInt(3));
+			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
-			skills = null;
 			e.printStackTrace();
 		}
-		return skills;
+		return skill;
 	}
 
 

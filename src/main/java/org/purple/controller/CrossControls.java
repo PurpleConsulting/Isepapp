@@ -46,7 +46,7 @@ public class CrossControls extends HttpServlet {
 		// TODO Auto-generated method stub
 		Page p = new Page();
 		p.setContent("mark/cross_controls.jsp");
-		p.setCss("crossmark.css");
+		p.setCss("bootstrap-select.min.css","crossmark.css");
 		// p.setTitle("");
 
 		// Create instance Dao
@@ -64,23 +64,18 @@ public class CrossControls extends HttpServlet {
 		Group g = dgp.select(str);
 		dgp.completeMemebers(g);
 
-		request.setAttribute("group", g);
-		request.setAttribute("pages", p);
-
 		// Display skills in tab
-		Skill[] skills = ds.selectCrossSkills();
-		if (skills != null) {
-			for (int i = 0; i <= skills.length - 1; i++) {
-				ds.completeSub_skills(skills[i]); // Add sub_skills into skills
-			}
-		}
-		request.setAttribute("skills", skills);
+		Skill skill = ds.selectCrossSkills();
+		ds.completeSub_skills(skill); // Add sub_skills into skills
 		
 		// Display values in radio btn
 		Value[] v = dv.selectAllValues();
+		System.out.print(skill.getSubSkills().size());
+		request.setAttribute("group", g);
+		request.setAttribute("pages", p);
+		request.setAttribute("skills", skill);
 		request.setAttribute("values", v);
 		
-
 		this.getServletContext().getRequestDispatcher("/template.jsp")
 				.forward(request, response);
 		

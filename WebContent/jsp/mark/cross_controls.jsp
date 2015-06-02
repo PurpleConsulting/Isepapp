@@ -10,112 +10,65 @@
 		<c:out value="${group.getName()}"></c:out>
 	</h1>
 
+	<!-- Deadlines -->
 	<div class="deadline">Deadline à (heure de depot)</div>
 
+	<!-- nom des membres du  groupe -->
+	<div class="eleve_groupe">
+
+		<button type="button" onclick="myFunction()" class="btn btn-default">
+			précédent</button>
+		<c:forEach var="student" items="${group.getMembers()}"
+			varStatus="status">
+			<c:out value="${student.getFirstName()} ${student.getLastName()}"></c:out>
+		</c:forEach>
+		<button type="button" class="btn btn-default">suivant</button>
+
+	</div>
 
 	<div id="name_group"></div>
 
+	<!-- Compétence et sous-compétence -->
 	<!-- Nav tabs -->
 	<div role="tabpanel">
 		<ul class="nav nav-tabs" role="tablist" id="tabs">
-			<c:forEach var="skill" items="${skills}" varStatus="status">
-				<li role="presentation" class='${status.count==1 ? "active":""}'>
-					<a href="#tab${status.count}" role="tab" data-toggle="tab"> <c:out
-							value="${status.count}. ${skill.getTitle()}"></c:out>
+				<li role="presentation" class='active'>
+					<a href="#tab0" role="tab" data-toggle="tab"> <c:out
+							value="${skills.getTitle()}"></c:out>
 				</a>
 				</li>
-			</c:forEach>
 		</ul>
 
 		<!-- Tab panes -->
 		<div class="tab-content">
-			<c:forEach var="skill" items="${skills}" varStatus="status">
-				<form action="Controls" method="post" id="form${skill.getId()}">
+			<form action="Controls" method="post" id="form">
+				<c:forEach var="sub_skill" items="${skills.getSubSkills()}"
+					varStatus="status">
 					<div role="tabpanel"
 						class='tab-pane ${status.count==1 ? "active":""}'
 						id="tab${status.count}">
-						<h2>
-							<c:out value='${status.count} - ${skill.getSubtitle()}'></c:out>
-						</h2>
-						<c:forEach var="sub_skill" items="${skill.getSubSkills()}"
-							varStatus="status">
+						<h4>
+							<c:out value='${status.count} - ${sub_skill.getTitle()}'></c:out>
+						</h4>
+						<div class="radio" class="line">
+							<c:forEach var="value" items="${values}" varStatus="status">
+								<label> <input type="radio" name='${subSkill.getId()}'
+									id="value${status.count}" value='${value.getId()}'
+									${status.count==1 ? "checked":""}> <c:out
+										value='${value.getTitle()}'></c:out>
+								</label>
 
-							<hr />
+								<input type="hidden" value='${subSkill.getId()}' class="val">
 
-							<h3>
-								<c:out value='${sub_skill.getTitle()} : '></c:out>
-							</h3>
-							<div class="radio" class="line">
-								<c:forEach var="value" items="${values}" varStatus="status">
-									<label> <input type="radio" name='${sub_skill.getId()}'
-										id="value${status.count}" value='${value.getId()}'
-										${status.count==1 ? "checked":""}> <c:out
-											value='${value.getTitle()}'></c:out>
-									</label>
-
-									<input type="hidden" value='${sub_skill.getId()}' class="val">
-
-								</c:forEach>
-								<c:set var="val" value="${skill.getId()}" />
-							</div>
-						</c:forEach>
+							</c:forEach>
+							<c:set var="val" value="${skill.getId()}" />
+						</div>
 					</div>
-					<button class="btn btn-default btn-test" value="${val}">Bouton</button>
-				</form>
-			</c:forEach>
+					<hr/>
+				</c:forEach>
+				<button class="btn btn-default btn-test" value="${val}">Bouton</button>
+			</form>
 		</div>
 	</div>
 
-	<!-- 	<div class="nom"> -->
-
-	<!-- 		<button type="button" onclick="myFunction()" class="btn btn-default"><</button> -->
-	<%-- 		<c:forEach var="student" items="${group.getMembers()}" --%>
-	<%-- 			varStatus="status"> --%>
-	<%-- 			<c:out value="${student.getFirstName()} ${student.getLastName()}"></c:out> --%>
-	<%-- 		</c:forEach> --%>
-	<!-- 		<button type="button" class="btn btn-default">></button> -->
-
-	<!-- 	</div> -->
-
-	<!-- </div> -->
-
-	<!-- <div id="formulaire"> -->
-	<!-- 	<form method="post" action="traitement.php"> -->
-
-	<!-- 		<div class="couleur"></div> -->
-	<!-- 		<div class="table-responsive"> -->
-	<!-- 			<table class="table table-bordered"> -->
-	<!-- 				<tr>compétence n°1 -->
-	<!-- 				</tr> -->
-
-	<!-- 				<tr> -->
-	<!-- 					<th class="sscomp1">Sous-compétence</th> -->
-	<!-- 					<th class="mark">Loin d'être acquis</th> -->
-	<!-- 					<th class="mark">En cours d'acquisition</th> -->
-	<!-- 					<th class="mark">Acquis</th> -->
-	<!-- 					<th class="mark">Au-delà</th> -->
-	<!-- 				</tr> -->
-
-	<!-- 				<tr> -->
-	<!-- 					<td>Sous-compétence n°1</td> -->
-	<!-- 					<td class="sscomp1"><label> <input type="radio" -->
-	<!-- 							name="sscomp1" id="optionsRadios2" value="Loin d'être acquis"> -->
-	<!-- 					</label></td> -->
-
-	<!-- 					<td class="sscomp1"><label> <input type="radio" -->
-	<!-- 							name="sscomp1" id="optionsRadios2" value="En cours d'acquisition"> -->
-	<!-- 					</label></td> -->
-
-	<!-- 					<td class="sscomp1"><label> <input type="radio" -->
-	<!-- 							name="sscomp1" id="optionsRadios2" value="Acquis"> -->
-	<!-- 					</label></td> -->
-
-	<!-- 					<td class="sscomp1"><label> <input type="radio" -->
-	<!-- 							name="sscomp1" id="optionsRadios2" value="Au-delà"> -->
-	<!-- 					</label></td> -->
-	<!-- 				</tr> -->
-	<!-- 			</table> -->
-	<!-- 		</div> -->
-	<!-- 		<button type="submit" class="btn btn-default">envoyer</button> -->
-	<!-- 	</form> -->
 </div>

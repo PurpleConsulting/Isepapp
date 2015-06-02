@@ -52,8 +52,8 @@ public class Skill {
 			return idRespo;
 		}
 
-		public void setId_respo(int id_respo) {
-			this.idRespo = id_respo;
+		public void setId_respo(int idRespo) {
+			this.idRespo = idRespo;
 		}
 
 		public int getCoefficient() {
