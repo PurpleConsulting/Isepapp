@@ -78,6 +78,7 @@
 								</div>
 								<div class="form-group" data-group="${deadline.getGroup()}" data-subject="${deadline.getDescription()}">
 									<a class="remove" id="del${status.count}" href="#" data-target="${deadline.getId()}"><span class="fa fa-trash-o fa-lg"></span></a> 
+
 								</div>
 							</div>
 						</c:forEach>
