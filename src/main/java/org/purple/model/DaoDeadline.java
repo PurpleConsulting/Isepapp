@@ -63,8 +63,8 @@ public class DaoDeadline extends Dao<Deadline>{
 	public Deadline select(String id) {
 		// TODO Auto-generated method stub
 		Deadline d = new Deadline();
-		String q = "SELECT Deadlines.description, DATE_FORMAT(Deadlines.date_limit, '"+ Isep.MYSQL_UTC +"'), Deadlines.`status`"
-				+	"FROM Deadlines WHERE Deadlines.id= ? ;" ;
+		String q = "SELECT Deadlines.description, DATE_FORMAT(Deadlines.date_limit, '"+ Isep.MYSQL_UTC +"'), Deadlines.id_createur, Deadlines.`status`"
+				+	"FROM Deadlines WHERE Deadlines.id = ? ;" ;
 		String [] params = {id};
 		ResultSet currsor = Bdd.prepareExec(this.connect, q, params);
 		try {

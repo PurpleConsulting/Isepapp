@@ -43,27 +43,39 @@ public class Deadlines extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		//Les Daos
-		Connection bddServletCo = Bdd.getCo();
-		DaoGroups dg = new DaoGroups(bddServletCo);
-		DaoDeadline dl = new DaoDeadline(bddServletCo);
-		DaoUsers u = new DaoUsers(bddServletCo);
-		
-		HttpSession session = request.getSession();
-		User userSession = (User)session.getAttribute("user");
-		request.setAttribute("usession", userSession);
-		
-		// -- get all the tutors
-		User[] user=u.selectTutorbyGroup();
-		request.setAttribute("user", user);
-		
+		request.setCharacterEncoding("UTF-8");
 		Page p = new Page();
-		p.setCss("deadline.css");
-		p.setJs("bootbox.min.js", "deadline.js");
-		p.setTitle("ISEP / APP - Deadline");
+		
+		// -- Third form alternative -- delete a user from a group
+		String idDeadline = request.getParameter("id_deadline");
+		String delete = request.getParameter("delete");
+					
+		
+		if(Auth.isRespo(request) || Auth.isTutor(request)){
+			p.setCss("deadline.css");
+			p.setJs("bootbox.min.js", "deadline.js");
+			p.setTitle("ISEP / APP - Deadline");
+			//Les Daos
+			Connection bddServletCo = Bdd.getCo();
+			DaoGroups dg = new DaoGroups(bddServletCo);
+			DaoDeadline dl = new DaoDeadline(bddServletCo);
+			DaoUsers u = new DaoUsers(bddServletCo);
+			
+			
+			HttpSession session = request.getSession();
+			User userSession = (User)session.getAttribute("user");
+			request.setAttribute("usession", userSession);
+			
+			// -- get all the tutors
+			User[] user=u.selectTutorbyGroup();
+			request.setAttribute("user", user);
 		
 		if(Auth.isRespo(request)){
 			p.setContent("/deadline/deadline.jsp");
+			if(!Isep.nullOrEmpty(delete)){
+				Deadline ds= dl.select(idDeadline);
+				dl.delete(ds);
+			}
 			// -- get all the groups
 			String[] groups = dg.selectAllClass();
 			request.setAttribute("groups", groups);
@@ -71,14 +83,6 @@ public class Deadlines extends HttpServlet {
 			Deadline[] deadline = dl.selectAllDeadlines();
 			request.setAttribute("deadline", deadline);
 						
-			// -- Third form alternative -- delete a user from a group
-			String idDeadline = request.getParameter("id_deadline");
-			String delete = request.getParameter("delete");
-			if(!Isep.nullOrEmpty(delete)){
-				Deadline ds= dl.select(idDeadline);
-				dl.delete(ds);
-			}
-			
 			
 		}else if(Auth.isTutor(request)){
 			p.setContent("/deadline/deadlineTutor.jsp");
@@ -87,7 +91,7 @@ public class Deadlines extends HttpServlet {
 			request.setAttribute("deadline", deadline);
 			
 		}
-		request.setAttribute("pages", p);
+		
 		
 		try {
 			bddServletCo.close();
@@ -95,6 +99,9 @@ public class Deadlines extends HttpServlet {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+		}
+		request.setAttribute("pages", p);
 		this.getServletContext().getRequestDispatcher("/template.jsp")
 		.forward(request, response);
 		
