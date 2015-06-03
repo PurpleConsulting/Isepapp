@@ -11,6 +11,6 @@
                maxActive="50" maxIdle="30" maxWait="10000"
                username="isep" password="paris06"
                driverClassName="com.mysql.jdbc.Driver"
-               url="jdbc:mysql://172.16.168.2:6311/APPDB"/>
+               url="jdbc:mysql://172.16.179.5:6311/APPDB"/>
 
 </Context>

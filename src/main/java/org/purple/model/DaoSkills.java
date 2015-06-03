@@ -102,7 +102,7 @@ public class DaoSkills extends Dao<Skill>{
 	
 	public Skill[] selectAllSkills(){
 		Skill[] skills = null;
-		String q = "SELECT title, sub_title, id FROM Skills WHERE id_skills != 0 ORDER BY id";
+		String q = "SELECT title, sub_title, id FROM Skills WHERE id != 0 ORDER BY id";
 		
 		try {
 			PreparedStatement prestmt = this.connect.prepareStatement(q);

@@ -45,8 +45,10 @@ public class CrossControls extends HttpServlet {
 			HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		Page p = new Page();
+		
+		
 		p.setContent("mark/cross_controls.jsp");
-		p.setCss("bootstrap-select.min.css","crossmark.css");
+		p.setCss("bootstrap-select.min.css","cross_controls.css");
 		// p.setTitle("");
 
 		// Create instance Dao
@@ -70,7 +72,7 @@ public class CrossControls extends HttpServlet {
 		
 		// Display values in radio btn
 		Value[] v = dv.selectAllValues();
-		System.out.print(skill.getSubSkills().size());
+
 		request.setAttribute("group", g);
 		request.setAttribute("pages", p);
 		request.setAttribute("skills", skill);

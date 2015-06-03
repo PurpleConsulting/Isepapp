@@ -1,11 +1,8 @@
 @CHARSET "ISO-8859-1";
-
-h1 {
-	text-align: center;
-	color : black;
+div.row{
+	margin-bottom: 30px;
 }
-
-.deadline {
+/*.deadline {
 	text-align: center;
 	margin-top: 5px;
 	margin-bottom: 5px;
@@ -14,12 +11,10 @@ h1 {
 	border: 3px red double;
 	padding-left: 1%;
 	font-size: 20px;
-}
+}*/
 
 .eleve_groupe {
 	text-align: center;
-	margin : 5%;
-	font-size: 30px;
 }
 
 #formulaire {
@@ -31,14 +26,12 @@ h1 {
 	padding-bottom: 1%;
 }
 
-div.row{
-	margin-bottom: 30px;
-}
 
-div.row div[class^='col-']{
+
+/*div.row div[class^='col-']{
 	padding-left:0px;
 	padding-right: 0px;
-}
+}*/
 
 div.grid{
 	border: solid #ccc 1px;
