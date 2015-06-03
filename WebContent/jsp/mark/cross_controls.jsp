@@ -7,18 +7,19 @@
 		<small><c:out value="${group.getName()}"></c:out></small>
 	</h1>
 </div>
+<c:out value="${deadline.printDateLimit()}"></c:out>
 <div class="row">
 	<div class="col-xs-offset-1 col-xs-10">
 		<div class="alert alert-info">Deadline à (heure de depot)</div>
 		<!-- nom des membres du  groupe -->
 		<div class="eleve_groupe">
 			<button type="button" onclick="myFunction()" class="btn btn-default">
-				précédent</button>
+				&larr; précédent</button>
 			<c:forEach var="student" items="${group.getMembers()}"
 				varStatus="status">
 				<c:out value="${student.getFirstName()} ${student.getLastName()}"></c:out>
 			</c:forEach>
-			<button type="button" class="btn btn-default">suivant</button>
+			<button type="button" class="btn btn-default">suivant &rarr;</button>
 		</div>
 	</div>
 </div>

@@ -11,12 +11,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.purple.bean.Deadline;
 import org.purple.bean.Group;
 import org.purple.bean.Page;
 import org.purple.bean.Skill;
 import org.purple.bean.User;
 import org.purple.bean.Value;
 import org.purple.constant.Bdd;
+import org.purple.constant.Isep;
+import org.purple.model.Auth;
+import org.purple.model.DaoDeadline;
 import org.purple.model.DaoGroups;
 import org.purple.model.DaoSkills;
 import org.purple.model.DaoUsers;
@@ -44,40 +48,53 @@ public class CrossControls extends HttpServlet {
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		request.setCharacterEncoding("UTF-8");
 		Page p = new Page();
-		
-		
-		p.setContent("mark/cross_controls.jsp");
-		p.setCss("bootstrap-select.min.css","cross_controls.css");
-		// p.setTitle("");
-
-		// Create instance Dao
 		Connection bddServletCo = Bdd.getCo();
-		DaoGroups dgp = new DaoGroups(bddServletCo);
-		DaoUsers dusr = new DaoUsers(bddServletCo);
-		DaoSkills ds = new DaoSkills(bddServletCo);
-		DaoValues dv = new DaoValues(bddServletCo);
-
-		// Display group name
-		HttpSession s = request.getSession();
-		User u = (User) s.getAttribute("user");
-		dusr.addGroup(u);
-		String str = u.getGroup();
-		Group g = dgp.select(str);
-		dgp.completeMemebers(g);
-
-		// Display skills in tab
-		Skill skill = ds.selectCrossSkills();
-		ds.completeSub_skills(skill); // Add sub_skills into skills
 		
-		// Display values in radio btn
-		Value[] v = dv.selectAllValues();
+		if(Auth.isStudent(request)){
+			
+			DaoGroups dgp = new DaoGroups(bddServletCo);
+			DaoUsers dusr = new DaoUsers(bddServletCo);
+			DaoSkills ds = new DaoSkills(bddServletCo);
+			DaoValues dv = new DaoValues(bddServletCo);
+			DaoDeadline dl = new DaoDeadline(bddServletCo);
+			
+			// -- We get the User 
+			HttpSession s = request.getSession();
+			User u = (User) s.getAttribute("user");
+			String grp = u.getGroup();
+			
+			Deadline deadline = dl.fetchCrossDeadline(grp);
+			
+			// -- We get the group
+			Group g = dgp.select(grp);
+			dgp.completeMemebers(g);
+	
+			
+			p.setContent("mark/cross_controls.jsp");
+			p.setCss("bootstrap-select.min.css","cross_controls.css");
+			
 
-		request.setAttribute("group", g);
+			// Display skills in tab
+			Skill skill = ds.selectCrossSkills();
+			ds.completeSub_skills(skill); // Add sub_skills into skills
+			
+			// Display values in radio btn
+			Value[] v = dv.selectAllValues();
+
+			request.setAttribute("group", g);
+			request.setAttribute("skills", skill);
+			request.setAttribute("values", v);
+			request.setAttribute("deadline", deadline);
+		} else {
+			Isep.bagPackHome(p, request.getSession());
+			p.setWarning(true);
+			p.setWarningMessage("Cette page n'est accessible qu'aux étudiants.");
+		}
+		
+		
 		request.setAttribute("pages", p);
-		request.setAttribute("skills", skill);
-		request.setAttribute("values", v);
-		
 		this.getServletContext().getRequestDispatcher("/template.jsp")
 				.forward(request, response);
 		

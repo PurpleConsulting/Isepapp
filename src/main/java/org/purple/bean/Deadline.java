@@ -16,6 +16,7 @@ public class Deadline {
 		private DateTime deliveryDate = new DateTime(2000, 01,01, 0,0,0);
 		private Boolean completed = false;
 		private int responsable=0;
+		
 		public Deadline(){
 			
 		}
@@ -27,9 +28,14 @@ public class Deadline {
 			this.setResponsable(createur);
 			this.setStatus(status);
 			this.setGroup(group);
-			
 		}
     
+		public Deadline(int id, String datelimit, Boolean status, String group){
+			this.setId(id);
+			this.setDateLimit(datelimit);
+			this.setStatus(status);
+			this.setGroup(group);
+		}
 		
 		public int getId() {
 			return id;
