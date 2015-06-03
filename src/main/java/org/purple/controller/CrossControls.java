@@ -53,7 +53,9 @@ public class CrossControls extends HttpServlet {
 		Connection bddServletCo = Bdd.getCo();
 		
 		if(Auth.isStudent(request)){
-			
+			/**
+			 * HERE THE USER IS A STUDENT
+			 */
 			DaoGroups dgp = new DaoGroups(bddServletCo);
 			DaoUsers dusr = new DaoUsers(bddServletCo);
 			DaoSkills ds = new DaoSkills(bddServletCo);
@@ -62,31 +64,43 @@ public class CrossControls extends HttpServlet {
 			
 			// -- We get the User 
 			HttpSession s = request.getSession();
-			User u = (User) s.getAttribute("user");
+			User u = (User)s.getAttribute("user");
+			dusr.addGroup(u);
 			String grp = u.getGroup();
 			
 			Deadline deadline = dl.fetchCrossDeadline(grp);
 			
-			// -- We get the group
-			Group g = dgp.select(grp);
-			dgp.completeMemebers(g);
-	
-			
-			p.setContent("mark/cross_controls.jsp");
-			p.setCss("bootstrap-select.min.css","cross_controls.css");
-			
+			if(deadline.getStatus()){
+				/**
+				 *  HERE THE CROSS MARK SESSION IS OPEN
+				 */
+				// -- We get the group
+				Group g = dgp.select(grp);
+				dgp.completeMemebers(g);
+		
+				
+				p.setContent("mark/cross_controls.jsp");
+				p.setCss("bootstrap-select.min.css","cross_controls.css");
+				
 
-			// Display skills in tab
-			Skill skill = ds.selectCrossSkills();
-			ds.completeSub_skills(skill); // Add sub_skills into skills
-			
-			// Display values in radio btn
-			Value[] v = dv.selectAllValues();
+				// Display skills in tab
+				Skill skill = ds.selectCrossSkills();
+				ds.completeSub_skills(skill); // Add sub_skills into skills
+				
+				// Display values in radio btn
+				Value[] v = dv.selectAllValues();
 
-			request.setAttribute("group", g);
-			request.setAttribute("skills", skill);
-			request.setAttribute("values", v);
-			request.setAttribute("deadline", deadline);
+				request.setAttribute("group", g);
+				request.setAttribute("skills", skill);
+				request.setAttribute("values", v);
+				request.setAttribute("deadline", deadline);
+				
+			} else {
+				Isep.bagPackHome(p, s);
+				p.setWarning(true);
+				p.setWarningMessage("pas d'évaluation croisée");
+			}
+			
 		} else {
 			Isep.bagPackHome(p, request.getSession());
 			p.setWarning(true);

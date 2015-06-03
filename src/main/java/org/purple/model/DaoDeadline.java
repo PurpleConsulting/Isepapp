@@ -147,9 +147,9 @@ public class DaoDeadline extends Dao<Deadline>{
 	public Deadline fetchCrossDeadline(String group){
 		Deadline d = new Deadline();
 		String[] params = {group};
-		String q = "SELECT Deadlines.`id`, DATE_FORMAT(Deadlines.date_limit, '"+ Isep.MYSQL_UTC +"'),"
-				+ " FROM Deadlines WHERE (Deadlines.`Status` = 1 AND Deadlines.`cross` = 1 AND Deadlines.id_group ="
-				+ " (SELECT Groups.`id` FROM Groups WHERE Groups.`name` = ? )); ";
+		String q = "SELECT Deadlines.`id`, DATE_FORMAT(Deadlines.date_limit, '"+ Isep.MYSQL_UTC +"'), Deadlines.`Status` FROM Deadlines "
+				+ " WHERE (Deadlines.`Status` = 1 AND Deadlines.`cross` = 1 AND Deadlines.id_group ="
+				+ " (SELECT Groups.`id` FROM Groups WHERE Groups.name = ? ));";
 		ResultSet currsor = Bdd.prepareExec(this.connect, q, params);
 		try {
 			if(currsor.next()){
