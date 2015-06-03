@@ -35,13 +35,12 @@ public class DaoValues extends Dao<Value> {
 	@Override
 	public boolean create(Value val) {
 		boolean r=false;
-		String q = "INSERT INTO `Values`"
-				+ "VALUES (?, ?, ?) ";	
+		String q = "INSERT INTO `Values`(title, points)"
+				+ "VALUES (?, ?) ";	
 		try{
 			PreparedStatement prestmt = this.connect.prepareStatement(q);
-			prestmt.setInt(1, val.getId());
-			prestmt.setString(2, val.getTitle());
-			prestmt.setInt(3, val.getPoints());
+			prestmt.setString(1, val.getTitle());
+			prestmt.setInt(2, val.getPoints());
 			
 			prestmt.execute();
 			

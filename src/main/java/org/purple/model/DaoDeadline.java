@@ -112,6 +112,7 @@ public class DaoDeadline extends Dao<Deadline>{
 			while(currsor.next()){
 				
 				gs[i] = new Deadline(currsor.getInt(1), currsor.getString(2), currsor.getString(3), currsor.getInt(6), currsor.getBoolean(4), currsor.getString(5));
+				System.out.print(gs[i].getDescription());
 				i++;
 			}
 		} catch (SQLException e) {

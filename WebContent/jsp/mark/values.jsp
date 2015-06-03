@@ -87,8 +87,7 @@
 					</div>
 					<div class="form-group">
 						<input class="form-control" placeholder="rentrer un nombre"
-							id="newpoints" /> <input type="hidden"
-							value='${fn:length(valeur)+1}' id="number">
+							id="newpoints" /> 
 					</div>
 					<div style="display: none"
 						class="warning alert-warning cascade-warning warningadd"></div>

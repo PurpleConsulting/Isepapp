@@ -24,6 +24,7 @@
 	            <li><a href="ManageSkills">Edition de la<br/>grille de compétences</a></li>
 	            <li class="divider"></li>
 	            <li><a href="Values">Valeurs des notes </a></li>
+	            <li><a href="test">Valeurs des notes cross </a></li>
           	</ul>
   		</li>
   		<li class="dropdown">

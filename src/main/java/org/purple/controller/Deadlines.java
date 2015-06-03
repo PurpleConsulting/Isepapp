@@ -59,7 +59,7 @@ public class Deadlines extends HttpServlet {
 		
 		Page p = new Page();
 		p.setCss("deadline.css");
-		p.setJs("deadline.js");
+		p.setJs("bootbox.min.js", "deadline.js");
 		p.setTitle("ISEP / APP - Deadline");
 		
 		if(Auth.isRespo(request)){
@@ -133,7 +133,7 @@ public class Deadlines extends HttpServlet {
 				}
 			}
 			else if(!Isep.nullOrEmpty(number)){
-				for(int i=0; i<=Integer.parseInt(number); i++){
+				for(int i=1; i<=Integer.parseInt(number); i++){
 					String datelim = request.getParameter("datelim"+i);
 					String timelim = request.getParameter("timelim"+i);
 					String idDeadline = request.getParameter("id"+i);
@@ -146,6 +146,7 @@ public class Deadlines extends HttpServlet {
 					dline.setId(Integer.parseInt(idDeadline));
 					dline.setDateLimit(datetimelimB+":00");
 					dl.update(dline);
+					
 					}else{
 						p.setWarning(true);
 						p.setWarningMessage("L'oppération à mal été éffectuée, veuillez répéter l'oppération en remplissant correctement les champs proposés.");
@@ -168,7 +169,7 @@ public class Deadlines extends HttpServlet {
 			
 		}else if(Auth.isTutor(request)){
 			if(!Isep.nullOrEmpty(number)){
-				for(int i=0; i<=Integer.parseInt(number); i++){
+				for(int i=0; i<=Integer.parseInt(number)-1; i++){
 					String datelim = request.getParameter("datelim"+i);
 					String timelim = request.getParameter("timelim"+i);
 					String idDeadline = request.getParameter("id"+i);
@@ -196,7 +197,7 @@ public class Deadlines extends HttpServlet {
 		}
 		// On ajout le css
 		p.setCss("deadline.css");
-		p.setJs("deadline.js");
+		p.setJs("bootbox.min.js","deadline.js");
 		p.setTitle("ISEP / APP - Deadline");
 		request.setAttribute("pages", p);
 		
