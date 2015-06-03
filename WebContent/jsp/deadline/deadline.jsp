@@ -77,7 +77,7 @@
 									Heure:<input type="time" class="form-control dateDisabled"  name="timelim${status.count}"  id="timelim${status.count}"value="${deadline.getDateLimit().toString('HH:mm:ss')}"/>
 								</div>
 								<div class="form-group">
-									<a class="remove" id="del${status.count}" href="#"><span class="fa fa-trash-o fa-lg"></span></a> 
+									<a class="remove" id="del${status.count}" href="#" data-target="${deadline.getId()}" data-group="${deadline.getGroup()}" data-subject="${deadline.getDescription()}"><span class="fa fa-trash-o fa-lg"></span></a> 
 								</div>
 							</div>
 						</c:forEach>
