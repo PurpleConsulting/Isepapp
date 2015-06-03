@@ -20,8 +20,8 @@
 					<input name="new_name" type="text"  value="${group.getName()}" class="form-control name" placeholder="Groupe: G**"/>
 				</div>
 				<div class="form-group">
-					<select name="new_tutor" class="form-control selectpicker" title="(Vide)" data-header="Selectionnez un Tuteur">
-						<c:if test="${ group.getTutor() == '(Vide)' }">
+					<select name="new_tutor" class="form-control selectpicker" data-header="Selectionnez un Tuteur">
+						<c:if test="${group.getTutor() == '(Vide)'}">
 							<option selected>Aucun Tuteur</option>
 						</c:if>
 						<c:forEach var="tutor" items="${teachers}" varStatus="status">
@@ -129,7 +129,7 @@
 								placeholder="Email">
 						</div>
 					</div>
-					<button style="Display:none;" type="submit" class="btn btn-primary no-btn" id="addin"></button>
+					<!--<button style="Display:none;" type="submit" class="btn btn-primary no-btn" id="addin"></button>-->
 				</form>
 			</div>
 			<div class="modal-footer">
