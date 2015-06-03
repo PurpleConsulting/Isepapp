@@ -9,6 +9,7 @@ import java.sql.Timestamp;
 import org.purple.bean.Deadline;
 import org.purple.bean.Group;
 import org.purple.bean.Missing;
+import org.purple.bean.Skill;
 import org.purple.bean.User;
 import org.purple.bean.Value;
 import org.purple.constant.Bdd;
@@ -39,7 +40,12 @@ public class DaoDeadline extends Dao<Deadline>{
 	@Override
 	public boolean delete(Deadline obj) {
 		// TODO Auto-generated method stub
-		return false;
+		boolean res = false;
+		String[] params = { Integer.toString(obj.getId())};
+		String q = "DELETE FROM Deadlines WHERE Deadlines.`id` = ?;" ;
+		int affected = Bdd.preparePerform(this.connect, q, params);
+		if(affected == 1) res = true;
+		return res;
 	}
 
 	@Override
@@ -56,7 +62,18 @@ public class DaoDeadline extends Dao<Deadline>{
 	@Override
 	public Deadline select(String id) {
 		// TODO Auto-generated method stub
-		return null;
+		Deadline d = new Deadline();
+		String q = "SELECT Deadlines.description, DATE_FORMAT(Deadlines.date_limit, '"+ Isep.MYSQL_UTC +"'), Deadlines.`status`"
+				+	"FROM Deadlines WHERE Deadlines.id= ? ;" ;
+		String [] params = {id};
+		ResultSet currsor = Bdd.prepareExec(this.connect, q, params);
+		try {
+			if(currsor.next()) d = new Deadline(Integer.parseInt(id), currsor.getString(1),currsor.getString(2), currsor.getInt(3), currsor.getBoolean(4));
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return d;
 	}
 	
 	public Deadline[] selectByGroup(String name) {
@@ -112,7 +129,6 @@ public class DaoDeadline extends Dao<Deadline>{
 			while(currsor.next()){
 				
 				gs[i] = new Deadline(currsor.getInt(1), currsor.getString(2), currsor.getString(3), currsor.getInt(6), currsor.getBoolean(4), currsor.getString(5));
-				System.out.print(gs[i].getDescription());
 				i++;
 			}
 		} catch (SQLException e) {

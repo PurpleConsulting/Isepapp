@@ -38,8 +38,36 @@ $(document).ready(function(){
 	      $(this).children("span").eq(0).switchClass("fa-pencil", "fa-undo",0);
 	    }
 	  });
-		  
-		 
-
 	
+	
+	  $("a.remove").click(function(e){
+		  e.preventDefault();
+			var idDeadline = $(this).attr("data-target");
+			var group = $(this).parent().attr("data-group");
+			var title = $(this).parent().attr("data-subject");
+			$.get("jsp/deadline/confim_deadline.jsp", {}, function(data, status){
+				var node = $( data );
+				// -- get the right dialog content
+				node.find( "em.dd-title" ).text(title);
+				node.find( "em.dd-group" ).text(group);
+				
+				// -- we send it
+				bootbox.dialog({
+				title: 'Suppression d\'une deadline.',
+				message: node.prop('outerHTML'),
+				buttons: {
+						failure:{ 
+							label: "Annuler",
+			                className: "btn-default",
+			                callback: function () {}
+						},sucess:{
+							label: "Supprimer",
+			                className: "btn-danger btn-target",
+			                callback: function () { window.location.replace("/Isepapp/Deadlines?delete=delete&id_deadline="+idDeadline+""); }
+						}
+					}
+				});
+			}); 
+	  });
+	  
 });

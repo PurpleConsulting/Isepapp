@@ -70,6 +70,15 @@ public class Deadlines extends HttpServlet {
 			// get all the deadlines
 			Deadline[] deadline = dl.selectAllDeadlines();
 			request.setAttribute("deadline", deadline);
+						
+			// -- Third form alternative -- delete a user from a group
+			String idDeadline = request.getParameter("id_deadline");
+			String delete = request.getParameter("delete");
+			if(!Isep.nullOrEmpty(delete)){
+				Deadline ds= dl.select(idDeadline);
+				dl.delete(ds);
+			}
+			
 			
 		}else if(Auth.isTutor(request)){
 			p.setContent("/deadline/deadlineTutor.jsp");

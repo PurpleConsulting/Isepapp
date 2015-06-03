@@ -29,6 +29,16 @@ public class Deadline {
 			this.setGroup(group);
 			
 		}
+		
+		public Deadline(int id, String description, String datelimit, int createur, Boolean status){
+			this.setId(id);
+			this.setDescription(description);
+			this.setDateLimit(datelimit);
+			this.setResponsable(createur);
+			this.setStatus(status);
+			
+		}
+
     
 		
 		public int getId() {
