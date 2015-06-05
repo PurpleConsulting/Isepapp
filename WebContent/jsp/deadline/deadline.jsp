@@ -37,6 +37,11 @@
 				</c:forEach>
 			  </select>
 			</div>
+			<div class="checkbox">
+			    <label>
+			      <input type="checkbox" name="checkCross"> Evaluation croissé
+			    </label>
+			 </div>
 			<div class="form-group">
 		  		<button type="submit" class="btn btn-default">Ajouter </button>
 		  	</div>
@@ -52,6 +57,13 @@
 				</div>
 				<input type="hidden" value="${fn:length(deadline)}" name="number"/>
 				<c:set var="length"  value="${fn:length(deadline)}"/>
+				<c:if test="${empty deadline}">
+					<div class="alert alert-danger design">
+						<div class="form-group deadline">
+									Il n'y a pas de deadline.
+						</div>
+					</div>
+				</c:if>
 			
 				<c:forEach var="deadline" items="${deadline}" varStatus="status">
 						<div class="alert alert-info design">

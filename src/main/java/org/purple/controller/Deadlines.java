@@ -126,6 +126,8 @@ public class Deadlines extends HttpServlet {
 		String time = request.getParameter("new_time");
 		String group = request.getParameter("new_grp");
 		String number = request.getParameter("number");
+		String cross = request.getParameter("checkCross");
+		System.out.print(cross);
 		
 		//Recuperer la session
 		HttpSession session = request.getSession();
@@ -145,7 +147,13 @@ public class Deadlines extends HttpServlet {
 					dline.setResponsable(Integer.parseInt(tuteur));
 					dline.setIdGroup(gr[i].getId());		 
 					dline.setDateLimit(datetime);
-					dl.create(dline);
+					if(!Isep.nullOrEmpty(cross)){
+						dline.setCross('1');
+						dl.create(dline);
+					}else{
+						dline.setCross('0');
+						dl.create(dline);
+					}
 				}
 			}
 			else if(!Isep.nullOrEmpty(number)){

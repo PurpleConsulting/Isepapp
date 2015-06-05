@@ -48,9 +48,10 @@ public class Values extends HttpServlet {
 			p.setContent("/mark/values.jsp");
 			p.setTitle("ISEP / APP - Notation");
 			
-			
+			//les Daos
 			Connection bddServletCo = Bdd.getCo();
 			DaoValues dv = new DaoValues(bddServletCo);
+			
 			// Afficher les values
 			Value[] value = dv.selectAllValues();
 			request.setAttribute("valeur", value);
@@ -61,7 +62,6 @@ public class Values extends HttpServlet {
 					e.printStackTrace();
 				}
 		}else{
-			System.out.print("hekkko");
 			Isep.bagPackHome(p, request.getSession());
 			p.setWarning(true);
 			p.setWarningMessage("Cette page n'est pas accessible.");
@@ -98,7 +98,6 @@ public class Values extends HttpServlet {
 					}
 				}
 				for (int i = 0; i <= Integer.parseInt(nombre); i++) {
-	
 					String title = request.getParameter("title" + i);
 					String points = request.getParameter("points" + i);
 					String id = request.getParameter("id" + i);
@@ -109,14 +108,11 @@ public class Values extends HttpServlet {
 						CountTrue++;
 						val.setPoints(Integer.parseInt(points));
 					}
-	
 					val.setId(Integer.parseInt(id));
 					val.setTitle(title);
 	
 					valu[i] = val;
 				}
-				// Appel  la page affichage value
-				
 	
 				if (CountTrue == Integer.parseInt(nombre) + 1) {
 					dv.updateValues(valu);
@@ -132,7 +128,6 @@ public class Values extends HttpServlet {
 				p.setJs("values.js");
 				p.setContent("/mark/values.jsp");
 				p.setTitle("ISEP / APP - Notation");
-				
 	
 				// Afficher les values
 				Value[] value = dv.selectAllValues();
@@ -147,7 +142,6 @@ public class Values extends HttpServlet {
 			this.getServletContext().getRequestDispatcher("/template.jsp")
 					.forward(request, response);
 
-		
 
 		// Ajouter une value
 			if (request.getParameter("modify").equals("2")) {

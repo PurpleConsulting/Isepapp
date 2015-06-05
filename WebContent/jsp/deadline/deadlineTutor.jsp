@@ -12,13 +12,13 @@
 	<div class="col-xs-offset-1 col-xs-10">
 		<em style="color:#337AB7">Les deadlines</em>
 			<div class="latest-group list">
-			<input type="hidden" value="${fn:length(deadline)-1}" id="taille"/>
+			<input type="hidden" value="${fn:length(deadline)}" id="taille"/>
 			<form class="form-inline off deadlineDate" method="post" action="Deadlines">
 				<div class="form-group button">
 					<a class="btn btn-default modify" href="#" role="button"><span class="fa fa-pencil"></span> <span>Modifier</span></a>
 					<button type="submit" class="btn btn-default" id="valid"><span class="fa fa-check"> </span> Valider</button>
 				</div>
-				<input type="hidden" value="${fn:length(deadline)-1}" name="number"/>
+				<input type="hidden" value="${fn:length(deadline)}" name="number"/>
 <%-- 					<c:forEach var="i" begin="0" end='${fn:length(deadline)-1}'> --%>
 <!-- 					<div class="alert alert-info design"> -->
 <%-- 						<input type="hidden" value="${deadline[i].getStatus()}" id="status${i}"/> --%>
@@ -45,6 +45,14 @@
 						
 <!-- 					</div> -->
 <%-- 					</c:forEach> --%>
+
+							<c:if test="${empty deadline}">
+								<div class="alert alert-danger design">
+									<div class="form-group deadline">
+												Il n'y a pas de deadline.
+									</div>
+								</div>
+							</c:if>
 					<c:forEach var="deadline" items="${deadline}" varStatus="status">
 						<div class="alert alert-info design">
 							<input type="hidden" value="${deadline.getStatus()}" id="status${status.count}"/>
