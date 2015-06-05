@@ -52,8 +52,8 @@ public class Deadlines extends HttpServlet {
 					
 		
 		if(Auth.isRespo(request) || Auth.isTutor(request)){
-			p.setCss("deadline.css");
-			p.setJs("bootbox.min.js", "deadline.js");
+			p.setCss("bootstrap-select.min.css", "deadline.css");
+			p.setJs("bootstrap-select.min.js", "bootbox.min.js", "deadline.js");
 			p.setTitle("ISEP / APP - Deadline");
 			//Les Daos
 			Connection bddServletCo = Bdd.getCo();

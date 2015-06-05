@@ -1,5 +1,5 @@
 @CHARSET "ISO-8859-1";
-div.list, form.group {
+div.insert form.group{
   border: solid #ccc 1px;
   border-radius: 6px;
   background-color: transparent;
@@ -24,15 +24,46 @@ div.form-group input[disabled] {
    font-weight:bold;
    color:#31708f;
    width: 150px;
+   padding-left: 0px;
+   cursor: text;
 }
 .design{
 	padding:6px;
 }
 .deadline{
-	margin-left:30px;
+	margin-left:2%;
 }
 
 .form-group.button {
   margin-top: 10px;
   margin-bottom: 13px;
+}
+
+
+div.modal-header{
+	 border-radius: 4px 4px 0px 0px;
+	 background: #D9534F;
+	 color: #FFFFFF;
+}
+
+div.insert div.form-group{
+	margin-top: 3px;
+}
+
+div.alert.alert-deadline{
+	background-color: #F8F8F8;
+	color: #31708f;
+	border: #CCCCCC solid 1px;
+}
+
+/*form.form-inline.deadlineDate{
+	display: table;
+}
+
+form.form-inline.deadlineDate div.form-group{
+	display: table-cell;
+}*/
+
+span.lab{
+	margin-right: 6px;
 }

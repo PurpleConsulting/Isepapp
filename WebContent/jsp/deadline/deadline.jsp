@@ -1,15 +1,12 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-
-	<div class="row">
-		<h1 class="col-xs-offset-1 col-xs-10">Les Deadlines</h1>
-	</div>
-<c:import url="/jsp/alert.jsp" charEncoding="UTF-8"></c:import>
-
 <div class="row">
-	<div class="col-xs-offset-1 col-xs-10">
+	<h1 class="col-xs-offset-1 col-xs-10">Les Deadlines</h1>
+</div>
+<c:import url="/jsp/alert.jsp" charEncoding="UTF-8"></c:import>
+<div class="row">
+	<div class="col-xs-offset-1 col-xs-10 insert">
 		<em style="color:#337AB7">Ajouter un deadline</em>
 		<form class="form-inline group" method="post" action="Deadlines">
 			<div class="form-group deadline">
@@ -28,8 +25,8 @@
 			      <input type="time" name="new_time" class="form-control" id="new_time" placeholder="Time limite">
 			    </div>
 		  	</div>
-		  	 <div class="form-group deadline">
-			  <select name="new_grp" class="form-control selectpicker" title="(Vide)" data-header="Selectionnez un Groupe">
+		  	 <div class="form-group deadline select">
+			  <select class="selectpicker" name="new_grp" class="form-control selectpicker">
 				<c:forEach var="group" items="${groups}" varStatus="status">
 						<option value="${group}">
 							<c:out value="${group}"></c:out>
@@ -43,10 +40,13 @@
 			    </label>
 			 </div>
 			<div class="form-group">
-		  		<button type="submit" class="btn btn-default">Ajouter </button>
+		  		<button type="submit" class="btn btn-default"><span class="fa fa-plus"> Ajouter </button>
 		  	</div>
 		</form>
-		
+	</div>
+</div>
+<div class="row">
+	<div class="col-xs-offset-1 col-xs-10 display">
 		<em style="color:#337AB7">Les deadlines</em>
 			<div class="latest-group list">
 			<input type="hidden" value="${fn:length(deadline)}" id="taille"/>
@@ -64,9 +64,8 @@
 						</div>
 					</div>
 				</c:if>
-			
 				<c:forEach var="deadline" items="${deadline}" varStatus="status">
-						<div class="alert alert-info design">
+						<div class="alert alert-deadline design">
 							<input type="hidden" value="${deadline.getStatus()}" id="status${status.count}"/>
 							<input type="hidden" value="${deadline.getId()}" name="id${status.count}"/>
 								<div class="form-group deadline">
@@ -83,12 +82,12 @@
 									</c:forEach> 
 								</div> 
 								<div class="form-group deadline">
-									Date:<input type="date" class="form-control dateDisabled"  name="datelim${status.count}" id="datelim${status.count}" value="${deadline.getDateLimit().toString('yyyy-MM-dd')}"/>
+									<span class="lab">Date:</span><input type="date" class="form-control dateDisabled"  name="datelim${status.count}" id="datelim${status.count}" value="${deadline.getDateLimit().toString('yyyy-MM-dd')}"/>
 								</div>
-								<div class="form-group">
-									Heure:<input type="time" class="form-control dateDisabled"  name="timelim${status.count}"  id="timelim${status.count}"value="${deadline.getDateLimit().toString('HH:mm:ss')}"/>
+								<div class="form-group deadline">
+									<span class="lab">Heure:</span><input type="time" class="form-control dateDisabled"  name="timelim${status.count}"  id="timelim${status.count}"value="${deadline.getDateLimit().toString('HH:mm:ss')}"/>
 								</div>
-								<div class="form-group" data-group="${deadline.getGroup()}" data-subject="${deadline.getDescription()}">
+								<div class="form-group deadline" data-group="${deadline.getGroup()}" data-subject="${deadline.getDescription()}">
 									<a class="remove" id="del${status.count}" href="#" data-target="${deadline.getId()}"><span class="fa fa-trash-o fa-lg"></span></a> 
 
 								</div>
