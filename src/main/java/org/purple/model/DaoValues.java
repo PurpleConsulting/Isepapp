@@ -17,9 +17,12 @@ import java.sql.SQLException;
 
 
 
+
+import org.purple.bean.Deadline;
 import org.purple.bean.User;
 import org.purple.bean.Value;
 import org.purple.constant.Bdd;
+import org.purple.constant.Isep;
 
 /*** Purple import ***/
 
@@ -72,38 +75,64 @@ public class DaoValues extends Dao<Value> {
 		// TODO Auto-generated method stub
 		return null;
 	}
-	
-	public Value[] selectAllValues (){
+	public Value[] selectAllValues(String cross) {
+		// TODO Auto-generated method stub
 		Value[] val = new Value[0];
 		String q = "SELECT id,title, points "
-				+ "FROM `Values` "
-				+ "ORDER BY id";		
-		try{
-			PreparedStatement prestmt = this.connect.prepareStatement(q);
-			ResultSet currsor = prestmt.executeQuery();
-			
-			int i = 0;
-			
-			if(!currsor.next()) return val;
+				+ "FROM `Values` WHERE `Values`.cross=?"
+				+ "ORDER BY id;";		
+		String[] params = {cross};
+		ResultSet currsor = Bdd.prepareExec(this.connect, q, params);
+		try {
 			if (currsor.last()) {
 				val = new Value[currsor.getRow()];
 				currsor.beforeFirst(); 
 			}
-			
+			int i = 0;
 			while(currsor.next()){
-				Value v = new Value();
-				v.setId(currsor.getInt(1));
-				v.setTitle(currsor.getString(2));
-				v.setPoints(currsor.getInt(3));
-				val[i] = v;
-				i = i + 1;
+				
+				val[i] = new Value(currsor.getInt(1), currsor.getInt(3), currsor.getString(2));
+				i++;
 			}
-		}catch (SQLException e){
+		} catch (SQLException e) {
 			// TODO Auto-generated catch block
+			val = new Value[0];
 			e.printStackTrace();
 		}
+		
 		return val;
 	}
+//	public Value[] selectAllValues (int cross){
+//		Value[] val = new Value[0];
+//		String q = "SELECT id,title, points "
+//				+ "FROM `Values` WHERE `Values`.cross=?"
+//				+ "ORDER BY id";		
+//		try{
+//			PreparedStatement prestmt = this.connect.prepareStatement(q);
+//			ResultSet currsor = prestmt.executeQuery();
+//			
+//			int i = 0;
+//			
+//			if(!currsor.next()) return val;
+//			if (currsor.last()) {
+//				val = new Value[currsor.getRow()];
+//				currsor.beforeFirst(); 
+//			}
+//			
+//			while(currsor.next()){
+//				Value v = new Value();
+//				v.setId(currsor.getInt(1));
+//				v.setTitle(currsor.getString(2));
+//				v.setPoints(currsor.getInt(3));
+//				val[i] = v;
+//				i = i + 1;
+//			}
+//		}catch (SQLException e){
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//		return val;
+//	}
 	
 	
 	public boolean updateValues (Value[] v){

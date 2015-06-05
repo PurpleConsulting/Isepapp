@@ -77,7 +77,7 @@ public class CrossControls extends HttpServlet {
 		request.setAttribute("skills", skills);
 		
 		// Display values in radio btn
-		Value[] v = dv.selectAllValues();
+		Value[] v = dv.selectAllValues("1");
 		request.setAttribute("values", v);
 		
 

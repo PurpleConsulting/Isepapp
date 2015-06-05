@@ -30,7 +30,7 @@ public class DaoDeadline extends Dao<Deadline>{
 				Integer.toString(dl.getIdGroup()),
 				Integer.toString(dl.getResponsable()),
 				"1",dl.getDateLimit().toString(Isep.JODA_UTC), Integer.toString(dl.getCross())};
-		String q = "INSERT INTO `Deadlines`(description, id_group, id_createur, date_creation, Status, date_limit, cross)"
+		String q = "INSERT INTO `Deadlines`(description, id_group, id_createur, date_creation, Status, date_limit, `Deadlines`.cross)"
 				+ "VALUES (?, ?, ?, CURDATE(),?,  ?, ?) ";	
 		int affected = Bdd.preparePerform(this.connect, q, params);
 		if(affected == 1) r = true;

@@ -53,8 +53,11 @@ public class Values extends HttpServlet {
 			DaoValues dv = new DaoValues(bddServletCo);
 			
 			// Afficher les values
-			Value[] value = dv.selectAllValues();
+			Value[] value = dv.selectAllValues("O");
 			request.setAttribute("valeur", value);
+			
+			Value[] valueCross = dv.selectAllValues("1");
+			request.setAttribute("valeurCross", valueCross);
 				try {
 					bddServletCo.close();
 				} catch (SQLException e) {
@@ -130,8 +133,11 @@ public class Values extends HttpServlet {
 				p.setTitle("ISEP / APP - Notation");
 	
 				// Afficher les values
-				Value[] value = dv.selectAllValues();
+				Value[] value = dv.selectAllValues("0");
 				request.setAttribute("valeur", value);
+				
+				Value[] valueCross = dv.selectAllValues("1");
+				request.setAttribute("valeurCross", valueCross);
 			
 			}else{
 				Isep.bagPackHome(p, request.getSession());

@@ -148,10 +148,10 @@ public class Deadlines extends HttpServlet {
 					dline.setIdGroup(gr[i].getId());		 
 					dline.setDateLimit(datetime);
 					if(!Isep.nullOrEmpty(cross)){
-						dline.setCross('1');
+						dline.setCross(1);
 						dl.create(dline);
 					}else{
-						dline.setCross('0');
+						//dline.setCross('0');
 						dl.create(dline);
 					}
 				}
@@ -220,8 +220,8 @@ public class Deadlines extends HttpServlet {
 			
 		}
 		// On ajout le css
-		p.setCss("deadline.css");
-		p.setJs("bootbox.min.js","deadline.js");
+		p.setCss("bootstrap-select.min.css", "deadline.css");
+		p.setJs("bootstrap-select.min.js", "bootbox.min.js", "deadline.js");
 		p.setTitle("ISEP / APP - Deadline");
 		request.setAttribute("pages", p);
 		
