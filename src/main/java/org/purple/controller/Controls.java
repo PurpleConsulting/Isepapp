@@ -81,7 +81,9 @@ public class Controls extends HttpServlet {
 			Value[] v= dv.selectAllValues();
 			request.setAttribute("values", v);
 			
-			p.setJs("bootbox.min.js", "bootstrap-select.min.js", "controls.js");
+			
+			
+			p.setJs("bootbox.min.js", "bootstrap-select.min.js", "controls.js","control_load.js");
 			p.setCss("bootstrap-select.min.css","controls.css");
 			p.setTitle("ISEP / APP - Evaluations");
 			p.setContent("mark/controls.jsp");
@@ -130,6 +132,7 @@ public class Controls extends HttpServlet {
 			Connection bddServletCo = Bdd.getCo();
 			DaoGroups dgroup = new DaoGroups(bddServletCo);
 			DaoMarks dmrk = new DaoMarks(bddServletCo);
+			DaoMarks dm = new DaoMarks(bddServletCo);
 			
 			if(!Isep.nullOrEmpty(str) && Auth.isTutor(request, str)){
 				// -- Find the group
@@ -140,11 +143,19 @@ public class Controls extends HttpServlet {
 					g = dgroup.select(str); //Select group id,name, class by group name
 					dgroup.completeMemebers(g); //Add members into the group selected
 					name = new String[g.getMembers().size()];
+					name = new String[g.getMembers().size()];
 					int i=0;
 					for(User u : g.getMembers()){		
 						name[i] = u.getFirstName();
 						//pseudo[i] = u.getPseudo();
 						i++;
+					}
+					//Display checked btn when there are already marks for the gp
+					Mark[] m = dm.selectGroupMark(Integer.toString(g.getId()));
+					if (m!=null){
+						System.out.print(m[0].getIdValue());
+					}else{
+						System.out.print("test");
 					}
 				}
 				

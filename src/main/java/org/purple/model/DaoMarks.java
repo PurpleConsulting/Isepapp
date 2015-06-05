@@ -76,7 +76,7 @@ public class DaoMarks extends Dao<Mark>{
 
 	@Override
 	public Mark select(String id) {
-		// TODO Auto-generated method stub
+		// A utiliser?
 		Mark m = new Mark();
 		String q = "SELECT Users.pseudo, `Values`.points, `Values`.title, Skills.title, Sub_skills.title FROM APPDB.Marks "
 				+ "INNER JOIN APPDB.Users ON Users.id = Marks.id_student "
@@ -98,6 +98,8 @@ public class DaoMarks extends Dao<Mark>{
 		}
 		return m;
 	}
+	
+	//public Mark select
 	
 	public ArrayList<Mark> selectByStudent(String id) {
 		// TODO Auto-generated method stub
@@ -122,6 +124,30 @@ public class DaoMarks extends Dao<Mark>{
 			return allMarks;
 		}
 		return allMarks;
+	}
+	
+	//Select group mark when group has already mark
+	public Mark[] selectGroupMark(String idGroup){
+		Mark[] m = new Mark[0];
+		String q = "SELECT DISTINCT Marks.id_value, Marks.id_sub_skill FROM Marks INNER JOIN Users ON Marks.id_student = Users.id WHERE Users.id_group = ? AND Marks.group_mark = 1;";
+		String[] params = {idGroup};
+		ResultSet cursor = Bdd.prepareExec(this.connect, q, params);
+		try {
+			if (cursor.last()) {
+				m = new Mark[cursor.getRow()];
+				cursor.beforeFirst(); 
+			}
+			int i = 0;
+			while(cursor.next()){
+				m[i] = new Mark(cursor.getInt(1), cursor.getInt(2));
+				i++;
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			m = new Mark[0];
+			e.printStackTrace();
+		}
+		return m;
 	}
 
 }

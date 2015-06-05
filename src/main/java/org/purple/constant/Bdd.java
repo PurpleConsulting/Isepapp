@@ -14,7 +14,7 @@ public class Bdd {
  * 
  */
 
-//	public static final String BDDHOST = "172.16.179.5";
+	//public static final String BDDHOST = "172.16.179.5";
 	
 	public static final String BDDHOST = "ns370799.ip-91-121-193.eu";
 
