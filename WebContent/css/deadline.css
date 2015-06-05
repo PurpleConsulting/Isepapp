@@ -55,7 +55,10 @@ div.alert.alert-deadline{
 	color: #31708f;
 	border: #CCCCCC solid 1px;
 }
-
+div.alert-deadline {
+	padding-left: 0px;
+	padding-right: 0px;
+}
 /*form.form-inline.deadlineDate{
 	display: table;
 }
@@ -66,4 +69,8 @@ form.form-inline.deadlineDate div.form-group{
 
 span.lab{
 	margin-right: 6px;
+}
+
+span.fa-trash-o{
+	cursor: pointer;
 }

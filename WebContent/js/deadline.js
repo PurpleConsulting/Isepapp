@@ -7,7 +7,7 @@ $(document).ready(function(){
 			$("#status"+i).parent().addClass("alert-danger");
 			$("#datelim"+i).css("color", "#a94442");
 			$("#timelim"+i).css("color", "#a94442");
-			$("#del"+i).css("color", "#a94442");
+			//$("#del"+i).css("color", "#a94442");
 			
 		};
 	}
@@ -40,7 +40,7 @@ $(document).ready(function(){
 	  });
 	
 	
-	  $("a.remove").click(function(e){
+	  $("span.fa-trash-o").click(function(e){
 		  e.preventDefault();
 			var idDeadline = $(this).attr("data-target");
 			var group = $(this).parent().attr("data-group");

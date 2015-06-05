@@ -40,7 +40,7 @@
 			    </label>
 			 </div>
 			<div class="form-group">
-		  		<button type="submit" class="btn btn-default"><span class="fa fa-plus"> Ajouter </button>
+		  		<button type="submit" class="btn btn-default"><span class="fa fa-plus"></span> Ajouter </button>
 		  	</div>
 		</form>
 	</div>
@@ -68,19 +68,12 @@
 						<div class="alert alert-deadline design">
 							<input type="hidden" value="${deadline.getStatus()}" id="status${status.count}"/>
 							<input type="hidden" value="${deadline.getId()}" name="id${status.count}"/>
-								<div class="form-group deadline">
-								Groupe: <strong><c:out value="${deadline.getGroup()}"></c:out> </strong> 
+								<div class="form-group col-xs-12 deadline" style="padding-left: 0px;">
+								Titre:  <em><c:out value="${deadline.getDescription()}"></c:out></em>
 								</div>
 								<div class="form-group deadline">
-								Titre:  <strong><c:out value="${deadline.getDescription()}"></c:out> </strong> 
+								Groupe: <em><c:out value="${deadline.getGroup()}"></c:out></em>
 								</div>
-								<div class="form-group deadline">
-									<c:forEach var="j" begin="0" end='${fn:length(user)-1}'>
-									 	<c:if test="${user[j].getGroup() == deadline.getGroup()}" > 
-								Tuteur: <strong><c:out value="${user[j].getFirstName()}"></c:out> <c:out value="${user[j].getLastName()}"></c:out> </strong>
-										</c:if>
-									</c:forEach> 
-								</div> 
 								<div class="form-group deadline">
 									<span class="lab">Date:</span><input type="date" class="form-control dateDisabled"  name="datelim${status.count}" id="datelim${status.count}" value="${deadline.getDateLimit().toString('yyyy-MM-dd')}"/>
 								</div>
@@ -88,8 +81,7 @@
 									<span class="lab">Heure:</span><input type="time" class="form-control dateDisabled"  name="timelim${status.count}"  id="timelim${status.count}"value="${deadline.getDateLimit().toString('HH:mm:ss')}"/>
 								</div>
 								<div class="form-group deadline" data-group="${deadline.getGroup()}" data-subject="${deadline.getDescription()}">
-									<a class="remove" id="del${status.count}" href="#" data-target="${deadline.getId()}"><span class="fa fa-trash-o fa-lg"></span></a> 
-
+									<span class="fa fa-trash-o fa-lg" data-target="${deadline.getId()}"></span>
 								</div>
 							</div>
 						</c:forEach>
