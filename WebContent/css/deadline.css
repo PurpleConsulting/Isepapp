@@ -59,13 +59,7 @@ div.alert-deadline {
 	padding-left: 0px;
 	padding-right: 0px;
 }
-/*form.form-inline.deadlineDate{
-	display: table;
-}
 
-form.form-inline.deadlineDate div.form-group{
-	display: table-cell;
-}*/
 
 span.lab{
 	margin-right: 6px;
@@ -73,4 +67,8 @@ span.lab{
 
 span.fa-trash-o{
 	cursor: pointer;
+	transition: 0.6s;
+}
+span.fa-trash-o:hover{
+	color: #8E2A3A;
 }

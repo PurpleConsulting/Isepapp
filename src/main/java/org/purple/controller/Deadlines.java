@@ -72,10 +72,7 @@ public class Deadlines extends HttpServlet {
 		
 		if(Auth.isRespo(request)){
 			p.setContent("/deadline/deadline.jsp");
-			if(!Isep.nullOrEmpty(delete)){
-				Deadline ds= dl.select(idDeadline);
-				dl.delete(ds);
-			}
+			
 			// -- get all the groups
 			String[] groups = dg.selectAllClass();
 			request.setAttribute("groups", groups);
@@ -127,7 +124,10 @@ public class Deadlines extends HttpServlet {
 		String group = request.getParameter("new_grp");
 		String number = request.getParameter("number");
 		String cross = request.getParameter("checkCross");
-		System.out.print(cross);
+		
+		// -- deadline deletion
+		String idDdLine = request.getParameter("id_deadline");
+		String delete = request.getParameter("delete");
 		
 		//Recuperer la session
 		HttpSession session = request.getSession();
@@ -135,41 +135,46 @@ public class Deadlines extends HttpServlet {
 		request.setAttribute("usession", userSession);
 		
 		if(Auth.isRespo(request)){
+			/**
+			 * HERE THE USER ADD SOME DEADLINES
+			 */
 			if(!Isep.nullOrEmpty(desc, date, group, time, tuteur)){
 				String timeS = time+":00";
 				String datetime = date+" "+timeS;
 				
 				Group[] gr = dg.selectGroupbyClass(group);
 				//dline à inserer
-				for(int i=0; i<gr.length;i++){
+				for(int i=0; i < gr.length; i++){
 					Deadline dline=new Deadline();
 					dline.setDescription(desc);
 					dline.setResponsable(Integer.parseInt(tuteur));
 					dline.setIdGroup(gr[i].getId());		 
 					dline.setDateLimit(datetime);
-					if(!Isep.nullOrEmpty(cross)){
-						dline.setCross(1);
-						dl.create(dline);
-					}else{
-						//dline.setCross('0');
-						dl.create(dline);
-					}
+					if(!Isep.nullOrEmpty(cross)) dline.setCross(1);
+					dl.create(dline);
 				}
-			}
-			else if(!Isep.nullOrEmpty(number)){
+			} else if(!Isep.nullOrEmpty(number)){
+				/**
+				 * HERE THE USER PERFORM AN UPDATE ON SOME DEADLINE
+				 */
+				boolean querysuccess = true;
 				for(int i=1; i<=Integer.parseInt(number); i++){
 					String datelim = request.getParameter("datelim"+i);
 					String timelim = request.getParameter("timelim"+i);
 					String idDeadline = request.getParameter("id"+i);
 					
 					if(!Isep.nullOrEmpty(datelim,timelim)){
-					String datetimelim=datelim+" "+timelim;
-					String datetimelimB=datetimelim.substring(0,16);
-					
-					Deadline dline=new Deadline();
-					dline.setId(Integer.parseInt(idDeadline));
-					dline.setDateLimit(datetimelimB+":00");
-					dl.update(dline);
+						String datetimelim=datelim+" "+timelim;
+						String datetimelimB=datetimelim.substring(0,16);
+						
+						Deadline dline=new Deadline();
+						dline.setId(Integer.parseInt(idDeadline));
+						dline.setDateLimit(datetimelimB+":00");
+						querysuccess = dl.update(dline);
+						if(!querysuccess && !p.getError()){
+							p.setError(true);
+							p.setErrorMessage("une erreur est survenue lors de la mise à jours des deadline.");
+						}
 					
 					}else{
 						p.setWarning(true);
@@ -177,8 +182,24 @@ public class Deadlines extends HttpServlet {
 				
 					}
 				}
-			}
-			else{
+				if (!p.getError()){
+					p.setSuccess(true);
+					p.setSuccessMessage("la mise à jour des deadlines à bien été effectuée.");
+				}
+			} else if(!Isep.nullOrEmpty(delete, idDdLine)){
+				/**
+				 * HERE THE USER TRY TO DELETE A DEADLINE
+				 */
+				Deadline ds= dl.select(idDdLine);
+				boolean querysuccess = dl.delete(ds);
+				if(querysuccess){
+					p.setSuccess(true);
+					p.setSuccessMessage("la deadline à bien été supprimée.");
+				} else {
+					p.setError(true);
+					p.setErrorMessage("une erreur est survenu lors de l'oppération. vérifiez que la deadline ai bien été supprimée.");
+				}
+			} else {
 				p.setWarning(true);
 				p.setWarningMessage("L'oppération à mal été éffectuée, veuillez répéter l'oppération en remplissant correctement les champs proposés.");
 			}

@@ -17,12 +17,12 @@
 		  	</div>
 		  	<div class="form-group deadline">
 			    <div class="input-group">
-			      <input type="date" name="new_date" class="form-control" id="new_date" placeholder="Date limite">
+			      <input type="text" name="new_date" class="form-control" id="new_date" placeholder="2015-06-20">
 			    </div>
 		  	</div>
 		  	<div class="form-group deadline">
 			    <div class="input-group">
-			      <input type="time" name="new_time" class="form-control" id="new_time" placeholder="Time limite">
+			      <input type="text" name="new_time" class="form-control" id="new_time" placeholder="23:00">
 			    </div>
 		  	</div>
 		  	 <div class="form-group deadline select">
@@ -69,10 +69,10 @@
 							<input type="hidden" value="${deadline.getStatus()}" id="status${status.count}"/>
 							<input type="hidden" value="${deadline.getId()}" name="id${status.count}"/>
 								<div class="form-group col-xs-12 deadline" style="padding-left: 0px;">
-								Titre:  <em><c:out value="${deadline.getDescription()}"></c:out></em>
+								Titre:  <strong><em><c:out value="${deadline.getDescription()}"></c:out></em></strong>
 								</div>
-								<div class="form-group deadline">
-								Groupe: <em><c:out value="${deadline.getGroup()}"></c:out></em>
+								<div class="form-group deadline col-sm-2" style="padding-left: 0px; padding-top:6px;">
+								Groupe: <strong><c:out value="${deadline.getGroup()}"></c:out></strong>
 								</div>
 								<div class="form-group deadline">
 									<span class="lab">Date:</span><input type="date" class="form-control dateDisabled"  name="datelim${status.count}" id="datelim${status.count}" value="${deadline.getDateLimit().toString('yyyy-MM-dd')}"/>
