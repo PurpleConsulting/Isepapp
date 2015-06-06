@@ -81,8 +81,6 @@ public class Controls extends HttpServlet {
 			Value[] v= dv.selectAllValues();
 			request.setAttribute("values", v);
 			
-			
-			
 			p.setJs("bootbox.min.js", "bootstrap-select.min.js", "controls.js","control_load.js");
 			p.setCss("bootstrap-select.min.css","controls.css");
 			p.setTitle("ISEP / APP - Evaluations");
@@ -99,18 +97,15 @@ public class Controls extends HttpServlet {
 				e.printStackTrace();
 			}
 			
-		
 		} else {
 			p.setTitle("ISEP / APP - Home");
 			p.setContent("home/student.jsp");
 			p.setWarning(true);
-			p.setWarningMessage("la page que vous essayer d'atteidre n'est accécible que par les tuteurs d'APP.");
+			p.setWarningMessage("La page que vous essayez d'atteindre n'est accessible que par les tuteurs d'APP.");
 			request.setAttribute("pages", p);
 			
 			this.getServletContext().getRequestDispatcher("/template.jsp").forward(request, response);
-		}
-		
-		
+		}	
 	}
 
 	/**
@@ -152,10 +147,8 @@ public class Controls extends HttpServlet {
 					}
 					//Display checked btn when there are already marks for the gp
 					Mark[] m = dm.selectGroupMark(Integer.toString(g.getId()));
-					if (m!=null){
-						System.out.print(m[0].getIdValue());
-					}else{
-						System.out.print("test");
+					if (m.length!=0){ //If array not empty, display value
+						request.setAttribute("marks", m);
 					}
 				}
 				
@@ -194,7 +187,6 @@ public class Controls extends HttpServlet {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-		}
-		
+		}	
 	}
 }

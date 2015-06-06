@@ -57,8 +57,8 @@ $(document).ready(function(){ //If page is ready
 				//$('html, body').animate( { scrollTop: $("#name_group").offset().top - 50 }, 800 );
 				$("#confirmation_box").toggleClass("alert-success");
 				$("#confirmation_box").append("<p><span class=\"fa fa-check-circle\" style=\"color:#3E753F;\"></span>   " +
-						"Félicitation, l'ajout de nouvelles notes à bien été effectué. Votre dernière notation se trouve maintenant " +
-						"dans le formutaire. Vous pouvez dès maitenant consulter la page du group que vous " +
+						"Félicitation, l'ajout de nouvelles notes a bien été effectué. Votre dernière notation se trouve maintenant " +
+						"dans le formutaire. Vous pouvez dès maintenant consulter la page du groupe que vous " +
 						"venez de noter: <a href=\"/Isepapp/Groups?scope="+ data.result.target +"\">"+ data.result.target +"</a></p>" );
 				$("#confirmation_box").show("slow");
 			}
