@@ -80,9 +80,9 @@ $(document).ready(function(){
 	    			  $("div.warning").css("display", "none");
 	    			  location.reload();
 				}else{
-					 $("div.warning").css("display", "inline-block");
-					 $("div.warning").html('<p><strong>La valeur n\'est pas correct</strong> </p>')
-					 $("div.warning").css('display', 'block');
+					 $("div.warningA").css("display", "inline-block");
+					 $("div.warningA").html('<p><strong>La valeur n\'est pas correct, veuillez recommencer </strong> </p>')
+					 $("div.warningA").css('display', 'block');
 				}
 	    	});
 	    	
@@ -113,6 +113,7 @@ $(document).ready(function(){
 	   }
 	   
 	   });
+   
    //Verifier nombre input pour ajouter
  $("#newpoints").blur(function() {
 	   

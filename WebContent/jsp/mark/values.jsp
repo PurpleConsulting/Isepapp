@@ -34,10 +34,9 @@
 					class="btn btn-default modify" href="#" role="button"><span
 					class="fa fa-pencil"></span> <span>Modifier</span></a>
 			</div>
-			<input type="hidden" value="1" name="modify" /> <input type="hidden"
-				value='${fn:length(valeur)-1}' name="int">
+			<input type="hidden" value="1" name="modify" /> 
+			<input type="hidden" value='${fn:length(valeur)-1}' name="int">
 			<c:forEach var="valeur" items="${valeur}" varStatus="status">
-<%-- 			<c:forEach var="i" begin="0" end='${fn:length(valeur)-1}'> --%>
 				<div class="line">
 					<div class="form-group">
 						<input type="text" class="form-control title" name="title${status.index}"
@@ -81,36 +80,27 @@
 				<a class="btn btn-default modify" href="#" role="button">
 				<span class="fa fa-pencil"></span> <span>Modifier</span></a>
 			</div>
-			<input type="hidden" value="1" name="modify" /> <input type="hidden"
-				value='${fn:length(valeurCross)-1}' name="int">
-			<c:forEach var="i" begin="0" end='${fn:length(valeurCross)-1}'>
+			<input type="hidden" value="3" name="modify" /> <input type="hidden"
+				value='${fn:length(valeurCross)-1}' name="intCross">
+			<c:forEach var="valeurCross" items="${valeurCross}" varStatus="status">
 				<div class="line">
 					<div class="form-group">
-						<input type="text" class="form-control title" name="title${i}"
-							value="<c:out value="${valeurCross[i].getTitle()}"></c:out>">
+						<input type="text" class="form-control title" name="titleCross${status.index}"
+							value="<c:out value="${valeurCross.getTitle()}"></c:out>">
 					</div>
 					<div class="form-group">
-						<input type="text" class="form-control value" name="points${i}"
-							value="<c:out value="${valeurCross[i].getPoints()}"></c:out>">
-					</div>
-					<div class="form-group">
-						<a class="remove" id="del${i}" href="#"><span
-							class="fa fa-times danger col-xs-offset-6"></span></a> <input
-							type="hidden" name="id${i}" class="display" id="id${i}"
-							value="<c:out value="${valeurCross[i].getId()}"></c:out>" />
+						<input type="text" class="form-control value" name="pointsCross${status.index}"
+							value="<c:out value="${valeurCross.getPoints()}"></c:out>">
 					</div>
 					<div class="form-group">
 						<div style="display: none"
 							class="alert warning alert-warning cascade-warning warning_modify"></div>
-					</div>
-					<div class="form-group">
-						<input type="checkbox" name="delete"
-							value="<c:out value="${valeurCross[i].getId()}"></c:out>"
-							style="visibility: hidden">
+						<input type="hidden" name="idCross${status.index}" class="display" 
+							value="<c:out value="${valeurCross.getId()}"></c:out>" />
 					</div>
 				</div>
 			</c:forEach>
-			<button type="submit" class="btn btn-default" id="modifyValue">
+			<button type="submit" class="btn btn-default" id="modifyValueCross">
 				<span class="fa fa-check"> </span> Valider
 			</button>
 		</form>
@@ -140,7 +130,7 @@
 							id="newpoints" /> 
 					</div>
 					<div style="display: none"
-						class="warning alert-warning cascade-warning warningadd"></div>
+						class="warningA alert-warning cascade-warning warningadd"></div>
 				</form>
 			</div>
 			<div class="modal-footer">
