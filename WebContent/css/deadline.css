@@ -72,3 +72,14 @@ span.fa-trash-o{
 span.fa-trash-o:hover{
 	color: #8E2A3A;
 }
+
+input.form-control.time{
+	text-align: center;
+}
+
+
+form div.noinput{
+	width: 170px;
+	padding-left: 0px; 
+	padding-top:0px;"
+}

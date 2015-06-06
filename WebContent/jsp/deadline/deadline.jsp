@@ -4,7 +4,9 @@
 <div class="row">
 	<h1 class="col-xs-offset-1 col-xs-10">Les Deadlines</h1>
 </div>
+<div class="col-xs-12">
 <c:import url="/jsp/alert.jsp" charEncoding="UTF-8"></c:import>
+</div>
 <div class="row">
 	<div class="col-xs-offset-1 col-xs-10 insert">
 		<em style="color:#337AB7">Ajouter un deadline</em>
@@ -17,20 +19,18 @@
 		  	</div>
 		  	<div class="form-group deadline">
 			    <div class="input-group">
-			      <input type="text" name="new_date" class="form-control" id="new_date" placeholder="2015-06-20">
+			      <input type="text" name="new_date" class="form-control time" id="new_date" placeholder="2015-06-20">
 			    </div>
 		  	</div>
 		  	<div class="form-group deadline">
 			    <div class="input-group">
-			      <input type="text" name="new_time" class="form-control" id="new_time" placeholder="23:00">
+			      <input type="text" name="new_time" class="form-control time" id="new_time" placeholder="23:00">
 			    </div>
 		  	</div>
 		  	 <div class="form-group deadline select">
 			  <select class="selectpicker" name="new_grp" class="form-control selectpicker">
 				<c:forEach var="group" items="${groups}" varStatus="status">
-						<option value="${group}">
-							<c:out value="${group}"></c:out>
-						</option>
+						<option value="${group}"><c:out value="${group}"></c:out></option>
 				</c:forEach>
 			  </select>
 			</div>
@@ -39,7 +39,8 @@
 			      <input type="checkbox" name="checkCross"> Evaluation croissé
 			    </label>
 			 </div>
-			<div class="form-group">
+			 <br/>
+			<div class="form-group deadline">
 		  		<button type="submit" class="btn btn-default"><span class="fa fa-plus"></span> Ajouter </button>
 		  	</div>
 		</form>
@@ -71,7 +72,7 @@
 								<div class="form-group col-xs-12 deadline" style="padding-left: 0px;">
 								Titre:  <strong><em><c:out value="${deadline.getDescription()}"></c:out></em></strong>
 								</div>
-								<div class="form-group deadline col-sm-2" style="padding-left: 0px; padding-top:6px;">
+								<div class="form-group deadline noinput">
 								Groupe: <strong><c:out value="${deadline.getGroup()}"></c:out></strong>
 								</div>
 								<div class="form-group deadline">

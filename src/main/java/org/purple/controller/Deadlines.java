@@ -109,7 +109,7 @@ public class Deadlines extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		
+		request.setCharacterEncoding("UTF-8");
 		Page p = new Page();
 		//Les Daos
 		Connection bddServletCo = Bdd.getCo();
@@ -148,10 +148,23 @@ public class Deadlines extends HttpServlet {
 					Deadline dline=new Deadline();
 					dline.setDescription(desc);
 					dline.setResponsable(Integer.parseInt(tuteur));
-					dline.setIdGroup(gr[i].getId());		 
-					dline.setDateLimit(datetime);
+					dline.setIdGroup(gr[i].getId());
+					try{
+						dline.setDateLimit(datetime);
+					} catch(IllegalArgumentException e){
+						p.setError(true);
+						p.setErrorMessage("une erreur s'est produite. indiquez bien une date au format: 'YYYY-MM-JJ'"
+								+ " et une heure au format: 'HH-MM'.");
+						break;
+					}
 					if(!Isep.nullOrEmpty(cross)) dline.setCross(1);
-					dl.create(dline);
+					if(!p.getError()){
+						boolean querrysuccess = dl.create(dline);
+						if(querrysuccess){
+							p.setSuccess(true);
+							p.setSuccessMessage("De nouvelles deadlines ont été ajoutées, retrouvez les dans la liste suivante.");
+						}
+					}
 				}
 			} else if(!Isep.nullOrEmpty(number)){
 				/**
