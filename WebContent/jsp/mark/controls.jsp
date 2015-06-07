@@ -34,6 +34,7 @@
 				</c:forEach>
 			</ul>
 		  	<div class="tab-content">
+		  		<div id='mark'></div>
 		  		<c:forEach var="skill" items="${skills}" varStatus="status">
 		  			<div role="tabpanel" class='tab-pane ${status.count==1 ? "active":""}' id="tab${status.count}">
 		  				<form id="form${skill.getId()}" class="groupgrid">
@@ -41,15 +42,9 @@
 			    			<c:forEach var="sub_skill" items="${skill.getSubSkills()}" varStatus="status">
 					  			<hr/><h5><c:out value="${sub_skill.getTitle()}"></c:out></h5>
 						  		<div class="line">
-						  			<c:forEach var="mark" items="${marks}" varStatus="status">
-						  			<input type="text" name="sub-skill-id" placeholder="mark.getIdSubSkill()" />
-						  			<input type="text" name="value-id" placeholder="mark.getIdValue()" />
-						  			</c:forEach>
 						  			<c:forEach var="value" items="${values}" varStatus="status">
 								  		<label>
-								  		
-								    		<input type="radio" name="${sub_skill.getId()}" value="${value.getId()}" ${sub_skill.getId()==mark.getIdSubSkill() && value.getId()==mark.getIdValue() ? "checked":""}>
-								    	
+								    	<input type="radio" name="${sub_skill.getId()}" value="${value.getId()}">
 								    	<c:out value='${value.getTitle()}'></c:out>
 								  		</label>
 									</c:forEach>

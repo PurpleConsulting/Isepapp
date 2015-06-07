@@ -78,7 +78,7 @@ public class DaoValues extends Dao<Value> {
 		Value[] val = new Value[0];
 		String q = "SELECT id,title, points "
 				+ "FROM `Values` "
-				+ "ORDER BY id";		
+				+ "WHERE 'cross' = 0;";		
 		try{
 			PreparedStatement prestmt = this.connect.prepareStatement(q);
 			ResultSet currsor = prestmt.executeQuery();

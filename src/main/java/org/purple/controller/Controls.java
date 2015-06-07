@@ -3,6 +3,7 @@ package org.purple.controller;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Enumeration;
 
 import javax.servlet.ServletException;
@@ -129,6 +130,8 @@ public class Controls extends HttpServlet {
 			DaoMarks dmrk = new DaoMarks(bddServletCo);
 			DaoMarks dm = new DaoMarks(bddServletCo);
 			
+			ArrayList<JSONObject> groupMark = new ArrayList<JSONObject>();
+			
 			if(!Isep.nullOrEmpty(str) && Auth.isTutor(request, str)){
 				// -- Find the group
 				Group g = new Group();
@@ -145,10 +148,16 @@ public class Controls extends HttpServlet {
 						//pseudo[i] = u.getPseudo();
 						i++;
 					}
+					
 					//Display checked btn when there are already marks for the gp
-					Mark[] m = dm.selectGroupMark(Integer.toString(g.getId()));
-					if (m.length!=0){ //If array not empty, display value
-						request.setAttribute("marks", m);
+					Mark[] tabMark = dm.selectGroupMark(Integer.toString(g.getId()));
+					
+					JSONObject current = new JSONObject();
+					for (Mark m : tabMark){
+						current = new JSONObject();
+						current.put("subSkill", m.getIdSubSkill());
+						current.put("value", m.getIdValue());
+						groupMark.add(current);
 					}
 				}
 				
@@ -157,6 +166,7 @@ public class Controls extends HttpServlet {
 				
 				list.put("groups", name);
 				result.put("result", list);
+				result.put("resultGroupMark", groupMark);
 				
 				response.setHeader("content-type", "application/json");
 				response.getWriter().write(result.toString());

@@ -16,7 +16,16 @@ $("select").change(function () {
     str=$("select option:selected").text();
    	$.post("/Isepapp/Controls", {string:str}, function(data, status) {
    		var result = data.result.groups.join(", ");
+   		var resultGroupMark = data.resultGroupMark;
+   		console.log(data.resultGroupMark);
    		$("div#name_group").html("<strong>"+str+"</strong> : "+ result).hide().delay(20).show("slow");
+   		$.each(data.resultGroupMark, function(i, item) {
+   		    alert(data.resultGroupMark[i].subSkill);
+   		    $("input[name=data.resultGroupMark[i].subSkill][value=data.resultGroupMark[i].value]").attr('checked',true);
+   		    
+   		})
+   		//selectionner tous input avec un name 1, 2 , 3 (id subskill courante) input[name=idsubskillcourant] 
+   		//filter reperer celui qui a la valeur qui m'intéresse, une fois que je l'ai je le select
 	 });	    	
 	 if(str != "Sélectionnez un groupe"){
 		$("button.marker, button.adder").attr("disabled", false);
