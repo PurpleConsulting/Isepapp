@@ -19,9 +19,9 @@
 			</button>
 			<ul class="group-ul">
 				<c:forEach var="student" items="${group.getMembers()}" varStatus="status">
-					<li class="${status.count == 1 ? 'active' : ''}">
-						<c:out value="${student.getFirstName()} ${student.getLastName()}"></c:out>
-					</li>
+						<li class="${status.count == 1 ? 'active' : ''}">
+							<c:out value="${student.getFirstName()} ${student.getLastName()}"></c:out>
+						</li>
 				</c:forEach>
 			</ul>
 			<button type="button" class="btn btn-default nxt">
@@ -42,10 +42,10 @@
 			</ul>
 			<!-- Tab panes -->
 			<div class="tab-content">
-				<c:forEach var="student" items="${group.getMembers()}" varStatus="status">	
+				<c:forEach var="student" items="${group.getMembers()}" varStatus="status">
 					<form action="CrossControls" method="post" class="cross-form${status.count == 1 ? ' active' : ''}">
-						<h3 style = "color: red"><c:out
-								value="${student.getFirstName()} ${student.getLastName()}"></c:out></h3>
+						<h3 style = "color: red">
+							<c:out value="${student.getFirstName()} ${student.getLastName()}"></c:out></h3>
 						<c:forEach var="sub_skill" items="${skills.getSubSkills()}"
 							varStatus="status">
 							<div role="tabpanel" class='tab-pane ${status.count==1 ? "active":""}' id="tab${status.count}">
@@ -66,11 +66,9 @@
 							</div>
 							<hr />
 						</c:forEach>
-<%-- 						<p> <label><c:out value='${student.getPseudo()}'></c:out></label> </p> --%>
 						<button class="btn btn-default btn-test" value="${val}">Bouton</button>
 						<input type="hidden" value='${student.getPseudo()}' name = 'student'>
 					</form>
-					
 				</c:forEach>
 			
 			</div>

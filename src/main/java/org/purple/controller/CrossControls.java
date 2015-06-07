@@ -3,6 +3,7 @@ package org.purple.controller;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.function.Predicate;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -25,13 +26,18 @@ import org.purple.model.DaoGroups;
 import org.purple.model.DaoSkills;
 import org.purple.model.DaoUsers;
 import org.purple.model.DaoValues;
+import org.purple.model.MyOwnClassMate;
 
 /**
  * Servlet implementation class Crossmark
  */
+
+
+
 @WebServlet("/CrossControls")
 public class CrossControls extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	
 
 	/**
 	 * @see HttpServlet#HttpServlet()
@@ -77,7 +83,8 @@ public class CrossControls extends HttpServlet {
 				// -- We get the group
 				Group g = dgp.select(grp);
 				dgp.completeMemebers(g);
-		
+				Predicate<User> filter = new MyOwnClassMate(u.getPseudo());
+				g.getMembers().removeIf(filter);	
 				
 				p.setContent("mark/cross_controls.jsp");
 				p.setCss("bootstrap-select.min.css","cross_controls.css");
