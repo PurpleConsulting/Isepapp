@@ -75,6 +75,45 @@ div.conf_box{
 button.close{
 	right:0px;
 }
+button.prev, button.nxt{
+	font-weight: bold;
+	padding: 15px;
+	border-radius: 100%;
+	line-height: 0.8;
+}
+button.prev{
+	float: left;
+}
+button.nxt{
+	float: right;
+}
+@media only screen and (max-width:650px) {
+	button.prev, button.nxt{
+		float: none;
+		display: block;
+		margin: auto;
+	}
+}
+ul.group-ul {
+	display: inline-block;
+	padding-left: 10%; 
+	padding-right: 10%; 
+}
+
+ul.group-ul li{
+	display: none;
+	padding-top: 15px;
+}
+ul.group-ul li.active{
+	display: inline-block;
+}
+
+form.cross-form{
+	display: none;
+}
+form.cross-form.active{
+	display: block;
+}
 
 /* body { */
 /*     background-color: rgb(190,190,230);

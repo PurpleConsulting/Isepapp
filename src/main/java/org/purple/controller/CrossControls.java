@@ -81,7 +81,7 @@ public class CrossControls extends HttpServlet {
 				
 				p.setContent("mark/cross_controls.jsp");
 				p.setCss("bootstrap-select.min.css","cross_controls.css");
-				
+				p.setJs("cross_controls.js");
 
 				// Display skills in tab
 				Skill skill = ds.selectCrossSkills();
