@@ -19,23 +19,21 @@ $(document).ready(function(){
 	
 	$("a.modify, a.cancel").on("click",function(event){
 	    event.preventDefault();
-	    $("form.form-inline").toggleClass("off");
+	    $("form.deadlineDate").toggleClass("off");
 	    if($(this).closest("form").hasClass("off")){
-	    	location.reload();
-	    	$("#valid").hide();
+	    	//location.reload();  <<<<<<---- Mais c'est quoi ce machin truc zozo ????
+	      $("#valid").hide();
 	      $("div.cascade-warning").removeAttr('style');
-	      $("div.values").attr("disabled",true);
-	      $("a.remove, a.reset").children("span").switchClass("safe","danger",0);
-	      $("a.remove, a.reset").children("span").switchClass("fa-undo","fa-times",0);
-	      $("a.remove, a.reset").switchClass("reset", "remove",0);
-	      $("div.has-error").removeClass("has-error");
+	      $("form.deadlineDate input").attr("disabled",true);
 	      $(this).children("span").eq(0).switchClass("fa-undo", "fa-pencil", 0);
 	      $(this).children("span").eq(1).text("Modifier");
+	      $(this).switchClass("modify", "cancel",0);
 	    } else {
-	    	$("#valid").show();
-	      $("form input").attr("disabled",false);
+	      $("#valid").show();
+	      $("form.deadlineDate input").attr("disabled",false);
 	      $(this).children("span").eq(1).text("Annuler");
 	      $(this).children("span").eq(0).switchClass("fa-pencil", "fa-undo",0);
+	      $(this).switchClass("cancel", "modify",0);
 	    }
 	  });
 	
@@ -63,10 +61,12 @@ $(document).ready(function(){
 						},sucess:{
 							label: "Supprimer",
 			                className: "btn-danger btn-target",
-			                callback: function () { window.location.replace("/Isepapp/Deadlines?delete=delete&id_deadline="+idDeadline+""); }
+			                callback: function () { $("form.form-del").submit(); }
 						}
 					}
 				});
+				$("input#modal-input-del").val("delete");
+				$("input#modal-input-id").val(idDeadline);
 			}); 
 	  });
 	  
