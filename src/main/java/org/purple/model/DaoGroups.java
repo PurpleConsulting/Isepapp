@@ -23,7 +23,7 @@ public class DaoGroups extends Dao<Group>{
     public String[] selectAllName(String pseudo){
 
         String[] gpName = new String[0];
-        String q = "SELECT Groups.`name` FROM Groups INNER JOIN Users ON Users.id = Groups.id_tutor WHERE Users.id = ? ORDER BY Groups.name;";
+        String q = "SELECT Groups.`name` FROM Groups INNER JOIN Users ON Users.id = Groups.id_tutor WHERE Users.id = ? AND Groups.id != 0 ORDER BY Groups.name ;";
         try {
             PreparedStatement prestmt = this.connect.prepareStatement(q);
             prestmt.setString(1,pseudo);

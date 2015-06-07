@@ -165,8 +165,8 @@ public class Controls extends HttpServlet {
 				JSONObject list = new JSONObject();
 				
 				list.put("groups", name);
+				list.put("marks", groupMark);
 				result.put("result", list);
-				result.put("resultGroupMark", groupMark);
 				
 				response.setHeader("content-type", "application/json");
 				response.getWriter().write(result.toString());

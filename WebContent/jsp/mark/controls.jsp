@@ -26,19 +26,22 @@
 		<div role="tabpanel">
 			<ul class="nav nav-tabs" role="tablist" id="tabs">
 				<c:forEach var="skill" items="${skills}" varStatus="status">
-					<li role="presentation" class='${status.count==1 ? "active":""}'>
-						<a href="#tab${status.count}" role="tab" data-toggle="tab">
-					  		<c:out value="${status.count}. ${skill.getTitle()}"></c:out>
+					<c:if test="${skill.getId() != 0}">
+					<li role="presentation" class='${status.index == 1 ? "active":""}'>
+						<a href="#tab${status.index}" role="tab" data-toggle="tab">
+					  		<c:out value="${status.index}. ${skill.getTitle()}"></c:out>
 						</a>
 					</li>
+					</c:if>
 				</c:forEach>
 			</ul>
 		  	<div class="tab-content">
 		  		<div id='mark'></div>
 		  		<c:forEach var="skill" items="${skills}" varStatus="status">
-		  			<div role="tabpanel" class='tab-pane ${status.count==1 ? "active":""}' id="tab${status.count}">
+		  		<c:if test="${skill.getId() != 0 }">
+		  			<div role="tabpanel" class='tab-pane ${status.index == 1 ? "active":""}' id="tab${status.index}">
 		  				<form id="form${skill.getId()}" class="groupgrid">
-			    			<h4 data-naming="${skill.getTitle()}"><c:out value='${status.count} - ${skill.getSubtitle()}'></c:out></h4>
+			    			<h4 data-naming="${skill.getTitle()}"><c:out value='${status.index} - ${skill.getSubtitle()}'></c:out></h4>
 			    			<c:forEach var="sub_skill" items="${skill.getSubSkills()}" varStatus="status">
 					  			<hr/><h5><c:out value="${sub_skill.getTitle()}"></c:out></h5>
 						  		<div class="line">
@@ -55,6 +58,7 @@
 					  		<button class="btn btn-default adder" disabled><span class="fa fa-plus"></span> Ajouter une note personnelle</button>
 						</form>
 					</div>
+				</c:if>
 				</c:forEach>
 		 	 </div>
 		</div>
