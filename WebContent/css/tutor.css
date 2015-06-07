@@ -2,6 +2,7 @@
 a.form-show{
 	padding: 6px;
 	margin: 12px 12px 12px 0px;
+	display: block;
 }
 div.col-sm-4.as-select{
 	width: 236px;

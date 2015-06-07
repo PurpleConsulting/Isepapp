@@ -9,7 +9,7 @@
 </div>
 <div class="row">
 	<div class="col-xs-offset-1 col-xs-10 add-tutor">
-		<div><a href="#" class="form-show">Ajouter une tuteur <span class="fa fa-plus"></span></a></div>
+		<a href="#" class="form-show">Ajouter un tuteur <span class="fa fa-plus"></span></a>
 		<form action="#" method="post" class="form-horizontal" style="display: none;">
 			<div class="form-group">
 				<div class="col-sm-10">
@@ -49,7 +49,16 @@
 <div class="row">
 	<div class="col-xs-offset-1 col-xs-10 list-tutors">
 		<div class="alert alert-info">
-			<strong>tuteur1</strong>
+			<ul>
+				<li>Nom: <em>Mario</em></li>
+				<li>Prenom: <em>Bros.</em></li>
+				<li>email: <em>mbros@gmail.com</em></li>
+				<li><ul>
+					<li>G1C</li>
+					<li>G2B</li>
+					<li>G3D</li>
+				</ul></li>
+			</ul>
 		</div>
 		<div class="alert alert-info">
 			<strong>tuteur1</strong>
