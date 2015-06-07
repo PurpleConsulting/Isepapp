@@ -182,7 +182,15 @@ public class Deadlines extends HttpServlet {
 						
 						Deadline dline=new Deadline();
 						dline.setId(Integer.parseInt(idDeadline));
-						dline.setDateLimit(datetimelimB+":00");
+						try{
+							dline.setDateLimit(datetimelimB+":00");
+						} catch(IllegalArgumentException e){
+							p.setError(true);
+							p.setErrorMessage("une erreur s'est produite. indiquez bien une date au format: 'YYYY-MM-JJ'"
+									+ " et une heure au format: 'HH-MM'. Il est possible que toutes les deadlines n'est pas été"
+									+ " mise à jours.");
+							break;
+						}
 						querysuccess = dl.update(dline);
 						if(!querysuccess && !p.getError()){
 							p.setError(true);

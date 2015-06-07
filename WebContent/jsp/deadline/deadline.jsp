@@ -79,7 +79,7 @@
 									<span class="lab">Date:</span><input type="date" class="form-control dateDisabled"  name="datelim${status.count}" id="datelim${status.count}" value="${deadline.getDateLimit().toString('yyyy-MM-dd')}"/>
 								</div>
 								<div class="form-group deadline">
-									<span class="lab">Heure:</span><input type="time" class="form-control dateDisabled"  name="timelim${status.count}"  id="timelim${status.count}"value="${deadline.getDateLimit().toString('HH:mm:ss')}"/>
+									<span class="lab">Heure:</span><input type="time" class="form-control dateDisabled"  name="timelim${status.count}"  id="timelim${status.count}"value="${deadline.getDateLimit().toString('HH:mm')}"/>
 								</div>
 								<div class="form-group deadline" data-group="${deadline.getGroup()}" data-subject="${deadline.getDescription()}">
 									<span class="fa fa-trash-o fa-lg" data-target="${deadline.getId()}"></span>
