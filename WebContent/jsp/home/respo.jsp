@@ -12,7 +12,7 @@
 <c:import url="/jsp/alert.jsp" charEncoding="UTF-8"></c:import>
 <div class="row">
 	<div class="col-xs-offset-1 col-xs-10 group">
-		<h4>- Les groups consultés -</h4>
+		<h4>- Les groups -</h4>
 		<em style="color:#337AB7">Ajouter un groupe...</em>
 		<form class="form-inline" method="post" action="AlterGroups">
 		  <div class="form-group">
