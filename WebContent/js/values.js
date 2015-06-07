@@ -8,13 +8,13 @@ $(document).ready(function(){
     $('#newtitle').focus();
   });
  
-  $('#modifyValue').click(function(){
-	   $("form input").attr("disabled",false);
-  });
+//  $('#modifyValue').click(function(){
+//	   $("form input").attr("disabled",false);
+//  });
   
   $("a.modify, a.cancel").on("click",function(event){
     event.preventDefault();
-    $("form.form-inline").toggleClass("off");
+    $(this).closest("form.form-inline").toggleClass("off");
     if($(this).closest("form").hasClass("off")){
     	location.reload();
     	

@@ -6,6 +6,9 @@ div.insert form.group{
   padding: 10px;
 }
 
+div.terminee{
+	  margin-top: 20px;
+}
 div.list{
 	min-height: 200px;
 }

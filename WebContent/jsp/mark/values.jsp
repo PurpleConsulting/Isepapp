@@ -26,7 +26,7 @@
 	<div class="col-xs-offset-1 col-xs-10 values">
 	<em style="color:#337AB7">Les values de la grille d'évaluation</em>
 		<hr />
-		<form class="form-inline off" method="post" action="Values">
+		<form class="form-inline grille off" method="post" action="Values">
 			<div class="line">
 				<a data-toggle="modal" data-target="#modaladd"
 					class="btn btn-default add" href="#" role="button"><span

@@ -48,7 +48,7 @@
 </div>
 <div class="row">
 	<div class="col-xs-offset-1 col-xs-10 display">
-		<em style="color:#337AB7">Les deadlines</em>
+		<em style="color:#337AB7">Les deadlines en cours</em>
 			<div class="latest-group list">
 			<input type="hidden" value="${fn:length(deadline)}" id="taille"/>
 			<form class="form-inline off deadlineDate" method="post" action="Deadlines">
@@ -66,6 +66,7 @@
 					</div>
 				</c:if>
 				<c:forEach var="deadline" items="${deadline}" varStatus="status">
+					<c:if test="${deadline.getStatus()==true}">
 						<div class="alert alert-deadline design">
 							<input type="hidden" value="${deadline.getStatus()}" id="status${status.count}"/>
 							<input type="hidden" value="${deadline.getId()}" name="id${status.count}"/>
@@ -76,19 +77,61 @@
 								Groupe: <strong><c:out value="${deadline.getGroup()}"></c:out></strong>
 								</div>
 								<div class="form-group deadline">
-									<span class="lab">Date:</span><input type="date" class="form-control dateDisabled"  name="datelim${status.count}" id="datelim${status.count}" value="${deadline.getDateLimit().toString('yyyy-MM-dd')}"/>
+									<span class="lab">Date:</span><input type="text" class="form-control dateDisabled"  name="datelim${status.count}" id="datelim${status.count}" value="${deadline.getDateLimit().toString('yyyy-MM-dd')}"/>
 								</div>
 								<div class="form-group deadline">
-									<span class="lab">Heure:</span><input type="time" class="form-control dateDisabled"  name="timelim${status.count}"  id="timelim${status.count}"value="${deadline.getDateLimit().toString('HH:mm')}"/>
+									<span class="lab">Heure:</span><input type="text" class="form-control dateDisabled"  name="timelim${status.count}"  id="timelim${status.count}"value="${deadline.getDateLimit().toString('HH:mm')}"/>
 								</div>
 								<div class="form-group deadline" data-group="${deadline.getGroup()}" data-subject="${deadline.getDescription()}">
 									<span class="fa fa-trash-o fa-lg" data-target="${deadline.getId()}"></span>
 								</div>
 							</div>
+							</c:if>
 						</c:forEach>
 				</form>
 			</div>
 	</div>
 </div>
-
+						<!----------------------------- Deadline passée ------------------------------->
+<div class="row">
+	<div class="col-xs-offset-1 col-xs-10 display terminee">
+		<em style="color:#797A7C">Les deadlines terminées</em>
+			<div class="latest-group list terminee">
+			<input type="hidden" value="${fn:length(deadline)}" id="taille"/>
+			<form class="form-inline off ">
+				<c:set var="length"  value="${fn:length(deadline)}"/>
+				<c:if test="${empty deadline}">
+					<div class="alert alert-danger design">
+						<div class="form-group deadline">
+									Il n'y a pas de deadline.
+						</div>
+					</div>
+				</c:if>
+				<c:forEach var="deadline" items="${deadline}" varStatus="status">
+					<c:if test="${deadline.getStatus()==false}">
+						<div class="alert alert-deadline design" style="color:#91999C">
+							<input type="hidden" value="${deadline.getStatus()}" id="status${status.count}"/>
+							<input type="hidden" value="${deadline.getId()}" name="id${status.count}"/>
+								<div class="form-group col-xs-12 deadline" style="padding-left: 0px;">
+								Titre:  <strong><em><c:out value="${deadline.getDescription()}"></c:out></em></strong>
+								</div>
+								<div class="form-group deadline noinput">
+								Groupe: <strong><c:out value="${deadline.getGroup()}"></c:out></strong>
+								</div>
+								<div class="form-group deadline">
+									<span class="lab">Date:</span><input type="text" class="form-control dateDisabled"  name="datelim${status.count}" id="datelim${status.count}" value="${deadline.getDateLimit().toString('yyyy-MM-dd')}"/>
+								</div>
+								<div class="form-group deadline">
+									<span class="lab">Heure:</span><input type="text" class="form-control dateDisabled"  name="timelim${status.count}"  id="timelim${status.count}"value="${deadline.getDateLimit().toString('HH:mm')}"/>
+								</div>
+								<div class="form-group deadline" data-group="${deadline.getGroup()}" data-subject="${deadline.getDescription()}">
+									<span class="fa fa-trash-o fa-lg" data-target="${deadline.getId()}"></span>
+								</div>
+							</div>
+							</c:if>
+						</c:forEach>
+				</form>
+			</div>
+	</div>
+</div>
 

@@ -21,7 +21,7 @@ $(document).ready(function(){
 	    event.preventDefault();
 	    $("form.deadlineDate").toggleClass("off");
 	    if($(this).closest("form").hasClass("off")){
-	    	//location.reload();  <<<<<<---- Mais c'est quoi ce machin truc zozo ????
+	    	//location.reload();  <<<<<<---- Mais c'est quoi ce machin truc zozo ???? C'est pour rechargé la page
 	      $("#valid").hide();
 	      $("div.cascade-warning").removeAttr('style');
 	      $("form.deadlineDate input").attr("disabled",true);
