@@ -85,7 +85,6 @@ $(document).ready(function(){
 				}
 			});
 			
-			var blink = function(){}
 			setInterval('$(".fa-exclamation-triangle").fadeOut(400).delay(300).fadeIn(400)' ,400);
 			
 		});

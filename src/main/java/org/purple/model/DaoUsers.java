@@ -168,6 +168,7 @@ public class DaoUsers extends Dao<User> {
 			int i = 0;
 			while(currsor.next()){
 				User u = new User(currsor.getInt(1), currsor.getString(5), currsor.getString(2), currsor.getString(3), currsor.getString(4));
+				u.setMail(currsor.getString(7));
 				us[i] = u;
 				i++;
 			}

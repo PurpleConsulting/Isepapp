@@ -4,7 +4,7 @@
 <div class="row">
 	<h1 class="col-md-offset-1 col-md-10 col-sm-offset-1 col-sm-10 col-xs-offset-1 col-xs-10">
 		Liste des tuteurs
-		<small> - <span class="fa fa-trash-o"></span> - </small>
+		<small> - <span class="fa fa-trash-o master"></span> - </small>
 	</h1>
 </div>
 <div class="row">
@@ -37,9 +37,9 @@
 			<div class="form-group">
 				<div class="col-sm-10">
 					<select class="selectpicker">
-						<option>G1</option>
-						<option>G2</option>
-						<option>G3</option>
+						<c:forEach var="_class" items="${allClass}" varStatus="status">
+							<option value="${_class}"><c:out value="${_class}"></c:out></option>
+						</c:forEach>
 					</select>
 				</div>
 			</div>
@@ -48,29 +48,27 @@
 </div>
 <div class="row">
 	<div class="col-xs-offset-1 col-xs-10 list-tutors">
-		<div class="alert alert-info">
-			<ul>
-				<li>Nom: <em>Mario</em></li>
-				<li>Prenom: <em>Bros.</em></li>
-				<li>email: <em>mbros@gmail.com</em></li>
-				<li><ul>
-					<li>G1C</li>
-					<li>G2B</li>
-					<li>G3D</li>
+	<c:forEach var="tutor" items="${tutors}" varStatus="status">
+		<div class="alert alert-tutor">
+			<div class="fa-container">
+			<span class="fa fa-trash-o slave" data-target="${tutor.getPseudo()}"></span>
+			<span class="fa fa-pencil" data-target="${tutor.getPseudo()}"></span>
+			</div>
+			<ul class="outer-li">
+				<li>Nom: <em><c:out value="${tutor.getFirstName()}"></c:out></em></li>
+				<li>Prenom: <em><c:out value="${tutor.getLastName()}"></c:out></em></li>
+				<li>Email: <em><c:out value="${tutor.getMail()}"></c:out></em></li>
+				<li>Groupes: <ul class="inner-li">
+					<c:forEach var="g" items="${groups.get(tutor.getPseudo())}" varStatus="status">
+						<li><em>
+							<a href="Groups?scope=${g}">
+								<c:out value="${g}"></c:out><c:if test="${!status.last}">,</c:if>
+							</a>
+						</em></li>
+					</c:forEach>
 				</ul></li>
 			</ul>
 		</div>
-		<div class="alert alert-info">
-			<strong>tuteur1</strong>
-		</div>
-		<div class="alert alert-info">
-			<strong>tuteur1</strong>
-		</div>
-		<div class="alert alert-info">
-			<strong>tuteur1</strong>
-		</div>
-		<div class="alert alert-info">
-			<strong>tuteur1</strong>
-		</div>
+	</c:forEach>
 	</div>
 </div>
