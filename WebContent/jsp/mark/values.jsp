@@ -28,11 +28,11 @@
 		<hr />
 		<form class="form-inline grille off" method="post" action="Values">
 			<div class="line">
+				<a class="btn btn-default modify" href="#" role="button"><span
+					class="fa fa-pencil"></span> <span>Modifier</span></a>
 				<a data-toggle="modal" data-target="#modaladd"
 					class="btn btn-default add" href="#" role="button"><span
-					class="fa fa-plus"></span> Ajouter</a> <a
-					class="btn btn-default modify" href="#" role="button"><span
-					class="fa fa-pencil"></span> <span>Modifier</span></a>
+					class="fa fa-plus"></span> Ajouter</a> 
 			</div>
 			<input type="hidden" value="1" name="modify" /> 
 			<input type="hidden" value='${fn:length(valeur)-1}' name="int">

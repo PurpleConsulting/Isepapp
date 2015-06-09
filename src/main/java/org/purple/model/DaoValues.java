@@ -102,37 +102,6 @@ public class DaoValues extends Dao<Value> {
 		
 		return val;
 	}
-//	public Value[] selectAllValues (int cross){
-//		Value[] val = new Value[0];
-//		String q = "SELECT id,title, points "
-//				+ "FROM `Values` WHERE `Values`.cross=?"
-//				+ "ORDER BY id";		
-//		try{
-//			PreparedStatement prestmt = this.connect.prepareStatement(q);
-//			ResultSet currsor = prestmt.executeQuery();
-//			
-//			int i = 0;
-//			
-//			if(!currsor.next()) return val;
-//			if (currsor.last()) {
-//				val = new Value[currsor.getRow()];
-//				currsor.beforeFirst(); 
-//			}
-//			
-//			while(currsor.next()){
-//				Value v = new Value();
-//				v.setId(currsor.getInt(1));
-//				v.setTitle(currsor.getString(2));
-//				v.setPoints(currsor.getInt(3));
-//				val[i] = v;
-//				i = i + 1;
-//			}
-//		}catch (SQLException e){
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-//		return val;
-//	}
 	
 	
 	public boolean updateValues (Value[] v){

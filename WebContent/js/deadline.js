@@ -5,9 +5,8 @@ $(document).ready(function(){
 		if($("#status"+i).val()== "false"){
 			$("#status"+i).parent().removeClass("alert-info");
 			$("#status"+i).parent().addClass("alert-danger");
-			$("#datelim"+i).css("color", "#a94442");
-			$("#timelim"+i).css("color", "#a94442");
-			//$("#del"+i).css("color", "#a94442");
+			$("#datelim"+i).css("color", "##91999C");
+			$("#timelim"+i).css("color", "##91999C");
 			
 		};
 	}

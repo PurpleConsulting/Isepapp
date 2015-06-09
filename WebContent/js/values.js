@@ -16,8 +16,6 @@ $(document).ready(function(){
     event.preventDefault();
     $(this).closest("form.form-inline").toggleClass("off");
     if($(this).closest("form").hasClass("off")){
-    	location.reload();
-    	
       $("div.cascade-warning").removeAttr('style');
       $("div.values").attr("disabled",true);
       $("a.remove, a.reset").children("span").switchClass("safe","danger",0);
