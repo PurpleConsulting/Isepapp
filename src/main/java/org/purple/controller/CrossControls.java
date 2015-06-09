@@ -12,8 +12,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.json.JSONObject;
 import org.purple.bean.Deadline;
 import org.purple.bean.Group;
+import org.purple.bean.Mark;
 import org.purple.bean.Page;
 import org.purple.bean.Skill;
 import org.purple.bean.User;
@@ -23,6 +25,7 @@ import org.purple.constant.Isep;
 import org.purple.model.Auth;
 import org.purple.model.DaoDeadline;
 import org.purple.model.DaoGroups;
+import org.purple.model.DaoMarks;
 import org.purple.model.DaoSkills;
 import org.purple.model.DaoUsers;
 import org.purple.model.DaoValues;
@@ -32,12 +35,11 @@ import org.purple.model.MyOwnClassMate;
  * Servlet implementation class Crossmark
  */
 
-
-
 @WebServlet("/CrossControls")
 public class CrossControls extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	
+	private static final String markDelimiter = ";";
+	private static final String skillValueDelimiter = "&";
 
 	/**
 	 * @see HttpServlet#HttpServlet()
@@ -57,8 +59,8 @@ public class CrossControls extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		Page p = new Page();
 		Connection bddServletCo = Bdd.getCo();
-		
-		if(Auth.isStudent(request)){
+
+		if (Auth.isStudent(request)) {
 			/**
 			 * HERE THE USER IS A STUDENT
 			 */
@@ -67,33 +69,33 @@ public class CrossControls extends HttpServlet {
 			DaoSkills ds = new DaoSkills(bddServletCo);
 			DaoValues dv = new DaoValues(bddServletCo);
 			DaoDeadline dl = new DaoDeadline(bddServletCo);
-			
-			// -- We get the User 
+
+			// -- We get the User
 			HttpSession s = request.getSession();
-			User u = (User)s.getAttribute("user");
+			User u = (User) s.getAttribute("user");
 			dusr.addGroup(u);
 			String grp = u.getGroup();
-			
+
 			Deadline deadline = dl.fetchCrossDeadline(grp);
-			
-			if(deadline.getStatus()){
+
+			if (deadline.getStatus()) {
 				/**
-				 *  HERE THE CROSS MARK SESSION IS OPEN
+				 * HERE THE CROSS MARK SESSION IS OPEN
 				 */
 				// -- We get the group
 				Group g = dgp.select(grp);
 				dgp.completeMemebers(g);
 				Predicate<User> filter = new MyOwnClassMate(u.getPseudo());
-				g.getMembers().removeIf(filter);	
-				
+				g.getMembers().removeIf(filter);
+
 				p.setContent("mark/cross_controls.jsp");
-				p.setCss("bootstrap-select.min.css","cross_controls.css");
+				p.setCss("bootstrap-select.min.css", "cross_controls.css");
 				p.setJs("cross_controls.js");
 
 				// Display skills in tab
 				Skill skill = ds.selectCrossSkills();
 				ds.completeSub_skills(skill); // Add sub_skills into skills
-				
+
 				// Display values in radio btn
 				Value[] v = dv.selectAllValues();
 
@@ -101,25 +103,24 @@ public class CrossControls extends HttpServlet {
 				request.setAttribute("skills", skill);
 				request.setAttribute("values", v);
 				request.setAttribute("deadline", deadline);
-				
+
 			} else {
 				Isep.bagPackHome(p, s);
 				p.setWarning(true);
 				p.setWarningMessage("pas d'évaluation croisée");
 			}
-			
+
 		} else {
 			Isep.bagPackHome(p, request.getSession());
 			p.setWarning(true);
 			p.setWarningMessage("Cette page n'est accessible qu'aux étudiants.");
 		}
-		
-		
+
 		request.setAttribute("pages", p);
 		this.getServletContext().getRequestDispatcher("/template.jsp")
 				.forward(request, response);
-		
-		//Close Dao
+
+		// Close Dao
 		try {
 			bddServletCo.close();
 		} catch (SQLException e) {
@@ -136,6 +137,35 @@ public class CrossControls extends HttpServlet {
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-	}
+		request.setCharacterEncoding("UTF-8");
+		Page p = new Page();
 
+		// Retrieve group name selected (global)
+		String str = request.getParameter("string");
+
+		// -- add serie of marks for a student on a skill
+		String pseudo = request.getParameter("student");
+		String idStudent = request.getParameter("id_student");
+		String marks = request.getParameter("marks");
+
+		if (Auth.isStudent(request)) {
+			// -- Now the user is allowed to perfom queries on the database
+			Connection bddServletCo = Bdd.getCo();
+			DaoGroups dgroup = new DaoGroups(bddServletCo);
+			DaoMarks dmrk = new DaoMarks(bddServletCo);
+
+			if (!Isep.nullOrEmpty(str) && Auth.isTutor(request, str)) {
+				// -- Find the group
+				Group g = new Group();
+				String[] name = null; // Store group members
+
+				try {
+					bddServletCo.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}
+	}
 }
