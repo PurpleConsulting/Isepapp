@@ -8,9 +8,8 @@
 		Evaluation croisée : <small><c:out value="${group.getName()}"></c:out></small>
 	</h1>
 </div>
-
+<c:import url="/jsp/alert.jsp" charEncoding="UTF-8"></c:import>
 <div class="row">
-	<c:import url="/jsp/alert.jsp" charEncoding="UTF-8"></c:import>
 	<div class="col-xs-offset-1 col-xs-10">
 		<div class="alert alert-info">
 			L'évaluation de votre groupe est à compléter avant le

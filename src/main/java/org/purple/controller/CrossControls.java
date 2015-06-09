@@ -6,6 +6,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 import java.util.function.Predicate;
 
 import javax.servlet.ServletException;
@@ -140,31 +142,30 @@ public class CrossControls extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
 	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request,
-			HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		request.setCharacterEncoding("UTF-8");
 		Page p = new Page();
 
-		// Retrieve group name selected (global)
-		String str = request.getParameter("string");
-		ArrayList<String> _params = Collections.list(request
-				.getParameterNames());
+		// -- params for cross evaluation
+		String pseudo = request.getParameter("student");
+		String idStudent = request.getParameter("id_student");
+		/* the subskill evaluated by the student*/
+		ArrayList<String> _params = Collections.list(request.getParameterNames());
 		ArrayList<String> submitSubSkills = new ArrayList<String>();
-		HashMap<String, String> submitValues = new HashMap<String, String>();
 		for (String _p : _params) {
 			if (_p.indexOf(this.pattern) != -1) {
 				submitSubSkills.add(_p.substring(this.patternLimit));
+				// -- Arraylist of id ex: 63, 64, 79
 			}
 
 		}
 
-		// -- add serie of marks for a student on a skill
-		String pseudo = request.getParameter("student");
-		String idStudent = request.getParameter("id_student");
-
 		if (Auth.isStudent(request)) {
-			// -- Now the user is allowed to perfom queries on the database
+			/**
+			 * THE USER IS A AUTHORISED STUDENT
+			 */
+			// -- the user have access to the data base
 			Connection bddServletCo = Bdd.getCo();
 			DaoGroups dgroup = new DaoGroups(bddServletCo);
 			DaoMarks dmrk = new DaoMarks(bddServletCo);
@@ -173,54 +174,83 @@ public class CrossControls extends HttpServlet {
 			DaoSkills ds = new DaoSkills(bddServletCo);
 			DaoValues dv = new DaoValues(bddServletCo);
 			DaoDeadline dl = new DaoDeadline(bddServletCo);
-
+			
+			// -- This is the user 
 			HttpSession s = request.getSession();
 			User u = (User) s.getAttribute("user");
 			dusr.addGroup(u);
-
-			// Display values in radio btn
+			
 			Value[] val = dv.selectAllValues();
-//			HashMap<String, Value> mapV = new HashMap<String, Value>();
-//			for (Value v : val) {
-//				mapV.put(Integer.toString(v.getId()), v);
-//			}
+			
 
 			if (!Isep.nullOrEmpty(pseudo, idStudent)) {
-				for (String sbs : submitSubSkills) {
-					submitValues.put(sbs,
-							request.getParameter(this.pattern + sbs));
-				}
-				// -- Find the group
-				Group g = new Group();
-				String[] name = null; // Store group members
+				/**
+				 * THIS IS AN EVALUATION REQUEST
+				 */
+				
+				// -- This is the classmate evaluated
 				User targetUser = dusr.select(pseudo);
 				dusr.addGroup(targetUser);
-
+				
+				// -- Hashmap (id_sub_skill, id_value)
+				HashMap<String, String> submitValues = new HashMap<String, String>();
+				for (String sbs : submitSubSkills) {
+					submitValues.put(sbs, request.getParameter(this.pattern + sbs));
+				}
+				
+				// -- Hashmap (id_value, bean:value)
+				HashMap<String, Value> mapV = new HashMap<String, Value>();
+				for (Value v : val) {
+					mapV.put(Integer.toString(v.getId()), v);
+				}
+				
+				
+				// -- The both user are in the same group
+				// -- it's ok let's evaluate
 				if (u.getGroup().equals(targetUser.getGroup())) {
+					
+					boolean businessFlague = true;
+					ArrayList<Mark> marks = new ArrayList<Mark>();
+					
+					// -- Are those sub_skill real cross sub_skill ??
 					ArrayList<SubSkill> subSkills = new ArrayList<SubSkill>();
 					for (String sskill : submitSubSkills) {
-						subSkills.add(dssk.select(sskill));
+						SubSkill in = dssk.select(sskill);
+						if(in.getIdSkill() != 0 || in.getId() == 0) businessFlague = false; 
+						subSkills.add(in);
 					}
-
-					Mark mark = new Mark();
-
-					for (SubSkill ss : subSkills) {
-						int valId = Integer.parseInt(submitValues.get(Integer.toString(ss.getId())));
-						mark = new Mark(targetUser.getPseudo(), ss.getId(), valId,
-								true);
-
-						submitValues.get(this.pattern
-								+ Integer.toString(ss.getId()));
-
-						// /////////////
-						System.out.println(mark.getIdValue());						
-						// ////////////
+					
+					// -- Are those values real cross values ??
+					Iterator it = submitValues.entrySet().iterator();
+				    while (it.hasNext()) {
+				        Map.Entry pair = (Map.Entry)it.next();
+				        String vv = (String)pair.getValue();
+				        System.out.println(pair.getKey() + " = " + vv);
+				        if(!mapV.keySet().contains(vv)) businessFlague = false;
+				    }
+				    
+				    //
+					if(!businessFlague){
+						/* SOMETHING WRONG WHITH THE FORM SUBMITED */
+						p.setError(true);
+						p.setErrorMessage("nous avons remarqué un problème dans l'envoie du formulaire,"
+								+ " veillez à bien remplire tous les champs du fomulaire pour un de vos collègues.");
+					} else {
+						for (SubSkill ss : subSkills) {
+							int valId = Integer.parseInt(submitValues.get(Integer.toString(ss.getId())));
+							marks.add(new Mark(targetUser.getPseudo(), ss.getId(), valId, true));
+							
+						}
+						
+						p.setSuccess(true);
+						p.setSuccessMessage("okok");
 					}
+					
 				} else {
 					p.setError(true);
 					p.setErrorMessage("Une erreur s'est produite lors de la notation de l'étudiant."
-							+ "Vérifier que l'étudiant noté soit ben dans votre groupe."
-							+ "En cas de problème contacter un responsable");
+							+ "Vérifiez que l'étudiant noté soit ben dans votre groupe."
+							+ "En cas de problème contacter un tuteur ou le responsable d'APP.");
 
 				}
 
