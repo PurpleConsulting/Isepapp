@@ -10,6 +10,7 @@
 </div>
 
 <div class="row">
+	<c:import url="/jsp/alert.jsp" charEncoding="UTF-8"></c:import>
 	<div class="col-xs-offset-1 col-xs-10">
 		<div class="alert alert-info">
 			L'évaluation de votre groupe est à compléter avant le
@@ -70,18 +71,17 @@
 								<div class="radio" class="line">
 									<c:forEach var="value" items="${values}" varStatus="status">
 										<label> <input type="radio"
-											name="${sub_skill.getId()}" id="value${status.count}"
-											value="${value.getId()}" ${status.count==1 ? "checked":""}>
+											name="sub_skill_${sub_skill.getId()}" id="value${status.count}"
+											value="${value.getId()}">
 											<c:out value="${value.getTitle()}"></c:out>
 										</label>
-										<input type="hidden" value='${subSkill.getId()}'>
 									</c:forEach>
 									<c:set var="val" value="${skill.getId()}" />
 								</div>
 							</div>
 							<hr />
 						</c:forEach>
-						<button class="btn btn-default btn-test" value="${val}">Bouton</button>
+						<button class="btn btn-default btn-test" value="${val}"> Envoyer </button>
 						
 					<input type="hidden" value='${student.getPseudo()}' name='student'>
 					<input type="hidden" value='${student.getId()}' name='id_student'>

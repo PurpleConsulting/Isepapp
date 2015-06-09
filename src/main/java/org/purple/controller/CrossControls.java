@@ -3,6 +3,9 @@ package org.purple.controller;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.function.Predicate;
 
 import javax.servlet.ServletException;
@@ -18,6 +21,7 @@ import org.purple.bean.Group;
 import org.purple.bean.Mark;
 import org.purple.bean.Page;
 import org.purple.bean.Skill;
+import org.purple.bean.SubSkill;
 import org.purple.bean.User;
 import org.purple.bean.Value;
 import org.purple.constant.Bdd;
@@ -27,6 +31,7 @@ import org.purple.model.DaoDeadline;
 import org.purple.model.DaoGroups;
 import org.purple.model.DaoMarks;
 import org.purple.model.DaoSkills;
+import org.purple.model.DaoSubSkills;
 import org.purple.model.DaoUsers;
 import org.purple.model.DaoValues;
 import org.purple.model.MyOwnClassMate;
@@ -38,8 +43,8 @@ import org.purple.model.MyOwnClassMate;
 @WebServlet("/CrossControls")
 public class CrossControls extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private static final String markDelimiter = ";";
-	private static final String skillValueDelimiter = "&";
+	private final String pattern = "sub_skill_";
+	private final int patternLimit = this.pattern.length();
 
 	/**
 	 * @see HttpServlet#HttpServlet()
@@ -88,6 +93,7 @@ public class CrossControls extends HttpServlet {
 				Predicate<User> filter = new MyOwnClassMate(u.getPseudo());
 				g.getMembers().removeIf(filter);
 
+				p.setTitle("ISEP / APP - Evaluation croisée");
 				p.setContent("mark/cross_controls.jsp");
 				p.setCss("bootstrap-select.min.css", "cross_controls.css");
 				p.setJs("cross_controls.js");
@@ -142,29 +148,118 @@ public class CrossControls extends HttpServlet {
 
 		// Retrieve group name selected (global)
 		String str = request.getParameter("string");
+		ArrayList<String> _params = Collections.list(request
+				.getParameterNames());
+		ArrayList<String> submitSubSkills = new ArrayList<String>();
+		HashMap<String, String> submitValues = new HashMap<String, String>();
+		for (String _p : _params) {
+			if (_p.indexOf(this.pattern) != -1) {
+				submitSubSkills.add(_p.substring(this.patternLimit));
+			}
+
+		}
 
 		// -- add serie of marks for a student on a skill
 		String pseudo = request.getParameter("student");
 		String idStudent = request.getParameter("id_student");
-		String marks = request.getParameter("marks");
 
 		if (Auth.isStudent(request)) {
 			// -- Now the user is allowed to perfom queries on the database
 			Connection bddServletCo = Bdd.getCo();
 			DaoGroups dgroup = new DaoGroups(bddServletCo);
 			DaoMarks dmrk = new DaoMarks(bddServletCo);
+			DaoSubSkills dssk = new DaoSubSkills(bddServletCo);
+			DaoUsers dusr = new DaoUsers(bddServletCo);
+			DaoSkills ds = new DaoSkills(bddServletCo);
+			DaoValues dv = new DaoValues(bddServletCo);
+			DaoDeadline dl = new DaoDeadline(bddServletCo);
 
-			if (!Isep.nullOrEmpty(str) && Auth.isTutor(request, str)) {
+			HttpSession s = request.getSession();
+			User u = (User) s.getAttribute("user");
+			dusr.addGroup(u);
+
+			// Display values in radio btn
+			Value[] val = dv.selectAllValues();
+//			HashMap<String, Value> mapV = new HashMap<String, Value>();
+//			for (Value v : val) {
+//				mapV.put(Integer.toString(v.getId()), v);
+//			}
+
+			if (!Isep.nullOrEmpty(pseudo, idStudent)) {
+				for (String sbs : submitSubSkills) {
+					submitValues.put(sbs,
+							request.getParameter(this.pattern + sbs));
+				}
 				// -- Find the group
 				Group g = new Group();
 				String[] name = null; // Store group members
+				User targetUser = dusr.select(pseudo);
+				dusr.addGroup(targetUser);
 
-				try {
-					bddServletCo.close();
-				} catch (SQLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+				if (u.getGroup().equals(targetUser.getGroup())) {
+					ArrayList<SubSkill> subSkills = new ArrayList<SubSkill>();
+					for (String sskill : submitSubSkills) {
+						subSkills.add(dssk.select(sskill));
+					}
+
+					Mark mark = new Mark();
+
+					for (SubSkill ss : subSkills) {
+						int valId = Integer.parseInt(submitValues.get(Integer.toString(ss.getId())));
+						mark = new Mark(targetUser.getPseudo(), ss.getId(), valId,
+								true);
+
+						submitValues.get(this.pattern
+								+ Integer.toString(ss.getId()));
+
+						// /////////////
+						System.out.println(mark.getIdValue());						
+						// ////////////
+					}
+				} else {
+					p.setError(true);
+					p.setErrorMessage("Une erreur s'est produite lors de la notation de l'étudiant."
+							+ "Vérifier que l'étudiant noté soit ben dans votre groupe."
+							+ "En cas de problème contacter un responsable");
+
 				}
+
+				// -- redirection après avoir submit
+				String grp = u.getGroup();
+				Deadline deadline = dl.fetchCrossDeadline(grp);
+
+				p.setTitle("ISEP / APP - Evaluation croisée");
+				p.setContent("mark/cross_controls.jsp");
+				p.setCss("bootstrap-select.min.css", "cross_controls.css");
+				p.setJs("cross_controls.js");
+
+				// -- We get the group
+				Group gr = dgroup.select(grp);
+				dgroup.completeMemebers(gr);
+				Predicate<User> filter = new MyOwnClassMate(u.getPseudo());
+				gr.getMembers().removeIf(filter);
+
+				// Display skills in tab
+				Skill skill = ds.selectCrossSkills();
+				ds.completeSub_skills(skill); // Add sub_skills into skills
+
+				request.setAttribute("group", gr);
+				request.setAttribute("skills", skill);
+				request.setAttribute("values", val);
+				request.setAttribute("deadline", deadline);
+				p.setContent("mark/cross_controls.jsp");
+				p.setCss("bootstrap-select.min.css", "cross_controls.css");
+				p.setJs("cross_controls.js");
+				request.setAttribute("pages", p);
+				this.getServletContext().getRequestDispatcher("/template.jsp")
+						.forward(request, response);
+			}
+
+			try {
+				bddServletCo.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
 		}
 	}

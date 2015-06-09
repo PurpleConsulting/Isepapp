@@ -2,14 +2,18 @@ package org.purple.bean;
 
 public class Value {
 
-	public Value(){
-		
-	}
-	
 	private int id = 0;
 	private int points = 0;
 	private String title = "null";
 
+	public Value(){
+		
+	}
+	
+	public Value(int id, String title){
+		this.setId(id);
+		this.setTitle(title);
+	}
 	
 	public int getId() {
 		return id;

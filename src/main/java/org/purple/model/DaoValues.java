@@ -17,6 +17,8 @@ import java.sql.SQLException;
 
 
 
+
+import org.purple.bean.Skill;
 import org.purple.bean.User;
 import org.purple.bean.Value;
 import org.purple.constant.Bdd;
@@ -72,6 +74,21 @@ public class DaoValues extends Dao<Value> {
 	public Value select(String id) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+	
+	public Value selectCross(String id) {
+		// TODO Auto-generated method stub
+		Value v = new Value();
+		String q = "SELECT Values.id, Values.title FROM Values WHERE cross = 1 AND Values.id = ? ;";
+		String [] params = {id};
+		ResultSet currsor = Bdd.prepareExec(this.connect, q, params);
+		try {
+			if(currsor.next()) v = new Value(currsor.getInt(1), currsor.getString(2));
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return v;
 	}
 	
 	public Value[] selectAllValues (){
