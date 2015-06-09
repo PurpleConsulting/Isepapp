@@ -2,14 +2,17 @@
 a.form-show{
 	padding: 6px;
 	margin: 12px 12px 12px 0px;
-	display: block;
+	display: inline-block;
 }
 div.col-sm-4.as-select{
 	width: 236px;
 	padding-right: 0px;
 	margin-right: 15px;
 }
-
+div.form-group.welcome-box label{
+	font-weight: inherit;
+	margin-left: 4px;
+}
 div.list-tutors li{
 	 list-style-type: none;
 }

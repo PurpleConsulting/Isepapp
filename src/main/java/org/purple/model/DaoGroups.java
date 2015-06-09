@@ -176,7 +176,7 @@ public class DaoGroups extends Dao<Group>{
 		// TODO Auto-generated method stub
 		Group[] gs = new Group[0];
 		String q = "SELECT Groups.id, Groups.`name`, Groups.class"
-				+ " FROM APPDB.Groups WHERE Groups.class= ?;";
+				+ " FROM APPDB.Groups WHERE Groups.class= ? AND Groups.id != 0;";
 		String[] params = {classe};
 		ResultSet currsor = Bdd.prepareExec(this.connect, q, params);
 		try {

@@ -10,10 +10,10 @@
 <div class="row">
 	<div class="col-xs-offset-1 col-xs-10 add-tutor">
 		<a href="#" class="form-show">Ajouter un tuteur <span class="fa fa-plus"></span></a>
-		<form action="#" method="post" class="form-horizontal" style="display: none;">
+		<form action="" method="post" class="form-horizontal" style="display: none;">
 			<div class="form-group">
 				<div class="col-sm-10">
-					<input type="text" name="new_first_mane" placeholder="Prénom du tuteur" class="form-control"/>
+					<input type="text" name="new_first_name" placeholder="Prénom du tuteur" class="form-control"/>
 				</div>
 			</div>
 			<div class="form-group">
@@ -28,19 +28,29 @@
 			</div>
 			<div class="form-group">
 				<div class="col-sm-4 as-select">
-					<input type="password" name="" placeholder="Mot de passe" class="form-control" disabled/>
+					<input type="password" name="new_password" placeholder="Mot de passe" class="form-control" disabled/>
 				</div>
 				<div class="col-sm-6" style="padding-top:6px;">
 					<input class="toggle-input" type="checkbox" name="is_isep" /> Tuteur externe ISEP
 				</div>
 			</div>
 			<div class="form-group">
-				<div class="col-sm-10">
-					<select class="selectpicker">
+				<div class="col-sm-4">
+					<select class="selectpicker" name="new_class">
+							<option value="null">Sélectionnez une classe</option>
 						<c:forEach var="_class" items="${allClass}" varStatus="status">
 							<option value="${_class}"><c:out value="${_class}"></c:out></option>
 						</c:forEach>
 					</select>
+				</div>
+			</div>
+			<div class="form-group welcome-box">
+				<div class="col-sm-4">
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="col-sm-4">
+				<button type="submit" class="btn btn-default"> Ajouter </button>
 				</div>
 			</div>
 		</form>

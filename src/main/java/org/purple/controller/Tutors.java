@@ -3,6 +3,7 @@ package org.purple.controller;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import javax.servlet.ServletException;
@@ -11,6 +12,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.json.JSONObject;
+import org.purple.bean.Group;
 import org.purple.bean.Page;
 import org.purple.bean.User;
 import org.purple.constant.Bdd;
@@ -94,6 +97,72 @@ public class Tutors extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		request.setCharacterEncoding("UTF-8");
+		Page p = new Page();
+		
+		/**
+		 * AJAX POST REQUEST PARAMS
+		 */
+		// --  fetch the group for the insert tutor
+		String classParam = request.getParameter("class_name");
+		
+		/**
+		 * POST REQUEST PARAMS
+		 */
+		// -- add tutor request
+		String newFirstName = request.getParameter("new_first_name");
+		String newLastName = request.getParameter("new_last_name");
+		String newEmail = request.getParameter("new_email");
+		String newClass = request.getParameter("new_class");
+		String newPass = request.getParameter("new_password");
+		
+		
+		if(Auth.isRespo(request)){
+			/*  the use have access to the data base */
+			Connection bddServletCo = Bdd.getCo();
+			DaoGroups dg = new DaoGroups(bddServletCo);
+			
+			if(!Isep.nullOrEmpty(classParam)){
+				/**
+				 * HERE THE USER ASK FOR SOME GROUP FOR THE NEW TUTOR
+				 */
+
+				Group[] groups = dg.selectGroupbyClass(classParam);
+				JSONObject result = new JSONObject();
+				ArrayList<JSONObject> jsGrooups = new ArrayList<JSONObject>();
+				for(Group g : groups){
+					JSONObject current = new JSONObject();
+					current.put("id", g.getId());
+					current.put("name", g.getName());
+					jsGrooups.add(current);
+				}
+				result.put("groups", jsGrooups);
+				
+				response.setHeader("content-type", "application/json");
+				response.getWriter().write(new JSONObject().put("result", result).toString());
+				
+			} else if(!Isep.nullOrEmpty(newFirstName, newLastName, newEmail, newClass)){
+				
+				
+			}
+			
+			try {
+				bddServletCo.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			
+		} else {
+			p.setWarning(true);
+			p.setWarningMessage("cette page est accécible uniquement au responsable d'APP.");
+			Isep.bagPackHome(p, request.getSession());
+			
+			request.setAttribute("pages", p);
+			this.getServletContext().getRequestDispatcher("/template.jsp").forward(request, response);
+			
+		}
 	}
 
 }
