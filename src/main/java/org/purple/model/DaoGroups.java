@@ -269,5 +269,15 @@ public class DaoGroups extends Dao<Group>{
 		res = Bdd.rsToStringTab(currsor);
 		return res;
 	}
+	
+	public boolean declareTutor(User u, String _class){
+		boolean res = true;
+		String q = "UPDATE Groups SET id_tutor = (SELECT Users.id FROM Users WHERE Users.pseudo = ?)"
+				+ " WHERE class = ?;";
+		String[] params = { u.getPseudo(), _class };
+		int affected = Bdd.preparePerform(this.connect, q, params);
+		if(affected < 1) res = false;
+		return res;
+	}
 
 }

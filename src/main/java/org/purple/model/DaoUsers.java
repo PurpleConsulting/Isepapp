@@ -225,9 +225,4 @@ public class DaoUsers extends Dao<User> {
 		return res;
 	}
 	
-	public static boolean declareTutor(User u){
-		boolean res = true;
-		
-		return res;
-	}
 }

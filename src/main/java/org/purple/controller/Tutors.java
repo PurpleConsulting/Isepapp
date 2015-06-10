@@ -179,14 +179,6 @@ public class Tutors extends HttpServlet {
 				 */
 				User newTutor = new User(newFirstName, newLastName, newPseudo, newEmail, Auth.tutor);
 				newTutor.setGroup("G00");
-				if(!Isep.nullOrEmpty(newPass)){
-					// -- this is an external teacher
-					newTutor.setPassword(newPass);
-				}
-				
-				if(newClass.equals("null")){
-					// -- the new tutor has already a class
-				}
 				boolean querrySuccess = du.create(newTutor);
 				
 				if(querrySuccess){
@@ -197,6 +189,21 @@ public class Tutors extends HttpServlet {
 					p.setError(true);
 					p.setErrorMessage("une erreur c'est produite lors de l'ajout du tuteur. "
 							+ "Vérifiez que le pseudo soit bien unique.");
+				}
+				
+				if(!Isep.nullOrEmpty(newPass) && querrySuccess){
+					// -- this is an external teacher
+					newTutor.setPassword(newPass);
+				}
+				
+				if(!newClass.equals("null") && querrySuccess){
+					// -- the new tutor has already a class
+					newTutor = du.select(newTutor.getPseudo());
+					boolean positionSuccess = dg.declareTutor(newTutor, newClass);
+					if(!positionSuccess){
+						p.setWarning(true);
+						p.setWarningMessage("une erreur c'est produite lors de l'attribution des groupes au nouveau tuteur.");
+					}
 				}
 				
 				this.doRegular(request, response, p, du, dg);
