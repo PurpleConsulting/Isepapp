@@ -16,6 +16,9 @@ function isValid() {
 	$("ul#tabs.nav.nav-tabs li a").each(function(el){
    		$(this).children().remove();
    	});
+	$('form.groupgrid').each(function(el){
+		$(this).find("span").remove();
+	});
    	$('form.groupgrid').each(function(){
    		if ($(this).find('div.line').length == $(this).find('input[type=radio]:checked').length){
    			var tab = $(this).parent();
