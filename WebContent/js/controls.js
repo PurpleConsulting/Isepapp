@@ -10,6 +10,8 @@ $("button.marker, button.adder ").attr("disabled", true);
 $("select").prop("selectedIndex",0);
 $("input[type=radio]").attr("checked", false);
 
+
+
 function isValid() {
 	$("ul#tabs.nav.nav-tabs li a").each(function(el){
    		$(this).children().remove();
@@ -19,7 +21,8 @@ function isValid() {
    			var tab = $(this).parent();
    			var flag = "#" + tab.attr("id");
    			$('a[href="' + flag + '"]').append("<span class='fa fa-check-circle'></span>");
-   			$(this).append("<span class='fa fa-check-circle'></span>");
+   			$(this).find("h4").append('<span class="fa fa-check-circle" data-toggle="tooltip" data-placement="right" title="Evaluation complète"></span>');
+   			$('span[data-toggle="tooltip"]').tooltip();
    		}
    	})
 }

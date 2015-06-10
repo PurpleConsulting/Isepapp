@@ -22,10 +22,10 @@ public class DaoMarks extends Dao<Mark>{
 		int cross = (obj.isCross()) ? 1 : 0;
 		String q = "INSERT INTO Marks (id_student, id_value, id_sub_skill,`cross`, date, id_tutor)"
 				+ " VALUES ((SELECT id FROM APPDB.Users WHERE pseudo = ?),"
-				+ " ?, ?," + Integer.toString(cross) + ", CURDATE(), "
+				+ " ?, ?," + Integer.toString(cross) + ", NOW(), "
 				+ "(SELECT Groups.id_tutor FROM Groups WHERE Groups.`name` = "
 				+ "(SELECT Groups.`name` FROM Groups INNER JOIN Users ON Users.id_group = Groups.id WHERE Users.pseudo = ?))) "
-				+ "ON DUPLICATE KEY UPDATE id_value=VALUES(id_value), date=CURDATE(), id_tutor = "
+				+ "ON DUPLICATE KEY UPDATE id_value=VALUES(id_value), date=NOW(), id_tutor = "
 				+ "(SELECT Groups.id_tutor FROM Groups WHERE Groups.`name` = "
 				+ "(SELECT Groups.`name` FROM Groups INNER JOIN Users ON Users.id_group = Groups.id WHERE Users.pseudo = ?));";
 		try{

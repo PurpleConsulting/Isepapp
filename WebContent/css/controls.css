@@ -32,6 +32,7 @@ label{
 div#name_group{
 	padding:5px;
 	border: 1px solid #31708F;
+	margin-bottom: 0px;
 }
 
 button.marker, button.adder{
@@ -57,5 +58,23 @@ button.close{
 
 li a[role="tab"] span{
 	color: #3E753F;
-	margin-left: 2px;
+	margin-left: 3px;
+}
+
+h4 span.fa{
+	color: #3E753F;
+	margin-left: 8px;
+	cursor: pointer;
+}
+
+div.tooltip.right{
+	margin-top: 0px;
+}
+div.tooltip-inner{
+	background-color: #DFF0D8;
+	color: #3E753F;
+}
+
+.tooltip.right .tooltip-arrow{
+	border-right-color: #DFF0D8;
 }
