@@ -62,13 +62,13 @@ public class DaoMarks extends Dao<Mark>{
 		return res;
 	}
 	
-	public boolean cross(Mark obj) {
+	public boolean createCrossMark(Mark obj) {
 		// TODO Auto-generated method stub
 		boolean res = false;
 		int cross = (obj.isCross()) ? 1 : 0;
-		String q = "INSERT INTO Marks (id_student, id_value, id_sub_skill,`cross`, date, id_tutor)"
+		String q = "INSERT INTO Marks (id_student, id_value, id_sub_skill,`cross`, date, group_mark, id_tutor)"
 				+ " VALUES ((SELECT id FROM APPDB.Users WHERE pseudo = ?),"
-				+ " ?, ?," + Integer.toString(cross) + ", CURDATE(), "
+				+ " ?, ?," + Integer.toString(cross) + ", CURDATE(), 0,"
 				+ "(SELECT Groups.id_tutor FROM Groups WHERE Groups.`name` = "
 				+ "(SELECT Groups.`name` FROM Groups INNER JOIN Users ON Users.id_group = Groups.id WHERE Users.pseudo = ?))) ";
 		try{
