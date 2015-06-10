@@ -4,6 +4,7 @@ $(document).ready(function(){
 	// -- slide class-mate
 	
 	$("button.prev").click(function(){
+		console.log(" - - - - - - - ");
 		var li = $("ul.group-ul li.active");
 		var newLi = li.prev("li");
 		if(newLi.length == 0) newLi = $("ul.group-ul li").last();

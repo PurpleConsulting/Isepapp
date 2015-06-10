@@ -258,10 +258,6 @@ public class CrossControls extends HttpServlet {
 				String grp = u.getGroup();
 				Deadline deadline = dl.fetchCrossDeadline(grp);
 
-				p.setTitle("ISEP / APP - Evaluation croisée");
-				p.setContent("mark/cross_controls.jsp");
-				p.setCss("bootstrap-select.min.css", "cross_controls.css");
-				p.setJs("cross_controls.js");
 
 				// -- We get the group
 				Group gr = dgroup.select(grp);
@@ -277,6 +273,7 @@ public class CrossControls extends HttpServlet {
 				request.setAttribute("skills", skill);
 				request.setAttribute("values", val);
 				request.setAttribute("deadline", deadline);
+				p.setTitle("ISEP / APP - Evaluation croisée");
 				p.setContent("mark/cross_controls.jsp");
 				p.setCss("bootstrap-select.min.css", "cross_controls.css");
 				p.setJs("cross_controls.js");
