@@ -243,13 +243,13 @@ public class CrossControls extends HttpServlet {
 						}
 						
 						p.setSuccess(true);
-						p.setSuccessMessage("okok");
+						p.setSuccessMessage("Evaluation réussie !");
 					}
 					
 				} else {
 					p.setError(true);
 					p.setErrorMessage("Une erreur s'est produite lors de la notation de l'étudiant."
-							+ "Vérifiez que l'étudiant noté soit ben dans votre groupe."
+							+ "Vérifiez que l'étudiant noté soit bien dans votre groupe."
 							+ "En cas de problème contacter un tuteur ou le responsable d'APP.");
 
 				}
