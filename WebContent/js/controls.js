@@ -10,30 +10,44 @@ $("button.marker, button.adder ").attr("disabled", true);
 $("select").prop("selectedIndex",0);
 $("input[type=radio]").attr("checked", false);
 
+function isValid() {
+	$("ul#tabs.nav.nav-tabs li a").each(function(el){
+   		$(this).children().remove();
+   	});
+   	$('form.groupgrid').each(function(){
+   		if ($(this).find('div.line').length == $(this).find('input[type=radio]:checked').length){
+   			var tab = $(this).parent();
+   			var flag = "#" + tab.attr("id");
+   			$('a[href="' + flag + '"]').append("<span class='fa fa-check-circle'></span>");
+   			$(this).append("<span class='fa fa-check-circle'></span>");
+   		}
+   	})
+}
+
 //Select group name
 $("select").change(function () {
     var str = "";
     str=$("select option:selected").text();
    	$.post("/Isepapp/Controls", {string:str}, function(data, status) {
    		$("input[type=radio]").prop("checked", false);
-   		console.log(data.result);
    		var result = data.result.groups.join(", ");
    		$("div#name_group").html("<strong>"+str+"</strong> : "+ result).hide().delay(20).show("slow");
    		data.result.marks.forEach(function(element){
    			var line = $("input[name='"+ element.subSkill +"']");
-   			console.log(line.filter("[value="+ element.value +"]").prop("checked", true));
+   			line.filter("[value="+ element.value +"]").prop("checked", true);
    		});
-	 });	    	
-	 if(str != "Sélectionnez un groupe"){
+	 });
+   	setTimeout(function(){isValid();}, 1000); 
+   	
+   	if(str != "Sélectionnez un groupe"){
 		$("button.marker, button.adder").attr("disabled", false);
 		$("form.groupgrid").attr("data-target", str.trim());
 	 } else {
 		$("button.marker, button.adder").attr("disabled", true);
 		$("form.groupgrid").attr("data-target", "");
 		$("div#name_group").html("<strong>"+str+"</strong> : "+ result).hide();
-	 }
+	 };
 });
-
 
 $(document).ready(function(){ //If page is ready
 
@@ -67,6 +81,7 @@ $(document).ready(function(){ //If page is ready
 						"dans le formutaire. Vous pouvez dès maintenant consulter la page du groupe que vous " +
 						"venez de noter: <a href=\"/Isepapp/Groups?scope="+ data.result.target +"\">"+ data.result.target +"</a></p>" );
 				$("#confirmation_box").show("slow");
+				setTimeout(function(){isValid();}, 1000); 
 			}
 		});
 	});

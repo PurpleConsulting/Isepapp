@@ -36,7 +36,6 @@
 				</c:forEach>
 			</ul>
 		  	<div class="tab-content">
-		  		<div id='mark'></div>
 		  		<c:forEach var="skill" items="${skills}" varStatus="status">
 		  		<c:if test="${skill.getId() != 0 }">
 		  			<div role="tabpanel" class='tab-pane ${status.index == 1 ? "active":""}' id="tab${status.index}">

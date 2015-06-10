@@ -54,3 +54,8 @@ div.conf_box{
 button.close{
 	right:0px;
 }
+
+li a[role="tab"] span{
+	color: #3E753F;
+	margin-left: 2px;
+}
