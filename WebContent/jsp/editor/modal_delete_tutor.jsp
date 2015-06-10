@@ -13,6 +13,6 @@
 	</div>
 	<div class="form-group has-error" style="margin-left:10%; width:80%">
 		<input value="" name="del-tutor" class="col-xs-10 form-control" type="text"/>
-		<input value="" name="delete-one-tutors" class="col-xs-10 form-control" type="hidden"/>
+		<input value="delete" name="delete-one-tutor" class="col-xs-10 form-control" type="hidden"/>
 	</div>
 </form>

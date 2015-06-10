@@ -38,6 +38,32 @@ public class Tutors extends HttpServlet {
         super();
         // TODO Auto-generated constructor stub
     }
+    
+    
+    protected void doRegular(HttpServletRequest request, HttpServletResponse response, Page p, DaoUsers du, DaoGroups dg){
+    	p.setContent("users/tutor.jsp");
+		p.setTitle("ISEP / APP - Les tuteurs");
+		p.setJs("bootstrap-select.min.js", "bootbox.min.js", "tutor.js");
+		p.setCss("bootstrap-select.min.css", "tutor.css");
+		
+		// -- we get the tutors
+		User[] tutors = du.selectAllTutor();
+
+		// -- we get the groups corresponding
+		HashMap groups = new HashMap(); 
+		for(User t : tutors){
+			groups.put(t.getPseudo(),dg.selectAllName(Integer.toString(t.getId())));
+		}
+		// -- we get all class for the adding tutors form
+		String[] allClass = dg.selectAllClass();
+
+		// -- fill the request
+		request.setAttribute("tutors", tutors);
+		request.setAttribute("groups", groups);
+		request.setAttribute("allClass", allClass);
+		
+		request.setAttribute("pages", p);
+    }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
@@ -115,12 +141,18 @@ public class Tutors extends HttpServlet {
 		String newEmail = request.getParameter("new_email");
 		String newClass = request.getParameter("new_class");
 		String newPass = request.getParameter("new_password");
+		String newPseudo = request.getParameter("new_pseudo");
+		
+		// -- delete tutor request
+		String delTutorFlag = request.getParameter("delete-one-tutor");
+		String oldTutor = request.getParameter("del-tutor");
 		
 		
 		if(Auth.isRespo(request)){
 			/*  the use have access to the data base */
 			Connection bddServletCo = Bdd.getCo();
 			DaoGroups dg = new DaoGroups(bddServletCo);
+			DaoUsers du = new DaoUsers(bddServletCo);
 			
 			if(!Isep.nullOrEmpty(classParam)){
 				/**
@@ -141,9 +173,49 @@ public class Tutors extends HttpServlet {
 				response.setHeader("content-type", "application/json");
 				response.getWriter().write(new JSONObject().put("result", result).toString());
 				
-			} else if(!Isep.nullOrEmpty(newFirstName, newLastName, newEmail, newClass)){
+			} else if(!Isep.nullOrEmpty(newFirstName, newLastName, newEmail, newPseudo, newClass)){
+				/**
+				 * HERE THE USER WANT TO ADD A NEW TUTOR
+				 */
+				User newTutor = new User(newFirstName, newLastName, newPseudo, newEmail, Auth.tutor);
+				newTutor.setGroup("G00");
+				if(!Isep.nullOrEmpty(newPass)){
+					// -- this is an external teacher
+					newTutor.setPassword(newPass);
+				}
+				
+				if(newClass.equals("null")){
+					// -- the new tutor has already a class
+				}
+				boolean querrySuccess = du.create(newTutor);
+				
+				if(querrySuccess){
+					p.setSuccess(true);
+					p.setSuccessMessage("le nouveau tuteur à été correcctement ajouté.");
+					
+				} else {
+					p.setError(true);
+					p.setErrorMessage("une erreur c'est produite lors de l'ajout du tuteur. "
+							+ "Vérifiez que le pseudo soit bien unique.");
+				}
+				
+				this.doRegular(request, response, p, du, dg);
+				this.getServletContext().getRequestDispatcher("/template.jsp").forward(request, response);
 				
 				
+			} else if(!Isep.nullOrEmpty(delTutorFlag, oldTutor)){
+				User oldUser = du.select(oldTutor);
+				boolean querrySuccess = du.delete(oldUser);
+				if(querrySuccess){
+					p.setSuccess(true);
+					p.setSuccessMessage("le tuteur a bien été supprimé.");
+				} else {
+					p.setWarning(true);
+					p.setWarningMessage("une erreur c'est produite lors de la suppression du tuteur.");
+				}
+				
+				this.doRegular(request, response, p, du, dg);
+				this.getServletContext().getRequestDispatcher("/template.jsp").forward(request, response);
 			}
 			
 			try {

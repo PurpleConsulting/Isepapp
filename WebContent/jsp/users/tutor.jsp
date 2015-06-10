@@ -7,6 +7,9 @@
 		<small> - <span class="fa fa-trash-o master"></span> - </small>
 	</h1>
 </div>
+<div class="col-xs-12">
+	<c:import url="/jsp/alert.jsp" charEncoding="UTF-8"></c:import>
+</div>
 <div class="row">
 	<div class="col-xs-offset-1 col-xs-10 add-tutor">
 		<a href="#" class="form-show">Ajouter un tuteur <span class="fa fa-plus"></span></a>
@@ -19,6 +22,11 @@
 			<div class="form-group">
 				<div class="col-sm-10">
 					<input type="text" name="new_last_name" placeholder="Nom du tuteur" class="form-control"/>
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="col-sm-10">
+					<input type="text" name="new_pseudo" placeholder="Pseudo du tuteur: ldivad" class="form-control"/>
 				</div>
 			</div>
 			<div class="form-group">

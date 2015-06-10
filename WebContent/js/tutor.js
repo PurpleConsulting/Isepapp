@@ -5,6 +5,7 @@ $(document).ready(function(){
 	// -- initialisation
 	$("input[type=password]").attr("disabled", true);
 	$("input.toggle-input[type=checkbox]").prop("checked", false);
+	$("select").prop("selectedIndex",0);
 	
 	// -- add external tutor
 	$("a.form-show").click(function(e){
@@ -25,7 +26,7 @@ $(document).ready(function(){
 			$("div.form-group.welcome-box div").hide("slow", function(){
 				$("div.form-group.welcome-box div label").remove();
 				data.result.groups.forEach(function(element){
-					$("div.form-group.welcome-box div").append('<label><input type="checkbox" value="'+ element.id +'" name="" > ' + element.name + '</label>');
+					$("div.form-group.welcome-box div").append('<label><span class="fa fa-check-square"></span>'+ element.name + '</label>');
 				});
 				$("div.form-group.welcome-box div label input").prop("checked", true);
 			})

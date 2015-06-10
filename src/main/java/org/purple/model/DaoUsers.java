@@ -218,9 +218,16 @@ public class DaoUsers extends Dao<User> {
 			ResultSet currsor = Bdd.prepareExec(co, q, new String[]{pseudo});
 			currsor.next();
 			res = currsor.getInt(1);
+			co.close();
 		}catch (SQLException e){
 			// TODO Auto-generated catch block
 		}
+		return res;
+	}
+	
+	public static boolean declareTutor(User u){
+		boolean res = true;
+		
 		return res;
 	}
 }
