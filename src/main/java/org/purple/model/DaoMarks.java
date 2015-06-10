@@ -62,22 +62,17 @@ public class DaoMarks extends Dao<Mark>{
 		return res;
 	}
 	
-	public boolean createCrossMark(Mark obj) {
+	public boolean createCrossMark(Mark marks) {
 		// TODO Auto-generated method stub
 		boolean res = false;
-		int cross = (obj.isCross()) ? 1 : 0;
-		String q = "INSERT INTO Marks (id_student, id_value, id_sub_skill,`cross`, date, group_mark, id_tutor)"
-				+ " VALUES ((SELECT id FROM APPDB.Users WHERE pseudo = ?),"
-				+ " ?, ?," + Integer.toString(cross) + ", CURDATE(), 0,"
-				+ "(SELECT Groups.id_tutor FROM Groups WHERE Groups.`name` = "
-				+ "(SELECT Groups.`name` FROM Groups INNER JOIN Users ON Users.id_group = Groups.id WHERE Users.pseudo = ?))) ";
+		int cross = (marks.isCross()) ? 1 : 0;
+		String q = "INSERT INTO Marks (id_student, id_sub_skill, id_value,`cross`, date, group_mark)"
+				+ " VALUES (?, ?, ?," + Integer.toString(cross) + ", NOW(), 0)";
 		try{
 			String[] params = {
-					obj.getOwner(),
-					Double.toString(obj.getIdValue()),
-					Integer.toString( obj.getIdSubSkill()),
-					obj.getOwner(),
-					obj.getOwner()};
+					Integer.toString(marks.getIdOwner()),
+					Integer.toString(marks.getIdSubSkill()),
+					Double.toString(marks.getIdValue())};
 			int affected = Bdd.preparePerform(this.connect, q, params);
 			if(affected == 1 || affected == 2) res = true;
 		}catch (NullPointerException e){
