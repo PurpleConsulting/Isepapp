@@ -1,6 +1,6 @@
 /*** CSS SINGIN MODULE ***/
 form{
-	margin-top: 100px;
+	margin-top: 50px;
 	border-radius: 4px;
 	border: 0.5px #CCC solid;
 	padding: 50px;
@@ -17,4 +17,9 @@ form{
 
 #formblock{
 	min-height: 600px;	
+}
+
+header{
+	height: 450px;
+	background-color: transparent;
 }
