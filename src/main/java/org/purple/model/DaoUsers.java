@@ -225,4 +225,14 @@ public class DaoUsers extends Dao<User> {
 		return res;
 	}
 	
+	public boolean dropByPosition(String position){
+		boolean res = true;
+		String q = "DELETE FROM Users WHERE Users.id_post = "
+				+ " (SELECT Positions.`id` FROM Positions WHERE Positions.title = ?);";
+		String[] params = {position}; 
+		int affected = Bdd.preparePerform(this.connect, q, params);
+		if(affected < 1) res = false ;
+		return res;
+	}
+	
 }

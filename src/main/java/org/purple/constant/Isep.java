@@ -7,6 +7,7 @@ import javax.servlet.http.HttpSession;
 
 import org.purple.bean.Page;
 import org.purple.bean.User;
+import org.purple.model.Auth;
 
 public class Isep {
 
@@ -44,9 +45,13 @@ public class Isep {
 		public static final void bagPackHome(Page p, HttpSession s){
 			User u = (User) s.getAttribute("user");
 			try{
-				u.getId();
+				if(u.getId() < 0 ) throw new NullPointerException();
 			} catch (NullPointerException e) {
 				u = new User();
+			}
+			if(u.getPosition().equals(Auth.respo)){
+				p.setCss("../js/bootstrap-fileinput/css/fileinput.min.css");
+				p.setJs("bootstrap-fileinput/js/fileinput.min.js", "bootstrap-fileinput/js/fileinput_locale_fr.js");
 			}
 			p.setContent("home/common.jsp");
 			p.setJs("bootstrap-select.min.js","home_"+u.getPosition()+".js"); 

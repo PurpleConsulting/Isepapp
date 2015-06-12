@@ -34,16 +34,18 @@ ul.inner-li li{
 ul.outer-li em{
 	color: #31708F;
 }
-span.fa-trash-o,
+span.fa-trash-o, span.fa-trash,
 div.alert span.fa-pencil{
 	cursor: pointer;
 	transition: 0.6s;
 }
 div.alert span.fa-pencil,
-div.alert span.fa-trash-o{
+div.alert span.fa-trash-o,
+div.alert span.fa-trash{
 	display: block;
 }
-span.fa-trash-o:hover{
+span.fa-trash-o:hover,
+span.fa-trash:hover{
 	color: #A94442;
 	text-shadow: 2px 2px 2px #F2DEDE;
 }

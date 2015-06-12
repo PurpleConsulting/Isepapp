@@ -94,9 +94,35 @@ $(document).ready(function(){
 			});
 		});
 	});
+	// -- delete respo
+	$("span.fa.fa-trash.standalone").click(function(){
+		//var tutor = $(this).attr("data-target");
+		$.get("jsp/editor/modal_no_delete_respo.jsp", {}, function(data, status){
+			var node = $( data );
+			bootbox.dialog({
+				title: 'Suppression du tuteur responsable d\'APP.',
+				message: node.prop('outerHTML'),
+				buttons: {
+						failure:{ 
+							label: "    OK    ",
+			                className: "btn-default",
+			                callback: function () {}
+						}
+					}
+				});
+
+			$("div.modal-header").addClass("danger-header");
+		});
+	});
 	// -- update one
 	$("span.fa.fa-pencil").click(function(){
 		var tutor = $(this).attr("data-target");
+		var obj = {
+				firstName: $(this).parent().parent().find('li[data-naming="first_name"] em').text(),
+				lastName: $(this).parent().parent().find('li[data-naming="last_name"] em').text(),
+				eMail: $(this).parent().parent().find('li[data-naming="email"] em').text(),
+				pseudo: "dd"
+		};
 		$.get("jsp/editor/modal_alter_tutor.jsp", {}, function(data, status){
 			var node = $( data );
 			
@@ -117,6 +143,12 @@ $(document).ready(function(){
 				});
 			$("div.modal-header").addClass("primary-header");
 			$("u.u-target").text(tutor);
+			
+			$('input[name="update_first_nane"]').val(obj.firstName);
+			$('input[name="update_last_name"]').val(obj.lastName)
+			$('input[name="update_email"]').val(obj.eMail);
+			$('select[name="update_group"]').append("<option>okok</option>");
+			
 		});
 	});
 });

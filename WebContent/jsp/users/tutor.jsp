@@ -69,14 +69,14 @@
 	<c:forEach var="tutor" items="${tutors}" varStatus="status">
 		<div class="alert alert-tutor">
 			<div class="fa-container">
-			<span class="fa fa-trash-o slave" data-target="${tutor.getPseudo()}"></span>
+			<span class="fa ${tutor.getPosition() == 'respo' ? 'fa-trash standalone' : 'fa-trash-o slave'}" data-target="${tutor.getPseudo()}"></span>
 			<span class="fa fa-pencil" data-target="${tutor.getPseudo()}"></span>
 			</div>
 			<ul class="outer-li">
-				<li>Nom: <em><c:out value="${tutor.getFirstName()}"></c:out></em></li>
-				<li>Prenom: <em><c:out value="${tutor.getLastName()}"></c:out></em></li>
-				<li>Email: <em><c:out value="${tutor.getMail()}"></c:out></em></li>
-				<li>Groupes: <ul class="inner-li">
+				<li data-naming="last_name">Nom: <em><c:out value="${tutor.getFirstName()}"></c:out></em></li>
+				<li data-naming="first_name">Prenom: <em><c:out value="${tutor.getLastName()}"></c:out></em></li>
+				<li data-naming="email">Email: <em><c:out value="${tutor.getMail()}"></c:out></em></li>
+				<li data-naming="groups">Groupes: <ul class="inner-li">
 					<c:forEach var="g" items="${groups.get(tutor.getPseudo())}" varStatus="status">
 						<li><em>
 							<a href="Groups?scope=${g}">

@@ -147,6 +147,10 @@ public class Tutors extends HttpServlet {
 		String delTutorFlag = request.getParameter("delete-one-tutor");
 		String oldTutor = request.getParameter("del-tutor");
 		
+		// -- delete all tutors request
+		String delAllTutorsFlag = request.getParameter("delete-all-tutors");
+		
+		
 		
 		if(Auth.isRespo(request)){
 			/*  the use have access to the data base */
@@ -221,6 +225,24 @@ public class Tutors extends HttpServlet {
 					p.setWarningMessage("une erreur c'est produite lors de la suppression du tuteur.");
 				}
 				
+				this.doRegular(request, response, p, du, dg);
+				this.getServletContext().getRequestDispatcher("/template.jsp").forward(request, response);
+			
+			} else if (!Isep.nullOrEmpty(delAllTutorsFlag)){
+				if(du.dropByPosition(Auth.tutor)){
+					p.setSuccess(true);
+					p.setSuccessMessage("Les tuteurs ont bien été supprimés");
+				} else {
+					p.setError(true);
+					p.setErrorMessage("une erreur s'est produite lors de la suppression des tuteurs d'APP.");
+				}
+				this.doRegular(request, response, p, du, dg);
+				this.getServletContext().getRequestDispatcher("/template.jsp").forward(request, response);
+			
+			} else {
+				p.setWarning(true);
+				p.setWarningMessage("la reqête demandée à mal été comprise, veuillez vous assuré que vous"
+						+ " remplissez tous les champs des formulaies proposés.");
 				this.doRegular(request, response, p, du, dg);
 				this.getServletContext().getRequestDispatcher("/template.jsp").forward(request, response);
 			}
