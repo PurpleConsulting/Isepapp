@@ -26,3 +26,7 @@ div.latest-group div.alert{
 	.semester{
 		overflow-y: scroll;
 	}
+}
+div.progress {
+	margin-bottom: 10px;
+}

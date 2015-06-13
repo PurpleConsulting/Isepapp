@@ -202,7 +202,7 @@ public class DaoGroups extends Dao<Group>{
 		// TODO Auto-generated method stub
 		String[] gs = new String[0];
 		String q = "SELECT distinct Groups.class"
-				+ " FROM APPDB.Groups;";
+				+ " FROM APPDB.Groups WHERE Groups.`id` != 0;";
 		try{
 			ResultSet currsor = this.connect.createStatement().executeQuery(q);
 			if (currsor.last()) {

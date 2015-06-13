@@ -2,6 +2,7 @@ package org.purple.constant;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.util.ArrayList;
 
 import javax.servlet.http.HttpSession;
 
@@ -13,6 +14,10 @@ public class Isep {
 
 		
 		public static final double LANDMARK = 20.0;
+		
+		public static final String ROOT_FILE_SYS = "assets/";
+		public static final String FILE_SUBJECT =  "CURRENTAPPSUBJECT.pdf";
+		public static final String FILE_PROMO =  "CURRENTGROUPLIST.csv";
 		
 		public static final String LOCATION = "Europe/Paris";
 		// -- This binding to a timezone id of orr.joda.time
@@ -56,5 +61,16 @@ public class Isep {
 			p.setContent("home/common.jsp");
 			p.setJs("bootstrap-select.min.js","home_"+u.getPosition()+".js"); 
 			p.setCss("bootstrap-select.min.css","home_"+u.getPosition()+".css");
+		}
+		
+		public static final boolean csvParser(String path, String file, String sep){
+			boolean res = true;
+			IsepCsvParser icp = new IsepCsvParser(path, file, sep);
+			res = res & icp.read();
+			res = res & icp.insertGroup();
+			for(ArrayList<String> line : icp.promotion){
+				res = res & icp.insertStudent(line);
+			}
+			return res;
 		}
 }

@@ -89,6 +89,22 @@ public class Bdd {
 		return rs;
 	}
 	
+	public static final boolean perform(Connection co, String query){
+		ResultSet rs = null;
+		Statement stmt = null;
+		boolean res = true;
+		try {
+			stmt = co.createStatement();
+			stmt.execute(query);
+			//prestmt.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			res = false;
+			e.printStackTrace();
+		}	
+		return res;
+	}
+	
 	public static final int preparePerform(Connection co, String query, String[] params){
 		PreparedStatement prestmt = null;
 		int change = 0;

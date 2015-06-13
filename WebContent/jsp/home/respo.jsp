@@ -40,9 +40,9 @@
 		</form>
 		<hr/>
 		<div class="latest-group">
-			<div class="alert alert-info"> Groupe G4C - Nombre de note: 0  - Absences: 0  - les livrables(0) - tuteur: ldivad</div>
-			<div class="alert alert-info"> Groupe G4C - Nombre de note: 0  - Absences: 0  - les livrables(0) - tuteur: ldivad</div>
-			<div class="alert alert-info"> Groupe G4C - Nombre de note: 0  - Absences: 0  - les livrables(0) - tuteur: ldivad</div>
+			<div class="alert alert-success"> Groupe G4C - Nombre de note: 0  - Absences: 0  - les livrables(0) - tuteur: ldivad</div>
+			<div class="alert alert-success"> Groupe G4C - Nombre de note: 0  - Absences: 0  - les livrables(0) - tuteur: ldivad</div>
+			<div class="alert alert-success"> Groupe G4C - Nombre de note: 0  - Absences: 0  - les livrables(0) - tuteur: ldivad</div>
 			<a href="Promo"><em>Voir plus de group...</em></a>
 		</div>
 	</div>
@@ -56,25 +56,44 @@
 	<div class="col-xs-offset-1 col-xs-10 semester">
 		<h4>- Organisation du semestre -</h4>
 		<div class="col-xs-12">
-			<form class="" action="FileHandler" method="post" enctype="multipart/form-data">
+		<div class="col-xs-12 alert alert-info" style="display: none">
+		</div>
+		</div>
+		<div class="col-xs-12">
+			<form class="subject_file" action="FileHandler" method="post" enctype="multipart/form-data">
 				<div class="form-group">
 					<label>Ajoutez un sujet d' APP pour ce semestre.</label>
-					<input type="file" name="subject_file" id="input_subject" class="input-class"  data-show-preview="false" />
+					<div class="progress" style="display: none">
+						<div class="progress-bar progress-bar-striped active"
+							 role="progressbar" style="width: 0%">
+						</div>
+					</div>
+					<input type="file" name="subject_file" id="input_subject" class="input-class file-loading"  data-show-preview="false" />
 				</div>
 			</form>
 		</div>
 		<div class="col-xs-12">
-			<form class="" action="FileHandler" method="post" enctype="multipart/form-data">
+			<form class="promo_file" action="FileHandler" method="post" enctype="multipart/form-data">
 				<div class="form-group">
 					<label>Ajoutez une liste d'étudiants. </label><a href=""> Revoir le format accepté</a>
+					<div class="progress" style="display: none">
+						<div class="progress-bar progress-bar-striped active"
+							 role="progressbar" style="width: 0%">
+						</div>
+					</div>
 					<input type="file" name="promo_file" id="input_promo" class="input-class"  data-show-preview="false" />
 				</div>
 			</form>
 		</div>
 		<div class="col-xs-12">
-			<form class="" action="FileHandler" method="post" enctype="multipart/form-data">
+			<form class="backup_file" action="FileHandler" method="post" enctype="multipart/form-data">
 				<div class="form-group">
 					<label>Importer une sauvegarde </label><a href=""> Revoir contenu d'une sauvegarde</a>
+					<div class="progress" style="display: none">
+						<div class="progress-bar progress-bar-striped active"
+							 role="progressbar" style="width: 0%">
+						</div>
+					</div>
 					<input type="file" name="backup_file" id="input_backup" class="input-class"  data-show-preview="false" />
 				</div>
 			</form>
