@@ -16,6 +16,7 @@ public class Deadline {
 		private DateTime deliveryDate = new DateTime(2000, 01,01, 0,0,0);
 		private Boolean completed = false;
 		private int responsable=0;
+		private int cross=0;
 		public Deadline(){
 			
 		}
@@ -29,6 +30,16 @@ public class Deadline {
 			this.setGroup(group);
 			
 		}
+		
+		public Deadline(int id, String description, String datelimit, int createur, Boolean status){
+			this.setId(id);
+			this.setDescription(description);
+			this.setDateLimit(datelimit);
+			this.setResponsable(createur);
+			this.setStatus(status);
+			
+		}
+
     
 		
 		public int getId() {
@@ -86,13 +97,19 @@ public class Deadline {
 			this.responsable = responsable;
 		}
 
-
 		public int getIdGroup() {
 			return idGroup;
 		}
 
-
 		public void setIdGroup(int idGroup) {
 			this.idGroup = idGroup;
+		}
+
+		public int getCross() {
+			return cross;
+		}
+
+		public void setCross(int cross) {
+			this.cross = cross;
 		}
 }

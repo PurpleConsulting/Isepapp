@@ -43,38 +43,62 @@ public class Deadlines extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		//Les Daos
+		request.setCharacterEncoding("UTF-8");
 		Page p = new Page();
-		if(Auth.isRespo(request)){
-			DaoGroups dg = new DaoGroups(Bdd.getCo());
-			DaoDeadline dl = new DaoDeadline(Bdd.getCo());
-			DaoUsers u = new DaoUsers(Bdd.getCo());
-			
-			
-			p.setCss("deadline.css");
-			p.setJs("deadline.js");
-			p.setContent("/deadline/deadline.jsp");
+		
+		// -- Third form alternative -- delete a user from a group
+		String idDeadline = request.getParameter("id_deadline");
+		String delete = request.getParameter("delete");
+					
+		
+		if(Auth.isRespo(request) || Auth.isTutor(request)){
+			p.setCss("bootstrap-select.min.css", "deadline.css");
+			p.setJs("bootstrap-select.min.js", "bootbox.min.js", "deadline.js");
 			p.setTitle("ISEP / APP - Deadline");
-			request.setAttribute("pages", p);
+			//Les Daos
+			Connection bddServletCo = Bdd.getCo();
+			DaoGroups dg = new DaoGroups(bddServletCo);
+			DaoDeadline dl = new DaoDeadline(bddServletCo);
+			DaoUsers u = new DaoUsers(bddServletCo);
+			
 			
 			HttpSession session = request.getSession();
 			User userSession = (User)session.getAttribute("user");
 			request.setAttribute("usession", userSession);
-	
-			
-			// -- get all the groups
-			String[] groups = dg.selectAllClass();
-			request.setAttribute("groups", groups);
 			
 			// -- get all the tutors
 			User[] user=u.selectTutorbyGroup();
 			request.setAttribute("user", user);
+		
+		if(Auth.isRespo(request)){
+			p.setContent("/deadline/deadline.jsp");
 			
+			// -- get all the groups
+			String[] groups = dg.selectAllClass();
+			request.setAttribute("groups", groups);
 			// get all the deadlines
 			Deadline[] deadline = dl.selectAllDeadlines();
 			request.setAttribute("deadline", deadline);
+						
+			
+		}else if(Auth.isTutor(request)){
+			p.setContent("/deadline/deadlineTutor.jsp");
+			// get all the deadlines
+			Deadline[] deadline = dl.selectGroupbyTutor(Integer.toString(userSession.getId()));
+			request.setAttribute("deadline", deadline);
+			
 		}
-	
+		
+		
+		try {
+			bddServletCo.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		}
+		request.setAttribute("pages", p);
 		this.getServletContext().getRequestDispatcher("/template.jsp")
 		.forward(request, response);
 		
@@ -85,7 +109,7 @@ public class Deadlines extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		
+		request.setCharacterEncoding("UTF-8");
 		Page p = new Page();
 		//Les Daos
 		Connection bddServletCo = Bdd.getCo();
@@ -99,25 +123,119 @@ public class Deadlines extends HttpServlet {
 		String time = request.getParameter("new_time");
 		String group = request.getParameter("new_grp");
 		String number = request.getParameter("number");
+		String cross = request.getParameter("checkCross");
+		
+		// -- deadline deletion
+		String idDdLine = request.getParameter("id_deadline");
+		String delete = request.getParameter("delete");
+		
+		//Recuperer la session
+		HttpSession session = request.getSession();
+		User userSession = (User)session.getAttribute("user");
+		request.setAttribute("usession", userSession);
 		
 		if(Auth.isRespo(request)){
+			/**
+			 * HERE THE USER ADD SOME DEADLINES
+			 */
 			if(!Isep.nullOrEmpty(desc, date, group, time, tuteur)){
 				String timeS = time+":00";
 				String datetime = date+" "+timeS;
 				
 				Group[] gr = dg.selectGroupbyClass(group);
 				//dline à inserer
-				for(int i=0; i<gr.length;i++){
+				for(int i=0; i < gr.length; i++){
 					Deadline dline=new Deadline();
 					dline.setDescription(desc);
 					dline.setResponsable(Integer.parseInt(tuteur));
-					dline.setIdGroup(gr[i].getId());		 
-					dline.setDateLimit(datetime);
-					dl.create(dline);
+					dline.setIdGroup(gr[i].getId());
+					try{
+						dline.setDateLimit(datetime);
+					} catch(IllegalArgumentException e){
+						p.setError(true);
+						p.setErrorMessage("une erreur s'est produite. indiquez bien une date au format: 'YYYY-MM-JJ'"
+								+ " et une heure au format: 'HH-MM'.");
+						break;
+					}
+					if(!Isep.nullOrEmpty(cross)) dline.setCross(1);
+					if(!p.getError()){
+						boolean querrysuccess = dl.create(dline);
+						if(querrysuccess){
+							p.setSuccess(true);
+							p.setSuccessMessage("De nouvelles deadlines ont été ajoutées, retrouvez les dans la liste suivante.");
+						}
+					}
 				}
+			} else if(!Isep.nullOrEmpty(number)){
+				/**
+				 * HERE THE USER PERFORM AN UPDATE ON SOME DEADLINE
+				 */
+				boolean querysuccess = true;
+				for(int i=1; i<=Integer.parseInt(number); i++){
+					String datelim = request.getParameter("datelim"+i);
+					String timelim = request.getParameter("timelim"+i);
+					String idDeadline = request.getParameter("id"+i);
+					
+					if(!Isep.nullOrEmpty(datelim,timelim)){
+						String datetimelim=datelim+" "+timelim;
+						String datetimelimB=datetimelim.substring(0,16);
+						
+						Deadline dline=new Deadline();
+						dline.setId(Integer.parseInt(idDeadline));
+						try{
+							dline.setDateLimit(datetimelimB+":00");
+						} catch(IllegalArgumentException e){
+							p.setError(true);
+							p.setErrorMessage("une erreur s'est produite. indiquez bien une date au format: 'YYYY-MM-JJ'"
+									+ " et une heure au format: 'HH-MM'. Il est possible que toutes les deadlines n'est pas été"
+									+ " mise à jours.");
+							break;
+						}
+						querysuccess = dl.update(dline);
+						if(!querysuccess && !p.getError()){
+							p.setError(true);
+							p.setErrorMessage("une erreur est survenue lors de la mise à jours des deadline.");
+						}
+					
+					}else{
+						p.setWarning(true);
+						p.setWarningMessage("L'oppération à mal été éffectuée, veuillez répéter l'oppération en remplissant correctement les champs proposés.");
+				
+					}
+				}
+				if (!p.getError()){
+					p.setSuccess(true);
+					p.setSuccessMessage("la mise à jour des deadlines à bien été effectuée.");
+				}
+			} else if(!Isep.nullOrEmpty(delete, idDdLine)){
+				/**
+				 * HERE THE USER TRY TO DELETE A DEADLINE
+				 */
+				Deadline ds= dl.select(idDdLine);
+				boolean querysuccess = dl.delete(ds);
+				if(querysuccess){
+					p.setSuccess(true);
+					p.setSuccessMessage("la deadline à bien été supprimée.");
+				} else {
+					p.setError(true);
+					p.setErrorMessage("une erreur est survenu lors de l'oppération. vérifiez que la deadline ai bien été supprimée.");
+				}
+			} else {
+				p.setWarning(true);
+				p.setWarningMessage("L'oppération à mal été éffectuée, veuillez répéter l'oppération en remplissant correctement les champs proposés.");
 			}
-			else if(!Isep.nullOrEmpty(number)){
-				for(int i=0; i<=Integer.parseInt(number); i++){
+			
+			p.setContent("/deadline/deadline.jsp");
+			// -- get all the groups
+			String[] groups = dg.selectAllClass();
+			request.setAttribute("groups", groups);
+			// get all the deadlines
+			Deadline[] deadline = dl.selectAllDeadlines();
+			request.setAttribute("deadline", deadline);
+			
+		}else if(Auth.isTutor(request)){
+			if(!Isep.nullOrEmpty(number)){
+				for(int i=0; i<=Integer.parseInt(number)-1; i++){
 					String datelim = request.getParameter("datelim"+i);
 					String timelim = request.getParameter("timelim"+i);
 					String idDeadline = request.getParameter("id"+i);
@@ -133,41 +251,25 @@ public class Deadlines extends HttpServlet {
 					}else{
 						p.setWarning(true);
 						p.setWarningMessage("L'oppération à mal été éffectuée, veuillez répéter l'oppération en remplissant correctement les champs proposés.");
-				
 					}
 				}
 			}
-			else{
-				p.setWarning(true);
-				p.setWarningMessage("L'oppération à mal été éffectuée, veuillez répéter l'oppération en remplissant correctement les champs proposés.");
-			}
-		
-		//Afficher la page
-		
+				
+			p.setContent("/deadline/deadlineTutor.jsp");
+			// get all the deadlines
+			Deadline[] deadline = dl.selectGroupbyTutor(Integer.toString(userSession.getId()));
+			request.setAttribute("deadline", deadline);
+			
+		}
 		// On ajout le css
-		p.setCss("deadline.css");
-		p.setJs("deadline.js");
-		p.setContent("/deadline/deadline.jsp");
+		p.setCss("bootstrap-select.min.css", "deadline.css");
+		p.setJs("bootstrap-select.min.js", "bootbox.min.js", "deadline.js");
 		p.setTitle("ISEP / APP - Deadline");
 		request.setAttribute("pages", p);
 		
-		
-		// -- get all the groups
-		String[] groups = dg.selectAllClass();
-		request.setAttribute("groups", groups);
-		
-		//Recuperer la session
-		HttpSession session = request.getSession();
-		User userSession = (User)session.getAttribute("user");
-		request.setAttribute("usession", userSession);
-				
 		// -- get all the tutors
 		User[] user=u.selectTutorbyGroup();
 		request.setAttribute("user", user);
-		
-		// get all the deadlines
-		Deadline[] deadline = dl.selectAllDeadlines();
-		request.setAttribute("deadline", deadline);
 		
 		try {
 			bddServletCo.close();
@@ -181,7 +283,6 @@ public class Deadlines extends HttpServlet {
 		
 		
 		
-		}
 	}
 
 }

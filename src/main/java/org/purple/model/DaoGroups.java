@@ -198,6 +198,8 @@ public class DaoGroups extends Dao<Group>{
 		return gs;
 	}
 	
+	
+	
 	public String[] selectAllClass() {
 		// TODO Auto-generated method stub
 		String[] gs = new String[0];

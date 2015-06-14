@@ -8,16 +8,14 @@ $(document).ready(function(){
     $('#newtitle').focus();
   });
  
-  $('#modifyValue').click(function(){
-	   $("form input").attr("disabled",false);
-  });
+//  $('#modifyValue').click(function(){
+//	   $("form input").attr("disabled",false);
+//  });
   
   $("a.modify, a.cancel").on("click",function(event){
     event.preventDefault();
-    $("form.form-inline").toggleClass("off");
+    $(this).closest("form.form-inline").toggleClass("off");
     if($(this).closest("form").hasClass("off")){
-    	location.reload();
-    	
       $("div.cascade-warning").removeAttr('style');
       $("div.values").attr("disabled",true);
       $("a.remove, a.reset").children("span").switchClass("safe","danger",0);
@@ -80,9 +78,9 @@ $(document).ready(function(){
 	    			  $("div.warning").css("display", "none");
 	    			  location.reload();
 				}else{
-					 $("div.warning").css("display", "inline-block");
-					 $("div.warning").html('<p><strong>La valeur n\'est pas correct</strong> </p>')
-					 $("div.warning").css('display', 'block');
+					 $("div.warningA").css("display", "inline-block");
+					 $("div.warningA").html('<p><strong>La valeur n\'est pas correct, veuillez recommencer </strong> </p>')
+					 $("div.warningA").css('display', 'block');
 				}
 	    	});
 	    	
@@ -113,6 +111,7 @@ $(document).ready(function(){
 	   }
 	   
 	   });
+   
    //Verifier nombre input pour ajouter
  $("#newpoints").blur(function() {
 	   

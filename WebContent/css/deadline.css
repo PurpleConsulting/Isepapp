@@ -1,11 +1,14 @@
 @CHARSET "ISO-8859-1";
-div.list, form.group {
+div.insert form.group{
   border: solid #ccc 1px;
   border-radius: 6px;
   background-color: transparent;
   padding: 10px;
 }
 
+div.terminee{
+	  margin-top: 20px;
+}
 div.list{
 	min-height: 200px;
 }
@@ -24,15 +27,62 @@ div.form-group input[disabled] {
    font-weight:bold;
    color:#31708f;
    width: 150px;
+   padding-left: 0px;
+   cursor: text;
 }
 .design{
 	padding:6px;
 }
 .deadline{
-	margin-left:30px;
+	margin-left:2%;
 }
 
 .form-group.button {
   margin-top: 10px;
   margin-bottom: 13px;
+}
+
+
+div.modal-header{
+	 border-radius: 4px 4px 0px 0px;
+	 background: #D9534F;
+	 color: #FFFFFF;
+}
+
+div.insert div.form-group{
+	margin-top: 3px;
+}
+
+div.alert.alert-deadline{
+	background-color: #F8F8F8;
+	color: #31708f;
+	border: #CCCCCC solid 1px;
+}
+div.alert-deadline {
+	padding-left: 0px;
+	padding-right: 0px;
+}
+
+
+span.lab{
+	margin-right: 6px;
+}
+
+span.fa-trash-o{
+	cursor: pointer;
+	transition: 0.6s;
+}
+span.fa-trash-o:hover{
+	color: #8E2A3A;
+}
+
+input.form-control.time{
+	text-align: center;
+}
+
+
+form div.noinput{
+	width: 170px;
+	padding-left: 0px; 
+	padding-top:0px;"
 }

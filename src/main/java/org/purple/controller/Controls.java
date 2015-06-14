@@ -78,7 +78,7 @@ public class Controls extends HttpServlet {
 			request.setAttribute("skills", skills);
 			
 			//Display values in radio btn
-			Value[] v= dv.selectAllValues();
+			Value[] v= dv.selectAllValues("0");
 			request.setAttribute("values", v);
 			
 			p.setJs("bootbox.min.js", "bootstrap-select.min.js", "controls.js");
