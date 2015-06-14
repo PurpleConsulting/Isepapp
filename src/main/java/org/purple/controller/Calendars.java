@@ -30,16 +30,15 @@ public class Calendars extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		Page p=new Page();
+		Page p = new Page();
 		p.setContent("/calendar/calendar.jsp");
-		p.setCss("fullcalendar.css","fullcalendar.print.css","calendar.css");
-		p.setJs("calendarFile/moment.min.js","calendarFile/jquery.min.js","calendarFile/fullcalendar.min.js","calendarFile/lang-all.js","calendar.js");
+		p.setCss("fullcalendar.css","calendar.css");
+		p.setJs("calendarFile/moment.min.js","calendarFile/fullcalendar.min.js", "calendarFile/lang-all.js", "calendar.js");
 		p.setTitle("ISEP / APP - Calendar");
 
 		
 		request.setAttribute("pages", p);
-		this.getServletContext().getRequestDispatcher("/template.jsp")
-		.forward(request, response);
+		this.getServletContext().getRequestDispatcher("/template.jsp").forward(request, response);
 	}
 
 	/**
