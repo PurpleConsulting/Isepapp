@@ -12,7 +12,7 @@
 <c:import url="/jsp/alert.jsp" charEncoding="UTF-8"></c:import>
 <div class="row">
 	<div class="col-xs-offset-1 col-xs-10 group">
-		<h4>- Les groups consultés -</h4>
+		<h4>- Les groupes consultés -</h4>
 		<em style="color:#337AB7">Ajouter un groupe...</em>
 		<form class="form-inline" method="post" action="AlterGroups">
 		  <div class="form-group">
@@ -34,7 +34,7 @@
 			  </select>
 			</div>
 			<div class="form-group">
-		  		<button type="submit" class="btn btn-default"><span class="fa fa-plus"> </span> Ajouter un Group</button>
+		  		<button type="submit" class="btn btn-default"><span class="fa fa-plus"> </span> Ajouter un groupe</button>
 		  	</div>
 		  	<div class="form-group">
 		  		<a class="btn btn-default" href="#" role="button"><span class="fa fa-plus"> </span>  Ajouter un Tuteur</a>
@@ -45,7 +45,7 @@
 			<div class="alert alert-info"> Groupe G4C - Nombre de note: 0  - Absences: 0  - les livrables(0) - tuteur: ldivad</div>
 			<div class="alert alert-info"> Groupe G4C - Nombre de note: 0  - Absences: 0  - les livrables(0) - tuteur: ldivad</div>
 			<div class="alert alert-info"> Groupe G4C - Nombre de note: 0  - Absences: 0  - les livrables(0) - tuteur: ldivad</div>
-			<a href="Promo"><em>Voir plus de group...</em></a>
+			<a href="Promo"><em>Voir plus de groupes...</em></a>
 		</div>
 	</div>
 </div>

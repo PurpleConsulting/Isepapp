@@ -131,8 +131,8 @@ public class Students extends HttpServlet {
 					
 					// -- the pseudo isn't found
 					p.setWarning(true);
-					p.setWarningMessage("L'utilisateur que vous cherché n'a pas peu être trouvé "
-							+ "ou ne fait pas parti des étudiants... page bientôt remplcé par une liste d'étudiant");
+					p.setWarningMessage("L'utilisateur que vous cherchez n'a pas pu être trouvé "
+							+ "ou ne fait pas parti des étudiants... page bientôt remplacée par une liste d'étudiant");
 					p.setContent("home.jsp");
 					
 				}
@@ -205,11 +205,11 @@ public class Students extends HttpServlet {
 					boolean querysuccess = du.update(subjectUser);
 					if(querysuccess){
 						p.setSuccess(true);
-						p.setSuccessMessage("les modifications sur le profile ont bien été apportées.");
+						p.setSuccessMessage("Les modifications sur le profil ont bien été apportées.");
 						redirectionPseudo = stdPseudo;
 					} else {
 						p.setError(true);
-						p.setErrorMessage("une erreur est survenue lors de la modification du profil étudiant."
+						p.setErrorMessage("Une erreur est survenue lors de la modification du profil étudiant."
 								+ " Les modifications demandées peuvent ne pas avoir été réalisées.");
 					}
 					
@@ -268,13 +268,13 @@ public class Students extends HttpServlet {
 					
 				} else {
 					p.setWarning(true);
-					p.setWarningMessage("le profil étudiant à modifier n'a pas été trouvé dans la base de donnée.");
+					p.setWarningMessage("Le profil étudiant à modifier n'a pas été trouvé dans la base de donnée.");
 				}
 				
 			} else {
 				
 				p.setError(true);
-				p.setErrorMessage("Votre demande à male été interprétée. veillez à bien remplir les champs des formulaires propsés.");
+				p.setErrorMessage("Votre demande a mal été interprétée. Veillez à bien remplir les champs des formulaires proposés.");
 				
 			}
 				

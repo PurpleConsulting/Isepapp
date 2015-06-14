@@ -79,10 +79,10 @@ public class Controls extends HttpServlet {
 			request.setAttribute("skills", skills);
 			
 			//Display values in radio btn
-			Value[] v= dv.selectAllValues();
+			Value[] v = dv.selectAllValues();
 			request.setAttribute("values", v);
 			
-			p.setJs("bootbox.min.js", "bootstrap-select.min.js", "controls.js","control_load.js");
+			p.setJs("bootbox.min.js", "bootstrap-select.min.js", "controls.js");
 			p.setCss("bootstrap-select.min.css","controls.css");
 			p.setTitle("ISEP / APP - Evaluations");
 			p.setContent("mark/controls.jsp");

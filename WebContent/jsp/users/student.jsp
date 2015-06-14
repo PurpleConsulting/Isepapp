@@ -39,7 +39,7 @@
 </div>
 <div class="row">
 	<div class="col-xs-offset-1 col-xs-10 mark" >
-		<h4>Compétences - <a class="btn btn-default" href="#" role="button"><span class="fa fa-pencil"> </span>  Noter</a></h4> 
+		<h4>Compétences - <a class="btn btn-default" href="PersoControls?pseudo=${student.getPseudo()}" role="button"><span class="fa fa-pencil"> </span>  Noter</a></h4> 
 		<div role="tabpanel">
 		  <!-- Nav tabs -->
 		  <ul class="nav nav-tabs" role="tablist">
@@ -216,7 +216,7 @@
 					aria-label="Close">
 					<span aria-hidden="true">&times;</span>
 				</button>
-				<h4 class="modal-title">Modification du profil étudiant: <c:out value="${student.getPseudo()}"></c:out></h4>
+				<h4 class="modal-title">Modification du profil étudiant : <c:out value="${student.getPseudo()}"></c:out></h4>
 			</div>
 			<div class="modal-body">
 				<form id="alteruser" class="form-horizontal" method="post" action="Students?pseudo=${student.getPseudo()}">
