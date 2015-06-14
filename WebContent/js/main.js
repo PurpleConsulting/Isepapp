@@ -22,7 +22,8 @@
     	$(this).toggleClass("tt-cursor");
     });
     
-    
+    // -- fix footer
+    $("div#content.container-fluid.content").css("min-height", $(window).height() -80 + "px");
     
     // -- Search Bar
  	

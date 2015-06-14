@@ -15,7 +15,7 @@ $(document).ready(function(){
 		    }
 		});
 	}
-	noEnterForSubmit("form");
+	noEnterForSubmit("form.no-enter");
 	// -- add external tutor
 	$("a.form-show").click(function(e){
 		e.preventDefault();
@@ -93,7 +93,7 @@ $(document).ready(function(){
 					}
 				});
 			$("fomr#delete-tutor").addClass("no-enter");
-			noEnterForSubmit("form");
+			noEnterForSubmit("form.no-enter");
 			
 			$(".btn-danger.btn-target").attr("disabled", true);
 			setInterval('$(".fa-exclamation-triangle").fadeOut(400).delay(300).fadeIn(400)' ,400);
@@ -157,7 +157,7 @@ $(document).ready(function(){
 						}
 					}
 				});
-			noEnterForSubmit("form");
+			noEnterForSubmit("form.no-enter");
 			$("div.modal-header").addClass("primary-header");
 			$("u.u-target").text(tutor);
 			// -- prefill the form
