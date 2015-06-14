@@ -35,6 +35,14 @@ public class FileHandler extends HttpServlet {
     private static final String subjectFile = "subject_file";
     private static final String promoFile = "promo_file";
     private static final String backupFile = "backup_file";
+    private String slash = "/";
+    private void setSlash(String root){
+    	if(root.indexOf("/") == -1){
+    		this.slash = "\\";
+    	} else if(root.indexOf("\\") == -1){
+    		this.slash = "/";
+    	}
+    }
    
     /**
      * @see HttpServlet#HttpServlet()
@@ -48,10 +56,10 @@ public class FileHandler extends HttpServlet {
     	int abc = fileName.length();
     	String name = fileName.substring(0, abc - 4);
     	String ext = fileName.substring(abc - 4);
-    	File del_file = new File(folder +"/"+ name + "_OLDER" + ext);
-    	File old_file = new File(folder +"/"+ fileName );
+    	File del_file = new File(folder +this.slash+ name + "_OLDER" + ext);
+    	File old_file = new File(folder +this.slash+ fileName );
     	del_file.delete();
-    	old_file.renameTo(new File(folder +"/"+ name + "_OLDER" + ext));
+    	old_file.renameTo(new File(folder +this.slash+ name + "_OLDER" + ext));
     }
 
 	/**
@@ -107,18 +115,19 @@ public class FileHandler extends HttpServlet {
 			                }
 			                
 			                String root = getServletContext().getRealPath("/");
-			                File path = new File(root +"/"+ Isep.ROOT_FILE_SYS);
+			                this.setSlash(root);
+			                File path = new File(root +this.slash+ Isep.ROOT_FILE_SYS);
 			                if (!path.exists()) {
 			                    boolean status = path.mkdirs();
 			                }
-			                this.doPivot(root +"/"+ Isep.ROOT_FILE_SYS, fileName);
-			                File uploadedFile = new File(path + "/" + fileName);
-			                System.out.print(path + "/" + fileName);
+			                this.doPivot(root +this.slash+ Isep.ROOT_FILE_SYS, fileName);
+			                File uploadedFile = new File(path + this.slash + fileName);
+			                System.out.print(path + this.slash + fileName);
 			                item.write(uploadedFile);
 			                
 			                if (field.equals(this.promoFile)) {
 			                	boolean parsingStatus = true;
-			                	parsingStatus = Isep.csvParser(root +"/"+ Isep.ROOT_FILE_SYS , Isep.FILE_PROMO, ";");
+			                	parsingStatus = Isep.csvParser(root +this.slash+ Isep.ROOT_FILE_SYS , Isep.FILE_PROMO, ";");
 			                	p.setSuccess(parsingStatus);
 			                }
 			                

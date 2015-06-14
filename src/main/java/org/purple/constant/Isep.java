@@ -56,7 +56,9 @@ public class Isep {
 			}
 			if(u.getPosition().equals(Auth.respo)){
 				p.setCss("../js/bootstrap-fileinput/css/fileinput.min.css");
-				p.setJs("bootstrap-fileinput/js/fileinput.min.js", "bootstrap-fileinput/js/fileinput_locale_fr.js");
+				p.setJs("bootbox.min.js",
+						"bootstrap-fileinput/js/fileinput.min.js", 
+						"bootstrap-fileinput/js/fileinput_locale_fr.js");
 			}
 			p.setContent("home/common.jsp");
 			p.setJs("bootstrap-select.min.js","home_"+u.getPosition()+".js"); 

@@ -135,8 +135,10 @@ public class Bdd {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		chain = chain.substring(1);
-		tab = chain.split("&");
+		if(chain.length() > 1){
+			chain = chain.substring(1);
+			tab = chain.split("&");
+		}
 		return tab;
 	}
 }

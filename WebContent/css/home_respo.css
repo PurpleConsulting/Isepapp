@@ -10,7 +10,7 @@ div.group, div.numbers, div.semester{
 	background-color: transparent;
 	padding: 10px;
 }
-h4{
+div[class^="col-"] h4{
 	color: #777777
 }
 div.latest-group{
@@ -29,4 +29,31 @@ div.latest-group div.alert{
 }
 div.progress {
 	margin-bottom: 10px;
+}
+
+div.primary-header{
+	background-color: #337AB7;
+	color: #FFFFFF;
+	border-radius: 4px 4px 0px 0px;
+}
+
+div.danger-header{
+	background-color: #D9534F;
+	color: #FFFFFF;
+	border-radius: 4px 4px 0px 0px;
+}
+
+table{
+	color: #BDBDBD;
+	font-weight: lighter;
+}
+
+table thead{
+	border: 0.5px solid #BDBDBD;
+}
+
+table tbody td th{
+	border: 0.5px solid #BDBDBD;
+	font-weight: lighter;
+	font-size: 0.2em;
 }

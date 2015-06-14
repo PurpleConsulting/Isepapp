@@ -75,7 +75,7 @@
 		<div class="col-xs-12">
 			<form class="promo_file" action="FileHandler" method="post" enctype="multipart/form-data">
 				<div class="form-group">
-					<label>Ajoutez une liste d'étudiants. </label><a href=""> Revoir le format accepté</a>
+					<label>Ajoutez une liste d'étudiants. </label><a href="#" id="csv-reminder"> Revoir le format accepté</a>
 					<div class="progress" style="display: none">
 						<div class="progress-bar progress-bar-striped active"
 							 role="progressbar" style="width: 0%">
@@ -88,8 +88,8 @@
 		<div class="col-xs-12">
 			<form class="backup_file" action="FileHandler" method="post" enctype="multipart/form-data">
 				<div class="form-group">
-					<label>Importer une sauvegarde </label><a href=""> Revoir contenu d'une sauvegarde</a>
-					<div class="progress" style="display: none">
+					<label>Importer une sauvegarde </label><a href="#" id="backup-reminder"> Revoir contenu d'une sauvegarde</a>
+					<div class="progress test" style="display: none">
 						<div class="progress-bar progress-bar-striped active"
 							 role="progressbar" style="width: 0%">
 						</div>

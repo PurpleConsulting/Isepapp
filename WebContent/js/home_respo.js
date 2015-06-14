@@ -16,18 +16,16 @@ var uploadIni = function(){
 // -- initialisation
 
 
-function okBar(obj, j, res){
-	if(j > 499){
-		setTimeout(function(){
-			obj.removeClass("progress-bar-striped"); obj.removeClass("active");
-			var statusClass = res.success ? "success" : "danger";
-			var statusMsg = res.success ? "info" : "warning";
-			$("div.semester div.alert").addClass("alert-"+statusMsg);
-			obj.addClass("progress-bar-" + statusClass);
-			$("div.semester div.alert").html(res.message);
-			$("div.semester div.alert").show("slow");
-		}, 1500);
-	}
+function okBar(obj, res){
+	setTimeout(function(){
+		obj.removeClass("progress-bar-striped"); obj.removeClass("active");
+		var statusClass = res.success ? "success" : "danger";
+		var statusMsg = res.success ? "info" : "warning";
+		$("div.semester div.alert").addClass("alert-"+statusMsg);
+		obj.addClass("progress-bar-" + statusClass);
+		$("div.semester div.alert").html(res.message);
+		$("div.semester div.alert").show("slow");
+	}, 1500);
 	return false;
 };
 $("input.input-class").on("filebatchpreupload", function(){
@@ -62,34 +60,113 @@ $("#input_backup").fileinput({
 });
 $("div.kv-upload-progress").remove();
 $("#input_subject").on('filebatchuploadsuccess', function(event, data, previewId, index){
-	var i = 0;
-	var bar = $("form.subject_file div.progress-bar");
-	bar.parent().show();
-	for(j = 0; j< 500 || okBar(bar, j, data.response);  j++){
-		i = i + 0.2; bar.css("width", i+"%");
-	}
+	var bar = $("form.subject_file div.progress-bar");	
+	bar.parent().show();setTimeout(function(){}, 500);
+	var i = Math.floor((Math.random() * (75 - 45) + 45));
+	var temp = Math.floor((Math.random() * 2000) + 500);
+	bar.css("width", i+"%");
+	setTimeout(function(){
+		bar.css("width", "100%");
+		okBar(bar, data.response);
+	 }, temp);
 });
 
 $("#input_promo").on('filelock', function(event, filestack, extraData){
-	var bar = $("form.promo_file div.progress-bar");
-	bar.parent().show();
-	var i = 0;
-	for(j = 0; j< 250;  j++){
-		i = i + 0.2; bar.css("width", i+"%");
-	}
-	console.log("////////////////////");
-});
-$("#input_promo").on('filebatchuploadsuccess', function(event, data, previewId, index){
-	var i = 50;
-	var bar = $("form.promo_file div.progress-bar");
-	for(j = 50; j< 500 || okBar(bar, j, data.response);  j++){
-		i = i + 0.2; bar.css("width", i+"%");
-	}
-	console.log(data.response);
+	var e = $("form.promo_file div.progress");
+	var bar = e.find(".progress-bar"); 
+	var threshold = Math.floor((Math.random() * (85 - 65) + 65));
+	var inter = window.setInterval(function(){
+		e.show();
+		var barPos = Math.floor((Math.random() * 5) + 1);
+		var barNeg = Math.floor((Math.random() * 9) + 2);
+		var freez = Math.floor((Math.random() * 15000) + 10000);
+		var i = Math.round(100 * (bar.width() / e.width()));
+		console.log("//////////////////////");
+		if(i < threshold){
+			i = i + barPos;
+			bar.css("width", i+"%");
+			setTimeout(function(){}, freez);
+			i = i + barNeg;
+			bar.css("width", i+"%");
+		}
+		},
+		3000
+	);
+	
+	$("#input_promo").on('filebatchuploadsuccess', function(event, data, previewId, index){
+		clearInterval(inter);
+		bar.css("width", "87%");
+		setTimeout(function(){}, 1000);
+		bar.css("width", "100%");
+		okBar(bar, data.response);
+	});
+	
 });
 
 
-// with plugin options
-//$("#input-id").fileinput({'showUplroad':false, 'previewFileType':'any'});
+var waiting = function(){
+	var e = $("div.progress.test");
+	var bar = e.find(".progress-bar"); 
+	var threshold = Math.floor((Math.random() * (85 - 65) + 65));
+	console.log(threshold);
+	e.show();
+	window.setInterval(function(){
+		var barPos = Math.floor((Math.random() * 5) + 1);
+		var barNeg = Math.floor((Math.random() * 9) + 2);
+		var freez = Math.floor((Math.random() * 15000) + 10000);
+		var i = Math.round(100 * (bar.width() / e.width()));
+		if(i < threshold){
+			i = i + barPos;
+			bar.css("width", i+"%");
+			setTimeout(function(){}, freez);
+			i = i + barNeg;
+			bar.css("width", i+"%");
+		}
+		},
+		3000
+	);
+} 
+
+
+$("a#csv-reminder").on("click", function(e) {
+	e.preventDefault();
+	$.get("jsp/home/modal_csv_reminder.jsp", {}, function(data, status){
+		var node = $( data );
+		bootbox.dialog({
+		title: 'Disposition attendu pour le fichier .csv',
+		message: node.prop('outerHTML'),
+		buttons: {
+				failure:{ 
+					label: "Ok",
+	                className: "btn-primary",
+	                callback: function () {}
+				}
+			}
+		});
+		$("div.modal-header").addClass("primary-header");
+	});
+});
+
+
+
+$("a#backup-reminder").on("click", function(e) {
+	e.preventDefault();
+	$.get("jsp/home/modal_backup_reminder.jsp", {}, function(data, status){
+		var node = $( data );
+		bootbox.dialog({
+		title: 'Contnue du .zip de sauvegarde.',
+		message: node.prop('outerHTML'),
+		buttons: {
+				failure:{ 
+					label: "Ok",
+	                className: "btn-default",
+	                callback: function () {}
+				}
+			}
+		});
+		$("div.modal-header").addClass("primary-header");
+	});
+});
+
 
 
