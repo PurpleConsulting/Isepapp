@@ -150,7 +150,14 @@ public class Tutors extends HttpServlet {
 		// -- delete all tutors request
 		String delAllTutorsFlag = request.getParameter("delete-all-tutors");
 		
-		
+		// -- alter student request
+		String updatePseudo = request.getParameter("update_pseudo");
+		String updateFirstName = request.getParameter("update_first_nane");
+		String updateLastName = request.getParameter("update_last_name"); 
+		String updateEmail = request.getParameter("update_email");
+		String updatePassword = request.getParameter("update_password");
+		String hasPsswdOrNot = request.getParameter("has-pass");
+		String updateGroups = request.getParameter("update_group");
 		
 		if(Auth.isRespo(request)){
 			/*  the use have access to the data base */
@@ -215,6 +222,9 @@ public class Tutors extends HttpServlet {
 				
 				
 			} else if(!Isep.nullOrEmpty(delTutorFlag, oldTutor)){
+				/**
+				 * HERE THE USER TRY TO DELETE A USER
+				 */
 				User oldUser = du.select(oldTutor);
 				boolean querrySuccess = du.delete(oldUser);
 				if(querrySuccess){
@@ -238,7 +248,46 @@ public class Tutors extends HttpServlet {
 				}
 				this.doRegular(request, response, p, du, dg);
 				this.getServletContext().getRequestDispatcher("/template.jsp").forward(request, response);
-			
+				
+			} else if (!Isep.nullOrEmpty(updatePseudo, updateFirstName, updateLastName, updateEmail, updateGroups,  updateGroups)){
+				/**
+				 *  HERE THE USER WANT TO UPDATE A TUTOR
+				 */
+				// --find the user 
+				User alterTutor = du.select(updatePseudo);
+				// -- perform the updates
+				alterTutor.setFirstName(updateFirstName);
+				alterTutor.setLastName(updateLastName);
+				alterTutor.setMail(updateEmail);
+				// -- save in the database
+				boolean querrySuccess = du.update(alterTutor);
+				
+				
+				// -- does this tuteur has a password ???
+				
+				
+				System.out.print("\n\n ... "+ querrySuccess +" ... \n\n");
+				
+				
+				if(!updateGroups.equals("null") && querrySuccess){
+					// -- wed add a new class to the tutor
+					querrySuccess = querrySuccess & dg.retireTutor(alterTutor);
+					querrySuccess = querrySuccess & dg.declareTutor(alterTutor, updateGroups);
+				}
+				
+				if(querrySuccess){
+					p.setInfo(true);
+					p.setInfoMessage("la modification du tuteur à bien été prise en compte.");
+				} else {
+					p.setWarning(true);
+					p.setWarningMessage("une erreur est survenue lors de la modification du tuteur.");
+				}
+				//User newTutor = new User(updateFirstName, updateLastName, updateEmail);
+				System.out.print("\n\n ... "+ hasPsswdOrNot +" ... \n\n");
+				
+				
+				this.doRegular(request, response, p, du, dg);
+				this.getServletContext().getRequestDispatcher("/template.jsp").forward(request, response);
 			} else {
 				p.setWarning(true);
 				p.setWarningMessage("la reqête demandée à mal été comprise, veuillez vous assuré que vous"

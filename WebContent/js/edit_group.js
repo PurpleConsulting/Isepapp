@@ -4,6 +4,17 @@
 
 $(document).ready(function(){
 	 
+	//--ini
+	var noEnterForSubmit = function(element){
+		$(element).bind("keypress", function (e) {
+		    if (e.keyCode == 13) {
+		        $("#btnSearch").attr('value');
+		        //add more buttons here
+		        return false;
+		    }
+		});
+	}
+	noEnterForSubmit("form");
 	var addUserSubmit =  function(){ $("form#adduser").submit(); }
 	
 	$("span.link-dialog-grp").on("click", function(e) {
@@ -32,16 +43,19 @@ $(document).ready(function(){
 					}
 				}
 			});
-			
+			$("form#delete-grp").addClass("no-enter");
+			noEnterForSubmit("form.no-enter");
 			$(".btn-danger.btn-target").attr("disabled", true);
 			$("input.delete-std").on("keyup", function(){
 				if($(this).val() == groupname) {
 					$(".btn-danger.btn-target").attr("disabled", false);
+					$("form#delete-grp").removeClass("no-enter");
 				} else {
+					$("form#delete-grp").addClass("no-enter");
 					$(".btn-danger.btn-target").attr("disabled", true);
 				}
 			});
-			
+
 			setInterval('$(".fa-exclamation-triangle").fadeOut(400).delay(300).fadeIn(400)' ,400);
 			
 		});
@@ -75,12 +89,15 @@ $(document).ready(function(){
 					}
 				}
 			});
-			
+			$("form#delete-std").addClass("no-enter");
+			noEnterForSubmit("form.no-enter");
 			$(".btn-danger.btn-target").attr("disabled", true);
 			$("input.delete-std").on("keyup", function(){
 				if($(this).val() == std) {
 					$(".btn-danger.btn-target").attr("disabled", false);
+					$("form#delete-std").removeClass("no-enter");
 				} else {
+					$("form#delete-std").addClass("no-enter");
 					$(".btn-danger.btn-target").attr("disabled", true);
 				}
 			});

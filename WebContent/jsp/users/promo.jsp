@@ -33,8 +33,7 @@
 				Vivamus suscipit imperdiet urna elementum consectetur. 
 				Cras commodo lorem justo, vel egestas urna malesuada at.
 			</div>
-			<c:forEach var="group" items="${groups}" varStatus="grItem">
-				<c:if test="${group.get_class() == cls}">
+			<c:forEach var="group" items="${prom.get(cls)}" varStatus="grItem">
 					<div id="Group${group.getName()}" class="row subgroup">
 						<div class="col-sm-10">
 							<h3>Groupe <c:out value="${group.getName()}"></c:out></h3>
@@ -46,7 +45,9 @@
 							<div class="medal">
 								<span class="fa fa-bed"></span>
 								Absences:
-								<span class="badge">0</span>
+								<span class="badge">
+									<c:out value="${fn:length(missings.get(group.getName()))}"></c:out>
+								</span>
 							</div>
 							<div class="medal">
 								<span class="fa fa-folder-open"></span>
@@ -64,7 +65,6 @@
 							</div>
 						</div>
 					</div>
-				</c:if>
 			</c:forEach>
 		</div>
 		<hr/>
@@ -77,7 +77,7 @@
 				<li>
 					<a href="#Group${cls}">Classe <c:out value="${cls}"></c:out></a>
 					<ul class="nav nav-stacked" >
-					<c:forEach var="group" items="${groups}" varStatus="grItem">
+					<c:forEach var="group" items="${prom.get(cls)}" varStatus="grItem">
 						<c:if test="${group.get_class() == cls}">
 							<li><a href="#Group${group.getName()}"><c:out value="${group.getName()}"></c:out></a></li>
 						</c:if>

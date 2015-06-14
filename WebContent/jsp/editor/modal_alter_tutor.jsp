@@ -5,10 +5,13 @@
 	<div style="margin-left:10%; width:80%">
 		<p>
 			Avec ce formulaire vous pouvez modifier les informations liées au tuteur: 
-			<u class="u-target" style="color:#337AB7;"></u><br/>
+			<u class="u-target" style="color:#337AB7;"></u>. Le choix d'une classe ici,
+			remplacera tous les groups du tuteur. Pour ajouter à ce tuteur des group en <em>plus</em>
+			vous pouvez le faire mannuellement via les pages groupes.
 		</p>
 	</div>
 	<div class="form-group" style="margin-left:10%; width:80%">
+		<input type="hidden" name="update_pseudo" class="form-control" />
 		<input type="text" name="update_first_nane" placeholder="Prénom du tuteur" class="form-control"/>
 		<input type="text" name="update_last_name" placeholder="Nom du tuteur" class="form-control"/>
 		<input type="email" name="update_email" placeholder="Email tuteur" class="form-control"/>
@@ -16,7 +19,6 @@
 		style="display:inline-block; width:90%" disabled/>
 		<input type="checkbox" name="has-pass">
 		<select name="update_group">
-			<option value="null">Aucun</option>	
 		</select>
 	</div>
 </form>

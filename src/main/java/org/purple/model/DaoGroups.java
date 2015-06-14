@@ -150,8 +150,8 @@ public class DaoGroups extends Dao<Group>{
 	public Group[] selectAll() {
 		// TODO Auto-generated method stub
 		Group[] gs = new Group[0];
-		String q = "SELECT Groups.id, Groups.`name`, Groups.class"
-				+ " FROM APPDB.Groups;";
+		String q = "SELECT Groups.id, Groups.`name`, Groups.class "
+				+ " FROM Groups WHERE Groups.`id` != 0;";
 		try{
 			ResultSet currsor = this.connect.createStatement().executeQuery(q);
 			if (currsor.last()) {
@@ -203,27 +203,12 @@ public class DaoGroups extends Dao<Group>{
 	public String[] selectAllClass() {
 		// TODO Auto-generated method stub
 		String[] gs = new String[0];
-		String q = "SELECT distinct Groups.class"
-				+ " FROM APPDB.Groups WHERE Groups.`id` != 0;";
-		try{
-			ResultSet currsor = this.connect.createStatement().executeQuery(q);
-			if (currsor.last()) {
-				gs = new String[currsor.getRow()];
-				currsor.beforeFirst(); 
-			}
-			int i = 0;
-			while(currsor.next()){
-				gs[i] = currsor.getString(1);
-				i++;
-			}
-			currsor.close();
-		}catch (SQLException e){
-			// TODO Auto-generated catch block
-			gs = null;
-			e.printStackTrace();
-		}
+		String q = "SELECT distinct Groups.`class` FROM Groups WHERE Groups.`id` != 0;";
+		ResultSet currsor = Bdd.exec(this.connect, q);
+		gs = Bdd.rsToStringTab(currsor);
 		return gs;
 	}
+	
 	public void completeTutor(Group g){
 		String q = "SELECT Users.pseudo FROM Users INNER JOIN Groups"
 				+ " ON Groups.id_tutor = Users.id"
@@ -281,5 +266,16 @@ public class DaoGroups extends Dao<Group>{
 		if(affected < 1) res = false;
 		return res;
 	}
+	
+	public boolean retireTutor(User u){
+		boolean res = true;
+		String q = "UPDATE Groups SET id_tutor = null "
+				+ " WHERE id_tutor = (SELECT Users.id FROM Users WHERE Users.pseudo = ?) ;";
+		String[] params = { u.getPseudo()};
+		int affected = Bdd.preparePerform(this.connect, q, params);
+		if(affected < 0) res = false;
+		return res;
+	}
+	
 
 }
