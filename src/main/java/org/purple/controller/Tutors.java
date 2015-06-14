@@ -192,6 +192,24 @@ public class Tutors extends HttpServlet {
 				newTutor.setGroup("G00");
 				boolean querrySuccess = du.create(newTutor);
 				
+				
+				if(!newClass.equals("null") && querrySuccess){
+					// -- the new tutor has already a class
+					newTutor = du.select(newTutor.getPseudo());
+					
+					if(!Isep.nullOrEmpty(newPass)){
+						// -- this is an external teacher
+						newTutor.setPassword(newPass);
+						querrySuccess = querrySuccess & du.setPassword(newTutor);
+					}
+					
+					boolean positionSuccess = dg.declareTutor(newTutor, newClass);
+					if(!positionSuccess){
+						p.setWarning(true);
+						p.setWarningMessage("une erreur c'est produite lors de l'attribution des groupes au nouveau tuteur.");
+					}
+				}
+				
 				if(querrySuccess){
 					p.setSuccess(true);
 					p.setSuccessMessage("le nouveau tuteur à été correcctement ajouté.");
@@ -200,21 +218,6 @@ public class Tutors extends HttpServlet {
 					p.setError(true);
 					p.setErrorMessage("une erreur c'est produite lors de l'ajout du tuteur. "
 							+ "Vérifiez que le pseudo soit bien unique.");
-				}
-				
-				if(!Isep.nullOrEmpty(newPass) && querrySuccess){
-					// -- this is an external teacher
-					newTutor.setPassword(newPass);
-				}
-				
-				if(!newClass.equals("null") && querrySuccess){
-					// -- the new tutor has already a class
-					newTutor = du.select(newTutor.getPseudo());
-					boolean positionSuccess = dg.declareTutor(newTutor, newClass);
-					if(!positionSuccess){
-						p.setWarning(true);
-						p.setWarningMessage("une erreur c'est produite lors de l'attribution des groupes au nouveau tuteur.");
-					}
 				}
 				
 				this.doRegular(request, response, p, du, dg);

@@ -1,8 +1,4 @@
 @CHARSET "UTF-8";
-
-div#content{
-	min-height: 800px;
-}
 div.row div.skills-selector form.form-inline{
 	display: inline-block;
 }

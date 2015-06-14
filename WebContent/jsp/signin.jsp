@@ -25,19 +25,10 @@
 		</header>
 		<div class="container-fluid">
 			<div  id="formblock" class="col-md-offset-2 col-md-8">
-			<div class="rox">
-				<c:if test="${pages.getError()}">
-					<div class="alert alert-danger col-md-offset-1 col-md-10">
-						<strong>Attention</strong>,
-						<c:out value="${pages.getErrorMessage()}"></c:out>
-					</div>
-				</c:if>
-				<c:if test="${pages.getWarning()}">
-					<div class="alert alert-warning col-md-offset-1 col-md-10">
-						<strong>Attention</strong>,
-						<c:out value="${pages.getWarningMessage()}"></c:out>
-					</div>
-				</c:if>
+			<div class="row">
+				<div class="col-xs-12">
+					<c:import url="/jsp/alert.jsp" charEncoding="UTF-8"></c:import>
+				</div>
 			</div>
 			<form method="post" action="/Isepapp/Signin">
 				<div class="row">

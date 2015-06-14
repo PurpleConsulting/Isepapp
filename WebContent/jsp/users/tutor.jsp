@@ -13,7 +13,7 @@
 <div class="row">
 	<div class="col-xs-offset-1 col-xs-10 add-tutor">
 		<a href="#" class="form-show">Ajouter un tuteur <span class="fa fa-plus"></span></a>
-		<form action="" method="post" class="form-horizontal" style="display: none;">
+		<form action="" method="post" class="form-horizontal no-enter" style="display: none;">
 			<div class="form-group">
 				<div class="col-sm-10">
 					<input type="text" name="new_first_name" placeholder="Prénom du tuteur" class="form-control"/>

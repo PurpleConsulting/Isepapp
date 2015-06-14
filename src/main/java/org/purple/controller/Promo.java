@@ -88,10 +88,6 @@ public class Promo extends HttpServlet {
 				grpMissings.put(g.getName(), dm.selectForGroup(g.getName()));
 			}
 			
-			System.out.print(grpMissings.get("G1A").length +" \n");
-			System.out.print(grpMissings.get("G1B").length +" \n");
-			System.out.print(grpMissings.get("G1C").length +" \n");
-			System.out.print(grpMissings.get("G1D").length +" \n");
 			
 			request.setAttribute("groups", groups);
 			request.setAttribute("allClass", allClass);

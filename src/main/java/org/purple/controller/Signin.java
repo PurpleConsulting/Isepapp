@@ -10,6 +10,7 @@ import java.sql.Connection;
 import java.sql.SQLException;
 
 
+
 /*** servlet import ***/
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -21,6 +22,7 @@ import org.json.JSONObject;
 import org.purple.bean.Page;
 import org.purple.bean.User;
 import org.purple.constant.Bdd;
+import org.purple.constant.Isep;
 /*** Purple import ***/
 import org.purple.model.DaoUsers;
 
@@ -50,8 +52,7 @@ public class Signin extends HttpServlet {
 		p.setContent("signin.jsp");
 		p.setTitle("ISEP / APP - Connection");
 		request.setAttribute("pages", p);
-		this.getServletContext().getRequestDispatcher("/jsp/signin.jsp")
-				.forward(request, response);
+		this.getServletContext().getRequestDispatcher("/jsp/signin.jsp").forward(request, response);
 	}
 
 	/**
@@ -61,53 +62,55 @@ public class Signin extends HttpServlet {
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-
+		
 		/**
 		 * AJAX HANDLER PART
 		 */
-		if (request.getParameter("Ajaxpseudo") != null){
+		// -- trigged by the blur input
+		String ajPseudo = request.getParameter("Ajaxpseudo");
+		
+		/**
+		 * REGULAR POST PART
+		 */
+		
+		String pseudo = request.getParameter("pseudo");
+		String pwd = request.getParameter("password");
+		/* OPS */
+		
+		/**
+		 * AJAX HANDLER PART
+		 */
+		request.setCharacterEncoding("UTF-8");
+		Page p = new Page();
+		Connection bddServletCo = Bdd.getCo();
+		DaoUsers du = new DaoUsers(bddServletCo);
+		
+		if (!Isep.nullOrEmpty(ajPseudo)){
 			
 			Boolean res = false;
 			
-			Connection bddServletCo = Bdd.getCo();
-			DaoUsers du = new DaoUsers(bddServletCo);
-			String param = request.getParameter("Ajaxpseudo");
-			if(du.find(param)) res = true;
-			
+			if(du.find(ajPseudo)) res = true;
 			response.setHeader("content-type", "application/json");
 			JSONObject result = new JSONObject();
 			JSONObject js = new JSONObject();
 			js.put("find", res.toString());
 			result.put("result", js);
 			response.getWriter().write(result.toString());
-		
-			/**
-			 * AJAX HANDLER END
-			 */
-			
-			try {
-				bddServletCo.close();
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		} else if (request.getParameter("pseudo") == null){
-			Page p = new Page();
+
+		} else if (Isep.nullOrEmpty(pseudo, pwd)){
 			p.setWarning(true);
 			p.setWarningMessage("Vos identifiants n'ont pas été correctement récupérés. Veuillez vous connecter à nouveau.");
 			p.setTitle("ISEP / APP - Connection");
+			request.setAttribute("pages", p);
 			this.getServletContext().getRequestDispatcher("/jsp/signin.jsp").forward(request, response);
 
 		} else {
 			String url = "";
-			
-			Connection bddServletCo = Bdd.getCo();
-			DaoUsers du = new DaoUsers(bddServletCo);
-			String pseudo = request.getParameter("pseudo");
 			User user = du.select(pseudo);
-			
+			user.setPassword(pwd);
+			user = du.comparePwd(user);
 			if(user.getId() !=  0){
-				Page p = new Page();
+				
 				p.setTitle("ISEP / APP - Home");
 				p.setContent("home.jsp");
 				url = "/template.jsp";
@@ -115,7 +118,6 @@ public class Signin extends HttpServlet {
 				request.setAttribute("pages", p);
 				response.sendRedirect("/Isepapp/Home");
 			} else {
-				Page p = new Page();
 				p.setTitle("ISEP / APP - Connection");
 				p.setError(true);
 				p.setErrorMessage("Un problème est survenu lors de l'établissement de la connection. "
