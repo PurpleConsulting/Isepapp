@@ -258,9 +258,7 @@ public class AlterGroups extends HttpServlet {
 					if(querrySucces){
 						p.setSuccess(true);
 						p.setSuccessMessage("le groupe demendé à bien été supprimé.");
-						p.setCss("bootstrap-select.min.css", "home_respo.css"); 
-						p.setJs("bootstrap-select.min.js","bootbox.min.js", "home_respo.js");
-						p.setTitle("ISEP / APP - Accueil");
+						Isep.bagPackHome(p, request.getSession());
 						p.setContent("home/respo.jsp");
 						redirectionGroup.setId(-1); // -- we skip the error, there is no group because we just deleted it 
 					} else{

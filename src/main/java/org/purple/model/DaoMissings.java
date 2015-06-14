@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import org.purple.bean.Missing; 
+import org.purple.constant.Bdd;
 import org.purple.constant.Isep;
 
 public class DaoMissings extends Dao<Missing>{
@@ -71,16 +72,15 @@ public class DaoMissings extends Dao<Missing>{
 		return ms;
 	}
 	
-	public Missing[] selectForGroup(String idGroup){
+	public Missing[] selectForGroup(String NameGroup){
 		Missing[] ms = new Missing[0];
+		String[] params = {NameGroup};
 		String q = "SELECT Users.pseudo, Missing.late FROM Missing"
 				+ " INNER JOIN  Users on Missing.id_student = Users.id"
 				+ " WHERE Users.id_group ="
 				+ " (SELECT Groups.id  FROM Groups WHERE Groups.`name` = ?);";
 		try{
-			PreparedStatement prestmt = this.connect.prepareStatement(q);
-			prestmt.setString(1,idGroup);
-			ResultSet currsor = prestmt.executeQuery();
+			ResultSet currsor = Bdd.prepareExec(this.connect, q, params);
 			if(!currsor.next()) return ms;
 			if (currsor.last()) {
 				ms = new Missing[currsor.getRow()];
@@ -91,11 +91,8 @@ public class DaoMissings extends Dao<Missing>{
 				Missing m = new Missing();
 				m.setStudent(currsor.getString(1));
 				m.setLate(currsor.getBoolean(2));
-				ms[i] = m;
-				i = i + 1;
+				ms[i] = m; i = i + 1;
 			}
-			currsor.close();	
-			prestmt.close();
 		}catch (SQLException e){
 			// TODO Auto-generated catch block
 			e.printStackTrace();

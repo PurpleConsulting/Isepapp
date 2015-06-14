@@ -13,7 +13,7 @@
  			<li>de <strong>toutes</strong> leurs abscences</li>
  			<li>et de leurs livrables</li>
 			</ul>
-			Si même après avoir vu cette petite iconne: <span class="fa fa-exclamation-triangle"></span><br/>
+			Si même après avoir vu cette petite icon: <span class="fa fa-exclamation-triangle"></span><br/>
 			vous voulez poursuivre la suppréssion du groupe vous pouver recopier le nom du groupe:
 			<strong><em class="todel"> </em></strong>, ici.
 		</p>

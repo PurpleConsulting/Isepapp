@@ -4,7 +4,7 @@
 <div class="row">
 	<h1 class="col-xs-offset-1 col-xs-10">
 		Accueil
-		<small> - APP - 2016 S1</small>
+		<small> - APP - </small>
 	</h1>
 </div>
 <c:import url="/jsp/alert.jsp" charEncoding="UTF-8"></c:import>

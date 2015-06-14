@@ -6,7 +6,16 @@ $(document).ready(function(){
 	$("input[type=password]").attr("disabled", true);
 	$("input.toggle-input[type=checkbox]").prop("checked", false);
 	$("select").prop("selectedIndex",0);
-	
+	var noEnterForSubmit = function(element){
+		$(element).on("keypress", function (e) {
+		    if (e.keyCode == 13) {
+		        $("#btnSearch").attr('value');
+		        //add more buttons here
+		        return false;
+		    }
+		});
+	}
+	noEnterForSubmit("form");
 	// -- add external tutor
 	$("a.form-show").click(function(e){
 		e.preventDefault();
@@ -57,6 +66,8 @@ $(document).ready(function(){
 						}
 					}
 				});
+			$("fomr#delete-all-tutors").addClass("no-enter");
+			noEnterForSubmit("form.no-enter");
 			$("div.modal-header").addClass("danger-header");
 		});
 	});
@@ -81,6 +92,9 @@ $(document).ready(function(){
 						}
 					}
 				});
+			$("fomr#delete-tutor").addClass("no-enter");
+			noEnterForSubmit("form");
+			
 			$(".btn-danger.btn-target").attr("disabled", true);
 			setInterval('$(".fa-exclamation-triangle").fadeOut(400).delay(300).fadeIn(400)' ,400);
 			$("div.modal-header").addClass("danger-header");
@@ -88,7 +102,9 @@ $(document).ready(function(){
 			$("input[name=del-tutor]").on("keyup", function(){
 				if($(this).val() == tutor) {
 					$(".btn-danger.btn-target").attr("disabled", false);
+					$("fomr#delete-tutor").removeClass("no-enter");
 				} else {
+					$("fomr#delete-tutor").addClass("no-enter");
 					$(".btn-danger.btn-target").attr("disabled", true);
 				}
 			});
@@ -110,18 +126,18 @@ $(document).ready(function(){
 						}
 					}
 				});
-
 			$("div.modal-header").addClass("danger-header");
 		});
 	});
 	// -- update one
 	$("span.fa.fa-pencil").click(function(){
 		var tutor = $(this).attr("data-target");
+		var existingClass = $("select.selectpicker option");
 		var obj = {
 				firstName: $(this).parent().parent().find('li[data-naming="first_name"] em').text(),
 				lastName: $(this).parent().parent().find('li[data-naming="last_name"] em').text(),
 				eMail: $(this).parent().parent().find('li[data-naming="email"] em').text(),
-				pseudo: "dd"
+				pseudo: $(this).parent().parent().find('li[data-naming="pseudo"]').text(),
 		};
 		$.get("jsp/editor/modal_alter_tutor.jsp", {}, function(data, status){
 			var node = $( data );
@@ -141,14 +157,22 @@ $(document).ready(function(){
 						}
 					}
 				});
+			noEnterForSubmit("form");
 			$("div.modal-header").addClass("primary-header");
 			$("u.u-target").text(tutor);
-			
+			// -- prefill the form
+			$('input[name="update_pseudo"]').val(obj.pseudo);
 			$('input[name="update_first_nane"]').val(obj.firstName);
 			$('input[name="update_last_name"]').val(obj.lastName)
 			$('input[name="update_email"]').val(obj.eMail);
-			$('select[name="update_group"]').append("<option>okok</option>");
 			
+			$('input[name="has-pass"]').change(function(){
+				$(this).prev().attr("disabled", !$(this).prop('checked') );
+			});
+			console.log(existingClass.length);
+			existingClass.each(function(option){
+				$(this).clone().appendTo('select[name="update_group"]');
+			});
 		});
 	});
 });
