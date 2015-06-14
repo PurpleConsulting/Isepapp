@@ -11,6 +11,7 @@ public class User {
 		private String group = "null";
 		private String mail = "null";
 		private String tel = "null";
+		private String password = "null";
 		
 		public User(){
 			
@@ -91,6 +92,12 @@ public class User {
 		}
 		public void setIsepNo(int isepNo) {
 			this.isepNo = isepNo;
+		}
+		public String getPassword() {
+			return password;
+		}
+		public void setPassword(String password) {
+			this.password = password;
 		}
 		
 		

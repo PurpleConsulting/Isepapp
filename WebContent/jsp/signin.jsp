@@ -20,10 +20,7 @@
 	<body>
 		<header>
 			<div class="container-fluid">
-				<div class="col-md-offset-1">
-					<a href="Home"><span style="color:white;" class="fa fa-flag fa-5x"></span></a>
-					<h1>ISEP - APP</h1>	
-				</div>
+
 			</div>
 		</header>
 		<div class="container-fluid">

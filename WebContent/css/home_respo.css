@@ -21,3 +21,12 @@ div.latest-group div.alert{
 	margin-bottom: 8px;
 	padding: 6px
 }
+
+@media only screen and (max-width:500px) {
+	.semester{
+		overflow-y: scroll;
+	}
+}
+div.progress {
+	margin-bottom: 10px;
+}

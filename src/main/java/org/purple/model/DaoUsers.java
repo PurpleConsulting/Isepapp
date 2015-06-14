@@ -168,6 +168,7 @@ public class DaoUsers extends Dao<User> {
 			int i = 0;
 			while(currsor.next()){
 				User u = new User(currsor.getInt(1), currsor.getString(5), currsor.getString(2), currsor.getString(3), currsor.getString(4));
+				u.setMail(currsor.getString(7));
 				us[i] = u;
 				i++;
 			}
@@ -217,9 +218,21 @@ public class DaoUsers extends Dao<User> {
 			ResultSet currsor = Bdd.prepareExec(co, q, new String[]{pseudo});
 			currsor.next();
 			res = currsor.getInt(1);
+			co.close();
 		}catch (SQLException e){
 			// TODO Auto-generated catch block
 		}
 		return res;
 	}
+	
+	public boolean dropByPosition(String position){
+		boolean res = true;
+		String q = "DELETE FROM Users WHERE Users.id_post = "
+				+ " (SELECT Positions.`id` FROM Positions WHERE Positions.title = ?);";
+		String[] params = {position}; 
+		int affected = Bdd.preparePerform(this.connect, q, params);
+		if(affected < 1) res = false ;
+		return res;
+	}
+	
 }
