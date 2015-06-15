@@ -42,18 +42,3 @@ div.danger-header{
 	color: #FFFFFF;
 	border-radius: 4px 4px 0px 0px;
 }
-
-table{
-	color: #BDBDBD;
-	font-weight: lighter;
-}
-
-table thead{
-	border: 0.5px solid #BDBDBD;
-}
-
-table tbody td th{
-	border: 0.5px solid #BDBDBD;
-	font-weight: lighter;
-	font-size: 0.2em;
-}

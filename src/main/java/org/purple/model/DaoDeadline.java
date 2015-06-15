@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.sql.Timestamp;
 
 import org.purple.bean.Deadline;
+import org.purple.bean.Delivery;
 import org.purple.bean.Group;
 import org.purple.bean.Missing;
 import org.purple.bean.Skill;
@@ -187,6 +188,28 @@ public class DaoDeadline extends Dao<Deadline>{
 			e.printStackTrace();
 		}
 		return dl;
+	}
+	
+	
+	public Delivery[] depositPerGroups(Group g){
+		Delivery[] res = new Delivery[0];
+		String[] params = {Integer.toString(g.getId())};
+		String q = "SELECT Delivery.`id`,  Delivery.`path` FROM Delivery"
+				+ " WHERE Delivery.id_owner_group = ? ;";
+		ResultSet currsor = Bdd.prepareExec(this.connect, q, params);
+		try {
+			if (currsor.last()) {
+				res = new Delivery[currsor.getRow()];
+				currsor.beforeFirst(); 
+			}
+			int i = 0;
+			while(currsor.next()){
+				Delivery d = new Delivery(currsor.getInt(1), currsor.getString(2));
+				res[i] = d;
+				i++;
+			}
+		} catch (SQLException e) { res = new Delivery[0]; }
+		return res;
 	}
 
 	

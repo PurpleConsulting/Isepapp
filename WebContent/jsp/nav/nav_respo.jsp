@@ -43,7 +43,7 @@
 	            <li><a href="#">Dépots</a></li>
           </ul>
   		</li>
-  		<li><a href="Signout">Déconnexion</a></li>
+  		<li><a href="Signout"><span class="fa fa-power-off"></span></a></li>
       </ul>
       <form class="navbar-form navbar-left" role="search" action="Search" method="GET">
         <div class="form-group">

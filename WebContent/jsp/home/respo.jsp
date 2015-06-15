@@ -4,7 +4,7 @@
 <div class="row">
 	<h1 class="col-xs-offset-1 col-xs-10">
 		Accueil
-		<small> - APP - </small>
+		<small> - <c:out value="${sessionScope.user.getPseudo()}"></c:out> - </small>
 	</h1>
 </div>
 <c:import url="/jsp/alert.jsp" charEncoding="UTF-8"></c:import>
@@ -75,7 +75,7 @@
 		<div class="col-xs-12">
 			<form class="promo_file" action="FileHandler" method="post" enctype="multipart/form-data">
 				<div class="form-group">
-					<label>Ajoutez une liste d'étudiants. </label><a href="#" id="csv-reminder"> Revoir le format accepté</a>
+					<label>Ajoutez une liste d'étudiants. </label> <a href="#" id="csv-reminder"> Revoir le format accepté</a>
 					<div class="progress" style="display: none">
 						<div class="progress-bar progress-bar-striped active"
 							 role="progressbar" style="width: 0%">
@@ -88,7 +88,7 @@
 		<div class="col-xs-12">
 			<form class="backup_file" action="FileHandler" method="post" enctype="multipart/form-data">
 				<div class="form-group">
-					<label>Importer une sauvegarde </label><a href="#" id="backup-reminder"> Revoir contenu d'une sauvegarde</a>
+					<label>Importer une sauvegarde. </label> <a href="#" id="backup-reminder"> Revoir contenu d'une sauvegarde</a>
 					<div class="progress test" style="display: none">
 						<div class="progress-bar progress-bar-striped active"
 							 role="progressbar" style="width: 0%">

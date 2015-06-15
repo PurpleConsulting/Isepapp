@@ -192,17 +192,16 @@ public class Tutors extends HttpServlet {
 				newTutor.setGroup("G00");
 				boolean querrySuccess = du.create(newTutor);
 				
+				if(!Isep.nullOrEmpty(newPass) && querrySuccess){
+					// -- this is an external teacher
+					newTutor = du.select(newTutor.getPseudo());
+					newTutor.setPassword(newPass);
+					querrySuccess = querrySuccess & du.setPassword(newTutor);
+				}
 				
 				if(!newClass.equals("null") && querrySuccess){
 					// -- the new tutor has already a class
 					newTutor = du.select(newTutor.getPseudo());
-					
-					if(!Isep.nullOrEmpty(newPass)){
-						// -- this is an external teacher
-						newTutor.setPassword(newPass);
-						querrySuccess = querrySuccess & du.setPassword(newTutor);
-					}
-					
 					boolean positionSuccess = dg.declareTutor(newTutor, newClass);
 					if(!positionSuccess){
 						p.setWarning(true);
@@ -265,12 +264,11 @@ public class Tutors extends HttpServlet {
 				// -- save in the database
 				boolean querrySuccess = du.update(alterTutor);
 				
-				
-				// -- does this tuteur has a password ???
-				
-				
-				System.out.print("\n\n ... "+ querrySuccess +" ... \n\n");
-				
+				if(!Isep.nullOrEmpty(hasPsswdOrNot, updatePassword)){
+					// --  we add a password to the tutor
+					alterTutor.setPassword(updatePassword);
+					querrySuccess = querrySuccess & du.setPassword(alterTutor);
+				}
 				
 				if(!updateGroups.equals("null") && querrySuccess){
 					// -- wed add a new class to the tutor
@@ -285,9 +283,6 @@ public class Tutors extends HttpServlet {
 					p.setWarning(true);
 					p.setWarningMessage("une erreur est survenue lors de la modification du tuteur.");
 				}
-				//User newTutor = new User(updateFirstName, updateLastName, updateEmail);
-				System.out.print("\n\n ... "+ hasPsswdOrNot +" ... \n\n");
-				
 				
 				this.doRegular(request, response, p, du, dg);
 				this.getServletContext().getRequestDispatcher("/template.jsp").forward(request, response);
@@ -305,7 +300,6 @@ public class Tutors extends HttpServlet {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			
 			
 		} else {
 			p.setWarning(true);

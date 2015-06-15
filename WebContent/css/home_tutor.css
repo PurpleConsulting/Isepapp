@@ -1,1 +1,70 @@
 @CHARSET "UTF-8";
+div.group{
+	border: solid #ccc 1px;
+	min-height: 200px;
+	border-radius: 6px;
+	background-color: transparent;
+	padding: 10px;
+}
+div.group form, div.group input, div.group button.btn{
+	margin-top: 4px;
+}
+
+div.group form span.fa{
+	padding-top:4px;
+	padding-left: 2px;
+	padding-right: 2px;
+}
+div#alert-passwd{
+	margin-bottom: 10px;
+}
+
+span.fa-lock{
+	transition: 0.4s;
+	cursor: pointer;
+	color: #BDBDBD;
+	opacity: 0.8;
+}
+span.fa-lock:hover{
+	color: #246482;
+	text-shadow: 2px 2px 2px #D9EDF7;
+	opacity: 1;
+}
+span.fa-unlock{
+	color: #246482;
+	cursor: pointer;
+	transition: 0.4s;
+} 
+div.group hr{
+	margin-bottom: 0px;
+}
+
+div.group div.alert-grp{
+	background-color: #F8F8F8;
+	color: #777777;
+	border: #CCCCCC solid 1px;
+	border-radius: 4px;
+	padding-top: 6px;
+	padding-bottom: 6px;
+	margin-bottom: 6px;
+}
+
+div.group div.alert-grp em{
+	color: #246482;
+}
+
+div.group div.alert-grp a{
+	color: inherit;
+}
+
+div.alert-pwd{
+	widht: auto;
+	margin-bottom: 0px;
+	float: right;
+	margin-top: 4px;
+	margin-left: 6px;
+	padding-top: 6px;
+	padding-bottom: 6px;
+	
+	
+}

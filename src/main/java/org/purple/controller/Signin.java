@@ -45,8 +45,7 @@ public class Signin extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
 	 *      response)
 	 */
-	protected void doGet(HttpServletRequest request,
-			HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		Page p = new Page();
 		p.setContent("signin.jsp");
@@ -59,8 +58,7 @@ public class Signin extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
 	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request,
-			HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		
 		/**
@@ -99,7 +97,7 @@ public class Signin extends HttpServlet {
 
 		} else if (Isep.nullOrEmpty(pseudo, pwd)){
 			p.setWarning(true);
-			p.setWarningMessage("Vos identifiants n'ont pas été correctement récupérés. Veuillez vous connecter à nouveau.");
+			p.setWarningMessage("vos identifiants n'ont pas été correctement récupérés. Veuillez vous connecter à nouveau.");
 			p.setTitle("ISEP / APP - Connection");
 			request.setAttribute("pages", p);
 			this.getServletContext().getRequestDispatcher("/jsp/signin.jsp").forward(request, response);
@@ -110,17 +108,13 @@ public class Signin extends HttpServlet {
 			user.setPassword(pwd);
 			user = du.comparePwd(user);
 			if(user.getId() !=  0){
-				
-				p.setTitle("ISEP / APP - Home");
-				p.setContent("home.jsp");
-				url = "/template.jsp";
+
 				request.getSession(true).setAttribute("user", user);
-				request.setAttribute("pages", p);
 				response.sendRedirect("/Isepapp/Home");
 			} else {
 				p.setTitle("ISEP / APP - Connection");
 				p.setError(true);
-				p.setErrorMessage("Un problème est survenu lors de l'établissement de la connection. "
+				p.setErrorMessage("un problème est survenu lors de l'établissement de la connection. "
 						+ "Pour toute récupération de mot de passe veuillez vous rapprocher de l'administration de l'ISEP.");
 				
 				url = "/jsp/signin.jsp";
@@ -128,12 +122,13 @@ public class Signin extends HttpServlet {
 				this.getServletContext().getRequestDispatcher(url).forward(request, response);
 			}
 	
-			try {
-				bddServletCo.close();
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+		}
+	
+		try {
+			bddServletCo.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 	}
 }
