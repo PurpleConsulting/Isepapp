@@ -1,14 +1,16 @@
 package org.purple.model;
 
 /*** SQL import ***/
+import java.math.BigInteger;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.security.SecureRandom;
 
-import org.purple.bean.Group;
 import org.purple.bean.User;
 import org.purple.constant.Bdd;
+import org.purple.constant.Isep;
 
 /*** Purple import ***/
 
@@ -245,17 +247,32 @@ public class DaoUsers extends Dao<User> {
 	}
 	
 	public User comparePwd(User u){
-		if(!u.getPassword().equals("null")){
-			String[] params = {u.getPassword(), u.getPseudo()};
-			String q = "SELECT Users.id FROM Users "
-					+ "	WHERE Users.`password` = PASSWORD(?) AND Users.pseudo = ?;";
-			ResultSet currsor = Bdd.prepareExec(this.connect, q, params);
-			try { if(!currsor.next()) u = new User();
-				if(currsor.getInt(1) != u.getId()) u = new User();
-			} catch (SQLException e) { 
-				u = new User();
+		if(Isep.ISEP_LDAP){
+			LDAPaccess ldap = new LDAPaccess();
+			LDAPObject iseper = new LDAPObject();
+			try {
+				iseper = ldap.LDAPget(u.getPseudo(), u.getPassword());
+			} catch (Exception e1) {
+				// TODO Auto-generated catch block
+				SecureRandom random = new SecureRandom();
+				iseper.setPassword(new BigInteger(130, random).toString(32));
+			}
+			
+			if(iseper.getPassword().equals(u.getPassword())){
+				return u;
 			}
 		}
+		
+		String[] params = {u.getPassword(), u.getPseudo()};
+		String q = "SELECT Users.id FROM Users "
+				+ "	WHERE Users.`password` = PASSWORD(?) AND Users.pseudo = ?;";
+		ResultSet currsor = Bdd.prepareExec(this.connect, q, params);
+		try { if(!currsor.next()) u = new User();
+			if(currsor.getInt(1) != u.getId()) u = new User();
+		} catch (SQLException e) { 
+			u = new User();
+		}
+			
 		return u;
 	}
 	
