@@ -2,10 +2,10 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <div>
-	<div style="margin-left:10%</th> width:80%">
+	<div style="" class="table-responsive">
 		<p>
 		</p>
-		<table>
+		<table class="table table-striped">
 			<thead>
 				<tr>
 		     		<th>Nom</th>

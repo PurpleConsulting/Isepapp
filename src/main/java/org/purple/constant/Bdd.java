@@ -15,9 +15,9 @@ public class Bdd {
  */
 
 
-	public static final String BDDHOST = "172.16.187.22";
+//	public static final String BDDHOST = "172.16.187.22";
 	
-//	public static final String BDDHOST = "ns370799.ip-91-121-193.eu";
+	public static final String BDDHOST = "ns370799.ip-91-121-193.eu";
 
 	public static final String BDDCLIENT = "com.mysql.jdbc.Driver";
 	public static final String BDDUSER = "isep";
@@ -109,12 +109,9 @@ public class Bdd {
 	public static final int preparePerform(Connection co, String query, String[] params){
 		PreparedStatement prestmt = null;
 		int change = 0;
-		try {
+		try {int i = 0;
 			prestmt = co.prepareStatement(query);
-			int i = 0;
-			for(String p : params){
-				i++; prestmt.setString(i,p);
-			}
+			for(String p : params){ i++; prestmt.setString(i,p); }
 			change = prestmt.executeUpdate();
 			//prestmt.close();
 		} catch (SQLException e) {

@@ -172,6 +172,28 @@ public class DaoGroups extends Dao<Group>{
 		return gs;
 	}
 	
+	public Group[] selectGroupbyTutor(User t){
+		Group[] g = new Group[0];
+		String[] params = {Integer.toString(t.getId())};
+		String q = "SELECT Groups.`id`, Groups.`name`, Groups.`class`"
+				+ " FROM Groups WHERE Groups.id_tutor = ? ;";
+		ResultSet currsor = Bdd.prepareExec(this.connect, q, params);
+		try {
+			if(currsor.last()){
+				g = new Group[currsor.getRow()];
+				currsor.beforeFirst(); 
+			}
+			int i = 0;
+			while(currsor.next()){ 
+				g[i] = new Group(currsor.getInt(1), currsor.getString(2), currsor.getString(3));
+				i++;
+			}
+		} catch (SQLException e) {
+			g = new Group[0];
+		}
+		return g;
+	}
+	
 	public Group[] selectGroupbyClass(String classe) {
 		// TODO Auto-generated method stub
 		Group[] gs = new Group[0];

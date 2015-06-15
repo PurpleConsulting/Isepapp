@@ -164,8 +164,7 @@ public class AlterGroups extends HttpServlet {
 			// -- since the user is authorize on the page we already know
 			// he will be able to return on a altergroup page
 
-			if (!Isep.nullOrEmpty(scope, newName, newTutor)
-					&& Auth.isRespo(request)) {
+			if (!Isep.nullOrEmpty(scope, newName, newTutor) && Auth.isRespo(request)) {
 				/**
 				 * HERE THE USER WANT TO CHANGE THE GROUP PROPERTIES GROUP NAME
 				 * AND TUTOR
@@ -195,16 +194,14 @@ public class AlterGroups extends HttpServlet {
 				p.setTitle("ISEP / APP - Edition de group");
 				p.setContent("editor/edit_group.jsp");
 
-			} else if (!Isep.nullOrEmpty(scope, newName, newTutor)
-					&& Auth.isTutor(request, scope)) {
+			} else if (!Isep.nullOrEmpty(scope, newName, newTutor) && Auth.isTutor(request, scope)) {
 				/**
 				 * HERE THE USER WANT TO CHANGE THE GROUP PROPERTIES GROUP NAME
 				 * AND TUTOR /!\ BUT HE IS NOT RESPO /!\
 				 */
 				redirectionGroup = dg.select(scope);
 				p.setCss("bootstrap-select.min.css", "edit_group.css");
-				p.setJs("bootstrap-select.min.js", "bootbox.min.js",
-						"edit_group.js");
+				p.setJs("bootstrap-select.min.js", "bootbox.min.js", "edit_group.js");
 				p.setTitle("ISEP / APP - Edition de groupe");
 				p.setWarning(true);
 				p.setWarningMessage("les propriétés du groupe, nom et tuteur ne sont modifiable que par le reponsable d'app."

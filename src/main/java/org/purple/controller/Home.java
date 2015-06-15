@@ -47,10 +47,7 @@ public class Home extends HttpServlet {
 			HttpSession s = request.getSession();
 			if(Auth.isRespo(request)){
 				User[] teachers = du.selectAllTutor();
-				
 				request.setAttribute("teachers", teachers); // à rajouter dans le JS !!!
-				Isep.bagPackHome(p, s);
-				
 			} else if(Auth.isTutor(request)){
 				
 			} else if(Auth.isAdmin(request)){
@@ -58,7 +55,7 @@ public class Home extends HttpServlet {
 			} else if(Auth.isStudent(request)){
 				
 			}
-			
+			Isep.bagPackHome(p, s);
 			p.setContent("home/common.jsp");
 			p.setTitle("ISEP / APP - Accueil");
 			

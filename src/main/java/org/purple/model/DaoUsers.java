@@ -237,12 +237,40 @@ public class DaoUsers extends Dao<User> {
 		return res;
 	}
 	
+	public boolean hasPassword(User u){
+		boolean res = true;
+		String[] params = {Integer.toString(u.getId())};
+		String q = "SELECT Users.`password` FROM Users WHERE id = ? ;";
+		ResultSet currsor = Bdd.prepareExec(this.connect, q, params);
+		try {
+			currsor.next();
+			if(currsor.getString(1).equals("null")) res = false;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			res = false;
+			e.printStackTrace();
+		}
+		return res;
+	}
+	
 	public boolean setPassword(User u){
 		boolean res = true;
 		String[] params = {u.getPassword(), Integer.toString(u.getId())};
 		String q = "UPDATE Users SET Users.`password` = PASSWORD(?) WHERE Users.id = ? ;";
 		int affected = Bdd.preparePerform(this.connect, q, params);
 		if(affected < 1) res = false;
+		return res;
+	}
+	
+	public boolean confirmPwd(User u){
+		boolean res = true;
+		String[] params = {u.getPassword(), u.getPseudo()};
+		String q = "SELECT Users.id FROM Users "
+				+ "	WHERE Users.`password` = PASSWORD(?) AND Users.pseudo = ?;";
+		ResultSet currsor = Bdd.prepareExec(this.connect, q, params);
+		try { if(!currsor.next()) res = false;
+			if(currsor.getInt(1) != u.getId()) res = false;
+		} catch (SQLException e) { res = false; }
 		return res;
 	}
 	
