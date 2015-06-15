@@ -9,25 +9,34 @@
 </div>
 <div class="row">
 	<div class="col-xs-10 col-xs-offset-1">
-		<div id="september" class="calendar col-sm-10"></div>
-		<div id="october" class="calendar col-sm-10"></div>
+		<button type="button" class="btn btn-primary" id="semester1">Semestre1</button>
+		<button type="button" class="btn btn-default" id="semester2">Semestre2</button>
 	</div>
-	<div class="col-xs-10 col-xs-offset-1">
-		<div id="november" class="calendar col-sm-10"></div>
-		<div id="december" class="calendar col-sm-10"></div>
+	<div id="premierSemester">
+		<div class="col-xs-10 col-xs-offset-1">
+			<div id="september" class="calendar col-sm-10"></div>
+			<div id="october" class="calendar col-sm-10"></div>
+		</div>
+		<div class="col-xs-10 col-xs-offset-1">
+			<div id="november" class="calendar col-sm-10"></div>
+			<div id="december" class="calendar col-sm-10"></div>
+		</div>
+		<div class="col-xs-10 col-xs-offset-1">
+			<div id="january" class="calendar col-sm-10"></div>
+		</div>
 	</div>
-	<div class="col-xs-10 col-xs-offset-1">
-		<div id="january" class="calendar col-sm-10"></div>
-		<div id="february" class="calendar col-sm-10"></div>
+	<div id="deuxiemeSemester">
+		<div class="col-xs-10 col-xs-offset-1">
+			<div id="february" class="calendar col-sm-10"></div>
+			<div id="march" class="calendar col-sm-10"></div>
+		</div>
+		
+		<div class="col-xs-10 col-xs-offset-1">
+			<div id="april" class="calendar col-sm-10"></div>
+			<div id="may" class="calendar col-sm-10"></div>
+		</div>
+		<div class="col-xs-10 col-xs-offset-1">
+			<div id="june" class="calendar col-sm-10"></div> 
+		</div>
 	</div>
-	
-	<div class="col-xs-10 col-xs-offset-1">
-		<div id="march" class="calendar col-sm-10"></div>
-		<div id="april" class="calendar col-sm-10"></div>
-	</div>
-	<div class="col-xs-10 col-xs-offset-1">
-		<div id="may" class="calendar col-sm-10"></div>
-		<div id="june" class="calendar col-sm-10"></div> 
-	</div>
-
 </div>

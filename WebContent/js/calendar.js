@@ -16,7 +16,7 @@ $(document).ready(function() {
 			businessHours: true, // display business hours
 			editable: true,
 			contentHeight: 355
-			});
+			});			 
 };	
 	
 	
@@ -32,7 +32,30 @@ $(document).ready(function() {
 	displayCalendar('may','2016-05-01');
 	displayCalendar('june','2016-06-01');
 	
-	$("div.fc-row.fc-week.fc-widget-content").last().remove();
+	//$("div.fc-row.fc-week.fc-widget-content").last().remove();
 
+	$("#deuxiemeSemester").hide();
+	$(".btn-primary").prop("disabled",true);
 	
+	$('#semester2').click(function(){ 
+		$(this).removeClass("btn-default");
+		$(this).addClass("btn-primary");
+		$('#semester1').removeClass("btn-primary");
+		$('#semester1').addClass("btn-default");
+		$(".btn-primary").prop("disabled",true);
+		$(".btn-default").prop("disabled",false);
+		$("#premierSemester").hide();
+		$("#deuxiemeSemester").show();
+		});
+	
+	$('#semester1').click(function(){ 
+		$(this).removeClass("btn-default");
+		$(this).addClass("btn-primary");
+		$('#semester2').removeClass("btn-primary");
+		$('#semester2').addClass("btn-default");
+		$(".btn-primary").prop("disabled",true);
+		$(".btn-default").prop("disabled",false);
+		$("#deuxiemeSemester").hide();
+		$("#premierSemester").show();
+		});
 	});
