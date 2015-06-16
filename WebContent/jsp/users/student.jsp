@@ -158,6 +158,9 @@
 				</div>
 			</c:if>
 		</c:forEach>
+		<c:if test="${fn:length(missingGrid) == 0}">
+			<img src="img/empty/missing.svg" alt="" class="app-empty-img"/>
+		</c:if>
 		</div>
 		<c:if test="${fn:length(missingGrid) > 3 }">
 			<nav>

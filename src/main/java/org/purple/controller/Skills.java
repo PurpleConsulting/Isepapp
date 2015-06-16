@@ -41,11 +41,10 @@ public class Skills extends HttpServlet {
 			Connection bddServletCo = Bdd.getCo();
 			DaoSkills dsk = new DaoSkills(bddServletCo);
 			
-			Skill[] skills =  dsk.selectAllSkills();
-			for(Skill s: skills ){
-				dsk.completeSub_skills(s);
-			}
-			
+			Skill[] skills = new Skill[0]; //dsk.selectAllSkills();
+//			for(Skill s: skills ){
+//				dsk.completeSub_skills(s);
+//			
 			p.setTitle("ISEP / APP - Les compétences");
 			p.setCss("skill_display.css");
 			p.setJs("skill_display.js");

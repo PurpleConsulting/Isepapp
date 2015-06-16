@@ -1,10 +1,11 @@
 @CHARSET "UTF-8";
-div.group{
+div.group, div.depots{
 	border: solid #ccc 1px;
 	min-height: 200px;
 	border-radius: 6px;
 	background-color: transparent;
 	padding: 10px;
+	margin-bottom: 12px;
 }
 div.group form, div.group input, div.group button.btn{
 	margin-top: 4px;
