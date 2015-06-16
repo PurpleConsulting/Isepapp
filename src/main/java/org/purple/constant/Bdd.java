@@ -19,8 +19,8 @@ public class Bdd {
 	public static final String BDDHOST = "ns370799.ip-91-121-193.eu";
 
 	public static final String BDDCLIENT = "com.mysql.jdbc.Driver";
-	public static final String BDDUSER = "isep";
-	public static final String BDDPASSWRD = "paris06";
+	public static final String BDDUSER = "purple";
+	public static final String BDDPASSWRD = "purple";
 	public static final String BDDPORT = "6311";
 	public static final String BDDSCHEMA = "APPDB";
 	public static final String BDDURL = "jdbc:mysql://" + BDDHOST + ":"+ BDDPORT + "/" + BDDSCHEMA;

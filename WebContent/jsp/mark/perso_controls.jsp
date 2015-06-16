@@ -30,21 +30,22 @@
 		  		<c:forEach var="skill" items="${skills}" varStatus="status">
 		  		<c:if test="${skill.getId() != 0 }">
 		  			<div role="tabpanel" class='tab-pane ${status.index == 1 ? "active":""}' id="tab${status.index}">
-		  				<form id="form${skill.getId()}" class="groupgrid">
+		  				<form id="form${skill.getId()}" class="groupgrid" action='PersoControls?pseudo=${student.getPseudo()}' method="post">
+		  					<input type="hidden" name="student" value="${student.getPseudo()}" />
 			    			<h4 data-naming="${skill.getTitle()}"><c:out value='${status.index} - ${skill.getSubtitle()}'></c:out></h4>
 			    			<c:forEach var="sub_skill" items="${skill.getSubSkills()}" varStatus="status">
 					  			<hr/><h5><c:out value="${sub_skill.getTitle()}"></c:out></h5>
 						  		<div class="line">
 						  			<c:forEach var="value" items="${values}" varStatus="status">
 								  		<label>
-								    	<input type="radio" name="${sub_skill.getId()}" value="${value.getId()}">
+								    	<input type="radio" name="sub_skill_${sub_skill.getId()}" value="${value.getId()}">
 								    	<c:out value='${value.getTitle()}'></c:out>
 								  		</label>
 									</c:forEach>
 									<c:set var="val" value="${skill.getId()}"/>
 								</div>
 					  		</c:forEach>
-					  		<button class="btn btn-default marker" disabled><span class="fa fa-crosshairs"></span>  Noter</button><!-- fa-cog fa-spin -->
+					  		<button class="btn btn-default marker" type="submit"><span class="fa fa-crosshairs"></span>  Noter</button><!-- fa-cog fa-spin -->
 						</form>
 					</div>
 				</c:if>
