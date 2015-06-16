@@ -7,7 +7,7 @@ div.container-fluid.content div.row div{
 	padding-left: 0px;
 	padding-right: 0px;
 }
-div.idcard, div.mark, div.crossmark, div.missing, div.delivery{
+div.idcard, div.mark, div.crossmark, div.missing, div.delivery, div.data{
 	border: solid #ccc 1px;
 	min-height: 200px;
 	border-radius: 6px;
