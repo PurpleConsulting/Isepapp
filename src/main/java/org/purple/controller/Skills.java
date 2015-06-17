@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.purple.bean.Page;
 import org.purple.bean.Skill;
 import org.purple.constant.Bdd;
+import org.purple.constant.Isep;
 import org.purple.model.Auth;
 import org.purple.model.DaoSkills;
 
@@ -41,10 +42,10 @@ public class Skills extends HttpServlet {
 			Connection bddServletCo = Bdd.getCo();
 			DaoSkills dsk = new DaoSkills(bddServletCo);
 			
-			Skill[] skills = new Skill[0]; //dsk.selectAllSkills();
-//			for(Skill s: skills ){
-//				dsk.completeSub_skills(s);
-//			
+			Skill[] skills = dsk.selectAllSkills();
+			for(Skill s: skills ){
+				dsk.completeSub_skills(s);
+			}
 			p.setTitle("ISEP / APP - Les compétences");
 			p.setCss("skill_display.css");
 			p.setJs("skill_display.js");
@@ -61,6 +62,12 @@ public class Skills extends HttpServlet {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+		} else {
+			Isep.bagPackHome(p, request.getSession());
+			p.setWarning(true);
+			p.setWarningMessage("Erreur de connection.");
+			request.setAttribute("pages", p);
+			this.getServletContext().getRequestDispatcher("/template.jsp").forward(request, response);
 		}
 		
 	}

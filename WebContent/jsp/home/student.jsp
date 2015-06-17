@@ -4,7 +4,56 @@
 <div class="row">
 	<h1 class="col-xs-offset-1 col-xs-10">
 		Accueil
-		<small> - APP - 2016 S1</small>
+		<small> - <c:out value="${user.getPseudo()}"></c:out> - </small>
 	</h1>
 </div>
 <c:import url="/jsp/alert.jsp" charEncoding="UTF-8"></c:import>
+<div class="row">
+	<div class="col-xs-10 col-xs-offset-1 home-skill">
+		<h4></h4>
+		
+	</div>
+</div>
+<div class="row">
+	<div class="col-xs-10 col-xs-offset-1 home-delivery">
+		<h4> - Les livrables du groupes - </h4>
+		
+	</div>
+</div>
+<div class="row">
+	<div class="col-xs-10 col-xs-offset-1 home-missing">
+		<h4> - Les Absences - </h4>
+		<div id="blk-missing">
+			<div class="alert alert-warning active" role="alert" id="blk1">
+				<strong>Retard</strong>:
+				2015-02-06 à 9h, 
+				Text motif fde l'absence ou du retard.
+			</div>
+			<div class="alert alert-info active" role="alert" id="blk1">
+				<strong>Retard</strong>:
+				2015-02-06 à 9h, 
+				Text motif fde l'absence ou du retard.
+					/ Heure d'arrivé: <strong>10h</strong>
+			</div>
+		</div>
+		<nav class="missing-nav">
+			<ul class="pagination">
+			    <li>
+			      <a data-target="1" href="#" aria-label="Previous">
+			        <span aria-hidden="true">&laquo;</span>
+			      </a>
+			    </li>
+			    <li class="active"><a data-target="1" href="#">1</a></li>
+			    <li><a data-target="2" href="#">2</a></li>
+			    <li><a data-target="3" href="#">3</a></li>
+			    <li><a data-target="4" href="#">4</a></li>
+			    <li><a data-target="5" href="#">5</a></li>
+			    <li>
+			      <a data-target="${rowNum -1}" href="#" aria-label="Next">
+			        <span aria-hidden="true">&raquo;</span>
+			      </a>
+			    </li>
+		  	</ul>
+		</nav>
+	</div>
+</div>

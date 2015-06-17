@@ -12,7 +12,7 @@
 <c:if test="${fn:length(skills) == 0}">
 	<div class="row">
 		<div class="col-xs-offset-2 col-xs-8 ">
-			<img src="img/empty/skill.svg" alt="" />
+			<img src="img/empty/skill.svg" alt=""  class="app-empty-img"/>
 		</div>
 	</div>
 </c:if>
