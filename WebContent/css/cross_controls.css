@@ -114,6 +114,26 @@ form.cross-form{
 form.cross-form.active{
 	display: block;
 }
+.no-row .row{
+	margin-bottom: 0px;
+}
+
+label.checked{
+	background-color: #31708F;
+	border-radius: 12px 4px 4px 12px;
+	color: #FFFFFF;
+	font-weight: bold;
+	padding-right: 6px;
+}
+form.completed{
+	opacity: 0.4;
+	background-color: #F4F4F4;
+	border-radius: 0px 0px 48px 0px;
+}
+form.completed hr{
+	color: #F4F4F4;
+}
+
 
 /* body { */
 /*     background-color: rgb(190,190,230);

@@ -142,18 +142,24 @@ public class CrossControls extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
 	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request,
-			HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		request.setCharacterEncoding("UTF-8");
 		Page p = new Page();
-
+		/**
+		 * FOR AJAX QUERIES
+		 */
+		String flagForm = request.getParameter("flag-form");
+		
+		
+		/**
+		 * FOR REGULAR POST QUERIES
+		 */
 		// -- params for cross evaluation
 		String pseudo = request.getParameter("student");
 		String idStudent = request.getParameter("id_student");
 		/* the subskill evaluated by the student */
-		ArrayList<String> _params = Collections.list(request
-				.getParameterNames());
+		ArrayList<String> _params = Collections.list(request.getParameterNames());
 		ArrayList<String> submitSubSkills = new ArrayList<String>();
 		for (String _p : _params) {
 			if (_p.indexOf(this.pattern) != -1) {
@@ -183,8 +189,27 @@ public class CrossControls extends HttpServlet {
 			dusr.addGroup(u);
 
 			Value[] val = dv.selectAllValues();
-
-			if (!Isep.nullOrEmpty(pseudo, idStudent)) {
+			if(!Isep.nullOrEmpty(flagForm)){
+				JSONObject result = new JSONObject();
+				JSONObject grid = new JSONObject();
+				ArrayList<Mark> allMarks = dmrk.selectByTutor(u.getId());
+				for(Mark mark : allMarks){
+					JSONObject control = new JSONObject();
+					control.put("value", mark.getIdValue());
+					control.put("student", mark.getIdOwner());
+					control.put("subSkillId", mark.getIdSubSkill());
+					grid.append("grid", control);
+				}
+				if(grid.isNull("grid")) { 
+					String[] tab = new String[0];
+					grid.putOnce("grid", tab);
+				};
+				result.put("result", grid);
+				response.setHeader("content-type", "application/json");
+				response.getWriter().write(result.toString());
+				
+				
+			} else if(!Isep.nullOrEmpty(pseudo, idStudent)) {
 				/**
 				 * THIS IS AN EVALUATION REQUEST
 				 */
@@ -192,12 +217,12 @@ public class CrossControls extends HttpServlet {
 				// -- This is the classmate evaluated
 				User targetUser = dusr.select(pseudo);
 				dusr.addGroup(targetUser);
+				request.setAttribute("ink", targetUser.getPseudo());
 
 				// -- Hashmap (id_sub_skill, id_value)
 				HashMap<String, String> submitValues = new HashMap<String, String>();
 				for (String sbs : submitSubSkills) {
-					submitValues.put(sbs,
-							request.getParameter(this.pattern + sbs));
+					submitValues.put(sbs, request.getParameter(this.pattern + sbs));
 				}
 
 				// -- Hashmap (id_value, bean:value)
@@ -218,9 +243,12 @@ public class CrossControls extends HttpServlet {
 					ArrayList<SubSkill> subSkills = new ArrayList<SubSkill>();
 					for (String sskill : submitSubSkills) {
 						SubSkill in = dssk.select(sskill);
-						if (in.getIdSkill() != 0 || in.getId() == 0)
+						if (in.getIdSkill() != 0 || in.getId() == 0){
 							businessFlague = false;
-						subSkills.add(in);
+						} else {
+							subSkills.add(in);
+						}
+						
 					}
 
 					// -- Are those values real cross values ??
@@ -228,8 +256,9 @@ public class CrossControls extends HttpServlet {
 					while (it.hasNext()) {
 						Map.Entry pair = (Map.Entry) it.next();
 						String vv = (String) pair.getValue();
-						if (!mapV.keySet().contains(vv))
+						if (!mapV.keySet().contains(vv)){
 							businessFlague = false;
+						}
 					}
 
 					//
@@ -241,12 +270,11 @@ public class CrossControls extends HttpServlet {
 					} else {
 						for (SubSkill ss : subSkills) {
 							int valId = Integer.parseInt(submitValues.get(Integer.toString(ss.getId())));
-							marks.add(new Mark(targetUser.getId(), ss.getId(), valId, true));
-
-
+							marks.add(new Mark(targetUser.getId(),u.getId(), ss.getId(), valId, true));
 						}
 						for (Mark m : marks) {
 							boolean querrysuccess = true;
+							m.setIdTutor(u.getId());
 							querrysuccess = dmrk.createCrossMark(m);
 							if (!querrysuccess) sqlFlag = false;
 						}
@@ -292,8 +320,38 @@ public class CrossControls extends HttpServlet {
 				p.setCss("bootstrap-select.min.css", "cross_controls.css");
 				p.setJs("cross_controls.js");
 				request.setAttribute("pages", p);
-				this.getServletContext().getRequestDispatcher("/template.jsp")
-						.forward(request, response);
+				this.getServletContext().getRequestDispatcher("/template.jsp").forward(request, response);
+			} else {
+				
+				p.setWarning(true);
+				p.setWarningMessage("une erreur est survenue, avez vous bien remplie"
+						+ " tous les champs des formulaires à votre disposition? ");
+				
+				// -- redirection après avoir submit
+				String grp = u.getGroup();
+				Deadline deadline = dl.fetchCrossDeadline(grp);
+
+				// -- We get the group
+				Group gr = dgroup.select(grp);
+				dgroup.completeMemebers(gr);
+				Predicate<User> filter = new MyOwnClassMate(u.getPseudo());
+				gr.getMembers().removeIf(filter);
+
+				// Display skills in tab
+				Skill skill = ds.selectCrossSkills();
+				ds.completeSub_skills(skill); // Add sub_skills into skills
+
+				request.setAttribute("group", gr);
+				request.setAttribute("skills", skill);
+				request.setAttribute("values", val);
+				request.setAttribute("deadline", deadline);
+				p.setTitle("ISEP / APP - Evaluation croisée");
+				p.setContent("mark/cross_controls.jsp");
+				p.setCss("bootstrap-select.min.css", "cross_controls.css");
+				p.setJs("cross_controls.js");
+				request.setAttribute("pages", p);
+				this.getServletContext().getRequestDispatcher("/template.jsp").forward(request, response);
+				
 			}
 
 			try {
@@ -302,6 +360,15 @@ public class CrossControls extends HttpServlet {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+		} else {
+			
+			Isep.bagPackHome(p, request.getSession());
+			p.setWarning(true);
+			p.setWarningMessage("seul les étudiants sont authorisés à compléter les évaluation croisés."
+					+ " êtes vous bien connectés à l'application? ");
+			request.setAttribute("pages", p);
+			this.getServletContext().getRequestDispatcher("/template.jsp").forward(request, response);
+			
 		}
 	}
 }
