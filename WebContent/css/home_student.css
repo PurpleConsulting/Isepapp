@@ -1,5 +1,5 @@
 @CHARSET "UTF-8";
-div.home-missing, div.home-delivery{
+div.home-missing, div.home-delivery, div.home-skill{
 	border: solid #ccc 1px;
 	min-height: 200px;
 	border-radius: 6px;
@@ -26,4 +26,13 @@ div.home-missing .alert{
 div.home-missing nav{
 	margin-left: 2%;
 	margin-right: 2%;
+}
+
+div.home-delivery ul.depots li{
+	list-style-type: none;
+	margin-bottom: 4px
+}
+
+li[data-role="exemple"]{
+	display:none;
 }

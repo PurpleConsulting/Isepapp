@@ -17,6 +17,9 @@ public class Deadline {
 		private Boolean completed = false;
 		private int responsable=0;
 		private int cross=0;
+		private String deliveryPath = "null";
+		
+		
 		public Deadline(){
 			
 		}
@@ -83,6 +86,9 @@ public class Deadline {
 			this.deliveryDate = DateTime.parse(date, DateTimeFormat.forPattern(Isep.JODA_UTC));
 			this.deliveryDate = this.deliveryDate.withZone(DateTimeZone.forID(Isep.LOCATION));
 		}
+		public String printDeliveryDate() {
+			return deliveryDate.toString("d/MM à HH:mm");
+		}
 		public Boolean getCompleted() {
 			return completed;
 		}
@@ -112,4 +118,14 @@ public class Deadline {
 		public void setCross(int cross) {
 			this.cross = cross;
 		}
+
+		public String getDeliveryPath() {
+			return deliveryPath;
+		}
+
+		public void setDeliveryPath(String deliveryPath) {
+			this.deliveryPath = deliveryPath;
+		}
+		
+		
 }

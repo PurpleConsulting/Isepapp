@@ -52,10 +52,12 @@
 			<div class="latest-group list">
 			<input type="hidden" value="${fn:length(deadline)}" id="taille"/>
 			<form class="form-inline off deadlineDate" method="post" action="Deadlines">
-				<div class="form-group button">
-					<a class="btn btn-default modify" href="#" role="button"><span class="fa fa-pencil"></span> <span>Modifier</span></a>
-					<button type="submit" class="btn btn-default" id="valid"><span class="fa fa-check"> </span> Valider</button>
-				</div>
+				<c:if test="${!empty deadline}">
+					<div class="form-group button">
+						<a class="btn btn-default modify" href="#" role="button"><span class="fa fa-pencil"></span> <span>Modifier</span></a>
+						<button type="submit" class="btn btn-default" id="valid"><span class="fa fa-check"> </span> Valider</button>
+					</div>
+				</c:if>
 				<input type="hidden" value="${fn:length(deadline)}" name="number"/>
 				<c:set var="length"  value="${fn:length(deadline)}"/>
 				<c:if test="${empty deadline}">

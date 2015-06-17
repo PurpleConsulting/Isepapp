@@ -11,10 +11,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.json.JSONObject;
+import org.purple.bean.Deadline;
 import org.purple.bean.Page;
+import org.purple.bean.User;
 import org.purple.constant.Bdd;
 import org.purple.constant.Isep;
 import org.purple.model.Auth;
+import org.purple.model.DaoDeadline;
 import org.purple.model.DaoGroups;
 import org.purple.model.DaoMissings;
 import org.purple.model.DaoUsers;
@@ -51,9 +54,14 @@ public class ServiceStudentHandler extends HttpServlet {
 		/**
 		 * AJAX QUERY
 		 */
+		// -- quey for depot
+		String deliveryParam = request.getParameter("depot-query");
+		String deliverySudent = request.getParameter("depot-delivery");
 		// -- query for missing
 		String missingParam = request.getParameter("missing-query");
 		String missingStudent = request.getParameter("missing-std");
+		// -- query for  
+		
 		JSONObject result = new JSONObject();
 		
 		if(Auth.isStudent(request)){
@@ -62,8 +70,28 @@ public class ServiceStudentHandler extends HttpServlet {
 			DaoGroups dg = new DaoGroups(bddServletCo);
 			DaoUsers du = new DaoUsers(bddServletCo);
 			DaoMissings dm = new DaoMissings(bddServletCo);
+			DaoDeadline ddl = new DaoDeadline(bddServletCo);
 			
-			if(Isep.nullOrEmpty(missingParam, missingStudent)){
+			if(!Isep.nullOrEmpty(missingParam, missingStudent)){
+				
+			} else if(!Isep.nullOrEmpty(deliveryParam, deliverySudent)){
+				JSONObject depots = new JSONObject();
+				User std = du.select(deliverySudent);
+				du.addGroup(std);
+				Deadline[] deadlines = ddl.selectByGroup(std.getGroup());
+
+				for(Deadline d : deadlines){
+					ddl.addPathToFile(d);
+					JSONObject jsonDead = new JSONObject();
+					jsonDead.put("completed", d.getCompleted());
+					jsonDead.put("deveryDate", d.printDeliveryDate());
+					jsonDead.put("status", d.getStatus());
+					jsonDead.put("description", d.getDescription());
+					jsonDead.put("path", d.getDeliveryPath());
+					depots.append("deadlines", jsonDead);
+				}
+				
+				result.put("result", depots);
 				
 			} else {
 				result.put("error", true);
