@@ -1,10 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-<h1 class="col-md-offset-1 col-md-10 col-sm-offset-1 col-sm-10 col-xs-offset-1 col-xs-10">
-	Evaluation des groupes
-	<small> - <c:out value="${sessionScope.user.getPseudo()}"></c:out> </small>
-</h1>
+<div class="row">
+	<h1 class="col-xs-offset-1 col-xs-10">
+		Evaluation des groupes<small> - <c:out value="${sessionScope.user.getPseudo()}"></c:out> </small>
+	</h1>
+</div>
 <div class="row">
 	<div class="col-xs-offset-1 col-xs-10 select-group">
 		<form action="Controls" method="post">
@@ -48,7 +49,7 @@
 								  		<label>
 								    	<input type="radio" name="${sub_skill.getId()}" value="${value.getId()}">
 								    	<c:out value='${value.getTitle()}'></c:out>
-								  		</label>
+								  		</label><br/>
 									</c:forEach>
 									<c:set var="val" value="${skill.getId()}"/>
 								</div>

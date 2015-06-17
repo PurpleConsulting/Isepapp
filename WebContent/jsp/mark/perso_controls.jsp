@@ -1,19 +1,29 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-<h1 class="col-md-offset-1 col-md-10 col-sm-offset-1 col-sm-10 col-xs-offset-1 col-xs-10">
-	Evaluation individuelle
-	<small> - <c:out value="${sessionScope.user.getPseudo()}"></c:out> </small>
-</h1>
-<div class="row">
-	<div class="col-xs-offset-1 col-xs-10">
-		Nom : <c:out value="${student.getLastName()}"></c:out><br />
-		Prénom : <c:out value="${student.getFirstName()}"></c:out><br />
-		Groupe : <c:out value="${student.getGroup()}"></c:out><br />
+<div class="row no-row">
+	<h1 class="col-xs-offset-1 col-xs-10">Evaluation individuelle
+		<small> - <c:out value="${sessionScope.user.getPseudo()}"></c:out> </small>
+	</h1>
+</div>
+<div class="col-xs-12 no-col">
+	<c:import url="/jsp/alert.jsp" charEncoding="UTF-8"></c:import>
+</div>
+<div class="row no-row">
+	<div class="alert alert-student col-xs-offset-1 col-xs-10">
+		<div class="col-sm-6">
+			<em class="std-label">Nom :</em> <c:out value="${student.getLastName()}"></c:out><br />
+			<em class="std-label">Prénom :</em> <c:out value="${student.getFirstName()}"></c:out><br />
+			<em class="std-label">Groupe :</em> <c:out value="${student.getGroup()}"></c:out><br />
+		</div>
+		<div class="col-xs-6 class legend">
+			<label class="checked-grp"><input type="radio" checked/>&nbsp; Note de groupe</label><br/>
+			<label class="checked"><input type="radio" checked/>&nbsp; Note personnelle</label><br/>
+		</div>
 	</div>
 </div>
 <div class="row">
-		<div class="col-xs-offset-1 col-xs-10 grid">
+		<div class="col-xs-offset-1 col-xs-10 grid" data-target="${student.getPseudo()}">
 		<div role="tabpanel">
 			<ul class="nav nav-tabs" role="tablist" id="tabs">
 				<c:forEach var="skill" items="${skills}" varStatus="status">
@@ -40,7 +50,7 @@
 								  		<label>
 								    	<input type="radio" name="sub_skill_${sub_skill.getId()}" value="${value.getId()}">
 								    	<c:out value='${value.getTitle()}'></c:out>
-								  		</label>
+								  		</label><br/>
 									</c:forEach>
 									<c:set var="val" value="${skill.getId()}"/>
 								</div>

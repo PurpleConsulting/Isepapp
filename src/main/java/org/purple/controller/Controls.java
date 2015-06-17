@@ -135,17 +135,17 @@ public class Controls extends HttpServlet {
 			if(!Isep.nullOrEmpty(str) && Auth.isTutor(request, str)){
 				// -- Find the group
 				Group g = new Group();
-				String[] name = null; //Store group members
-				
+				String[] name = new String[0]; //Store group members
+				String[] nickname = new String[0];
 				if (g != null){
 					g = dgroup.select(str); //Select group id,name, class by group name
 					dgroup.completeMemebers(g); //Add members into the group selected
 					name = new String[g.getMembers().size()];
-					name = new String[g.getMembers().size()];
+					nickname = new String[g.getMembers().size()];
 					int i=0;
 					for(User u : g.getMembers()){		
 						name[i] = u.getFirstName();
-						//pseudo[i] = u.getPseudo();
+						nickname[i] = u.getPseudo();
 						i++;
 					}
 					
@@ -165,6 +165,7 @@ public class Controls extends HttpServlet {
 				JSONObject list = new JSONObject();
 				
 				list.put("groups", name);
+				list.put("pseudo", nickname);
 				list.put("marks", groupMark);
 				result.put("result", list);
 				

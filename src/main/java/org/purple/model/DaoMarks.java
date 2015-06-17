@@ -28,14 +28,16 @@ public class DaoMarks extends Dao<Mark>{
 				+ "(SELECT Groups.`name` FROM Groups INNER JOIN Users ON Users.id_group = Groups.id WHERE Users.pseudo = ?))) "
 				+ "ON DUPLICATE KEY UPDATE id_value=VALUES(id_value), date=NOW(), id_tutor = "
 				+ "(SELECT Groups.id_tutor FROM Groups WHERE Groups.`name` = "
-				+ "(SELECT Groups.`name` FROM Groups INNER JOIN Users ON Users.id_group = Groups.id WHERE Users.pseudo = ?));";
+				+ "(SELECT Groups.`name` FROM Groups INNER JOIN Users ON Users.id_group = Groups.id WHERE Users.pseudo = ?)),"
+				+ " group_mark = ?;";
 		try{
 			String[] params = {
 					obj.getOwner(),
 					Double.toString(obj.getIdValue()),
 					Integer.toString( obj.getIdSubSkill()),
 					obj.getOwner(),
-					obj.getOwner()};
+					obj.getOwner(),
+					Integer.toString(groupMark)};
 			int affected = Bdd.preparePerform(this.connect, q, params);
 			if(affected == 1 || affected == 2) res = true;
 		}catch (NullPointerException e){
@@ -105,23 +107,30 @@ public class DaoMarks extends Dao<Mark>{
 	public ArrayList<Mark> selectByStudent(String id) {
 		// TODO Auto-generated method stub
 		ArrayList<Mark> allMarks = new ArrayList<Mark>();
-		String q = "SELECT Users.pseudo, `Values`.points, `Values`.title, Skills.title, Sub_skills.title FROM APPDB.Marks "
+		String[] params = {id};
+		String q = "SELECT Users.pseudo, `Values`.points, `Values`.title, Skills.title, Sub_skills.title, "
+				+ "Marks.id_sub_skill, Marks.id_value, Marks.`cross`, Marks.group_mark FROM APPDB.Marks "
 				+ "INNER JOIN APPDB.Users ON Users.id = Marks.id_student "
 				+ "INNER JOIN APPDB.`Values` ON `Values`.id = Marks.id_value "
 				+ "INNER JOIN APPDB.Sub_skills ON Sub_skills.id = Marks.id_sub_skill "
 				+ "INNER JOIN APPDB.Skills ON Sub_skills.id_skill = Skills.id "
 				+ "WHERE Users.id = ?";
 		try{
-			PreparedStatement prestmt = this.connect.prepareStatement(q);
-			prestmt.setString(1,id);
-			ResultSet currsor = prestmt.executeQuery();
+			ResultSet currsor = Bdd.prepareExec(this.connect, q, params);
 			while(currsor.next()){
-				allMarks.add(new Mark(currsor.getString(1), currsor.getDouble(2), currsor.getString(3), currsor.getString(4), currsor.getString(5)));
+				Mark m = new Mark(currsor.getString(1), currsor.getDouble(2),
+						currsor.getString(3), currsor.getString(4),
+						currsor.getString(5));
+				m.setCross(currsor.getBoolean(8));
+				m.setIdSubSkill(currsor.getInt(6));
+				m.setIdValue(currsor.getInt(7));
+				m.setGroupMark(currsor.getBoolean(9));
+				allMarks.add(m);
 			}
-			prestmt.close();
 		}catch (SQLException e){
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			allMarks = new ArrayList<Mark>();
 			return allMarks;
 		}
 		return allMarks;
