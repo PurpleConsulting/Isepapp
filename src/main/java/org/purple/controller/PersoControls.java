@@ -23,7 +23,6 @@ import org.purple.bean.Skill;
 import org.purple.bean.User;
 import org.purple.bean.Value;
 import org.purple.constant.Bdd;
-import org.purple.constant.Isep;
 import org.purple.model.Auth;
 import org.purple.model.DaoGroups;
 import org.purple.model.DaoMarks;
@@ -87,6 +86,26 @@ public class PersoControls extends HttpServlet {
 				Value[] v = dv.selectAllValues();
 				request.setAttribute("values", v);
 				
+				//Display checked btn when there are already marks for the student
+				ArrayList<JSONObject> mark = new ArrayList<JSONObject>();
+				ArrayList<Mark> tabMark = dm.selectByStudent(Integer.toString(u.getId()));
+				
+				JSONObject current = new JSONObject();
+				for (Mark m : tabMark){
+					current = new JSONObject();
+					current.put("subSkill", m.getIdSubSkill());
+					current.put("value", m.getIdValue());
+					mark.add(current);
+				}
+				
+				JSONObject result = new JSONObject();
+				JSONObject list = new JSONObject();
+				list.put("marks", mark);
+				result.put("result", list);
+				
+				response.setHeader("content-type", "application/json");
+				response.getWriter().write(result.toString());
+				
 				p.setJs("bootbox.min.js", "bootstrap-select.min.js","perso_controls.js");
 				p.setCss("bootstrap-select.min.css", "controls.css");
 				p.setTitle("ISEP / APP - Evaluations");
@@ -131,9 +150,6 @@ public class PersoControls extends HttpServlet {
 		}	
 	}
 
-	
-	
-
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
@@ -144,83 +160,47 @@ public class PersoControls extends HttpServlet {
 		/**
 		 * AJAX QUERY PARAMS
 		 */
-		//-- fill all radios
-		String markedStudent = request.getParameter("marked");
-
+		
 		/**
 		 * POST PARAMETERS
 		 */
 		// -- Add marks query
+		
+		Connection bddServletCo = Bdd.getCo();
+		DaoMarks dm = new DaoMarks(bddServletCo);
+		
 		String student = request.getParameter("student");
 		
-		
-		if(Auth.isTutor(request) || Auth.isRespo(request)){
-		
-			Connection bddServletCo = Bdd.getCo();
-			DaoMarks dm = new DaoMarks(bddServletCo);
-			DaoUsers du = new DaoUsers(bddServletCo);
-			DaoSkills ds = new DaoSkills(bddServletCo);
-			DaoValues dv = new DaoValues(bddServletCo);
-			
-			if(!Isep.nullOrEmpty(markedStudent)){
-				 
-				//Display checked btn when there are already marks for the student
-				ArrayList<JSONObject> mark = new ArrayList<JSONObject>();
-				ArrayList<Mark> tabMark = dm.selectByStudent(Integer.toString(u.getId()));
-				
-				JSONObject current = new JSONObject();
-				for (Mark m : tabMark){
-					current = new JSONObject();
-					current.put("subSkill", m.getIdSubSkill());
-					current.put("value", m.getIdValue());
-					mark.add(current);
-				}
-				
-				JSONObject result = new JSONObject();
-				JSONObject list = new JSONObject();
-				list.put("marks", mark);
-				result.put("result", list);
-				
-				response.setHeader("content-type", "application/json");
-				response.getWriter().write(result.toString());
+		ArrayList<String> _params = Collections.list(request.getParameterNames());
+		ArrayList<String> submitSubSkills = new ArrayList<String>();
+		for (String _p : _params) {
+			if (_p.indexOf(this.pattern) != -1) {
+				submitSubSkills.add(_p.substring(this.patternLimit));
 			}
-			if(!Isep.nullOrEmpty(student)){
-				ArrayList<String> _params = Collections.list(request.getParameterNames());
-				ArrayList<String> submitSubSkills = new ArrayList<String>();
-				for (String _p : _params) {
-					if (_p.indexOf(this.pattern) != -1) {
-						submitSubSkills.add(_p.substring(this.patternLimit));
-					}
-				}
-				HashMap<String, String> submitValues = new HashMap<String, String>();
-				for (String s : submitSubSkills){
-					submitValues.put(s,request.getParameter(this.pattern + s));
-				}
-				boolean querySuccess = true;
-				Iterator it = submitValues.entrySet().iterator();
-				while (it.hasNext()) {
-					Map.Entry pair = (Map.Entry) it.next();
-					Mark m = new Mark(Integer.parseInt((String)pair.getValue()), Integer.parseInt((String)pair.getKey()));
-					m.setOwner(student);
-					m.setGroupMark(false);
-					querySuccess = querySuccess & dm.create(m);
-				}
+		}
+		HashMap<String, String> submitValues = new HashMap<String, String>();
+		for (String s : submitSubSkills){
+			submitValues.put(s,request.getParameter(this.pattern + s));
+		}
+		boolean querySuccess = true;
+		Iterator it = submitValues.entrySet().iterator();
+		while (it.hasNext()) {
+			Map.Entry pair = (Map.Entry) it.next();
+			Mark m = new Mark(Integer.parseInt((String)pair.getValue()), Integer.parseInt((String)pair.getKey()));
+			m.setOwner(student);
+			m.setGroupMark(false);
+			querySuccess = querySuccess & dm.create(m);
+		}
+		
+		if(querySuccess){
+			p.setSuccess(true);
+			p.setSuccessMessage("Evaluation réussie !");
+			if(Auth.isTutor(request) || Auth.isRespo(request)){
 				
-				if(querySuccess){
-					p.setSuccess(true);
-					p.setSuccessMessage("Evaluation réussie !");
-				
-				}else{
-					p.setWarning(true);
-					p.setWarningMessage("Une erreur est survenue. Veuillez revérifier les formulaires de notation !");
-					p.setJs("bootbox.min.js", "bootstrap-select.min.js","perso_controls.js");
-					p.setCss("bootstrap-select.min.css", "controls.css");
-					p.setTitle("ISEP / APP - Evaluations");
-					p.setContent("mark/perso_controls.jsp");
-					request.setAttribute("pages", p);
-				}
-			
-			
+				//Create instance Dao
+				DaoUsers du = new DaoUsers(bddServletCo);
+				DaoSkills ds = new DaoSkills(bddServletCo);
+				DaoValues dv = new DaoValues(bddServletCo);
 				
 				//Display student info to know who we are giving individual marks 
 				String pseudo = request.getParameter("pseudo");
@@ -252,7 +232,15 @@ public class PersoControls extends HttpServlet {
 					p.setContent("mark/perso_controls.jsp");
 					request.setAttribute("pages", p);
 				
-				
+					this.getServletContext().getRequestDispatcher("/template.jsp").forward(request, response);
+					
+					//Close Dao
+					try {
+						bddServletCo.close();
+					} catch (SQLException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 				}else{
 					p.setTitle("ISEP / APP - Home");
 					p.setContent("home/student.jsp"); //A revoir
@@ -260,29 +248,43 @@ public class PersoControls extends HttpServlet {
 					p.setWarningMessage("L'élève que vous souhaitez noter n'existe pas. Veuillez consulter la liste des groupes pour trouver un élève existant.");
 					request.setAttribute("pages", p);
 					
-
-				}	
+					this.getServletContext().getRequestDispatcher("/template.jsp").forward(request, response);
+					
+					//Close Dao
+					try {
+						bddServletCo.close();
+					} catch (SQLException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+			} else {
+				p.setTitle("ISEP / APP - Home");
+				p.setContent("home/student.jsp");
+				p.setWarning(true);
+				p.setWarningMessage("La page que vous essayez d'atteindre n'est accessible que par les tuteurs d'APP.");
+				request.setAttribute("pages", p);
 				
 				this.getServletContext().getRequestDispatcher("/template.jsp").forward(request, response);
-				
-				//Close Dao
-				try {
-					bddServletCo.close();
-				} catch (SQLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-
-				
 			}	
-		}else {
-			p.setTitle("ISEP / APP - Home");
-			p.setContent("home/student.jsp");
+		}else{
 			p.setWarning(true);
-			p.setWarningMessage("La page que vous essayez d'atteindre n'est accessible que par les tuteurs d'APP.");
+			p.setWarningMessage("Une erreur est survenue. Veuillez revérifier les formulaires de notation !");
+			p.setJs("bootbox.min.js", "bootstrap-select.min.js","perso_controls.js");
+			p.setCss("bootstrap-select.min.css", "controls.css");
+			p.setTitle("ISEP / APP - Evaluations");
+			p.setContent("mark/perso_controls.jsp");
 			request.setAttribute("pages", p);
-			
+		
 			this.getServletContext().getRequestDispatcher("/template.jsp").forward(request, response);
-		}
+			
+			//Close Dao
+			try {
+				bddServletCo.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}	
 	}
 }
