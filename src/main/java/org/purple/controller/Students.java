@@ -120,7 +120,7 @@ public class Students extends HttpServlet {
 					p.setContent("users/student.jsp");
 					p.setTitle("ISEP / APP - Etudiants");
 					p.setCss("bootstrap-select.min.css", "student.css");
-					p.setJs("bootstrap-select.min.js", "bootbox.min.js", "student.js");
+					p.setJs("bootstrap-select.min.js", "bootbox.min.js","student.js","data_student.js");
 					
 					request.setAttribute("student", std);// -- we send the student
 					request.setAttribute("missingGrid", missingGrid);// -- we send the his missing
@@ -260,7 +260,7 @@ public class Students extends HttpServlet {
 					p.setContent("users/student.jsp");
 					p.setTitle("ISEP / APP - Etudiants");
 					p.setCss("bootstrap-select.min.css", "student.css");
-					p.setJs("bootstrap-select.min.js", "bootbox.min.js", "student.js");
+					p.setJs("bootstrap-select.min.js", "bootbox.min.js", "student.js","data_student.js");
 					
 					request.setAttribute("student", std);// -- we send the student
 					request.setAttribute("missingGrid", missingGrid);// -- we send the his missing

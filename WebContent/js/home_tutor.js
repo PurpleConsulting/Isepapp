@@ -20,6 +20,8 @@ $(document).ready(function(){
 		input.attr("type", status);
 	});
 	
+	
+	
 	(function () {
 		var pseudo = $("#alert-passwd").attr("data-target");
 		$.post("/Isepapp/SeviceTuteurHandler", { isExternal: pseudo }, function(data, status){
@@ -58,14 +60,28 @@ $(document).ready(function(){
 		$.post("/Isepapp/SeviceTuteurHandler", { "old-pwd": oldPwd , "new-pwd": newPwd  }, function(data, status){
 			if(data.result.insert){
 				$("div.form-group input").val('');
-				$("div.form-group").addClass("has-success");
+				$("div.group div.form-group").addClass("has-success");
 				$(".alert-pwd").removeClass("alert-warning");
 				$(".alert-pwd").addClass("alert-success");
-				$(".alert-pwd").append("<strong>ok:</strong>, mot de passe modifié.")
+				$(".alert-pwd").append("<strong>Ok</strong>, mot de passe modifié.")
 				$(".alert-pwd").show("slow");
-				
+			
+			} else {
+				$("div.form-group input").val('');
+				$("div.group div.form-group").addClass("has-warning");
+				$(".alert-pwd").removeClass("alert-success");
+				$(".alert-pwd").addClass("alert-warning");
+				$(".alert-pwd").append("<strong>Erreur</strong>, mot de passe incorrecte.");
+				$(".alert-pwd").show("slow");
 			}
-			console.log(data);
+			
+			$("div.group div.has-success input, div.group div.has-warning input ").keyup(function(){
+				$(".alert-pwd").hide();
+				$(".alert-pwd").text("");
+				$(".alert-pwd").addClass("alert-success");
+				$(this).parent().removeClass("has-success");
+			});
+			
 		});
 	});
 	 

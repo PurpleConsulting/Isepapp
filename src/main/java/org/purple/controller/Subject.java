@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.purple.bean.Page;
+import org.purple.constant.Isep;
 
 /**
  * Servlet implementation class Subject
@@ -36,6 +37,9 @@ public class Subject extends HttpServlet {
 		p.setContent("subject.jsp");
 		p.setTitle("ISEP / APP - Le sujet");
 		
+		String path = getServletContext().getRealPath("/");
+		path = path + Isep.FILE_SUBJECT;
+		request.setAttribute("subjectUrl", path);
 		request.setAttribute("pages", p);
 		request.getRequestDispatcher("/template.jsp").forward(request, response);
 		

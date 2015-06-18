@@ -63,7 +63,9 @@
 		    			<c:if test="${!skill_mark.isCross()}">
 		    			<div>
 		    				<div class="col-sm-4"><c:out value="${skill_mark.getTitle()}"></c:out>:</div>
-		    				<span class="badge"><c:out value="${skill_mark.compute().intValue()}"></c:out></span>
+		    				<span class="badge" data-vis="${skill_mark.getTitle()}">
+		    					<c:out value="${skill_mark.compute().intValue()}"></c:out>
+		    				</span>
 							<div class="progress">
 						  		<div class="progress-bar" role="progressbar" aria-valuenow="${skill_mark.compute()}" aria-valuemin="0" aria-valuemax="20" style="width: 60%;"></div>
 							</div>
@@ -141,6 +143,12 @@
 	</div>
 </div>
 <div class="row">
+	<div class="col-xs-offset-1 col-xs-10 data" >
+		<h4> Visuels </h4>
+		<div class="d3-target"></div>
+	</div>
+</div>
+<div class="row">
 	<div class="col-xs-offset-1 col-xs-10 missing" >
 		<h4>Les absences - <c:out value="${fn:length(missingGrid)}"></c:out></h4>
 		<br/>
@@ -158,6 +166,9 @@
 				</div>
 			</c:if>
 		</c:forEach>
+		<c:if test="${fn:length(missingGrid) == 0}">
+			<img src="img/empty/missing.svg" alt="" class="app-empty-img"/>
+		</c:if>
 		</div>
 		<c:if test="${fn:length(missingGrid) > 3 }">
 			<nav>

@@ -117,3 +117,9 @@ footer{
 	position: relative;
 	bottom: 0;
 }
+
+img.app-empty-img{
+	opacity: 0.6;
+	width: 100%;
+	
+}

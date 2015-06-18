@@ -211,6 +211,20 @@ public class DaoDeadline extends Dao<Deadline>{
 		} catch (SQLException e) { res = new Delivery[0]; }
 		return res;
 	}
+	
+	public void addPathToFile(Deadline d){
+		String[] params = {Integer.toString(d.getId())};
+		String q = "SELECT Delivery.path FROM Delivery INNER JOIN Deadlines"
+				+ " ON Deadlines.`id` = Delivery.id_deadline WHERE Deadlines.`id` = ?";
+		ResultSet currsor = Bdd.prepareExec(this.connect, q, params);
+		try {
+			currsor.next();
+			d.setDeliveryPath(currsor.getString(1));
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 
 	public Deadline fetchCrossDeadline(String group){
 		Deadline d = new Deadline();
