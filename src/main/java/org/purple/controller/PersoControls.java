@@ -70,7 +70,7 @@ public class PersoControls extends HttpServlet {
 			request.setAttribute("skills", skills);
 			
 			//Display values in radio btn
-			Value[] v = dv.selectAllValues();
+			Value[] v = dv.selectAllValues("0");
 			request.setAttribute("values", v);
 			
 			p.setJs("bootbox.min.js", "bootstrap-select.min.js","perso_controls.js");
@@ -119,7 +119,7 @@ public class PersoControls extends HttpServlet {
 				request.setAttribute("skills", skills);
 				
 				//Display values in radio btn
-				Value[] v = dv.selectAllValues();
+				Value[] v = dv.selectAllValues("0");
 				request.setAttribute("values", v);
 				
 				//Display checked btn when there are already marks for the student

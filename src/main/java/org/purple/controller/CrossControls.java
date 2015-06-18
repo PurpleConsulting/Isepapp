@@ -191,7 +191,7 @@ public class CrossControls extends HttpServlet {
 			User u = (User) s.getAttribute("user");
 			dusr.addGroup(u);
 
-			Value[] val = dv.selectAllValues();
+			Value[] val = dv.selectAllValues("1");
 			if(!Isep.nullOrEmpty(flagForm)){
 				JSONObject result = new JSONObject();
 				JSONObject grid = new JSONObject();
