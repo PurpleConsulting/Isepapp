@@ -22,14 +22,6 @@
     	$(this).toggleClass("tt-cursor");
     });
     
-    // -- fix footer
-    var url = window.location.href;
-    if(url.indexOf("Subject") == -1){
-    	$("div#content.container-fluid.content").css("min-height", $(window).height() -60 + "px");
-    } else {
-    	$("div#content.container-fluid.content").css("min-height", "500px");
-    }
-    
     // -- Search Bar
  	
 	$.post("Search", {

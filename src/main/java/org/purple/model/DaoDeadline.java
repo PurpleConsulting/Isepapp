@@ -64,12 +64,14 @@ public class DaoDeadline extends Dao<Deadline>{
 	public Deadline select(String id) {
 		// TODO Auto-generated method stub
 		Deadline d = new Deadline();
-		String q = "SELECT Deadlines.description, DATE_FORMAT(Deadlines.date_limit, '"+ Isep.MYSQL_UTC +"'), Deadlines.id_createur, Deadlines.`status`"
-				+	"FROM Deadlines WHERE Deadlines.id = ? ;" ;
+		String q = "SELECT Deadlines.description, DATE_FORMAT(Deadlines.date_limit, '"+ Isep.MYSQL_UTC +"'), Deadlines.id_createur, Deadlines.`status`, "
+				+  "Deadlines.id_group FROM Deadlines WHERE Deadlines.id = ? ;" ;
 		String [] params = {id};
 		ResultSet currsor = Bdd.prepareExec(this.connect, q, params);
 		try {
-			if(currsor.next()) d = new Deadline(Integer.parseInt(id), currsor.getString(1),currsor.getString(2), currsor.getInt(3), currsor.getBoolean(4));
+			currsor.next();
+			d = new Deadline(Integer.parseInt(id), currsor.getString(1),currsor.getString(2), currsor.getInt(3), currsor.getBoolean(4));
+			d.setIdGroup(currsor.getInt(5));
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -154,10 +156,7 @@ public class DaoDeadline extends Dao<Deadline>{
 			if(currsor.getInt(1) != 0){
 				dl.setCompleted(true);
 				dl.setDeliveryDate(currsor.getString(2));
-			} else {
-				
 			}
-			currsor.close();
 		} catch(SQLException e){
 			System.out.print(e);
 		}
@@ -222,8 +221,17 @@ public class DaoDeadline extends Dao<Deadline>{
 			d.setDeliveryPath(currsor.getString(1));
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
 		}
+	}
+	
+	public boolean submitDeposit(Deadline d, String path){
+		boolean res = true;
+		String[] params = {Integer.toString(d.getIdGroup()), Integer.toString(d.getId()), path};
+		String q = "INSERT INTO Delivery (`id_owner_group`, `id_deadline`, `path`, `date`)"
+				+ " VALUES (?,?,?, NOW());";
+		int affected = Bdd.preparePerform(this.connect, q, params);
+		if(affected != 1) res = false;
+		return res;
 	}
 
 	public Deadline fetchCrossDeadline(String group){

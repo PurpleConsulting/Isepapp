@@ -17,6 +17,7 @@ public class Isep {
 		public static final boolean ISEP_LDAP = false;
 		
 		public static final String ROOT_FILE_SYS = "assets/";
+		public static final String ROOT_FILE_SYS_DEPOSIT = "deposit/";
 		public static final String FILE_SUBJECT =  "CURRENTAPPSUBJECT.pdf";
 		public static final String FILE_PROMO =  "CURRENTGROUPLIST.csv";
 		
@@ -55,13 +56,12 @@ public class Isep {
 			} catch (NullPointerException e) {
 				u = new User();
 			}
-			if(u.getPosition().equals(Auth.respo)){
-				p.setCss("../js/bootstrap-fileinput/css/fileinput.min.css");
-				p.setJs("bootbox.min.js",
-						"bootstrap-fileinput/js/fileinput.min.js", 
-						"bootstrap-fileinput/js/fileinput_locale_fr.js");
-			}
+		
 			p.setContent("home/common.jsp");
+			p.setJs("bootbox.min.js",
+					"bootstrap-fileinput/js/fileinput.min.js", 
+					"bootstrap-fileinput/js/fileinput_locale_fr.js");
+			p.setCss("../js/bootstrap-fileinput/css/fileinput.min.css");
 			p.setJs("bootstrap-select.min.js","home_"+u.getPosition()+".js"); 
 			p.setCss("bootstrap-select.min.css","home_"+u.getPosition()+".css");
 		}

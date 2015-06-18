@@ -83,8 +83,10 @@ public class ServiceStudentHandler extends HttpServlet {
 				for(Deadline d : deadlines){
 					ddl.addPathToFile(d);
 					JSONObject jsonDead = new JSONObject();
+					jsonDead.put("id", d.getId());
 					jsonDead.put("completed", d.getCompleted());
 					jsonDead.put("deveryDate", d.printDeliveryDate());
+					jsonDead.put("dateLimit", d.printDateLimit());
 					jsonDead.put("status", d.getStatus());
 					jsonDead.put("description", d.getDescription());
 					jsonDead.put("path", d.getDeliveryPath());

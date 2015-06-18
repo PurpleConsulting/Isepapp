@@ -106,16 +106,19 @@ div.tt-cursor{
 em.Bloodhound{
 	color: #337AB7;
 }
-
+div#content.container-fluid{
+	margin-bottom:16px;
+}
 
 /*** - - - FOOTER - - - ***/
 footer{
 	min-height: 16px;
 	width:100%;
 	background-color: #bdbdbd;
-	margin-top: 10px;
-	position: relative;
+	margin-top: 0px;
+	position: fixed;
 	bottom: 0;
+	z-index: 4;
 }
 
 img.app-empty-img{

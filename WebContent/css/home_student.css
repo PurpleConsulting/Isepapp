@@ -1,5 +1,6 @@
 @CHARSET "UTF-8";
-div.home-missing, div.home-delivery, div.home-skill{
+div.home-missing, div.home-delivery, div.home-skill,
+div.home-fileinput{
 	border: solid #ccc 1px;
 	min-height: 200px;
 	border-radius: 6px;
@@ -27,12 +28,25 @@ div.home-missing nav{
 	margin-left: 2%;
 	margin-right: 2%;
 }
+div.home-delivery ul.depots,
+div.home-delivery ul.deadline{
+	padding-left: 0px;
+}
 
-div.home-delivery ul.depots li{
+div.home-delivery ul.depots li,
+div.home-delivery ul.deadline li{
 	list-style-type: none;
 	margin-bottom: 4px
 }
 
-li[data-role="exemple"]{
+li[data-role="exemple"], input[data-role="exemple"]{
 	display:none;
 }
+.sub-h4{
+	color:#246482;
+	margin-left: 0px;
+}
+file-drop-zone-title{
+	word-break: break-all;	
+}
+ 

@@ -16,24 +16,26 @@
 <div class="row">
 	<div class="col-xs-10 col-xs-offset-1 home-delivery">
 		<h4> - Les livrables du groupes - </h4>
-		<span><em style="color:#246482;">Livrables déposés</em></span>
+		<span class="sub-h4"><em>Livrables déposés</em></span>
 		<ul class="depots">
 			<li data-role="exemple" >
-				<a href="" dowload>
-					<button class="btn btn-default" data-toggle="tooltip" data-placement="right" title="">
-					</button>
-				</a>
+				<a href="" download class="btn btn-default" data-toggle="tooltip" data-placement="right" title=""></a>
 			</li>
 		</ul>
-		<span><em style="color:#246482;">Livrables à fournir</em></span>
+		<span class="sub-h4"><em>Livrables à fournir</em></span>
 		<ul class="deadline">
 			<li data-role="exemple" >
-				<a href="#">
-					<button class="btn btn-default" data-toggle="tooltip" data-placement="right" title="">
-					</button>
-				</a>
+				<a href="#" class="btn btn-primary"></a>
 			</li>
 		</ul>			
+	</div>
+</div>
+<div class="row">
+	<div class="col-xs-10 col-xs-offset-1 home-fileinput" style="display:none;">
+		<input data-role="exemple" name="delivery_file" type="file" class="file-loading">
+		<div id="input-border" class="col-xs-12" style="padding:0px; margin:0px; display:none;">
+		    <!--  <input data-role="exemple" id="delivery-upload" name="delivery" type="file" class="file-loading"> -->
+		</div>
 	</div>
 </div>
 <div class="row">
