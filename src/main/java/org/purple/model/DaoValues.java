@@ -80,15 +80,6 @@ public class DaoValues extends Dao<Value> {
 		return null;
 	}
 
-	public Value[] selectAllValues(String cross) {
-		// TODO Auto-generated method stub
-		Value[] val = new Value[0];
-		String q = "SELECT id,title, points "
-				+ "FROM `Values` WHERE `Values`.cross=?"
-				+ "ORDER BY id;";		
-		String[] params = {cross};
-		ResultSet currsor = Bdd.prepareExec(this.connect, q, params);
-		try {
 	
 	public Value selectCross(String id) {
 		// TODO Auto-generated method stub
@@ -104,18 +95,16 @@ public class DaoValues extends Dao<Value> {
 		}
 		return v;
 	}
-	
-	public Value[] selectAllValues (){
+
+	public Value[] selectAllValues(String cross) {
+		// TODO Auto-generated method stub
 		Value[] val = new Value[0];
 		String q = "SELECT id,title, points "
-				+ "FROM `Values` WHERE `cross`=1 ;";		
-		try{
-			PreparedStatement prestmt = this.connect.prepareStatement(q);
-			ResultSet currsor = prestmt.executeQuery();
-			
-			int i = 0;
-			
-			if(!currsor.next()) return val;
+				+ "FROM `Values` WHERE `Values`.cross=?"
+				+ "ORDER BY id;";		
+		String[] params = {cross};
+		ResultSet currsor = Bdd.prepareExec(this.connect, q, params);
+		try {
 			if (currsor.last()) {
 				val = new Value[currsor.getRow()];
 				currsor.beforeFirst(); 
@@ -134,6 +123,7 @@ public class DaoValues extends Dao<Value> {
 		
 		return val;
 	}
+	
 	
 	
 	public boolean updateValues (Value[] v){

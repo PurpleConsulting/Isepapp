@@ -14,10 +14,6 @@ public class Mark extends Avg {
 	private int idTutor = 0;
 	private boolean cross = false;
 	private boolean groupMark = true;
-	
-	public Mark(){
-		
-
 	private int idOwner = 0;
 
 	public Mark() {

@@ -108,7 +108,7 @@ public class CrossControls extends HttpServlet {
 				ds.completeSub_skills(skill); // Add sub_skills into skills
 
 				// Display values in radio btn
-				Value[] v = dv.selectAllValues();
+				Value[] v = dv.selectAllValues("1");
 
 				request.setAttribute("group", g);
 				request.setAttribute("skills", skill);
@@ -126,13 +126,6 @@ public class CrossControls extends HttpServlet {
 			p.setWarning(true);
 			p.setWarningMessage("Cette page n'est accessible qu'aux étudiants.");
 		}
-        
-		request.setAttribute("skills", skills);
-		
-		// Display values in radio btn
-		Value[] v = dv.selectAllValues("1");
-		request.setAttribute("values", v);
-		
 
 		request.setAttribute("pages", p);
 		this.getServletContext().getRequestDispatcher("/template.jsp")
