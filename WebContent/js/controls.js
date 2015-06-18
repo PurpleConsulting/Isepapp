@@ -69,6 +69,7 @@ $(document).ready(function(){ //If page is ready
 	$("form button.marker").click(function (e){ //When click on the button send
 		e.preventDefault();
 		reInitConfboc();
+		$(this).attr("disabled", true);
 		$(this).children("span").removeClass("fa-crosshairs").addClass("fa-cog fa-spin");
 		$("button.marker").toggleClass("working");
 		var form = $(this).parent();
@@ -93,7 +94,9 @@ $(document).ready(function(){ //If page is ready
 				$("div.tab-pane.active").find("input[type='radio']:checked").addClass("checked");
 				setTimeout(function(){isValid();}, 1000); 
 			}
+			
 		});
+		$(this).attr("disabled", true);
 	});
 	
 	
