@@ -3,6 +3,7 @@ package org.purple.controller;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Enumeration;
 
 import javax.servlet.ServletException;
@@ -78,6 +79,7 @@ public class Controls extends HttpServlet {
 			request.setAttribute("skills", skills);
 			
 			//Display values in radio btn
+
 			Value[] v= dv.selectAllValues("0");
 			request.setAttribute("values", v);
 			
@@ -97,18 +99,15 @@ public class Controls extends HttpServlet {
 				e.printStackTrace();
 			}
 			
-		
 		} else {
 			p.setTitle("ISEP / APP - Home");
 			p.setContent("home/student.jsp");
 			p.setWarning(true);
-			p.setWarningMessage("la page que vous essayer d'atteidre n'est accécible que par les tuteurs d'APP.");
+			p.setWarningMessage("La page que vous essayez d'atteindre n'est accessible que par les tuteurs d'APP.");
 			request.setAttribute("pages", p);
 			
 			this.getServletContext().getRequestDispatcher("/template.jsp").forward(request, response);
-		}
-		
-		
+		}	
 	}
 
 	/**
@@ -130,21 +129,36 @@ public class Controls extends HttpServlet {
 			Connection bddServletCo = Bdd.getCo();
 			DaoGroups dgroup = new DaoGroups(bddServletCo);
 			DaoMarks dmrk = new DaoMarks(bddServletCo);
+			DaoMarks dm = new DaoMarks(bddServletCo);
+			
+			ArrayList<JSONObject> groupMark = new ArrayList<JSONObject>();
 			
 			if(!Isep.nullOrEmpty(str) && Auth.isTutor(request, str)){
 				// -- Find the group
 				Group g = new Group();
-				String[] name = null; //Store group members
-				
+				String[] name = new String[0]; //Store group members
+				String[] nickname = new String[0];
 				if (g != null){
 					g = dgroup.select(str); //Select group id,name, class by group name
 					dgroup.completeMemebers(g); //Add members into the group selected
 					name = new String[g.getMembers().size()];
+					nickname = new String[g.getMembers().size()];
 					int i=0;
 					for(User u : g.getMembers()){		
 						name[i] = u.getFirstName();
-						//pseudo[i] = u.getPseudo();
+						nickname[i] = u.getPseudo();
 						i++;
+					}
+					
+					//Display checked btn when there are already marks for the gp
+					Mark[] tabMark = dm.selectGroupMark(Integer.toString(g.getId()));
+					
+					JSONObject current = new JSONObject();
+					for (Mark m : tabMark){
+						current = new JSONObject();
+						current.put("subSkill", m.getIdSubSkill());
+						current.put("value", m.getIdValue());
+						groupMark.add(current);
 					}
 				}
 				
@@ -152,6 +166,8 @@ public class Controls extends HttpServlet {
 				JSONObject list = new JSONObject();
 				
 				list.put("groups", name);
+				list.put("pseudo", nickname);
+				list.put("marks", groupMark);
 				result.put("result", list);
 				
 				response.setHeader("content-type", "application/json");
@@ -183,7 +199,6 @@ public class Controls extends HttpServlet {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-		}
-		
+		}	
 	}
 }

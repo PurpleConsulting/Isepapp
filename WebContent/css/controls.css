@@ -15,9 +15,11 @@ div.grid{
 }
 div.grid div{
 	margin: 10px 15px;
+	margin-right: 0px;
 }
 div.grid ul div{
 	margin: 10px 0px;
+	margin-right: 0px;
 }
 div.grid div ul{
 	margin-top: 30px;
@@ -32,6 +34,7 @@ label{
 div#name_group{
 	padding:5px;
 	border: 1px solid #31708F;
+	margin-bottom: 0px;
 }
 
 button.marker, button.adder{
@@ -53,4 +56,62 @@ div.conf_box{
 
 button.close{
 	right:0px;
+}
+
+li a[role="tab"] span{
+	color: #3E753F;
+	margin-left: 3px;
+}
+
+h4 span.fa{
+	color: #3E753F;
+	margin-left: 8px;
+	cursor: pointer;
+}
+
+div.tooltip.right{
+	margin-top: 0px;
+}
+div.tooltip-inner{
+	background-color: #DFF0D8;
+	color: #3E753F;
+}
+
+.tooltip.right .tooltip-arrow{
+	border-right-color: #DFF0D8;
+}
+label.checked{
+	background-color: #31708F;	
+}
+label.checked-grp{
+	background-color: #BDBDBD;	
+}
+label.checked, label.checked-grp{
+	border-radius: 12px 4px 4px 12px;
+	color: #FFFFFF;
+	font-weight: bold;
+	padding-right: 6px;
+}
+div.no-col .row, div.no-row{
+	margin-bottom: 0px;
+}
+div.no-row{
+	padding-left: 15px;
+	padding-right: 15px;
+}
+
+div.alert-student{
+	background-color: #F8F8F8;
+	border-radius: 4px;
+	border: 1px solid #BDBDBD;
+	color: #777777;
+}
+div.alert-student label{
+	margin-bottom: 4px;
+	width: 50%;
+	min-width: 160px;
+	margin-left: 0px;
+}
+em.std-label{
+	color: #31708F;
 }

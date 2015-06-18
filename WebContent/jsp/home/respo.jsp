@@ -32,7 +32,7 @@
 			  </select>
 			</div>
 			<div class="form-group">
-		  		<button type="submit" class="btn btn-default"><span class="fa fa-plus"> </span> Ajouter un Group</button>
+		  		<button type="submit" class="btn btn-default"><span class="fa fa-plus"> </span> Ajouter un groupe</button>
 		  	</div>
 		  	<div class="form-group">
 		  		<a class="btn btn-default" href="Tutors" role="button"><span class="fa fa-plus"> </span>  Ajouter un Tuteur</a>

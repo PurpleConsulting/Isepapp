@@ -9,10 +9,11 @@ public class Mark extends Avg{
 	private String skill = "null";
 	private String owner = "null";
 	private String groupOwner = "null";
-	private int idValue;
-	private int idSubSkill;
-	private int idTutor;
+	private int idValue = 0;
+	private int idSubSkill = 0;
+	private int idTutor = 0;
 	private boolean cross = false;
+	private boolean groupMark = true;
 	
 	public Mark(){
 		
@@ -36,6 +37,12 @@ public class Mark extends Avg{
 		this.setOwner(owner);
 		this.setSkill(skill);
 		this.setSubSkill(subSkill);
+	}
+	
+	public Mark(int idValue, int idSubSkill){
+		// -- This constructor is for selecting group mark
+		this.setIdValue(idValue);
+		this.setIdSubSkill(idSubSkill);
 	}
 	
 	public void setValue(double value){
@@ -105,6 +112,14 @@ public class Mark extends Avg{
 
 	public void setIdSubSkill(int idSubSkill) {
 		this.idSubSkill = idSubSkill;
+	}
+
+	public boolean isGroupMark() {
+		return groupMark;
+	}
+
+	public void setGroupMark(boolean groupMark) {
+		this.groupMark = groupMark;
 	}
 	
 }

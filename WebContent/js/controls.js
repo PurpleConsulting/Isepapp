@@ -10,24 +10,52 @@ $("button.marker, button.adder ").attr("disabled", true);
 $("select").prop("selectedIndex",0);
 $("input[type=radio]").attr("checked", false);
 
+
+
+function isValid() {
+	$("ul#tabs.nav.nav-tabs li a").each(function(el){
+   		$(this).children().remove();
+   	});
+	$('form.groupgrid').each(function(el){
+		$(this).find("span.fa-check-circle").remove();
+	});
+   	$('form.groupgrid').each(function(){
+   		if ($(this).find('div.line').length == $(this).find('input[type=radio]:checked').length){
+   			var tab = $(this).parent();
+   			var flag = "#" + tab.attr("id");
+   			$('a[href="' + flag + '"]').append("<span class='fa fa-check-circle'></span>");
+   			$(this).find("h4").append('<span class="fa fa-check-circle" data-toggle="tooltip" data-placement="right" title="Evaluation complète"></span>');
+   			$('span[data-toggle="tooltip"]').tooltip();
+   		}
+   	});
+}
+
 //Select group name
 $("select").change(function () {
     var str = "";
     str=$("select option:selected").text();
    	$.post("/Isepapp/Controls", {string:str}, function(data, status) {
+   		$("input[type='radio']").prop("checked", false);
+   		$("label.checked").removeClass("checked");
    		var result = data.result.groups.join(", ");
    		$("div#name_group").html("<strong>"+str+"</strong> : "+ result).hide().delay(20).show("slow");
-	 });	    	
-	 if(str != "Sélectionnez un groupe"){
+   		data.result.marks.forEach(function(element){
+   			var line = $("input[name='"+ element.subSkill +"']");
+   			var radio = line.filter("[value="+ element.value +"]").prop("checked", true);
+   			radio.parent("label").addClass("checked");
+   		});
+	 });
+   	setTimeout(function(){isValid();}, 1000); 
+   	
+   	if(str != "Sélectionnez un groupe"){
 		$("button.marker, button.adder").attr("disabled", false);
 		$("form.groupgrid").attr("data-target", str.trim());
 	 } else {
 		$("button.marker, button.adder").attr("disabled", true);
 		$("form.groupgrid").attr("data-target", "");
 		$("div#name_group").html("<strong>"+str+"</strong> : "+ result).hide();
-	 }
+	 };
 });
-
 
 $(document).ready(function(){ //If page is ready
 
@@ -41,6 +69,7 @@ $(document).ready(function(){ //If page is ready
 	$("form button.marker").click(function (e){ //When click on the button send
 		e.preventDefault();
 		reInitConfboc();
+		$(this).attr("disabled", true);
 		$(this).children("span").removeClass("fa-crosshairs").addClass("fa-cog fa-spin");
 		$("button.marker").toggleClass("working");
 		var form = $(this).parent();
@@ -57,12 +86,17 @@ $(document).ready(function(){ //If page is ready
 				//$('html, body').animate( { scrollTop: $("#name_group").offset().top - 50 }, 800 );
 				$("#confirmation_box").toggleClass("alert-success");
 				$("#confirmation_box").append("<p><span class=\"fa fa-check-circle\" style=\"color:#3E753F;\"></span>   " +
-						"Félicitation, l'ajout de nouvelles notes à bien été effectué. Votre dernière notation se trouve maintenant " +
-						"dans le formutaire. Vous pouvez dès maitenant consulter la page du group que vous " +
+						"Félicitation, l'ajout de nouvelles notes a bien été effectué. Votre dernière notation se trouve maintenant " +
+						"dans le formutaire. Vous pouvez dès maintenant consulter la page du groupe que vous " +
 						"venez de noter: <a href=\"/Isepapp/Groups?scope="+ data.result.target +"\">"+ data.result.target +"</a></p>" );
 				$("#confirmation_box").show("slow");
+				$("div.tab-pane.active").find("input.checked").removeClass("checked");
+				$("div.tab-pane.active").find("input[type='radio']:checked").addClass("checked");
+				setTimeout(function(){isValid();}, 1000); 
 			}
+			
 		});
+		$(this).attr("disabled", true);
 	});
 	
 	
@@ -72,7 +106,7 @@ $(document).ready(function(){ //If page is ready
 		$.get("jsp/mark/modal_control_addpersonal.jsp", {}, function(data, status){
 			var node = $( data );
 			$("form.groupgrid").each(function(){
-				node.find("ul").append("<li><label><input type=\"checkbox\" value=\"\"/></label>"+ $(this).find("h4").attr("data-naming") +"</li>");
+				node.find("ul").append("<li>"+ $(this).find("h4").attr("data-naming") +"</li>");
 			});	    	
 			bootbox.dialog({
 			title: 'Ajout de notes personnalisées.',
@@ -85,17 +119,23 @@ $(document).ready(function(){ //If page is ready
 					},sucess:{
 						label: "Démarrer",
 		                className: "btn-primary",
-		                callback: function () { }
+		                callback: function () {
+		                	var target = $("select.select-modal option:selected").val();
+		                	document.location.href="/Isepapp/PersoControls?pseudo="+target 
+		                }
 					}
 				}
 			});
 		});
 		$.post("/Isepapp/Controls", {string: $("select.select-group option:selected").text()}, function(data, status) {
 	   		var res = data.result.groups;
+	   		var i = 0;
 	   		res.forEach(function(element){
-	   			$("select.select-modal").append("<option value=\"\">"+ element +"</option>");
+	   			$("select.select-modal").append("<option value=\""+data.result.pseudo[i]+"\">"+ element +"</option>");
+	   			i++;
 	   		});
 		});
+		
 	});
 });	
 

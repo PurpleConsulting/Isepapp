@@ -30,17 +30,17 @@
   			<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Les groupes <span class="caret"></span></a>
   			<ul class="dropdown-menu" role="menu">
 	            <li><a href="Promo">Les classes</a></li>
-	            <li><a href="Tutors">Les Tuteurs</a></li>
+	            <li><a href="Tutors">Les tuteurs</a></li>
 	            <li class="divider"></li>
 	            <li><a href="#">L'appel</a></li>
-	            <li><a href="Controls">Evaluation des Groupes</a></li>
+	            <li><a href="Controls">Evaluation des groupes</a></li>
           	</ul>
   		</li>
   		<li class="dropdown">
   			<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Les livrables<span class="caret"></span></a>
   			<ul class="dropdown-menu" role="menu">
 	            <li><a href="Deadlines">Deadlines</a></li>
-	            <li><a href="#">Dépots</a></li>
+	            <li><a href="#">Dépôts</a></li>
           </ul>
   		</li>
   		<li><a href="Signout"><span class="fa fa-power-off"></span></a></li>
