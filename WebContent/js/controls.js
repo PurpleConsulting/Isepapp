@@ -92,11 +92,11 @@ $(document).ready(function(){ //If page is ready
 				$("#confirmation_box").show("slow");
 				$("div.tab-pane.active").find("input.checked").removeClass("checked");
 				$("div.tab-pane.active").find("input[type='radio']:checked").addClass("checked");
-				setTimeout(function(){isValid();}, 1000); 
+				setTimeout(function(){isValid(); $("button.marker").attr("disabled", false);}, 1000); 
 			}
 			
 		});
-		$(this).attr("disabled", true);
+		
 	});
 	
 	
