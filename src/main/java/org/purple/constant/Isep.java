@@ -14,7 +14,7 @@ public class Isep {
 
 		
 		public static final double LANDMARK = 20.0;
-		public static final boolean ISEP_LDAP = false;
+		public static final boolean ISEP_LDAP = true;
 		
 		public static final String ROOT_FILE_SYS = "assets/";
 		public static final String FILE_SUBJECT =  "CURRENTAPPSUBJECT.pdf";
