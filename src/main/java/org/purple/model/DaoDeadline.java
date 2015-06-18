@@ -212,5 +212,23 @@ public class DaoDeadline extends Dao<Deadline>{
 		return res;
 	}
 
+	public Deadline fetchCrossDeadline(String group){
+		Deadline d = new Deadline();
+		String[] params = {group};
+		String q = "SELECT Deadlines.`id`, DATE_FORMAT(Deadlines.date_limit, '"+ Isep.MYSQL_UTC +"'), Deadlines.`Status` FROM Deadlines "
+				+ " WHERE (Deadlines.`Status` = 1 AND Deadlines.`cross` = 1 AND Deadlines.id_group ="
+				+ " (SELECT Groups.`id` FROM Groups WHERE Groups.name = ? ));";
+		ResultSet currsor = Bdd.prepareExec(this.connect, q, params);
+		try {
+			if(currsor.next()){
+				d = new Deadline(currsor.getInt(1), currsor.getString(2), currsor.getBoolean(3), group);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			d = new Deadline();
+			e.printStackTrace();
+		}
+		return d;
+	}
 	
 }

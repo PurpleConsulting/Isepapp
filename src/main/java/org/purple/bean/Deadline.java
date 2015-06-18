@@ -17,6 +17,7 @@ public class Deadline {
 		private Boolean completed = false;
 		private int responsable=0;
 		private int cross=0;
+
 		public Deadline(){
 			
 		}
@@ -28,7 +29,6 @@ public class Deadline {
 			this.setResponsable(createur);
 			this.setStatus(status);
 			this.setGroup(group);
-			
 		}
 		
 		public Deadline(int id, String description, String datelimit, int createur, Boolean status){
@@ -41,6 +41,12 @@ public class Deadline {
 		}
 
     
+		public Deadline(int id, String datelimit, Boolean status, String group){
+			this.setId(id);
+			this.setDateLimit(datelimit);
+			this.setStatus(status);
+			this.setGroup(group);
+		}
 		
 		public int getId() {
 			return id;

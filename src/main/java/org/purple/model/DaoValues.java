@@ -5,7 +5,24 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+
 import org.purple.bean.Deadline;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+import org.purple.bean.Skill;
+
 import org.purple.bean.User;
 import org.purple.bean.Value;
 import org.purple.constant.Bdd;
@@ -62,6 +79,7 @@ public class DaoValues extends Dao<Value> {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
 	public Value[] selectAllValues(String cross) {
 		// TODO Auto-generated method stub
 		Value[] val = new Value[0];
@@ -71,6 +89,33 @@ public class DaoValues extends Dao<Value> {
 		String[] params = {cross};
 		ResultSet currsor = Bdd.prepareExec(this.connect, q, params);
 		try {
+	
+	public Value selectCross(String id) {
+		// TODO Auto-generated method stub
+		Value v = new Value();
+		String q = "SELECT Values.id, Values.title FROM Values WHERE cross = 1 AND Values.id = ? ;";
+		String [] params = {id};
+		ResultSet currsor = Bdd.prepareExec(this.connect, q, params);
+		try {
+			if(currsor.next()) v = new Value(currsor.getInt(1), currsor.getString(2));
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return v;
+	}
+	
+	public Value[] selectAllValues (){
+		Value[] val = new Value[0];
+		String q = "SELECT id,title, points "
+				+ "FROM `Values` WHERE `cross`=1 ;";		
+		try{
+			PreparedStatement prestmt = this.connect.prepareStatement(q);
+			ResultSet currsor = prestmt.executeQuery();
+			
+			int i = 0;
+			
+			if(!currsor.next()) return val;
 			if (currsor.last()) {
 				val = new Value[currsor.getRow()];
 				currsor.beforeFirst(); 

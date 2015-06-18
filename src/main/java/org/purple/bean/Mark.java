@@ -2,8 +2,8 @@ package org.purple.bean;
 
 import org.purple.model.Avg;
 
-public class Mark extends Avg{
-	
+public class Mark extends Avg {
+
 	private String title = "null";
 	private String subSkill = "null";
 	private String skill = "null";
@@ -17,20 +17,34 @@ public class Mark extends Avg{
 	
 	public Mark(){
 		
+
+	private int idOwner = 0;
+
+	public Mark() {
+
 	}
-	
-	public Mark(double value){
+
+	public Mark(double value) {
 		this.setValue(value);
 	}
-	
-	public Mark(String groupOwner, int idSubSkill, int idValue){
+
+	public Mark(String groupOwner, int idSubSkill, int idValue) {
 		// -- This constructor only prepare mark for INSERTION
 		this.setGroupOwner(groupOwner);
 		this.setIdSubSkill(idSubSkill);
 		this.setIdValue(idValue);
 	}
 	
-	public Mark(String owner, double value, String title, String skill, String subSkill){
+	public Mark(int idOwner, int idTutor, int idSubSkill, int idValue, boolean cross) {
+		// -- This constructor only prepare mark for INSERTION
+		this.setIdOwner(idOwner);
+		this.setIdSubSkill(idSubSkill);
+		this.setIdValue(idValue);
+		this.setCross(cross);
+	}
+
+	public Mark(String owner, double value, String title, String skill,
+			String subSkill) {
 		// -- This constructor only prepare mark for the display and computation
 		this.setValue(value);
 		this.setTitle(title);
@@ -44,58 +58,78 @@ public class Mark extends Avg{
 		this.setIdValue(idValue);
 		this.setIdSubSkill(idSubSkill);
 	}
-	
-	public void setValue(double value){
+
+	public void setValue(double value) {
+
 		this.value = value;
 	}
-	public double getValue(){
+
+	public double getValue() {
 		return this.value;
 	}
+
 	public String getTitle() {
 		return title;
 	}
+
 	public void setTitle(String title) {
 		this.title = title;
 	}
+
 	public String getSkill() {
 		return skill;
 	}
+
 	public void setSkill(String skill) {
 		this.skill = skill;
 	}
+
 	public String getSubSkill() {
 		return subSkill;
 	}
+
 	public void setSubSkill(String subSkill) {
 		this.subSkill = subSkill;
 	}
+
 	public String getOwner() {
 		return owner;
 	}
+
 	public void setOwner(String owner) {
 		this.owner = owner;
 	}
+
 	public String getGroupOwner() {
 		return groupOwner;
 	}
+
 	public void setGroupOwner(String groupOwner) {
 		this.groupOwner = groupOwner;
 	}
+
 	public int getIdTutor() {
 		return idTutor;
 	}
+
 	public void setIdTutor(int idTutor) {
 		this.idTutor = idTutor;
 	}
+
 	public boolean isCross() {
 		return cross;
 	}
+
 	public void setCross(boolean cross) {
 		this.cross = cross;
 	}
+	
+	
+
 	public int getIdValue() {
 		return idValue;
 	}
+
 	public void setIdValue(int idValue) {
 		this.idValue = idValue;
 	}
@@ -122,4 +156,13 @@ public class Mark extends Avg{
 		this.groupMark = groupMark;
 	}
 	
+
+	public int getIdOwner() {
+		return idOwner;
+	}
+
+	public void setIdOwner(int idOwner) {
+		this.idOwner = idOwner;
+	}
+
 }

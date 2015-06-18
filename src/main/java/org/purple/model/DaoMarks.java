@@ -64,6 +64,28 @@ public class DaoMarks extends Dao<Mark>{
 		}
 		return res;
 	}
+	
+	public boolean createCrossMark(Mark marks) {
+		// TODO Auto-generated method stub
+		boolean res = false;
+		int cross = (marks.isCross()) ? 1 : 0;
+		String q = "INSERT INTO Marks (id_student, id_tutor, id_sub_skill, id_value,`cross`, date, group_mark)"
+				+ " VALUES (?, ?, ?, ?," + Integer.toString(cross) + ", NOW(), 0)";
+		try{
+			String[] params = {
+					Integer.toString(marks.getIdOwner()),
+					Integer.toString(marks.getIdTutor()),
+					Integer.toString(marks.getIdSubSkill()),
+					Double.toString(marks.getIdValue())};
+			int affected = Bdd.preparePerform(this.connect, q, params);
+			if(affected == 1 || affected == 2) res = true;
+		}catch (NullPointerException e){
+			// TODO Auto-generated catch block
+			res = false;
+			e.printStackTrace();
+		}
+		return res;
+	}
 
 	@Override
 	public boolean delete(Mark obj) {
@@ -136,6 +158,7 @@ public class DaoMarks extends Dao<Mark>{
 		return allMarks;
 	}
 	
+
 	//Select group mark when group has already mark
 	public Mark[] selectGroupMark(String idGroup){
 		Mark[] m = new Mark[0];
@@ -158,6 +181,27 @@ public class DaoMarks extends Dao<Mark>{
 			e.printStackTrace();
 		}
 		return m;
+
+	public ArrayList<Mark> selectByTutor(int id) {
+		// TODO Auto-generated method stub
+		ArrayList<Mark> allMarks = new ArrayList<Mark>();
+		String[] params = {Integer.toString(id)};
+		String q = "SELECT Marks.id_student, Marks.id_tutor, Marks.id_sub_skill,  Marks.id_value, "
+				+  "Marks.`cross` FROM Marks WHERE Marks.id_tutor = ? ; ";
+		try{
+			ResultSet currsor = Bdd.prepareExec(this.connect, q, params);
+			while(currsor.next()){
+				allMarks.add( new Mark(currsor.getInt(1),currsor.getInt(2), 
+						currsor.getInt(3), currsor.getInt(4), currsor.getBoolean(5)));
+			}
+		}catch (SQLException e){
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			allMarks = new ArrayList<Mark>();
+			return allMarks;
+		}
+		return allMarks;
+
 	}
 
 }
