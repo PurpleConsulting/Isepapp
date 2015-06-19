@@ -3,7 +3,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <div class="row">
 	<h1 class="col-xs-offset-1 col-xs-10 titlepage">
-		Création de la grille de compétences.
+		Création de la grille de compétences
 	</h1>
 </div>
 <c:import url="/jsp/alert.jsp" charEncoding="UTF-8"></c:import>
@@ -47,7 +47,7 @@
 						<span class="fa fa-times-circle-o  fa-2x"></span>
 					</div>
 				</c:forEach>
-				<button type="submit" class="btn btn-default subskill_adder"><span class="fa fa-plus"> </span> Sous compétence</button>
+				<button type="submit" class="btn btn-default subskill_adder"><span class="fa fa-plus"> </span> Sous-compétence</button>
 				<button type="submit" class="btn btn-default"><span class="fa fa-pencil-square-o"> </span> Modifier</button>
 			</form>
 		</c:forEach>

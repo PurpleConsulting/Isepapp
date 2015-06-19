@@ -4,14 +4,14 @@
 <form class="form-horizontal" id="delete-std" method="post">
 	<div style="margin-left:10%; width:80%">
 		<p>
-			Voulez vous <u>vraiment</u> supprimer cet étudiant?  <span class="fa fa-exclamation-triangle"></span><br/>
-			La suppréssion entrainera automatiquement la suppréssion en cascade<br/>
+			Voulez-vous <u>vraiment</u> supprimer cet étudiant ?  <span class="fa fa-exclamation-triangle"></span><br/>
+			La suppression entraînera automatiquement la suppression en cascade<br/>
 			<ul>
  			<li>des <strong>notes</strong></li>
  			<li>des évaluations <strong>croisées</strong></li>
- 			<li>et des autres informations liées à létudiant</li>
+ 			<li>et des autres informations liées à l'étudiant.</li>
 			</ul>
-			Pour coufirmer la suppession copier le pseudo ISEP: <strong><em class="pop"> </em></strong>
+			Pour confirmer la suppression, copier le pseudo ISEP : <strong><em class="pop"> </em></strong>
 		</p>
 	</div>
 	<div class="form-group has-error" style="margin-left:10%; width:80%">

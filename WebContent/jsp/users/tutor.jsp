@@ -74,10 +74,10 @@
 			</div>
 			<ul class="outer-li">
 				<li data-naming="pseudo" style="display: none;"><c:out value="${tutor.getPseudo()}"></c:out></li>
-				<li data-naming="last_name">Nom: <em><c:out value="${tutor.getFirstName()}"></c:out></em></li>
-				<li data-naming="first_name">Prenom: <em><c:out value="${tutor.getLastName()}"></c:out></em></li>
-				<li data-naming="email">Email: <em><c:out value="${tutor.getMail()}"></c:out></em></li>
-				<li data-naming="groups">Groupes: <ul class="inner-li">
+				<li data-naming="last_name">Nom : <em><c:out value="${tutor.getFirstName()}"></c:out></em></li>
+				<li data-naming="first_name">Prénom : <em><c:out value="${tutor.getLastName()}"></c:out></em></li>
+				<li data-naming="email">Email : <em><c:out value="${tutor.getMail()}"></c:out></em></li>
+				<li data-naming="groups">Groupes : <ul class="inner-li">
 					<c:forEach var="g" items="${groups.get(tutor.getPseudo())}" varStatus="status">
 						<li><em>
 							<a href="Groups?scope=${g}">

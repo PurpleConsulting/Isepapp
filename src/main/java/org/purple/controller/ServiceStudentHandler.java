@@ -107,7 +107,7 @@ public class ServiceStudentHandler extends HttpServlet {
 			
 		} else {
 			result.put("error", true);
-			result.put("erromMessage", "l'utiisateur n'est pas connecté.");
+			result.put("erromMessage", "l'utilisateur n'est pas connecté.");
 		}
 		response.setHeader("content-type", "application/json");
 		response.getWriter().write(result.toString());

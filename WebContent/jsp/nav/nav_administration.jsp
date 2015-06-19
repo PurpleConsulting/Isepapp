@@ -16,7 +16,7 @@
   		<li><a class="link1nav" href="#">Le sujet</a></li>
   		<li><a href="#">Les groupes</a></li>
   		<li><a href="#">Les résultats</a></li>
-  		<li><a href="#">Les Deadlines</a></li>
+  		<li><a href="#">Les deadlines</a></li>
   		<li><a href="Signout">Déconnexion</a></li>
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Fourtout Modules<span class="caret"></span></a>

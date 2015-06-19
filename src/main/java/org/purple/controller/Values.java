@@ -67,7 +67,7 @@ public class Values extends HttpServlet {
 		}else{
 			Isep.bagPackHome(p, request.getSession());
 			p.setWarning(true);
-			p.setWarningMessage("Cette page n'est pas accessible.");
+			p.setWarningMessage("cette page n'est pas accessible.");
 			p.setTitle("ISEP / APP - Erreur");
 		}
 		
@@ -127,7 +127,7 @@ public class Values extends HttpServlet {
 						p.setError(false);
 					} else {
 						p.setError(true);
-						p.setErrorMessage("Vous avez rentrer une valeur incorrect.");
+						p.setErrorMessage("vous avez rentré une valeur incorrecte.");
 					}
 	
 				}else if(request.getParameter("modify").equals("3")){
@@ -158,7 +158,7 @@ public class Values extends HttpServlet {
 		
 					} else {
 						p.setError(true);
-						p.setErrorMessage("Vous avez rentrer une valeur incorrect.");
+						p.setErrorMessage("Vous avez rentré une valeur incorrecte.");
 					}
 		
 					

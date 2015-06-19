@@ -15,7 +15,7 @@
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
       	<li><a class="icon_isep" href="#"><img  src="img/icon_isep.png" alt="logo isep"></a></li>
-      	<li><a class="link1nav" href="Home">Home</a></li>
+      	<li><a class="link1nav" href="Home">Accueil</a></li>
   		<li><a href="Subject">Le sujet</a></li>
   		<li class="dropdown">
   			<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">La gestion <span class="caret"></span></a>
@@ -32,14 +32,14 @@
 	            <li><a href="Promo">Les classes</a></li>
 	            <li><a href="Tutors">Les tuteurs</a></li>
 	            <li class="divider"></li>
-	            <li><a href="#">L'appel</a></li>
+	            <li><a href="#">Gestion des absences</a></li>
 	            <li><a href="Controls">Evaluation des groupes</a></li>
           	</ul>
   		</li>
   		<li class="dropdown">
   			<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Les livrables<span class="caret"></span></a>
   			<ul class="dropdown-menu" role="menu">
-	            <li><a href="Deadlines">Deadlines</a></li>
+	            <li><a href="Deadlines">Les deadlines</a></li>
 	            <li><a href="#">Dépôts</a></li>
           </ul>
   		</li>
@@ -48,7 +48,7 @@
       <form class="navbar-form navbar-left" role="search" action="Search" method="GET">
         <div class="form-group">
           <input name="keyword" type="text" class="form-control typeahead search-virgin" placeholder="Search">
-          <button style="Display:none;" type="submit" class="btn btn-default">Submit</button>
+          <button style="Display:none;" type="submit" class="btn btn-default">Envoyer</button>
         </div>
       </form>
     </div><!-- /.navbar-collapse -->

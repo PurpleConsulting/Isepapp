@@ -100,10 +100,10 @@ public class Controls extends HttpServlet {
 			}
 			
 		} else {
-			p.setTitle("ISEP / APP - Home");
+			p.setTitle("ISEP / APP - Accueil");
 			p.setContent("home/student.jsp");
 			p.setWarning(true);
-			p.setWarningMessage("La page que vous essayez d'atteindre n'est accessible que par les tuteurs d'APP.");
+			p.setWarningMessage("la page que vous essayez d'atteindre n'est accessible que par les tuteurs d'APP.");
 			request.setAttribute("pages", p);
 			
 			this.getServletContext().getRequestDispatcher("/template.jsp").forward(request, response);

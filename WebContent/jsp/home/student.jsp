@@ -38,18 +38,18 @@
 </div>
 <div class="row">
 	<div class="col-xs-10 col-xs-offset-1 home-missing">
-		<h4> - Les Absences - </h4>
+		<h4> - Les absences - </h4>
 		<div id="blk-missing">
 			<div data-role="exemple" class="alert alert-warning active" role="alert" id="blk1">
 				<strong>Retard</strong>:
 				2015-02-06 à 9h, 
-				Text motif fde l'absence ou du retard.
+				Texte de motif de l'absence ou du retard
 			</div>
 			<div class="alert alert-info active" role="alert" id="blk1">
 				<strong>Retard</strong>:
 				2015-02-06 à 9h, 
-				Text motif fde l'absence ou du retard.
-					/ Heure d'arrivé: <strong>10h</strong>
+				Texte de motif de l'absence ou du retard
+					/ Heure d'arrivée : <strong>10h</strong>
 			</div>
 		</div>
 		<nav class="missing-nav">

@@ -28,7 +28,7 @@
 <c:if test="${pages.getSuccess()}">
 	<div class="row">
 		<div class="alert alert-success col-xs-offset-1 col-xs-10">
-			<strong>Félicitation: </strong>
+			<strong>Félicitation : </strong>
 			<c:out value="${pages.getSuccessMessage()}"></c:out>
 		</div>
 	</div>

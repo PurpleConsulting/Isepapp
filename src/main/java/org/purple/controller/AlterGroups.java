@@ -54,7 +54,7 @@ public class AlterGroups extends HttpServlet {
 				Connection bddServletCo = Bdd.getCo();
 				DaoUsers du = new DaoUsers(bddServletCo);
 				DaoGroups dg = new DaoGroups(bddServletCo);
-				// -- reday to perfom query on the database
+				// -- ready to perfom query on the database
 
 				Group group = dg.select(thegroup); // -- Get the group
 				if (group.getId() != 0) {
@@ -71,14 +71,14 @@ public class AlterGroups extends HttpServlet {
 					p.setCss("bootstrap-select.min.css", "edit_group.css");
 					p.setJs("bootstrap-select.min.js", "bootbox.min.js",
 							"edit_group.js");
-					p.setTitle("ISEP / APP - Edition de groupe");
+					p.setTitle("ISEP / APP - Edition de groupes");
 					p.setContent("editor/edit_group.jsp");
 				} else {
 					p.setWarning(true);
-					p.setWarningMessage("Le group que vous essayez d'atteindre n'a pas été retrouvé.");
+					p.setWarningMessage("le groupe que vous essayez d'atteindre n'a pas été trouvé.");
 					HttpSession s = request.getSession();
 					Isep.bagPackHome(p, s);
-					p.setTitle("ISEP / APP - Acceuil");
+					p.setTitle("ISEP / APP - Accueil");
 					p.setContent("home/common.jsp");
 				}
 
@@ -94,15 +94,15 @@ public class AlterGroups extends HttpServlet {
 				Isep.bagPackHome(p, request.getSession());
 				p.setTitle("ISEP / APP - Erreur");
 				p.setWarning(true);
-				p.setWarningMessage("Vous ne semblez pas être le propriétaire de ce groupe. Les tuteurs ne peuvent éditer que leurs "
-						+ "propres groupes. Vous remarquez une erreur sur un group? Contactez le reponsable d'APP.");
+				p.setWarningMessage("vous ne semblez pas être le propriétaire de ce groupe. Les tuteurs ne peuvent éditer que leurs "
+						+ "propres groupes. Vous remarquez une erreur sur un groupe ? Contactez le responsable d'APP.");
 
 			} else {
 				// -- student / admin / or non connected user
 				Isep.bagPackHome(p, request.getSession());
 				p.setTitle("ISEP / APP - Erreur");
 				p.setWarning(true);
-				p.setWarningMessage("Cette page n'est accécible qu'aux Tuteurs et responsable d'app.");
+				p.setWarningMessage("cette page n'est accessible qu'aux tuteurs et responsable d'APP.");
 
 			}
 
@@ -111,7 +111,7 @@ public class AlterGroups extends HttpServlet {
 			Isep.bagPackHome(p, request.getSession());
 			p.setTitle("ISEP / APP - Erreur");
 			p.setWarning(true);
-			p.setWarningMessage("la page demandé n'a pas pue être retrouvée car il manque "
+			p.setWarningMessage("la page demandée n'a pas pu être retrouvée car il manque "
 					+ "des renseignements dans l'adresse demandée.");
 		}
 
@@ -178,20 +178,20 @@ public class AlterGroups extends HttpServlet {
 				boolean querrySucces = dg.update(newGroup);
 				if (querrySucces) {
 					p.setSuccess(true);
-					p.setSuccessMessage("La mise à jour du group à bien été éffectuée.");
+					p.setSuccessMessage("la mise à jour du groupe a bien été éffectuée.");
 					redirectionGroup = dg.select(newName); // -- Get the group
 				} else {
 					p.setError(true);
-					p.setErrorMessage("Une erreur est survenu lors de la mise à jour du group."
-							+ " Assurez vous de bien entrer un nom de group d'au moins 3 carractères, "
-							+ "et veillez également à ce que ce nom de group ne soit pas déjà utilisé.");
+					p.setErrorMessage("une erreur est survenue lors de la mise à jour du groupe."
+							+ " Assurez-vous de bien entrer un nom de groupe d'au moins 3 caractères, "
+							+ "et veillez également à ce que ce nom de groupe ne soit pas déjà utilisé.");
 					redirectionGroup = dg.select(scope); // -- Get the group
 				}
 
 				p.setCss("bootstrap-select.min.css", "edit_group.css");
 				p.setJs("bootstrap-select.min.js", "bootbox.min.js",
 						"edit_group.js");
-				p.setTitle("ISEP / APP - Edition de group");
+				p.setTitle("ISEP / APP - Edition de groupes");
 				p.setContent("editor/edit_group.jsp");
 
 			} else if (!Isep.nullOrEmpty(scope, newName, newTutor) && Auth.isTutor(request, scope)) {
@@ -202,10 +202,10 @@ public class AlterGroups extends HttpServlet {
 				redirectionGroup = dg.select(scope);
 				p.setCss("bootstrap-select.min.css", "edit_group.css");
 				p.setJs("bootstrap-select.min.js", "bootbox.min.js", "edit_group.js");
-				p.setTitle("ISEP / APP - Edition de groupe");
+				p.setTitle("ISEP / APP - Edition de groupes");
 				p.setWarning(true);
-				p.setWarningMessage("les propriétés du groupe, nom et tuteur ne sont modifiable que par le reponsable d'app."
-						+ " Prendre contacte avec lui si une modification est nécessaire.");
+				p.setWarningMessage("les propriétés du groupe, nom et tuteur ne sont modifiables que par le responsable d'APP."
+						+ " Prendre contact avec lui si une modification est nécessaire.");
 
 			} else if (!Isep.nullOrEmpty(stdFirstName, stdLastName, stdPseudo,
 					stdEmail, scope)) {
@@ -222,19 +222,19 @@ public class AlterGroups extends HttpServlet {
 					p.setSuccess(true);
 					p.setSuccessMessage("l'étudiant " + newUser.getFirstName()
 							+ " " + newUser.getLastName() + ""
-							+ " a bien été ajouter au groupe " + scope + ".");
+							+ " a bien été ajouté au groupe " + scope + ".");
 				} else {
 					p.setError(true);
-					p.setErrorMessage("une erreur c'est produite lors de l'ajout de l'étudiant "
+					p.setErrorMessage("une erreur s'est produite lors de l'ajout de l'étudiant "
 							+ newUser.getPseudo()
 							+ ". \n"
-							+ "Veuillez vérifier que ces pseudo et numéro isep ne soit pas déjà utilisés.");
+							+ "Veuillez vérifier que ses pseudo et numéro ISEP ne soient pas déjà utilisés.");
 				}
 
 				p.setCss("bootstrap-select.min.css", "edit_group.css");
 				p.setJs("bootstrap-select.min.js", "bootbox.min.js",
 						"edit_group.js");
-				p.setTitle("ISEP / APP - Edition de group");
+				p.setTitle("ISEP / APP - Edition de groupes");
 				p.setContent("editor/edit_group.jsp");
 
 			} else if (!Isep.nullOrEmpty(deleteStd, suggestionDeleteStd)) {
@@ -249,23 +249,23 @@ public class AlterGroups extends HttpServlet {
 					redirectionGroup = dg.select(exStudent.getGroup());
 					if (querrySucces) {
 						p.setSuccess(true);
-						p.setSuccessMessage("la suppréssion de l'étudiant "
+						p.setSuccessMessage("la suppression de l'étudiant "
 								+ exStudent.getFirstName() + " "
 								+ exStudent.getLastName()
-								+ " à bien été réalisée.");
+								+ " a bien été réalisée.");
 					} else {
 						p.setError(true);
-						p.setErrorMessage("Une erreur est survenue lors de la suppréssion de l'étudiant.");
+						p.setErrorMessage("une erreur est survenue lors de la suppression de l'étudiant.");
 						redirectionGroup.setId(-1);
 					}
 				} else {
 					p.setWarning(true);
-					p.setWarningMessage("l'oppération à mal été éffectuée, veuillez répéter l'oppération en remplissant correctement les champs proposés.");
+					p.setWarningMessage("l'opération a mal été éffectuée, veuillez répéter l'opération en remplissant correctement les champs proposés.");
 				}
 				p.setCss("bootstrap-select.min.css", "edit_group.css");
 				p.setJs("bootstrap-select.min.js", "bootbox.min.js",
 						"edit_group.js");
-				p.setTitle("ISEP / APP - Edition de group");
+				p.setTitle("ISEP / APP - Edition de groupes");
 				p.setContent("editor/edit_group.jsp");
 
 			} else if (!Isep.nullOrEmpty(deleteGrp, suggestionGroup)) {
@@ -278,7 +278,7 @@ public class AlterGroups extends HttpServlet {
 					redirectionGroup = dg.select(deleteGrp);
 					if (querrySucces) {
 						p.setSuccess(true);
-						p.setSuccessMessage("le groupe demendé à bien été supprimé.");
+						p.setSuccessMessage("le groupe demandé a bien été supprimé.");
 						Isep.bagPackHome(p, request.getSession());
 						p.setContent("home/respo.jsp");
 						redirectionGroup.setId(-1); // -- we skip the error,
@@ -286,11 +286,11 @@ public class AlterGroups extends HttpServlet {
 													// we just deleted it
 					} else {
 						p.setWarning(true);
-						p.setWarningMessage("ce groupe n'a pas peu être supprimé car une erreur c'est produite.");
+						p.setWarningMessage("ce groupe n'a pas pu être supprimé car une erreur s'est produite.");
 						p.setCss("bootstrap-select.min.css", "edit_group.css");
 						p.setJs("bootstrap-select.min.js", "bootbox.min.js",
 								"edit_group.js");
-						p.setTitle("ISEP / APP - Edition de group");
+						p.setTitle("ISEP / APP - Edition de groupes");
 						p.setContent("editor/edit_group.jsp");
 					}
 				}
@@ -310,18 +310,18 @@ public class AlterGroups extends HttpServlet {
 				if (querrySucces) {
 
 					p.setSuccess(true);
-					p.setSuccessMessage("Le groupe "
+					p.setSuccessMessage("le groupe "
 							+ newGrp
-							+ " viens d' être crée. Vous pouvez dès maintenant y ajouter des étudiants.");
+							+ " vient d'être créé. Vous pouvez dès maintenant y ajouter des étudiants.");
 					p.setCss("bootstrap-select.min.css", "edit_group.css");
 					p.setJs("bootstrap-select.min.js", "bootbox.min.js",
 							"edit_group.js");
-					p.setTitle("ISEP / APP - Edition de group");
+					p.setTitle("ISEP / APP - Edition de groupes");
 					p.setContent("editor/edit_group.jsp");
 				} else {
 					p.setError(true);
-					p.setErrorMessage("Il s'est produit une erreur lors de l'ajourt du groupe."
-							+ " Assurez vous que le nom de groupe soit au format 'G1A' et qu'il n'est pas encore utilisé.");
+					p.setErrorMessage("il s'est produit une erreur lors de l'ajout du groupe."
+							+ " Assurez-vous que le nom de groupe soit au format 'G1A' et qu'il n'est pas encore utilisé.");
 					p.setCss("bootstrap-select.min.css", "home_respo.css");
 					p.setJs("bootstrap-select.min.js", "bootbox.min.js",
 							"home_respo.js");
@@ -337,9 +337,9 @@ public class AlterGroups extends HttpServlet {
 				p.setCss("bootstrap-select.min.css", "edit_group.css");
 				p.setJs("bootstrap-select.min.js", "bootbox.min.js",
 						"edit_group.js");
-				p.setTitle("ISEP / APP - Edition de groupe");
+				p.setTitle("ISEP / APP - Edition de groupes");
 				p.setWarning(true);
-				p.setWarningMessage("votre requête à mal été interprétée. Est-êtes vous sur d'être propriétaire de ce groupe");
+				p.setWarningMessage("votre requête a mal été interprétée. Etes-vous sûr d'être propriétaire de ce groupe ?");
 
 			}
 
@@ -367,7 +367,7 @@ public class AlterGroups extends HttpServlet {
 
 			Isep.bagPackHome(p, request.getSession());
 			p.setWarning(true);
-			p.setWarningMessage("Cette page n'est accécible qu'aux tuteurs et au responsable d'app.");
+			p.setWarningMessage("cette page n'est accessible qu'aux tuteurs et au responsable d'APP.");
 			p.setTitle("ISEP / APP - Erreur");
 
 		}

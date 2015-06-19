@@ -6,21 +6,21 @@
 	<h1>La promotion</h1>
 	<div class="info-checkpoint">
 		<div class="text">
-			<h5> -- Page promo: La notice --</h5>
-			Vous trouverez ici l'ensemble des groupes  pour tout un semestre.<br/>
-			Les informations sur leur tutor, note et absences sont disponibles sur cette page.<br/>
-			Les groupes sont regroupés pas classe, n'hésitez pas à utiliser l'ascenseur sur votre droite
-			pour naviguer. l'agencement de la page est le suivant:
+			<h5> -- Page promo : La notice --</h5>
+			Vous trouverez ici l'ensemble des groupes pour tout un semestre.<br/>
+			Les informations sur le tuteur, note et absences sont disponibles sur cette page.<br/>
+			Les groupes sont regroupés par classe, n'hésitez pas à utiliser l'ascenseur sur votre droite
+			pour naviguer. L'agencement de la page est le suivant :
 		</div>
 	</div>
 	<div class="row subgroup">
-			├ ── Page Promotion:<br/>
-			├   ├ ── Class 1:<br/>
-			├   ├   ├ ── Info Tutor<br/>
+			├ ── Page Promotion :<br/>
+			├   ├ ── Classe 1 :<br/>
+			├   ├   ├ ── Information du tuteur<br/>
 			├   ├   ├ ── Groupe A<br/>
 			├   ├   ├ ── Groupe B .... <br/>
 			...<br/>
-			├   ├ ── Class 2:<br/>
+			├   ├ ── Class 2 :<br/>
 			... etc.<br/>
 	</div>
 	<c:forEach var="cls" items="${allClass}" varStatus="clItem">
@@ -39,19 +39,19 @@
 							<h3>Groupe <c:out value="${group.getName()}"></c:out></h3>
 							<div class="medal">
 								<span class="fa fa-graduation-cap"></span>
-								Note:
+								Note :
 								<span class="badge">0</span>
 							</div>
 							<div class="medal">
 								<span class="fa fa-bed"></span>
-								Absences:
+								Absences :
 								<span class="badge">
 									<c:out value="${fn:length(missings.get(group.getName()))}"></c:out>
 								</span>
 							</div>
 							<div class="medal">
 								<span class="fa fa-folder-open"></span>
-								Livrables:
+								Livrables :
 								<span class="badge">0</span>
 							</div>
 							<div class="list-group">

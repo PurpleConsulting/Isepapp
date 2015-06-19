@@ -33,7 +33,7 @@
 			<form method="post" action="/Isepapp/Signin">
 				<div class="row">
 				  <div class="form-group col-md-7 has-feedback">
-				    <label for="id">Identifiant: </label>
+				    <label for="id">Identifiant : </label>
 				    <input type="text" class="form-control" name="pseudo" id="pseudo" placeholder="Ex: Luc MARTIN -> lmartin">
 				  </div>
 				  <div style="display:none" class="col-xs-offset-1 col-xs-10 col-md-offset-0 col-md-5 alert alert-warning alert_input" role="alert">

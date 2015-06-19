@@ -49,7 +49,7 @@ public class Signin extends HttpServlet {
 		// TODO Auto-generated method stub
 		Page p = new Page();
 		p.setContent("signin.jsp");
-		p.setTitle("ISEP / APP - Connection");
+		p.setTitle("ISEP / APP - Connexion");
 		request.setAttribute("pages", p);
 		this.getServletContext().getRequestDispatcher("/jsp/signin.jsp").forward(request, response);
 	}
@@ -98,7 +98,7 @@ public class Signin extends HttpServlet {
 		} else if (Isep.nullOrEmpty(pseudo, pwd)){
 			p.setWarning(true);
 			p.setWarningMessage("vos identifiants n'ont pas été correctement récupérés. Veuillez vous connecter à nouveau.");
-			p.setTitle("ISEP / APP - Connection");
+			p.setTitle("ISEP / APP - Connexion");
 			request.setAttribute("pages", p);
 			this.getServletContext().getRequestDispatcher("/jsp/signin.jsp").forward(request, response);
 
@@ -112,10 +112,10 @@ public class Signin extends HttpServlet {
 				request.getSession(true).setAttribute("user", user);
 				response.sendRedirect("/Isepapp/Home");
 			} else {
-				p.setTitle("ISEP / APP - Connection");
+				p.setTitle("ISEP / APP - Connexion");
 				p.setError(true);
-				p.setErrorMessage("un problème est survenu lors de l'établissement de la connection. "
-						+ "Pour toute récupération de mot de passe veuillez vous rapprocher de l'administration de l'ISEP.");
+				p.setErrorMessage("un problème est survenu lors de l'établissement de la connexion. "
+						+ "Pour toute récupération de mot de passe, veuillez vous rapprocher de l'administration de l'ISEP.");
 				
 				url = "/jsp/signin.jsp";
 				request.setAttribute("pages", p);

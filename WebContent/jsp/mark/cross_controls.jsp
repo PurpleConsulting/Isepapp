@@ -14,7 +14,7 @@
 		<div class="alert alert-info">
 			L'évaluation de votre groupe est à compléter avant le
 			<strong><c:out value="${deadline.printDateLimit()}"></c:out></strong>
-			. Au-delà cette date le groupe ne pourra plus compéter l'évaluation croisée.
+			. Au-delà de cette date, le groupe ne pourra plus compléter l'évaluation croisée.
 		</div>
 		<!-- nom des membres du  groupe -->
 		<div class="eleve_groupe">
