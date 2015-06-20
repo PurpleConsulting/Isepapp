@@ -1,0 +1,21 @@
+@CHARSET "UTF-8";
+header{
+	display:none;
+}
+nav#navmain.navbar{
+	margin-bottom: 0px;
+	position: fixed;
+	top:0px;
+	width:100%;
+	border-radius: 0px;
+}
+div#content.container-fluid.content{
+	padding: 0px;
+	margin-top:50px;
+	background-image: url("img/empty/subject.svg");
+	background-repeat: no-repeat;
+	background-position:center center;
+}
+footer{
+	margin-top:0px;
+}

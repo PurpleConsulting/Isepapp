@@ -1,0 +1,44 @@
+@CHARSET "UTF-8";
+div.row{
+	margin-bottom:20px;	
+}
+div.group, div.numbers, div.semester{
+	border: solid #ccc 1px;
+	min-height: 200px;
+	border-radius: 6px;
+
+	background-color: transparent;
+	padding: 10px;
+}
+div[class^="col-"] h4{
+	color: #777777
+}
+div.latest-group{
+	margin-bottom: 8px;
+}
+
+div.latest-group div.alert{
+	margin-bottom: 8px;
+	padding: 6px
+}
+
+@media only screen and (max-width:500px) {
+	.semester{
+		overflow-y: scroll;
+	}
+}
+div.progress {
+	margin-bottom: 10px;
+}
+
+div.primary-header{
+	background-color: #337AB7;
+	color: #FFFFFF;
+	border-radius: 4px 4px 0px 0px;
+}
+
+div.danger-header{
+	background-color: #D9534F;
+	color: #FFFFFF;
+	border-radius: 4px 4px 0px 0px;
+}

@@ -1,0 +1,100 @@
+@CHARSET "UTF-8";
+div.row div.skills-selector form.form-inline{
+	display: inline-block;
+}
+div.skills-selector{
+	margin-top: 20px;
+}
+
+div.skills-selector a.btn,
+div.skills-selector form,
+div.skills-selector form input{
+	width: 220px;
+}
+
+div.skills-selector a.btn,
+div.skills-selector div.bootstrap-select.btn-group,
+div.skills-selector form input,
+form.edit button{
+	margin-bottom: 12px;
+}
+form.edit{
+	margin-bottom: 30px;
+	min-height: 35px;
+}
+form.edit div.form-group{
+	width: 100%;
+	min-height: 35px;
+}
+form.edit div.form-group input.form-control{
+	width: 83.3333%;
+	display: inline-block;
+}
+form.edit div.form-group span.fa.fa-2x{
+	cursor: pointer;
+	float: right;
+	color: #BDBDBD;
+	opacity: 0.6;
+}
+
+form.edit div.form-group span.fa.fa-2x{
+	margin-top: 3px;
+}
+
+form.edit div.form-group span.fa-times-circle:hover,
+form.edit div.form-group span.fa-times-circle-o:hover{
+	color: #A94442;
+	text-shadow: 2px 2px 2px #F2DEDE;
+	opacity: 1;
+}
+
+form.edit div.input-group{
+	margin-bottom: 15px;
+}
+
+div.subskill-group.form-group.input-group input.subskill{
+	border-radius: 0px 4px 4px 0px;
+	margin-right: 3px;
+}
+
+form.edit[id^=form-skill]{
+	display: none;
+}
+form.edit[id^=form-skill].active{
+	display: block;
+}
+
+form.edit div.form-group span.fa.subskill_adder{
+	color: #246482;
+}
+form.edit div.form-group span.fa.fa-2x, form.edit button.subskill_adder, div.input-group-addon.plus{
+	transition: 0.4s;
+}
+form.edit button.subskill_adder{
+	background-color: #EEEEEE;
+	border:1px solid #CCCCCC;
+	color: #555555;
+}
+div.input-group-addon.plus{
+	cursor: pointer;	
+}
+form.edit button.subskill_adder:hover, div.input-group-addon.plus:hover{
+	color: #246482;
+	border-color: #246482;
+}
+
+div.modal-header{
+	color: #FFFFFF;
+	background-color: #337AB7;
+	border-radius: 4px 4px 0px 0px;
+}
+
+div.modal-header.modal-header-danger{
+	color: #FFFFFF;
+	background-color: #D9534F;
+	border-radius: 4px 4px 0px 0px;
+}
+
+form.form-add-skill p{
+	margin-bottom:0px;
+}

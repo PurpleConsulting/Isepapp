@@ -1,0 +1,45 @@
+@CHARSET "UTF-8";
+div.panel-heading h4{
+	margin-top: 0px;
+	margin-bottom: 0px;
+}
+span.bold-clock{
+	background-color: #FFFFFF;
+	color: #246482;
+	border-radius: 100%;
+	padding: 8px 10px;
+	cursor: pointer;
+}
+span.master-block{
+	
+}
+span.bold-clock:hover{
+	background-color: #246482;
+	color: #FFFFFF;
+}
+
+input[type="time"]{
+	width: 65px;
+	border-radius: 6px;
+	display: inline-block;
+}
+input.supporting{
+	margin-top:4px;
+	margin-bottom:4px;
+}
+label.student{
+	margin-right: 10px;
+}
+label.student input{
+	margin-right: 10px;
+}
+button.late{
+	padding: 6px;
+}
+input[name="day-skiped"]{
+	text-align: center;
+}
+
+form{
+	margin-bottom: 100px;
+}
