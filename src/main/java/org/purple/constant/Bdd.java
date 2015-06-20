@@ -14,12 +14,12 @@ public class Bdd {
  * 
  */
 	
-    public static final String BDDHOST = System.getProperty("bddhost");
-	public static final String BDDCLIENT = System.getProperty("bddclient");
-	public static final String BDDUSER = System.getProperty("bdduser");
-	public static final String BDDPASSWRD = System.getProperty("bddpasswrd");
-	public static final String BDDPORT = System.getProperty("bddport");
-	public static final String BDDSCHEMA = System.getProperty("bddschema");
+    public static final String BDDHOST = System.getProperty("app-bddhost");
+	public static final String BDDCLIENT = System.getProperty("app-bddclient");
+	public static final String BDDUSER = System.getProperty("app-bdduser");
+	public static final String BDDPASSWRD = System.getProperty("app-bddpasswrd");
+	public static final String BDDPORT = System.getProperty("app-bddport");
+	public static final String BDDSCHEMA = System.getProperty("app-bddschema");
 	public static final String BDDURL = "jdbc:mysql://" + BDDHOST + ":"+ BDDPORT + "/" + BDDSCHEMA;
 	
 	public static final Connection getSecureCo(){
