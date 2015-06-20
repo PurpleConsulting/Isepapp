@@ -14,9 +14,9 @@ public class Bdd {
  * 
  */
 
-	public static final String BDDHOST = "172.16.188.10";
+//	public static final String BDDHOST = "172.16.188.10";
 	
-//	public static final String BDDHOST = "ns370799.ip-91-121-193.eu";
+	public static final String BDDHOST = "ns370799.ip-91-121-193.eu";
 
 	public static final String BDDCLIENT = "com.mysql.jdbc.Driver";
 	public static final String BDDUSER = "isep";
