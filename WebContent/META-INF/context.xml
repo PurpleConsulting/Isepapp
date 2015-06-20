@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Context path="/jdbctest" docBase="jdbctest" crossContext="true" reloadable="true" debug="1">	
+<context-param>
+	<bddhost>ns370799.ip-91-121-193.eu</bddhost>
+	<bddclient>com.mysql.jdbc.Driver</bddclient>
+	<bdduser>isep</bdduser>
+	<bddpasswrd>paris06</bddpasswrd>
+	<bddport>6311</bddport>
+	<bddschema>APPDB</bddschema>
+</context-param>
+  <WatchedResource>WEB-INF/web.xml</WatchedResource>
+       <Resource name="jdbc/APPDB" auth="Container" type="javax.sql.DataSource"
+                     maxActive="120" maxIdle="100" maxWait="10000"
+                     username="isep" password="paris06"
+                     driverClassName="com.mysql.jdbc.Driver"
+                     url="jdbc:mysql://ns370799.ip-91-121-193.eu:6311/APPDB"/>
+
+</Context>
