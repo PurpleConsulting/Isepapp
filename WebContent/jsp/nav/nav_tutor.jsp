@@ -23,7 +23,7 @@
   			<ul class="dropdown-menu" role="menu">
 	            <li><a href="Promo">Les classes</a></li>
 	            <li class="divider"></li>
-	            <li><a href="#">L'appel</a></li>
+	            <li><a href="RollCall">L'appel</a></li>
 	            <li><a href="Controls">Evaluation des Groupes</a></li>
           	</ul>
   		</li>

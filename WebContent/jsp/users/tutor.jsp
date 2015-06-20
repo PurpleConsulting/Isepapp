@@ -67,7 +67,7 @@
 <div class="row">
 	<div class="col-xs-offset-1 col-xs-10 list-tutors">
 	<c:forEach var="tutor" items="${tutors}" varStatus="status">
-		<div class="alert alert-tutor">
+		<div class="alert alert-tutor" id="${tutor.getPseudo()}">
 			<div class="fa-container">
 			<span class="fa ${tutor.getPosition() == 'respo' ? 'fa-trash standalone' : 'fa-trash-o slave'}" data-target="${tutor.getPseudo()}"></span>
 			<span class="fa fa-pencil" data-target="${tutor.getPseudo()}"></span>

@@ -7,7 +7,9 @@
 	<small> - <c:out value="${student.getLastName()} ${student.getFirstName()}"></c:out></small>
 	<a class="btn btn-default link-dialog-std" href="#" data-toggle="modal" data-target="#modal_alter" role="button"><span class="fa fa-pencil"> </span>  Editer</a>
 </h1>
-<c:import url="/jsp/alert.jsp" charEncoding="UTF-8"></c:import>
+<div class="col-xs-12">
+	<c:import url="/jsp/alert.jsp" charEncoding="UTF-8"></c:import>
+</div>
 <div class="row">	
 	<div class="col-xs-offset-1 col-xs-10 idcard">
 		<div class="col-md-offset-1 col-md-4 col-sm-offset-1 col-sm-10 col-xs-offset-1 col-xs-10  ">
@@ -198,6 +200,11 @@
 <div class="row">
 	<div class="col-xs-offset-1 col-xs-10 delivery">
 		<h4>Les livrables</h4>
+		<c:if test="${empty deadlines}">
+			<div class="col-xs-offset-1 col-xs-10" >
+				<img src="img/empty/delivery.svg" alt="" class="app-empty-img"/>
+			</div>
+		</c:if>
 		<c:forEach var="dead" items="${deadlines}" varStatus="ddElem">
 			<div class="col-md-3 col-sm-6" >
 				<c:choose>

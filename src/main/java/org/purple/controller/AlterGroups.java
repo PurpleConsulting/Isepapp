@@ -373,8 +373,7 @@ public class AlterGroups extends HttpServlet {
 		}
 
 		request.setAttribute("pages", p);
-		this.getServletContext().getRequestDispatcher("/template.jsp")
-				.forward(request, response);
+		this.getServletContext().getRequestDispatcher("/template.jsp").forward(request, response);
 	}
 
 }

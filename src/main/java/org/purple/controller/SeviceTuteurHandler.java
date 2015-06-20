@@ -65,7 +65,7 @@ public class SeviceTuteurHandler extends HttpServlet {
 		/**
 		 * POST PARAMETERS PART
 		 */
-		request.getParameter("");
+		
 		
 		if(Auth.isTutor(request)){
 			

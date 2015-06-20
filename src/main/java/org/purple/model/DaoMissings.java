@@ -67,6 +67,7 @@ public class DaoMissings extends Dao<Missing>{
 			prestmt.close();
 		}catch (SQLException e){
 			// TODO Auto-generated catch block
+			ms = new Missing[0];
 			e.printStackTrace();
 		}
 		return ms;

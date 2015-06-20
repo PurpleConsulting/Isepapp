@@ -28,7 +28,7 @@
 			    </div>
 		  	</div>
 		  	 <div class="form-group deadline select">
-			  <select class="selectpicker" name="new_grp" class="form-control selectpicker">
+			  <select name="new_grp" class="">
 				<c:forEach var="group" items="${groups}" varStatus="status">
 						<option value="${group}"><c:out value="${group}"></c:out></option>
 				</c:forEach>
@@ -36,10 +36,9 @@
 			</div>
 			<div class="checkbox">
 			    <label>
-			      <input type="checkbox" name="checkCross"> Evaluation croissé
+			      <input type="checkbox" name="checkCross"> Evaluation croissée
 			    </label>
 			 </div>
-			 <br/>
 			<div class="form-group deadline">
 		  		<button type="submit" class="btn btn-default"><span class="fa fa-plus"></span> Ajouter </button>
 		  	</div>
@@ -85,6 +84,13 @@
 								<div class="form-group deadline" data-group="${deadline.getGroup()}" data-subject="${deadline.getDescription()}">
 									<span class="fa fa-trash-o fa-lg" data-target="${deadline.getId()}"></span>
 								</div>
+								<c:if test="${deadline.getCompleted()}">
+									<div class="form-group deadline">
+										<a href="${deadline.getDeliveryPath()}" download>
+											<span class="fa fa fa-check-circle"></span>
+										</a>
+									</div>
+								</c:if>
 							</div>
 							</c:if>
 						</c:forEach>
@@ -125,6 +131,16 @@
 								<div class="form-group deadline" data-group="${deadline.getGroup()}" data-subject="${deadline.getDescription()}">
 									<span class="fa fa-trash-o fa-lg" data-target="${deadline.getId()}"></span>
 								</div>
+								<c:if test="${!deadline.getCompleted()}">
+									<div class="form-group deadline">
+										<span class="fa fa-exclamation-circle"></span>
+									</div>
+								</c:if>
+								<c:if test="${deadline.getCompleted()}">
+									<div class="form-group deadline">
+										<span class="fa fa fa-check-circle"></span>
+									</div>
+								</c:if>
 							</div>
 							</c:if>
 						</c:forEach>

@@ -2,6 +2,8 @@ package org.purple.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Enumeration;
@@ -21,10 +23,14 @@ import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.json.JSONObject;
+import org.purple.bean.Deadline;
 import org.purple.bean.Page;
 import org.purple.bean.SubSkill;
+import org.purple.bean.User;
+import org.purple.constant.Bdd;
 import org.purple.constant.Isep;
 import org.purple.model.Auth;
+import org.purple.model.DaoDeadline;
 
 /**
  * Servlet implementation class FileHandler
@@ -35,7 +41,9 @@ public class FileHandler extends HttpServlet {
     private static final String subjectFile = "subject_file";
     private static final String promoFile = "promo_file";
     private static final String backupFile = "backup_file";
+    private static final String deliveryFile = "delivery_file";
     private String slash = "/";
+    
     private void setSlash(String root){
     	if(root.indexOf("/") == -1){
     		this.slash = "\\";
@@ -61,13 +69,14 @@ public class FileHandler extends HttpServlet {
     	del_file.delete();
     	old_file.renameTo(new File(folder +this.slash+ name + "_OLDER" + ext));
     }
+    
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		System.out.print("OKOK: GET");
+		
 	}
 
 	/**
@@ -82,11 +91,16 @@ public class FileHandler extends HttpServlet {
 		 * POSSIBLE PARAMS
 		 */
 		// -- file request
+		String deadLineId = request.getParameter("deadline-number");
 		boolean isMultipart = ServletFileUpload.isMultipartContent(request);
 		
-		if(Auth.isRespo(request)){
+		if(Auth.isConnect(request)){
+			
+			Connection bddServletCo = Bdd.getCo();
+			DaoDeadline ddl = new DaoDeadline(bddServletCo);
 			
 			if(isMultipart){
+				User user = (User) request.getSession().getAttribute("user"); 
 				p.setSuccess(true);
 				FileItemFactory factory = new DiskFileItemFactory();
 		        ServletFileUpload upload = new ServletFileUpload(factory);
@@ -101,39 +115,68 @@ public class FileHandler extends HttpServlet {
 			                String fileName = item.getName();
 			                String field = item.getFieldName();
 			                
-			                if(field.equals(this.subjectFile)){
-			                	fileName = Isep.FILE_SUBJECT;
-			                	p.setSuccessMessage("<strong>Et voilà, </strong>le chargement du fichié à bien été effectué."
-			                			+ " retrouvez le nouveau sujet sur la page <em><a href=\"Subject\">sujet</a><em>.");
-			                } else if (field.equals(this.promoFile)) {
-			                	fileName = Isep.FILE_PROMO;
-			                	p.setSuccessMessage("<strong>Et voilà, </strong>les groupes du nouveau semestre "
-			                			+ "ont été chargés avec success. Retrouvez dès maintenant la demi-promo sur "
-			                			+ "la page <em><a href=\"Promo\">Classes</a><em>.");
-			                } else if (field.equals(this.backupFile)) {
+			                if(Auth.isRespo(request)){
 			                	
+			                	if(field.equals(this.subjectFile)){
+				                	fileName = Isep.FILE_SUBJECT;
+				                	p.setSuccessMessage("<strong>Et voilà, </strong>le chargement du fichié à bien été effectué."
+				                			+ " retrouvez le nouveau sujet sur la page <em><a href=\"Subject\">sujet</a><em>.");
+				                } else if (field.equals(this.promoFile)) {
+				                	fileName = Isep.FILE_PROMO;
+				                	p.setSuccessMessage("<strong>Et voilà, </strong>les groupes du nouveau semestre "
+				                			+ "ont été chargés avec success. Retrouvez dès maintenant la demi-promo sur "
+				                			+ "la page <em><a href=\"Promo\">Classes</a><em>.");
+				                } else {
+				                	
+				                }
+				                
+				                String root = getServletContext().getRealPath("/");
+				                this.setSlash(root);
+				                File path = new File(root +this.slash+ Isep.ROOT_FILE_SYS);
+				                if (!path.exists()) {
+				                    boolean status = path.mkdirs();
+				                }
+				                this.doPivot(root +this.slash+ Isep.ROOT_FILE_SYS, fileName);
+				                File uploadedFile = new File(path + this.slash + fileName);
+				                System.out.print(path + this.slash + fileName);
+				                item.write(uploadedFile);
+				                
+				                if (field.equals(this.promoFile)) {
+				                	boolean parsingStatus = true;
+				                	parsingStatus = Isep.csvParser(root +this.slash+ Isep.ROOT_FILE_SYS , Isep.FILE_PROMO, ";");
+				                	p.setSuccess(parsingStatus);
+				                } 
+				                
+			                } else if (Auth.isStudent(request)){
+			                	
+			                	if(field.equals(this.deliveryFile) && !Isep.nullOrEmpty(deadLineId)){
+			                		boolean businessFlag = true;
+			                		Deadline deadl = ddl.select(deadLineId);
+			                		
+			                		if(deadl.getId() == 0 || !deadl.getStatus()) businessFlag = false;
+			                		
+			                		if(businessFlag){
+			                			String root = getServletContext().getRealPath("/");
+						                this.setSlash(root);
+						                File path = new File(root +this.slash+ Isep.ROOT_FILE_SYS_DEPOSIT);
+						                if (!path.exists()) {
+						                    boolean status = path.mkdirs();
+						                }
+						                File uploadedFile = new File(path + this.slash + fileName);
+						                System.out.print(path + this.slash + fileName);
+						                boolean sqlFlag = ddl.submitDeposit(deadl , Isep.ROOT_FILE_SYS_DEPOSIT + fileName);
+						                if(sqlFlag){
+						                	item.write(uploadedFile);
+						                }
+						                
+			                		}
+			                		
+			                	}
 			                }
-			                
-			                String root = getServletContext().getRealPath("/");
-			                this.setSlash(root);
-			                File path = new File(root +this.slash+ Isep.ROOT_FILE_SYS);
-			                if (!path.exists()) {
-			                    boolean status = path.mkdirs();
-			                }
-			                this.doPivot(root +this.slash+ Isep.ROOT_FILE_SYS, fileName);
-			                File uploadedFile = new File(path + this.slash + fileName);
-			                System.out.print(path + this.slash + fileName);
-			                item.write(uploadedFile);
-			                
-			                if (field.equals(this.promoFile)) {
-			                	boolean parsingStatus = true;
-			                	parsingStatus = Isep.csvParser(root +this.slash+ Isep.ROOT_FILE_SYS , Isep.FILE_PROMO, ";");
-			                	p.setSuccess(parsingStatus);
-			                }
-			                
 			                
 			            }
 			        }
+			        
 			    } catch (FileUploadException e) {
 			        e.printStackTrace();
 			        p.setSuccess(false);
@@ -154,6 +197,14 @@ public class FileHandler extends HttpServlet {
 			} else {
 				
 			}
+			
+			try {
+				bddServletCo.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
 		} else {
 			p.setSuccess(false);
 			p.setSuccessMessage("<strong>Attention</strong>, une erreur est arrivée lors de l'envoie du fichier. "

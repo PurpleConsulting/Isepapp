@@ -3,6 +3,7 @@ package org.purple.controller;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -12,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.json.JSONObject;
 import org.purple.bean.Deadline;
+import org.purple.bean.Missing;
 import org.purple.bean.Page;
 import org.purple.bean.User;
 import org.purple.constant.Bdd;
@@ -71,20 +73,37 @@ public class ServiceStudentHandler extends HttpServlet {
 			DaoUsers du = new DaoUsers(bddServletCo);
 			DaoMissings dm = new DaoMissings(bddServletCo);
 			DaoDeadline ddl = new DaoDeadline(bddServletCo);
-			
+
 			if(!Isep.nullOrEmpty(missingParam, missingStudent)){
+				JSONObject jsonMissings = new JSONObject();
+				User std = du.select(missingStudent);
+				ArrayList<JSONObject> empty =  new ArrayList<JSONObject>();
+				Missing[] missingGrid = dm.selectForStudent(Integer.toString(std.getId()));
+				if(missingGrid.length == 0 ) jsonMissings.put("miss",empty);
+				for(Missing m : missingGrid){
+					JSONObject missing = new JSONObject();
+					missing.put("late", m.getLate());
+					missing.put("supporting", m.getSupporting());
+					missing.put("date", m.printDate());
+					
+					jsonMissings.append("miss", missing);
+				}
+				result.put("result", jsonMissings);
 				
 			} else if(!Isep.nullOrEmpty(deliveryParam, deliverySudent)){
 				JSONObject depots = new JSONObject();
 				User std = du.select(deliverySudent);
+				ArrayList<JSONObject> empty =  new ArrayList<JSONObject>();
 				du.addGroup(std);
 				Deadline[] deadlines = ddl.selectByGroup(std.getGroup());
-
+				if(deadlines.length == 0 ) depots.put("deadlines",empty);
 				for(Deadline d : deadlines){
 					ddl.addPathToFile(d);
 					JSONObject jsonDead = new JSONObject();
+					jsonDead.put("id", d.getId());
 					jsonDead.put("completed", d.getCompleted());
 					jsonDead.put("deveryDate", d.printDeliveryDate());
+					jsonDead.put("dateLimit", d.printDateLimit());
 					jsonDead.put("status", d.getStatus());
 					jsonDead.put("description", d.getDescription());
 					jsonDead.put("path", d.getDeliveryPath());

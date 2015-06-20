@@ -63,6 +63,21 @@ public class DaoUsers extends Dao<User> {
 		return res;
 	}
 
+	
+	public boolean createTutor(User usr) {
+		// TODO Auto-generated method stub
+		boolean res = false;
+		String[] params = { usr.getPseudo(),
+							usr.getFirstName(), usr.getLastName(),
+							usr.getMail(), usr.getPosition()};
+		String q = "INSERT INTO Users (pseudo, first_name, last_name, mail, add_date, id_post)"
+				+ " VALUES (?, ?, ?, ?, CURDATE(),"
+				+ " (SELECT Positions.id FROM Positions WHERE Positions.title = ?)) ;";
+		
+		int affected = Bdd.preparePerform(this.connect, q, params);
+		if(affected == 1) res = true;
+		return res;
+	}
 
 	@Override
 	public boolean delete(User usr) {
