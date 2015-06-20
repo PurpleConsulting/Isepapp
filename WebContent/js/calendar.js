@@ -11,11 +11,13 @@ $(document).ready(function() {
 				right: ''
 			},
 			dayClick: function(event, jsEvent, view) {
+				//var block = $(this).closest(".fc-bg");
+				$("td.fc-day-number[data-date='"+ $(this).attr("data-date") + "']").toggleClass("color-class");
 				$(this).toggleClass("color-class"); 
 			},
 			businessHours: true, // display business hours
 			editable: true,
-			contentHeight: 355
+			contentHeight: 300
 			});			 
 };	
 	
@@ -58,4 +60,48 @@ $(document).ready(function() {
 		$("#deuxiemeSemester").hide();
 		$("#premierSemester").show();
 		});
+	
+	
+	$('.group_button').click(function(){
+		$(".group_button").removeClass("btn-primary");	
+		$(".group_button").addClass("btn-default");
+		$(this).removeClass("btn-default");
+		$(this).addClass("btn-primary");
+	});
+	
+	
+	$('#validerForm').click(function(){
+		var a = $("td.color-class");
+		var hash = "";
+		var del = "&";
+		a.each(function(){
+			hash = hash + del + $(this).attr("data-date");
+		});
+		hash = hash.substr(1);
+		 $.post("/Isepapp/Calendars", {
+		    	dates :hash,
+		    	group:$("button.group_button.btn-primary").attr("data-group")
+		    	}).done(function(data){
+		    		});
+	});
+	
+	
+	$('.group_button').click(function(){
+		$("td.fc-day").removeClass("color-class");
+		$("td.fc-day-number").removeClass("color-class");
+		 $.post("/Isepapp/Calendars", {
+		    	groupClass:$(this).attr("data-group")
+		    	}).done(function(data){
+		    		
+		    		data.result.dates.forEach(function(e){
+		    			$("td.fc-day[data-date='"+ e +"']").toggleClass("color-class");
+		    			$("td.fc-day-number[data-date='"+ e + "']").toggleClass("color-class");
+		    		})
+		    			
+		    		
+		    		});
+	});
+	
+	
+	
 	});
