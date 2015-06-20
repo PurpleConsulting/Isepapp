@@ -68,7 +68,7 @@ public class ManageSkills extends HttpServlet {
 			p.setCss("bootstrap-select.min.css", "manage_skills.css");
 			p.setJs("bootbox.min.js","bootstrap-select.min.js", "manage_skills.js");
 			p.setContent("/skills/manage_skill.jsp");
-			p.setTitle("ISEP / APP - Gestion des Compétences");
+			p.setTitle("ISEP / APP - Gestion des compétences");
 			
 			try {
 				bddServletCo.close();
@@ -82,7 +82,7 @@ public class ManageSkills extends HttpServlet {
 			Isep.bagPackHome(p, s);
 			p.setTitle("ISEP / APP - Accueil");
 			p.setWarning(true); p.setContent("/home/common.jsp");
-			p.setWarningMessage("La page que vous tentez d'atteindre est réservé au tuteur d'APP.");	
+			p.setWarningMessage("la page que vous tentez d'atteindre est réservée au tuteur d'APP.");	
 		}
 		
 		request.setAttribute("pages", p);
@@ -163,16 +163,16 @@ public class ManageSkills extends HttpServlet {
 				querrysuccess = querrysuccess & ds.update(skillbean);
 				if(querrysuccess){
 					p.setSuccess(true);
-					p.setSuccessMessage("la modification de la grille de compétance a bien été éffectuée.");
+					p.setSuccessMessage("la modification de la grille de compétences a bien été éffectuée.");
 				} else {
 					p.setError(true);
-					p.setErrorMessage("une erreur est survenue lors de la modification de la grille de compétence. Nous vous invitons"
-							+ "à véirifier que vos changements aient bien été appliqués, et sinon répéter l'oppération.");
+					p.setErrorMessage("une erreur est survenue lors de la modification de la grille de compétences. Nous vous invitons"
+							+ "à vérifier que vos changements aient bien été appliqués, sinon répétez l'opération.");
 				}
 				p.setCss("bootstrap-select.min.css", "manage_skills.css");
 				p.setJs("bootbox.min.js","bootstrap-select.min.js", "manage_skills.js");
 				p.setContent("/skills/manage_skill.jsp");
-				p.setTitle("ISEP / APP - Gestion des Compétences");
+				p.setTitle("ISEP / APP - Gestion des compétences");
 				
 				int support = skillbean.getId();
 				request.setAttribute("support", support);
@@ -185,17 +185,17 @@ public class ManageSkills extends HttpServlet {
 				boolean querysuccess = ds.create(skill);
 				if(querysuccess){
 					p.setSuccess(true);
-					p.setSuccessMessage("l'ajout d'une compétence à bien été effectué. Ajoutez dès mainteant "
-							+ "des sous compétences pour permettre la notation des étudiants.");
+					p.setSuccessMessage("l'ajout d'une compétence a bien été effectué. Ajoutez dès maintenant "
+							+ "des sous-compétences pour permettre la notation des étudiants.");
 				} else {
 					p.setError(true);
-					p.setErrorMessage("l'ajout d'une compétence à provoqué une erreur interne. Nous vous invitons"
+					p.setErrorMessage("l'ajout d'une compétence a provoqué une erreur interne. Nous vous invitons"
 							+ " à bien vérifier la présence de celle-ci.");
 				}
 				p.setCss("bootstrap-select.min.css", "manage_skills.css");
 				p.setJs("bootbox.min.js","bootstrap-select.min.js", "manage_skills.js");
 				p.setContent("/skills/manage_skill.jsp");
-				p.setTitle("ISEP / APP - Gestion des Compétences");
+				p.setTitle("ISEP / APP - Gestion des compétences");
 				
 				int support = -1;
 				request.setAttribute("support", support);
@@ -209,16 +209,16 @@ public class ManageSkills extends HttpServlet {
 				boolean querysuccess = dss.create(subSkill);
 				if(querysuccess){
 					p.setSuccess(true);
-					p.setSuccessMessage("l'ajout d'une sous-compétence à bien été effectué.");
+					p.setSuccessMessage("l'ajout d'une sous-compétence a bien été effectué.");
 				} else {
 					p.setError(true);
-					p.setErrorMessage("l'ajout d'une sous-compétence à provoqué une erreur interne. Nous vous invitons"
+					p.setErrorMessage("l'ajout d'une sous-compétence a provoqué une erreur interne. Nous vous invitons"
 							+ " à bien vérifier la présence de celle-ci.");
 				}
 				p.setCss("bootstrap-select.min.css", "manage_skills.css");
 				p.setJs("bootbox.min.js","bootstrap-select.min.js", "manage_skills.js");
 				p.setContent("/skills/manage_skill.jsp");
-				p.setTitle("ISEP / APP - Gestion des Compétences");
+				p.setTitle("ISEP / APP - Gestion des compétences");
 				
 				int support = Integer.parseInt(addSubSkillFlag);
 				request.setAttribute("support", support);
@@ -232,17 +232,17 @@ public class ManageSkills extends HttpServlet {
 					boolean querrysuccess = ds.delete(OldSkill);
 					if(querrysuccess){
 						p.setSuccess(true);
-						p.setSuccessMessage("la suppression de la compétence à bien été effectuée. "
-								+ "Les sous compétences associées on bien été effacées elles aussi.");
+						p.setSuccessMessage("la suppression de la compétence a bien été effectuée. "
+								+ "Les sous-compétences associées ont bien été effacées elles aussi.");
 					} else {
 						p.setError(true);
-						p.setErrorMessage("Une erreur est survenu lors de la suppression de la compétence.");
+						p.setErrorMessage("une erreur est survenu lors de la suppression de la compétence.");
 					}
-				} else { p.setWarning(true); p.setWarningMessage("la compétence évaluation croisée ne peut être supprimer."); }
+				} else { p.setWarning(true); p.setWarningMessage("la compétence évaluation croisée ne peut être supprimée."); }
 				p.setCss("bootstrap-select.min.css", "manage_skills.css");
 				p.setJs("bootbox.min.js","bootstrap-select.min.js", "manage_skills.js");
 				p.setContent("/skills/manage_skill.jsp");
-				p.setTitle("ISEP / APP - Gestion des Compétences");
+				p.setTitle("ISEP / APP - Gestion des compétences");
 				
 			} else if(!Isep.nullOrEmpty(delSubSkillFlag, delSubSkill) ) {
 				/**
@@ -253,28 +253,28 @@ public class ManageSkills extends HttpServlet {
 				boolean querrysuccess = dss.delete(ss);
 				if(querrysuccess){
 					p.setSuccess(true);
-					p.setSuccessMessage("la suppression de la sous-compétence à bien été éffectuée.");
+					p.setSuccessMessage("la suppression de la sous-compétence a bien été éffectuée.");
 				} else {
 					p.setError(true);
-					p.setErrorMessage("Une erreur est survenu lors de la suppression de la compétence."
-							+ " Nous vous invitons à vérifier que l'oppération ai bien été effectuée.");
+					p.setErrorMessage("une erreur est survenue lors de la suppression de la compétence."
+							+ " Nous vous invitons à vérifier que l'opération ait bien été effectuée.");
 				}
 				
 				p.setCss("bootstrap-select.min.css", "manage_skills.css");
 				p.setJs("bootbox.min.js","bootstrap-select.min.js", "manage_skills.js");
 				p.setContent("/skills/manage_skill.jsp");
-				p.setTitle("ISEP / APP - Gestion des Compétences");
+				p.setTitle("ISEP / APP - Gestion des compétences");
 				
 				int support = ss.getIdSkill();
 				request.setAttribute("support", support);
 			} else {
 				p.setWarning(true);
-				p.setWarningMessage("votre préscédente requête n'a pas pue être correctement interprétée."
-						+ " Il y manque peut-être des informations. Veillez à bien remplire les champs des formulaires proposées.");
+				p.setWarningMessage("votre précédente requête n'a pas pu être correctement interprétée."
+						+ " Il y manque peut-être des informations. Veillez à bien remplir les champs des formulaires proposés.");
 				p.setCss("bootstrap-select.min.css", "manage_skills.css");
 				p.setJs("bootbox.min.js","bootstrap-select.min.js", "manage_skills.js");
 				p.setContent("/skills/manage_skill.jsp");
-				p.setTitle("ISEP / APP - Gestion des Compétences");
+				p.setTitle("ISEP / APP - Gestion des compétences");
 			}
 			
 			if(p.getContent().equals("/skills/manage_skill.jsp")){
@@ -299,7 +299,7 @@ public class ManageSkills extends HttpServlet {
 			Isep.bagPackHome(p, s);
 			p.setTitle("ISEP / APP - Accueil");
 			p.setWarning(true); p.setContent("/home/common.jsp");
-			p.setWarningMessage("La page que vous tentez d'atteindre est réservé au tuteur d'APP.");		
+			p.setWarningMessage("la page que vous tentez d'atteindre est réservée au tuteur d'APP.");		
 		}
 		
 		request.setAttribute("pages", p);

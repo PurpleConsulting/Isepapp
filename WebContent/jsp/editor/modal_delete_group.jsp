@@ -5,16 +5,16 @@
 	<div style="margin-left:10%; width:80%">
 		<p>
 			Voulez vous <u style="color:#A94442;">vraiment</u> supprimer <u style="color:#A94442;">tout</u>
-			ce groupe?  <span class="fa fa-exclamation-triangle"></span><br/>
-			La suppression d'un group entier entrainera la suppréssion<br/>
+			ce groupe ?  <span class="fa fa-exclamation-triangle"></span><br/>
+			La suppression d'un groupe entier entraînera la suppression<br/>
 			<ul>
 			<li>de chacun des membres du groupe</li>
  			<li>de <strong>toutes</strong> les notes</li>
- 			<li>de <strong>toutes</strong> leurs abscences</li>
+ 			<li>de <strong>toutes</strong> leurs absences</li>
  			<li>et de leurs livrables</li>
 			</ul>
-			Si même après avoir vu cette petite icon: <span class="fa fa-exclamation-triangle"></span><br/>
-			vous voulez poursuivre la suppréssion du groupe vous pouver recopier le nom du groupe:
+			Si même après avoir vu cette petite icône : <span class="fa fa-exclamation-triangle"></span><br/>
+			vous voulez poursuivre la suppression du groupe, vous pouvez recopier le nom du groupe :
 			<strong><em class="todel"> </em></strong>, ici.
 		</p>
 	</div>

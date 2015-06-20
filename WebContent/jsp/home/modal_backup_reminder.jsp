@@ -4,9 +4,9 @@
 <div>
 	<div style="margin-left:10%; width:80%">
 		<p>
-			Lorque vous téléchargez un backup de l'application il contient
-			une série de fichiers. Ces fichiez sont nécessaires pour la 
-			restoration d'une sauvegarde de l'application. voilà la liste que 
+			Lorque vous téléchargez un backup de l'application, il contient
+			une série de fichiers. Ces fichiers sont nécessaires pour la 
+			restauration d'une sauvegarde de l'application. Voici la liste que 
 			doit contenir le <em style="color:#337AB7"><u>.zip</u></em> à uploader.
 		</p>
 		<ul>

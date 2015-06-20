@@ -4,15 +4,15 @@
 <form action="ManageSkills" class="form-horizontal form-add-skill" id="modal-form-delskill" method="post">
 	<div style="margin-left:10%; width:80%">
 		<p>
-			Voulez vous <u style="color:#A94442;">vraiment</u> supprimer <u style="color:#A94442;">cette</u>
-			compétence?  <span class="fa fa-exclamation-triangle" style="color:#A94442;"></span><br/>
-			La suppression d'une compétence entrainera la suppréssion<br/>
+			Voulez-vous <u style="color:#A94442;">vraiment</u> supprimer <u style="color:#A94442;">cette</u>
+			compétence ?  <span class="fa fa-exclamation-triangle" style="color:#A94442;"></span><br/>
+			La suppression d'une compétence entraînera la suppression<br/>
 			<ul>
-			<li>de <strong>toutes</strong> ses sous compétences</li>
- 			<li>et de <strong>toutes</strong> les notes associées</li>
+			<li>de <strong>toutes</strong> ses sous-compétences</li>
+ 			<li>et de <strong>toutes</strong> les notes associées.</li>
 			</ul>
-			Si vous êtes sûr de vouloir poursuivre la suppréssion,
-			vous pouver recopier le nom de copétence:
+			Si vous êtes sûr de vouloir poursuivre la suppression,
+			vous pouvez recopier le nom de cette compétence :
 			<strong><em class="todel"> </em></strong>, ici.
 		</p>
 	</div>

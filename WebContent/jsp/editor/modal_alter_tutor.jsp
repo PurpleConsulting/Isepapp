@@ -4,10 +4,10 @@
 <form class="form-horizontal" id="alter-tutor" method="post">
 	<div style="margin-left:10%; width:80%">
 		<p>
-			Avec ce formulaire vous pouvez modifier les informations liées au tuteur: 
+			Avec ce formulaire vous pouvez modifier les informations liées au tuteur : 
 			<u class="u-target" style="color:#337AB7;"></u>. Le choix d'une classe ici,
-			remplacera tous les groups du tuteur. Pour ajouter à ce tuteur des group en <em>plus</em>
-			vous pouvez le faire mannuellement via les pages groupes.
+			remplacera tous les groupes du tuteur. Pour ajouter à ce tuteur des groupes en <em>plus</em>
+			vous pouvez le faire manuellement via les pages groupes.
 		</p>
 	</div>
 	<div class="form-group" style="margin-left:10%; width:80%">

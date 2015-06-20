@@ -118,13 +118,13 @@ public class CrossControls extends HttpServlet {
 			} else {
 				Isep.bagPackHome(p, s);
 				p.setWarning(true);
-				p.setWarningMessage("pas d'évaluation croisée");
+				p.setWarningMessage("il n'y a pas d'évaluation croisée.");
 			}
 
 		} else {
 			Isep.bagPackHome(p, request.getSession());
 			p.setWarning(true);
-			p.setWarningMessage("Cette page n'est accessible qu'aux étudiants.");
+			p.setWarningMessage("cette page n'est accessible qu'aux étudiants.");
 		}
 
 		request.setAttribute("pages", p);
@@ -268,8 +268,8 @@ public class CrossControls extends HttpServlet {
 					if (!businessFlague) {
 						/* SOMETHING WRONG WHITH THE FORM SUBMITED */
 						p.setError(true);
-						p.setErrorMessage("nous avons remarqué un problème dans l'envoie du formulaire,"
-								+ " veillez à bien remplire tous les champs du fomulaire pour un de vos collègues.");
+						p.setErrorMessage("nous avons remarqué un problème dans l'envoi du formulaire,"
+								+ " veillez à bien remplir tous les champs du formulaire pour un de vos collègues.");
 					} else {
 						for (SubSkill ss : subSkills) {
 							int valId = Integer.parseInt(submitValues.get(Integer.toString(ss.getId())));
@@ -284,19 +284,19 @@ public class CrossControls extends HttpServlet {
 
 						if (sqlFlag){
 							p.setSuccess(true);
-							p.setSuccessMessage("Evaluation réussie !");
+							p.setSuccessMessage("Evaluation croisée réussie !");
 						}else{
 							p.setWarning(true);
-							p.setWarningMessage("Une erreur est survenue. Veuillez revérifier les formulaires de notation !");
+							p.setWarningMessage("Une erreur est survenue. Veuillez revérifier les formulaires de notation.");
 						}
 						
 					}
 
 				} else {
 					p.setError(true);
-					p.setErrorMessage("Une erreur s'est produite lors de la notation de l'étudiant."
+					p.setErrorMessage("une erreur s'est produite lors de la notation de l'étudiant."
 							+ "Vérifiez que l'étudiant noté soit bien dans votre groupe."
-							+ "En cas de problème contacter un tuteur ou le responsable d'APP.");
+							+ "En cas de problème, veuillez contacter un tuteur ou le responsable d'APP.");
 
 				}
 
@@ -327,8 +327,8 @@ public class CrossControls extends HttpServlet {
 			} else {
 				
 				p.setWarning(true);
-				p.setWarningMessage("une erreur est survenue, avez vous bien remplie"
-						+ " tous les champs des formulaires à votre disposition? ");
+				p.setWarningMessage("une erreur est survenue, avez-vous bien rempli"
+						+ " tous les champs des formulaires à votre disposition ? ");
 				
 				// -- redirection après avoir submit
 				String grp = u.getGroup();
@@ -367,8 +367,8 @@ public class CrossControls extends HttpServlet {
 			
 			Isep.bagPackHome(p, request.getSession());
 			p.setWarning(true);
-			p.setWarningMessage("seul les étudiants sont authorisés à compléter les évaluation croisés."
-					+ " êtes vous bien connectés à l'application? ");
+			p.setWarningMessage("seuls les étudiants sont autorisés à compléter les évaluations croisées."
+					+ " Etes-vous bien connecté à l'application? ");
 			request.setAttribute("pages", p);
 			this.getServletContext().getRequestDispatcher("/template.jsp").forward(request, response);
 			

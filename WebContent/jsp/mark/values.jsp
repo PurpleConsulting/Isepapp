@@ -1,17 +1,17 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <h1 class="col-xs-offset-1 col-xs-10">
-	Valeur des notes.
+	Valeur des notes
 </h1>
 <div class="row">
 	<div class="alert alert-info col-xs-offset-1 col-xs-10">
-		<strong>Aide</strong>: Les notes présente ici sont à la disposition
-		des tutors lorsqu'il notent les étudiants. Toute modification des
-		valeurs associées au notes auront un effet sur les moyennes.
+		<strong>Aide</strong>: Les notes présentes ici sont à la disposition
+		des tuteurs lorsqu'ils notent les étudiants. Toutes modifications des
+		valeurs associées aux notes auront un effet sur les moyennes.
 	</div>
 	<div class="alert alert-warning cascade-warning col-xs-offset-1 col-xs-10 suppression">
-		<strong>Attention</strong>: la suppression d'une valeur possible
-		supprimera également les notes correspondantes affectés aux élèves.
+		<strong>Attention </strong>: la suppression d'une valeur
+		supprimera également les notes correspondantes affectées aux élèves.
 	</div>
 	<c:if test="${pages.getError()}">
 		<div class="alert alert-danger col-md-offset-1 col-md-10">
@@ -24,7 +24,7 @@
 <!------------------------------- grille evaluation  ------------------------------------------------->
 <div class="row">
 	<div class="col-xs-offset-1 col-xs-10 values">
-	<em style="color:#337AB7">Les values de la grille d'évaluation</em>
+	<em style="color:#337AB7">Les valeurs de la grille d'évaluation</em>
 		<hr />
 		<form class="form-inline grille off" method="post" action="Values">
 			<div class="line">
@@ -73,7 +73,7 @@
 <!------------------------------- evaluation croissé ------------------------------------------------->
 <div class="row">
 	<div class="col-xs-offset-1 col-xs-10 values">
-	<em style="color:#337AB7">Les values d'évaluations croissés</em>
+	<em style="color:#337AB7">Les valeurs d'évaluation croissés</em>
 		<hr />
 		<form class="form-inline off" method="post" action="Values">
 			<div class="line">
@@ -117,7 +117,7 @@
 					aria-label="Close">
 					<span aria-hidden="true">&times;</span>
 				</button>
-				<h4 class="modal-title">Ajouter une valeur.</h4>
+				<h4 class="modal-title">Ajouter une valeur</h4>
 			</div>
 			<div class="modal-body">
 				<form>

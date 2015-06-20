@@ -111,7 +111,7 @@ public class Tutors extends HttpServlet {
 		} else {
 			Isep.bagPackHome(p, request.getSession());
 			p.setWarning(true);
-			p.setWarningMessage("la page demandé n'est accessible qu'au responsable d'APP");
+			p.setWarningMessage("la page demandée n'est accessible qu'au responsable d'APP.");
 		}
 		
 		request.setAttribute("pages", p);
@@ -204,17 +204,17 @@ public class Tutors extends HttpServlet {
 					boolean positionSuccess = dg.declareTutor(newTutor, newClass);
 					if(!positionSuccess){
 						p.setWarning(true);
-						p.setWarningMessage("une erreur c'est produite lors de l'attribution des groupes au nouveau tuteur.");
+						p.setWarningMessage("une erreur s'est produite lors de l'attribution des groupes au nouveau tuteur.");
 					}
 				}
 				
 				if(querrySuccess){
 					p.setSuccess(true);
-					p.setSuccessMessage("le nouveau tuteur à été correcctement ajouté.");
+					p.setSuccessMessage("le nouveau tuteur a été correctement ajouté.");
 					
 				} else {
 					p.setError(true);
-					p.setErrorMessage("une erreur c'est produite lors de l'ajout du tuteur. "
+					p.setErrorMessage("une erreur s'est produite lors de l'ajout du tuteur. "
 							+ "Vérifiez que le pseudo soit bien unique.");
 				}
 				
@@ -233,7 +233,7 @@ public class Tutors extends HttpServlet {
 					p.setSuccessMessage("le tuteur a bien été supprimé.");
 				} else {
 					p.setWarning(true);
-					p.setWarningMessage("une erreur c'est produite lors de la suppression du tuteur.");
+					p.setWarningMessage("une erreur s'est produite lors de la suppression du tuteur.");
 				}
 				
 				this.doRegular(request, response, p, du, dg);
@@ -242,7 +242,7 @@ public class Tutors extends HttpServlet {
 			} else if (!Isep.nullOrEmpty(delAllTutorsFlag)){
 				if(du.dropByPosition(Auth.tutor)){
 					p.setSuccess(true);
-					p.setSuccessMessage("Les tuteurs ont bien été supprimés");
+					p.setSuccessMessage("les tuteurs ont bien été supprimés.");
 				} else {
 					p.setError(true);
 					p.setErrorMessage("une erreur s'est produite lors de la suppression des tuteurs d'APP.");
@@ -277,7 +277,7 @@ public class Tutors extends HttpServlet {
 				
 				if(querrySuccess){
 					p.setInfo(true);
-					p.setInfoMessage("la modification du tuteur à bien été prise en compte.");
+					p.setInfoMessage("la modification du tuteur a bien été prise en compte.");
 				} else {
 					p.setWarning(true);
 					p.setWarningMessage("une erreur est survenue lors de la modification du tuteur.");
@@ -287,7 +287,7 @@ public class Tutors extends HttpServlet {
 				this.getServletContext().getRequestDispatcher("/template.jsp").forward(request, response);
 			} else {
 				p.setWarning(true);
-				p.setWarningMessage("la reqête demandée à mal été comprise, veuillez vous assuré que vous"
+				p.setWarningMessage("la requête demandée a mal été interprétée, veuillez vous assurer que vous"
 						+ " remplissez tous les champs des formulaies proposés.");
 				this.doRegular(request, response, p, du, dg);
 				this.getServletContext().getRequestDispatcher("/template.jsp").forward(request, response);
@@ -302,7 +302,7 @@ public class Tutors extends HttpServlet {
 			
 		} else {
 			p.setWarning(true);
-			p.setWarningMessage("cette page est accécible uniquement au responsable d'APP.");
+			p.setWarningMessage("cette page est accessible uniquement au responsable d'APP.");
 			Isep.bagPackHome(p, request.getSession());
 			
 			request.setAttribute("pages", p);

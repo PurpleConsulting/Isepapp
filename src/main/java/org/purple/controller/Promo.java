@@ -46,14 +46,14 @@ public class Promo extends HttpServlet {
 		if(!Auth.isConnect(request)){
 			Isep.bagPackHome(p, request.getSession());
 			p.setWarning(true);
-			p.setWarningMessage("il semble que vous ayez un problèe d'authetification. "
-					+ "Essayer de vous reconnecter.");
+			p.setWarningMessage("il semble que vous ayez un problème d'authentification. "
+					+ "Essayez de vous reconnecter.");
 		} else if(Auth.isStudent(request)){
 			// --  the user is a student
 			
 			Isep.bagPackHome(p, request.getSession());
 			p.setWarning(true);
-			p.setWarningMessage("La page que vous essayez d'atteindre n'est pas accécible aux étudiants");
+			p.setWarningMessage("la page que vous essayez d'atteindre n'est pas accessible aux étudiants.");
 			
 
 		} else {
