@@ -31,6 +31,7 @@ import org.purple.constant.Bdd;
 import org.purple.constant.Isep;
 import org.purple.model.Auth;
 import org.purple.model.DaoDeadline;
+import org.purple.model.DaoGroups;
 
 /**
  * Servlet implementation class FileHandler
@@ -98,6 +99,7 @@ public class FileHandler extends HttpServlet {
 			
 			Connection bddServletCo = Bdd.getCo();
 			DaoDeadline ddl = new DaoDeadline(bddServletCo);
+			DaoGroups dg = new DaoGroups(bddServletCo);
 			
 			if(isMultipart){
 				User user = (User) request.getSession().getAttribute("user"); 
@@ -122,6 +124,7 @@ public class FileHandler extends HttpServlet {
 				                	p.setSuccessMessage("<strong>Et voilà, </strong>le chargement du fichié à bien été effectué."
 				                			+ " retrouvez le nouveau sujet sur la page <em><a href=\"Subject\">sujet</a><em>.");
 				                } else if (field.equals(this.promoFile)) {
+				                	dg.dropAll();
 				                	fileName = Isep.FILE_PROMO;
 				                	p.setSuccessMessage("<strong>Et voilà, </strong>les groupes du nouveau semestre "
 				                			+ "ont été chargés avec success. Retrouvez dès maintenant la demi-promo sur "

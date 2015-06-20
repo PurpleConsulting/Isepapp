@@ -40,10 +40,12 @@
 		</form>
 		<hr/>
 		<div class="latest-group">
-			<div class="alert alert-success"> Groupe G4C - Nombre de note: 0  - Absences: 0  - les livrables(0) - tuteur: ldivad</div>
-			<div class="alert alert-success"> Groupe G4C - Nombre de note: 0  - Absences: 0  - les livrables(0) - tuteur: ldivad</div>
-			<div class="alert alert-success"> Groupe G4C - Nombre de note: 0  - Absences: 0  - les livrables(0) - tuteur: ldivad</div>
-			<a href="Promo"><em>Voir plus de group...</em></a>
+			<div class="col-xs-6 col-xs-offset-3">
+				<img src="img/empty/group.svg" class="app-empty-img">
+			</div><br/>
+			<div class="col-xs-12">
+			<a href="Promo" style="dislplay:block"><em>Voir plus de group...</em></a>
+			</div>
 		</div>
 	</div>
 </div>
