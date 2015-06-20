@@ -39,6 +39,4 @@ Thumbs.db
 # Custom #
 ##########
 *.MF
-*.properties
-target/*
-target/
+

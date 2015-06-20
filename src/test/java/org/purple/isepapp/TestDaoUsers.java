@@ -19,23 +19,23 @@ public class TestDaoUsers extends TestCase{
 		//fail("Not yet implemented");
 	}
 
-	//@Test
-	public void testFind() {
-		DaoUsers u = new DaoUsers(Bdd.getCo());
-		String id = "ldivad";
-		assertTrue(u.find(id));
-	}
+//	//@Test
+//	public void testFind() {
+//		DaoUsers u = new DaoUsers(Bdd.getCo());
+//		String id = "ldivad";
+//		assertTrue(u.find(id));
+//	}
 	
 
 	//@Test
-	public void testSelect() {
-		String pseudo = "ldivad";
-		DaoUsers u = new DaoUsers(Bdd.getCo());
-		User beanUser = u.select(pseudo);
-		
-		assertEquals(beanUser.getFirstName(), "Loïc");
-		assertEquals(beanUser.getLastName(), "DIVAD");
-	}
+//	public void testSelect() {
+//		String pseudo = "ldivad";
+//		DaoUsers u = new DaoUsers(Bdd.getCo());
+//		User beanUser = u.select(pseudo);
+//		
+//		assertEquals(beanUser.getFirstName(), "Loïc");
+//		assertEquals(beanUser.getLastName(), "DIVAD");
+//	}
 
 
 }
