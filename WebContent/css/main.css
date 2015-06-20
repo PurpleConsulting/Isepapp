@@ -16,10 +16,21 @@ header img{
 	margin-top:5px;
 	height: 150px;
 }
-@media only screen and (max-width:640px) {
+@media only screen and (max-width:630px) {
  header img {
 	width: 100%
  }
+}
+@media only screen and (max-width:915px) {
+	nav#navmain form{
+		margin-left: 400px;
+	}
+}
+
+@media only screen and (max-width:768px) {
+	nav#navmain form, nav#navmain img{
+		display: none;
+	}	
 }
 span.appname{
 	opacity: 1;

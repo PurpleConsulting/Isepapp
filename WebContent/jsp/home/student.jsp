@@ -46,18 +46,12 @@
 <div class="row">
 	<div class="col-xs-10 col-xs-offset-1 home-missing">
 		<h4> - Les Absences - </h4>
-		<div id="blk-missing">
-			<div data-role="exemple" class="alert alert-warning active" role="alert" id="blk1">
-				<strong>Retard</strong>:
-				2015-02-06 à 9h, 
-				Text motif fde l'absence ou du retard.
-			</div>
-			<div class="alert alert-info active" role="alert" id="blk1">
-				<strong>Retard</strong>:
-				2015-02-06 à 9h, 
-				Text motif fde l'absence ou du retard.
-					/ Heure d'arrivé: <strong>10h</strong>
-			</div>
+		<div data-role="exemple" class="alert" role="alert" id="blk">
+				<strong></strong>:
+				<span class="when"></span>, 
+				<span class="why"></span>
+		</div>
+		<div id="blok-missing">
 		</div>
 		<nav class="missing-nav">
 			<ul class="pagination">
@@ -66,13 +60,8 @@
 			        <span aria-hidden="true">&laquo;</span>
 			      </a>
 			    </li>
-			    <li class="active"><a data-target="1" href="#">1</a></li>
-			    <li><a data-target="2" href="#">2</a></li>
-			    <li><a data-target="3" href="#">3</a></li>
-			    <li><a data-target="4" href="#">4</a></li>
-			    <li><a data-target="5" href="#">5</a></li>
 			    <li>
-			      <a data-target="${rowNum -1}" href="#" aria-label="Next">
+			      <a data-target="" href="#" aria-label="Next">
 			        <span aria-hidden="true">&raquo;</span>
 			      </a>
 			    </li>

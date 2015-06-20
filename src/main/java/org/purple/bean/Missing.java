@@ -8,7 +8,7 @@ import org.purple.constant.Isep;
 
 public class Missing {
 	
-	private String id = " ";
+	private String id = "";
 	private DateTime date = new DateTime(2000, 01,01, 0,0,0);
 	// -- initialise at 1st Jan 2000 ... we never know;
 	private Boolean late = false;

@@ -31,11 +31,70 @@ var openUpload = function(link){
 //		$(this).find("div#input-border").fadeIn("slow");
 //	});
 }
-
+// -- absences
 var student = $("h1 small").attr("data-target");
-$.post("Isepapp/ServiceStudentHandler", {"missing-query": true, "missing-std": student}, function(data, status){
-	console.log(data);
+$.post("/Isepapp/ServiceStudentHandler", {"missing-query": true, "missing-std": student}, function(data, status){
+	var i = 0; var j = 0;
+	data.result.miss.forEach(function(element){
+		i++;
+		var tag = $("div.home-missing #blk[data-role='exemple']").clone();
+		tag.removeAttr("data-role");
+		tag.removeAttr("id"); tag.attr("id", "blk" + i);
+		tag.find("span.when").text(element.supporting);
+		tag.find("span.why").text(element.date);
+		if(i <= 3){
+			tag.addClass("active")
+		}
+		if(element.late){
+			tag.addClass("alert-info");
+			tag.find("strong").text("Retard");
+		} else {
+			tag.addClass("alert-warning");
+			tag.find("strong").text("Absence");
+		}
+		
+		$("#blok-missing").append(tag);
+		if(i%3 == 1){
+			j++; var active = (j == 1) ? "active" : "";
+			$("nav.missing-nav ul.pagination li").last().before("<li class=\""+active+"\"><a data-target="+j+" href=\"#\">"+j+"</a></li>");
+		}
+		
+		var missing = $("#blok-missing");
+		var missinNav = $("#blok-missing nav");
+		$(".home-missing nav ul li a").on("click", function(event){
+			event.preventDefault();
+			var pattern = $(this).attr("data-target");
+			var targets = [];
+			for(var i = (3 * (pattern - 1)) + 1,j = 0; j < 3; i++,j++){
+
+				targets.push(i);
+			}
+			missing.children(".active").removeClass('active');
+			targets.forEach(function(t){
+				missing.children("#blk" + t).addClass('active');
+			})
+			$(".home-missing nav ul li.active").removeClass('active');
+			if($(this).attr("aria-label") =="Previous"){
+				$(".home-missing nav ul li").first().next().addClass('active');
+			}else if($(this).attr("aria-label") == "Next"){
+				$(".home-missing nav ul li").last().prev().addClass('active');
+			} else{
+				$(this).parent().addClass('active');
+			}
+		});
+	})
+	
+	$(".home-missing nav ul li a[aria-label='Next']").attr("data-target", j);
+	
+	if(data.result.miss.length == 0){
+		$("#blok-missing").empty();
+		$("nav.missing-nav").remove();
+		$("#blok-missing").append('<div class="col-xs-8 col-xs-offset-2">' +
+				'<img src="img/empty/missing.svg" alt="" class="app-empty-img\">' +
+				'</div>');
+	}
 });
+// -- deadline
 $.post("/Isepapp/ServiceStudentHandler", {"depot-query": true, "depot-delivery": student }, function(data, status){
 	data.result.deadlines.forEach(function(element){
 		if (element.completed && !element.cross){
@@ -64,7 +123,6 @@ $.post("/Isepapp/ServiceStudentHandler", {"depot-query": true, "depot-delivery":
 			$("ul.missing-depots").append(tagList);
 		}
 	});
-	console.log(data);
 	$(function () {
 		$('a[data-toggle="tooltip"]').tooltip();
 	});

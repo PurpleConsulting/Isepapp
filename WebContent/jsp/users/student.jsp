@@ -200,6 +200,11 @@
 <div class="row">
 	<div class="col-xs-offset-1 col-xs-10 delivery">
 		<h4>Les livrables</h4>
+		<c:if test="${empty deadlines}">
+			<div class="col-xs-offset-1 col-xs-10" >
+				<img src="img/empty/delivery.svg" alt="" class="app-empty-img"/>
+			</div>
+		</c:if>
 		<c:forEach var="dead" items="${deadlines}" varStatus="ddElem">
 			<div class="col-md-3 col-sm-6" >
 				<c:choose>

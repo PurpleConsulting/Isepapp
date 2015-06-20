@@ -5,7 +5,7 @@
 	<h1 class="col-xs-10 col-xs-offset-1">
 		Gestion des absences <small>- 
 		<c:out value="${user.getPseudo()}"></c:out> 
-		<span class="fa fa-clock-o master-block"></span></small>
+		<span class="fa fa-clock-o master-block" data-action="open"></span></small>
 	</h1>
 </div>
 <div class="col-xs-12">
@@ -20,7 +20,9 @@
 	<div class="col-xs-10 col-xs-offset-1">
 		<div class="alert alert-info alert-dismissible" role="alert">
 	  		<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-	  		<strong>Bienvenu,</strong> sur la page d'appel
+	  		<strong>Bienvenu,</strong> cette page vous permet de rapporter les absences de vos groupes. Il vous suffit de 
+	  		noter la date du jour au format '2015-08-27' (En cas d'erreur il vous sera indiqué que vos group n'ont pas cour à ces dates).
+	  		Puis cochez le case correspondant à l'étudiant absent. 
 		</div>
 	</div>
 </div>
@@ -32,7 +34,13 @@
 			</div>
 		</c:if>
 		<c:if test="${!empty groups}">
-		<form class="" action="" method="post">
+		<select class="" name="planning" disabled style="display:none;">
+			<option value=""></option>
+		</select>
+		<form class="" action="RollCall" method="post">
+			<div class="form-group">
+				<input type="text" name="day-skiped" class="form-control" placeholder="2012-08-27 (date de l'absence)"/>
+			</div>
 			<c:forEach var="grp" items="${groups}" varStatus="status">
 				<div class="panel panel-primary">
 				<div class="panel-heading">
@@ -43,17 +51,18 @@
 						<div class="form-group" >
 							<div class="row">
 								<div class="col-xs-4">
-									<label class="student"> <input type="checkbox"  name="" value="" class="check_missing"/>
+									<label class="student"> <input type="checkbox"  name="miss_${student.getPseudo()}" value="" class="check_missing"/>
 										<c:out value="${ student.getFirstName()}"></c:out>
 										<c:out value="${ student.getLastName()}"></c:out>
 									</label>
 								</div>
 								<div class="col-xs-offset-1 col-xs-3">
 									<button disabled href="#" class="btn btn-default late">Retard ?</button>
-									<input disabled type="time" id="new_time" name="" value="" placeholder="10:00" class="form-control" style="display:none;"/>
+									<input disabled type="time"  name="delay_${student.getPseudo()}" value="" placeholder="10:00" class="form-control" style="display:none;"/>
 								</div>
 							</div>
-							<input disabled type="text" name="" value="" class="form-control supporting"
+							<input type="hidden" name="pseudo_${student.getPseudo()}" class="no-submit"/>
+							<input disabled type="text" name="support_${student.getPseudo()}" value="" class="form-control supporting"
 							placeholder="Motif de l'absence ou du retard."/>
 						</div>
 					</c:forEach>

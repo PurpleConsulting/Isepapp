@@ -6,7 +6,7 @@
   </welcome-file-list>
   <error-page>
     <error-code>404</error-code>
-    <location>/jsp/error/404.jsp</location>
+    <location>/template.jsp</location>
   </error-page>
   <resource-ref>
     <description>MySQL Datasource</description>

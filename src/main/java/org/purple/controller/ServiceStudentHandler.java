@@ -3,6 +3,7 @@ package org.purple.controller;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -76,7 +77,9 @@ public class ServiceStudentHandler extends HttpServlet {
 			if(!Isep.nullOrEmpty(missingParam, missingStudent)){
 				JSONObject jsonMissings = new JSONObject();
 				User std = du.select(missingStudent);
+				ArrayList<JSONObject> empty =  new ArrayList<JSONObject>();
 				Missing[] missingGrid = dm.selectForStudent(Integer.toString(std.getId()));
+				if(missingGrid.length == 0 ) jsonMissings.put("miss",empty);
 				for(Missing m : missingGrid){
 					JSONObject missing = new JSONObject();
 					missing.put("late", m.getLate());
@@ -85,14 +88,15 @@ public class ServiceStudentHandler extends HttpServlet {
 					
 					jsonMissings.append("miss", missing);
 				}
-				
+				result.put("result", jsonMissings);
 				
 			} else if(!Isep.nullOrEmpty(deliveryParam, deliverySudent)){
 				JSONObject depots = new JSONObject();
 				User std = du.select(deliverySudent);
+				ArrayList<JSONObject> empty =  new ArrayList<JSONObject>();
 				du.addGroup(std);
 				Deadline[] deadlines = ddl.selectByGroup(std.getGroup());
-
+				if(deadlines.length == 0 ) depots.put("deadlines",empty);
 				for(Deadline d : deadlines){
 					ddl.addPathToFile(d);
 					JSONObject jsonDead = new JSONObject();

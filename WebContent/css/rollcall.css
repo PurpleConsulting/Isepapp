@@ -5,7 +5,7 @@ div.panel-heading h4{
 }
 span.bold-clock{
 	background-color: #FFFFFF;
-	color: #337AB7;
+	color: #246482;
 	border-radius: 100%;
 	padding: 8px 10px;
 	cursor: pointer;
@@ -14,7 +14,7 @@ span.master-block{
 	
 }
 span.bold-clock:hover{
-	background-color: #337AB7;
+	background-color: #246482;
 	color: #FFFFFF;
 }
 
@@ -35,4 +35,11 @@ label.student input{
 }
 button.late{
 	padding: 6px;
+}
+input[name="day-skiped"]{
+	text-align: center;
+}
+
+form{
+	margin-bottom: 100px;
 }

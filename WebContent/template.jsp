@@ -1,14 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ page import="org.purple.bean.User" %>
 <!doctype html>
 <c:if test="${sessionScope.user == null}">
 	<c:redirect url="/Signin" />
 </c:if>
 <c:if test="${pages == null}">
-	<jsp:useBean id="pages" class="org.purple.bean.Page"></jsp:useBean>  
-	<jsp:setProperty property="content" value="home.jsp" name="pages"  />
-	<jsp:setProperty property="title" value="ISEP / APP - Home" name="pages"  />
+	<% User u = (User)session.getAttribute("user");%>
+	<jsp:useBean id="pages" class="org.purple.bean.Page"></jsp:useBean>
+	<% pages.setCss("bootstrap-select.min.css", "../js/bootstrap-fileinput/css/fileinput.min.css", "home_"+  u.getPosition() +".css"); %>
+	<% pages.setJs("bootbox.min.js", "bootstrap-select.min.js", "bootstrap-fileinput/js/fileinput.min.js", "bootstrap-fileinput/js/fileinput_locale_fr.js", "home_"+  u.getPosition() +".js"); %>
+	<jsp:setProperty property="content" value="home/common.jsp" name="pages"  />
+	<jsp:setProperty property="title" value="ISEP / APP  Accueil" name="pages"  />
 </c:if>
 <html>
 	<head>
@@ -25,7 +29,7 @@
 	<body>
 		<header>
 			<div class="container-fluid">
-				<div class="col-md-offset-1">
+				<div class="col-sm-offset-1">
 					<img class="" src="img/BANNERISEPAPP.svg"  alt ="Bannière du site Isep.app" style="heigth:150px;"/><!--  style="width:40%;"-->
 					</div>
 				</div>

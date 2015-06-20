@@ -41,7 +41,9 @@ div.home-delivery ul.missing-depots li{
 	margin-bottom: 4px
 }
 
-li[data-role="exemple"], input[data-role="exemple"]{
+li[data-role="exemple"], 
+input[data-role="exemple"],
+div[data-role="exemple"]{
 	display:none;
 }
 .sub-h4{
@@ -51,4 +53,11 @@ li[data-role="exemple"], input[data-role="exemple"]{
 file-drop-zone-title{
 	word-break: break-all;	
 }
- 
+
+div.home-missing div[id^='blk']{
+	display:none;
+}
+
+div.home-missing div[id^='blk'].active{
+	display:block;
+}

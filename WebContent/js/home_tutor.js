@@ -50,6 +50,11 @@ $(document).ready(function(){
 				});
 			};
 			showup($("div.group div.alert-grp").first());
+			if(data.result.groups.length == 0){
+				$("div.group").append('<br/><div class="col-xs-6 col-xs-offset-3">' +
+						'<img src="img/empty/group.svg" alt="" class="app-empty-img" />' +
+						'</div>');
+			}
 		});
 	})();
 	
