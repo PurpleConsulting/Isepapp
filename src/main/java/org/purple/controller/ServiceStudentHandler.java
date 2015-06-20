@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.json.JSONObject;
 import org.purple.bean.Deadline;
+import org.purple.bean.Missing;
 import org.purple.bean.Page;
 import org.purple.bean.User;
 import org.purple.constant.Bdd;
@@ -71,8 +72,20 @@ public class ServiceStudentHandler extends HttpServlet {
 			DaoUsers du = new DaoUsers(bddServletCo);
 			DaoMissings dm = new DaoMissings(bddServletCo);
 			DaoDeadline ddl = new DaoDeadline(bddServletCo);
-			
+
 			if(!Isep.nullOrEmpty(missingParam, missingStudent)){
+				JSONObject jsonMissings = new JSONObject();
+				User std = du.select(missingStudent);
+				Missing[] missingGrid = dm.selectForStudent(Integer.toString(std.getId()));
+				for(Missing m : missingGrid){
+					JSONObject missing = new JSONObject();
+					missing.put("late", m.getLate());
+					missing.put("supporting", m.getSupporting());
+					missing.put("date", m.printDate());
+					
+					jsonMissings.append("miss", missing);
+				}
+				
 				
 			} else if(!Isep.nullOrEmpty(deliveryParam, deliverySudent)){
 				JSONObject depots = new JSONObject();

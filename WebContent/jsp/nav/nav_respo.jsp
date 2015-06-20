@@ -32,7 +32,7 @@
 	            <li><a href="Promo">Les classes</a></li>
 	            <li><a href="Tutors">Les tuteurs</a></li>
 	            <li class="divider"></li>
-	            <li><a href="#">L'appel</a></li>
+	            <li><a href="RollCall">L'appel</a></li>
 	            <li><a href="Controls">Evaluation des groupes</a></li>
           	</ul>
   		</li>

@@ -78,6 +78,9 @@ public class Deadlines extends HttpServlet {
 			request.setAttribute("groups", groups);
 			// get all the deadlines
 			Deadline[] deadline = dl.selectAllDeadlines();
+			for(Deadline d : deadline){
+				dl.checkOut(d);
+			}
 			request.setAttribute("deadline", deadline);
 						
 			
@@ -85,6 +88,9 @@ public class Deadlines extends HttpServlet {
 			p.setContent("/deadline/deadlineTutor.jsp");
 			// get all the deadlines
 			Deadline[] deadline = dl.selectGroupbyTutor(Integer.toString(userSession.getId()));
+			for(Deadline d : deadline){
+				dl.checkOut(d);
+			}
 			request.setAttribute("deadline", deadline);
 			
 		}

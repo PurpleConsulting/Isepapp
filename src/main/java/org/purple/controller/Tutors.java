@@ -189,8 +189,7 @@ public class Tutors extends HttpServlet {
 				 * HERE THE USER WANT TO ADD A NEW TUTOR
 				 */
 				User newTutor = new User(newFirstName, newLastName, newPseudo, newEmail, Auth.tutor);
-				newTutor.setGroup("G00");
-				boolean querrySuccess = du.create(newTutor);
+				boolean querrySuccess = du.createTutor(newTutor);
 				
 				if(!Isep.nullOrEmpty(newPass) && querrySuccess){
 					// -- this is an external teacher

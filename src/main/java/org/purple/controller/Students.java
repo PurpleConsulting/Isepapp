@@ -109,7 +109,7 @@ public class Students extends HttpServlet {
 					
 					// -- we get the missing of the student
 					Missing[] missingGrid = dm.selectForStudent(Integer.toString(std.getId()));// -- we prepare the data format for the view
-					if(missingGrid == null) missingGrid = new Missing[0];// -- He never skip class, he win an empty array
+
 					
 					
 					// -- available group

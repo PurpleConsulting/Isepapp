@@ -27,6 +27,12 @@
 			<li data-role="exemple" >
 				<a href="#" class="btn btn-primary"></a>
 			</li>
+		</ul>
+		<span class="sub-h4"><em>Livrables en retard</em></span>
+		<ul class="missing-depots">
+			<li data-role="exemple" >
+				<a href="#" class="btn btn-danger disabled"></a>
+			</li>
 		</ul>			
 	</div>
 </div>
@@ -34,7 +40,6 @@
 	<div class="col-xs-10 col-xs-offset-1 home-fileinput" style="display:none;">
 		<input data-role="exemple" name="delivery_file" type="file" class="file-loading">
 		<div id="input-border" class="col-xs-12" style="padding:0px; margin:0px; display:none;">
-		    <!--  <input data-role="exemple" id="delivery-upload" name="delivery" type="file" class="file-loading"> -->
 		</div>
 	</div>
 </div>

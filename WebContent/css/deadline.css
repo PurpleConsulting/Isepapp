@@ -68,11 +68,14 @@ span.lab{
 	margin-right: 6px;
 }
 
-span.fa-trash-o{
+span.fa-trash-o, .fa-exclamation-circle{
 	cursor: pointer;
 	transition: 0.6s;
 }
 span.fa-trash-o:hover{
+	color: #8E2A3A;
+}
+.fa-exclamation-circle{
 	color: #8E2A3A;
 }
 

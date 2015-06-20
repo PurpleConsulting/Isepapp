@@ -1,6 +1,7 @@
 
 $(document).ready(function(){
 
+	setInterval('$(".fa-exclamation-circle").fadeOut(600).delay(600).fadeIn(600)' ,400);
 	for(var i=0; i<=$("#taille").val(); i++){
 		if($("#status"+i).val()== "false"){
 			$("#status"+i).parent().removeClass("alert-info");

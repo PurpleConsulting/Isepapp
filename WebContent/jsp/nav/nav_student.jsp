@@ -18,13 +18,9 @@
       	<li><a class="link1nav" href="Home">Home</a></li>
   		<li><a href="Subject">Le sujet</a></li>
   		<li><a href="Skills">Les compétences</a></li>
-  		<li><a href="Groups?">Mon group</a></li>
+  		<li><a href="">Evaluations croisées</a></li>
   		<li class="dropdown">
   			<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Les livrables<span class="caret"></span></a>
-  			<ul class="dropdown-menu" role="menu">
-  				<li><a href="#">Dépots</a></li>
-	            <li><a href="CrossControls">Evaluations<br/>croisées</a></li>
-          </ul>
   		</li>
   		<li><a href="Signout"><span class="fa fa-power-off"></span></a></li>
       </ul>

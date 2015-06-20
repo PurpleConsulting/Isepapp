@@ -20,7 +20,7 @@
 <c:if test="${pages.getInfo()}">
 	<div class="row">
 		<div class="alert alert-info col-xs-offset-1 col-xs-10">
-			<strong>Attention</strong>,
+			<strong>Info</strong>: 
 			<c:out value="${pages.getInfoMessage()}"></c:out>
 		</div>
 	</div>

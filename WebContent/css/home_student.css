@@ -29,12 +29,14 @@ div.home-missing nav{
 	margin-right: 2%;
 }
 div.home-delivery ul.depots,
-div.home-delivery ul.deadline{
+div.home-delivery ul.deadline,
+div.home-delivery ul.missing-depots{
 	padding-left: 0px;
 }
 
 div.home-delivery ul.depots li,
-div.home-delivery ul.deadline li{
+div.home-delivery ul.deadline li,
+div.home-delivery ul.missing-depots li{
 	list-style-type: none;
 	margin-bottom: 4px
 }

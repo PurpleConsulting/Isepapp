@@ -106,8 +106,6 @@ public class DaoDeadline extends Dao<Deadline>{
 			for(Deadline d : dls){
 				this.checkOut(d);
 			}
-			currsor.close();
-			prestmt.close();
 		} catch(SQLException e) {
 			e.printStackTrace();
 		}
@@ -145,7 +143,7 @@ public class DaoDeadline extends Dao<Deadline>{
 	
 	public void checkOut(Deadline dl){
 		
-		String q = "SELECT COUNT(*), DATE_FORMAT(Delivery.`date`, '"+ Isep.MYSQL_UTC +"')"
+		String q = "SELECT COUNT(*), DATE_FORMAT(Delivery.`date`, '"+ Isep.MYSQL_UTC +"'), Delivery.path"
 				+ " FROM Delivery INNER JOIN Groups ON Delivery.`id_owner_group` = Groups.id "
 				+ " WHERE Groups.`name` = '" + dl.getGroup() + "'"
 				+ " AND Delivery.id_deadline = '" + Integer.toString(dl.getId()) + "'";
@@ -156,9 +154,10 @@ public class DaoDeadline extends Dao<Deadline>{
 			if(currsor.getInt(1) != 0){
 				dl.setCompleted(true);
 				dl.setDeliveryDate(currsor.getString(2));
+				dl.setDeliveryPath(currsor.getString(3));
 			}
 		} catch(SQLException e){
-			System.out.print(e);
+			
 		}
 		
 	}
