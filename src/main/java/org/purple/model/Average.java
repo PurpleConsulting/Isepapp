@@ -66,11 +66,13 @@ public class Average extends Avg{
 		// TODO Auto-generated method stub
 		if(this.grid.size() > 0){
 			double sum = 0.0;
+			int length = 0;
 			for(Avg mark : this.grid){
 				sum = sum + mark.compute();
+				length = length + mark.status();
 			}// --
 			
-			double res = (sum / (double)this.grid.size());
+			double res = (sum / (double)length);
 			// -- Average for a skill:
 			if(Double.compare(Isep.LANDMARK, this.maxVal) != 0){
 				res = (res * Isep.LANDMARK) / this.maxVal;
@@ -87,6 +89,15 @@ public class Average extends Avg{
 	
 	public void push(Avg mark){
 		this.grid.add(mark);
+	}
+	@Override
+	public int status() {
+		// TODO Auto-generated method stub
+		if(this.grid.size() != 0){
+			return 1;
+		} else {
+			return 0;
+		}
 	}
 
 }

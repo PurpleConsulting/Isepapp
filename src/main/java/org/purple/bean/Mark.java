@@ -161,4 +161,10 @@ public class Mark extends Avg {
 		this.idOwner = idOwner;
 	}
 
+	@Override
+	public int status() {
+		// TODO Auto-generated method stub
+		return 1;
+	}
+
 }

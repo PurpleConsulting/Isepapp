@@ -6,4 +6,5 @@ public abstract class Avg {
 		
 		public abstract double compute();
 		
+		public abstract int status();
 }

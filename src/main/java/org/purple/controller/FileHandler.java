@@ -128,9 +128,6 @@ public class FileHandler extends HttpServlet {
 			                			+ "ont été chargés avec succès. Retrouvez dès maintenant la demi-promo sur "
 			                			+ "la page <em><a href=\"Promo\">Classes</a><em>.");
 			                } else if (field.equals(this.backupFile)) {
-
-			                	
-                            }
 				                
 				                String root = getServletContext().getRealPath("/");
 				                this.setSlash(root);
