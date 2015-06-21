@@ -31,6 +31,7 @@ import org.purple.constant.Bdd;
 import org.purple.constant.Isep;
 import org.purple.model.Auth;
 import org.purple.model.DaoDeadline;
+import org.purple.model.DaoGroups;
 
 /**
  * Servlet implementation class FileHandler
@@ -76,7 +77,7 @@ public class FileHandler extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	/**
@@ -98,6 +99,7 @@ public class FileHandler extends HttpServlet {
 			
 			Connection bddServletCo = Bdd.getCo();
 			DaoDeadline ddl = new DaoDeadline(bddServletCo);
+			DaoGroups dg = new DaoGroups(bddServletCo);
 			
 			if(isMultipart){
 				User user = (User) request.getSession().getAttribute("user"); 
@@ -115,20 +117,20 @@ public class FileHandler extends HttpServlet {
 			                String fileName = item.getName();
 			                String field = item.getFieldName();
 			                
-			                if(Auth.isRespo(request)){
+
+			                if(field.equals(this.subjectFile)){
+			                	fileName = Isep.FILE_SUBJECT;
+			                	p.setSuccessMessage("<strong>et voilà, </strong>le chargement du fichier a bien été effectué."
+			                			+ " Retrouvez le nouveau sujet sur la page <em><a href=\"Subject\">sujet</a><em>.");
+			                } else if (field.equals(this.promoFile)) {
+			                	fileName = Isep.FILE_PROMO;
+			                	p.setSuccessMessage("<strong>et voilà, </strong>les groupes du nouveau semestre "
+			                			+ "ont été chargés avec succès. Retrouvez dès maintenant la demi-promo sur "
+			                			+ "la page <em><a href=\"Promo\">Classes</a><em>.");
+			                } else if (field.equals(this.backupFile)) {
+
 			                	
-			                	if(field.equals(this.subjectFile)){
-				                	fileName = Isep.FILE_SUBJECT;
-				                	p.setSuccessMessage("<strong>Et voilà, </strong>le chargement du fichié à bien été effectué."
-				                			+ " retrouvez le nouveau sujet sur la page <em><a href=\"Subject\">sujet</a><em>.");
-				                } else if (field.equals(this.promoFile)) {
-				                	fileName = Isep.FILE_PROMO;
-				                	p.setSuccessMessage("<strong>Et voilà, </strong>les groupes du nouveau semestre "
-				                			+ "ont été chargés avec success. Retrouvez dès maintenant la demi-promo sur "
-				                			+ "la page <em><a href=\"Promo\">Classes</a><em>.");
-				                } else {
-				                	
-				                }
+                            }
 				                
 				                String root = getServletContext().getRealPath("/");
 				                this.setSlash(root);
@@ -180,11 +182,11 @@ public class FileHandler extends HttpServlet {
 			    } catch (FileUploadException e) {
 			        e.printStackTrace();
 			        p.setSuccess(false);
-			        p.setSuccessMessage("Une erreur est survenue lors du chargement du fichier.");
+			        p.setSuccessMessage("une erreur est survenue lors du chargement du fichier.");
 			    } catch (Exception e) {
 			        e.printStackTrace();
 			        p.setSuccess(false);
-			        p.setSuccessMessage("Une erreur est survenue lors du chargement du fichier.");
+			        p.setSuccessMessage("une erreur est survenue lors du chargement du fichier.");
 			    }
 				
 				JSONObject business = new JSONObject();
@@ -207,8 +209,8 @@ public class FileHandler extends HttpServlet {
 			
 		} else {
 			p.setSuccess(false);
-			p.setSuccessMessage("<strong>Attention</strong>, une erreur est arrivée lors de l'envoie du fichier. "
-					+ "Vérifiez que soyé bien conecté à l'application.");
+			p.setSuccessMessage("<strong>attention</strong>, une erreur est arrivée lors de l'envoi du fichier. "
+					+ "Vérifiez que vous êtes bien connecté à l'application.");
 			JSONObject business = new JSONObject();
 			business.put("err", true);
 			business.put("success", p.getSuccess());

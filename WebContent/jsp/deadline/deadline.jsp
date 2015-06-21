@@ -9,7 +9,7 @@
 </div>
 <div class="row">
 	<div class="col-xs-offset-1 col-xs-10 insert">
-		<em style="color:#337AB7">Ajouter un deadline</em>
+		<em style="color:#337AB7">Ajouter une deadline</em>
 		<form class="form-inline group" method="post" action="Deadlines">
 			<div class="form-group deadline">
 			    <div class="input-group">
@@ -36,7 +36,7 @@
 			</div>
 			<div class="checkbox">
 			    <label>
-			      <input type="checkbox" name="checkCross"> Evaluation croissée
+			      <input type="checkbox" name="checkCross"> Evaluation croisée
 			    </label>
 			 </div>
 			<div class="form-group deadline">

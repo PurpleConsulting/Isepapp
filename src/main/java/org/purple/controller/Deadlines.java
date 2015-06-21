@@ -159,8 +159,8 @@ public class Deadlines extends HttpServlet {
 						dline.setDateLimit(datetime);
 					} catch(IllegalArgumentException e){
 						p.setError(true);
-						p.setErrorMessage("une erreur s'est produite. indiquez bien une date au format: 'YYYY-MM-JJ'"
-								+ " et une heure au format: 'HH-MM'.");
+						p.setErrorMessage("une erreur s'est produite. Indiquez bien une date au format : 'YYYY-MM-JJ'"
+								+ " et une heure au format : 'HH-MM'.");
 						break;
 					}
 					if(!Isep.nullOrEmpty(cross)) dline.setCross(1);
@@ -168,7 +168,7 @@ public class Deadlines extends HttpServlet {
 						boolean querrysuccess = dl.create(dline);
 						if(querrysuccess){
 							p.setSuccess(true);
-							p.setSuccessMessage("De nouvelles deadlines ont été ajoutées, retrouvez les dans la liste suivante.");
+							p.setSuccessMessage("de nouvelles deadlines ont été ajoutées, retrouvez-les dans la liste suivante.");
 						}
 					}
 				}
@@ -192,26 +192,26 @@ public class Deadlines extends HttpServlet {
 							dline.setDateLimit(datetimelimB+":00");
 						} catch(IllegalArgumentException e){
 							p.setError(true);
-							p.setErrorMessage("une erreur s'est produite. indiquez bien une date au format: 'YYYY-MM-JJ'"
-									+ " et une heure au format: 'HH-MM'. Il est possible que toutes les deadlines n'est pas été"
-									+ " mise à jours.");
+							p.setErrorMessage("une erreur s'est produite. Indiquez bien une date au format : 'YYYY-MM-JJ'"
+									+ " et une heure au format : 'HH-MM'. Il est possible que toutes les deadlines n'ont pas été"
+									+ " mises à jour.");
 							break;
 						}
 						querysuccess = dl.update(dline);
 						if(!querysuccess && !p.getError()){
 							p.setError(true);
-							p.setErrorMessage("une erreur est survenue lors de la mise à jours des deadline.");
+							p.setErrorMessage("une erreur est survenue lors de la mise à jous des deadlines.");
 						}
 					
 					}else{
 						p.setWarning(true);
-						p.setWarningMessage("L'oppération à mal été éffectuée, veuillez répéter l'oppération en remplissant correctement les champs proposés.");
+						p.setWarningMessage("l'opération a mal été éffectuée, veuillez répéter l'opération en remplissant correctement les champs proposés.");
 				
 					}
 				}
 				if (!p.getError()){
 					p.setSuccess(true);
-					p.setSuccessMessage("la mise à jour des deadlines à bien été effectuée.");
+					p.setSuccessMessage("la mise à jour des deadlines a bien été effectuée.");
 				}
 			} else if(!Isep.nullOrEmpty(delete, idDdLine)){
 				/**
@@ -221,14 +221,14 @@ public class Deadlines extends HttpServlet {
 				boolean querysuccess = dl.delete(ds);
 				if(querysuccess){
 					p.setSuccess(true);
-					p.setSuccessMessage("la deadline à bien été supprimée.");
+					p.setSuccessMessage("la deadline a bien été supprimée.");
 				} else {
 					p.setError(true);
-					p.setErrorMessage("une erreur est survenu lors de l'oppération. vérifiez que la deadline ai bien été supprimée.");
+					p.setErrorMessage("une erreur est survenue lors de l'opération. Vérifiez que la deadline ait bien été supprimée.");
 				}
 			} else {
 				p.setWarning(true);
-				p.setWarningMessage("L'oppération à mal été éffectuée, veuillez répéter l'oppération en remplissant correctement les champs proposés.");
+				p.setWarningMessage("l'opération a mal été éffectuée, veuillez répéter l'opération en remplissant correctement les champs proposés.");
 			}
 			
 			p.setContent("/deadline/deadline.jsp");
@@ -256,7 +256,7 @@ public class Deadlines extends HttpServlet {
 					dl.update(dline);
 					}else{
 						p.setWarning(true);
-						p.setWarningMessage("L'oppération à mal été éffectuée, veuillez répéter l'oppération en remplissant correctement les champs proposés.");
+						p.setWarningMessage("l'opération a mal été éffectuée, veuillez répéter l'opération en remplissant correctement les champs proposés.");
 					}
 				}
 			}

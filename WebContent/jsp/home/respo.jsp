@@ -11,7 +11,7 @@
 <div class="row">
 	<div class="col-xs-offset-1 col-xs-10 group">
 		<h4>- Les groupes -</h4>
-		<em style="color:#337AB7">Ajouter un groupe...</em>
+		<em style="color:#337AB7">Ajouter un groupe ...</em>
 		<form class="form-inline" method="post" action="AlterGroups">
 		  <div class="form-group">
 		    <div class="input-group">
@@ -40,10 +40,12 @@
 		</form>
 		<hr/>
 		<div class="latest-group">
-			<div class="alert alert-success"> Groupe G4C - Nombre de note: 0  - Absences: 0  - les livrables(0) - tuteur: ldivad</div>
-			<div class="alert alert-success"> Groupe G4C - Nombre de note: 0  - Absences: 0  - les livrables(0) - tuteur: ldivad</div>
-			<div class="alert alert-success"> Groupe G4C - Nombre de note: 0  - Absences: 0  - les livrables(0) - tuteur: ldivad</div>
-			<a href="Promo"><em>Voir plus de group...</em></a>
+			<div class="col-xs-6 col-xs-offset-3">
+				<img src="img/empty/group.svg" class="app-empty-img">
+			</div><br/>
+			<div class="col-xs-12">
+			<a href="Promo" style="dislplay:block"><em>Voir plus de group...</em></a>
+			</div>
 		</div>
 	</div>
 </div>
@@ -62,7 +64,7 @@
 		<div class="col-xs-12">
 			<form class="subject_file" action="FileHandler" method="post" enctype="multipart/form-data">
 				<div class="form-group">
-					<label>Ajoutez un sujet d' APP pour ce semestre.</label>
+					<label>Ajouter un sujet d' APP pour ce semestre</label>
 					<div class="progress" style="display: none">
 						<div class="progress-bar progress-bar-striped active"
 							 role="progressbar" style="width: 0%">
@@ -75,7 +77,7 @@
 		<div class="col-xs-12">
 			<form class="promo_file" action="FileHandler" method="post" enctype="multipart/form-data">
 				<div class="form-group">
-					<label>Ajoutez une liste d'étudiants. </label> <a href="#" id="csv-reminder"> Revoir le format accepté</a>
+					<label>Ajouter une liste d'étudiants </label> <a href="#" id="csv-reminder"> Revoir le format accepté</a>
 					<div class="progress" style="display: none">
 						<div class="progress-bar progress-bar-striped active"
 							 role="progressbar" style="width: 0%">
@@ -88,7 +90,7 @@
 		<div class="col-xs-12">
 			<form class="backup_file" action="FileHandler" method="post" enctype="multipart/form-data">
 				<div class="form-group">
-					<label>Importer une sauvegarde. </label> <a href="#" id="backup-reminder"> Revoir contenu d'une sauvegarde</a>
+					<label>Importer une sauvegarde </label> <a href="#" id="backup-reminder"> Revoir le contenu d'une sauvegarde</a>
 					<div class="progress test" style="display: none">
 						<div class="progress-bar progress-bar-striped active"
 							 role="progressbar" style="width: 0%">
@@ -103,7 +105,7 @@
 				Réaliser une sauvegarde
 			</div>
 			<div class="btn btn-danger">
-				Archivez le semestre.
+				Archiver le semestre
 			</div>
 		</div>
 	</div>

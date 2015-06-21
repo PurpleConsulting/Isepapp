@@ -61,7 +61,7 @@ public class Students extends HttpServlet {
 				// -- Incomplete data, the pseudo is missing.
 				p.setWarning(true);
 				Isep.bagPackHome(p, request.getSession());
-				p.setWarningMessage("La page étudiante n'a été retrouvée.");
+				p.setWarningMessage("la page étudiante n'a pas été retrouvée.");
 				p.setContent("home/common.jsp");
 				
 			} else {
@@ -131,7 +131,7 @@ public class Students extends HttpServlet {
 					
 					// -- the pseudo isn't found
 					p.setWarning(true);
-					p.setWarningMessage("L'utilisateur que vous cherchez n'a pas pu être trouvé "
+					p.setWarningMessage("l'utilisateur que vous cherchez n'a pas pu être trouvé "
 							+ "ou ne fait pas parti des étudiants... page bientôt remplacée par une liste d'étudiant");
 					p.setContent("home.jsp");
 					
@@ -149,8 +149,8 @@ public class Students extends HttpServlet {
 			// -- Back to the home page with an warning message.
 			Isep.bagPackHome(p, request.getSession());
 			p.setWarning(true);
-			p.setWarningMessage("La page sur laquelle vous tentez de vous rendre ne vous est pas accessible. "
-					+ "Pour toute réclamation, prenez contact avec le responsable d'APP actuel.");
+			p.setWarningMessage("la page sur laquelle vous tentez de vous rendre ne vous est pas accessible. "
+					+ "Pour toutes réclamations, prenez contact avec le responsable d'APP actuel.");
 			p.setContent("home/common.jsp");
 		}
 		
@@ -205,11 +205,11 @@ public class Students extends HttpServlet {
 					boolean querysuccess = du.update(subjectUser);
 					if(querysuccess){
 						p.setSuccess(true);
-						p.setSuccessMessage("Les modifications sur le profil ont bien été apportées.");
+						p.setSuccessMessage("les modifications sur le profil ont bien été apportées.");
 						redirectionPseudo = stdPseudo;
 					} else {
 						p.setError(true);
-						p.setErrorMessage("Une erreur est survenue lors de la modification du profil étudiant."
+						p.setErrorMessage("une erreur est survenue lors de la modification du profil étudiant."
 								+ " Les modifications demandées peuvent ne pas avoir été réalisées.");
 					}
 					
@@ -268,13 +268,13 @@ public class Students extends HttpServlet {
 					
 				} else {
 					p.setWarning(true);
-					p.setWarningMessage("Le profil étudiant à modifier n'a pas été trouvé dans la base de donnée.");
+					p.setWarningMessage("le profil étudiant à modifier n'a pas été trouvé dans la base de données.");
 				}
 				
 			} else {
 				
 				p.setError(true);
-				p.setErrorMessage("Votre demande a mal été interprétée. Veillez à bien remplir les champs des formulaires proposés.");
+				p.setErrorMessage("votre demande a mal été interprétée. Veillez à bien remplir les champs des formulaires proposés.");
 				
 			}
 				
@@ -287,8 +287,8 @@ public class Students extends HttpServlet {
 			
 		} else {
 			p.setWarning(true);
-			p.setWarningMessage("La page sur laquelle vous tentez de vous rendre ne vous est pas accessible. "
-					+ "Pour toute réclamation, prenez contact avec le responsable d'APP actuel.");
+			p.setWarningMessage("la page sur laquelle vous tentez de vous rendre ne vous est pas accessible. "
+					+ "Pour toutes réclamations, prenez contact avec le responsable d'APP actuel.");
 			HttpSession s = request.getSession();
 			Isep.bagPackHome(p, s);
 			p.setContent("home/common.jsp");

@@ -5,10 +5,10 @@
 	<div style="margin-left:10%; width:80%">
 		<p>
 			Cette section vous permet d'ajouter des notes personnalisées pour dissocier
-			des étudiants du reste du group. Pour se faire, veuillez choisir un élève et cocher les 
+			des étudiants du reste du groupe. Pour ce faire, veuillez choisir un élève et cocher les 
 			copétences sur lequelles vous voullez le noter.
 			<select class="selectpicker select-modal">
-				<option value="init">Sélectionnez un Etudiant</option>
+				<option value="init">Sélectionnez un étudiant</option>
 			</select><br/>
 			<label>Les compétences</label>
 			<ul>

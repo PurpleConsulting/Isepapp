@@ -65,7 +65,7 @@ public class Skills extends HttpServlet {
 		} else {
 			Isep.bagPackHome(p, request.getSession());
 			p.setWarning(true);
-			p.setWarningMessage("Erreur de connection.");
+			p.setWarningMessage("Erreur de connexion.");
 			request.setAttribute("pages", p);
 			this.getServletContext().getRequestDispatcher("/template.jsp").forward(request, response);
 		}

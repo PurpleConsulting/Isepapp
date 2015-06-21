@@ -4,7 +4,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
 	<div class="row">
-		<h1 class="col-xs-offset-1 col-xs-10">Les Deadlines</h1>
+		<h1 class="col-xs-offset-1 col-xs-10">Les deadlines</h1>
 	</div>
 <c:import url="/jsp/alert.jsp" charEncoding="UTF-8"></c:import>
 

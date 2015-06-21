@@ -14,7 +14,7 @@
 			<button type="button" class="close" data-dismiss="alert" aria-label="Close">
 				<span aria-hidden="true">&times;</span>
 			</button>
-			<p>Vous êtes un tuteur externe? Vous avez la possibilité de changer votre mot de passe
+			<p>Vous êtes un tuteur externe ? Vous avez la possibilité de changer votre mot de passe
 			en cliquant sur, <a class="change-pass" href="#">changer votre mot de passe.</a></p>
 			<div id="alert-passwd-form" class="" style="display:none"><!--  -->
 				<div>
@@ -31,11 +31,11 @@
 				<hr/>
 			</div>
 		</div>
-		<em style="color:#337AB7">Vous groupes d'APP</em>
+		<em style="color:#337AB7">Vos groupes d'APP</em>
 		<div id="line-grp-template" class="col-xs-12 " style="display: none;" >
-			<div class="col-xs-12 col-sm-3"><em>Groupe:</em> <strong class="grp"><a></a></strong></div>
-			<div class="col-xs-12 col-sm-3"><em><a href="#" data-info="missing">Absences:</a></em> <strong class="abs">12</strong></div>
-			<div class="col-xs-12 col-sm-3"><em><a href="#" data-info="delivery">Livrables:</a></em> <strong class="del">2</strong></div>
+			<div class="col-xs-12 col-sm-3"><em>Groupe :</em> <strong class="grp"><a></a></strong></div>
+			<div class="col-xs-12 col-sm-3"><em><a href="#" data-info="missing">Absences :</a></em> <strong class="abs">12</strong></div>
+			<div class="col-xs-12 col-sm-3"><em><a href="#" data-info="delivery">Livrables :</a></em> <strong class="del">2</strong></div>
 			<div class="col-xs-12 col-sm-3"><em></em><span class="fa fa-clock-o"></span></div>
 		</div>
 	</div>

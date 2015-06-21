@@ -3,7 +3,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <div class="row">
 	<h1 class="col-md-offset-1 col-md-10 col-sm-offset-1 col-sm-10 col-xs-offset-1 col-xs-10">
-		Modification du Groupe
+		Modification du groupe
 		<small> 
 			- <a class="chameleon" href="Groups?scope=${group.getName()}"><c:out value="${group.getName()}"></c:out></a> - 
 			<span data-delete="${group.getName()}" class="fa fa-trash-o link-dialog-grp"></span></small>
@@ -12,7 +12,7 @@
 <c:import url="/jsp/alert.jsp" charEncoding="UTF-8"></c:import>
 <div class="row">
 	<div class="col-xs-offset-1 col-xs-10 status">
-		<h4>- Propiétés du groupe - <small>Responsable d'app uniquement</small></h4>
+		<h4>- Propriétés du groupe - <small>Responsable d'APP uniquement</small></h4>
 		<form class="form-inline" method="post" action="AlterGroups">
 			<div class="line">
 				<div class="form-group">
@@ -20,9 +20,9 @@
 					<input name="new_name" type="text"  value="${group.getName()}" class="form-control name" placeholder="Groupe: G**"/>
 				</div>
 				<div class="form-group">
-					<select name="new_tutor" class="form-control selectpicker" data-header="Selectionnez un Tuteur">
+					<select name="new_tutor" class="form-control selectpicker" data-header="Sélectionnez un Tuteur">
 						<c:if test="${group.getTutor() == '(Vide)'}">
-							<option selected>Aucun Tuteur</option>
+							<option selected>Aucun tuteur</option>
 						</c:if>
 						<c:forEach var="tutor" items="${teachers}" varStatus="status">
 								<option ${tutor.getPseudo() != group.getTutor() ? '' : 'selected'}
@@ -43,11 +43,11 @@
 <hr class="col-xs-offset-1 col-xs-10" />
 <div class="row">
 	<div class="col-xs-offset-1 col-xs-10 add-remove">
-		<h4>- Memebres du groupe -</h4>
+		<h4>- Membres du groupe -</h4>
 		<ul class="list-group col-md-7">
 			<li class="list-group-item active">
 				<a class="chameleon" data-toggle="modal" data-target="#modaladd"><span data-toggle="modal" data-target="#myModal" class="fa fa-user-plus fa-2x"></span></a>
-				 Ajouter un étidiant au group.
+				 Ajouter un étudiant au groupe
 			</li>
 			<c:forEach var="student" items="${group.getMembers()}" varStatus="status">
 				<li class="list-group-item std">
@@ -65,7 +65,7 @@
 <hr class="col-xs-offset-1 col-xs-10"/>
 <div class="row">
 	<div class="col-xs-offset-1 col-xs-10 delivery">
-		<h4>- Livrables dugroupe -</h4>
+		<h4>- Livrables du groupe -</h4>
 		<ul class="list-group col-md-7">
 			<li class="list-group-item std">
 				<span class="fa fa-times-circle"> </span>
@@ -91,7 +91,7 @@
 					aria-label="Close">
 					<span aria-hidden="true">&times;</span>
 				</button>
-				<h4 class="modal-title">Ajouter un étudiant au group <c:out value="${group.getName()}"></c:out></h4>
+				<h4 class="modal-title">Ajouter un étudiant au groupe <c:out value="${group.getName()}"></c:out></h4>
 			</div>
 			<div class="modal-body">
 				<form id="adduser" class="form-horizontal" method="post" action="AlterGroups?scope=${group.getName()}">

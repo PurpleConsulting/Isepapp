@@ -4,9 +4,9 @@
 <form class="" id="" method="">
 	<div style="margin-left:10%; width:80%">
 		<p>
-			Nous vous rappelons que le tuteur d' APP ne peut être supprimé.<br/>
-			Pour changer de tuteur veuillez vous servire du module <em style="color:#A94442;"><u>passassion</u></em>.<br/>
-			présent sur la page d'acceuil.
+			Nous vous rappelons que le tuteur d'APP ne peut être supprimé.<br/>
+			Pour changer de tuteur, veuillez <em style="color:#A94442;"><u>modifier</u></em><br/>
+			ses informations en cliquant sur le bouton juste en dessous.
 		</p>
 	</div>
 	<div class="form-group has-error" style="margin-left:10%; width:80%">

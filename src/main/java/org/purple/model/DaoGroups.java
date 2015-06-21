@@ -300,5 +300,11 @@ public class DaoGroups extends Dao<Group>{
 		return res;
 	}
 	
+	public void dropAll(){
+		String q = "DELETE FROM Groups WHERE id != 0 ;";
+		String [] params = {};
+		int affected = Bdd.preparePerform(this.connect, q, params);
+	}
+	
 
 }

@@ -2,7 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <h1 class="col-xs-offset-1 col-xs-10 titlepage">
-	Les compétences. <span class="master-dropdown fa fa-angle-double-down"></span>
+	Les compétences <span class="master-dropdown fa fa-angle-double-down"></span>
 	<c:if test="${user.getPosition() == 'respo'}">
 		<a class="btn btn-default" href="ManageSkills" role="button">
 			<span class="fa fa-pencil"> </span> Editer

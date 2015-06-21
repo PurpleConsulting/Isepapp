@@ -27,7 +27,16 @@ public class Average extends Avg{
 		this.setMaxVal(maxVal);
 	}
 	
-	
+	public int getSize(){
+		int i = 0;
+		for(Avg a : this.grid ){
+			Average av = (Average)a ;
+			if(av.grid.size() != 0){
+				i++;
+			}
+		}
+		return i;
+	}
 	public String getTitle() {
 		return title;
 	}

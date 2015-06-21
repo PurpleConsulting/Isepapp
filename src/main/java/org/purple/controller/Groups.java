@@ -56,8 +56,8 @@ public class Groups extends HttpServlet {
 			
 			// -- Back to the home page with an warning message.
 			p.setWarning(true);
-			p.setWarningMessage("La page sur laquelle vous tentez de vous rendre ne vous est pas accessible. "
-					+ "Pour toute réclamation, prenez contact avec le responsable d'APP actuel.");
+			p.setWarningMessage("la page sur laquelle vous tentez de vous rendre ne vous est pas accessible. "
+					+ "Pour toutes réclamations, prenez contact avec le responsable d'APP actuel.");
 			p.setContent("home.jsp");
 			
 		} else {
@@ -79,7 +79,7 @@ public class Groups extends HttpServlet {
 					
 					// -- Incorrect data, the group is missing.
 					p.setWarning(true);
-					p.setWarningMessage("Le groupe demandé n'a pas été retrouvé dans la base.");
+					p.setWarningMessage("le groupe demandé n'a pas été retrouvé dans la base.");
 					p.setContent("home.jsp");
 					request.setAttribute("pages", p);
 					
@@ -115,7 +115,7 @@ public class Groups extends HttpServlet {
 					}
 					
 					
-					p.setTitle("ISEP / APP - Group "+group.getName());
+					p.setTitle("ISEP / APP - Groupes "+group.getName());
 					p.setContent("users/group.jsp");
 					p.setCss("group.css");
 					p.setJs("group.js");

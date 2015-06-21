@@ -151,10 +151,10 @@ public class PersoControls extends HttpServlet {
 				this.getServletContext().getRequestDispatcher("/template.jsp").forward(request, response);
 				
 			}else{
-				p.setTitle("ISEP / APP - Home");
+				p.setTitle("ISEP / APP - Accueil");
 				p.setContent("home/common.jsp"); //A revoir
 				p.setWarning(true);
-				p.setWarningMessage("L'élève que vous souhaitez noter n'existe pas. Veuillez consulter la liste des groupes pour trouver un élève existant.");
+				p.setWarningMessage("l'élève que vous souhaitez noter n'existe pas. Veuillez consulter la liste des groupes pour trouver un élève existant.");
 				request.setAttribute("pages", p);
 				
 				this.getServletContext().getRequestDispatcher("/template.jsp").forward(request, response);
@@ -170,10 +170,10 @@ public class PersoControls extends HttpServlet {
 			}
 			
 		} else {
-			p.setTitle("ISEP / APP - Home");
+			p.setTitle("ISEP / APP - Accueil");
 			p.setContent("home/common.jsp");
 			p.setWarning(true);
-			p.setWarningMessage("La page que vous essayez d'atteindre n'est accessible que par les tuteurs d'APP.");
+			p.setWarningMessage("la page que vous essayez d'atteindre n'est accessible que par les tuteurs d'APP.");
 			request.setAttribute("pages", p);
 			
 			this.getServletContext().getRequestDispatcher("/template.jsp").forward(request, response);
@@ -257,13 +257,13 @@ public class PersoControls extends HttpServlet {
 				
 				if(querySuccess){
 					p.setSuccess(true);
-					p.setSuccessMessage("Evaluation réussie. Si une évaluation de groupe avait déjà été "
-							+ " éffectuée les notes de " +student+ " ont été mise à jours.");
+					p.setSuccessMessage("évaluation réussie. Si une évaluation de groupe a déjà été "
+							+ " effectuée, les notes de " +student+ " ont été mises à jour.");
 				} else {
-					p.setTitle("ISEP / APP - Home");
+					p.setTitle("ISEP / APP - Accueil");
 					p.setContent("home/common.jsp"); //A revoir
 					p.setWarning(true);
-					p.setWarningMessage("L'élève que vous souhaitez noter n'existe pas. Veuillez "
+					p.setWarningMessage("l'élève que vous souhaitez noter n'existe pas. Veuillez "
 							+ "consulter la liste des groupes pour trouver un élève existant.");
 					request.setAttribute("pages", p);
 					
@@ -288,7 +288,7 @@ public class PersoControls extends HttpServlet {
 			
 			Isep.bagPackHome(p, request.getSession());
 			p.setWarning(true);
-			p.setWarningMessage("seul les tuteurs des étudiants ont le droit d'accéder aux page de notation.");
+			p.setWarningMessage("seuls les tuteurs des étudiants ont le droit d'accéder aux pages de notation.");
 		}
 	}
 }
