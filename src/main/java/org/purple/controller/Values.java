@@ -109,13 +109,11 @@ public class Values extends HttpServlet {
 					String title = request.getParameter("title" + i);
 					String points = request.getParameter("points" + i);
 					String id = request.getParameter("id" + i);
-					char point = points.charAt(0);
-					boolean chara = Character.isDigit(point);
+					
 					Value val = new Value();
-					if (chara == true) {
-						CountTrue++;
-						val.setPoints(Integer.parseInt(points));
-					}
+					CountTrue++;
+					val.setPoints(Integer.parseInt(points));
+					
 					val.setId(Integer.parseInt(id));
 					val.setTitle(title);
 	

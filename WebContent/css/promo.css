@@ -46,10 +46,10 @@ hr{
 .bs-docs-sidebar .nav>.active>a, 
 .bs-docs-sidebar .nav>li>a:hover, 
 .bs-docs-sidebar .nav>li>a:focus {
-    color: #337AB7;                 
+    color: #246482;                 
     text-decoration: none;          
     background-color: transparent;  
-    border-left-color: #337AB7; 
+    border-left-color: #246482; 
 }
 
 
@@ -82,12 +82,12 @@ h2{
 div.info-checkpoint{
 	width: 100%;
 	padding: 10px 20px;
-	border: 1px solid #5BC0DE;
-	border-left: 6px solid #5BC0DE;
+	border: 1px solid #246482;
+	border-left: 6px solid #246482;
 	border-radius:6px;
 }
 div.info-checkpoint div.text h5{
-	color: #5BC0DE;
+	color: #246482;
 }
 div.info-checkpoint div.text{
 	width: 80%;
@@ -96,8 +96,8 @@ div.info-checkpoint div.text{
 div.class-checkpoint{
 	width: 80%;
 	padding: 10px 20px;
-	border: 1px solid #337AB7;
-	border-left: 6px solid #337AB7;
+	border: 1px solid #246482;
+	border-left: 6px solid #246482;
 	border-radius:6px;
 	
 }
@@ -115,11 +115,11 @@ div.medal{
 }
 
 div.medal span.fa{
-	color: #337AB7;
+	color: #246482;
 }
 
 div.medal span.badge{
-	background-color: #337AB7;
+	background-color: #246482;
 }
 
 span.list-group-item:hover {

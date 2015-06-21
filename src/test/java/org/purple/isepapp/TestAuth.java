@@ -14,7 +14,7 @@ public class TestAuth {
 	private HttpServletRequest[] reqs = new HttpServletRequest[4];
 	private HttpSession[] sess = new HttpSession[4];
 	private User[] us = {new User(1, "slefebvr", "sylvain", "lefebvre", "respo"),
-			new User(8, "mmenceny", "matthieu", "manceny", "tutor"),
+			new User(8, "mmanceny", "matthieu", "manceny", "tutor"),
 			new User(3, "ldivad", "loic", "Divad", "student"),
 			new User(4, "nlefebvr", "natacha", "lefebvre", "administration")
 	};

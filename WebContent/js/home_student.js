@@ -17,6 +17,8 @@ var plugInput = function(title, iddeadline){
 	    allowedFileExtensions: ["pdf"],
 	    maxFileCount: 1
 	});
+	
+
 }
 
 var openUpload = function(link){

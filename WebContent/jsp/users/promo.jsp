@@ -13,26 +13,13 @@
 			pour naviguer. L'agencement de la page est le suivant :
 		</div>
 	</div>
-	<div class="row subgroup">
-			├ ── Page Promotion :<br/>
-			├   ├ ── Classe 1 :<br/>
-			├   ├   ├ ── Information du tuteur<br/>
-			├   ├   ├ ── Groupe A<br/>
-			├   ├   ├ ── Groupe B .... <br/>
-			...<br/>
-			├   ├ ── Class 2 :<br/>
-			... etc.<br/>
-	</div>
+	<c:if test="${empty allClass}">
+		<img src="img/empty/group.svg" alt="" class="app-empty-img"/>	
+	</c:if>
 	<c:forEach var="cls" items="${allClass}" varStatus="clItem">
-		<div id="Group${cls}" class="group">
+		<div id="Group${cls}"  class="group">
 			<h2>Classe <c:out value="${cls}"></c:out></h2>
-			<div class="class-checkpoint">
-				Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-				Donec quis nibh velit. Mauris sollicitudin in diam ac imperdiet. 
-				Vivamus elementum ultrices turpis vel sollicitudin. In hac habitasse platea dictumst. 
-				Vivamus suscipit imperdiet urna elementum consectetur. 
-				Cras commodo lorem justo, vel egestas urna malesuada at.
-			</div>
+			
 			<c:forEach var="group" items="${prom.get(cls)}" varStatus="grItem">
 					<div id="Group${group.getName()}" class="row subgroup">
 						<div class="col-sm-10">

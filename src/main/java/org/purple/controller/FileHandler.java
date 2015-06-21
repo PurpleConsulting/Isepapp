@@ -117,21 +117,21 @@ public class FileHandler extends HttpServlet {
 			                String fileName = item.getName();
 			                String field = item.getFieldName();
 			                
-
-			                if(field.equals(this.subjectFile)){
+			            if (Auth.isRespo(request)){
+			                
+			            	if(field.equals(this.subjectFile)){
 			                	fileName = Isep.FILE_SUBJECT;
 			                	p.setSuccessMessage("<strong>et voilà, </strong>le chargement du fichier a bien été effectué."
 			                			+ " Retrouvez le nouveau sujet sur la page <em><a href=\"Subject\">sujet</a><em>.");
+			                	
 			                } else if (field.equals(this.promoFile)) {
 			                	fileName = Isep.FILE_PROMO;
+			                	dg.dropAll();
 			                	p.setSuccessMessage("<strong>et voilà, </strong>les groupes du nouveau semestre "
 			                			+ "ont été chargés avec succès. Retrouvez dès maintenant la demi-promo sur "
 			                			+ "la page <em><a href=\"Promo\">Classes</a><em>.");
-			                } else if (field.equals(this.backupFile)) {
-
-			                	
-                            }
-				                
+			                }
+			                
 				                String root = getServletContext().getRealPath("/");
 				                this.setSlash(root);
 				                File path = new File(root +this.slash+ Isep.ROOT_FILE_SYS);
@@ -140,7 +140,6 @@ public class FileHandler extends HttpServlet {
 				                }
 				                this.doPivot(root +this.slash+ Isep.ROOT_FILE_SYS, fileName);
 				                File uploadedFile = new File(path + this.slash + fileName);
-				                System.out.print(path + this.slash + fileName);
 				                item.write(uploadedFile);
 				                
 				                if (field.equals(this.promoFile)) {
@@ -165,7 +164,6 @@ public class FileHandler extends HttpServlet {
 						                    boolean status = path.mkdirs();
 						                }
 						                File uploadedFile = new File(path + this.slash + fileName);
-						                System.out.print(path + this.slash + fileName);
 						                boolean sqlFlag = ddl.submitDeposit(deadl , Isep.ROOT_FILE_SYS_DEPOSIT + fileName);
 						                if(sqlFlag){
 						                	item.write(uploadedFile);

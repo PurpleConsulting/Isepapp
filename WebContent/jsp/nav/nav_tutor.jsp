@@ -23,13 +23,8 @@
   			<ul class="dropdown-menu" role="menu">
 	            <li><a href="Promo">Les classes</a></li>
 	            <li class="divider"></li>
-<<<<<<< HEAD
 	            <li><a href="RollCall">L'appel</a></li>
 	            <li><a href="Controls">Evaluation des Groupes</a></li>
-=======
-	            <li><a href="#">Gestion des absences</a></li>
-	            <li><a href="Controls">Evaluation des groupes</a></li>
->>>>>>> V0.3-ORTHOGRAPHE
           	</ul>
   		</li>
   		<li class="dropdown">

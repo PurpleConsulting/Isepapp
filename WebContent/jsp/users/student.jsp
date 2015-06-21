@@ -145,12 +145,6 @@
 	</div>
 </div>
 <div class="row">
-	<div class="col-xs-offset-1 col-xs-10 data" >
-		<h4> Visuels </h4>
-		<div class="d3-target"></div>
-	</div>
-</div>
-<div class="row">
 	<div class="col-xs-offset-1 col-xs-10 missing" >
 		<h4>Les absences - <c:out value="${fn:length(missingGrid)}"></c:out></h4>
 		<br/>
@@ -223,8 +217,6 @@
 		</c:forEach>
 	</div>
 </div>
-
-
 <!-- INVISIBLE -->
 <div id="modal_alter" class="modal fade">
 	<div class="modal-dialog">

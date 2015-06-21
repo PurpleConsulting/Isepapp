@@ -87,7 +87,7 @@ div.container-fluid.content div.row div.tooltip-inner{
 }
 
 div.mark div .global-average div{
-	border: 3px solid #337AB7;
+	border: 3px solid #246482;
 	text-align:center;
 	font-size:2.8em;
 	background-color:white;
@@ -96,7 +96,7 @@ div.mark div .global-average div{
 	width: 95px;
 	padding-top:14px;
 	margin: 20px 0px;
-	color: #337AB7;
+	color: #246482;
 	display: block;
 	margin:auto;
 }
@@ -117,7 +117,7 @@ div.mark div p, div.mark div span{
 div.mark span.badge{
 	float: left;
 	margin: 0px 10px;
-	background-color: #337AB7;
+	background-color: #246482;
 }
 
 a.btn.btn-default span{
@@ -147,5 +147,5 @@ div.alert-mark.global{
 	border: solid 1px #31708F;
 }
 span.alert-mark-result{
-	color: #337AB7;
+	color: #246482;
 }

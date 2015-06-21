@@ -57,7 +57,6 @@ public class DaoUsers extends Dao<User> {
 				+ " VALUES (?, ?, ?, ?, CURDATE(),"
 				+ " (SELECT Positions.id FROM Positions WHERE Positions.title = ?),"
 				+ " (SELECT Groups.id FROM Groups WHERE Groups.`name` = ?))";
-		
 		int affected = Bdd.preparePerform(this.connect, q, params);
 		if(affected == 1) res = true;
 		return res;
@@ -226,7 +225,7 @@ public class DaoUsers extends Dao<User> {
 
 	public static int returnTutor(String pseudo) {
 		// TODO Auto-generated method stub
-		Connection co = Bdd.getSecureCo();
+		Connection co = Bdd.getCo();
 		int res = 0;
 		String q = "SELECT Users.id FROM Users INNER JOIN Groups"
 				+ " ON Users.id = Groups.id_tutor WHERE Groups.`id` ="

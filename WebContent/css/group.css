@@ -84,7 +84,7 @@ div.student-cell div span:not(.badge){
 	display: block
 }
 div.student-cell div span.mark{
-	background-color:#337AB7;
+	background-color:#246482;
 }
 div.student-cell div span.missing{
 	background-color:transparent;

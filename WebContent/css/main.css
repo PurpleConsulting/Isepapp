@@ -111,11 +111,11 @@ div.tt-dataset{
 }
 div.tt-cursor{
 	color: white;
-	background-color: #337AB7;
+	background-color: #246482;
 	cursor: pointer;
 }
 em.Bloodhound{
-	color: #337AB7;
+	color: #246482;
 }
 div#content.container-fluid{
 	margin-bottom:16px;

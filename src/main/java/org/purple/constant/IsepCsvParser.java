@@ -107,8 +107,7 @@ public class IsepCsvParser {
 	
 	public boolean insertStudent(ArrayList<String> line){
 		boolean res = true;
-		Connection co = Bdd.getSecureCo();
-		
+		Connection co = Bdd.getCo();
 		String q = "INSERT INTO `APPDB`.`Users` "
 				+ "(`last_name`, `first_name`, `id_group`, "
 				+ "`pseudo`, `isep_no`, `mail`,"

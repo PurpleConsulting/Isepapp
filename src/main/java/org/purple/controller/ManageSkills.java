@@ -50,6 +50,7 @@ public class ManageSkills extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		request.setCharacterEncoding("UTF-8");
 		Page p = new Page();
 		if(Auth.isRespo(request)){
 			// -- create the dao to perorme queries

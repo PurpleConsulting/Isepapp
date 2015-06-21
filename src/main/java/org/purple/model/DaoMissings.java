@@ -19,7 +19,16 @@ public class DaoMissings extends Dao<Missing>{
 	@Override
 	public boolean create(Missing obj) {
 		// TODO Auto-generated method stub
-		return false;
+		boolean res = true;
+		int l = (obj.getLate()) ? 1 : 0;
+		String[] params = {obj.getStudent(), obj.getDate().toString(Isep.JODA_UTC), 
+				Integer.toString(l), obj.getSupporting()};
+		String q = "INSERT INTO Missing (id_student, date, late, supporting)"
+				+ " VALUES ((SELECT Users.id FROM Users WHERE Users.pseudo = ?),"
+				+ " ?, ?, ?)";
+		int affected = Bdd.preparePerform(this.connect, q, params);
+		if(affected != 1) res = false;
+		return res;
 	}
 
 	@Override

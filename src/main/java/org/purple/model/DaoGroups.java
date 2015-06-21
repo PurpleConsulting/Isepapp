@@ -131,7 +131,7 @@ public class DaoGroups extends Dao<Group>{
 	
 	public static int returnTutor(String group) {
 		// TODO Auto-generated method stub
-		Connection co = Bdd.getSecureCo();
+		Connection co = Bdd.getCo();
 		int res = 0;
 		String q = "SELECT Users.id FROM Users INNER JOIN Groups"
 				+ " ON Users.id = Groups.id_tutor WHERE Groups.`name` = ?";
@@ -139,7 +139,6 @@ public class DaoGroups extends Dao<Group>{
 			ResultSet currsor = Bdd.prepareExec(co, q, new String[]{group});
 			currsor.next();
 			res = currsor.getInt(1);
-			currsor.close();
 			co.close();
 		}catch (SQLException e){
 			// TODO Auto-generated catch block
