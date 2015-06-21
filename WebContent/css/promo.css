@@ -82,12 +82,12 @@ h2{
 div.info-checkpoint{
 	width: 100%;
 	padding: 10px 20px;
-	border: 1px solid #5BC0DE;
-	border-left: 6px solid #5BC0DE;
+	border: 1px solid #246482;
+	border-left: 6px solid #246482;
 	border-radius:6px;
 }
 div.info-checkpoint div.text h5{
-	color: #5BC0DE;
+	color: #246482;
 }
 div.info-checkpoint div.text{
 	width: 80%;

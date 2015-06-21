@@ -50,11 +50,6 @@
 	</div>
 </div>
 <div class="row">
-	<div class="col-xs-offset-1 col-xs-10 numbers">
-		<h4>- Les chiffres -</h4>
-	</div>
-</div>
-<div class="row">
 	<div class="col-xs-offset-1 col-xs-10 semester">
 		<h4>- Organisation du semestre -</h4>
 		<div class="col-xs-12">

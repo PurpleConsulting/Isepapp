@@ -68,13 +68,12 @@ public class DaoSkills extends Dao<Skill>{
 		return s;
 	}
 	
-	public static Skill[] allSkill(){
+	public Skill[] allSkill(){
 		Skill[] skills = new Skill[0];
 		//Connection co = Bdd.getCo();
-		Connection co = Bdd.getSecureCo();
 		String q = "SELECT id, title, sub_title FROM Skills";
 		try {
-			ResultSet currsor = co.createStatement().executeQuery(q);
+			ResultSet currsor = this.connect.createStatement().executeQuery(q);
 			if (currsor.last()) {
 				skills = new Skill[currsor.getRow()];
 				currsor.beforeFirst(); 
@@ -84,8 +83,6 @@ public class DaoSkills extends Dao<Skill>{
 				skills[i] = new Skill(currsor.getInt(1), currsor.getString(2), currsor.getString(3));
 				i++;
 			}
-			currsor.close();
-			co.close();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

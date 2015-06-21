@@ -50,6 +50,7 @@ public class Groups extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		request.setCharacterEncoding("UTF-8");
 		Page p = new Page();
 		// -- Authentication --
 		if(!Auth.isRespo(request) && !Auth.isTutor(request) && !Auth.isAdmin(request)){ 
@@ -73,6 +74,8 @@ public class Groups extends HttpServlet {
 				DaoMarks dmk = new DaoMarks(bddServletCo);
 				DaoDeadline ddl = new DaoDeadline(bddServletCo);
 				DaoMissings dm = new DaoMissings(bddServletCo);
+				DaoValues dv = new DaoValues(bddServletCo);
+				DaoSkills ds = new DaoSkills(bddServletCo);
 				
 				Group group = dg.select(scope);  
 				if(group == null){
@@ -96,7 +99,7 @@ public class Groups extends HttpServlet {
 					
 					// -- Retrieve the group average
 					double maxMark = DaoValues.fetchMax();
-					Skill[] skills = DaoSkills.allSkill();// -- get all the skill for this session
+					Skill[] skills = ds.allSkill();// -- get all the skill for this session
 					Average grpAverage = new Average("Moyenne: "+group.getName(), Isep.LANDMARK);
 					for(User u : group.getMembers()){
 						// -- get all the mark for this student

@@ -14,12 +14,12 @@ public class Bdd {
  * 
  */
 	
-    public static final String BDDHOST = System.getProperty("app-bddhost");
-	public static final String BDDCLIENT = System.getProperty("app-bddclient");
-	public static final String BDDUSER = System.getProperty("app-bdduser");
-	public static final String BDDPASSWRD = System.getProperty("app-bddpasswrd");
-	public static final String BDDPORT = System.getProperty("app-bddport");
-	public static final String BDDSCHEMA = System.getProperty("app-bddschema");
+    public static final String BDDHOST = "myhost";
+	public static final String BDDCLIENT = "myclient";
+	public static final String BDDUSER = "me";
+	public static final String BDDPASSWRD = "mypassword";
+	public static final String BDDPORT = "myport";
+	public static final String BDDSCHEMA = "mydb";
 	public static final String BDDURL = "jdbc:mysql://" + BDDHOST + ":"+ BDDPORT + "/" + BDDSCHEMA;
 	
 	public static final Connection getSecureCo(){
@@ -44,12 +44,11 @@ public class Bdd {
 		} catch (SQLException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
-		} catch (NamingException e3 ) {
+		} catch (NamingException e2 ) {
 			// TODO Auto-generated catch block
-			//e2.printStackTrace();
-			co = getSecureCo();
-		} catch (NullPointerException e2) {
-			co = getSecureCo();
+			e2.printStackTrace();
+		} catch (NullPointerException e3) {
+			e3.printStackTrace();
 		}
 		return co;
 	}

@@ -73,6 +73,7 @@ public class Students extends HttpServlet {
 				DaoMarks dmk = new DaoMarks(bddServletCo);
 				DaoDeadline ddl = new DaoDeadline(bddServletCo);
 				DaoGroups dgrp = new DaoGroups(bddServletCo);
+				DaoSkills ds = new DaoSkills(bddServletCo);
 				User std = du.select(student);
 				
 				if(std != null && std.getPosition().equals("student")){
@@ -82,7 +83,7 @@ public class Students extends HttpServlet {
 					
 					// -- we deal with the skills
 					double maxMark = DaoValues.fetchMax();
-					Skill[] skills = DaoSkills.allSkill();// -- get all the skill for this session
+					Skill[] skills = ds.allSkill();// -- get all the skill for this session
 					ArrayList<Mark> marks = dmk.selectByStudent(Integer.toString(std.getId()));// -- get all the mark for this student
 					ArrayList<Average> sklAverage = new ArrayList<Average>();// -- 
 					Average average = new Average("Moyenne: "+std.getPseudo(), Isep.LANDMARK);
@@ -188,6 +189,7 @@ public class Students extends HttpServlet {
 				DaoMarks dmk = new DaoMarks(bddServletCo);
 				DaoDeadline ddl = new DaoDeadline(bddServletCo);
 				DaoGroups dgrp = new DaoGroups(bddServletCo);
+				DaoSkills ds = new DaoSkills(bddServletCo);
 				
 			if(!Isep.nullOrEmpty(scope, stdFirstName, stdLastName, stdPseudo, stdEmail, stdNewGroup)){
 				/**
@@ -222,7 +224,7 @@ public class Students extends HttpServlet {
 					
 					// -- we deal with the skills
 					double maxMark = DaoValues.fetchMax();
-					Skill[] skills = DaoSkills.allSkill();// -- get all the skill for this session
+					Skill[] skills = ds.allSkill();// -- get all the skill for this session
 					ArrayList<Mark> marks = dmk.selectByStudent(Integer.toString(std.getId()));// -- get all the mark for this student
 					ArrayList<Average> sklAverage = new ArrayList<Average>();// -- 
 					Average average = new Average("Moyenne: "+std.getPseudo(), Isep.LANDMARK);

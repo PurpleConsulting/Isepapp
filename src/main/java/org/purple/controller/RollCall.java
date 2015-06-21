@@ -16,6 +16,7 @@ import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
 import org.joda.time.format.DateTimeFormat;
 import org.purple.bean.Group;
+import org.purple.bean.Missing;
 import org.purple.bean.Page;
 import org.purple.bean.User;
 import org.purple.constant.Bdd;
@@ -125,9 +126,9 @@ public class RollCall extends HttpServlet {
 			DaoGroups dg = new DaoGroups(bddServletCo);
 			if(!Isep.nullOrEmpty(daySkiped)){
 				boolean buisnessFlag = true;
-				
+				DateTime day = new DateTime();
 				try{
-					DateTime day = DateTime.parse(daySkiped, DateTimeFormat.forPattern("yyyy-MM-dd"));
+					day = DateTime.parse(daySkiped, DateTimeFormat.forPattern("yyyy-MM-dd"));
 					day = day.withZone(DateTimeZone.forID(Isep.LOCATION));
 				} catch(IllegalArgumentException e){
 					e.printStackTrace();
@@ -136,13 +137,39 @@ public class RollCall extends HttpServlet {
 					p.setErrorMessage("la date indiquée est incorrecte.");
 				}
 				if(buisnessFlag){
+					ArrayList<Missing> allMissings = new ArrayList<Missing>();
 					for(String std : students){
+						boolean late = false;
 						String support = request.getParameter(this.PATTERN_SUPPORT + std); 
 						String delay = request.getParameter(this.PATTERN_DELAY + std);
-						String missing = request.getParameter(this.PATTERN_MISSING + std); 
-						System.out.print(std + "\n");
-						System.out.print(support +" :  "+ delay +" :  "+ missing +" \n");
+						String missing = request.getParameter(this.PATTERN_MISSING + std);
+						if(!Isep.nullOrEmpty(delay)){
+							try{
+								day = DateTime.parse(daySkiped+" "+delay+":00" , DateTimeFormat.forPattern(Isep.JODA_UTC));
+								late = true;
+							} catch(IllegalArgumentException e){
+								buisnessFlag = false;
+								late = false;
+							}
+						}
+						Missing m = new Missing(std, support, day, late);
+						allMissings.add(m);
 					}
+					boolean sqlFlag = true;
+					if(buisnessFlag){
+						for(Missing am : allMissings){
+							sqlFlag = sqlFlag & dm.create(am);
+						}
+					}
+					if(buisnessFlag && sqlFlag){
+						p.setSuccess(true);
+						p.setSuccessMessage("l'enssemble des absences à été inséré.");
+					} else {
+						p.setWarning(true);
+						p.setWarningMessage("une erreur est survenue.");
+					}
+					
+					
 				}
 				
 				
@@ -154,7 +181,7 @@ public class RollCall extends HttpServlet {
 			p.setContent("/deadline/rollcall.jsp");
 			p.setCss("rollcall.css");
 			p.setJs("rollcall.js");
-			
+			p.setTitle("ISEP / APP - L'appel");
 			User tutor = (User)request.getSession().getAttribute("user");
 			Group[] groups = dg.selectGroupbyTutor(tutor);
 			for(Group g : groups){

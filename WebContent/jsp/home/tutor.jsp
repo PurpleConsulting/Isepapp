@@ -40,9 +40,3 @@
 		</div>
 	</div>
 </div>
-<div class="row">
-	<div class="col-xs-offset-1 col-xs-10 depots">
-		<h4></h4>
-		<div> </div>
-	</div>
-</div>

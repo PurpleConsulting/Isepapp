@@ -8,6 +8,10 @@
     <error-code>404</error-code>
     <location>/template.jsp</location>
   </error-page>
+  <error-page>
+    <error-code>500</error-code>
+    <location>/template.jsp</location>
+  </error-page>
   <resource-ref>
     <description>MySQL Datasource</description>
     <res-ref-name>jdbc/APPDB</res-ref-name>
