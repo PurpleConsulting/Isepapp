@@ -3,6 +3,12 @@
  */
 
 $(document).ready(function(){
+	
+	(function(){
+		var date = new Date();
+		dateformat = date.getFullYear() +"-0"+ (date.getMonth()+1) +"-"+ date.getDate();
+		$("input[name='day-skiped']").val(dateformat);
+	})();
 	$("input.check_missing").prop("checked", false);
 	
 	$("input.check_missing").on("click", function(){

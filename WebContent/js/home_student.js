@@ -91,7 +91,7 @@ $.post("/Isepapp/ServiceStudentHandler", {"missing-query": true, "missing-std": 
 	if(data.result.miss.length == 0){
 		$("#blok-missing").empty();
 		$("nav.missing-nav").remove();
-		$("#blok-missing").append('<div class="col-xs-8 col-xs-offset-2">' +
+		$("#blok-missing").append('<div class="col-xs-6 col-xs-offset-3">' +
 				'<img src="img/empty/missing.svg" alt="" class="app-empty-img\">' +
 				'</div>');
 	}
@@ -134,16 +134,3 @@ $.post("/Isepapp/ServiceStudentHandler", {"depot-query": true, "depot-delivery":
 	});
 });
 
-
-
-//$("#delivery-upload").fileinput({
-//    uploadUrl: "/Isepapp/FileHandler?delivery-doc=", // server upload action <div class="file-drop-zone-title" 
-//    uploadAsync: false,
-//    showCaption: false,
-//    showCancel: true,
-//    showRemove: true,
-//    language: "fr",
-//    dropZoneTitle: "//////////////",
-//    allowedFileExtensions: ["pdf"],
-//    maxFileCount: 1
-//});

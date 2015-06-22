@@ -58,7 +58,7 @@ public class ManageSkills extends HttpServlet {
 			DaoSkills ds = new DaoSkills(bddServletCo);
 			
 			// -- prepare the skill we need to display
-			Skill[] allskills = ds.selectAllSkills();
+			Skill[] allskills = ds.selecAllSkillsWhithCross();
 			for(Skill s : allskills){
 				ds.completeSub_skills(s);
 			}
@@ -280,7 +280,7 @@ public class ManageSkills extends HttpServlet {
 			
 			if(p.getContent().equals("/skills/manage_skill.jsp")){
 				// -- load the content of the redirection page
-				Skill[] allskills = ds.selectAllSkills();
+				Skill[] allskills = ds.selecAllSkillsWhithCross();
 				for(Skill s : allskills){
 					ds.completeSub_skills(s);
 				}

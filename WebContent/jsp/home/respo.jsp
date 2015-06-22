@@ -4,7 +4,7 @@
 <div class="row">
 	<h1 class="col-xs-offset-1 col-xs-10">
 		Accueil
-		<small> - <c:out value="${sessionScope.user.getPseudo()}"></c:out> - </small>
+		<small data-target="${user.getPseudo()}"> - <c:out value="${sessionScope.user.getPseudo()}"></c:out> - </small>
 	</h1>
 </div>
 <c:import url="/jsp/alert.jsp" charEncoding="UTF-8"></c:import>
@@ -39,13 +39,20 @@
 		  	</div>
 		</form>
 		<hr/>
-		<div class="latest-group">
-			<div class="col-xs-6 col-xs-offset-3">
-				<img src="img/empty/group.svg" class="app-empty-img">
-			</div><br/>
-			<div class="col-xs-12">
-			<a href="Promo" style="dislplay:block"><em>Voir plus de group...</em></a>
+		<div class="respo-group">
+			<div id="line-grp-template" data-role="exemple" class="col-xs-12" style="display: none;">
+				<div class="col-xs-12 col-sm-3"><em>Groupe :</em> <strong class="grp"><a></a></strong></div>
+				<div class="col-xs-12 col-sm-3"><em><a href="#" data-info="missing">Absences :</a></em> <strong class="abs">12</strong></div>
+				<div class="col-xs-12 col-sm-3"><em><a href="#" data-info="delivery">Livrables :</a></em> <strong class="del">2</strong></div>
+				<div class="col-xs-12 col-sm-3"><em></em><span class="fa fa-clock-o"></span></div>
 			</div>
+			<!--<div class="col-xs-6 col-xs-offset-3">
+					<img src="img/empty/group.svg" class="app-empty-img">
+				</div><br/>-->
+			
+		</div>
+		<div class="col-xs-12">
+			<a href="Promo" style="dislplay:block"><em>Voir plus de group...</em></a>
 		</div>
 	</div>
 </div>

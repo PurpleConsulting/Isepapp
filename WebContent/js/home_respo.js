@@ -31,6 +31,41 @@ function okBar(obj, res){
 $("input.input-class").on("filebatchpreupload", function(){
 	uploadIni();
 });
+
+(function () {
+	var pseudo = $("h1 small").attr("data-target");
+	$.post("/Isepapp/SeviceTuteurHandler", { isExternal: pseudo }, function(data, status){
+		console.log(data);
+		var template = $("#line-grp-template");
+		data.result.groups.forEach(function(element){
+			var line = template.clone();
+			line.removeAttr("id"); line.addClass("alert-grp");
+			// -- name
+			line.find("strong.grp a").text(element.name);
+			line.find("strong.grp a").attr("href", "Groups?scope="+element.name);
+			// -- abs
+			line.find('a[data-info="missing"]').attr("href", "Groups?scope="+element.name+"#missing-div");
+			line.find("strong.abs").text(element.missings);
+			// -- delivery
+			line.find('a[data-info="delivery"]').attr("href", "Groups?scope="+element.name+"#delivery-div");
+			line.find("strong.del").text(element.deliveries);
+			$("div.respo-group").append(line);
+		});
+		var showup = function(tag){
+			tag.show(300, function(){
+				showup($(this).next());
+			});
+		};
+		showup($("div.respo-group div.alert-grp").first());
+		if(data.result.groups.length == 0){
+			var img = $("div.group").append('<br/><div class="col-xs-4 col-xs-offset-4" class="app-empty-img">' +
+					'<img src="img/empty/group.svg" alt="" class="app-empty-img" />' +
+					'</div>');
+			$("div.app-empty-img").show("slow");
+		}
+	});
+})();
+
 // -- input subject
 $("#input_subject").fileinput({
     language: "fr",

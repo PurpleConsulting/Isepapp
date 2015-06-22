@@ -2,4 +2,4 @@
  * 
  */
 
-$('button').tooltip({placement: 'bottom',trigger: 'manual'}).tooltip('show');
+$('a').tooltip({placement: 'bottom',trigger: 'manual'}).tooltip('show');

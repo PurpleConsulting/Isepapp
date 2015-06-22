@@ -2,11 +2,14 @@
 var alert_re = new RegExp(/\^alert-/i);
 
 
+
 $(document).ready(function(){
 	block = $("div.alert_input");
 	input = $("input").first();
 	btn = $('button').first();
 
+	$("#animate").animate({ "margin-top": "-=60px", "opacity": "1" }, 1500);
+	
 	input.blur(function(){
 		$.post("/Isepapp/Signin", {Ajaxpseudo :$(this).val()}, function(data, status){
 			var result = (data.result.find == "true") ? true : false; 

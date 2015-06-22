@@ -130,7 +130,7 @@
 							id="newpoints" /> 
 					</div>
 					<div style="display: none"
-						class="warningA alert-warning cascade-warning warningadd"></div>
+						class="warningA alert alert-warning cascade-warning warningadd col-xs-12"></div>
 				</form>
 			</div>
 			<div class="modal-footer">

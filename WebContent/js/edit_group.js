@@ -3,7 +3,9 @@
  */
 
 $(document).ready(function(){
-	 
+	$(function () {
+		  $('[data-toggle="tooltip"]').tooltip();
+		})
 	//--ini
 	var noEnterForSubmit = function(element){
 		$(element).bind("keypress", function (e) {
@@ -14,7 +16,7 @@ $(document).ready(function(){
 		    }
 		});
 	}
-	noEnterForSubmit("form");
+	noEnterForSubmit("form:not(.navbar-form)");
 	var addUserSubmit =  function(){ $("form#adduser").submit(); }
 	
 	$("span.link-dialog-grp").on("click", function(e) {

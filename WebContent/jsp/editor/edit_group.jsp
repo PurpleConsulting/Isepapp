@@ -21,15 +21,9 @@
 				</div>
 				<div class="form-group">
 					<select name="new_tutor" class="form-control selectpicker" data-header="Sélectionnez un Tuteur">
-						<c:if test="${group.getTutor() == '(Vide)'}">
-							<option selected>Aucun tuteur</option>
-						</c:if>
+						<c:if test="${group.getTutor() == '(Vide)'}"><option selected>Aucun tuteur</option></c:if>
 						<c:forEach var="tutor" items="${teachers}" varStatus="status">
-								<option ${tutor.getPseudo() != group.getTutor() ? '' : 'selected'}
-								 value="${tutor.getPseudo()}">
-									<c:out value="${tutor.getFirstName()}"></c:out>
-									<c:out value="${tutor.getLastName()}"></c:out>
-								</option>
+								<option ${tutor.getPseudo() != group.getTutor() ? '' : 'selected'} value="${tutor.getPseudo()}"><c:out value="${tutor.getFirstName()}"></c:out> <c:out value="${tutor.getLastName()}"></c:out></option>
 						</c:forEach>
 					  </select>
 				</div>
@@ -67,14 +61,17 @@
 	<div class="col-xs-offset-1 col-xs-10 delivery">
 		<h4>- Livrables du groupe -</h4>
 		<ul class="list-group col-md-7">
-			<li class="list-group-item std">
-				<span class="fa fa-times-circle"> </span>
-				<button type="button" class="btn btn-default">Livrable20150312.pdf</button>
-			</li>
-			<li class="list-group-item std">
-				<span class="fa fa-times-circle"> </span>
-				<button type="button" class="btn btn-default">Livrable20150312.zip</button>
-			</li>
+			<c:forEach var="deadl" items="${deadlines}" varStatus="status">
+				<c:if test="${deadl.getCompleted()}">
+					<li class="list-group-item std">
+						<span class="fa fa-times-circle fa-2x"> </span>
+						<a download href="${deadl.getDeliveryPath()}" type="button" class="btn btn-default"
+						data-toggle="tooltip" data-placement="right" title="${deadl.printDeliveryDate()}">
+							<c:out value="${deadl.getDescription()}"></c:out> 
+						</a>
+					</li>
+				</c:if>
+			</c:forEach>
 		</ul>
 	</div>
 </div>

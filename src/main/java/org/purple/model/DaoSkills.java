@@ -97,8 +97,30 @@ public class DaoSkills extends Dao<Skill>{
 		return false;
 	}
 	
+	public Skill[] selecAllSkillsWhithCross(){
+		Skill[] skills =  new Skill[0];
+		String q = "SELECT title, sub_title, id FROM Skills ORDER BY id";
+		ResultSet cursor = Bdd.exec(this.connect, q);
+		try {
+			if (cursor.last()) {
+				skills = new Skill[cursor.getRow()];
+				cursor.beforeFirst(); 
+			}
+			int i = 0;
+			while(cursor.next()){
+				Skill s = new Skill();s.setTitle(cursor.getString(1));
+				s.setSubtitle(cursor.getString(2));s.setId(cursor.getInt(3));
+				skills[i] = s; i++;
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			skills =  new Skill[0];
+			e.printStackTrace();
+		}
+		return skills;
+	}
 	public Skill[] selectAllSkills(){
-		Skill[] skills = null;
+		Skill[] skills = new Skill[0];
 		String q = "SELECT title, sub_title, id FROM Skills WHERE id != 0 ORDER BY id";
 		
 		try {

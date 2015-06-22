@@ -7,8 +7,6 @@
 <div class="col-xs-12">
 	<c:import url="/jsp/alert.jsp" charEncoding="UTF-8"></c:import>
 </div>
-
-
 <div class="row" style="margin-top:50px">
 	<div class="col-xs-10 col-xs-offset-1">
 		<c:forEach var="group" items="${groups}" varStatus="status">
@@ -16,22 +14,16 @@
 		</c:forEach>
 	</div>
 </div>
-
-
 <div class="row" style="margin-top:30px">
 	<div class="col-xs-10 col-xs-offset-1">
 		<button type="button" class="btn btn-primary" id="semester1">Semestre1</button>
 		<button type="button" class="btn btn-default col-sm-offset-8" id="semester2">Semestre2</button>
 	</div>
-	
 	<div class="col-xs-12 col-xs-offset-1" style="margin-top:10px">
 		<button type="button" class="btn btn-default" id="validerForm" >Valider</button>
 	</div>
 </div>
-
-	 
 <div class="row" style="margin-top:50px">
-
 	<div id="premierSemester">
 		<div class="col-sm-3 col-xs-offset-1">
 			<div id="september" class="calendar col-sm-10"></div>

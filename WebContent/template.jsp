@@ -31,8 +31,8 @@
 			<div class="container-fluid">
 				<div class="col-sm-offset-1">
 					<img class="" src="img/BANNERISEPAPP.svg"  alt ="Bannière du site Isep.app" style="heigth:150px;"/><!--  style="width:40%;"-->
-					</div>
 				</div>
+			</div>
 		</header>
 		<c:import url="jsp/nav/nav_${sessionScope.user.position}.jsp" charEncoding="UTF-8"></c:import>
 		<div id="content" class="container-fluid content">

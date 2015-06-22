@@ -67,7 +67,7 @@ public class SeviceTuteurHandler extends HttpServlet {
 		 */
 		
 		
-		if(Auth.isTutor(request)){
+		if(Auth.isTutor(request) || Auth.isRespo(request)){
 			
 			Connection bddServletCo = Bdd.getCo();
 			DaoUsers du = new DaoUsers(bddServletCo);

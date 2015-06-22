@@ -60,7 +60,7 @@
 			    },{
 		    	  name: 'Groups',
 		    	  source: groups,
-		    	  limit: 3,
+		    	  limit: 4,
 		    	  templates: {
 		    	  header: '<div class="tt-suggestion tt-suggestion-header"><em class="Bloodhound">Groupes</em></div>'
 		    	  }
