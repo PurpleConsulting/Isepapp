@@ -35,7 +35,7 @@
 		  		<button type="submit" class="btn btn-default"><span class="fa fa-plus"> </span> Ajouter un groupe</button>
 		  	</div>
 		  	<div class="form-group">
-		  		<a class="btn btn-default" href="Tutors" role="button"><span class="fa fa-plus"> </span>  Ajouter un Tuteur</a>
+		  		<a class="btn btn-default" href="Tutors" role="button"><span class="fa fa-plus"> </span>  Ajouter un tuteur</a>
 		  	</div>
 		</form>
 		<hr/>
@@ -44,7 +44,7 @@
 				<img src="img/empty/group.svg" class="app-empty-img">
 			</div><br/>
 			<div class="col-xs-12">
-			<a href="Promo" style="dislplay:block"><em>Voir plus de group...</em></a>
+			<a href="Promo" style="dislplay:block"><em>Voir plus de groupes ...</em></a>
 			</div>
 		</div>
 	</div>
@@ -59,7 +59,7 @@
 		<div class="col-xs-12">
 			<form class="subject_file" action="FileHandler" method="post" enctype="multipart/form-data">
 				<div class="form-group">
-					<label>Ajouter un sujet d' APP pour ce semestre</label>
+					<label>Ajouter un sujet d'APP pour ce semestre</label>
 					<div class="progress" style="display: none">
 						<div class="progress-bar progress-bar-striped active"
 							 role="progressbar" style="width: 0%">

@@ -15,7 +15,7 @@
 				<span aria-hidden="true">&times;</span>
 			</button>
 			<p>Vous êtes un tuteur externe ? Vous avez la possibilité de changer votre mot de passe
-			en cliquant sur, <a class="change-pass" href="#">changer votre mot de passe.</a></p>
+			en cliquant sur <a class="change-pass" href="#">changer votre mot de passe.</a></p>
 			<div id="alert-passwd-form" class="" style="display:none"><!--  -->
 				<div>
 					<form class="form-inline" action="SeviceTuteurHandler" method="post" onsubmit="return false;">
