@@ -107,7 +107,7 @@ $.post("/Isepapp/ServiceStudentHandler", {"depot-query": true, "depot-delivery":
 			tagList.find("a").attr("title", "Déposé le "+element.deveryDate);
 			$("ul.depots").append(tagList);
 			
-		} else if(!element.completed && element.status){
+		} else if(!element.completed && element.status && !element.cross){
 			var tagList = $("ul.deadline li[data-role='exemple']").clone();
 			tagList.removeAttr("data-role");
 			tagList.find("a").text(element.description);
@@ -117,7 +117,7 @@ $.post("/Isepapp/ServiceStudentHandler", {"depot-query": true, "depot-delivery":
 			tagList.find("a").append(" <span class=\"fa fa-exclamation-triangle\"></span>");
 			$("ul.deadline").append(tagList);
 			
-		} else if(!element.completed && !element.status){
+		} else if(!element.completed && !element.status && !element.cross){
 			var tagList = $("ul.missing-depots li[data-role='exemple']").clone();
 			tagList.removeAttr("data-role");
 			tagList.find("a").text(element.description);

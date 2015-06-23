@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -13,10 +15,12 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.purple.bean.Deadline;
+import org.purple.bean.Group;
 import org.purple.bean.Mark;
 import org.purple.bean.Missing;
 import org.purple.bean.Page;
 import org.purple.bean.Skill;
+import org.purple.bean.SubSkill;
 import org.purple.bean.User;
 import org.purple.constant.Bdd;
 import org.purple.constant.Isep;
@@ -27,6 +31,7 @@ import org.purple.model.DaoGroups;
 import org.purple.model.DaoMarks;
 import org.purple.model.DaoMissings;
 import org.purple.model.DaoSkills;
+import org.purple.model.DaoSubSkills;
 import org.purple.model.DaoUsers;
 import org.purple.model.DaoValues;
 
@@ -74,6 +79,8 @@ public class Students extends HttpServlet {
 				DaoDeadline ddl = new DaoDeadline(bddServletCo);
 				DaoGroups dgrp = new DaoGroups(bddServletCo);
 				DaoSkills ds = new DaoSkills(bddServletCo);
+				DaoSubSkills dss = new DaoSubSkills(bddServletCo);
+				
 				User std = du.select(student);
 				
 				if(std != null && std.getPosition().equals("student")){
@@ -116,6 +123,28 @@ public class Students extends HttpServlet {
 					// -- available group
 					String[] grps = dgrp.allGroups();
 					request.setAttribute("availableGroups", grps);
+					
+					Group group = dgrp.select(std.getGroup());
+					dgrp.completeMemebers(group);
+					ArrayList<User> crossMate = new ArrayList<User>();
+					HashMap<String, ArrayList<Mark>> allCrossMarks = new HashMap<String, ArrayList<Mark>>();
+					
+					// -- cross marks
+					Skill cross  = ds.select("0");
+					ds.completeSub_skills(cross);
+					for(SubSkill c : cross.getSubSkills()){
+						System.out.print(c.getTitle() + " \n ");
+					}
+					for(User m : group.getMembers()){
+						allCrossMarks.put(m.getPseudo(), dmk.selectCrossByStudentAndMate(std.getPseudo(), m.getPseudo()));
+						if(allCrossMarks.get(m.getPseudo()).size() > 0){
+							crossMate.add(m);
+							
+						}
+					}
+					request.setAttribute("CSubSkills", cross.getSubSkills());
+					request.setAttribute("crossmates", crossMate);
+					request.setAttribute("crossmarks", allCrossMarks);
 					
 					
 					p.setContent("users/student.jsp");

@@ -105,41 +105,21 @@
 		<div class="table-responsive">
 		<table class="table table-hover">
 			<tr>
-				<td>Travail en groupe</td>
-				<td>Communication</td>
-				<td>Conduite de projet</td>
-				<td>Conception/réalisation</td>    
+				<c:forEach var="css" items="${CSubSkills}" varStatus="status">
+					<td><c:out value="${css.getTitle()}"></c:out></td>
+				</c:forEach>
 			</tr>
-			<tr>
-				<td>Noémie: acquis</td>
-				<td>Noémie: acquis</td>
-				<td>Noémie: acquis</td>
-				<td>Noémie: acquis</td>
-			</tr>
-			<tr>
-				<td>Emie: acquis</td>
-				<td>Emie: acquis</td>
-				<td>Emie: acquis</td>
-				<td>Emie: acquis</td>
-			</tr>
-			<tr>
-				<td>Amélie: acquis</td>
-				<td>Amélie: acquis</td>
-				<td>Amélie: acquis</td>
-				<td>Amélie: acquis</td>
-			</tr>
-			<tr>
-				<td>Naomie: acquis</td>
-				<td>Naomie: acquis</td>
-				<td>Naomie: acquis</td>
-				<td>Naomie: acquis</td>
-			</tr>
-			<tr>
-				<td>Noémie: acquis</td>
-				<td>Emie: acquis</td>
-				<td>Amélie: acquis</td>
-				<td>Naomie: acquis</td>
-			</tr>
+			<c:forEach var="mate" items="${crossmates}" varStatus="status">
+				<tr>
+					<c:forEach var="mark" items="${crossmarks.get(mate.getPseudo())}" varStatus="status">
+						<td>
+							<c:out value="${mate.getFirstName()}"></c:out>:
+							<c:out value="${mark.getTitle()}"></c:out> 
+						</td>
+					</c:forEach>
+				</tr>
+			</c:forEach>
+			
 		</table>
 		</div>
 	</div>
