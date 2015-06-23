@@ -13,11 +13,11 @@ div.group, div.numbers, div.semester{
 div[class^="col-"] h4{
 	color: #777777
 }
-div.latest-group{
+div.respo-group{
 	margin-bottom: 8px;
 }
 
-div.latest-group div.alert{
+div.respo-group div.alert{
 	margin-bottom: 8px;
 	padding: 6px
 }
@@ -41,4 +41,13 @@ div.danger-header{
 	background-color: #D9534F;
 	color: #FFFFFF;
 	border-radius: 4px 4px 0px 0px;
+}
+div.group div.alert-grp{
+	background-color: #F8F8F8;
+	color: #777777;
+	border: #CCCCCC solid 1px;
+	border-radius: 4px;
+	padding-top: 6px;
+	padding-bottom: 6px;
+	margin-bottom: 6px;
 }

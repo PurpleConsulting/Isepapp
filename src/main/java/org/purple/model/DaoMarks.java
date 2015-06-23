@@ -158,6 +158,69 @@ public class DaoMarks extends Dao<Mark>{
 		return allMarks;
 	}
 	
+	public ArrayList<Mark> selectCrossByStudent(String pseudo) {
+		// TODO Auto-generated method stub
+		ArrayList<Mark> allMarks = new ArrayList<Mark>();
+		String[] params = {pseudo};
+		String q = "SELECT Users.pseudo, `Values`.points, `Values`.title, Skills.title, Sub_skills.title, "
+				+ "Marks.id_sub_skill, Marks.id_value, Marks.`cross`, Marks.group_mark FROM APPDB.Marks "
+				+ "INNER JOIN APPDB.Users ON Users.id = Marks.id_student "
+				+ "INNER JOIN APPDB.`Values` ON `Values`.id = Marks.id_value "
+				+ "INNER JOIN APPDB.Sub_skills ON Sub_skills.id = Marks.id_sub_skill "
+				+ "INNER JOIN APPDB.Skills ON Sub_skills.id_skill = Skills.id "
+				+ "WHERE Users.pseudo = ? && Marks.`cross` = 1";
+		try{
+			ResultSet currsor = Bdd.prepareExec(this.connect, q, params);
+			while(currsor.next()){
+				Mark m = new Mark(currsor.getString(1), currsor.getDouble(2),
+						currsor.getString(3), currsor.getString(4),
+						currsor.getString(5));
+				m.setCross(currsor.getBoolean(8));
+				m.setIdSubSkill(currsor.getInt(6));
+				m.setIdValue(currsor.getInt(7));
+				m.setGroupMark(currsor.getBoolean(9));
+				allMarks.add(m);
+			}
+		}catch (SQLException e){
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			allMarks = new ArrayList<Mark>();
+			return allMarks;
+		}
+		return allMarks;
+	}
+	
+	public ArrayList<Mark> selectCrossByStudentAndMate(String pseudo, String mate) {
+		// TODO Auto-generated method stub
+		ArrayList<Mark> allMarks = new ArrayList<Mark>();
+		String[] params = {pseudo, mate};
+		String q = "SELECT Users.pseudo, `Values`.points, `Values`.title, Skills.title, Sub_skills.title, "
+				+ "Marks.id_sub_skill, Marks.id_value, Marks.`cross`, Marks.group_mark FROM APPDB.Marks "
+				+ "INNER JOIN APPDB.Users ON Users.id = Marks.id_student "
+				+ "INNER JOIN APPDB.`Values` ON `Values`.id = Marks.id_value "
+				+ "INNER JOIN APPDB.Sub_skills ON Sub_skills.id = Marks.id_sub_skill "
+				+ "INNER JOIN APPDB.Skills ON Sub_skills.id_skill = Skills.id "
+				+ "WHERE Users.pseudo = ? && Marks.`cross` = 1 && Marks.id_tutor = (SELECT Users.`id` FROM Users WHERE Users.pseudo = ?)";
+		try{
+			ResultSet currsor = Bdd.prepareExec(this.connect, q, params);
+			while(currsor.next()){
+				Mark m = new Mark(currsor.getString(1), currsor.getDouble(2),
+						currsor.getString(3), currsor.getString(4),
+						currsor.getString(5));
+				m.setCross(currsor.getBoolean(8));
+				m.setIdSubSkill(currsor.getInt(6));
+				m.setIdValue(currsor.getInt(7));
+				m.setGroupMark(currsor.getBoolean(9));
+				allMarks.add(m);
+			}
+		}catch (SQLException e){
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			allMarks = new ArrayList<Mark>();
+			return allMarks;
+		}
+		return allMarks;
+	}
 
 	//Select group mark when group has already mark
 	public Mark[] selectGroupMark(String idGroup){

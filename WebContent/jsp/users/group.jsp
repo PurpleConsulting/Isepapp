@@ -58,22 +58,17 @@
 			<div class="col-md-3 col-sm-6" >
 				<c:choose>
     				<c:when test="${dead.getCompleted()}">
-    					<button type="button" class="btn btn-default" data-toggle="tooltip" data-placement="right" title="Ok, rendu le: ${dead.printDateLimit()}">
+    					<a download href="${dead.getDeliveryPath()}" type="button" class="btn btn-default" data-toggle="tooltip" data-placement="right" title="Ok, rendu le: ${dead.printDateLimit()}">
     						<c:out value="${dead.getDescription()}"></c:out>
-    					</button>
+    					</a>
     				</c:when>
     				<c:otherwise>
-    					<button type="button" class="btn btn-default" data-toggle="tooltip" data-placement="right" title="">
+    					<a href="#" class="btn btn-default" data-toggle="tooltip" data-placement="right" title="">
     						<c:out value="${dead.getDescription()}"></c:out>
-    					</button>
+    					</a>
     				</c:otherwise>
     			</c:choose>
 			</div>
 		</c:forEach>
-	</div>
-</div>
-<div class="row">
-	<div class="col-xs-offset-1 col-xs-10 groupmark">
-		<h4>Les statistiques</h4>
 	</div>
 </div>

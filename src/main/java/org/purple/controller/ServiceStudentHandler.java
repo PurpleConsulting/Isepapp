@@ -101,6 +101,7 @@ public class ServiceStudentHandler extends HttpServlet {
 					ddl.addPathToFile(d);
 					JSONObject jsonDead = new JSONObject();
 					jsonDead.put("id", d.getId());
+					jsonDead.put("cross", d.getCross());
 					jsonDead.put("completed", d.getCompleted());
 					jsonDead.put("deveryDate", d.printDeliveryDate());
 					jsonDead.put("dateLimit", d.printDateLimit());

@@ -23,7 +23,8 @@
 			<c:forEach var="group" items="${prom.get(cls)}" varStatus="grItem">
 					<div id="Group${group.getName()}" class="row subgroup">
 						<div class="col-sm-10">
-							<h3>Groupe <c:out value="${group.getName()}"></c:out></h3>
+							<h3> <a href="Groups?scope=${group.getName()}"> Groupe
+								<c:out value="${group.getName()}"></c:out></a></h3>
 							<div class="medal">
 								<span class="fa fa-graduation-cap"></span>
 								Note :

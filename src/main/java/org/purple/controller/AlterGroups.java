@@ -11,12 +11,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.purple.bean.Deadline;
 import org.purple.bean.Group;
 import org.purple.bean.Page;
 import org.purple.bean.User;
 import org.purple.constant.Bdd;
 import org.purple.constant.Isep;
 import org.purple.model.Auth;
+import org.purple.model.DaoDeadline;
 import org.purple.model.DaoGroups;
 import org.purple.model.DaoUsers;
 
@@ -54,6 +56,7 @@ public class AlterGroups extends HttpServlet {
 				Connection bddServletCo = Bdd.getCo();
 				DaoUsers du = new DaoUsers(bddServletCo);
 				DaoGroups dg = new DaoGroups(bddServletCo);
+				DaoDeadline dl = new DaoDeadline(bddServletCo);
 				// -- ready to perfom query on the database
 
 				Group group = dg.select(thegroup); // -- Get the group
@@ -64,7 +67,12 @@ public class AlterGroups extends HttpServlet {
 					dg.completeTutor(group); // -- add the tutor of the group
 					dg.completeMemebers(group); // -- add the student of the
 												// group
-
+					Deadline[] allDeadlines = dl.selectByGroup(group.getName());
+					for(Deadline d : allDeadlines){
+						dl.checkOut(d);
+					}
+					
+					request.setAttribute("deadlines", allDeadlines);
 					request.setAttribute("teachers", teachers);
 					request.setAttribute("group", group);
 
@@ -158,6 +166,7 @@ public class AlterGroups extends HttpServlet {
 			Connection bddServletCo = Bdd.getCo();
 			DaoUsers du = new DaoUsers(bddServletCo);
 			DaoGroups dg = new DaoGroups(bddServletCo);
+			DaoDeadline dl = new DaoDeadline(bddServletCo);
 			// -- we are ready to perform query on the database
 
 			Group redirectionGroup = new Group();
@@ -352,6 +361,11 @@ public class AlterGroups extends HttpServlet {
 														// all tutors
 				dg.completeMemebers(redirectionGroup);
 				dg.completeTutor(redirectionGroup);
+				Deadline[] allDeadlines = dl.selectByGroup(redirectionGroup.getName());
+				for(Deadline d : allDeadlines){
+					dl.checkOut(d);
+				}
+				
 				request.setAttribute("teachers", teachers);
 				request.setAttribute("group", redirectionGroup);
 			}

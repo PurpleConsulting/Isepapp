@@ -112,7 +112,11 @@ public class Values extends HttpServlet {
 					
 					Value val = new Value();
 					CountTrue++;
-					val.setPoints(Integer.parseInt(points));
+					try{
+						val.setPoints(Integer.parseInt(points));
+					}catch (NumberFormatException e){
+						e.printStackTrace();
+					}
 					
 					val.setId(Integer.parseInt(id));
 					val.setTitle(title);

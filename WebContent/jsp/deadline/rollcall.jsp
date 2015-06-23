@@ -21,8 +21,8 @@
 		<div class="alert alert-info alert-dismissible" role="alert">
 	  		<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 	  		<strong>Bienvenu,</strong> cette page vous permet de rapporter les absences de vos groupes. Il vous suffit de 
-	  		noter la date du jour au format '2015-08-27' (En cas d'erreur il vous sera indiqué que vos group n'ont pas cour à ces dates).
-	  		Puis cochez le case correspondant à l'étudiant absent. 
+	  		noter la date du jour au format '2015-08-27' (En cas d'erreur, il vous sera indiqué que vos groupes n'ont pas cours à ces dates).
+	  		Puis de cocher la case correspondant à l'étudiant absent. 
 		</div>
 	</div>
 </div>

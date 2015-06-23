@@ -42,7 +42,7 @@ public class Skills extends HttpServlet {
 			Connection bddServletCo = Bdd.getCo();
 			DaoSkills dsk = new DaoSkills(bddServletCo);
 			
-			Skill[] skills = dsk.selectAllSkills();
+			Skill[] skills = dsk.selecAllSkillsWhithCross();
 			for(Skill s: skills ){
 				dsk.completeSub_skills(s);
 			}

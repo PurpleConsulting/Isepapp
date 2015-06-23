@@ -3,6 +3,10 @@ h1.titlepage{
 	margin-bottom: 20px;
 }
 
+div.row{
+	margin-bottom: 20px;
+}
+
 div.alert-skill, div.alert-sub-skill{
 	background-color: #F8F8F8;
 	font-style: italic;
@@ -12,6 +16,7 @@ div.alert-skill, div.alert-sub-skill{
 div.alert.alert-skill{
 	border: 1px #246482 solid;
 	color: #575757;
+	margin-bottom: 0px;
 }
 div.alert.alert-sub-skill{
 	border: 1px #BDBDBD solid;

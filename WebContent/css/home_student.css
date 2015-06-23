@@ -61,3 +61,11 @@ div.home-missing div[id^='blk']{
 div.home-missing div[id^='blk'].active{
 	display:block;
 }
+
+span[data-toggle="no-toggle"]{
+	
+}
+
+span[data-role="fa-notif"]{
+	color: #F0AD4E;
+}

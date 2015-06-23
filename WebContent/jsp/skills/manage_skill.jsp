@@ -20,7 +20,7 @@
 		</a>
 		<form class="form-inline">
 			<div class="form-group">
-				<input class="form-control" type="text" placeholder="Sous compétence"/>
+				<!-- <input class="form-control" type="text" placeholder="Sous compétence"/> -->
 			</div>
 		</form>
 	</div>
@@ -28,6 +28,11 @@
 <hr class="col-xs-offset-1 col-xs-10" />
 <div class="row">
 	<div class="col-xs-offset-1 col-xs-10 skills-editors">
+		<form method="post" action="" onsubmit="return false;" class="edit" id="form-skill-2">
+			<div class="col-xs-8 col-xs-offset-1">
+				<img src="img/empty/selectskill.svg" alt=""  class="app-empty-img"/>
+			</div>
+		</form>
 		<c:forEach var="skill" items="${skills}" varStatus="status">
 			<form method="post" action="ManageSkills?skill_id=${skill.getId()}" class="edit" id="form-skill${skill.getId()}">
 				<div class="skill-group form-group">
@@ -48,7 +53,7 @@
 					</div>
 				</c:forEach>
 				<button type="submit" class="btn btn-default subskill_adder"><span class="fa fa-plus"> </span> Sous-compétence</button>
-				<button type="submit" class="btn btn-default"><span class="fa fa-pencil-square-o"> </span> Modifier</button>
+				<button type="submit" class="btn btn-default"><span class="fa fa-pencil-square-o"> </span> Valider</button>
 			</form>
 		</c:forEach>
 	</div>

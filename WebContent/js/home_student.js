@@ -91,7 +91,7 @@ $.post("/Isepapp/ServiceStudentHandler", {"missing-query": true, "missing-std": 
 	if(data.result.miss.length == 0){
 		$("#blok-missing").empty();
 		$("nav.missing-nav").remove();
-		$("#blok-missing").append('<div class="col-xs-8 col-xs-offset-2">' +
+		$("#blok-missing").append('<div class="col-xs-6 col-xs-offset-3">' +
 				'<img src="img/empty/missing.svg" alt="" class="app-empty-img\">' +
 				'</div>');
 	}
@@ -99,6 +99,7 @@ $.post("/Isepapp/ServiceStudentHandler", {"missing-query": true, "missing-std": 
 // -- deadline
 $.post("/Isepapp/ServiceStudentHandler", {"depot-query": true, "depot-delivery": student }, function(data, status){
 	data.result.deadlines.forEach(function(element){
+		console.log(data);
 		if (element.completed && !element.cross){
 			var tagList = $("ul.depots li[data-role='exemple']").clone();
 			tagList.removeAttr("data-role");
@@ -107,7 +108,7 @@ $.post("/Isepapp/ServiceStudentHandler", {"depot-query": true, "depot-delivery":
 			tagList.find("a").attr("title", "Déposé le "+element.deveryDate);
 			$("ul.depots").append(tagList);
 			
-		} else if(!element.completed && element.status){
+		} else if(!element.completed && element.status && !element.cross){
 			var tagList = $("ul.deadline li[data-role='exemple']").clone();
 			tagList.removeAttr("data-role");
 			tagList.find("a").text(element.description);
@@ -117,12 +118,17 @@ $.post("/Isepapp/ServiceStudentHandler", {"depot-query": true, "depot-delivery":
 			tagList.find("a").append(" <span class=\"fa fa-exclamation-triangle\"></span>");
 			$("ul.deadline").append(tagList);
 			
-		} else if(!element.completed && !element.status){
+		} else if(!element.completed && !element.status && !element.cross){
 			var tagList = $("ul.missing-depots li[data-role='exemple']").clone();
 			tagList.removeAttr("data-role");
 			tagList.find("a").text(element.description);
 			tagList.find("a").append(" <span class=\"fa fa fa-bomb\"></span>");
 			$("ul.missing-depots").append(tagList);
+			
+		} else if(element.cross && element.status) {
+			 var bell = $("span.fa[data-role='fa-notif']");
+			 bell.removeAttr("data-toggle");
+			 setInterval('$(".fa-bell").fadeOut(400).delay(300).fadeIn(400)' ,400);
 		}
 	});
 	$(function () {
@@ -134,16 +140,3 @@ $.post("/Isepapp/ServiceStudentHandler", {"depot-query": true, "depot-delivery":
 	});
 });
 
-
-
-//$("#delivery-upload").fileinput({
-//    uploadUrl: "/Isepapp/FileHandler?delivery-doc=", // server upload action <div class="file-drop-zone-title" 
-//    uploadAsync: false,
-//    showCaption: false,
-//    showCancel: true,
-//    showRemove: true,
-//    language: "fr",
-//    dropZoneTitle: "//////////////",
-//    allowedFileExtensions: ["pdf"],
-//    maxFileCount: 1
-//});

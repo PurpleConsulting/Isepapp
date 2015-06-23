@@ -9,11 +9,6 @@
 </div>
 <c:import url="/jsp/alert.jsp" charEncoding="UTF-8"></c:import>
 <div class="row">
-	<div class="col-xs-10 col-xs-offset-1 home-skill">
-		<h4>Notes et compétences</h4>
-	</div>
-</div>
-<div class="row">
 	<div class="col-xs-10 col-xs-offset-1 home-delivery">
 		<h4> - Les livrables du groupes - </h4>
 		<span class="sub-h4"><em>Livrables déposés</em></span>

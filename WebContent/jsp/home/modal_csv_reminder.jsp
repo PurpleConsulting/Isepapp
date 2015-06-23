@@ -4,9 +4,10 @@
 <div>
 	<div style="" class="table-responsive">
 		<p>
+		Le fichier csv attendu est un .csv encodé en UTF-8, avec le délimiteur '<strong style="color:#246482">;</strong>'.
 		</p>
 		<table class="table table-striped">
-			<thead>
+			<tdead>
 				<tr>
 		     		<th>Nom</th>
 		     		<th>Prénom</th>
@@ -15,47 +16,47 @@
 		     		<th>Isep n°</th>
 		     		<th>E-mail</th>
 		  		</tr>
-			</thead>
+			</tdead>
 			<tbody>
 				<tr>
-		     		<th>KOROBENKO</th>
-		     		<th>Irina</th>
-		     		<th>G4A</th>
-		     		<th>ikoroben</th>
-		     		<th>8072</th>
-		     		<th>ikorobenko@isep.fr</th>
+		     		<td>KOROBENKO</td>
+		     		<td>Irina</td>
+		     		<td>G4A</td>
+		     		<td>ikoroben</td>
+		     		<td>8072</td>
+		     		<td>ikorobenko@isep.fr</td>
 		  		</tr>
 		  		<tr>
-			  		<th>JORRE</th>
-			  		<th>Alison</th>
-			  		<th>G4A</th>
-			  		<th>ajorre</th>
-			  		<th>8071</th>
-			  		<th>ajorre@isep.fr</th>
+			  		<td>JORRE</td>
+			  		<td>Alison</td>
+			  		<td>G4A</td>
+			  		<td>ajorre</td>
+			  		<td>8071</td>
+			  		<td>ajorre@isep.fr</td>
 		  		</tr>
 		  		<tr>
-			  		<th>BUCAILLE</th>
-			  		<th>Olivier</th>
-			  		<th>G4A</th>
-			  		<th>obucaill</th>
-			  		<th>8090</th>
-			  		<th>obucaille@isep.fr</th>
+			  		<td>BUCAILLE</td>
+			  		<td>Olivier</td>
+			  		<td>G4A</td>
+			  		<td>obucaill</td>
+			  		<td>8090</td>
+			  		<td>obucaille@isep.fr</td>
 			  	</tr>	
 		  		<tr>
-			  		<th>ZHANG</th>
-			  		<th>Li</th>
-			  		<th>G4A</th>
-			  		<th>lzhang</th>
-			  		<th>8081</th>
-			  		<th>lzhang@isep.fr</th>
+			  		<td>ZHANG</td>
+			  		<td>Li</td>
+			  		<td>G4A</td>
+			  		<td>lzhang</td>
+			  		<td>8081</td>
+			  		<td>lzhang@isep.fr</td>
 		  		</tr>
 		  		<tr>
-		  			<th>BEN MOHAMED</th>
-		  			<th>Farah</th>
-		  			<th>G4A</th>
-		  			<th>fbenmoh</th>
-		  			<th>8087</th>
-		  			<th>fbenmohamed@isep.fr</th>
+		  			<td>BEN MOHAMED</td>
+		  			<td>Farah</td>
+		  			<td>G4A</td>
+		  			<td>fbenmoh</td>
+		  			<td>8087</td>
+		  			<td>fbenmohamed@isep.fr</td>
 		  		</tr>
 			</tbody>
 		</table>

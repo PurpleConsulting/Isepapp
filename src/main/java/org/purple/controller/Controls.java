@@ -51,6 +51,7 @@ public class Controls extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		request.setCharacterEncoding("UTF-8");
 		Page p = new Page();
 		if(Auth.isTutor(request) || Auth.isRespo(request)){
 			
@@ -80,7 +81,7 @@ public class Controls extends HttpServlet {
 			
 			//Display values in radio btn
 
-			Value[] v= dv.selectAllValues("0");
+			Value[] v= dv.selectAllValues("0"); //select values which are not crossmark values
 			request.setAttribute("values", v);
 			
 			p.setJs("bootbox.min.js", "bootstrap-select.min.js", "controls.js");
@@ -115,7 +116,7 @@ public class Controls extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		
+		request.setCharacterEncoding("UTF-8");
 		//Retrieve group name selected (global)
 		String str = request.getParameter("string");
 		
