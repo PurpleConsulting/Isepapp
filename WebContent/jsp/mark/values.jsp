@@ -5,12 +5,12 @@
 </h1>
 <div class="row">
 	<div class="alert alert-info col-xs-offset-1 col-xs-10">
-		<strong>Aide</strong>: Les notes présentes ici sont à la disposition
+		<strong>Aide</strong> : les notes présentes ici sont à la disposition
 		des tuteurs lorsqu'ils notent les étudiants. Toutes modifications des
 		valeurs associées aux notes auront un effet sur les moyennes.
 	</div>
 	<div class="alert alert-warning cascade-warning col-xs-offset-1 col-xs-10 suppression">
-		<strong>Attention </strong>: la suppression d'une valeur
+		<strong>Attention </strong> : la suppression d'une valeur
 		supprimera également les notes correspondantes affectées aux élèves.
 	</div>
 	<c:if test="${pages.getError()}">
@@ -73,7 +73,7 @@
 <!------------------------------- evaluation croissé ------------------------------------------------->
 <div class="row">
 	<div class="col-xs-offset-1 col-xs-10 values">
-	<em style="color:#337AB7">Les valeurs d'évaluation croissés</em>
+	<em style="color:#337AB7">Les valeurs d'évaluation croisées</em>
 		<hr />
 		<form class="form-inline off" method="post" action="Values">
 			<div class="line">

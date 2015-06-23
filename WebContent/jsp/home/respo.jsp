@@ -35,10 +35,9 @@
 		  		<button type="submit" class="btn btn-default"><span class="fa fa-plus"> </span> Ajouter un groupe</button>
 		  	</div>
 		  	<div class="form-group">
-		  		<a class="btn btn-default" href="Tutors" role="button"><span class="fa fa-plus"> </span>  Ajouter un Tuteur</a>
+		  		<a class="btn btn-default" href="Tutors" role="button"><span class="fa fa-plus"> </span>  Ajouter un tuteur</a>
 		  	</div>
 		</form>
-		<hr/>
 		<div class="respo-group">
 			<div id="line-grp-template" data-role="exemple" class="col-xs-12" style="display: none;">
 				<div class="col-xs-12 col-sm-3"><em>Groupe :</em> <strong class="grp"><a></a></strong></div>
@@ -66,7 +65,7 @@
 		<div class="col-xs-12">
 			<form class="subject_file" action="FileHandler" method="post" enctype="multipart/form-data">
 				<div class="form-group">
-					<label>Ajouter un sujet d' APP pour ce semestre</label>
+					<label>Ajouter un sujet d'APP pour ce semestre</label>
 					<div class="progress" style="display: none">
 						<div class="progress-bar progress-bar-striped active"
 							 role="progressbar" style="width: 0%">

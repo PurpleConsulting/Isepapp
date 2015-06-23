@@ -16,8 +16,8 @@
 </div>
 <div class="row" style="margin-top:30px">
 	<div class="col-xs-10 col-xs-offset-1">
-		<button type="button" class="btn btn-primary" id="semester1">Semestre1</button>
-		<button type="button" class="btn btn-default col-sm-offset-8" id="semester2">Semestre2</button>
+		<button type="button" class="btn btn-primary" id="semester1">Semestre 1</button>
+		<button type="button" class="btn btn-default col-sm-offset-8" id="semester2">Semestre 2</button>
 	</div>
 	<div class="col-xs-12 col-xs-offset-1" style="margin-top:10px">
 		<button type="button" class="btn btn-default" id="validerForm" >Valider</button>
