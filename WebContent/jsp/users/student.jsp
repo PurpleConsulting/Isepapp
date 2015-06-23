@@ -103,6 +103,8 @@
 	<div class="col-xs-offset-1 col-xs-10 crossmark" >
 		<h4>Evaluation croisée - 12 / 20</h4>
 		<div class="table-responsive">
+		<c:choose>
+			<c:when test="${!empty crossmates}">
 		<table class="table table-hover">
 			<tr>
 				<c:forEach var="css" items="${CSubSkills}" varStatus="status">
@@ -119,8 +121,14 @@
 					</c:forEach>
 				</tr>
 			</c:forEach>
-			
 		</table>
+		</c:when>
+		<c:when test="${empty crossmates}">
+			<div class="col-xs-10 col-xs-offset-1">
+				<img src="img/empty/nocross.svg" alt="" class="app-empty-img"/>
+			</div>
+		</c:when>
+		</c:choose>
 		</div>
 	</div>
 </div>

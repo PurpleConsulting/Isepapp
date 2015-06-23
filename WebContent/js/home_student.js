@@ -99,6 +99,7 @@ $.post("/Isepapp/ServiceStudentHandler", {"missing-query": true, "missing-std": 
 // -- deadline
 $.post("/Isepapp/ServiceStudentHandler", {"depot-query": true, "depot-delivery": student }, function(data, status){
 	data.result.deadlines.forEach(function(element){
+		console.log(data);
 		if (element.completed && !element.cross){
 			var tagList = $("ul.depots li[data-role='exemple']").clone();
 			tagList.removeAttr("data-role");
@@ -123,6 +124,11 @@ $.post("/Isepapp/ServiceStudentHandler", {"depot-query": true, "depot-delivery":
 			tagList.find("a").text(element.description);
 			tagList.find("a").append(" <span class=\"fa fa fa-bomb\"></span>");
 			$("ul.missing-depots").append(tagList);
+			
+		} else if(element.cross && element.status) {
+			 var bell = $("span.fa[data-role='fa-notif']");
+			 bell.removeAttr("data-toggle");
+			 setInterval('$(".fa-bell").fadeOut(400).delay(300).fadeIn(400)' ,400);
 		}
 	});
 	$(function () {

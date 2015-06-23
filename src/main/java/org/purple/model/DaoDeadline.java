@@ -82,8 +82,8 @@ public class DaoDeadline extends Dao<Deadline>{
 	public Deadline[] selectByGroup(String name) {
 		// TODO Auto-generated method stub
 		Deadline[] dls = new Deadline[0];
-		String q = "SELECT Deadlines.id, Deadlines.description, DATE_FORMAT(Deadlines.date_limit, '"+ Isep.MYSQL_UTC +"'), Deadlines.`status`, Groups.`name`"
-				+ " FROM Deadlines INNER JOIN Groups ON Deadlines.id_group = Groups.id"
+		String q = "SELECT Deadlines.id, Deadlines.description, DATE_FORMAT(Deadlines.date_limit, '"+ Isep.MYSQL_UTC +"'), Deadlines.`status`, Groups.`name`,"
+				+ " Deadlines.`cross` FROM Deadlines INNER JOIN Groups ON Deadlines.id_group = Groups.id"
 				+ " WHERE Groups.`name` = ? ;";
 		try{
 			PreparedStatement prestmt = this.connect.prepareStatement(q);
@@ -100,6 +100,7 @@ public class DaoDeadline extends Dao<Deadline>{
 				dl.setId(currsor.getInt(1));
 				dl.setDescription(currsor.getString(2)); dl.setDateLimit(currsor.getString(3));
 				dl.setStatus(currsor.getBoolean(4)); dl.setGroup(currsor.getString(5));
+				dl.setCross(currsor.getInt(6));
 				dls[i] = dl;
 				i++;
 			}

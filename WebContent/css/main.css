@@ -137,3 +137,7 @@ img.app-empty-img{
 	width: 100%;
 	
 }
+
+span[data-toggle="no-toggle"]{
+	display: none;
+}

@@ -132,9 +132,6 @@ public class Students extends HttpServlet {
 					// -- cross marks
 					Skill cross  = ds.select("0");
 					ds.completeSub_skills(cross);
-					for(SubSkill c : cross.getSubSkills()){
-						System.out.print(c.getTitle() + " \n ");
-					}
 					for(User m : group.getMembers()){
 						allCrossMarks.put(m.getPseudo(), dmk.selectCrossByStudentAndMate(std.getPseudo(), m.getPseudo()));
 						if(allCrossMarks.get(m.getPseudo()).size() > 0){
