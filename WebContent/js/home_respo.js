@@ -58,7 +58,7 @@ $("input.input-class").on("filebatchpreupload", function(){
 		};
 		showup($("div.respo-group div.alert-grp").first());
 		if(data.result.groups.length == 0){
-			var img = $("div.group").append('<br/><div class="col-xs-4 col-xs-offset-4" class="app-empty-img">' +
+			var img = $("div.group div[data-role='more-groups']").before('<br/><div class="col-xs-4 col-xs-offset-4" class="app-empty-img">' +
 					'<img src="img/empty/group.svg" alt="" class="app-empty-img" />' +
 					'</div>');
 			$("div.app-empty-img").show("slow");
@@ -116,7 +116,6 @@ $("#input_promo").on('filelock', function(event, filestack, extraData){
 		var barNeg = Math.floor((Math.random() * 9) + 2);
 		var freez = Math.floor((Math.random() * 15000) + 10000);
 		var i = Math.round(100 * (bar.width() / e.width()));
-		console.log("//////////////////////");
 		if(i < threshold){
 			i = i + barPos;
 			bar.css("width", i+"%");
