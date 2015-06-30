@@ -252,8 +252,8 @@ public class DaoGroups extends Dao<Group>{
 	
 	
 	public void completeMemebers(Group g){
-		String q = "SELECT Users.id, Users.pseudo, Users.first_name, Users.last_name, "
-				+ " Users.tel, Users.mail "
+		String q = "SELECT Users.id, Users.pseudo, Users.first_name, "
+				+ " Users.last_name, Users.mail "
 				+ " FROM APPDB.Users INNER JOIN APPDB.Groups "
 				+ " ON Groups.id = Users.id_group WHERE Groups.id = "+ Integer.toString(g.getId()) +""
 				+ " AND Users.id_post = 4;";
@@ -261,7 +261,7 @@ public class DaoGroups extends Dao<Group>{
 			ResultSet currsor = this.connect.createStatement().executeQuery(q);
 			while(currsor.next()){
 				User u = new User(currsor.getInt(1), currsor.getString(2), currsor.getString(3), currsor.getString(4), Auth.student);
-				u.setGroup(g.getName()); u.setTel(currsor.getString(5)); u.setMail(currsor.getString(6));
+				u.setGroup(g.getName()); u.setMail(currsor.getString(5));
 				g.setMembers(u);
 			}
 		} catch (SQLException e) {

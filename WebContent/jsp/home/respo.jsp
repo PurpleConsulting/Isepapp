@@ -50,7 +50,7 @@
 				</div><br/>-->
 			
 		</div>
-		<div class="col-xs-12">
+		<div class="col-xs-12" style="padding-left:0px;" data-role="more-groups">
 			<a href="Promo" style="dislplay:block"><em>Voir plus de group...</em></a>
 		</div>
 	</div>

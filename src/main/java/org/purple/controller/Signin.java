@@ -1,33 +1,24 @@
 package org.purple.controller;
 
-/*** java import ***/
 import java.io.IOException;
-
-
-
-
 import java.sql.Connection;
 import java.sql.SQLException;
-
-
-
-/*** servlet import ***/
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import org.json.JSONObject;
 import org.purple.bean.Page;
 import org.purple.bean.User;
 import org.purple.constant.Bdd;
 import org.purple.constant.Isep;
-/*** Purple import ***/
 import org.purple.model.DaoUsers;
 
 /**
- * Servlet implementation class Signin
+ * THIS SERVLET GIVE ACCESS TO THE SIGNIN PAGE, PROVIDE A CHECK OF YOUR LOGIN IN AJAX
+ * ADD AN USER OBJECT TO THE SESSION AFTER A SUCESS FULL AUTHETICATION
+ * 
  */
 @WebServlet("/Signin")
 public class Signin extends HttpServlet {
@@ -60,33 +51,24 @@ public class Signin extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		
-		/**
-		 * AJAX HANDLER PART
-		 */
-		// -- trigged by the blur input
-		String ajPseudo = request.getParameter("Ajaxpseudo");
-		
-		/**
-		 * REGULAR POST PART
-		 */
-		
-		String pseudo = request.getParameter("pseudo");
-		String pwd = request.getParameter("password");
-		/* OPS */
-		
-		/**
-		 * AJAX HANDLER PART
-		 */
 		request.setCharacterEncoding("UTF-8");
 		Page p = new Page();
+		/** AJAX PARAMS **/
+		String ajPseudo = request.getParameter("Ajaxpseudo"); // -- trigged by the blur input
+		
+		/** FORM PARAMS **/
+		String pseudo = request.getParameter("pseudo");
+		String pwd = request.getParameter("password");
+		
+		////////////////////// OPS //////////////////////
+		
 		Connection bddServletCo = Bdd.getCo();
 		DaoUsers du = new DaoUsers(bddServletCo);
 		
 		if (!Isep.nullOrEmpty(ajPseudo)){
 			
+			// -- Check Login helper -- //
 			Boolean res = false;
-			
 			if(du.find(ajPseudo)) res = true;
 			response.setHeader("content-type", "application/json");
 			JSONObject result = new JSONObject();
@@ -96,6 +78,8 @@ public class Signin extends HttpServlet {
 			response.getWriter().write(result.toString());
 
 		} else if (Isep.nullOrEmpty(pseudo, pwd)){
+			
+			// -- BAD attempt for sign in -- //
 			p.setWarning(true);
 			p.setWarningMessage("vos identifiants n'ont pas été correctement récupérés. Veuillez vous connecter à nouveau.");
 			p.setTitle("ISEP / APP - Connexion");
@@ -103,25 +87,28 @@ public class Signin extends HttpServlet {
 			this.getServletContext().getRequestDispatcher("/jsp/signin.jsp").forward(request, response);
 
 		} else {
-			String url = "";
+			// -- GOOD attempt for sign in -- //
 			User user = du.select(pseudo);
 			user.setPassword(pwd);
 			user = du.comparePwd(user);
 			if(user.getId() !=  0){
-
+				
+				// -- Identification Success
 				request.getSession(true).setAttribute("user", user);
 				response.sendRedirect("/Isepapp/Home");
+				
 			} else {
+				
+				// -- Identification Failure
 				p.setTitle("ISEP / APP - Connexion");
 				p.setError(true);
 				p.setErrorMessage("un problème est survenu lors de l'établissement de la connexion. "
 						+ "Pour toute récupération de mot de passe, veuillez vous rapprocher de l'administration de l'ISEP.");
 				
-				url = "/jsp/signin.jsp";
 				request.setAttribute("pages", p);
-				this.getServletContext().getRequestDispatcher(url).forward(request, response);
+				this.getServletContext().getRequestDispatcher("/jsp/signin.jsp").forward(request, response);
+		
 			}
-	
 		}
 	
 		try {
