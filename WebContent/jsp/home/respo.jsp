@@ -45,14 +45,24 @@
 				<div class="col-xs-12 col-sm-3"><em><a href="#" data-info="delivery">Livrables :</a></em> <strong class="del">2</strong></div>
 				<div class="col-xs-12 col-sm-3"><em></em><span class="fa fa-clock-o"></span></div>
 			</div>
-			<!--<div class="col-xs-6 col-xs-offset-3">
-					<img src="img/empty/group.svg" class="app-empty-img">
-				</div><br/>-->
-			
 		</div>
 		<div class="col-xs-12" style="padding-left:0px;" data-role="more-groups">
 			<a href="Promo" style="dislplay:block"><em>Voir plus de group...</em></a>
 		</div>
+	</div>
+</div>
+<div class="row">
+	<div class="col-xs-10 col-xs-offset-1 numbers">
+		<h4>- Les notes -</h4>
+		<div class="col-xs-6 col-sm-3 barchart-promo">
+			<label>Moyenne des classes</label>
+			<canvas id="barchart-canvas" width="100" height="100"></canvas>
+		</div>
+	</div>
+</div>
+<div class="row">
+	<div class="col-xs-10 col-xs-offset-1 missings">
+		<h4>- Les absences -</h4>
 	</div>
 </div>
 <div class="row">

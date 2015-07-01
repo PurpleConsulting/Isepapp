@@ -8,7 +8,7 @@ $(document).ready(function(){
 	var pdf = $("embed");
 	var pdfResize = function(){
 		pdf.css("width",container.innerWidth() + "px" );
-		pdf.css("height", $(window).height() - 70 + "px" );
+		pdf.css("height", $(window).height() - 50 + "px" );
 	};
 	
 	pdfResize();

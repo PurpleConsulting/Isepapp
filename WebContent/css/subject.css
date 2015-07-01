@@ -12,10 +12,12 @@ nav#navmain.navbar{
 div#content.container-fluid.content{
 	padding: 0px;
 	margin-top:50px;
+	margin-bottom: 0px;
 	background-image: url("img/empty/subject.svg");
 	background-repeat: no-repeat;
 	background-position:center center;
 }
 footer{
+	display: none;
 	margin-top:0px;
 }
