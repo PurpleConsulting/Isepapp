@@ -39,8 +39,7 @@ public class Mark extends Avg {
 		this.setCross(cross);
 	}
 
-	public Mark(String owner, double value, String title, String skill,
-			String subSkill) {
+	public Mark(String owner, double value, String title, String skill, String subSkill) {
 		// -- This constructor only prepare mark for the display and computation
 		this.setValue(value);
 		this.setTitle(title);
@@ -56,7 +55,6 @@ public class Mark extends Avg {
 	}
 
 	public void setValue(double value) {
-
 		this.value = value;
 	}
 

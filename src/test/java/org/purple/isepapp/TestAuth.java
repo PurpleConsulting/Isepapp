@@ -19,7 +19,7 @@ public class TestAuth {
 			new User(4, "nlefebvr", "natacha", "lefebvre", "administration")
 	};
 	
-	//@Before
+	@Before
 	public void setUp() {
 	    MockitoAnnotations.initMocks(this); 
 	    for(int i = 0; i < 4; i++){
@@ -30,7 +30,7 @@ public class TestAuth {
 	    }
 	}
 	
-	//@Test
+	@Test
 	public void testIsConnect(){
 		if(Auth.isConnect(reqs[0])){
 			
@@ -39,7 +39,7 @@ public class TestAuth {
 		}
 	}
 	
-	//@Test
+	@Test
 	public void testIsRespo(){
 		if(Auth.isRespo(reqs[0])){
 			
@@ -48,7 +48,7 @@ public class TestAuth {
 		}
 	}
 	
-	//@Test
+	@Test
 	public void testIsTutor(){
 		if(Auth.isTutor(reqs[1])){
 			
@@ -57,7 +57,7 @@ public class TestAuth {
 		}
 	}
 	
-	//@Test
+	//@Test // --  FAILED FOR NOW
 	public void testIsThatTutor(){
 		if(Auth.isTutor(reqs[1], "G8B")){
 			
@@ -66,7 +66,7 @@ public class TestAuth {
 		}
 	}
 	
-	//@Test
+	//@Test // --  FAILED FOR NOW
 	public void testIsUrTutor(){
 		if(Auth.isStudentTutor(reqs[1], "ldivad")){
 			
@@ -75,7 +75,7 @@ public class TestAuth {
 		}
 	}
 	
-	//@Test
+	@Test
 	public void testIsStudent(){
 		if(Auth.isStudent(reqs[2])){
 			
@@ -84,7 +84,7 @@ public class TestAuth {
 		}
 	}
 	
-	//@Test
+	@Test
 	public void testIsAdministrator(){
 		if(Auth.isAdmin(reqs[3])){
 			
