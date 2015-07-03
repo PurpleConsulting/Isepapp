@@ -4,11 +4,6 @@ import org.purple.bean.User;
 
 /**
  * @author LoicMDIVAD
- *
- */
-/**
- * @author LoicMDIVAD
- *
  */
 public class Auth {
 	
@@ -30,11 +25,12 @@ public class Auth {
 		}
 	}
 		
-	/**This function compare the user position with one of the available position (Auth.stutend, Auth.tutor...) If the positions matches the user had a good permission and the function return True, False otherwise.
+	/**This function compare the user position with one of the available position (Auth.stutend, Auth.tutor...).
+	 * If the positions matches the user had a good permission and the function return True, False otherwise.
 	 * DON'T USE THIS LIGHT, better user Auth.isStudent() Auth.isRespo ...
 	 * @param request (HttpServletRequest)
 	 * @param position (String)
-	 * @return 
+	 * @return (boolean)
 	 */
 	private static boolean isUser(HttpServletRequest request, String position){
 		User u = (User)request.getSession().getAttribute("user");
@@ -48,7 +44,7 @@ public class Auth {
 	/**
 	 * @param request
 	 * @param group
-	 * @return
+	 * @return (boolean)
 	 */
 	private static boolean isGroupOwner(HttpServletRequest request, String group){
 		User u = (User)request.getSession().getAttribute("user");
@@ -63,7 +59,7 @@ public class Auth {
 	/**
 	 * @param request
 	 * @param group
-	 * @return
+	 * @return (boolean)
 	 */
 	private static boolean isStudentOwner(HttpServletRequest request, String group){
 		User u = (User)request.getSession().getAttribute("user");
@@ -75,23 +71,27 @@ public class Auth {
 		}
 	}
 	
-	/**
-	 * @param request
-	 * @return
+	/**Take a request from the user and returns True if is rôle is Respo (see Auth.respo) otherwise it returns False.
+	 * Use only in a HttpServlet
+	 * @param request (HttpServletRequest)
+	 * @return (boolean)
 	 */
 	public static boolean isRespo(HttpServletRequest request){
 		return isUser(request, Auth.respo);
 	}
 	
-	/**
-	 * @param request
-	 * @return
+	/**Take a request from the user and returns True if is role is Tutor (see Auth.tutor) otherwise it returns False.
+	 * Use only in a HttpServlet
+	 * @param request (HttpServletRequest)
+	 * @return (boolean)
 	 */
 	public static boolean isTutor(HttpServletRequest request){
 		return isUser(request, Auth.tutor);
 	}
 	
-	/**
+	/**Take a request from the user and a group name (format: G8B). 
+	 * Returns True if is role is Tutor and the group belong to him, otherwise it returns False.
+	 * Use only in a HttpServlet
 	 * @param request
 	 * @param group
 	 * @return
@@ -104,7 +104,9 @@ public class Auth {
 		}
 	}
 	
-	/**
+	/**Take a request from the user and a student pseudo (format: zkaneswa).
+	 * Returns True if is role is Tutor and the student belong to him, otherwise it returns False.
+	 * Use only in a HttpServlet
 	 * @param request
 	 * @param student
 	 * @return
@@ -117,7 +119,8 @@ public class Auth {
 		}
 	}
 	
-	/**
+	/**Take a request from the user and returns True if is role is Student (see Auth.student) otherwise it returns False.
+	 * Use only in a HttpServlet
 	 * @param request
 	 * @return
 	 */
@@ -125,7 +128,8 @@ public class Auth {
 		return isUser(request, Auth.student);
 	}
 	
-	/**
+	/**Take a request from the user and returns True if is role is Admin (see Auth.admin) otherwise it returns False.
+	 * Use only in a HttpServlet
 	 * @param request
 	 * @return
 	 */

@@ -31,6 +31,9 @@ public class TestAvgBuilder {
 		this.path = new File(".").getCanonicalPath() + "/src/test/";
 		zozo.setGroup("G5A"); dede.setGroup("G5B");
 		stdM = this.stdMarkFile();
+		for(Mark m : stdM){
+			System.out.print(m.getOwner() +" : "+ m.getValue() +" "+ m.getSubSkill() + "\n");
+		}
 	}
 	
 	//@Test
