@@ -26,6 +26,7 @@ import org.purple.constant.Bdd;
 import org.purple.constant.Isep;
 import org.purple.model.Auth;
 import org.purple.model.Average;
+import org.purple.model.AvgBuilder;
 import org.purple.model.DaoDeadline;
 import org.purple.model.DaoGroups;
 import org.purple.model.DaoMarks;
@@ -90,24 +91,10 @@ public class Students extends HttpServlet {
 					
 					// -- we deal with the skills
 					double maxMark = DaoValues.fetchMax();
-					Skill[] skills = ds.allSkill();// -- get all the skill for this session
-					ArrayList<Mark> marks = dmk.selectByStudent(Integer.toString(std.getId()));// -- get all the mark for this student
-					ArrayList<Average> sklAverage = new ArrayList<Average>();// -- 
-					Average average = new Average("Moyenne: "+std.getPseudo(), Isep.LANDMARK);
-					for(Skill s : skills){
-						Average a = new Average(s.getTitle(), maxMark);
-						if(s.getId() == 0) a.setCross(true);
-						sklAverage.add(a);
-						
-					}
-					for(Average av : sklAverage){
-						for(Mark note : marks){
-							if(av.getTitle().equals(note.getSkill())){
-								av.push(note);
-							}
-						}
-						average.push(av);
-					}
+					Skill[] skills = ds.allSkill();
+					ArrayList<Mark> marks = dmk.selectByStudent(std.getPseudo());// -- get all the mark for this student
+					Average average = AvgBuilder.studentAverage(marks,std,maxMark);
+					
 					
 					// -- we retreve all the deadline
 					Deadline[] deadlines = ddl.selectByGroup(std.getGroup());

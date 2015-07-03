@@ -103,19 +103,19 @@ public class DaoMarks extends Dao<Mark>{
 	public Mark select(String id) {
 		// A utiliser?
 		Mark m = new Mark();
-		String q = "SELECT Users.pseudo, `Values`.points, `Values`.title, Skills.title, Sub_skills.title FROM APPDB.Marks "
-				+ "INNER JOIN APPDB.Users ON Users.id = Marks.id_student "
-				+ "INNER JOIN APPDB.`Values` ON `Values`.id = Marks.id_value "
-				+ "INNER JOIN APPDB.Sub_skills ON Sub_skills.id = Marks.id_sub_skill "
-				+ "INNER JOIN APPDB.Skills ON Sub_skills.id_skill = Skills.id "
-				+ "WHERE Marks.id = ?";
+		String[] params = {id};
+		String q = "SELECT `Users`.pseudo, `Values`.points, `Values`.title, "
+				+ " Skills.id, Skills.title, Sub_skills.id, Sub_skills.title, "
+				+ " Marks.`cross`, Marks.group_mark, `Values`.id FROM Marks"
+				+ " INNER JOIN `Users` ON Marks.id_student = `Users`.id"
+				+ " INNER JOIN `Values` ON `Values`.id = Marks.id_value"
+				+ " INNER JOIN Sub_skills ON Sub_skills.id = Marks.id_sub_skill"
+				+ " INNER JOIN Skills ON Sub_skills.id_skill = Skills.id "
+				+ " WHERE Marks.id = ? ;";
 		try{
-			PreparedStatement prestmt = this.connect.prepareStatement(q);
-			prestmt.setString(1,id);
-			ResultSet currsor = prestmt.executeQuery();
+			ResultSet currsor = Bdd.prepareExec(this.connect, q, params);
 			if(!currsor.next()) return m;
-			m = new Mark(currsor.getString(1), currsor.getDouble(2), currsor.getString(3), currsor.getString(4), currsor.getString(5));
-			prestmt.close();
+			m = new Mark(currsor.getString(1), currsor.getDouble(2), currsor.getString(3), currsor.getInt(4), currsor.getString(5), currsor.getInt(6), currsor.getString(7));
 		}catch (SQLException e){
 			// TODO Auto-generated catch block
 			m = null;
@@ -126,27 +126,26 @@ public class DaoMarks extends Dao<Mark>{
 	
 	//public Mark select
 	
-	public ArrayList<Mark> selectByStudent(String id) {
+	public ArrayList<Mark> selectByStudent(String pseudo) {
 		// TODO Auto-generated method stub
 		ArrayList<Mark> allMarks = new ArrayList<Mark>();
-		String[] params = {id};
-		String q = "SELECT Users.pseudo, `Values`.points, `Values`.title, Skills.title, Sub_skills.title, "
-				+ "Marks.id_sub_skill, Marks.id_value, Marks.`cross`, Marks.group_mark FROM APPDB.Marks "
-				+ "INNER JOIN APPDB.Users ON Users.id = Marks.id_student "
-				+ "INNER JOIN APPDB.`Values` ON `Values`.id = Marks.id_value "
-				+ "INNER JOIN APPDB.Sub_skills ON Sub_skills.id = Marks.id_sub_skill "
-				+ "INNER JOIN APPDB.Skills ON Sub_skills.id_skill = Skills.id "
-				+ "WHERE Users.id = ?";
+		String[] params = {pseudo};
+		String q = "SELECT `Users`.pseudo, `Values`.points, `Values`.title, "
+				+ " Skills.id, Skills.title, Sub_skills.id, Sub_skills.title, "
+				+ " Marks.`cross`, Marks.group_mark,`Values`.id FROM Marks"
+				+ " INNER JOIN `Users` ON Marks.id_student = `Users`.id"
+				+ " INNER JOIN `Values` ON `Values`.id = Marks.id_value"
+				+ " INNER JOIN Sub_skills ON Sub_skills.id = Marks.id_sub_skill"
+				+ " INNER JOIN Skills ON Sub_skills.id_skill = Skills.id "
+				+ " WHERE Users.pseudo = ? ORDER BY Skills.id ; ";
 		try{
 			ResultSet currsor = Bdd.prepareExec(this.connect, q, params);
 			while(currsor.next()){
-				Mark m = new Mark(currsor.getString(1), currsor.getDouble(2),
-						currsor.getString(3), currsor.getString(4),
-						currsor.getString(5));
+				Mark m = new Mark(currsor.getString(1), currsor.getDouble(2),currsor.getString(3), 
+						currsor.getInt(4), currsor.getString(5), currsor.getInt(6), currsor.getString(7));
 				m.setCross(currsor.getBoolean(8));
-				m.setIdSubSkill(currsor.getInt(6));
-				m.setIdValue(currsor.getInt(7));
 				m.setGroupMark(currsor.getBoolean(9));
+				m.setIdValue(currsor.getInt(10));
 				allMarks.add(m);
 			}
 		}catch (SQLException e){
@@ -162,23 +161,22 @@ public class DaoMarks extends Dao<Mark>{
 		// TODO Auto-generated method stub
 		ArrayList<Mark> allMarks = new ArrayList<Mark>();
 		String[] params = {pseudo};
-		String q = "SELECT Users.pseudo, `Values`.points, `Values`.title, Skills.title, Sub_skills.title, "
-				+ "Marks.id_sub_skill, Marks.id_value, Marks.`cross`, Marks.group_mark FROM APPDB.Marks "
-				+ "INNER JOIN APPDB.Users ON Users.id = Marks.id_student "
-				+ "INNER JOIN APPDB.`Values` ON `Values`.id = Marks.id_value "
-				+ "INNER JOIN APPDB.Sub_skills ON Sub_skills.id = Marks.id_sub_skill "
-				+ "INNER JOIN APPDB.Skills ON Sub_skills.id_skill = Skills.id "
-				+ "WHERE Users.pseudo = ? && Marks.`cross` = 1";
+		String q = "SELECT `Users`.pseudo, `Values`.points, `Values`.title, "
+				+ " Skills.id, Skills.title, Sub_skills.id, Sub_skills.title, "
+				+ " Marks.`cross`, Marks.group_mark, `Values`.id FROM Marks"
+				+ " INNER JOIN `Users` ON Marks.id_student = `Users`.id"
+				+ " INNER JOIN `Values` ON `Values`.id = Marks.id_value"
+				+ " INNER JOIN Sub_skills ON Sub_skills.id = Marks.id_sub_skill"
+				+ " INNER JOIN Skills ON Sub_skills.id_skill = Skills.id "
+				+ " WHERE Users.pseudo = ? && Marks.`cross` = 1";
 		try{
 			ResultSet currsor = Bdd.prepareExec(this.connect, q, params);
 			while(currsor.next()){
-				Mark m = new Mark(currsor.getString(1), currsor.getDouble(2),
-						currsor.getString(3), currsor.getString(4),
-						currsor.getString(5));
+				Mark m = new Mark(currsor.getString(1), currsor.getDouble(2),currsor.getString(3), 
+						currsor.getInt(4), currsor.getString(5), currsor.getInt(6), currsor.getString(7));
 				m.setCross(currsor.getBoolean(8));
-				m.setIdSubSkill(currsor.getInt(6));
-				m.setIdValue(currsor.getInt(7));
 				m.setGroupMark(currsor.getBoolean(9));
+				m.setIdValue(currsor.getInt(10));
 				allMarks.add(m);
 			}
 		}catch (SQLException e){
@@ -194,23 +192,22 @@ public class DaoMarks extends Dao<Mark>{
 		// TODO Auto-generated method stub
 		ArrayList<Mark> allMarks = new ArrayList<Mark>();
 		String[] params = {pseudo, mate};
-		String q = "SELECT Users.pseudo, `Values`.points, `Values`.title, Skills.title, Sub_skills.title, "
-				+ "Marks.id_sub_skill, Marks.id_value, Marks.`cross`, Marks.group_mark FROM APPDB.Marks "
-				+ "INNER JOIN APPDB.Users ON Users.id = Marks.id_student "
-				+ "INNER JOIN APPDB.`Values` ON `Values`.id = Marks.id_value "
-				+ "INNER JOIN APPDB.Sub_skills ON Sub_skills.id = Marks.id_sub_skill "
-				+ "INNER JOIN APPDB.Skills ON Sub_skills.id_skill = Skills.id "
-				+ "WHERE Users.pseudo = ? && Marks.`cross` = 1 && Marks.id_tutor = (SELECT Users.`id` FROM Users WHERE Users.pseudo = ?)";
+		String q = "SELECT `Users`.pseudo, `Values`.points, `Values`.title, "
+				+ " Skills.id, Skills.title, Sub_skills.id, Sub_skills.title, "
+				+ " Marks.`cross`, Marks.group_mark, `Values`.id FROM Marks"
+				+ " INNER JOIN `Users` ON Marks.id_student = `Users`.id"
+				+ " INNER JOIN `Values` ON `Values`.id = Marks.id_value"
+				+ " INNER JOIN Sub_skills ON Sub_skills.id = Marks.id_sub_skill"
+				+ " INNER JOIN Skills ON Sub_skills.id_skill = Skills.id "
+				+ " WHERE Users.pseudo = ? && Marks.`cross` = 1 && Marks.id_tutor = (SELECT Users.`id` FROM Users WHERE Users.pseudo = ?)";
 		try{
 			ResultSet currsor = Bdd.prepareExec(this.connect, q, params);
 			while(currsor.next()){
-				Mark m = new Mark(currsor.getString(1), currsor.getDouble(2),
-						currsor.getString(3), currsor.getString(4),
-						currsor.getString(5));
+				Mark m = new Mark(currsor.getString(1), currsor.getDouble(2),currsor.getString(3), 
+						currsor.getInt(4), currsor.getString(5), currsor.getInt(6), currsor.getString(7));
 				m.setCross(currsor.getBoolean(8));
-				m.setIdSubSkill(currsor.getInt(6));
-				m.setIdValue(currsor.getInt(7));
 				m.setGroupMark(currsor.getBoolean(9));
+				m.setIdValue(currsor.getInt(10));
 				allMarks.add(m);
 			}
 		}catch (SQLException e){

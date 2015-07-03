@@ -1,4 +1,4 @@
-package org.purple.controller;
+package org.purple.isepapp;
 
 import java.io.IOException;
 

@@ -104,7 +104,7 @@ public class Groups extends HttpServlet {
 					for(User u : group.getMembers()){
 						// -- get all the mark for this student
 						Average stdAverage = new Average(u.getPseudo(), Isep.LANDMARK);
-						ArrayList<Mark> marks = dmk.selectByStudent(Integer.toString(u.getId()));
+						ArrayList<Mark> marks = dmk.selectByStudent(u.getPseudo());
 						for(Skill skill : skills){
 							Average skillAvg = new Average(skill.getTitle(), maxMark);
 							for(Mark m : marks){

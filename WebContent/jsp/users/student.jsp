@@ -49,7 +49,7 @@
 			<c:forEach var="skill" items="${skills}" varStatus="status">
 				<c:if test="${skill.getId() != 0}">
 				<li role="presentation">
-					<a href="#tab${status.count + 1}" aria-controls="tab${status.count + 1}" role="tab" data-toggle="tab"><c:out value="${skill.getTitle()}"></c:out></a>
+					<a href="#tab${status.count}" aria-controls="tab${status.count}" role="tab" data-toggle="tab"><c:out value="${skill.getTitle()}"></c:out></a>
 				</li>
 				</c:if>
 			</c:forEach>	
@@ -84,7 +84,7 @@
 		    			<strong><c:out value="${skill_mark.compute()}"></c:out></strong>
 		    		</span>
 		    		</div>
-		    		<c:forEach var="sub_skill_mark" items="${skill_mark.grid}" varStatus="status">
+		    		<c:forEach var="sub_skill_mark" items="${skill_mark.grid}" varStatus="subStatus">
 		    			<div class="alert alert-mark">
 		    				<span><c:out value="${sub_skill_mark.getSubSkill()}">:</c:out></span>
 		    				<span class="alert-mark-result">
