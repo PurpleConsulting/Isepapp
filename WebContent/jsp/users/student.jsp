@@ -64,12 +64,12 @@
 		    	<div class="col-sm-offset-4 col-sm-9">
     				<c:forEach  var="c" begin="1" end="${fn:length(skills) -1}" > <!-- var="skill_mark" items="${average.grid}" varStatus="status"-->
 		    			<c:choose>
-		    			<c:when test="${c > average.getGrid().size()}">
-		    				<c:set var="computed" value="${0.0}"/>
-		    			</c:when>
-		    			<c:otherwise>
-		    				<c:set var="computed" value="${average.getGrid().get(c-1).compute()}"/>
-		    			</c:otherwise>
+		    				<c:when test="${c > average.getGrid().size()}">
+		    					<c:set var="computed" value="${0.0}"/>
+		    				</c:when>
+		    				<c:otherwise>
+		    					<c:set var="computed" value="${average.getGrid().get(c-1).compute()}"/>
+		    				</c:otherwise>
 		    			</c:choose>
 		    			<c:if test="${skill[c].getId() != 0}"><!--  !average.grid.get(c).isCross() -->
 		    			<div>
@@ -86,18 +86,26 @@
 		    	</div>
 		    </div>
 		    <c:forEach var="c" begin="1" end="${fn:length(skills) -1}" ><!-- var="skill_mark" items="${average.grid}" varStatus="status" -->
+		    	<c:choose>
+		   			<c:when test="${c > average.getGrid().size()}">
+		   				<c:set var="computed" value="${0.0}"/>
+		   			</c:when>
+		   			<c:otherwise>
+		   				<c:set var="computed" value="${average.getGrid().get(c-1).compute()}"/>
+		   			</c:otherwise>
+    			</c:choose>
 		    	<div role="tabpanel" class="tab-pane" id="tab${skills[c].getId()}">
 		    		<div class="alert alert-mark global">
 		    		<span class="alert-mark-result">
 		    			<c:out value="${skills[c].getTitle()}"></c:out>: 
-		    			<strong><c:out value="${0.0}"></c:out>/<c:out value="${LANDMARK}"></c:out></strong><!-- skill_mark.compute() -->
+		    			<strong><c:out value="${computed}"></c:out> / 20</strong><!-- skill_mark.compute() -->
 		    		</span>
 		    		</div>
 		    		<c:if test="${c <= average.getGrid().size()}">
 		    		<c:forEach var="sub_skill_mark" items="${average.getGrid().get(c-1).getGrid()}" varStatus="subStatus">
 		    			<c:if test="${skills[c].getId() == sub_skill_mark.getIdSkill()}">
 		    			<div class="alert alert-mark">
-		    				<span><c:out value="${sub_skill_mark.getSubSkill()}">:</c:out></span>
+		    				<span><c:out value="${sub_skill_mark.getSubSkill()}"></c:out>: </span>
 		    				<span class="alert-mark-result">
 		    					<c:out value="${sub_skill_mark.getTitle()}"></c:out> - 
 		    					<c:out value="${sub_skill_mark.compute()}"></c:out>
