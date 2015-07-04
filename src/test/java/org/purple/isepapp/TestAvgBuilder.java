@@ -33,8 +33,7 @@ public class TestAvgBuilder {
 	public void setUp() throws IOException{
 		this.path = new File(".").getCanonicalPath() + "/src/test/";
 		zozo.setGroup("G5A"); dede.setGroup("G5B");
-		stdM = this.stdMarkFile();
-		
+		stdM = this.stdMarkFile(this.stdMarkFile);
 		
 	}
 	
@@ -48,16 +47,17 @@ public class TestAvgBuilder {
 	public void testAvgStudent(){
 		Average a = AvgBuilder.studentAverage(this.stdM, this.dede, 5);
 		Assert.assertEquals(this.stdM.get(random.nextInt(this.stdM.size())).getOwner(), a.getTitle());
+		Assert.assertEquals(5, a.getGrid().size());
 		Assert.assertEquals(13.52, a.compute(), 0.01);
 		
 	}
 
-	public ArrayList<Mark> stdMarkFile(){
+	public ArrayList<Mark> stdMarkFile(String csvFileName){
 		BufferedReader br = null;
 		String sep = ";"; String line = "";
 		ArrayList<Mark> marks = new ArrayList<Mark>();
 		try{
-			br = new BufferedReader(new FileReader(this.path + this.stdMarkFile));
+			br = new BufferedReader(new FileReader(this.path + csvFileName));
 			while ((line = br.readLine()) != null) {
 				String[] markLine = line.split(sep);
 				Mark m = new Mark(markLine[0], Double.parseDouble(markLine[1]), markLine[2], 

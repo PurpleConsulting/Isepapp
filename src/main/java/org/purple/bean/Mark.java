@@ -8,7 +8,6 @@ public class Mark extends Avg {
 	private String subSkill = "null";
 	private String skill = "null";
 	private String owner = "null";
-	private String groupOwner = "null";
 	private int idValue = 0;
 	private int idSkill = -1;
 	private int idSubSkill = 0;
@@ -23,13 +22,6 @@ public class Mark extends Avg {
 
 	public Mark(double value) {
 		this.setValue(value);
-	}
-
-	public Mark(String groupOwner, int idSubSkill, int idValue) {
-		// -- This constructor only prepare mark for INSERTION
-		this.setGroupOwner(groupOwner);
-		this.setIdSubSkill(idSubSkill);
-		this.setIdValue(idValue);
 	}
 	
 	public Mark(int idOwner, int idTutor, int idSubSkill, int idValue, boolean cross) {
@@ -105,13 +97,6 @@ public class Mark extends Avg {
 		this.owner = owner;
 	}
 
-	public String getGroupOwner() {
-		return groupOwner;
-	}
-
-	public void setGroupOwner(String groupOwner) {
-		this.groupOwner = groupOwner;
-	}
 
 	public int getIdTutor() {
 		return idTutor;

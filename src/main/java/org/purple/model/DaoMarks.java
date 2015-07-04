@@ -53,7 +53,7 @@ public class DaoMarks extends Dao<Mark>{
 		boolean res = false;
 		String q1 = "SELECT Users.pseudo FROM Users WHERE Users.id_group ="
 				+ " (SELECT Groups.id FROM Groups WHERE Groups.`name` =  ?)";
-		String[] params = {obj.getGroupOwner()};
+		String[] params = {obj.getOwner()};
 		ResultSet currsor = Bdd.prepareExec(this.connect, q1, params);
 		String[] pseudos = Bdd.rsToStringTab(currsor);
 		if(pseudos.length > 0) res = true; 

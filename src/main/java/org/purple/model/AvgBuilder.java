@@ -29,7 +29,7 @@ public class AvgBuilder {
 			}
 			aLeaf.push(m);
 		}
-		skillTab.add(aLeaf);
+		if(aLeaf.status() == 1)skillTab.add(aLeaf);
 		a.setGrid(skillTab); 
 		return a;
 	}

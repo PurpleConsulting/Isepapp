@@ -180,7 +180,8 @@ public class Controls extends HttpServlet {
 					String[] controls = marks.split(this.markDelimiter);
 					for(String c : controls){
 						String[] stringmrk = c.split(this.skillValueDelimiter);
-						Mark mark = new Mark(group, Integer.parseInt(stringmrk[0]), Integer.parseInt(stringmrk[1]));
+						Mark mark = new Mark(Integer.parseInt(stringmrk[0]), Integer.parseInt(stringmrk[1]));
+						mark.setOwner(group);
 						querrysuccess = dmrk.createMulti(mark);
 					}
 					JSONObject result = new JSONObject();

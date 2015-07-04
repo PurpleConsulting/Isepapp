@@ -92,6 +92,7 @@ public class Students extends HttpServlet {
 					// -- we deal with the skills
 					double maxMark = DaoValues.fetchMax();
 					Skill[] skills = ds.allSkill();
+					
 					ArrayList<Mark> marks = dmk.selectByStudent(std.getPseudo());// -- get all the mark for this student
 					Average average = AvgBuilder.studentAverage(marks,std,maxMark);
 					
