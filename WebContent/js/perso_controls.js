@@ -24,6 +24,7 @@ $(document).ready(function(){
 	var student =  $("div.grid").attr("data-target");
 	
 	$.post("/Isepapp/PersoControls", { marked: student }, function(data, status){
+		console.log(data);
 		data.result.grid.forEach(function(element){
 			var markedInput = $("input[name='sub_skill_"+ element.subSkill +"'][value='"+ element.value +"']");
 			markedInput.prop("checked", true);

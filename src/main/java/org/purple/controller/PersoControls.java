@@ -212,7 +212,7 @@ public class PersoControls extends HttpServlet {
 			if(!Isep.nullOrEmpty(markedStudent)){
 				
 				User markedUser = du.select(markedStudent);
-				ArrayList<Mark> allMarks = dm.selectByStudent(Integer.toString(markedUser.getId()));
+				ArrayList<Mark> allMarks = dm.selectByStudent(markedUser.getPseudo());
 				JSONObject result = new JSONObject();
 				JSONObject grid = new JSONObject();
 				for(Mark m : allMarks){

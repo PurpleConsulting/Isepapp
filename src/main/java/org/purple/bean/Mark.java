@@ -24,6 +24,12 @@ public class Mark extends Avg {
 		this.setValue(value);
 	}
 	
+	public Mark(int idValue, int idSubSkill){
+		// -- This constructor only prepare mark for INSERTION of a Group mark
+		this.setIdValue(idValue);
+		this.setIdSubSkill(idSubSkill);
+	}
+	
 	public Mark(int idOwner, int idTutor, int idSubSkill, int idValue, boolean cross) {
 		// -- This constructor only prepare mark for INSERTION
 		this.setIdOwner(idOwner);
@@ -49,12 +55,6 @@ public class Mark extends Avg {
 
 	public void setIdSkill(int idSkill) {
 		this.idSkill = idSkill;
-	}
-
-	public Mark(int idValue, int idSubSkill){
-		// -- This constructor is for selecting group mark
-		this.setIdValue(idValue);
-		this.setIdSubSkill(idSubSkill);
 	}
 
 	public void setValue(double value) {
