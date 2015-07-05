@@ -2,6 +2,7 @@ package org.purple.model;
 
 import java.util.ArrayList;
 
+import org.purple.bean.Group;
 import org.purple.bean.Mark;
 import org.purple.bean.User;
 import org.purple.constant.Isep;
@@ -31,6 +32,11 @@ public class AvgBuilder {
 		}
 		if(aLeaf.status() == 1)skillTab.add(aLeaf);
 		a.setGrid(skillTab); 
+		return a;
+	}
+	
+	public static Average groupAverage(ArrayList<Mark> marks, Group group, double valMax){
+		Average a = new Average();
 		return a;
 	}
 }

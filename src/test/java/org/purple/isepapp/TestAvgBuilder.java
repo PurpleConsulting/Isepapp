@@ -13,6 +13,7 @@ import java.util.Random;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.Assert;
+import org.purple.bean.Group;
 import org.purple.bean.Mark;
 import org.purple.bean.User;
 import org.purple.model.Average;
@@ -24,6 +25,7 @@ public class TestAvgBuilder {
 	private User zozo = new User(7, "zkaneswa", "Zovena", "KANESWARAN", "student");
 	private User dede = new User(10, "dchantha", "Delphine", "CHANTHAVONG", "student");
 	private User billy  = new User(13, "nrasolom", "Narisely", "RASOLOMALALA",  "student");
+	private Group g8b = new Group(8, "G8B", "G8");
 	
 	private String path = "/real/path/to/the/test/folder";
 	
@@ -49,8 +51,9 @@ public class TestAvgBuilder {
 	@Before
 	public void setUp() throws IOException{
 		this.path = new File(".").getCanonicalPath() + "/src/test/";
-		zozo.setGroup("G5A"); dede.setGroup("G5B");
+		zozo.setGroup("G5A"); dede.setGroup("G5B");billy.setGroup("G6C");
 		std = this.loadMarkFile(this.stdFile);
+		stdCross = this.loadMarkFile(this.stdFileLimitCross);
 		stdBlank = this.loadMarkFile(this.stdFileLimitBlank);
 	}
 	
@@ -68,12 +71,28 @@ public class TestAvgBuilder {
 		Assert.assertEquals(5, a.getGrid().size());		 // test number of skill evaluated
 		Assert.assertEquals(13.52, a.compute(), 0.01);	// test the result of average
 		
+		// -- Case limit || average with cross mark
+		Average b = AvgBuilder.studentAverage(this.stdCross, this.billy, 5);
+		Assert.assertEquals(this.stdCross.get(random.nextInt(this.stdCross.size())).getOwner(), b.getTitle()); // Identity of the student for a random skill
+		Assert.assertEquals(6, b.getGrid().size());		// test number of skill evaluated
+		Assert.assertEquals(11.71, b.compute(), 0.01); // test the result of average
+		
 		// -- Case limit || uncomplete evaluation
-		Average b = AvgBuilder.studentAverage(this.stdBlank, this.zozo, 5);
-		Assert.assertEquals(this.stdBlank.get(random.nextInt(this.stdBlank.size())).getOwner(), b.getTitle()); // Identity of the student for a random skill
-		Assert.assertEquals(3, b.getGrid().size());		// test number of skill evaluated
-		Assert.assertEquals(17.73, b.compute(), 0.01); // test the result of average
+		Average c = AvgBuilder.studentAverage(this.stdBlank, this.zozo, 5);
+		Assert.assertEquals(this.stdBlank.get(random.nextInt(this.stdBlank.size())).getOwner(), c.getTitle()); // Identity of the student for a random skill
+		Assert.assertEquals(3, c.getGrid().size());		// test number of skill evaluated
+		Assert.assertEquals(17.73, c.compute(), 0.01); // test the result of average
 	}
+	
+	
+	@Test
+	public void testAvgGroup(){
+		
+		Average a = AvgBuilder.groupAverage(this.grp, this.g8b, 5);
+		
+		
+	}
+	
 
 	public ArrayList<Mark> loadMarkFile(String csvFileName){
 		BufferedReader br = null;
