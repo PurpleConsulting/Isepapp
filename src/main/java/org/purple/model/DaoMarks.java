@@ -124,7 +124,36 @@ public class DaoMarks extends Dao<Mark>{
 		return m;
 	}
 	
-	//public Mark select
+	public ArrayList<Mark> selectByGroup(String name) {
+		// TODO Auto-generated method stub
+		ArrayList<Mark> allMarks = new ArrayList<Mark>();
+		String[] params = {name};
+		String q = "SELECT `Users`.pseudo, `Values`.points, `Values`.title, "
+				+ " Skills.id, Skills.title, Sub_skills.id, Sub_skills.title, "
+				+ " Marks.`cross`, Marks.group_mark,`Values`.id FROM Marks"
+				+ " INNER JOIN `Users` ON Marks.id_student = `Users`.id"
+				+ " INNER JOIN `Values` ON `Values`.id = Marks.id_value"
+				+ " INNER JOIN Sub_skills ON Sub_skills.id = Marks.id_sub_skill"
+				+ " INNER JOIN Skills ON Sub_skills.id_skill = Skills.id "
+				+ " WHERE Users.id_group = (SELECT id FROM Groups WHERE `name` = ? ) ORDER BY Users.pseudo ; ";
+		try{
+			ResultSet currsor = Bdd.prepareExec(this.connect, q, params);
+			while(currsor.next()){
+				Mark m = new Mark(currsor.getString(1), currsor.getDouble(2),currsor.getString(3), 
+						currsor.getInt(4), currsor.getString(5), currsor.getInt(6), currsor.getString(7));
+				m.setCross(currsor.getBoolean(8));
+				m.setGroupMark(currsor.getBoolean(9));
+				m.setIdValue(currsor.getInt(10));
+				allMarks.add(m);
+			}
+		}catch (SQLException e){
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			allMarks = new ArrayList<Mark>();
+			return allMarks;
+		}
+		return allMarks;
+	}
 	
 	public ArrayList<Mark> selectByStudent(String pseudo) {
 		// TODO Auto-generated method stub
@@ -199,7 +228,8 @@ public class DaoMarks extends Dao<Mark>{
 				+ " INNER JOIN `Values` ON `Values`.id = Marks.id_value"
 				+ " INNER JOIN Sub_skills ON Sub_skills.id = Marks.id_sub_skill"
 				+ " INNER JOIN Skills ON Sub_skills.id_skill = Skills.id "
-				+ " WHERE Users.pseudo = ? && Marks.`cross` = 1 && Marks.id_tutor = (SELECT Users.`id` FROM Users WHERE Users.pseudo = ?)";
+				+ " WHERE Users.pseudo = ? && Marks.`cross` = 1 && "
+				+ " Marks.id_tutor = (SELECT Users.`id` FROM Users WHERE Users.pseudo = ?)";
 		try{
 			ResultSet currsor = Bdd.prepareExec(this.connect, q, params);
 			while(currsor.next()){
@@ -222,7 +252,9 @@ public class DaoMarks extends Dao<Mark>{
 	//Select group mark when group has already mark
 	public Mark[] selectGroupMark(String idGroup){
 		Mark[] m = new Mark[0];
-		String q = "SELECT DISTINCT Marks.id_value, Marks.id_sub_skill FROM Marks INNER JOIN Users ON Marks.id_student = Users.id WHERE Users.id_group = ? AND Marks.group_mark = 1;";
+		String q = "SELECT DISTINCT Marks.id_value, Marks.id_sub_skill FROM Marks "
+				+ " INNER JOIN Users ON Marks.id_student = Users.id "
+				+ " WHERE Users.id_group = ? AND Marks.group_mark = 1;";
 		String[] params = {idGroup};
 		ResultSet cursor = Bdd.prepareExec(this.connect, q, params);
 		try {

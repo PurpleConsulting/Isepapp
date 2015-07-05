@@ -1,6 +1,7 @@
 package org.purple.model;
 
 import java.util.ArrayList;
+import java.util.function.Predicate;
 
 import org.purple.bean.Group;
 import org.purple.bean.Mark;
@@ -36,7 +37,14 @@ public class AvgBuilder {
 	}
 	
 	public static Average groupAverage(ArrayList<Mark> marks, Group group, double valMax){
-		Average a = new Average();
+		Average a = new Average(group.getName(), Isep.LANDMARK);
+		//ArrayList<Mark> student = new ArrayList();
+		for(User student : group.getMembers()){
+			ArrayList<Mark> tab = (ArrayList<Mark>) marks.clone();
+			Predicate<Mark> filter = new ShiftOtherStudentMarkPrd(student.getPseudo());
+			tab.removeIf(filter);
+			a.push(studentAverage(tab, student, valMax));
+		}		
 		return a;
 	}
 }

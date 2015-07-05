@@ -25,7 +25,8 @@ public class TestAvgBuilder {
 	private User zozo = new User(7, "zkaneswa", "Zovena", "KANESWARAN", "student");
 	private User dede = new User(10, "dchantha", "Delphine", "CHANTHAVONG", "student");
 	private User billy  = new User(13, "nrasolom", "Narisely", "RASOLOMALALA",  "student");
-	private Group g8b = new Group(8, "G8B", "G8");
+	private User loic  = new User(16, "ldivad", "Loïc", "DIVAD",  "student");
+	private Group g9z = new Group(9, "G9Z", "G9");
 	
 	private String path = "/real/path/to/the/test/folder";
 	
@@ -51,10 +52,14 @@ public class TestAvgBuilder {
 	@Before
 	public void setUp() throws IOException{
 		this.path = new File(".").getCanonicalPath() + "/src/test/";
-		zozo.setGroup("G5A"); dede.setGroup("G5B");billy.setGroup("G6C");
+		this.g9z.setMembers(zozo);this.g9z.setMembers(dede); this.g9z.setMembers(billy);this.g9z.setMembers(loic);
+		zozo.setGroup("G5A"); dede.setGroup("G5B"); billy.setGroup("G6C"); loic.setGroup("G09");
+		
 		std = this.loadMarkFile(this.stdFile);
 		stdCross = this.loadMarkFile(this.stdFileLimitCross);
 		stdBlank = this.loadMarkFile(this.stdFileLimitBlank);
+		
+		grp = this.loadMarkFile(this.grpFile);
 	}
 	
 	//@Test
@@ -88,8 +93,14 @@ public class TestAvgBuilder {
 	@Test
 	public void testAvgGroup(){
 		
-		Average a = AvgBuilder.groupAverage(this.grp, this.g8b, 5);
-		
+		Average a = AvgBuilder.groupAverage(this.grp, this.g9z, 5);
+		assertEquals("G9Z", a.getTitle());		// -- test the average belong to the group
+		assertEquals(4,a.getGrid().size());
+
+			System.out.print(a.byTitle("ldivad").compute() + "\n");
+
+		//assertEquals(15.71, a.compute(), 0.1);
+		//assertEquals(a.byTitle("zkaneswa").compute(), 17.68, 0.01);
 		
 	}
 	

@@ -39,7 +39,7 @@ import org.purple.model.DaoSkills;
 import org.purple.model.DaoSubSkills;
 import org.purple.model.DaoUsers;
 import org.purple.model.DaoValues;
-import org.purple.model.MyOwnClassMate;
+import org.purple.model.ShiftMeFromGroupPrd;
 
 /**
  * Servlet implementation class Crossmark
@@ -95,7 +95,7 @@ public class CrossControls extends HttpServlet {
 				// -- We get the group
 				Group g = dgp.select(grp);
 				dgp.completeMemebers(g);
-				Predicate<User> filter = new MyOwnClassMate(u.getPseudo());
+				Predicate<User> filter = new ShiftMeFromGroupPrd(u.getPseudo());
 				g.getMembers().removeIf(filter);
 
 				p.setTitle("ISEP / APP - Evaluation croisée");
@@ -307,7 +307,7 @@ public class CrossControls extends HttpServlet {
 				// -- We get the group
 				Group gr = dgroup.select(grp);
 				dgroup.completeMemebers(gr);
-				Predicate<User> filter = new MyOwnClassMate(u.getPseudo());
+				Predicate<User> filter = new ShiftMeFromGroupPrd(u.getPseudo());
 				gr.getMembers().removeIf(filter);
 
 				// Display skills in tab
@@ -337,7 +337,7 @@ public class CrossControls extends HttpServlet {
 				// -- We get the group
 				Group gr = dgroup.select(grp);
 				dgroup.completeMemebers(gr);
-				Predicate<User> filter = new MyOwnClassMate(u.getPseudo());
+				Predicate<User> filter = new ShiftMeFromGroupPrd(u.getPseudo());
 				gr.getMembers().removeIf(filter);
 
 				// Display skills in tab
