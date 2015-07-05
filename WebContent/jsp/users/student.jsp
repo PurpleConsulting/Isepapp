@@ -58,51 +58,36 @@
 		  <div class="tab-content">
 		    <div role="tabpanel" class="tab-pane active" id="tab0">
 		    	<div class="col-sm-offset-1 col-sm-2 global-average">
-		    		<div><c:out value="${fn:substring(average.compute(),0,4)}"></c:out></div><!--  -->
+		    		<div><c:out value="${fn:substring(average.compute(),0,4)}"></c:out></div>
 		    	</div>
 		    	<div class="col-sm-offset-4 col-sm-9">
-    				<c:forEach  var="c" begin="1" end="${fn:length(skills) -1}" > <!-- var="skill_mark" items="${average.grid}" varStatus="status"-->
-		    			<c:choose>
-		    				<c:when test="${c > average.getGrid().size()}">
-		    					<c:set var="computed" value="${0.0}"/>
-		    				</c:when>
-		    				<c:otherwise>
-		    					<c:set var="computed" value="${average.getGrid().get(c-1).compute()}"/>
-		    				</c:otherwise>
-		    			</c:choose>
-		    			<c:if test="${skill[c].getId() != 0}"><!--  !average.grid.get(c).isCross() -->
-		    			<div>
-		    				<div class="col-sm-4"><c:out value="${skills[c].getTitle()}"></c:out>:</div>
-		    				<span class="badge" data-vis="${skills[c].getTitle()}">
-		    					<c:out value="${computed.intValue()}"></c:out>
-		    				</span>
-							<div class="progress">
-						  		<div class="progress-bar" role="progressbar" aria-valuenow="${computed}" aria-valuemin="0" aria-valuemax="20" style="width: 60%;"></div>
+    				<c:forEach  var="skill" items="${skills}" varStatus="status" >
+		    			<c:set var="skill_average" value="${average.byTitle(skill.getTitle())}"/>
+		    			<c:if test="${skill.getId() != 0}">
+			    			<div>
+			    				<div class="col-sm-4"><c:out value="${skill.getTitle()}"></c:out>:</div>
+			    				<span class="badge" data-vis="${skill.getTitle()}">
+			    					<c:out value="${skill_average.compute().intValue()}"></c:out>
+			    				</span>
+								<div class="progress">
+							  		<div class="progress-bar" role="progressbar" aria-valuenow="${skill_average.compute()}" aria-valuemin="0" aria-valuemax="20" style="width: 60%;"></div>
+								</div>
 							</div>
-						</div>
-						</c:if>
+						</c:if>		
 					</c:forEach>
 		    	</div>
 		    </div>
-		    <c:forEach var="c" begin="1" end="${fn:length(skills) -1}" ><!-- var="skill_mark" items="${average.grid}" varStatus="status" -->
-		    	<c:choose>
-		   			<c:when test="${c > average.getGrid().size()}">
-		   				<c:set var="computed" value="${0.0}"/>
-		   			</c:when>
-		   			<c:otherwise>
-		   				<c:set var="computed" value="${average.getGrid().get(c-1).compute()}"/>
-		   			</c:otherwise>
-    			</c:choose>
-		    	<div role="tabpanel" class="tab-pane" id="tab${skills[c].getId()}">
+		    <c:forEach var="skill" items="${skills}" varStatus="status" >
+		    	<c:set var="skill_average" value="${average.byTitle(skill.getTitle())}"/>
+		    	<div role="tabpanel" class="tab-pane" id="tab${skill.getId()}">
 		    		<div class="alert alert-mark global">
 		    		<span class="alert-mark-result">
-		    			<c:out value="${skills[c].getTitle()}"></c:out>: 
-		    			<strong><c:out value="${computed}"></c:out> / 20</strong><!-- skill_mark.compute() -->
+		    			<c:out value="${skill.getTitle()}"></c:out>: 
+		    			<strong><c:out value="${skill_average.compute()}"></c:out> / 20</strong><!-- skill_mark.compute() -->
 		    		</span>
 		    		</div>
-		    		<c:if test="${c <= average.getGrid().size()}">
-		    		<c:forEach var="sub_skill_mark" items="${average.getGrid().get(c-1).getGrid()}" varStatus="subStatus">
-		    			<c:if test="${skills[c].getId() == sub_skill_mark.getIdSkill()}">
+		    		<c:forEach var="sub_skill_mark" items="${skill_average.getGrid()}" varStatus="subStatus">
+		    			<c:if test="${skill.getId() == sub_skill_mark.getIdSkill()}">
 		    			<div class="alert alert-mark">
 		    				<span><c:out value="${sub_skill_mark.getSubSkill()}"></c:out>: </span>
 		    				<span class="alert-mark-result">
@@ -112,7 +97,6 @@
 		    			</div>
 		    			</c:if>
 		    		</c:forEach>
-		    		</c:if>
 		    	</div>
 			</c:forEach>
 		  </div>

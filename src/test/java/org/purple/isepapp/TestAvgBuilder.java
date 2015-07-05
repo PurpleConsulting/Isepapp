@@ -23,9 +23,26 @@ public class TestAvgBuilder {
 	private Random random = new Random();
 	private User zozo = new User(7, "zkaneswa", "Zovena", "KANESWARAN", "student");
 	private User dede = new User(10, "dchantha", "Delphine", "CHANTHAVONG", "student");
-	private ArrayList<Mark> stdM = new ArrayList<Mark>();
+	private User billy  = new User(13, "nrasolom", "Narisely", "RASOLOMALALA",  "student");
+	
 	private String path = "/real/path/to/the/test/folder";
-	private String stdMarkFile = "test_avg_student.csv";
+	
+	private ArrayList<Mark> std = new ArrayList<Mark>();
+	private ArrayList<Mark> stdCross = new ArrayList<Mark>();
+	private ArrayList<Mark> stdBlank = new ArrayList<Mark>();
+	
+	private ArrayList<Mark> grp = new ArrayList<Mark>();
+	private ArrayList<Mark> grpCross = new ArrayList<Mark>();
+	private ArrayList<Mark> grpBlank = new ArrayList<Mark>();
+	
+	
+	private String stdFile = "test_avg_student.csv";
+	private String stdFileLimitCross = "test_avg_student_cross.csv";
+	private String stdFileLimitBlank = "test_avg_student_uncompleted.csv";
+	
+	private String grpFile = "test_avg_group.csv";
+	private String grpFileLimitCross = "test_avg_group_cross.csv";
+	private String grpFileLimitBlank = "test_avg_group_uncompleted.csv";
 	
 	ArrayList<Mark> stdMark = new ArrayList<Mark>(); 
 	
@@ -33,7 +50,7 @@ public class TestAvgBuilder {
 	public void setUp() throws IOException{
 		this.path = new File(".").getCanonicalPath() + "/src/test/";
 		zozo.setGroup("G5A"); dede.setGroup("G5B");
-		stdM = this.stdMarkFile(this.stdMarkFile);
+		std = this.loadMarkFile(this.stdFile);
 		
 	}
 	
@@ -45,14 +62,13 @@ public class TestAvgBuilder {
 	
 	@Test
 	public void testAvgStudent(){
-		Average a = AvgBuilder.studentAverage(this.stdM, this.dede, 5);
-		Assert.assertEquals(this.stdM.get(random.nextInt(this.stdM.size())).getOwner(), a.getTitle());
+		Average a = AvgBuilder.studentAverage(this.std, this.dede, 5);
+		Assert.assertEquals(this.std.get(random.nextInt(this.std.size())).getOwner(), a.getTitle());
 		Assert.assertEquals(5, a.getGrid().size());
 		Assert.assertEquals(13.52, a.compute(), 0.01);
-		
 	}
 
-	public ArrayList<Mark> stdMarkFile(String csvFileName){
+	public ArrayList<Mark> loadMarkFile(String csvFileName){
 		BufferedReader br = null;
 		String sep = ";"; String line = "";
 		ArrayList<Mark> marks = new ArrayList<Mark>();
@@ -66,9 +82,9 @@ public class TestAvgBuilder {
 				marks.add(m);
 			}
 		} catch (FileNotFoundException e){
-			fail("Error the file " +this.stdMarkFile+ " is missing.");	
+			fail("Error the file " +csvFileName+ " is missing.");	
 		} catch (IOException e) {
-			fail("Error occures when parcing the file "+this.stdMarkFile+ ".");
+			fail("Error occures when parcing the file "+csvFileName+ ".");
 		} finally {
 			if (br != null) {
 				try {
