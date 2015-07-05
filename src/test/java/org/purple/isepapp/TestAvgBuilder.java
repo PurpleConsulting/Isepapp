@@ -51,7 +51,7 @@ public class TestAvgBuilder {
 		this.path = new File(".").getCanonicalPath() + "/src/test/";
 		zozo.setGroup("G5A"); dede.setGroup("G5B");
 		std = this.loadMarkFile(this.stdFile);
-		
+		stdBlank = this.loadMarkFile(this.stdFileLimitBlank);
 	}
 	
 	//@Test
@@ -62,10 +62,17 @@ public class TestAvgBuilder {
 	
 	@Test
 	public void testAvgStudent(){
+		// -- Nomale case
 		Average a = AvgBuilder.studentAverage(this.std, this.dede, 5);
-		Assert.assertEquals(this.std.get(random.nextInt(this.std.size())).getOwner(), a.getTitle());
-		Assert.assertEquals(5, a.getGrid().size());
-		Assert.assertEquals(13.52, a.compute(), 0.01);
+		Assert.assertEquals(this.std.get(random.nextInt(this.std.size())).getOwner(), a.getTitle()); // Identity of the student for a random skill 
+		Assert.assertEquals(5, a.getGrid().size());		 // test number of skill evaluated
+		Assert.assertEquals(13.52, a.compute(), 0.01);	// test the result of average
+		
+		// -- Case limit || uncomplete evaluation
+		Average b = AvgBuilder.studentAverage(this.stdBlank, this.zozo, 5);
+		Assert.assertEquals(this.stdBlank.get(random.nextInt(this.stdBlank.size())).getOwner(), b.getTitle()); // Identity of the student for a random skill
+		Assert.assertEquals(3, b.getGrid().size());		// test number of skill evaluated
+		Assert.assertEquals(17.73, b.compute(), 0.01); // test the result of average
 	}
 
 	public ArrayList<Mark> loadMarkFile(String csvFileName){

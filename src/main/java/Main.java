@@ -11,6 +11,8 @@ public class Main {
 		
 		String path = new File(".").getCanonicalPath();
 		System.out.print(path);
+		
+		ArrayList<String> s = new ArrayList<String>();
 	}
 
 }

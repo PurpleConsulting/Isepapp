@@ -105,33 +105,33 @@
 </div>
 <div class="row">
 	<div class="col-xs-offset-1 col-xs-10 crossmark" >
-		<h4>Evaluation croisée - 12 / 20</h4>
+		<h4>Evaluation croisée - <c:out value="${average.byTitle(skills[0].getTitle()).compute()}"></c:out> / 20</h4>
 		<div class="table-responsive">
 		<c:choose>
 			<c:when test="${!empty crossmates}">
-		<table class="table table-hover">
-			<tr>
-				<c:forEach var="css" items="${CSubSkills}" varStatus="status">
-					<td><c:out value="${css.getTitle()}"></c:out></td>
-				</c:forEach>
-			</tr>
-			<c:forEach var="mate" items="${crossmates}" varStatus="status">
-				<tr>
-					<c:forEach var="mark" items="${crossmarks.get(mate.getPseudo())}" varStatus="status">
-						<td>
-							<c:out value="${mate.getFirstName()}"></c:out>:
-							<c:out value="${mark.getTitle()}"></c:out> 
-						</td>
+				<table class="table table-hover">
+					<tr>
+						<c:forEach var="css" items="${CSubSkills}" varStatus="status">
+							<td><c:out value="${css.getTitle()}"></c:out></td>
+						</c:forEach>
+					</tr>
+					<c:forEach var="mate" items="${crossmates}" varStatus="status">
+						<tr>
+							<c:forEach var="mark" items="${crossmarks.get(mate.getPseudo())}" varStatus="status">
+								<td>
+									<c:out value="${mate.getFirstName()}"></c:out>:
+									<c:out value="${mark.getTitle()}"></c:out> 
+								</td>
+							</c:forEach>
+						</tr>
 					</c:forEach>
-				</tr>
-			</c:forEach>
-		</table>
-		</c:when>
-		<c:when test="${empty crossmates}">
-			<div class="col-xs-10 col-xs-offset-1">
-				<img src="img/empty/nocross.svg" alt="" class="app-empty-img"/>
-			</div>
-		</c:when>
+				</table>
+			</c:when>
+			<c:when test="${empty crossmates}">
+				<div class="col-xs-10 col-xs-offset-1">
+					<img src="img/empty/nocross.svg" alt="" class="app-empty-img"/>
+				</div>
+			</c:when>
 		</c:choose>
 		</div>
 	</div>
