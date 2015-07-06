@@ -135,7 +135,7 @@ public class DaoMarks extends Dao<Mark>{
 				+ " INNER JOIN `Values` ON `Values`.id = Marks.id_value"
 				+ " INNER JOIN Sub_skills ON Sub_skills.id = Marks.id_sub_skill"
 				+ " INNER JOIN Skills ON Sub_skills.id_skill = Skills.id "
-				+ " WHERE Users.id_group = (SELECT id FROM Groups WHERE `name` = ? ) ORDER BY Users.pseudo ; ";
+				+ " WHERE Users.id_group = (SELECT id FROM Groups WHERE `name` = ? ) ORDER BY Users.pseudo, Skills.id ; ";
 		try{
 			ResultSet currsor = Bdd.prepareExec(this.connect, q, params);
 			while(currsor.next()){

@@ -236,7 +236,9 @@ public class CrossControls extends HttpServlet {
 
 				// -- The both user are in the same group
 				// -- it's ok let's evaluate
-				if (u.getGroup().equals(targetUser.getGroup()) && pseudo.equals(targetUser.getPseudo())) {
+				if (u.getGroup().equals(targetUser.getGroup()) &&
+						pseudo.equals(targetUser.getPseudo()) &&
+						!u.getPseudo().equals(targetUser.getPseudo()) ) {
 
 					boolean businessFlague = true;
 					boolean sqlFlag = true;

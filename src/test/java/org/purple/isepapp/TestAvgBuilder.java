@@ -60,6 +60,8 @@ public class TestAvgBuilder {
 		stdBlank = this.loadMarkFile(this.stdFileLimitBlank);
 		
 		grp = this.loadMarkFile(this.grpFile);
+		grpCross = this.loadMarkFile(this.grpFileLimitCross);
+		grpBlank = this.loadMarkFile(this.grpFileLimitBlank);
 	}
 	
 	//@Test
@@ -70,20 +72,20 @@ public class TestAvgBuilder {
 	
 	@Test
 	public void testAvgStudent(){
-		// -- Nomale case
-		Average a = AvgBuilder.studentAverage(this.std, this.dede, 5);
+		// -- Normal case
+		Average a = AvgBuilder.studentAverage(this.std, this.dede, 5.0);
 		Assert.assertEquals(this.std.get(random.nextInt(this.std.size())).getOwner(), a.getTitle()); // Identity of the student for a random skill 
 		Assert.assertEquals(5, a.getGrid().size());		 // test number of skill evaluated
 		Assert.assertEquals(13.52, a.compute(), 0.01);	// test the result of average
 		
 		// -- Case limit || average with cross mark
-		Average b = AvgBuilder.studentAverage(this.stdCross, this.billy, 5);
+		Average b = AvgBuilder.studentAverage(this.stdCross, this.billy, 5.0);
 		Assert.assertEquals(this.stdCross.get(random.nextInt(this.stdCross.size())).getOwner(), b.getTitle()); // Identity of the student for a random skill
 		Assert.assertEquals(6, b.getGrid().size());		// test number of skill evaluated
 		Assert.assertEquals(11.71, b.compute(), 0.01); // test the result of average
 		
 		// -- Case limit || uncomplete evaluation
-		Average c = AvgBuilder.studentAverage(this.stdBlank, this.zozo, 5);
+		Average c = AvgBuilder.studentAverage(this.stdBlank, this.zozo, 5.0);
 		Assert.assertEquals(this.stdBlank.get(random.nextInt(this.stdBlank.size())).getOwner(), c.getTitle()); // Identity of the student for a random skill
 		Assert.assertEquals(3, c.getGrid().size());		// test number of skill evaluated
 		Assert.assertEquals(17.73, c.compute(), 0.01); // test the result of average
@@ -92,16 +94,31 @@ public class TestAvgBuilder {
 	
 	@Test
 	public void testAvgGroup(){
-		
-		Average a = AvgBuilder.groupAverage(this.grp, this.g9z, 5);
+		// -- Normal case
+		Average a = AvgBuilder.groupAverage(this.grp, this.g9z, 5.0);
 		assertEquals("G9Z", a.getTitle());		// -- test the average belong to the group
-		assertEquals(4,a.getGrid().size());
-
-			System.out.print(a.byTitle("ldivad").compute() + "\n");
-
-		//assertEquals(15.71, a.compute(), 0.1);
-		//assertEquals(a.byTitle("zkaneswa").compute(), 17.68, 0.01);
+		assertEquals(4, a.getGrid().size());		// -- test the number in the group
+		assertEquals(15.71, a.compute(), 0.1);	// -- test the computation for the group
+		assertEquals(17.68, a.byTitle("zkaneswa").compute(), 0.01); // -- test the computation for one student
+		/**  group: 15.71, zozo: 17.68, dede: 14.17, billy: 14.92, loic: 16.08  **/
 		
+		// -- Case limit || half completed cross mark
+		Average b = AvgBuilder.groupAverage(this.grpCross, this.g9z, 5.0);
+		assertEquals(139, this.grpCross.size());
+		assertEquals("G9Z", b.getTitle());		// -- test the average belong to the group
+		assertEquals(4, b.getGrid().size());		// -- test the number in the group
+		assertEquals(15.6, b.compute(), 0.1);	// -- test the computation for the group
+		assertEquals(14.21, b.byTitle("dchantha").compute(), 0.01); // -- test the computation for one student
+		/** group: 15.6, zozo: 17.8, dede: 14.21, billy: 14.64, loic: 15.73 **/
+		
+		// -- Case limit || incomplete evaluation no cross mark
+		Average c = AvgBuilder.groupAverage(this.grpBlank, this.g9z, 5);
+		assertEquals(139, this.grpCross.size());
+		assertEquals("G9Z", c.getTitle());		// -- test the average belong to the group
+		assertEquals(4, c.getGrid().size());		// -- test the number in the group
+		assertEquals(16.17, c.compute(), 0.1);	// -- test the computation for the group 16.17 vs 12.13
+		assertEquals(15.0, c.byTitle("nrasolom").compute(), 0.01); // -- test the computation for one student
+		/** group: 16.17, zozo: 17.68, dede: 15.82, billy: 15.0, loic:0.0 **/
 	}
 	
 
