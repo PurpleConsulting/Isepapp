@@ -1,13 +1,16 @@
 package org.purple.isepapp;
 
 import static org.junit.Assert.*;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Random;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.Assert;
@@ -37,6 +40,8 @@ public class TestAvgBuilder {
 	private ArrayList<Mark> grpCross = new ArrayList<Mark>();
 	private ArrayList<Mark> grpBlank = new ArrayList<Mark>();
 	
+	private HashMap<String, ArrayList<Mark>> prm = new HashMap<String, ArrayList<Mark>>();
+	
 	
 	private String stdFile = "test_avg_student.csv";
 	private String stdFileLimitCross = "test_avg_student_cross.csv";
@@ -61,6 +66,8 @@ public class TestAvgBuilder {
 		grp = this.loadMarkFile(this.grpFile);
 		grpCross = this.loadMarkFile(this.grpFileLimitCross);
 		grpBlank = this.loadMarkFile(this.grpFileLimitBlank);
+		
+		
 	}
 	
 	//@Test
@@ -123,9 +130,11 @@ public class TestAvgBuilder {
 
 	@Test
 	public void testAvgProm(){
-		Average a = AvgBuilder.promAverage();
+		ArrayList<Group>allGrp = new ArrayList<Group>();
+		Average a = AvgBuilder.promAverage(this.prm, allGrp, 5.0);
 		assertNotEquals(0.0, a.compute());
 	}
+	
 	public ArrayList<Mark> loadMarkFile(String csvFileName){
 		BufferedReader br = null;
 		String sep = ";"; String line = "";

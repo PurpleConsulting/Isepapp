@@ -1,6 +1,7 @@
 package org.purple.model;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.function.Predicate;
 
 import org.purple.bean.Group;
@@ -47,8 +48,10 @@ public class AvgBuilder {
 		return a;
 	}
 	
-	public static Average promAverage(){
+	public static Average promAverage(HashMap<String, ArrayList<Mark>> marks, ArrayList<Group> groups, double valMax){
 		Average a = new Average();
+		ArrayList<String> _class = new ArrayList<String>();
+		
 		return a;
 	}
 }
