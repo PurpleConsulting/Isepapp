@@ -38,13 +38,17 @@ public class AvgBuilder {
 	
 	public static Average groupAverage(ArrayList<Mark> marks, Group group, double valMax){
 		Average a = new Average(group.getName(), Isep.LANDMARK);
-		//ArrayList<Mark> student = new ArrayList();
 		for(User student : group.getMembers()){
 			ArrayList<Mark> tab = (ArrayList<Mark>) marks.clone();
 			Predicate<Mark> filter = new ShiftOtherStudentMarkPrd(student.getPseudo());
 			tab.removeIf(filter);
 			a.push(studentAverage(tab, student, valMax));
 		}		
+		return a;
+	}
+	
+	public static Average promAverage(){
+		Average a = new Average();
 		return a;
 	}
 }

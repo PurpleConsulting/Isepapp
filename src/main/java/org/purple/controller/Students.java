@@ -248,9 +248,7 @@ public class Students extends HttpServlet {
 								+ " Les modifications demandées peuvent ne pas avoir été réalisées.");
 					}
 					
-					// -- end of modifications
-					
-					// -- redirection user
+					// -- end of modifications, redirection
 					
 					User std = du.select(redirectionPseudo);
 					// -- we get he/she from the data base

@@ -1,7 +1,6 @@
 package org.purple.isepapp;
 
 import static org.junit.Assert.*;
-
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -9,7 +8,6 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.Assert;
@@ -19,6 +17,7 @@ import org.purple.bean.User;
 import org.purple.model.Average;
 import org.purple.model.Avg;
 import org.purple.model.AvgBuilder;
+
 public class TestAvgBuilder {
 
 	private Random random = new Random();
@@ -122,6 +121,11 @@ public class TestAvgBuilder {
 	}
 	
 
+	@Test
+	public void testAvgProm(){
+		Average a = AvgBuilder.promAverage();
+		assertNotEquals(0.0, a.compute());
+	}
 	public ArrayList<Mark> loadMarkFile(String csvFileName){
 		BufferedReader br = null;
 		String sep = ";"; String line = "";
