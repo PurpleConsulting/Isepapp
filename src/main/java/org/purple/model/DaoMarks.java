@@ -115,7 +115,8 @@ public class DaoMarks extends Dao<Mark>{
 		try{
 			ResultSet currsor = Bdd.prepareExec(this.connect, q, params);
 			if(!currsor.next()) return m;
-			m = new Mark(currsor.getString(1), currsor.getDouble(2), currsor.getString(3), currsor.getInt(4), currsor.getString(5), currsor.getInt(6), currsor.getString(7));
+			m = new Mark(currsor.getString(1), currsor.getDouble(2), currsor.getString(3),
+					currsor.getInt(4), currsor.getString(5), currsor.getInt(6), currsor.getString(7));
 		}catch (SQLException e){
 			// TODO Auto-generated catch block
 			m = null;

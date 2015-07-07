@@ -50,15 +50,77 @@ public class Students extends HttpServlet {
         super();
         // TODO Auto-generated constructor stub
     }
+    
+    protected void doLoad(HttpServletRequest request, DaoGroups dgrp, DaoSkills ds, DaoMarks dmk, DaoDeadline ddl, DaoMissings dm, User std){
+    	// --------------------------------------------------------------------------------
+    	// -- BUILDING THE MARK
+    	// --------------------------------------------------------------------------------
+		double maxMark = DaoValues.fetchMax(); 						  // -- the maximum possible for one evaluation
+		Skill[] skills = ds.allSkill();
+		ArrayList<Mark> marks = dmk.selectByStudent(std.getPseudo()); // -- get all the marks for this student
+		Average average = AvgBuilder.studentAverage(marks,std,maxMark);
+		
+		
+		// --------------------------------------------------------------------------------
+    	// -- BUILDING THE DEADLINE AND DELIVERIES
+    	// --------------------------------------------------------------------------------
+		Deadline[] deadlines = ddl.selectByGroup(std.getGroup());
+		
+				
+		// --------------------------------------------------------------------------------
+    	// -- BUILDING THE MISSINGS GRID
+    	// --------------------------------------------------------------------------------
+		Missing[] missingGrid = dm.selectForStudent(Integer.toString(std.getId()));
+
+		
+		// --------------------------------------------------------------------------------
+		// -- BUILDING THE CROSSMAK (IF EXIST)
+		// --------------------------------------------------------------------------------	
+		ArrayList<User> crossMate = new ArrayList<User>();
+		Group group = dgrp.select(std.getGroup()); /*for this group*/
+		dgrp.completeMemebers(group);/*find all the students*/
+		HashMap<String, ArrayList<Mark>> allCrossMarks = new HashMap<String, ArrayList<Mark>>();/* group all the mark by classmate*/
+		/*["classmateA", [markA1,markA2 markA3 ... ]]*/
+		/*["classmateB", [markB1,markB2 markB3 ... ]]*/
+		/*["classmateC", [markC1,markC2 markC3 ... ]]*/
+		
+		Skill cross  = ds.select("0");/*the cross skill id is 0*/
+		ds.completeSub_skills(cross); /*all the subskil belong to the skill n°0*/
+		for(User m : group.getMembers()){// for each class mate ...
+			allCrossMarks.put(m.getPseudo(), dmk.selectCrossByStudentAndMate(std.getPseudo(), m.getPseudo()));
+			//get the mark given to this student ...
+			if(allCrossMarks.get(m.getPseudo()).size() > 0){
+				crossMate.add(m);// if more then 0 mark, put it in the average.
+			}
+		}
+		
+		
+		// --------------------------------------------------------------------------------
+		// -- FILLIN THE REQUEST
+		// --------------------------------------------------------------------------------	
+		String[] grps = dgrp.allGroups();
+		request.setAttribute("availableGroups", grps);
+		
+		request.setAttribute("CSubSkills", cross.getSubSkills());
+		request.setAttribute("crossmates", crossMate);
+		request.setAttribute("crossmarks", allCrossMarks);
+		request.setAttribute("skills", skills);
+		request.setAttribute("average", average);	
+		request.setAttribute("missingGrid", missingGrid);
+		request.setAttribute("deadlines", deadlines);
+		
+    }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		request.setCharacterEncoding("UTF-8");
-		Page p = new Page();
+		request.setCharacterEncoding("UTF-8"); Page p = new Page();
+		/*$$$ GET PARAMS  $$$*/
 		String student = request.getParameter("pseudo");
+		
+		
 		// -- Authentication --
 		if(Auth.isRespo(request) || Auth.isStudentTutor(request, student)){ 
 			// -- We assume we are Admin or tutor or Respo, Now Does the student exist?
@@ -75,72 +137,29 @@ public class Students extends HttpServlet {
 				// -- Lets see if the pseudo is in the data base.
 				Connection bddServletCo = Bdd.getCo();
 				DaoUsers du = new DaoUsers(bddServletCo);
-				DaoMissings dm = new DaoMissings(bddServletCo);
-				DaoMarks dmk = new DaoMarks(bddServletCo);
-				DaoDeadline ddl = new DaoDeadline(bddServletCo);
-				DaoGroups dgrp = new DaoGroups(bddServletCo);
-				DaoSkills ds = new DaoSkills(bddServletCo);
-				DaoSubSkills dss = new DaoSubSkills(bddServletCo);
 				
 				User std = du.select(student);
 				
 				if(std != null && std.getPosition().equals("student")){
 					
+					DaoMissings dm = new DaoMissings(bddServletCo);
+					DaoMarks dmk = new DaoMarks(bddServletCo);
+					DaoDeadline ddl = new DaoDeadline(bddServletCo);
+					DaoGroups dgrp = new DaoGroups(bddServletCo);
+					DaoSkills ds = new DaoSkills(bddServletCo);
+					DaoSubSkills dss = new DaoSubSkills(bddServletCo);
+					
 					// -- we get he/she from the data base
 					du.addGroup(std);// -- we retrieve his group.
 					
-					// -- we deal with the skills
-					double maxMark = DaoValues.fetchMax();
-					Skill[] skills = ds.allSkill();
-					
-					ArrayList<Mark> marks = dmk.selectByStudent(std.getPseudo());// -- get all the mark for this student
-					Average average = AvgBuilder.studentAverage(marks,std,maxMark);
-					
-					
-					// -- we retreve all the deadline
-					Deadline[] deadlines = ddl.selectByGroup(std.getGroup());
-					
-					request.setAttribute("average", average);
-					request.setAttribute("skills", skills);
-					
-					// -- we get the missing of the student
-					Missing[] missingGrid = dm.selectForStudent(Integer.toString(std.getId()));// -- we prepare the data format for the view
-
-					
-					
-					// -- available group
-					String[] grps = dgrp.allGroups();
-					request.setAttribute("availableGroups", grps);
-					
-					Group group = dgrp.select(std.getGroup());
-					dgrp.completeMemebers(group);
-					ArrayList<User> crossMate = new ArrayList<User>();
-					HashMap<String, ArrayList<Mark>> allCrossMarks = new HashMap<String, ArrayList<Mark>>();
-					
-					// -- cross marks
-					Skill cross  = ds.select("0");
-					ds.completeSub_skills(cross);
-					for(User m : group.getMembers()){
-						allCrossMarks.put(m.getPseudo(), dmk.selectCrossByStudentAndMate(std.getPseudo(), m.getPseudo()));
-						if(allCrossMarks.get(m.getPseudo()).size() > 0){
-							crossMate.add(m);
-							
-						}
-					}
-					request.setAttribute("CSubSkills", cross.getSubSkills());
-					request.setAttribute("crossmates", crossMate);
-					request.setAttribute("crossmarks", allCrossMarks);
-					
-					
+					this.doLoad(request, dgrp, ds, dmk, ddl, dm, std);
+						
 					p.setContent("users/student.jsp");
 					p.setTitle("ISEP / APP - Etudiant");
 					p.setCss("bootstrap-select.min.css", "student.css");
 					p.setJs("bootstrap-select.min.js", "bootbox.min.js","student.js","data_student.js");
 					
 					request.setAttribute("student", std);// -- we send the student
-					request.setAttribute("missingGrid", missingGrid);// -- we send the his missing
-					request.setAttribute("deadlines", deadlines);
-					
 					
 				} else {
 					
@@ -178,12 +197,11 @@ public class Students extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		request.setCharacterEncoding("UTF-8");
-		Page p = new Page();
+		request.setCharacterEncoding("UTF-8"); Page p = new Page();
 		
-		// -- All type of request
-		String scope = "";
-		scope = request.getParameter("pseudo"); /** student, tutor, ... **/
+		/*$$$ POST PARAM $$$*/
+		String scope = request.getParameter("pseudo");
+		if(Isep.nullOrEmpty(scope)) scope = "";
 		
 		// -- Alter student request
 		String stdFirstName = request.getParameter("std_first_name");
@@ -206,19 +224,20 @@ public class Students extends HttpServlet {
 				DaoSkills ds = new DaoSkills(bddServletCo);
 				
 			if(!Isep.nullOrEmpty(scope, stdFirstName, stdLastName, stdPseudo, stdEmail, stdNewGroup)){
-				/**
-				 *  HERE THE USER TRY TO UPDATE A STUDENT
-				 */
-				
+				// --------------------------------------------------------------------------------
+				// -- HERE THE USER TRY TO UPDATE A STUDENT
+				// --------------------------------------------------------------------------------		
 				User subjectUser = du.select(scope);
 				String redirectionPseudo = scope;
 				if(subjectUser.getId() != 0){
 					subjectUser.setFirstName(stdFirstName); subjectUser.setLastName(stdLastName);
-					subjectUser.setPseudo(stdPseudo);
-					subjectUser.setMail(stdEmail); subjectUser.setGroup(stdNewGroup);
+					subjectUser.setPseudo(stdPseudo);subjectUser.setGroup(stdNewGroup);
+					subjectUser.setMail(stdEmail); 
+					
 					try{ subjectUser.setIsepNo(Integer.parseInt(stdIsepNo));} 
 					catch (NumberFormatException e){ }
 					boolean querysuccess = du.update(subjectUser);
+					
 					if(querysuccess){
 						p.setSuccess(true);
 						p.setSuccessMessage("les modifications sur le profil ont bien été apportées.");
@@ -230,48 +249,14 @@ public class Students extends HttpServlet {
 					}
 					
 					// -- end of modifications
+					
 					// -- redirection user
 					
 					User std = du.select(redirectionPseudo);
 					// -- we get he/she from the data base
 					du.addGroup(std);// -- we retrieve his group.
 					
-					// -- we deal with the skills
-					double maxMark = DaoValues.fetchMax();
-					Skill[] skills = ds.allSkill();// -- get all the skill for this session
-					ArrayList<Mark> marks = dmk.selectByStudent(Integer.toString(std.getId()));// -- get all the mark for this student
-					ArrayList<Average> sklAverage = new ArrayList<Average>();// -- 
-					Average average = new Average("Moyenne: "+std.getPseudo(), Isep.LANDMARK);
-					for(Skill s : skills){
-						Average a = new Average(s.getTitle(), maxMark);
-						if(s.getId() == 0) a.setCross(true);
-						sklAverage.add(a);
-						
-					}
-					for(Average av : sklAverage){
-						for(Mark note : marks){
-							if(av.getTitle().equals(note.getSkill())){
-								av.push(note);
-							}
-						}
-						average.push(av);
-					}
-					
-					// -- we retreve all the deadline
-					Deadline[] deadlines = ddl.selectByGroup(std.getGroup());
-					
-					request.setAttribute("average", average);
-					request.setAttribute("skills", skills);
-					
-					// -- we get the missing of the student
-					Missing[] missingGrid = dm.selectForStudent(Integer.toString(std.getId()));// -- we prepare the data format for the view
-					if(missingGrid == null) missingGrid = new Missing[0];// -- He never skip class, he win an empty array
-					
-					
-					// -- available group
-					String[] grps = dgrp.allGroups();
-					request.setAttribute("availableGroups", grps);
-					
+					this.doLoad(request, dgrp, ds, dmk, ddl, dm, std);
 					
 					p.setContent("users/student.jsp");
 					p.setTitle("ISEP / APP - Etudiants");
@@ -279,8 +264,6 @@ public class Students extends HttpServlet {
 					p.setJs("bootstrap-select.min.js", "bootbox.min.js", "student.js","data_student.js");
 					
 					request.setAttribute("student", std);// -- we send the student
-					request.setAttribute("missingGrid", missingGrid);// -- we send the his missing
-					request.setAttribute("deadlines", deadlines);
 					
 				} else {
 					p.setWarning(true);
@@ -288,7 +271,9 @@ public class Students extends HttpServlet {
 				}
 				
 			} else {
-				
+				// --------------------------------------------------------------------------------
+				// -- ANY REQUEST UNDERSTOOD
+				// --------------------------------------------------------------------------------
 				p.setError(true);
 				p.setErrorMessage("votre demande a mal été interprétée. Veillez à bien remplir les champs des formulaires proposés.");
 				
@@ -302,6 +287,7 @@ public class Students extends HttpServlet {
 			}
 			
 		} else {
+			
 			p.setWarning(true);
 			p.setWarningMessage("la page sur laquelle vous tentez de vous rendre ne vous est pas accessible. "
 					+ "Pour toutes réclamations, prenez contact avec le responsable d'APP actuel.");
@@ -312,7 +298,6 @@ public class Students extends HttpServlet {
 		
 		}
 		
-
 		request.setAttribute("pages", p);
 		request.getRequestDispatcher("/template.jsp").forward(request, response);
 					
