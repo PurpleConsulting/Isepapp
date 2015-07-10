@@ -17,6 +17,8 @@ import org.junit.Assert;
 import org.purple.bean.Group;
 import org.purple.bean.Mark;
 import org.purple.bean.User;
+import org.purple.constant.Isep;
+import org.purple.model.Auth;
 import org.purple.model.Average;
 import org.purple.model.Avg;
 import org.purple.model.AvgBuilder;
@@ -130,10 +132,23 @@ public class TestAvgBuilder {
 
 	@Test
 	public void testAvgProm(){
-		ArrayList<Group>allGrp = new ArrayList<Group>();
+		ArrayList<Group>allGrp = this.loadPromoFile();
 		Average a = AvgBuilder.promAverage(this.prm, allGrp, 5.0);
+		assertEquals(4, a.getGrid().size());
 		assertNotEquals(0.0, a.compute());
+		
+		ArrayList<Group> p = this.loadPromoFile();
+		
+
+		
 	}
+	
+	
+	
+	
+	// --------------------------------------------------------------------------------
+	// -- UTILITIES FUNCTION - OBJECT LOADER FOR TEST
+	// --------------------------------------------------------------------------------
 	
 	public ArrayList<Mark> loadMarkFile(String csvFileName){
 		BufferedReader br = null;
@@ -162,5 +177,40 @@ public class TestAvgBuilder {
 			}
 		}
 		return marks;
+	}
+	
+	public ArrayList<Group> loadPromoFile(){
+		BufferedReader br = null;
+		String sep = ";"; String line = ""; String lastGrp = "";
+		ArrayList<Group> prom = new ArrayList<Group>();
+		try{
+			br = new BufferedReader(new FileReader(this.path + "test_promo.csv"));
+			Group group = new Group();
+			while ((line = br.readLine()) != null) {
+				String[] stdLine = line.split(sep);
+				if(!lastGrp.equals(stdLine[0]) && !lastGrp.equals("")){
+					group.setName(lastGrp); prom.add(group);
+					group = new Group(); 
+				}
+				lastGrp = stdLine[0];
+				User student = new User(stdLine[1], stdLine[2], stdLine[3], stdLine[4], Auth.student);
+				student.setGroup(stdLine[0]);
+				group.setMembers(student);
+			}
+			group.setName(lastGrp); prom.add(group);
+		} catch (FileNotFoundException e){
+			fail("Error the file test_promo.csv is missing.");	
+		} catch (IOException e) {
+			fail("Error occures when parcing the file test_promo.csv.");
+		} finally {
+			if (br != null) {
+				try {
+					br.close();
+				} catch (IOException e) {
+
+				}
+			}
+		}
+		return prom;
 	}
 }

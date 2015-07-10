@@ -50,8 +50,20 @@ public class AvgBuilder {
 	
 	public static Average promAverage(HashMap<String, ArrayList<Mark>> marks, ArrayList<Group> groups, double valMax){
 		Average a = new Average();
+		ArrayList<Average> av = new ArrayList<Average>();
 		ArrayList<String> _class = new ArrayList<String>();
-		
+		for(Group g : groups){
+			String current = g.getName().substring(0, 2);
+			if(!_class.contains(current)) _class.add(current);
+			av.add(AvgBuilder.groupAverage(marks.get(g.getName()), g, valMax));
+		}
+		for(String c : _class ){
+			Average avgClass = new Average(c, Isep.LANDMARK);
+			for(Average avg : av){
+				if (avg.getTitle().substring(0, 2).equals(c)) avgClass.push(avg);
+			}
+			a.push(avgClass);
+		}
 		return a;
 	}
 }
