@@ -1,0 +1,182 @@
+bdebuye;3;Niveau de Base acquis;1;Travail en groupe;1;Travailler en équipe;0;1;3
+bdebuye;4;Niveau Intermédiaire en cours d'acquisition;1;Travail en groupe;3;Gérer les conflits;0;1;4
+bdebuye;4;Niveau Intermédiaire en cours d'acquisition;1;Travail en groupe;2;Animer une équipe;0;1;4
+bdebuye;5;Niveau Intermédiaire acquis;1;Travail en groupe;4;Être force de proposition;0;1;5
+bdebuye;5;Niveau Intermédiaire acquis;2;Communication;5;Écouter et se faire écouter;0;1;5
+bdebuye;4;Niveau Intermédiaire en cours d'acquisition;2;Communication;7;Documentation efficace;0;1;4
+bdebuye;0;Non Acquis;2;Communication;6;Mener un dialogue;0;1;1
+bdebuye;2;Niveau de Base en cours d'acquisition;2;Communication;8;Avoir une approche communicative adaptée;0;1;2
+bdebuye;3;Niveau de Base acquis;3;Conduite de projet;9;Méthodologie;0;1;3
+bdebuye;5;Niveau Intermédiaire acquis;3;Conduite de projet;11;Suivre un projet;0;1;5
+bdebuye;4;Niveau Intermédiaire en cours d'acquisition;3;Conduite de projet;13;Répondre aux attentes du client;0;1;4
+bdebuye;3;Niveau de Base acquis;3;Conduite de projet;10;Planifier un projet;0;1;3
+bdebuye;4;Niveau Intermédiaire en cours d'acquisition;3;Conduite de projet;12;Utiliser des outils de suivi de projets;0;1;4
+bdebuye;3;Niveau de Base acquis;4;Conception / réalisation;16;Conception des données;0;1;3
+bdebuye;5;Niveau Intermédiaire acquis;4;Conception / réalisation;18;Développement HTML;0;1;5
+bdebuye;3;Niveau de Base acquis;4;Conception / réalisation;20;Développement PHP;0;1;3
+bdebuye;0;Non Acquis;4;Conception / réalisation;22;Développement SQL;0;1;1
+bdebuye;3;Niveau de Base acquis;4;Conception / réalisation;24;Test et validation;0;1;3
+bdebuye;2;Niveau de Base en cours d'acquisition;4;Conception / réalisation;15;Conception visuelle;0;1;2
+bdebuye;4;Niveau Intermédiaire en cours d'acquisition;4;Conception / réalisation;17;Conception technique;0;1;4
+bdebuye;4;Niveau Intermédiaire en cours d'acquisition;4;Conception / réalisation;19;Développement CSS;0;1;4
+bdebuye;2;Niveau de Base en cours d'acquisition;4;Conception / réalisation;21;Développement Javascript;0;1;2
+bdebuye;2;Niveau de Base en cours d'acquisition;4;Conception / réalisation;23;Organisation du code;0;1;2
+bdebuye;0;Non Acquis;4;Conception / réalisation;14;Spécification des besoins;0;1;1
+bdebuye;5;Niveau Intermédiaire acquis;5;Professionnel responsable;26;Autonomie;0;1;5
+bdebuye;3;Niveau de Base acquis;5;Professionnel responsable;25;Professionnalisme;0;1;3
+cheissel;3;Niveau de Base acquis;1;Travail en groupe;1;Travailler en équipe;0;1;3
+cheissel;4;Niveau Intermédiaire en cours d'acquisition;1;Travail en groupe;3;Gérer les conflits;0;1;4
+cheissel;4;Niveau Intermédiaire en cours d'acquisition;1;Travail en groupe;2;Animer une équipe;0;1;4
+cheissel;5;Niveau Intermédiaire acquis;1;Travail en groupe;4;Être force de proposition;0;1;5
+cheissel;2;Niveau de Base en cours d'acquisition;2;Communication;8;Avoir une approche communicative adaptée;0;1;2
+cheissel;5;Niveau Intermédiaire acquis;2;Communication;5;Écouter et se faire écouter;0;1;5
+cheissel;4;Niveau Intermédiaire en cours d'acquisition;2;Communication;7;Documentation efficace;0;1;4
+cheissel;0;Non Acquis;2;Communication;6;Mener un dialogue;0;1;1
+cheissel;3;Niveau de Base acquis;3;Conduite de projet;10;Planifier un projet;0;1;3
+cheissel;4;Niveau Intermédiaire en cours d'acquisition;3;Conduite de projet;12;Utiliser des outils de suivi de projets;0;1;4
+cheissel;3;Niveau de Base acquis;3;Conduite de projet;9;Méthodologie;0;1;3
+cheissel;5;Niveau Intermédiaire acquis;3;Conduite de projet;11;Suivre un projet;0;1;5
+cheissel;4;Niveau Intermédiaire en cours d'acquisition;3;Conduite de projet;13;Répondre aux attentes du client;0;1;4
+cheissel;0;Non Acquis;4;Conception / réalisation;14;Spécification des besoins;0;1;1
+cheissel;3;Niveau de Base acquis;4;Conception / réalisation;16;Conception des données;0;1;3
+cheissel;5;Niveau Intermédiaire acquis;4;Conception / réalisation;18;Développement HTML;0;1;5
+cheissel;3;Niveau de Base acquis;4;Conception / réalisation;20;Développement PHP;0;1;3
+cheissel;0;Non Acquis;4;Conception / réalisation;22;Développement SQL;0;1;1
+cheissel;3;Niveau de Base acquis;4;Conception / réalisation;24;Test et validation;0;1;3
+cheissel;2;Niveau de Base en cours d'acquisition;4;Conception / réalisation;15;Conception visuelle;0;1;2
+cheissel;4;Niveau Intermédiaire en cours d'acquisition;4;Conception / réalisation;17;Conception technique;0;1;4
+cheissel;4;Niveau Intermédiaire en cours d'acquisition;4;Conception / réalisation;19;Développement CSS;0;1;4
+cheissel;2;Niveau de Base en cours d'acquisition;4;Conception / réalisation;21;Développement Javascript;0;1;2
+cheissel;2;Niveau de Base en cours d'acquisition;4;Conception / réalisation;23;Organisation du code;0;1;2
+cheissel;3;Niveau de Base acquis;5;Professionnel responsable;25;Professionnalisme;0;1;3
+cheissel;5;Niveau Intermédiaire acquis;5;Professionnel responsable;26;Autonomie;0;1;5
+ecomazzi;4;Niveau Intermédiaire en cours d'acquisition;1;Travail en groupe;2;Animer une équipe;0;1;4
+ecomazzi;5;Niveau Intermédiaire acquis;1;Travail en groupe;4;Être force de proposition;0;1;5
+ecomazzi;3;Niveau de Base acquis;1;Travail en groupe;1;Travailler en équipe;0;1;3
+ecomazzi;4;Niveau Intermédiaire en cours d'acquisition;1;Travail en groupe;3;Gérer les conflits;0;1;4
+ecomazzi;4;Niveau Intermédiaire en cours d'acquisition;2;Communication;7;Documentation efficace;0;1;4
+ecomazzi;0;Non Acquis;2;Communication;6;Mener un dialogue;0;1;1
+ecomazzi;2;Niveau de Base en cours d'acquisition;2;Communication;8;Avoir une approche communicative adaptée;0;1;2
+ecomazzi;5;Niveau Intermédiaire acquis;2;Communication;5;Écouter et se faire écouter;0;1;5
+ecomazzi;3;Niveau de Base acquis;3;Conduite de projet;9;Méthodologie;0;1;3
+ecomazzi;5;Niveau Intermédiaire acquis;3;Conduite de projet;11;Suivre un projet;0;1;5
+ecomazzi;4;Niveau Intermédiaire en cours d'acquisition;3;Conduite de projet;13;Répondre aux attentes du client;0;1;4
+ecomazzi;3;Niveau de Base acquis;3;Conduite de projet;10;Planifier un projet;0;1;3
+ecomazzi;4;Niveau Intermédiaire en cours d'acquisition;3;Conduite de projet;12;Utiliser des outils de suivi de projets;0;1;4
+ecomazzi;0;Non Acquis;4;Conception / réalisation;22;Développement SQL;0;1;1
+ecomazzi;3;Niveau de Base acquis;4;Conception / réalisation;24;Test et validation;0;1;3
+ecomazzi;2;Niveau de Base en cours d'acquisition;4;Conception / réalisation;15;Conception visuelle;0;1;2
+ecomazzi;4;Niveau Intermédiaire en cours d'acquisition;4;Conception / réalisation;17;Conception technique;0;1;4
+ecomazzi;4;Niveau Intermédiaire en cours d'acquisition;4;Conception / réalisation;19;Développement CSS;0;1;4
+ecomazzi;2;Niveau de Base en cours d'acquisition;4;Conception / réalisation;21;Développement Javascript;0;1;2
+ecomazzi;2;Niveau de Base en cours d'acquisition;4;Conception / réalisation;23;Organisation du code;0;1;2
+ecomazzi;0;Non Acquis;4;Conception / réalisation;14;Spécification des besoins;0;1;1
+ecomazzi;3;Niveau de Base acquis;4;Conception / réalisation;16;Conception des données;0;1;3
+ecomazzi;5;Niveau Intermédiaire acquis;4;Conception / réalisation;18;Développement HTML;0;1;5
+ecomazzi;3;Niveau de Base acquis;4;Conception / réalisation;20;Développement PHP;0;1;3
+ecomazzi;5;Niveau Intermédiaire acquis;5;Professionnel responsable;26;Autonomie;0;1;5
+ecomazzi;3;Niveau de Base acquis;5;Professionnel responsable;25;Professionnalisme;0;1;3
+groubeix;4;Niveau Intermédiaire en cours d'acquisition;1;Travail en groupe;2;Animer une équipe;0;1;4
+groubeix;5;Niveau Intermédiaire acquis;1;Travail en groupe;4;Être force de proposition;0;1;5
+groubeix;3;Niveau de Base acquis;1;Travail en groupe;1;Travailler en équipe;0;1;3
+groubeix;4;Niveau Intermédiaire en cours d'acquisition;1;Travail en groupe;3;Gérer les conflits;0;1;4
+groubeix;0;Non Acquis;2;Communication;6;Mener un dialogue;0;1;1
+groubeix;2;Niveau de Base en cours d'acquisition;2;Communication;8;Avoir une approche communicative adaptée;0;1;2
+groubeix;5;Niveau Intermédiaire acquis;2;Communication;5;Écouter et se faire écouter;0;1;5
+groubeix;4;Niveau Intermédiaire en cours d'acquisition;2;Communication;7;Documentation efficace;0;1;4
+groubeix;4;Niveau Intermédiaire en cours d'acquisition;3;Conduite de projet;13;Répondre aux attentes du client;0;1;4
+groubeix;3;Niveau de Base acquis;3;Conduite de projet;10;Planifier un projet;0;1;3
+groubeix;4;Niveau Intermédiaire en cours d'acquisition;3;Conduite de projet;12;Utiliser des outils de suivi de projets;0;1;4
+groubeix;3;Niveau de Base acquis;3;Conduite de projet;9;Méthodologie;0;1;3
+groubeix;5;Niveau Intermédiaire acquis;3;Conduite de projet;11;Suivre un projet;0;1;5
+groubeix;2;Niveau de Base en cours d'acquisition;4;Conception / réalisation;15;Conception visuelle;0;1;2
+groubeix;4;Niveau Intermédiaire en cours d'acquisition;4;Conception / réalisation;17;Conception technique;0;1;4
+groubeix;4;Niveau Intermédiaire en cours d'acquisition;4;Conception / réalisation;19;Développement CSS;0;1;4
+groubeix;2;Niveau de Base en cours d'acquisition;4;Conception / réalisation;21;Développement Javascript;0;1;2
+groubeix;2;Niveau de Base en cours d'acquisition;4;Conception / réalisation;23;Organisation du code;0;1;2
+groubeix;0;Non Acquis;4;Conception / réalisation;14;Spécification des besoins;0;1;1
+groubeix;3;Niveau de Base acquis;4;Conception / réalisation;16;Conception des données;0;1;3
+groubeix;5;Niveau Intermédiaire acquis;4;Conception / réalisation;18;Développement HTML;0;1;5
+groubeix;3;Niveau de Base acquis;4;Conception / réalisation;20;Développement PHP;0;1;3
+groubeix;0;Non Acquis;4;Conception / réalisation;22;Développement SQL;0;1;1
+groubeix;3;Niveau de Base acquis;4;Conception / réalisation;24;Test et validation;0;1;3
+groubeix;3;Niveau de Base acquis;5;Professionnel responsable;25;Professionnalisme;0;1;3
+groubeix;5;Niveau Intermédiaire acquis;5;Professionnel responsable;26;Autonomie;0;1;5
+ioussdid;5;Niveau Intermédiaire acquis;1;Travail en groupe;4;Être force de proposition;0;1;5
+ioussdid;3;Niveau de Base acquis;1;Travail en groupe;1;Travailler en équipe;0;1;3
+ioussdid;4;Niveau Intermédiaire en cours d'acquisition;1;Travail en groupe;3;Gérer les conflits;0;1;4
+ioussdid;4;Niveau Intermédiaire en cours d'acquisition;1;Travail en groupe;2;Animer une équipe;0;1;4
+ioussdid;0;Non Acquis;2;Communication;6;Mener un dialogue;0;1;1
+ioussdid;2;Niveau de Base en cours d'acquisition;2;Communication;8;Avoir une approche communicative adaptée;0;1;2
+ioussdid;5;Niveau Intermédiaire acquis;2;Communication;5;Écouter et se faire écouter;0;1;5
+ioussdid;4;Niveau Intermédiaire en cours d'acquisition;2;Communication;7;Documentation efficace;0;1;4
+ioussdid;3;Niveau de Base acquis;3;Conduite de projet;10;Planifier un projet;0;1;3
+ioussdid;4;Niveau Intermédiaire en cours d'acquisition;3;Conduite de projet;12;Utiliser des outils de suivi de projets;0;1;4
+ioussdid;3;Niveau de Base acquis;3;Conduite de projet;9;Méthodologie;0;1;3
+ioussdid;5;Niveau Intermédiaire acquis;3;Conduite de projet;11;Suivre un projet;0;1;5
+ioussdid;4;Niveau Intermédiaire en cours d'acquisition;3;Conduite de projet;13;Répondre aux attentes du client;0;1;4
+ioussdid;2;Niveau de Base en cours d'acquisition;4;Conception / réalisation;21;Développement Javascript;0;1;2
+ioussdid;2;Niveau de Base en cours d'acquisition;4;Conception / réalisation;23;Organisation du code;0;1;2
+ioussdid;0;Non Acquis;4;Conception / réalisation;14;Spécification des besoins;0;1;1
+ioussdid;3;Niveau de Base acquis;4;Conception / réalisation;16;Conception des données;0;1;3
+ioussdid;5;Niveau Intermédiaire acquis;4;Conception / réalisation;18;Développement HTML;0;1;5
+ioussdid;3;Niveau de Base acquis;4;Conception / réalisation;20;Développement PHP;0;1;3
+ioussdid;0;Non Acquis;4;Conception / réalisation;22;Développement SQL;0;1;1
+ioussdid;3;Niveau de Base acquis;4;Conception / réalisation;24;Test et validation;0;1;3
+ioussdid;2;Niveau de Base en cours d'acquisition;4;Conception / réalisation;15;Conception visuelle;0;1;2
+ioussdid;4;Niveau Intermédiaire en cours d'acquisition;4;Conception / réalisation;17;Conception technique;0;1;4
+ioussdid;4;Niveau Intermédiaire en cours d'acquisition;4;Conception / réalisation;19;Développement CSS;0;1;4
+ioussdid;3;Niveau de Base acquis;5;Professionnel responsable;25;Professionnalisme;0;1;3
+ioussdid;5;Niveau Intermédiaire acquis;5;Professionnel responsable;26;Autonomie;0;1;5
+mtauch;3;Niveau de Base acquis;1;Travail en groupe;1;Travailler en équipe;0;1;3
+mtauch;4;Niveau Intermédiaire en cours d'acquisition;1;Travail en groupe;3;Gérer les conflits;0;1;4
+mtauch;4;Niveau Intermédiaire en cours d'acquisition;1;Travail en groupe;2;Animer une équipe;0;1;4
+mtauch;5;Niveau Intermédiaire acquis;1;Travail en groupe;4;Être force de proposition;0;1;5
+mtauch;5;Niveau Intermédiaire acquis;2;Communication;5;Écouter et se faire écouter;0;1;5
+mtauch;4;Niveau Intermédiaire en cours d'acquisition;2;Communication;7;Documentation efficace;0;1;4
+mtauch;0;Non Acquis;2;Communication;6;Mener un dialogue;0;1;1
+mtauch;2;Niveau de Base en cours d'acquisition;2;Communication;8;Avoir une approche communicative adaptée;0;1;2
+mtauch;4;Niveau Intermédiaire en cours d'acquisition;3;Conduite de projet;12;Utiliser des outils de suivi de projets;0;1;4
+mtauch;3;Niveau de Base acquis;3;Conduite de projet;9;Méthodologie;0;1;3
+mtauch;5;Niveau Intermédiaire acquis;3;Conduite de projet;11;Suivre un projet;0;1;5
+mtauch;4;Niveau Intermédiaire en cours d'acquisition;3;Conduite de projet;13;Répondre aux attentes du client;0;1;4
+mtauch;3;Niveau de Base acquis;3;Conduite de projet;10;Planifier un projet;0;1;3
+mtauch;0;Non Acquis;4;Conception / réalisation;14;Spécification des besoins;0;1;1
+mtauch;3;Niveau de Base acquis;4;Conception / réalisation;16;Conception des données;0;1;3
+mtauch;5;Niveau Intermédiaire acquis;4;Conception / réalisation;18;Développement HTML;0;1;5
+mtauch;3;Niveau de Base acquis;4;Conception / réalisation;20;Développement PHP;0;1;3
+mtauch;0;Non Acquis;4;Conception / réalisation;22;Développement SQL;0;1;1
+mtauch;3;Niveau de Base acquis;4;Conception / réalisation;24;Test et validation;0;1;3
+mtauch;2;Niveau de Base en cours d'acquisition;4;Conception / réalisation;15;Conception visuelle;0;1;2
+mtauch;4;Niveau Intermédiaire en cours d'acquisition;4;Conception / réalisation;17;Conception technique;0;1;4
+mtauch;4;Niveau Intermédiaire en cours d'acquisition;4;Conception / réalisation;19;Développement CSS;0;1;4
+mtauch;2;Niveau de Base en cours d'acquisition;4;Conception / réalisation;21;Développement Javascript;0;1;2
+mtauch;2;Niveau de Base en cours d'acquisition;4;Conception / réalisation;23;Organisation du code;0;1;2
+mtauch;5;Niveau Intermédiaire acquis;5;Professionnel responsable;26;Autonomie;0;1;5
+mtauch;3;Niveau de Base acquis;5;Professionnel responsable;25;Professionnalisme;0;1;3
+smangann;4;Niveau Intermédiaire en cours d'acquisition;1;Travail en groupe;2;Animer une équipe;0;1;4
+smangann;5;Niveau Intermédiaire acquis;1;Travail en groupe;4;Être force de proposition;0;1;5
+smangann;3;Niveau de Base acquis;1;Travail en groupe;1;Travailler en équipe;0;1;3
+smangann;4;Niveau Intermédiaire en cours d'acquisition;1;Travail en groupe;3;Gérer les conflits;0;1;4
+smangann;0;Non Acquis;2;Communication;6;Mener un dialogue;0;1;1
+smangann;2;Niveau de Base en cours d'acquisition;2;Communication;8;Avoir une approche communicative adaptée;0;1;2
+smangann;5;Niveau Intermédiaire acquis;2;Communication;5;Écouter et se faire écouter;0;1;5
+smangann;4;Niveau Intermédiaire en cours d'acquisition;2;Communication;7;Documentation efficace;0;1;4
+smangann;3;Niveau de Base acquis;3;Conduite de projet;10;Planifier un projet;0;1;3
+smangann;4;Niveau Intermédiaire en cours d'acquisition;3;Conduite de projet;12;Utiliser des outils de suivi de projets;0;1;4
+smangann;3;Niveau de Base acquis;3;Conduite de projet;9;Méthodologie;0;1;3
+smangann;5;Niveau Intermédiaire acquis;3;Conduite de projet;11;Suivre un projet;0;1;5
+smangann;4;Niveau Intermédiaire en cours d'acquisition;3;Conduite de projet;13;Répondre aux attentes du client;0;1;4
+smangann;4;Niveau Intermédiaire en cours d'acquisition;4;Conception / réalisation;17;Conception technique;0;1;4
+smangann;4;Niveau Intermédiaire en cours d'acquisition;4;Conception / réalisation;19;Développement CSS;0;1;4
+smangann;2;Niveau de Base en cours d'acquisition;4;Conception / réalisation;21;Développement Javascript;0;1;2
+smangann;2;Niveau de Base en cours d'acquisition;4;Conception / réalisation;23;Organisation du code;0;1;2
+smangann;0;Non Acquis;4;Conception / réalisation;14;Spécification des besoins;0;1;1
+smangann;3;Niveau de Base acquis;4;Conception / réalisation;16;Conception des données;0;1;3
+smangann;5;Niveau Intermédiaire acquis;4;Conception / réalisation;18;Développement HTML;0;1;5
+smangann;3;Niveau de Base acquis;4;Conception / réalisation;20;Développement PHP;0;1;3
+smangann;0;Non Acquis;4;Conception / réalisation;22;Développement SQL;0;1;1
+smangann;3;Niveau de Base acquis;4;Conception / réalisation;24;Test et validation;0;1;3
+smangann;2;Niveau de Base en cours d'acquisition;4;Conception / réalisation;15;Conception visuelle;0;1;2
+smangann;3;Niveau de Base acquis;5;Professionnel responsable;25;Professionnalisme;0;1;3
+smangann;5;Niveau Intermédiaire acquis;5;Professionnel responsable;26;Autonomie;0;1;5
