@@ -43,23 +43,24 @@ public class AvgBuilder {
 			ArrayList<Mark> tab = (ArrayList<Mark>) marks.clone();
 			Predicate<Mark> filter = new ShiftOtherStudentMarkPrd(student.getPseudo());
 			tab.removeIf(filter);
+			//System.out.print(student.getPseudo() +" : "+ tab.size() + "\n\n");
 			a.push(studentAverage(tab, student, valMax));
 		}		
 		return a;
 	}
 	
 	public static Average promAverage(HashMap<String, ArrayList<Mark>> marks, ArrayList<Group> groups, double valMax){
-		Average a = new Average();
-		ArrayList<Average> av = new ArrayList<Average>();
+		Average a = new Average("Promo", Isep.LANDMARK);
+		ArrayList<Average> groupsAVG = new ArrayList<Average>();
 		ArrayList<String> _class = new ArrayList<String>();
 		for(Group g : groups){
 			String current = g.getName().substring(0, 2);
 			if(!_class.contains(current)) _class.add(current);
-			av.add(AvgBuilder.groupAverage(marks.get(g.getName()), g, valMax));
+			groupsAVG.add(AvgBuilder.groupAverage(marks.get(g.getName()), g, valMax));
 		}
 		for(String c : _class ){
 			Average avgClass = new Average(c, Isep.LANDMARK);
-			for(Average avg : av){
+			for(Average avg : groupsAVG){
 				if (avg.getTitle().substring(0, 2).equals(c)) avgClass.push(avg);
 			}
 			a.push(avgClass);

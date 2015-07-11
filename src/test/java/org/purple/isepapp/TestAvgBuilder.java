@@ -135,6 +135,8 @@ public class TestAvgBuilder {
 		assertEquals(16.17, c.compute(), 0.1);	// -- test the computation for the group 16.17 vs 12.13
 		assertEquals(15.0, c.byTitle("nrasolom").compute(), 0.01); // -- test the computation for one student
 		/** group: 16.17, zozo: 17.68, dede: 15.82, billy: 15.0, loic:0.0 **/
+		
+
 	}
 	
 
@@ -144,9 +146,42 @@ public class TestAvgBuilder {
 		ArrayList<Group>allGrp = this.loadPromoFile();
 		Average a = AvgBuilder.promAverage(this.prm, allGrp, 5.0);
 		
+
+		assertEquals(4, a.getGrid().size());
+	    assertNotEquals(0.0, a.compute());
+	    System.out.print("Promo 2016 S2 <3: "+ a.compute() +"\n");
 		
-		//assertEquals(4, a.getGrid().size());
-		//assertNotEquals(0.0, a.compute());
+		for(Avg _classAVG : a.getGrid()){
+			assertNotEquals(0, _classAVG.status());
+			System.out.print(_classAVG.getTitle() + ": "+ _classAVG.compute() +"\n");
+			
+			Average _classAverage = (Average)_classAVG;
+			
+			for(Avg groupAVG : _classAverage.getGrid()){
+				assertNotEquals(0, groupAVG.status());
+				System.out.print(groupAVG.getTitle() +" : "+ groupAVG.compute() + "\n");
+				
+				Average groupAverage = (Average)groupAVG;
+				
+				for(Avg studentAVG : groupAverage.getGrid()){
+					assertNotEquals(0, groupAVG.status());
+					//System.out.print(studentAVG.compute() + "\n");
+					
+				}
+			}
+			
+			System.out.print( "\n");
+		}
+		
+		//assertNotEquals(0, a.byTitle("G5").status());
+		//assertNotEquals(0, a.byTitle("G6").status());
+		//assertNotEquals(0, a.byTitle("G7").status());
+		//assertNotEquals(0, a.byTitle("G8").status());
+		
+		//assertNotEquals(0.0, a.byTitle("G5").compute(), 0.1);
+		//assertNotEquals(0.0, a.byTitle("G6").compute(), 0.1);
+		//assertNotEquals(0.0, a.byTitle("G7").compute(), 0.1);
+		//assertNotEquals(0.0, a.byTitle("G8").compute(), 0.1);
 		
 		//ArrayList<Group> p = this.loadPromoFile();
 		
@@ -202,7 +237,7 @@ public class TestAvgBuilder {
 					group = new Group(); 
 				}
 				lastGrp = stdLine[0];
-				User student = new User(stdLine[1], stdLine[2], stdLine[3], stdLine[4], Auth.student);
+				User student = new User(stdLine[2], stdLine[3], stdLine[1], stdLine[4], Auth.student);
 				student.setGroup(stdLine[0]);
 				group.setMembers(student);
 			}
