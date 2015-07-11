@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import org.purple.bean.Group;
 import org.purple.bean.User;
@@ -147,26 +148,20 @@ public class DaoGroups extends Dao<Group>{
 		return res;
 	}
 	
-	public Group[] selectAll() {
+	public ArrayList<Group> selectAll() {
 		// TODO Auto-generated method stub
-		Group[] gs = new Group[0];
+		ArrayList<Group> gs = new ArrayList<Group>();
+
 		String q = "SELECT Groups.id, Groups.`name`, Groups.class "
 				+ " FROM Groups WHERE Groups.`id` != 0;";
 		try{
-			ResultSet currsor = this.connect.createStatement().executeQuery(q);
-			if (currsor.last()) {
-				gs = new Group[currsor.getRow()];
-				currsor.beforeFirst(); 
-			}
-			int i = 0;
+			ResultSet currsor = Bdd.exec(this.connect, q);
 			while(currsor.next()){
-				gs[i] = new Group(currsor.getInt(1), currsor.getString(2), currsor.getString(3));
-				i++;
+				gs.add(new Group(currsor.getInt(1), currsor.getString(2), currsor.getString(3)));
 			}
-			currsor.close();
 		}catch (SQLException e){
 			// TODO Auto-generated catch block
-			gs = null;
+			gs = new ArrayList<Group>();
 			e.printStackTrace();
 		}
 		return gs;
@@ -273,7 +268,7 @@ public class DaoGroups extends Dao<Group>{
 
 	public String[] allGroups(){
 		String [] res = new String[0];
-		String q = "SELECT Groups.`name` FROM Groups WHERE id > 0;";
+		String q = "SELECT Groups.`name` FROM Groups ;";
 		ResultSet currsor = Bdd.exec(this.connect, q);
 		res = Bdd.rsToStringTab(currsor);
 		return res;

@@ -131,7 +131,7 @@ public class TestAvgBuilder {
 		Average c = AvgBuilder.groupAverage(this.grpBlank, this.g9z, 5);
 		assertEquals(139, this.grpCross.size());
 		assertEquals("G9Z", c.getTitle());		// -- test the average belong to the group
-		assertEquals(4, c.getGrid().size());		// -- test the number in the group
+		assertEquals(3, c.getGrid().size());		// -- test the number in the group
 		assertEquals(16.17, c.compute(), 0.1);	// -- test the computation for the group 16.17 vs 12.13
 		assertEquals(15.0, c.byTitle("nrasolom").compute(), 0.01); // -- test the computation for one student
 		/** group: 16.17, zozo: 17.68, dede: 15.82, billy: 15.0, loic:0.0 **/
@@ -165,7 +165,6 @@ public class TestAvgBuilder {
 				
 				for(Avg studentAVG : groupAverage.getGrid()){
 					assertNotEquals(0, groupAVG.status());
-					//System.out.print(studentAVG.compute() + "\n");
 					
 				}
 			}
@@ -173,19 +172,10 @@ public class TestAvgBuilder {
 			System.out.print( "\n");
 		}
 		
-		//assertNotEquals(0, a.byTitle("G5").status());
-		//assertNotEquals(0, a.byTitle("G6").status());
-		//assertNotEquals(0, a.byTitle("G7").status());
-		//assertNotEquals(0, a.byTitle("G8").status());
-		
-		//assertNotEquals(0.0, a.byTitle("G5").compute(), 0.1);
-		//assertNotEquals(0.0, a.byTitle("G6").compute(), 0.1);
-		//assertNotEquals(0.0, a.byTitle("G7").compute(), 0.1);
-		//assertNotEquals(0.0, a.byTitle("G8").compute(), 0.1);
-		
-		//ArrayList<Group> p = this.loadPromoFile();
-		
-
+		assertEquals(14.13, a.byTitle("G5").compute(), 0.1);
+		assertNotEquals(17, a.byTitle("G6").compute(), 0.1);
+		assertNotEquals(6.21, a.byTitle("G7").compute(), 0.1);
+		assertEquals(14.18, a.byTitle("G8").compute(), 0.1);
 		
 	}
 	

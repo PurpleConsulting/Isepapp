@@ -2,7 +2,10 @@ package org.purple.controller;
 
 import java.io.IOException;
 import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -11,10 +14,18 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.json.JSONObject;
+import org.purple.bean.Group;
+import org.purple.bean.Mark;
 import org.purple.bean.Page;
 import org.purple.constant.Bdd;
 import org.purple.constant.Isep;
 import org.purple.model.Auth;
+import org.purple.model.Average;
+import org.purple.model.Avg;
+import org.purple.model.AvgBuilder;
+import org.purple.model.DaoGroups;
+import org.purple.model.DaoMarks;
+import org.purple.model.DaoValues;
 
 /**
  * Servlet implementation class ServiceRespoHandler
@@ -56,14 +67,24 @@ public class ServiceRespoHandler extends HttpServlet {
 			
 			// -- Database access
 			Connection bddServletCo = Bdd.getCo();
+			DaoGroups dg = new DaoGroups(bddServletCo);
+			DaoMarks dm = new DaoMarks(bddServletCo);
 			
 			if(!Isep.nullOrEmpty(markServiceParam)){
-				
+				// --------------------------------------------------------------------------------
+				// -- JSON SOURCE - PROM RESULT BARCHART 
+				// --------------------------------------------------------------------------------
 				JSONObject prom = new JSONObject();
+				ArrayList<Group> allGroups = dg.selectAll();
+				HashMap<String, ArrayList<Mark>> marks = new HashMap<String, ArrayList<Mark>>();
+				for(Group group : allGroups){ dg.completeMemebers(group); }
+				for(String group : dg.allGroups()){ marks.put(group, dm.selectByGroup(group)); }
 				
-				for(int i = 1; i < 5; i++){
+				Average promAverage = AvgBuilder.promAverage(marks, allGroups, DaoValues.fetchMax());
+
+				for(Avg classAverage : promAverage.getGrid()){
 					JSONObject _class = new JSONObject();
-					prom.put("G"+i, i*2);
+					prom.put(classAverage.getTitle(), classAverage.compute());
 					
 				}
 				
@@ -75,6 +96,13 @@ public class ServiceRespoHandler extends HttpServlet {
 				result.put("err", true);
 				result.put("err-message", "Requête incorrecte.");
 				
+			}
+			
+			try {
+				bddServletCo.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
 			
 		} else {

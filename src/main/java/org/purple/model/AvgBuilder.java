@@ -43,8 +43,8 @@ public class AvgBuilder {
 			ArrayList<Mark> tab = (ArrayList<Mark>) marks.clone();
 			Predicate<Mark> filter = new ShiftOtherStudentMarkPrd(student.getPseudo());
 			tab.removeIf(filter);
-			//System.out.print(student.getPseudo() +" : "+ tab.size() + "\n\n");
-			a.push(studentAverage(tab, student, valMax));
+			Average stdAverage = studentAverage(tab, student, valMax);
+			if(stdAverage.status() == 1) a.push(stdAverage);
 		}		
 		return a;
 	}
@@ -61,9 +61,10 @@ public class AvgBuilder {
 		for(String c : _class ){
 			Average avgClass = new Average(c, Isep.LANDMARK);
 			for(Average avg : groupsAVG){
-				if (avg.getTitle().substring(0, 2).equals(c)) avgClass.push(avg);
+				if (avg.getTitle().substring(0, 2).equals(c) && avg.status() == 1) avgClass.push(avg);
 			}
-			a.push(avgClass);
+			if(avgClass.status() == 1) a.push(avgClass);
+
 		}
 		return a;
 	}
