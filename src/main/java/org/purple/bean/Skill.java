@@ -11,7 +11,7 @@ public class Skill {
 		private String type = "null";
 		private int idRespo = 0;
 		private int coefficient = 0;
-		
+
 		
 		public Skill(){
 			
@@ -52,7 +52,7 @@ public class Skill {
 			return idRespo;
 		}
 
-		public void setId_respo(int idRespo) {
+		public void setIdRespo(int idRespo) {
 			this.idRespo = idRespo;
 		}
 

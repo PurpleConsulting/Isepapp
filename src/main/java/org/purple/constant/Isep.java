@@ -58,7 +58,7 @@ public class Isep {
 			}
 		
 			p.setContent("home/common.jsp");
-			p.setJs("bootbox.min.js",
+			p.setJs("chartjs/Chart.min.js", "bootbox.min.js",
 					"bootstrap-fileinput/js/fileinput.min.js", 
 					"bootstrap-fileinput/js/fileinput_locale_fr.js");
 			p.setCss("../js/bootstrap-fileinput/css/fileinput.min.css");

@@ -18,9 +18,7 @@ public class Average extends Avg{
 		 * We divide by the number of composite to get the average.
 		 */
 	}
-	public Average(boolean unit){
-		this.value = 0.0;
-	}
+
 	public Average(String title, double maxVal){
 		this.setTitle(title);
 		this.value = 0.0;
@@ -61,6 +59,29 @@ public class Average extends Avg{
 	public void setCross(boolean cross) {
 		this.cross = cross;
 	}
+	
+	public void push(Avg mark){
+		this.grid.add(mark);
+	}
+	
+	public Avg byTitle(String title){
+		Avg avg = new Average();
+		for(Avg a : this.grid){
+			if(a.getTitle().equals(title)) avg = a;
+		}
+		return avg;
+	}
+	
+	@Override
+	public int status() {
+		// TODO Auto-generated method stub
+		if(this.grid.size() != 0){
+			return 1;
+		} else {
+			return 0;
+		}
+	}
+	
 	@Override
 	public double compute() {
 		// TODO Auto-generated method stub
@@ -86,18 +107,6 @@ public class Average extends Avg{
 		}
 		
 	}
-	
-	public void push(Avg mark){
-		this.grid.add(mark);
-	}
-	@Override
-	public int status() {
-		// TODO Auto-generated method stub
-		if(this.grid.size() != 0){
-			return 1;
-		} else {
-			return 0;
-		}
-	}
+
 
 }

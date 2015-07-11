@@ -43,9 +43,11 @@ public class Home extends HttpServlet {
 		Page p = new Page();
 		
 		if(Auth.isConnect(request)){
+			
 			Connection bddServletCo = Bdd.getCo();
 			DaoUsers du = new DaoUsers(bddServletCo);
 			HttpSession s = request.getSession();
+			
 			if(Auth.isRespo(request)){
 				User[] teachers = du.selectAllTutor();
 				request.setAttribute("teachers", teachers); // à rajouter dans le JS !!!
@@ -56,6 +58,7 @@ public class Home extends HttpServlet {
 			} else if(Auth.isStudent(request)){
 				
 			}
+			
 			Isep.bagPackHome(p, s);
 			p.setContent("home/common.jsp");
 			p.setTitle("ISEP / APP - Accueil");
@@ -84,6 +87,7 @@ public class Home extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		response.sendRedirect("/Isepapp/Home");
 	}
 
 }

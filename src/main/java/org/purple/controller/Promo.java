@@ -69,7 +69,7 @@ public class Promo extends HttpServlet {
 			
 			// -- get all the groups
 			String[] allClass = dg.selectAllClass();
-			Group[] groups = dg.selectAll();
+			ArrayList<Group> groups = dg.selectAll();
 			HashMap<String, ArrayList<Group>> prom = new HashMap<String, ArrayList<Group>>();
 			for(String c : allClass){
 				ArrayList<Group> team = new ArrayList<Group>(); 

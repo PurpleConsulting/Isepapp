@@ -89,13 +89,6 @@ public class DaoSkills extends Dao<Skill>{
 		}
 		return skills;
 	}
-
-
-
-	public boolean find(String id) {
-		// TODO Auto-generated method stub
-		return false;
-	}
 	
 	public Skill[] selecAllSkillsWhithCross(){
 		Skill[] skills =  new Skill[0];

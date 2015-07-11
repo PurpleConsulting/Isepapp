@@ -38,8 +38,8 @@ public class Signin extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		request.setCharacterEncoding("UTF-8");
 		Page p = new Page();
-		p.setContent("signin.jsp");
 		p.setTitle("ISEP / APP - Connexion");
 		request.setAttribute("pages", p);
 		this.getServletContext().getRequestDispatcher("/jsp/signin.jsp").forward(request, response);
@@ -60,7 +60,7 @@ public class Signin extends HttpServlet {
 		String pseudo = request.getParameter("pseudo");
 		String pwd = request.getParameter("password");
 		
-		////////////////////// OPS //////////////////////
+		////////////////////// OPS \\\\\\\\\\\\\\\\\\\\\\
 		
 		Connection bddServletCo = Bdd.getCo();
 		DaoUsers du = new DaoUsers(bddServletCo);

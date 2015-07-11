@@ -1,3 +1,5 @@
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -5,23 +7,12 @@ import org.json.JSONObject;
 
 public class Main {
 
-	public static void main(String[] args) {
-		JSONObject result = new JSONObject();
-		JSONObject js = new JSONObject();
-		String[] array = {"ldivad","ldchanta","ldzozo","ldbilly","ldldldl","ldtruc"};
-		js.put("pseudo", array);
-		result.put("result", js);
+	public static void main(String[] args) throws IOException {
 		
-		System.out.print(result.toString());
+		String path = new File(".").getCanonicalPath();
+		System.out.print(path);
 		
-		HashMap<String, Integer> map = new HashMap<String, Integer>();
-		map.put("1", 1);
-		map.put("2", 2);
-		map.put("3", 3);
-		
-		Integer i = map.get("7");
-		System.out.print(i);
-		
+		ArrayList<String> s = new ArrayList<String>();
 	}
 
 }

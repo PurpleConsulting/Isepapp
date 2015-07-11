@@ -2,11 +2,10 @@
 div.row{
 	margin-bottom:20px;	
 }
-div.group, div.numbers, div.semester{
+div.group, div.numbers, div.missings, div.semester{
 	border: solid #ccc 1px;
 	min-height: 200px;
 	border-radius: 6px;
-
 	background-color: transparent;
 	padding: 10px;
 }

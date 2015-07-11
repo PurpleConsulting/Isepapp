@@ -45,53 +45,57 @@
 		<div role="tabpanel">
 		  <!-- Nav tabs -->
 		  <ul class="nav nav-tabs" role="tablist">
-		    <li role="presentation" class="active"><a href="#tab1" aria-controls="tab1" role="tab" data-toggle="tab">Global</a></li>
+		    <li role="presentation" class="active"><a href="#tab0" aria-controls="tab0" role="tab" data-toggle="tab">Global</a></li>
 			<c:forEach var="skill" items="${skills}" varStatus="status">
 				<c:if test="${skill.getId() != 0}">
 				<li role="presentation">
-					<a href="#tab${status.count + 1}" aria-controls="tab${status.count + 1}" role="tab" data-toggle="tab"><c:out value="${skill.getTitle()}"></c:out></a>
+					<a href="#tab${skill.getId()}" aria-controls="tab${skill.getId()}" role="tab" data-toggle="tab"><c:out value="${skill.getTitle()}"></c:out></a>
 				</li>
 				</c:if>
 			</c:forEach>	
 		    </ul>
 		  <!-- Tab panes -->
 		  <div class="tab-content">
-		    <div role="tabpanel" class="tab-pane active" id="tab1">
+		    <div role="tabpanel" class="tab-pane active" id="tab0">
 		    	<div class="col-sm-offset-1 col-sm-2 global-average">
-		    		<div><c:out value="${fn:substring(average.compute(),0,4)}"></c:out></div><!--  -->
+		    		<div><c:out value="${fn:substring(average.compute(),0,4)}"></c:out></div>
 		    	</div>
 		    	<div class="col-sm-offset-4 col-sm-9">
-    				<c:forEach var="skill_mark" items="${average.grid}" varStatus="status">
-		    			<c:if test="${!skill_mark.isCross()}">
-		    			<div>
-		    				<div class="col-sm-4"><c:out value="${skill_mark.getTitle()}"></c:out>:</div>
-		    				<span class="badge" data-vis="${skill_mark.getTitle()}">
-		    					<c:out value="${skill_mark.compute().intValue()}"></c:out>
-		    				</span>
-							<div class="progress">
-						  		<div class="progress-bar" role="progressbar" aria-valuenow="${skill_mark.compute()}" aria-valuemin="0" aria-valuemax="20" style="width: 60%;"></div>
+    				<c:forEach  var="skill" items="${skills}" varStatus="status" >
+		    			<c:set var="skill_average" value="${average.byTitle(skill.getTitle())}"/>
+		    			<c:if test="${skill.getId() != 0}">
+			    			<div>
+			    				<div class="col-sm-4"><c:out value="${skill.getTitle()}"></c:out>:</div>
+			    				<span class="badge" data-vis="${skill.getTitle()}">
+			    					<c:out value="${skill_average.compute().intValue()}"></c:out>
+			    				</span>
+								<div class="progress">
+							  		<div class="progress-bar" role="progressbar" aria-valuenow="${skill_average.compute()}" aria-valuemin="0" aria-valuemax="20" style="width: 60%;"></div>
+								</div>
 							</div>
-						</div>
-						</c:if>
+						</c:if>		
 					</c:forEach>
 		    	</div>
 		    </div>
-		    <c:forEach var="skill_mark" items="${average.grid}" varStatus="status">
-		    	<div role="tabpanel" class="tab-pane" id="tab${status.count + 1}">
+		    <c:forEach var="skill" items="${skills}" varStatus="status" >
+		    	<c:set var="skill_average" value="${average.byTitle(skill.getTitle())}"/>
+		    	<div role="tabpanel" class="tab-pane" id="tab${skill.getId()}">
 		    		<div class="alert alert-mark global">
 		    		<span class="alert-mark-result">
-		    			<c:out value="${skill_mark.getTitle()}"></c:out>: 
-		    			<strong><c:out value="${skill_mark.compute()}"></c:out></strong>
+		    			<c:out value="${skill.getTitle()}"></c:out>: 
+		    			<strong><c:out value="${skill_average.compute()}"></c:out> / 20</strong><!-- skill_mark.compute() -->
 		    		</span>
 		    		</div>
-		    		<c:forEach var="sub_skill_mark" items="${skill_mark.grid}" varStatus="status">
+		    		<c:forEach var="sub_skill_mark" items="${skill_average.getGrid()}" varStatus="subStatus">
+		    			<c:if test="${skill.getId() == sub_skill_mark.getIdSkill()}">
 		    			<div class="alert alert-mark">
-		    				<span><c:out value="${sub_skill_mark.getSubSkill()}">:</c:out></span>
+		    				<span><c:out value="${sub_skill_mark.getSubSkill()}"></c:out>: </span>
 		    				<span class="alert-mark-result">
 		    					<c:out value="${sub_skill_mark.getTitle()}"></c:out> - 
 		    					<c:out value="${sub_skill_mark.compute()}"></c:out>
 		    				</span>
 		    			</div>
+		    			</c:if>
 		    		</c:forEach>
 		    	</div>
 			</c:forEach>
@@ -101,33 +105,33 @@
 </div>
 <div class="row">
 	<div class="col-xs-offset-1 col-xs-10 crossmark" >
-		<h4>Evaluation croisée - 12 / 20</h4>
+		<h4>Evaluation croisée - <c:out value="${average.byTitle(skills[0].getTitle()).compute()}"></c:out> / 20</h4>
 		<div class="table-responsive">
 		<c:choose>
 			<c:when test="${!empty crossmates}">
-		<table class="table table-hover">
-			<tr>
-				<c:forEach var="css" items="${CSubSkills}" varStatus="status">
-					<td><c:out value="${css.getTitle()}"></c:out></td>
-				</c:forEach>
-			</tr>
-			<c:forEach var="mate" items="${crossmates}" varStatus="status">
-				<tr>
-					<c:forEach var="mark" items="${crossmarks.get(mate.getPseudo())}" varStatus="status">
-						<td>
-							<c:out value="${mate.getFirstName()}"></c:out>:
-							<c:out value="${mark.getTitle()}"></c:out> 
-						</td>
+				<table class="table table-hover">
+					<tr>
+						<c:forEach var="css" items="${CSubSkills}" varStatus="status">
+							<td><c:out value="${css.getTitle()}"></c:out></td>
+						</c:forEach>
+					</tr>
+					<c:forEach var="mate" items="${crossmates}" varStatus="status">
+						<tr>
+							<c:forEach var="mark" items="${crossmarks.get(mate.getPseudo())}" varStatus="status">
+								<td>
+									<c:out value="${mate.getFirstName()}"></c:out>:
+									<c:out value="${mark.getTitle()}"></c:out> 
+								</td>
+							</c:forEach>
+						</tr>
 					</c:forEach>
-				</tr>
-			</c:forEach>
-		</table>
-		</c:when>
-		<c:when test="${empty crossmates}">
-			<div class="col-xs-10 col-xs-offset-1">
-				<img src="img/empty/nocross.svg" alt="" class="app-empty-img"/>
-			</div>
-		</c:when>
+				</table>
+			</c:when>
+			<c:when test="${empty crossmates}">
+				<div class="col-xs-10 col-xs-offset-1">
+					<img src="img/empty/nocross.svg" alt="" class="app-empty-img"/>
+				</div>
+			</c:when>
 		</c:choose>
 		</div>
 	</div>

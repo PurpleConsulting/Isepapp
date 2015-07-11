@@ -1,6 +1,6 @@
-/**
- * 
- */
+
+// -- utils functions
+
 var uploadIni = function(){
 	$("div.progress, div.alert").hide();
 	$("div.progress").hide();
@@ -12,11 +12,8 @@ var uploadIni = function(){
 	$("div.progress div.progress-bar").addClass("progress-bar-striped");
 	$("div.progress div.progress-bar").addClass("active");
 };
-	 
-// -- initialisation
 
-
-function okBar(obj, res){
+var okBar = function(obj, res){
 	setTimeout(function(){
 		obj.removeClass("progress-bar-striped"); obj.removeClass("active");
 		var statusClass = res.success ? "success" : "danger";
@@ -28,14 +25,15 @@ function okBar(obj, res){
 	}, 1500);
 	return false;
 };
-$("input.input-class").on("filebatchpreupload", function(){
-	uploadIni();
-});
 
+// -- initialisation
+
+Chart.defaults.global.responsive = true;
 (function () {
+	/**  LOAD GROUPS OF THE RESPO IF ANY **/
+	
 	var pseudo = $("h1 small").attr("data-target");
 	$.post("/Isepapp/SeviceTuteurHandler", { isExternal: pseudo }, function(data, status){
-		console.log(data);
 		var template = $("#line-grp-template");
 		data.result.groups.forEach(function(element){
 			var line = template.clone();
@@ -65,6 +63,41 @@ $("input.input-class").on("filebatchpreupload", function(){
 		}
 	});
 })();
+
+(function () {
+	/** LOAD THE MARK OF THE PROMOTION **/
+	$.post("/Isepapp/ServiceRespoHandler", { "mark-service": "true"}, function(data, status){
+		console.log(data);
+		var ctx = document.getElementById("barchart-canvas").getContext("2d");
+		//var lab = data.result.prom.map(function(element){return element.name});
+		var lab = Object.keys(data.result.prom);
+		var datum = {
+				labels: lab,
+				datasets: [
+	               {
+	                   label: "Moyenne de la Promotion",
+	                   fillColor: "rgba(220,220,220,0.5)",
+	                   strokeColor: "rgba(220,220,220,0.8)",
+	                   highlightFill: "rgba(220,220,220,0.75)",
+	                   highlightStroke: "rgba(220,220,220,1)",
+	                   data: lab.map(function(group){return data.result.prom[group]})
+	               }
+               ]
+           };
+		var canvas = $("#barchart-canvas");
+		var barchart = new Chart(ctx).Bar(datum);
+		canvas.click(function(evt){
+		    var activeBars = barchart.getBarsAtEvent(evt);
+		    console.log(activeBars);
+		});
+	});
+})();
+
+
+
+$("input.input-class").on("filebatchpreupload", function(){
+	uploadIni();
+});
 
 // -- input subject
 $("#input_subject").fileinput({
@@ -201,6 +234,8 @@ $("a#backup-reminder").on("click", function(e) {
 		$("div.modal-header").addClass("primary-header");
 	});
 });
+
+
 
 
 

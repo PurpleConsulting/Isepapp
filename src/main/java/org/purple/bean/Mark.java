@@ -8,8 +8,8 @@ public class Mark extends Avg {
 	private String subSkill = "null";
 	private String skill = "null";
 	private String owner = "null";
-	private String groupOwner = "null";
 	private int idValue = 0;
+	private int idSkill = -1;
 	private int idSubSkill = 0;
 	private int idTutor = 0;
 	private boolean cross = false;
@@ -23,12 +23,11 @@ public class Mark extends Avg {
 	public Mark(double value) {
 		this.setValue(value);
 	}
-
-	public Mark(String groupOwner, int idSubSkill, int idValue) {
-		// -- This constructor only prepare mark for INSERTION
-		this.setGroupOwner(groupOwner);
-		this.setIdSubSkill(idSubSkill);
+	
+	public Mark(int idValue, int idSubSkill){
+		// -- This constructor only prepare mark for INSERTION of a Group mark
 		this.setIdValue(idValue);
+		this.setIdSubSkill(idSubSkill);
 	}
 	
 	public Mark(int idOwner, int idTutor, int idSubSkill, int idValue, boolean cross) {
@@ -39,24 +38,26 @@ public class Mark extends Avg {
 		this.setCross(cross);
 	}
 
-	public Mark(String owner, double value, String title, String skill,
-			String subSkill) {
+	public Mark(String owner, double value, String title, int idSkill, String skill, int idSubSkill, String subSkill) {
 		// -- This constructor only prepare mark for the display and computation
 		this.setValue(value);
 		this.setTitle(title);
 		this.setOwner(owner);
+		this.setIdSkill(idSkill);
 		this.setSkill(skill);
+		this.setIdSubSkill(idSubSkill);
 		this.setSubSkill(subSkill);
 	}
 	
-	public Mark(int idValue, int idSubSkill){
-		// -- This constructor is for selecting group mark
-		this.setIdValue(idValue);
-		this.setIdSubSkill(idSubSkill);
+	public int getIdSkill() {
+		return idSkill;
+	}
+
+	public void setIdSkill(int idSkill) {
+		this.idSkill = idSkill;
 	}
 
 	public void setValue(double value) {
-
 		this.value = value;
 	}
 
@@ -96,13 +97,6 @@ public class Mark extends Avg {
 		this.owner = owner;
 	}
 
-	public String getGroupOwner() {
-		return groupOwner;
-	}
-
-	public void setGroupOwner(String groupOwner) {
-		this.groupOwner = groupOwner;
-	}
 
 	public int getIdTutor() {
 		return idTutor;

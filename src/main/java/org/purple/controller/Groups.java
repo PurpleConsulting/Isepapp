@@ -22,6 +22,7 @@ import org.purple.constant.Bdd;
 import org.purple.constant.Isep;
 import org.purple.model.Auth;
 import org.purple.model.Average;
+import org.purple.model.AvgBuilder;
 import org.purple.model.DaoDeadline;
 import org.purple.model.DaoGroups;
 import org.purple.model.DaoMarks;
@@ -44,90 +45,101 @@ public class Groups extends HttpServlet {
         super();
         // TODO Auto-generated constructor stub
     }
+    
+    
+    protected void doLoad(HttpServletRequest request, DaoSkills ds, DaoMissings dm, DaoDeadline ddl, DaoMarks dmk, Group group){
+    	// --------------------------------------------------------------------------------
+    	// -- BUILDING THE MISSINGS GRID
+    	// --------------------------------------------------------------------------------
+		Missing[] allmissings = dm.selectForGroup(group.getName());
+		
+		
+		// --------------------------------------------------------------------------------
+    	// -- BUILDING THE DEADLINES AND DELIVERIES
+    	// --------------------------------------------------------------------------------
+		Deadline[] deadlines = ddl.selectByGroup(group.getName());
+		
+		
+		// --------------------------------------------------------------------------------
+    	// -- BUILDING THE GROUP AVERAGE
+    	// --------------------------------------------------------------------------------
+		double maxMark = DaoValues.fetchMax();
+		Skill[] skills = ds.allSkill();// -- get all the skill for this session
+		ArrayList<Mark> marks = dmk.selectByGroup(group.getName());
+		Average average = AvgBuilder.groupAverage(marks, group, maxMark);
+		
+		// --------------------------------------------------------------------------------
+    	// -- BUILDING LOAD THE REQUEST
+    	// --------------------------------------------------------------------------------
+		request.setAttribute("average", average);
+		request.setAttribute("missings", allmissings);
+		request.setAttribute("deadlines", deadlines);
+    }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		request.setCharacterEncoding("UTF-8");
-		Page p = new Page();
+		request.setCharacterEncoding("UTF-8"); Page p = new Page();
+		/*$$$ GET PARAMS $$$*/		
+		String scope = request.getParameter("scope");
+		
 		// -- Authentication --
 		if(!Auth.isRespo(request) && !Auth.isTutor(request) && !Auth.isAdmin(request)){ 
-			
-			// -- Back to the home page with an warning message.
+			// --------------------------------------------------------------------------------
+	    	// -- NON AUTHORIZED
+	    	// --------------------------------------------------------------------------------
 			p.setWarning(true);
 			p.setWarningMessage("la page sur laquelle vous tentez de vous rendre ne vous est pas accessible. "
 					+ "Pour toutes réclamations, prenez contact avec le responsable d'APP actuel.");
 			p.setContent("home.jsp");
 			
 		} else {
-			// -- We assume we are Admin or tutor or Respo, Now Does the student exist?
-			// -- Which group is required
-			String scope = request.getParameter("scope");
-			if(scope == null || scope == "_all"){
-				
-				p.setContent("home.jsp");
+			// --------------------------------------------------------------------------------
+	    	// -- AUTHORIZED
+	    	// --------------------------------------------------------------------------------			
+			if(Isep.nullOrEmpty(scope)){
+				// -- Missing data
+				p.setWarning(true);
+				p.setWarningMessage("Aucun group ne correspond à cette rquête.");
+				Isep.bagPackHome(p, request.getSession());
+				p.setContent("home/common.jsp");
 			} else {
+				
 				Connection bddServletCo = Bdd.getCo();
 				DaoGroups dg = new DaoGroups(bddServletCo);
-				DaoMarks dmk = new DaoMarks(bddServletCo);
-				DaoDeadline ddl = new DaoDeadline(bddServletCo);
-				DaoMissings dm = new DaoMissings(bddServletCo);
-				DaoValues dv = new DaoValues(bddServletCo);
-				DaoSkills ds = new DaoSkills(bddServletCo);
 				
 				Group group = dg.select(scope);  
-				if(group == null){
+				if(group.getId() == 0){
 					
-					// -- Incorrect data, the group is missing.
+					// -- non-existent group
 					p.setWarning(true);
 					p.setWarningMessage("le groupe demandé n'a pas été retrouvé dans la base.");
-					p.setContent("home.jsp");
-					request.setAttribute("pages", p);
+					Isep.bagPackHome(p, request.getSession());
+					p.setContent("homme/common.jsp");
 					
 				} else {
+					
+					// -- existent group 
+					DaoMarks dmk = new DaoMarks(bddServletCo);
+					DaoDeadline ddl = new DaoDeadline(bddServletCo);
+					DaoMissings dm = new DaoMissings(bddServletCo);
+					DaoValues dv = new DaoValues(bddServletCo);
+					DaoSkills ds = new DaoSkills(bddServletCo);
 					
 					dg.completeMemebers(group);
 					dg.completeTutor(group);
 					
-					// -- Retrieve all missings
-					Missing[] allmissings = dm.selectForGroup(group.getName());
-					
-					// -- Retrieve all deadlines
-					Deadline[] deadlines = ddl.selectByGroup(group.getName());
-					
-					// -- Retrieve the group average
-					double maxMark = DaoValues.fetchMax();
-					Skill[] skills = ds.allSkill();// -- get all the skill for this session
-					Average grpAverage = new Average("Moyenne: "+group.getName(), Isep.LANDMARK);
-					for(User u : group.getMembers()){
-						// -- get all the mark for this student
-						Average stdAverage = new Average(u.getPseudo(), Isep.LANDMARK);
-						ArrayList<Mark> marks = dmk.selectByStudent(Integer.toString(u.getId()));
-						for(Skill skill : skills){
-							Average skillAvg = new Average(skill.getTitle(), maxMark);
-							for(Mark m : marks){
-								if(skillAvg.getTitle().equals(m.getSkill())){
-									skillAvg.push(m);
-								}
-							}
-							stdAverage.push(skillAvg);
-						}
-						grpAverage.push(stdAverage);
-					}
-					
+					this.doLoad(request, ds, dm, ddl, dmk, group);
 					
 					p.setTitle("ISEP / APP - Groupes "+group.getName());
 					p.setContent("users/group.jsp");
 					p.setCss("group.css");
 					p.setJs("group.js");
 					
-					request.setAttribute("pages", p);
 					request.setAttribute("group", group);
-					request.setAttribute("average", grpAverage);
-					request.setAttribute("missings", allmissings);
-					request.setAttribute("deadlines", deadlines);
+					request.setAttribute("pages", p);
 				}
 				
 				try {
