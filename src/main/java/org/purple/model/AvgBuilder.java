@@ -12,10 +12,10 @@ import org.purple.constant.Isep;
 public class AvgBuilder {
 	
 	/**
-	 * @param marks (Mark) owner pseudo, value, title, idSkill, skill title, id SubSkill, subSkill title
-	 * need to be load. You find all those things in DaoMarks.selectByStudent().
-	 * @param student (User): Before pass the user to the method you need to
-	 * add he's group
+	 * This function get the Average object standing for the average of ONE student.
+	 * @param marks (ArrayList Mark ): owner pseudo, value, title, idSkill, skill title, id SubSkill, subSkill title
+	 * need to be load. You will find all those things in DaoMarks.selectByStudent().
+	 * @param student (User): Before pass the user to the method you need to add he's group
 	 * @param valMax (double): maximum value of point in the database (try DaoValues.fetchMax())
 	 * @return (Average): General Average of ONE Student for this semester.
 	 */
@@ -37,6 +37,14 @@ public class AvgBuilder {
 		return a;
 	}
 	
+	/**
+	 * This function return the Average standing for the average of a group (like G8B).
+	 * @param marks (ArrayList Mark) owner pseudo, value, title, idSkill, skill title, id SubSkill, subSkill title
+	 * need to be load and for all students. You will find all those things in DaoMarks.selectByGroup().
+	 * @param group (Group): Before pass the group to the method you need to add the members with DaoGroup.completeMembers()
+	 * @param valMax (double): maximum value of point in the database (try DaoValues.fetchMax())
+	 * @return (Average): General Average of ONE Group like G5A.
+	 */
 	public static Average groupAverage(ArrayList<Mark> marks, Group group, double valMax){
 		Average a = new Average(group.getName(), Isep.LANDMARK);
 		for(User student : group.getMembers()){
@@ -49,6 +57,13 @@ public class AvgBuilder {
 		return a;
 	}
 	
+	/**
+	 * This function return the Average object standing for the average all the prom.
+	 * @param marks (HashMap Mark) ["G5A", ArrayList(Mark)]
+	 * @param groups (ArrayList Group) all groups in the array need to be complete with DaoGroup.completeMembers()
+	 * @param valMax (double): maximum value of point in the database (try DaoValues.fetchMax()) 
+	 * @return (Average): General Average of all the prom
+	 */
 	public static Average promAverage(HashMap<String, ArrayList<Mark>> marks, ArrayList<Group> groups, double valMax){
 		Average a = new Average("Promo", Isep.LANDMARK);
 		ArrayList<Average> groupsAVG = new ArrayList<Average>();
