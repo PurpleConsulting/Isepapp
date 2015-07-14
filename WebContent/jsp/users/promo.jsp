@@ -17,10 +17,11 @@
 		<img src="img/empty/group.svg" alt="" class="app-empty-img"/>	
 	</c:if>
 	<c:forEach var="cls" items="${allClass}" varStatus="clItem">
+		<c:set var="average" value="${avg.byTitle(cls)}"/>
 		<div id="Group${cls}"  class="group">
 			<h2>Classe <c:out value="${cls}"></c:out></h2>
-			
 			<c:forEach var="group" items="${prom.get(cls)}" varStatus="grItem">
+			
 					<div id="Group${group.getName()}" class="row subgroup">
 						<div class="col-sm-10">
 							<h3> <a href="Groups?scope=${group.getName()}"> Groupe
@@ -28,7 +29,7 @@
 							<div class="medal">
 								<span class="fa fa-graduation-cap"></span>
 								Note :
-								<span class="badge">0</span>
+								<span class="badge"><c:out value="${fn:substring(average.byTitle(group.getName()).compute(),0,4)}"></c:out></span>
 							</div>
 							<div class="medal">
 								<span class="fa fa-bed"></span>

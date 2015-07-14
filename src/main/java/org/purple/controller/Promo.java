@@ -13,13 +13,18 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.purple.bean.Group;
+import org.purple.bean.Mark;
 import org.purple.bean.Missing;
 import org.purple.bean.Page;
 import org.purple.constant.Bdd;
 import org.purple.constant.Isep;
 import org.purple.model.Auth;
+import org.purple.model.Average;
+import org.purple.model.AvgBuilder;
 import org.purple.model.DaoGroups;
+import org.purple.model.DaoMarks;
 import org.purple.model.DaoMissings;
+import org.purple.model.DaoValues;
 
 /**
  * Servlet implementation class Promo
@@ -34,6 +39,10 @@ public class Promo extends HttpServlet {
     public Promo() {
         super();
         // TODO Auto-generated constructor stub
+    }
+    
+    protected void doLoad(){
+    	
     }
 
 	/**
@@ -61,6 +70,7 @@ public class Promo extends HttpServlet {
 			Connection bddServletCo = Bdd.getCo();
 			DaoGroups dg = new DaoGroups(bddServletCo);
 			DaoMissings dm = new DaoMissings(bddServletCo);
+			DaoMarks dmk = new DaoMarks(bddServletCo);
 			
 			// -- the user acces to the prom page
 			p.setCss("promo.css"); p.setJs("promo.js");
@@ -70,17 +80,28 @@ public class Promo extends HttpServlet {
 			// -- get all the groups
 			String[] allClass = dg.selectAllClass();
 			ArrayList<Group> groups = dg.selectAll();
+			
 			HashMap<String, ArrayList<Group>> prom = new HashMap<String, ArrayList<Group>>();
+			HashMap<String, ArrayList<Mark>> marks = new HashMap<String, ArrayList<Mark>>();
+			
 			for(String c : allClass){
 				ArrayList<Group> team = new ArrayList<Group>(); 
 				prom.put(c, team);
 			}
+						
 			
 			for(Group g : groups){
 				dg.completeTutor(g);
 				dg.completeMemebers(g);
+				
 				prom.get(g.get_class()).add(g);
+				marks.put(g.getName(), dmk.selectByGroup(g.getName()));
 			}
+			
+			
+			double valMax = DaoValues.fetchMax();
+			Average avg = AvgBuilder.promAverage(marks, groups, valMax);
+			
 
 			// --  missing per group
 			HashMap<String, Missing[]> grpMissings = new HashMap<String, Missing[]>();
@@ -89,8 +110,9 @@ public class Promo extends HttpServlet {
 			}
 			
 			
-			request.setAttribute("groups", groups);
+			//request.setAttribute("groups", groups);
 			request.setAttribute("allClass", allClass);
+			request.setAttribute("avg", avg);
 			request.setAttribute("prom",prom);
 			request.setAttribute("missings", grpMissings);
 			

@@ -64,12 +64,12 @@ public class Average extends Avg{
 		this.grid.add(mark);
 	}
 	
-	public Avg byTitle(String title){
+	public Average byTitle(String title){
 		Avg avg = new Average();
 		for(Avg a : this.grid){
 			if(a.getTitle().equals(title)) avg = a;
 		}
-		return avg;
+		return (Average)avg;
 	}
 	
 	@Override
