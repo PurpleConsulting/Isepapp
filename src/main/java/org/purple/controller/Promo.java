@@ -41,7 +41,55 @@ public class Promo extends HttpServlet {
         // TODO Auto-generated constructor stub
     }
     
-    protected void doLoad(){
+    protected void doLoad(HttpServletRequest request, DaoGroups dg, DaoMarks dmk, DaoMissings dm){
+    	// --------------------------------------------------------------------------------
+    	// -- GET THE Class AND ALL GROUPS
+    	// --------------------------------------------------------------------------------
+		
+    	String[] allClass = dg.selectAllClass();
+
+		HashMap<String, ArrayList<Group>> prom = new HashMap<String, ArrayList<Group>>();
+		HashMap<String, ArrayList<Mark>> marks = new HashMap<String, ArrayList<Mark>>();
+		
+		for(String c : allClass){
+			ArrayList<Group> team = dg.selectGroupbyClass(c);
+			for(Group t : team){ 
+				dg.completeMemebers(t);
+				dg.completeTutor(t);
+			}
+			prom.put(c, team);
+		}
+		
+		// --------------------------------------------------------------------------------
+		// -- GET THE MARKS
+		// --------------------------------------------------------------------------------
+		
+		ArrayList<Group> groups = dg.selectAll();
+		for(Group g : groups){
+			// -- Fill the groups
+			dg.completeMemebers(g);
+			
+			// -- Find average of each group
+			marks.put(g.getName(), dmk.selectByGroup(g.getName()));
+		}
+		
+		
+		double valMax = DaoValues.fetchMax();
+		Average avg = AvgBuilder.promAverage(marks, groups, valMax);
+		
+		// --------------------------------------------------------------------------------
+		// -- GET THE MISSINGS
+		// --------------------------------------------------------------------------------
+				
+		HashMap<String, Missing[]> grpMissings = new HashMap<String, Missing[]>();
+		for(Group g : groups){
+			grpMissings.put(g.getName(), dm.selectForGroup(g.getName()));
+		}
+		
+		request.setAttribute("allClass", allClass);
+		request.setAttribute("avg", avg);
+		request.setAttribute("prom",prom);
+		request.setAttribute("missings", grpMissings);
     	
     }
 
@@ -72,49 +120,11 @@ public class Promo extends HttpServlet {
 			DaoMissings dm = new DaoMissings(bddServletCo);
 			DaoMarks dmk = new DaoMarks(bddServletCo);
 			
-			// -- the user acces to the prom page
 			p.setCss("promo.css"); p.setJs("promo.js");
 			p.setContent("users/promo.jsp");
 			p.setTitle("ISEP / APP - Promotion");
 			
-			// -- get all the groups
-			String[] allClass = dg.selectAllClass();
-			ArrayList<Group> groups = dg.selectAll();
-			
-			HashMap<String, ArrayList<Group>> prom = new HashMap<String, ArrayList<Group>>();
-			HashMap<String, ArrayList<Mark>> marks = new HashMap<String, ArrayList<Mark>>();
-			
-			for(String c : allClass){
-				ArrayList<Group> team = new ArrayList<Group>(); 
-				prom.put(c, team);
-			}
-						
-			
-			for(Group g : groups){
-				dg.completeTutor(g);
-				dg.completeMemebers(g);
-				
-				prom.get(g.get_class()).add(g);
-				marks.put(g.getName(), dmk.selectByGroup(g.getName()));
-			}
-			
-			
-			double valMax = DaoValues.fetchMax();
-			Average avg = AvgBuilder.promAverage(marks, groups, valMax);
-			
-
-			// --  missing per group
-			HashMap<String, Missing[]> grpMissings = new HashMap<String, Missing[]>();
-			for(Group g : groups){
-				grpMissings.put(g.getName(), dm.selectForGroup(g.getName()));
-			}
-			
-			
-			//request.setAttribute("groups", groups);
-			request.setAttribute("allClass", allClass);
-			request.setAttribute("avg", avg);
-			request.setAttribute("prom",prom);
-			request.setAttribute("missings", grpMissings);
+			this.doLoad(request, dg, dmk, dm);
 			
 			try {
 				bddServletCo.close();

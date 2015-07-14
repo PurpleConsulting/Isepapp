@@ -4,6 +4,7 @@ import java.io.Console;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -148,13 +149,13 @@ public class Deadlines extends HttpServlet {
 				String timeS = time+":00";
 				String datetime = date+" "+timeS;
 				
-				Group[] gr = dg.selectGroupbyClass(group);
+				ArrayList<Group> gr = dg.selectGroupbyClass(group);
 				//dline à inserer
-				for(int i=0; i < gr.length; i++){
+				for(int i=0; i < gr.size(); i++){
 					Deadline dline=new Deadline();
 					dline.setDescription(desc);
 					dline.setResponsable(Integer.parseInt(tuteur));
-					dline.setIdGroup(gr[i].getId());
+					dline.setIdGroup(gr.get(i).getId());
 					try{
 						dline.setDateLimit(datetime);
 					} catch(IllegalArgumentException e){
