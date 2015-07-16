@@ -54,3 +54,38 @@ div.group div.alert-grp{
 .form-inline{
 	margin-bottom: 6px;
 }
+div.barchart-promo{
+	min-width: 200px;
+}
+.barchart-promo label{
+	position: relative;
+	left: 30%;
+}
+
+.barchart-prom-legend{
+	min-height:30px;
+	margin-top: 16px;
+	border-radius: 6px;
+	border: #246482 solid 1px;
+	color: #246482;
+}
+
+.barchart-prom-legend span.badge{
+	background-color: #246482;
+	font-size: 1.8em;
+	display: block;
+	margin: auto;
+	width: auto;
+	margin-top: 6px;
+	
+}
+
+.barchart-prom-legend span.badge + em{
+	display: block;
+	margin: auto;
+	text-align: center;
+}
+
+.barchart-prom-legend div ul{
+	padding-left: 10px;
+}
