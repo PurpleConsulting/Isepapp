@@ -61,17 +61,17 @@
 		<div class="col-xs-12 col-sm-6 col-sm-offset-1 barchart-prom-legend" style="margin-top:9%;">
 			<div class="col-xs-6 ">
 				<span class="badge" data-info="47">47%</span>
-				<em>d'étudiants notés.<br/> Cliquez sur le graphique...<em>
+				<em>d'étudiants notés.<br/> </em>
 				<!-- <em>Cliquez sur le graphe pour avoir les détail par group.</em>-->
 			</div>
 			<div class="col-xs-6">
-				Notes par groupe: <strong>G8</strong>
+				Notes par groupe: <strong>G8</strong><br/>
 				<ul>
-					<li>G8A: 12.3</li>
-					<li>G8B: 12.3</li>
-					<li>G8C: 12.3</li>
-					<li>G8D: 12.3</li>
+					<li>Cliquez sur le graphique pour obtenir les notes par groupe.</li>	
 				</ul>
+				<div class="fa-container" style="display: none; margin:auto; width:56px; margin-top:5%;">
+					<span class="fa fa-spinner fa-pulse fa-4x" ></span>
+				</div>	
 			</div>
 		</div>	
 	</div>
