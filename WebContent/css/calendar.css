@@ -27,3 +27,15 @@ td.color-class{
 .fc-scroller{
 	overflow-y: hidden;
 }
+div.waiting div.fa-spinner-box{
+	display:block;
+	margin:auto;
+	width:100px;
+}
+
+@media only screen and (max-width: 400px) {
+	div#deuxiemeSemester div.calendar-set,
+	div#premierSemester div.calendar-set{
+		margin-left:0px;
+	}
+}

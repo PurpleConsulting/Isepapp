@@ -65,7 +65,7 @@
 				<!-- <em>Cliquez sur le graphe pour avoir les détail par group.</em>-->
 			</div>
 			<div class="col-xs-6">
-				Notes par groupe: <strong>G8</strong><br/>
+				Notes par groupe: <strong id="class">G8</strong><br/>
 				<ul>
 					<li>Cliquez sur le graphique pour obtenir les notes par groupe.</li>	
 				</ul>

@@ -104,6 +104,12 @@ public class Calendars extends HttpServlet {
 						}
 					dc.createDate(cal);
 				 }
+				 JSONObject status = new JSONObject();
+				 status.put("success", true);
+				 result.put("result", status);
+				 
+				 response.setHeader("content-type", "application/json");
+				 response.getWriter().write(result.toString());
 			}
 			else if(!Isep.nullOrEmpty(groupClass)){
 				Calendar c= new Calendar();
@@ -136,3 +142,4 @@ public class Calendars extends HttpServlet {
 	
 	}
 
+//நான் உன்னை காதலிக்கிறேன

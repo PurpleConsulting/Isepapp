@@ -68,6 +68,9 @@ var markByGroup = function(bar){
 	/** LOAD THE MAR OF ONE GROUP **/
 	var list = $("div.barchart-prom-legend ul");
 	var spiner = $("div.barchart-prom-legend div.fa-container");
+	var flag = $("div.barchart-prom-legend strong#class");
+	
+	flag.text(bar[0]['label']);
 	list.hide();
 	spiner.show();
 	$.post("/Isepapp/ServiceRespoHandler", {"mark-group": bar[0]['label']}, function(data, status){

@@ -82,6 +82,13 @@ $(document).ready(function() {
 	
 	
 	$('#validerForm').click(function(){
+		var waiting = $("div.waiting");
+		var spin = $("div[data-role='exemple'] div.fa-spinner-box").clone();
+		
+		waiting.empty()
+		waiting.append(spin);
+		
+		
 		var a = $("td.color-class");
 		var hash = "";
 		var del = "&";
@@ -89,30 +96,28 @@ $(document).ready(function() {
 			hash = hash + del + $(this).attr("data-date");
 		});
 		hash = hash.substr(1);
-		 $.post("/Isepapp/Calendars", {
-		    	dates :hash,
-		    	group:$("button.group_button.btn-primary").attr("data-group")
-		    	}).done(function(data){
-		    		});
+		 $.post("/Isepapp/Calendars", { dates :hash, group:$("button.group_button.btn-primary").attr("data-group") }, 
+				 function(data, status){
+					 var waiting = $("div.waiting");
+					 var alert = $("div[data-role='exemple'] div.alert-dismissible").clone();
+						
+					 waiting.empty()
+					 waiting.append(alert);
+			 
+		 });
 	});
 	
 	
 	$('.group_button').click(function(){
 		$("td.fc-day").removeClass("color-class");
 		$("td.fc-day-number").removeClass("color-class");
-		 $.post("/Isepapp/Calendars", {
-		    	groupClass:$(this).attr("data-group")
-		    	}).done(function(data){
-		    		
-		    		data.result.dates.forEach(function(e){
-		    			$("td.fc-day[data-date='"+ e +"']").toggleClass("color-class");
-		    			$("td.fc-day-number[data-date='"+ e + "']").toggleClass("color-class");
-		    		})
-		    			
-		    		
-		    		});
+		 $.post("/Isepapp/Calendars", { groupClass: $(this).attr("data-group") }).done(function(data){		
+    		data.result.dates.forEach(function(e){
+    			$("td.fc-day[data-date='"+ e +"']").toggleClass("color-class");
+    			$("td.fc-day-number[data-date='"+ e + "']").toggleClass("color-class");
+    		})
+		 });
 	});
 	
 	
-	
-	});
+});
