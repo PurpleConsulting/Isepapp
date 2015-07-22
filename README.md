@@ -10,10 +10,16 @@ The system must allow us to:
 - [x] Specify the level of each student for those skills
 - [x] Convert the levels into Mark and compute an average
 - [ ] Get deliveries (pdf format) and count missing
+- [ ] Raize a warrning for an under threshold average
 
 ![PurpleConsulting logo](https://dl.dropboxusercontent.com/s/ritubunlz1j4b79/purplelogo.png?dl=0)
-Isepapp is the response proposed by the PurpleConsulting Team 
-The Team{ @Zozo, @Dede, @Billy, @Sherya & @Loïc}
+Isepapp is the response proposed by the PurpleConsulting Team.     
+The Team:     
+Zozo -> @zkaneswa   
+Dede -> @dchanthavong   
+Billy -> @nrasolom    
+Sherya -> @shreyamittal17   
+Loïc -> @DivLoic    
 
 ### Technos:
 This project include (for now) j2ee, Tomcat sever 7 plugin, jstl core taglib, junit framework, bootstrap, jquery(ui).
