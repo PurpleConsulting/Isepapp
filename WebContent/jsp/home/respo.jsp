@@ -60,12 +60,12 @@
 		</div>
 		<div class="col-xs-12 col-sm-6 col-sm-offset-1 barchart-prom-legend" style="margin-top:9%;">
 			<div class="col-xs-6 ">
-				<span class="badge" data-info="47">47%</span>
+				<span class="badge" data-info="47">0%</span>
 				<em>d'étudiants notés.<br/> </em>
 				<!-- <em>Cliquez sur le graphe pour avoir les détail par group.</em>-->
 			</div>
 			<div class="col-xs-6">
-				Notes par groupe: <strong id="class">G8</strong><br/>
+				Notes par groupe: <strong id="class"></strong><br/>
 				<ul>
 					<li>Cliquez sur le graphique pour obtenir les notes par groupe.</li>	
 				</ul>

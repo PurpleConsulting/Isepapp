@@ -4,11 +4,14 @@
 
 $(document).ready(function(){
 	
-	(function(){
+	function toDayIsTheDay(){
 		var date = new Date();
 		dateformat = date.getFullYear() +"-0"+ (date.getMonth()+1) +"-"+ date.getDate();
 		$("input[name='day-skiped']").val(dateformat);
-	})();
+	}
+	
+	toDayIsTheDay();
+	
 	$("input.check_missing").prop("checked", false);
 	
 	$("input.check_missing").on("click", function(){
@@ -25,6 +28,7 @@ $(document).ready(function(){
 			block.find("input[type='hidden']").addClass("no-submit");
 		}
 	});
+	
 	$("button.late").click(function(e){
 		e.preventDefault();
 		$(this).toggleClass("btn-default");
@@ -32,9 +36,11 @@ $(document).ready(function(){
 		$(this).next().toggle('slow');
 		$(this).next().val('');
 	});
+	
 	$("span.master-clock").click(function(){
 		var bodies = $("form .div ");
 	});
+	
 	$("span.bold-clock").click(function(){
 		var panel = $(this).closest("div.panel");
 		console.log(panel);
@@ -45,5 +51,22 @@ $(document).ready(function(){
 		$("input[type='hidden'].no-submit").remove();
 	});
 	
+	$("input[name='day-skiped']").blur(function(){
+		
+		var scopeDate = $("select[name='planning'] option").map(function(opt){
+			return $(this).val();
+		});
+		scopeDate = $.makeArray(scopeDate);
+		
+		if ( scopeDate.indexOf($(this).val()) != -1){
+			$(this).parent().removeClass("has-warning");
+			$("div.wrong-date").hide("slow");
+		} else {
+			$(this).parent().addClass("has-warning");
+			$("div.wrong-date").show("slow");
+			toDayIsTheDay();
+		}
+		console.log(scopeDate);
+	});
 });
 

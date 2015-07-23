@@ -10,6 +10,7 @@ body {
 .calendar {
 	width: 300px;
 	display:inline-block;
+	margin-bottom: 40px;
 }
 .fc-other-month {
    opacity: 0;  
