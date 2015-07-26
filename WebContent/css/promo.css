@@ -26,7 +26,7 @@ hr{
 }
 
 
-.bs-docs-sidebar .nav>li>a {
+.bs-docs-sidebar .nav > li > a {
     color: #999;
     border-left: 2px solid transparent;
     padding: 4px 20px;
@@ -35,7 +35,7 @@ hr{
 }
 
 
-.bs-docs-sidebar .nav .nav>li>a {
+.bs-docs-sidebar .nav .nav > li > a {
     padding-top: 1px;
     padding-bottom: 1px;
     padding-left: 30px;
@@ -126,4 +126,25 @@ span.list-group-item:hover {
 	color: #555;
     text-decoration: none;
     background-color: #F5F5F5;
+}
+
+
+div.row.class-card{
+	border-radius: 6px;
+	padding: 10px;
+	border: solid 1px #bdbdbd;
+	margin-left: 0px;
+	margin-right: 0px;
+}
+
+div.class-card div.medal{
+	background-color: #F8F8F8;
+}
+
+div.class-card div.ledgend{
+	width: auto;
+	dispaly: block;
+	margin: auto;
+	text-align: center;
+	
 }

@@ -74,7 +74,6 @@ var markByGroup = function(bar){
 	list.hide();
 	spiner.show();
 	$.post("/Isepapp/ServiceRespoHandler", {"mark-group": bar[0]['label']}, function(data, status){
-		console.log(data);
 		list.empty();
 		data.result.groups.forEach(function(group){
 			list.append('<li><a href="Groups?scope='+group.name+'">'+group.name+'</a>: '+group.mark+'</li>');
@@ -88,7 +87,6 @@ var markByGroup = function(bar){
 	/** LOAD THE MARK OF THE PROMOTION **/
 	$.post("/Isepapp/ServiceRespoHandler", { "mark-prom": "true"}, function(data, status){
 		var ctx = document.getElementById("barchart-canvas").getContext("2d");
-		//var lab = data.result.prom.map(function(element){return element.name});
 		var lab = Object.keys(data.result.prom);
 		var datum = {
 				labels: lab,
@@ -194,7 +192,6 @@ var waiting = function(){
 	var e = $("div.progress.test");
 	var bar = e.find(".progress-bar"); 
 	var threshold = Math.floor((Math.random() * (85 - 65) + 65));
-	console.log(threshold);
 	e.show();
 	window.setInterval(function(){
 		var barPos = Math.floor((Math.random() * 5) + 1);

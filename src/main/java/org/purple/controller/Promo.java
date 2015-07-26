@@ -120,9 +120,10 @@ public class Promo extends HttpServlet {
 			DaoMissings dm = new DaoMissings(bddServletCo);
 			DaoMarks dmk = new DaoMarks(bddServletCo);
 			
-			p.setCss("promo.css"); p.setJs("promo.js");
+			p.setCss("promo.css");
 			p.setContent("users/promo.jsp");
 			p.setTitle("ISEP / APP - Promotion");
+			p.setJs("chartjs/Chart.min.js", "promo.js");
 			
 			this.doLoad(request, dg, dmk, dm);
 			
