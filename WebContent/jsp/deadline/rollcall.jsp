@@ -34,12 +34,18 @@
 			</div>
 		</c:if>
 		<c:if test="${!empty groups}">
-		<select class="" name="planning" disabled style="display:none;">
-			<option value=""></option>
+		<select class="" name="planning"> <!--  -->
+			<c:forEach var="date" items="${scopeDates}" varStatus="status">
+				<option value="${date}"><c:out value="${date}"></c:out></option>
+			</c:forEach>
 		</select>
 		<form class="" action="RollCall" method="post">
-			<div class="form-group">
+			<div class="form-group has-feedback">
 				<input type="text" name="day-skiped" class="form-control" placeholder="2012-08-27 (date de l'absence)"/>
+			</div>
+			<div class="alert alert-warning wrong-date" >
+				<strong>Attention</strong>, la date que vous avez sélectionnée ne figure pas sur les calidriers de vos groupes. Pour retrouver les dates
+				valides veuillez vous référer à l'hyperplanning. Si vous constatez une erreur prenez contact avec le responsable d'app. 
 			</div>
 			<c:forEach var="grp" items="${groups}" varStatus="status">
 				<div class="panel panel-primary">

@@ -29,7 +29,7 @@
 <div class="row">
 	<div class="col-xs-offset-1 col-xs-10 skills-editors">
 		<form method="post" action="" onsubmit="return false;" class="edit" id="form-skill-2">
-			<div class="col-xs-8 col-xs-offset-1">
+			<div class="col-xs-8 col-xs-offset-2">
 				<img src="img/empty/selectskill.svg" alt=""  class="app-empty-img"/>
 			</div>
 		</form>

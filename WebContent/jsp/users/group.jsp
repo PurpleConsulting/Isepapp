@@ -38,12 +38,9 @@
 					</a></span>
 					<span>Absences: <span class="badge missing"><c:out value="${abs}"></c:out></span> </span>
 					<span>Moyenne: <span class="badge mark">
-						<c:forEach var="stdAvg" items="${average.getGrid()}">
-							<c:if test="${stdAvg.getTitle() == student.getPseudo()}">
-								<c:out value="${stdAvg.compute()}"></c:out>
-							</c:if>
-						</c:forEach>
-					</span></span>
+							<c:out value="${average.byTitle(student.getPseudo()).compute()}"></c:out>	
+						</span>
+					</span>
 				</div>
 			</div>
 			<c:if test="${stdElem.index%2 != 0 || stdElem.last}"></div></c:if>

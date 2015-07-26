@@ -57,7 +57,8 @@ public class ServiceRespoHandler extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		Page p = new Page();
 		/** AJAX PARAMS **/
-		String markServiceParam = request.getParameter("mark-service");
+		String markPromParam = request.getParameter("mark-prom");
+		String markGroupParam = request.getParameter("mark-group");
 		
 		////////////////////// OPS \\\\\\\\\\\\\\\\\\\\\\
 		
@@ -70,9 +71,9 @@ public class ServiceRespoHandler extends HttpServlet {
 			DaoGroups dg = new DaoGroups(bddServletCo);
 			DaoMarks dm = new DaoMarks(bddServletCo);
 			
-			if(!Isep.nullOrEmpty(markServiceParam)){
+			if(!Isep.nullOrEmpty(markPromParam)){
 				// --------------------------------------------------------------------------------
-				// -- JSON SOURCE - PROM RESULT BARCHART 
+				// -- JSON SOURCE - PROM RESULT TO BARCHART 
 				// --------------------------------------------------------------------------------
 				JSONObject prom = new JSONObject();
 				ArrayList<Group> allGroups = dg.selectAll();
@@ -89,6 +90,30 @@ public class ServiceRespoHandler extends HttpServlet {
 				}
 				
 				result.put("result", new JSONObject().put("prom", prom));
+				
+			}else if(!Isep.nullOrEmpty(markGroupParam)){	
+				// --------------------------------------------------------------------------------
+				// -- JSON SOURCE - GROUP RESULT TO LABEL 
+				// --------------------------------------------------------------------------------
+				ArrayList<JSONObject> groups = new ArrayList<JSONObject>();
+				JSONObject group = new JSONObject();
+				
+				ArrayList<Group> allGrp = dg.selectGroupbyClass(markGroupParam);
+				
+				for(Group g : allGrp){
+					
+					dg.completeMemebers(g);
+					ArrayList<Mark> marks = dm.selectByGroup(g.getName());
+					Average avg = AvgBuilder.groupAverage(marks, g, DaoValues.fetchMax());
+					
+					group = new JSONObject();
+					group.put("name", avg.getTitle());
+					group.put("mark", avg.compute());
+					groups.add(group);
+				}
+				
+				result.put("result", new JSONObject().put("groups", groups));
+				
 				
 			} else {
 				

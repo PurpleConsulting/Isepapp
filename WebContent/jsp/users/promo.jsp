@@ -9,26 +9,26 @@
 			<h5> -- Page promo : La notice --</h5>
 			Vous trouverez ici l'ensemble des groupes pour tout un semestre.<br/>
 			Les informations sur le tuteur, note et absences sont disponibles sur cette page.<br/>
-			Les groupes sont regroupés par classe, n'hésitez pas à utiliser l'ascenseur sur votre droite
-			pour naviguer. L'agencement de la page est le suivant :
+			Les groupes sont regroupés par classe, n'hésitez pas à utiliser l'ascenseur sur votre droite pour naviguer.
 		</div>
 	</div>
 	<c:if test="${empty allClass}">
 		<img src="img/empty/group.svg" alt="" class="app-empty-img"/>	
 	</c:if>
 	<c:forEach var="cls" items="${allClass}" varStatus="clItem">
+		<c:set var="average" value="${avg.byTitle(cls)}"/>
 		<div id="Group${cls}"  class="group">
 			<h2>Classe <c:out value="${cls}"></c:out></h2>
-			
 			<c:forEach var="group" items="${prom.get(cls)}" varStatus="grItem">
 					<div id="Group${group.getName()}" class="row subgroup">
 						<div class="col-sm-10">
 							<h3> <a href="Groups?scope=${group.getName()}"> Groupe
-								<c:out value="${group.getName()}"></c:out></a></h3>
+								<c:out value="${group.getName()}"></c:out></a><small> 
+								- Tuteur: <c:out value="${group.getTutor()}"></c:out></small></h3>
 							<div class="medal">
 								<span class="fa fa-graduation-cap"></span>
 								Note :
-								<span class="badge">0</span>
+								<span class="badge"><c:out value="${fn:substring(average.byTitle(group.getName()).compute(),0,4)}"></c:out></span>
 							</div>
 							<div class="medal">
 								<span class="fa fa-bed"></span>

@@ -64,10 +64,29 @@ Chart.defaults.global.responsive = true;
 	});
 })();
 
+var markByGroup = function(bar){
+	/** LOAD THE MAR OF ONE GROUP **/
+	var list = $("div.barchart-prom-legend ul");
+	var spiner = $("div.barchart-prom-legend div.fa-container");
+	var flag = $("div.barchart-prom-legend strong#class");
+	
+	flag.text(bar[0]['label']);
+	list.hide();
+	spiner.show();
+	$.post("/Isepapp/ServiceRespoHandler", {"mark-group": bar[0]['label']}, function(data, status){
+		console.log(data);
+		list.empty();
+		data.result.groups.forEach(function(group){
+			list.append('<li><a href="Groups?scope='+group.name+'">'+group.name+'</a>: '+group.mark+'</li>');
+		});
+		spiner.hide();
+		list.show("slow");
+	});
+};
+
 (function () {
 	/** LOAD THE MARK OF THE PROMOTION **/
-	$.post("/Isepapp/ServiceRespoHandler", { "mark-service": "true"}, function(data, status){
-		console.log(data);
+	$.post("/Isepapp/ServiceRespoHandler", { "mark-prom": "true"}, function(data, status){
 		var ctx = document.getElementById("barchart-canvas").getContext("2d");
 		//var lab = data.result.prom.map(function(element){return element.name});
 		var lab = Object.keys(data.result.prom);
@@ -88,7 +107,7 @@ Chart.defaults.global.responsive = true;
 		var barchart = new Chart(ctx).Bar(datum);
 		canvas.click(function(evt){
 		    var activeBars = barchart.getBarsAtEvent(evt);
-		    console.log(activeBars);
+		    markByGroup(activeBars);
 		});
 	});
 })();

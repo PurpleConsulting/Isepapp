@@ -54,10 +54,26 @@
 <div class="row">
 	<div class="col-xs-10 col-xs-offset-1 numbers">
 		<h4>- Les notes -</h4>
-		<div class="col-xs-6 col-sm-3 barchart-promo">
+		<div class="col-xs-5 col-sm-2 col-sm-offset-1 barchart-promo">
 			<label>Moyenne des classes</label>
 			<canvas id="barchart-canvas" width="100" height="100"></canvas>
 		</div>
+		<div class="col-xs-12 col-sm-6 col-sm-offset-1 barchart-prom-legend" style="margin-top:9%;">
+			<div class="col-xs-6 ">
+				<span class="badge" data-info="47">0%</span>
+				<em>d'étudiants notés.<br/> </em>
+				<!-- <em>Cliquez sur le graphe pour avoir les détail par group.</em>-->
+			</div>
+			<div class="col-xs-6">
+				Notes par groupe: <strong id="class"></strong><br/>
+				<ul>
+					<li>Cliquez sur le graphique pour obtenir les notes par groupe.</li>	
+				</ul>
+				<div class="fa-container" style="display: none; margin:auto; width:56px; margin-top:5%;">
+					<span class="fa fa-spinner fa-pulse fa-4x" ></span>
+				</div>	
+			</div>
+		</div>	
 	</div>
 </div>
 <div class="row">

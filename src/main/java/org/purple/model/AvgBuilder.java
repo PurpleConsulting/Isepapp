@@ -59,7 +59,7 @@ public class AvgBuilder {
 	
 	/**
 	 * This function return the Average object standing for the average all the prom.
-	 * @param marks (HashMap Mark) ["G5A", ArrayList(Mark)]
+	 * @param marks (HashMap Mark) ["G5A", ArrayList(Mark)] use DaoMark.selectByGroup to get the Arraylst
 	 * @param groups (ArrayList Group) all groups in the array need to be complete with DaoGroup.completeMembers()
 	 * @param valMax (double): maximum value of point in the database (try DaoValues.fetchMax()) 
 	 * @return (Average): General Average of all the prom
