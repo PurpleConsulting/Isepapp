@@ -55,8 +55,8 @@ $(document).ready(function() {
 		$(this).addClass("btn-primary");
 		$('#semester1').removeClass("btn-primary");
 		$('#semester1').addClass("btn-default");
-		$(".btn-primary").prop("disabled",true);
-		$(".btn-default").prop("disabled",false);
+		$("[id^='semester'].btn-primary").prop("disabled",true);
+		$("[id^='semester'].btn-default").prop("disabled",false);
 		$("#premierSemester").hide();
 		$("#deuxiemeSemester").show();
 		});
@@ -66,8 +66,8 @@ $(document).ready(function() {
 		$(this).addClass("btn-primary");
 		$('#semester2').removeClass("btn-primary");
 		$('#semester2').addClass("btn-default");
-		$(".btn-primary").prop("disabled",true);
-		$(".btn-default").prop("disabled",false);
+		$("[id^='semester'].btn-primary").prop("disabled",true);
+		$("[id^='semester'].btn-default").prop("disabled",false);
 		$("#deuxiemeSemester").hide();
 		$("#premierSemester").show();
 		});
