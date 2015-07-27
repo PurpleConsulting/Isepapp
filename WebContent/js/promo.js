@@ -28,26 +28,39 @@ console.log(allCtx);
 var data = [
             {
                 value: 300,
-                color:"#F7464A",
-                highlight: "#FF5A5E",
+                color:"#246482",
+                highlight: "#E1EBF5",
                 label: "Red"
             },
             {
-                value: 50,
-                color: "#46BFBD",
-                highlight: "#5AD3D1",
+                value: 100,
+                color: "#EAC173",
+                highlight: "#E1EBF5",
                 label: "Green"
             },
             {
-                value: 100,
-                color: "#FDB45C",
-                highlight: "#FFC870",
+                value: 150,
+                color: "#8E2A3A",
+                highlight: "#E1EBF5",
                 label: "Yellow"
+            },
+            {
+                value: 50,
+                color: "#BDBDBD",
+                highlight: "#E1EBF5",
+                label: "other"
             }
         ]
 
 
 allCtx.forEach(function(ctx){
 	new Chart(ctx).Doughnut(data, {});
-})
+});
 
+var MissPerClass = function(clsName){
+	$.post("Promo", {clsToCall: clsName}, function(data, status){
+		console.log(data);
+	});
+}
+
+MissPerClass("G5");

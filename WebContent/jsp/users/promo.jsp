@@ -31,10 +31,10 @@
 					<canvas id="missing-chart-${cls}"></canvas>
 					<div class="ledgend">Répartition des absences</div>
 					<p style="text-align:center;">
-					<span class="badge" style="background-color:red; color:white;">G8A</span>
-					<span class="badge" style="background-color:green; color:white;">G8B</span>
-					<span class="badge" style="background-color:bleu; color:white;">G8C</span>
-					<span class="badge" style="background-color:purple; color:white;">G8D</span>
+					<span class="badge chart-blue">G8A</span>
+					<span class="badge chart-red">G8B</span>
+					<span class="badge chart-yellow">G8C</span>
+					<span class="badge chart-grey">G8D</span>
 					</p>
 				</div>
 			</div>

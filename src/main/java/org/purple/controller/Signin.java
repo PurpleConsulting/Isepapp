@@ -53,10 +53,10 @@ public class Signin extends HttpServlet {
 		// TODO Auto-generated method stub
 		request.setCharacterEncoding("UTF-8");
 		Page p = new Page();
-		/** AJAX PARAMS **/
+		/*$$$ AJAX PARAMS $$$*/
 		String ajPseudo = request.getParameter("Ajaxpseudo"); // -- trigged by the blur input
 		
-		/** FORM PARAMS **/
+		/*$$$ FORM PARAMS $$$*/
 		String pseudo = request.getParameter("pseudo");
 		String pwd = request.getParameter("password");
 		

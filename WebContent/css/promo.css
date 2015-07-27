@@ -148,3 +148,17 @@ div.class-card div.ledgend{
 	text-align: center;
 	
 }
+
+/** -------------------------------------------------------------------------------- **/
+/** -- DONUT CHART STYLE 
+/** -------------------------------------------------------------------------------- **/
+div.class-card span.badge{
+	color: white;
+}
+
+span.badge.chart-blue{background-color: #246482;}
+span.badge.chart-red{background-color: #8E2A3A;}
+span.badge.chart-yellow{background-color: #EAC173;}
+span.badge.chart-grey{background-color: #BDBDBD;}
+span.badge.chart-green{background-color: #45B29D;}
+span.badge.chart-orange{background-color: #E27A3F;}

@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.json.JSONObject;
 import org.purple.bean.Group;
 import org.purple.bean.Mark;
 import org.purple.bean.Missing;
@@ -143,6 +144,52 @@ public class Promo extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		request.setCharacterEncoding("UTF-8");
+		JSONObject result = new JSONObject();
+		Page p = new Page();
+		
+		/*$$$ PARAMS $$$*/
+		String cls = request.getParameter("clsToCall");
+		String grp = request.getParameter("...");
+		
+		//////////////////// OPS \\\\\\\\\\\\\\\\\\\\
+		
+		if(!Auth.isStudent(request)){
+			
+			Connection bddServletCo = Bdd.getCo();
+			DaoMissings ds = new DaoMissings(bddServletCo);
+			DaoGroups dg = new DaoGroups(bddServletCo);
+			
+			if(!Isep.nullOrEmpty(cls)){
+				
+				ArrayList<Group> groups = dg.selectGroupbyClass(cls);
+				
+				for(Group g : groups){
+					
+				}
+				System.out.print(cls);
+				result.put("err", false);
+				response.setHeader("content-type", "application/json");
+				response.getWriter().write(result.toString());
+				
+			} else {
+				
+				System.out.print(cls);
+				result.put("err", true);
+				result.put("Error message", "Bad request.");
+				response.setHeader("content-type", "application/json");
+				response.getWriter().write(result.toString());
+				
+			}
+			
+			try {
+				bddServletCo.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
 	}
 
 }
