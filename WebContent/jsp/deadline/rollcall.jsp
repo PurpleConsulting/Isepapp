@@ -77,7 +77,7 @@
 			</c:forEach>
 			<div class="form-group">
 				<button type="submit" class="btn btn-primary">
-					Confirmer les absences
+					<span class="fa fa-archive"></span> Confirmer les absences
 				</button>
 			</div> 
 		</form>
