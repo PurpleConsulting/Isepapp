@@ -157,18 +157,26 @@ public class Promo extends HttpServlet {
 		if(!Auth.isStudent(request)){
 			
 			Connection bddServletCo = Bdd.getCo();
-			DaoMissings ds = new DaoMissings(bddServletCo);
+			DaoMissings dm = new DaoMissings(bddServletCo);
 			DaoGroups dg = new DaoGroups(bddServletCo);
 			
 			if(!Isep.nullOrEmpty(cls)){
 				
+				JSONObject clsMissing = new JSONObject();
+				clsMissing.put("classSupport", cls);
 				ArrayList<Group> groups = dg.selectGroupbyClass(cls);
 				
 				for(Group g : groups){
+					JSONObject grpMissing = new JSONObject();
+					grpMissing.put("group", g.getName());
+					grpMissing.put("miss", dm.selectForGroup(g.getName()).length);
 					
+					clsMissing.append("class", grpMissing);
 				}
-				System.out.print(cls);
+				
+
 				result.put("err", false);
+				result.put("result", clsMissing);
 				response.setHeader("content-type", "application/json");
 				response.getWriter().write(result.toString());
 				
