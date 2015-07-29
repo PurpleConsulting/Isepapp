@@ -141,7 +141,8 @@ div.class-card div.medal{
 	background-color: #F8F8F8;
 }
 
-div.class-card div.ledgend{
+div.class-card div.ledgend,
+div.class-card p.ledgend{
 	width: auto;
 	dispaly: block;
 	margin: auto;

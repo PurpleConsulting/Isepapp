@@ -6,12 +6,12 @@
 // -- INITIALISATION
 // --------------------------------------------------------------------------------
 
-CANVAS_COLOR = [{'propety': 'chart-blue', 'hexa': '#246482', 'rank': 0},
-                {'propety': 'chart-red', 'hexa': '#8E2A3A', 'rank': 1},
-                {'propety': 'chart-yellow', 'hexa': '#EAC173', 'rank': 2},
-                {'propety': 'chart-grey', 'hexa': '#BDBDBD', 'rank': 3},
-                {'propety': 'chart-green', 'hexa': '#45B29D', 'rank': 4},
-                {'propety': 'chart-orange', 'hexa': '#E27A3F', 'rank': 5}];
+CANVAS_COLOR = [{'propety': 'chart-blue', 'hexa': '#246482', 'rank': 0, 'highlight': '#40B2E8'},
+                {'propety': 'chart-red', 'hexa': '#8E2A3A', 'rank': 1, 'highlight': '#F54864'},
+                {'propety': 'chart-yellow', 'hexa': '#EAC173', 'rank': 2, 'highlight': '#FFDB85'},
+                {'propety': 'chart-grey', 'hexa': '#BDBDBD', 'rank': 3, 'highlight': '#7D7D7D'},
+                {'propety': 'chart-green', 'hexa': '#45B29D', 'rank': 4, 'highlight': '#63FFE1'},
+                {'propety': 'chart-orange', 'hexa': '#E27A3F', 'rank': 5, 'highlight': '#FF8A47'}];
 
 $('body').scrollspy({
     target: '.bs-docs-sidebar',
@@ -27,11 +27,11 @@ $("a.list-group-item").on("click", function(e){
 	e.preventDefault();
 });
 
-
-
-
-var MissPerClass = function(clsName){
-	var paint = [];
+var MissingCharts = function(ctx){
+	var datum = [];
+	var jCanvas = $(ctx.canvas);
+	var clsName = jCanvas.attr('data-target');
+	
 	$.post("Promo", {clsToCall: clsName}, function(data, status){
 		data.result['class'].sort(function(a,b){
 			if(a.miss > b.miss){
@@ -47,35 +47,41 @@ var MissPerClass = function(clsName){
 		data.result['class'].forEach(function(grp){
 			var node = {
 					value: grp.miss,
+					colorName: CANVAS_COLOR[idx]["propety"],
 				    color: CANVAS_COLOR[idx]["hexa"],
-				    highlight: "#E1EBF5",
+				    highlight: CANVAS_COLOR[idx]["highlight"],
 				    label: 	grp.group
 				};
-			paint.push(node);
+			datum.push(node);
 			idx++;
 		});
+		var  total = datum
+		.map(function(dat){return dat.value})
+		.reduce(function(d, t){return d + t});
+		
+		$("div.medal[data-miss='"+ clsName +"']").append('<span class="badge">'+total+'</span>');
+				
+		datum.forEach(function(element){
+			jCanvas.nextAll(".ledgend").eq(1).append('<span class="badge '
+					+element.colorName+'">'+element.label+'</span> \n');
+		});
+		
+		new Chart(ctx).Doughnut(datum, {});
+		console.log(datum.length);
+		if(total == 0){
+			console.log("run");
+			var blk = jCanvas.parent();
+			blk.empty();
+		}
 	});
-	return paint;
 };
 
+//--------------------------------------------------------------------------------
+//-- DRAW CHART
+//--------------------------------------------------------------------------------
 
-var data = [
-            {color: "#246482",highlight: "#E1EBF5",label: "G5D",value: 16},
-            {color: "#8E2A3A",highlight: "#E1EBF5",label: "G5C",value: 13},
-            {color: "#EAC173",highlight: "#E1EBF5",label: "G5A",value: 10},
-            {color: "#BDBDBD",highlight: "#E1EBF5",label: "G5B",value: 10}
-        ];
-
-
-
-
-
-// --------------------------------------------------------------------------------
-// -- DRAW CHART
-// --------------------------------------------------------------------------------
 Chart.defaults.global.animation = false;
 Chart.defaults.global.responsive = true;
-
 
 var jChats = $('canvas[id^="missing-chart-"]');
 var allCtx = jChats.map(function(){
@@ -83,10 +89,10 @@ var allCtx = jChats.map(function(){
 });
 
 allCtx = $.makeArray(allCtx);
+
 allCtx.forEach(function(ctx){
-	var datum = MissPerClass("G5");
-	console.log(datum);
-	new Chart(ctx).Doughnut(datum, {});
+	var cls = ctx.canvas.getAttribute('data-target');
+	MissingCharts(ctx);
 });
 
 //--------------------------------------------------------------------------------
