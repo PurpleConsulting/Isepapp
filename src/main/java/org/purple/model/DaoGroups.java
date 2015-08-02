@@ -189,29 +189,21 @@ public class DaoGroups extends Dao<Group>{
 		return g;
 	}
 	
-	public Group[] selectGroupbyClass(String classe) {
+	public ArrayList<Group> selectGroupbyClass(String classe) {
 		// TODO Auto-generated method stub
-		Group[] gs = new Group[0];
+		ArrayList<Group> gs = new ArrayList<Group>();
 		String q = "SELECT Groups.id, Groups.`name`, Groups.class"
 				+ " FROM APPDB.Groups WHERE Groups.class= ? AND Groups.id != 0;";
 		String[] params = {classe};
 		ResultSet currsor = Bdd.prepareExec(this.connect, q, params);
 		try {
-			if (currsor.last()) {
-				gs = new Group[currsor.getRow()];
-				currsor.beforeFirst(); 
-			}
-			int i = 0;
 			while(currsor.next()){
-				gs[i] = new Group(currsor.getInt(1), currsor.getString(2), currsor.getString(3));
-				i++;
+				gs.add(new Group(currsor.getInt(1), currsor.getString(2), currsor.getString(3)));
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
-			gs = new Group[0];
-			e.printStackTrace();
+			gs = new ArrayList<Group>();
 		}
-		
 		return gs;
 	}
 	
@@ -235,7 +227,7 @@ public class DaoGroups extends Dao<Group>{
 			if(currsor.next()){
 				g.setTutor(currsor.getString(1));
 			} else{
-				g.setTutor("(Vide)");
+				g.setTutor("Auncun");
 			}
 			currsor.close();
 		} catch (SQLException e) {

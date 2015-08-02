@@ -74,5 +74,12 @@ div.alert.alert-warning.warning_modify{
 }
 
 input.form-control.title{
-	min-width: 280px;
+	min-width: 300px;
+}
+
+@media only screen and (max-width: 600px){
+	input.form-control.title{
+		min-width: auto;
+		width: 100%;
+	}
 }

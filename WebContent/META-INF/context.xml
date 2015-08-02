@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Context path="/jdbctest" docBase="jdbctest" crossContext="true" reloadable="true" debug="1">	
+<Context docBase="Isepapp" path="/Isepapp" crossContext="true" reloadable="true" debug="1">	
   <WatchedResource>WEB-INF/web.xml</WatchedResource>
        <Resource name="jdbc/APPDB" auth="Container" type="javax.sql.DataSource"
                      maxActive="120" maxIdle="100" maxWait="10000"

@@ -26,7 +26,7 @@ hr{
 }
 
 
-.bs-docs-sidebar .nav>li>a {
+.bs-docs-sidebar .nav > li > a {
     color: #999;
     border-left: 2px solid transparent;
     padding: 4px 20px;
@@ -35,7 +35,7 @@ hr{
 }
 
 
-.bs-docs-sidebar .nav .nav>li>a {
+.bs-docs-sidebar .nav .nav > li > a {
     padding-top: 1px;
     padding-bottom: 1px;
     padding-left: 30px;
@@ -127,3 +127,39 @@ span.list-group-item:hover {
     text-decoration: none;
     background-color: #F5F5F5;
 }
+
+
+div.row.class-card{
+	border-radius: 6px;
+	padding: 10px;
+	border: solid 1px #bdbdbd;
+	margin-left: 0px;
+	margin-right: 0px;
+}
+
+div.class-card div.medal{
+	background-color: #F8F8F8;
+}
+
+div.class-card div.ledgend,
+div.class-card p.ledgend{
+	width: auto;
+	dispaly: block;
+	margin: auto;
+	text-align: center;
+	
+}
+
+/** -------------------------------------------------------------------------------- **/
+/** -- DONUT CHART STYLE 
+/** -------------------------------------------------------------------------------- **/
+div.class-card span.badge{
+	color: white;
+}
+
+span.badge.chart-blue{background-color: #246482;}
+span.badge.chart-red{background-color: #8E2A3A;}
+span.badge.chart-yellow{background-color: #EAC173;}
+span.badge.chart-grey{background-color: #BDBDBD;}
+span.badge.chart-green{background-color: #45B29D;}
+span.badge.chart-orange{background-color: #E27A3F;}

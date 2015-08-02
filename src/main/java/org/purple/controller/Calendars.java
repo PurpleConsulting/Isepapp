@@ -90,11 +90,11 @@ public class Calendars extends HttpServlet {
 				
 				Calendar cal= new Calendar();
 				
-				Group[] gr = dg.selectGroupbyClass(group);
+				ArrayList<Group> gr = dg.selectGroupbyClass(group);
 			
-				 for(int j=0; j < gr.length; j++){
+				 for(int j=0; j < gr.size(); j++){
 					 //Selectionner calendrier d'un group
-					 cal= dc.select(Integer.toString(gr[j].getId()));
+					 cal= dc.select(Integer.toString(gr.get(j).getId()));
 					
 					 dc.deleteDateGroup(Integer.toString(cal.getId_calendar()));
 						
@@ -104,11 +104,17 @@ public class Calendars extends HttpServlet {
 						}
 					dc.createDate(cal);
 				 }
+				 JSONObject status = new JSONObject();
+				 status.put("success", true);
+				 result.put("result", status);
+				 
+				 response.setHeader("content-type", "application/json");
+				 response.getWriter().write(result.toString());
 			}
 			else if(!Isep.nullOrEmpty(groupClass)){
 				Calendar c= new Calendar();
-				Group[] gr = dg.selectGroupbyClass(groupClass);
-				c = dc.selectAllDate(Integer.toString(gr[0].getId()));
+				ArrayList<Group> gr = dg.selectGroupbyClass(groupClass);
+				c = dc.selectAllDate(Integer.toString(gr.get(0).getId()));
 				
 				JSONObject jsonCalendar = new JSONObject();
 				
@@ -136,3 +142,4 @@ public class Calendars extends HttpServlet {
 	
 	}
 
+//நான் உன்னை காதலிக்கிறேன

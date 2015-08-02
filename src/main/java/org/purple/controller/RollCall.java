@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
 import org.joda.time.format.DateTimeFormat;
+import org.purple.bean.Calendar;
 import org.purple.bean.Group;
 import org.purple.bean.Missing;
 import org.purple.bean.Page;
@@ -22,6 +23,7 @@ import org.purple.bean.User;
 import org.purple.constant.Bdd;
 import org.purple.constant.Isep;
 import org.purple.model.Auth;
+import org.purple.model.DaoCalendars;
 import org.purple.model.DaoGroups;
 import org.purple.model.DaoMissings;
 import org.purple.model.DaoUsers;
@@ -48,9 +50,32 @@ public class RollCall extends HttpServlet {
     }
 
     
-    protected void doRegular(){
+    protected void doLoad(HttpServletRequest request, User tutor, ArrayList<String> allDates, DaoGroups dg, DaoCalendars dc){
+    	// --------------------------------------------------------------------------------
+    	// -- FINDING THE GROUPS 
+    	// --------------------------------------------------------------------------------
+    	Group[] groups = dg.selectGroupbyTutor(tutor);
     	
+    	// --------------------------------------------------------------------------------
+    	// -- FINDING THE DATES 
+    	// --------------------------------------------------------------------------------
+    	for(Group g : groups){
+			dg.completeMemebers(g);
+			dg.completeTutor(g);
+			
+			Calendar c = dc.selectAllDate(Integer.toString(g.getId()));
+			for(String date : c.getDateList()){
+				if(!allDates.contains(date)) allDates.add(date);
+			}
+			
+			
+		}
+    	
+    	request.setAttribute("scopeDates", allDates);
+		request.setAttribute("groups", groups);
+		
     }
+    
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
@@ -58,28 +83,25 @@ public class RollCall extends HttpServlet {
 		// TODO Auto-generated method stub
 		request.setCharacterEncoding("UTF-8");
 		Page p = new Page();
-		/**
-		 * PARAMS
-		 */
+		/*$$$ PARAMS $$$*/
 		
 		if(Auth.isRespo(request) || Auth.isTutor(request)){
 			Connection bddServletCo = Bdd.getCo();
 			DaoGroups dg = new DaoGroups(bddServletCo);
 			DaoUsers du = new DaoUsers(bddServletCo);
+			DaoCalendars dc = new DaoCalendars(bddServletCo);
+			
+			User tutor = (User)request.getSession().getAttribute("user");
+			
+			ArrayList<String> allDates = new ArrayList<String>();
+			
+			this.doLoad(request, tutor, allDates, dg, dc);
 			
 			p.setContent("deadline/rollcall.jsp");
 			p.setTitle("ISEP / APP - L'appel");
 			p.setCss("rollcall.css");
 			p.setJs("rollcall.js");
 			
-			User tutor = (User)request.getSession().getAttribute("user");
-			Group[] groups = dg.selectGroupbyTutor(tutor);
-			for(Group g : groups){
-				dg.completeMemebers(g);
-				dg.completeTutor(g);
-			}
-			
-			request.setAttribute("groups", groups);
 			request.setAttribute("pages", p);
 			this.getServletContext().getRequestDispatcher("/template.jsp").forward(request, response);
 			
@@ -124,6 +146,8 @@ public class RollCall extends HttpServlet {
 			Connection bddServletCo = Bdd.getCo();
 			DaoMissings dm = new DaoMissings(bddServletCo);
 			DaoGroups dg = new DaoGroups(bddServletCo);
+			DaoCalendars dc =new DaoCalendars(bddServletCo);
+			
 			if(!Isep.nullOrEmpty(daySkiped)){
 				boolean buisnessFlag = true;
 				DateTime day = new DateTime();
@@ -169,27 +193,24 @@ public class RollCall extends HttpServlet {
 						p.setWarningMessage("une erreur est survenue.");
 					}
 					
-					
-				}
-				
+				}			
 				
 			} else {
 				p.setWarning(true);
 				p.setWarningMessage("votre requête n'a pas pu être correctement interprétée. Remplissez bien le champ date lié à l'absence.");
 			}
 			
+			User tutor = (User)request.getSession().getAttribute("user");
+			
+			ArrayList<String> allDates = new ArrayList<String>();
+			
+			this.doLoad(request, tutor, allDates, dg, dc);
+			
 			p.setContent("/deadline/rollcall.jsp");
 			p.setCss("rollcall.css");
 			p.setJs("rollcall.js");
 			p.setTitle("ISEP / APP - L'appel");
-			User tutor = (User)request.getSession().getAttribute("user");
-			Group[] groups = dg.selectGroupbyTutor(tutor);
-			for(Group g : groups){
-				dg.completeMemebers(g);
-				dg.completeTutor(g);
-			}
 			
-			request.setAttribute("groups", groups);
 			request.setAttribute("pages", p);
 			this.getServletContext().getRequestDispatcher("/template.jsp").forward(request, response);
 			

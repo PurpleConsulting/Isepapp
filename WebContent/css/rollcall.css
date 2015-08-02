@@ -43,3 +43,7 @@ input[name="day-skiped"]{
 form{
 	margin-bottom: 100px;
 }
+select[name="planning"], 
+div.wrong-date{
+	 display:none;
+}

@@ -170,7 +170,7 @@ public class Tutors extends HttpServlet {
 				 * HERE THE USER ASK FOR SOME GROUP FOR THE NEW TUTOR
 				 */
 
-				Group[] groups = dg.selectGroupbyClass(classParam);
+				ArrayList<Group> groups = dg.selectGroupbyClass(classParam);
 				JSONObject result = new JSONObject();
 				ArrayList<JSONObject> jsGrooups = new ArrayList<JSONObject>();
 				for(Group g : groups){

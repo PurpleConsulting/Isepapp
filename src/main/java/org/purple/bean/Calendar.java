@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class Calendar {
 	
 	private int idGroup = 0; 
-	private ArrayList<String> dateList = new ArrayList();;
+	private ArrayList<String> dateList = new ArrayList();
 	private int id_calendar=0;
 	
 	
