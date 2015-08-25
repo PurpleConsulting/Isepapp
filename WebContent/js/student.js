@@ -18,12 +18,12 @@ $(document).ready(function(){
 	});
 	
 	// -- chart
-	//Chart.defaults.global.responsive = true;
-	Chart.defaults.global.scaleShowLabels = false;
+	Chart.defaults.global.responsive = true;
+	//Chart.defaults.global.scaleShowLabels = false;
 	var ctx = document.getElementById("radar-canvas").getContext("2d");
 	
 	var data = {
-		    labels: ["azertyuiop","aaaaaaa","azertyuiop","azertyuiop","azertyuiop","azertyuiop"],
+		    labels: ["Trav","Comm","Cond","Conc","Prof","Eval c."],
 		    datasets: [
 		        {
 		            label: "My First dataset",
@@ -80,6 +80,5 @@ $(document).ready(function(){
 		}
 	});
 	
-
 });
 

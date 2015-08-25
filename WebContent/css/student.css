@@ -153,3 +153,11 @@ span.alert-mark-result{
 canvas{
 	min-height:200px;
 }
+
+
+@media only screen and (max-width:620px) {
+	.col-canvas{
+		margin-left: 8.33333%;
+		width: 83.3333%;
+	}
+}

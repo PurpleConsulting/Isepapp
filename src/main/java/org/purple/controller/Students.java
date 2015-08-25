@@ -157,7 +157,7 @@ public class Students extends HttpServlet {
 					p.setContent("users/student.jsp");
 					p.setTitle("ISEP / APP - Etudiant");
 					p.setCss("bootstrap-select.min.css", "student.css");
-					p.setJs("chartjs/Chart.min.js", "bootstrap-select.min.js", "bootbox.min.js","student.js","data_student.js");
+					p.setJs("flip/dist/jquery.flip.min.js", "chartjs/Chart.min.js", "bootstrap-select.min.js", "bootbox.min.js","student.js");
 					
 					request.setAttribute("student", std);// -- we send the student
 					
