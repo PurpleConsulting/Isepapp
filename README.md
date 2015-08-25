@@ -22,11 +22,11 @@ Sherya -> @shreyamittal17
 Loïc -> @DivLoic    
 
 ### Technos:
-This project include (for now) j2ee, Tomcat sever 7 plugin, jstl core taglib, junit framework, bootstrap, jquery(ui).
+This project include j2ee, Tomcat sever 7, MySql jstl core taglib, junit framework, bootstrap, jquery(ui), chart.js, FullCalendar.
 
 ### Install:
-1. Clone the repository;
-2. Open an Eclipse project from sources;
+1. Clone the repository
+2. Open an Eclipse project from sources
 3. In Eclipse do Run as > Maven install > (wait) > Ready.
 4. Now u can plug your Eclipse to the repo Team > Share project > Git, use or create... > Finish (u should see: [Isepapp Master] next to your project folder).
 
