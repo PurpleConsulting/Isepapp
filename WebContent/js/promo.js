@@ -33,6 +33,7 @@ var MissingCharts = function(ctx){
 	var clsName = jCanvas.attr('data-target');
 	
 	$.post("Promo", {clsToCall: clsName}, function(data, status){
+		console.log(data);
 		data.result['class'].sort(function(a,b){
 			if(a.miss > b.miss){
 				return -1;
@@ -59,6 +60,7 @@ var MissingCharts = function(ctx){
 		.map(function(dat){return dat.value})
 		.reduce(function(d, t){return d + t});
 		
+		
 		$("div.medal[data-miss='"+ clsName +"']").append('<span class="badge">'+total+'</span>');
 				
 		datum.forEach(function(element){
@@ -67,7 +69,7 @@ var MissingCharts = function(ctx){
 		});
 		
 		new Chart(ctx).Doughnut(datum, {});
-		console.log(datum.length);
+		//console.log(datum.length);
 		if(total == 0){
 			console.log("run");
 			var blk = jCanvas.parent();

@@ -4,6 +4,11 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.HashMap;
+
+import org.purple.bean.Group;
+import org.purple.bean.User;
 import org.purple.constant.Bdd;
 
 public class Research {
@@ -28,7 +33,7 @@ public class Research {
 			return res;
 		}
 		
-		public static final String[] pseudoResearch(String field, String table, String filter){
+		public static final String[] exactResearch(String field, String table, String filter){
 			Connection co = Bdd.getCo();
 			String[] res = new String[0];
 			String q = "SELECT " + field + " FROM " + table +" "+ filter +" ;";
@@ -36,7 +41,6 @@ public class Research {
 				Statement stmt = co.createStatement();
 				ResultSet currsor = stmt.executeQuery(q);
 				if(!currsor.next()) return new String[0];
-				//test = (String[])currsor.getArray("Student").getArray();
 				if (currsor.last()) {
 					res = new String[currsor.getRow()];
 					currsor.beforeFirst(); 
@@ -56,6 +60,47 @@ public class Research {
 			return res;
 		}
 		
+		
+		public static final HashMap<String, User> fuzzyStudent(String keyword) throws SQLException{
+			Connection co = Bdd.getCo();
+			String[] keys = keyword.split(" ");
+			HashMap<String, User> u = new HashMap<String, User>();
+			String q = "SELECT Users.id, Users.first_name, Users.last_name,"
+					+ " Groups.`name` FROM Users INNER JOIN Groups ON Users.id_group = Groups.`id` INNER JOIN Positions "
+					+ " ON Positions.`id` = Users.id_post WHERE Positions.title = '" + Auth.student + "'"
+					+ " AND (Users.first_name LIKE ? OR Users.last_name LIKE ? )";
+			for(String k : keys){
+				String[] param = {"%"+k+"%", "%"+k+"%"};
+				ResultSet currsor = Bdd.prepareExec(co, q, param);
+				while(currsor.next()){
+					User s = new User(currsor.getInt(1), currsor.getString(2), currsor.getString(3),currsor.getString(4));
+					u.put(Integer.toString(s.getId()), s);				
+				}
+			}			
+			co.close();
+			return u;
+		}
+		
+		public static final HashMap<String, Group> fuzzyGroup(String keyword) throws SQLException {
+			Connection co = Bdd.getCo();
+			String[] keys = keyword.split(" ");
+			HashMap<String, Group> g = new HashMap<String, Group>();
+			String q = "SELECT Groups.`id` as gid, "
+					+ " Groups.`name` as grp, Users.`pseudo`, "
+					+ "(SELECT COUNT(*) FROM Users WHERE Users.id_group = gid) "
+					+ " FROM Groups LEFT JOIN Users ON Groups.id_tutor = Users.id "
+					+ " WHERE Groups.`name` LIKE ?";
+			if(keys.length == 1){
+				keys[0] = "%" + keys[0] + "%";
+				ResultSet cursor = Bdd.prepareExec(co, q, keys);
+					while(cursor.next()){
+						Group grp = new Group(cursor.getString(2), cursor.getString(3));
+						g.put(cursor.getString(2)+"@"+cursor.getString(4), grp);
+					}
+			}
+			co.close();
+			return g;
+		}
 		
 		public static final String nameToSpeudo(String name){
 			Connection co = Bdd.getCo();

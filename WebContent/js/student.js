@@ -3,10 +3,10 @@
  */
 
 $(document).ready(function(){
-// -- Display the delivery	
-$('button').tooltip({placement: 'bottom',trigger: 'manual'}).tooltip('show');
+	// -- Display the delivery	
+	$('button').tooltip({placement: 'bottom',trigger: 'manual'}).tooltip('show');
 
-//  -- Marks: Global averages
+	//  -- Marks: Global averages
 	$("div.progress-bar").each(function(i){
 		max = $(this).attr("aria-valuemax");
 		mark = $(this).attr("aria-valuenow");
@@ -16,6 +16,40 @@ $('button').tooltip({placement: 'bottom',trigger: 'manual'}).tooltip('show');
 		$(this).css("width", per+"%");
 		
 	});
+	
+	// -- chart
+	//Chart.defaults.global.responsive = true;
+	Chart.defaults.global.scaleShowLabels = false;
+	var ctx = document.getElementById("radar-canvas").getContext("2d");
+	
+	var data = {
+		    labels: ["azertyuiop","aaaaaaa","azertyuiop","azertyuiop","azertyuiop","azertyuiop"],
+		    datasets: [
+		        {
+		            label: "My First dataset",
+		            fillColor: "rgba(220,220,220,0.2)",
+		            strokeColor: "rgba(220,220,220,1)",
+		            pointColor: "rgba(220,220,220,1)",
+		            pointStrokeColor: "#fff",
+		            pointHighlightFill: "#fff",
+		            pointHighlightStroke: "rgba(220,220,220,1)",
+		            data: [65, 59, 90, 81, 56, 55]
+		        },
+		        {
+		            label: "My Second dataset",
+		            fillColor: "rgba(36,100,130,0.2)",
+		            strokeColor: "rgba(36,100,130,1)",
+		            pointColor: "rgba(36,100,130,1)",
+		            pointStrokeColor: "#fff",
+		            pointHighlightFill: "#fff",
+		            pointHighlightStroke: "rgba(151,187,205,1)",
+		            data: [28, 48, 40, 19, 96, 27]
+		        }
+		    ]
+		};
+	
+	
+	var Radar = new Chart(ctx).Radar(data, {scaleShowLabels: false});
 	
 	// -- Pagination for the missing part
 	var missing = $("#blk-missing");

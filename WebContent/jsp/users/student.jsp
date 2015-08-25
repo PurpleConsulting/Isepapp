@@ -104,6 +104,13 @@
 	</div>
 </div>
 <div class="row">
+	<div class="col-xs-offset-1 col-xs-10 radar">
+		<div class="col-sm-8 col-xs-12">
+			<canvas id="radar-canvas" width="300" height="300" ></canvas> <!-- width="300" height="300" -->
+		</div>
+	</div>
+</div>
+<div class="row">
 	<div class="col-xs-offset-1 col-xs-10 crossmark" >
 		<h4>Evaluation croisée - <c:out value="${average.byTitle(skills[0].getTitle()).compute()}"></c:out> / 20</h4>
 		<div class="table-responsive">
