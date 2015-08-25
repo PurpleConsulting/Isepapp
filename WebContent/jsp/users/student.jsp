@@ -11,7 +11,7 @@
 	<c:import url="/jsp/alert.jsp" charEncoding="UTF-8"></c:import>
 </div>
 <div class="row">	
-	<div class="col-xs-offset-1 col-xs-10 idcard">
+	<div class="col-xs-offset-1 col-xs-10 idcard" data-target="${student.getPseudo()}">
 		<div class="col-md-offset-1 col-md-4 col-sm-offset-1 col-sm-10 col-xs-offset-1 col-xs-10  ">
 			<img src="./img/photo.jpg" alt="Photo de l'étudiant" />
 		</div>

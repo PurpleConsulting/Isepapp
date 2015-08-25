@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.json.JSONObject;
 import org.purple.bean.Deadline;
 import org.purple.bean.Group;
 import org.purple.bean.Mark;
@@ -26,6 +27,7 @@ import org.purple.constant.Bdd;
 import org.purple.constant.Isep;
 import org.purple.model.Auth;
 import org.purple.model.Average;
+import org.purple.model.Avg;
 import org.purple.model.AvgBuilder;
 import org.purple.model.DaoDeadline;
 import org.purple.model.DaoGroups;
@@ -198,6 +200,11 @@ public class Students extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		request.setCharacterEncoding("UTF-8"); Page p = new Page();
+		Boolean noHeader = false;
+		
+		/*$$$ AJAX PARAM $$$*/
+		String radar = request.getParameter("radar");
+		String radarStudent = request.getParameter("radar_std");
 		
 		/*$$$ POST PARAM $$$*/
 		String scope = request.getParameter("pseudo");
@@ -268,6 +275,35 @@ public class Students extends HttpServlet {
 					p.setWarningMessage("le profil étudiant à modifier n'a pas été trouvé dans la base de données.");
 				}
 				
+			}else if(!Isep.nullOrEmpty(radar, radarStudent)){
+				JSONObject res = new JSONObject();
+				JSONObject jsMarks = new JSONObject();
+				//jsMarks.append("skills", new JSONObject());
+
+				User student = du.select(radarStudent);
+				Group group = dgrp.select(student.getGroup());
+				
+				Double max = DaoValues.fetchMax();
+				ArrayList<Mark> grpMarks = dmk.selectByGroup(student.getGroup());
+				ArrayList<Mark> stdMarks = dmk.selectByStudent(student.getPseudo());
+				
+				Average grey = AvgBuilder.groupAverage(grpMarks, group, max);
+				Average blue = AvgBuilder.studentAverage(stdMarks, student, max);
+				
+				
+				for(Avg b : blue.getGrid()){
+					JSONObject obj = new JSONObject();
+					obj.put("title", b.getTitle());
+					obj.put("student", b.compute());
+					jsMarks.append("skills", obj);
+					
+				}
+				
+				res.put("result", jsMarks);
+				response.setHeader("content-type", "application/json");
+				response.getWriter().write(res.toString());
+				noHeader = true;
+				
 			} else {
 				// --------------------------------------------------------------------------------
 				// -- ANY REQUEST UNDERSTOOD
@@ -295,9 +331,10 @@ public class Students extends HttpServlet {
 			p.setTitle("ISEP / APP - Accueil");
 		
 		}
-		
-		request.setAttribute("pages", p);
-		request.getRequestDispatcher("/template.jsp").forward(request, response);
+		if(!noHeader){
+			request.setAttribute("pages", p);
+			request.getRequestDispatcher("/template.jsp").forward(request, response);
+		}
 					
 	}
 

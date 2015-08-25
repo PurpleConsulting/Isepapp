@@ -17,6 +17,11 @@ $(document).ready(function(){
 		
 	});
 	
+	
+	$.post("/Isepapp/Students", {radar: true, radar_std: $("div.idcard").attr("data-target")}, function(data, status){
+		
+		console.log(data);
+	});
 	// -- chart
 	Chart.defaults.global.responsive = true;
 	//Chart.defaults.global.scaleShowLabels = false;
