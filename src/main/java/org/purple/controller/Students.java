@@ -281,22 +281,46 @@ public class Students extends HttpServlet {
 				//jsMarks.append("skills", new JSONObject());
 
 				User student = du.select(radarStudent);
+				du.addGroup(student);
 				Group group = dgrp.select(student.getGroup());
+				dgrp.completeMemebers(group);
 				
 				Double max = DaoValues.fetchMax();
+				Skill[] allSkills = ds.allSkill();
+				
 				ArrayList<Mark> grpMarks = dmk.selectByGroup(student.getGroup());
 				ArrayList<Mark> stdMarks = dmk.selectByStudent(student.getPseudo());
 				
-				Average grey = AvgBuilder.groupAverage(grpMarks, group, max);
+				Average preGrey = AvgBuilder.groupAverage(grpMarks, group, max);
+
+				
+				Average grey = new Average();
 				Average blue = AvgBuilder.studentAverage(stdMarks, student, max);
 				
-				
 				for(Avg b : blue.getGrid()){
+					Average skillAvg = new Average(b.getTitle(), Isep.LANDMARK);
+					for(Avg pg : preGrey.getGrid()){
+						Average g = (Average) pg;
+						skillAvg.push(g.byTitle(b.getTitle()));
+					}
+					grey.push(skillAvg);
+				}
+				
+				
+				
+				for(Skill s : allSkills){
+					Avg b = blue.byTitle(s.getTitle());
 					JSONObject obj = new JSONObject();
-					obj.put("title", b.getTitle());
-					obj.put("student", b.compute());
+					if(!b.getTitle().equals("null")){
+						obj.put("title", b.getTitle());
+						obj.put("student", b.compute());
+						obj.put("group", grey.byTitle(b.getTitle()).compute());
+					} else {
+						obj.put("title", s.getTitle());
+						obj.put("student", 0.0);
+						obj.put("group", 0.0);
+					}
 					jsMarks.append("skills", obj);
-					
 				}
 				
 				res.put("result", jsMarks);

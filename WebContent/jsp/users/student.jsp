@@ -107,6 +107,7 @@
 </div>
 <div class="row">
 	<div class="col-xs-offset-1 col-xs-10 radar">
+		<h4><span style="color:#246482;">Notes d'étudiant</span> / Notes de groupe</h4>
 		<div class=" col-xs-4 col-xs-offset-4  col-canvas"><!-- col-xs-10 col-xs-offset-1 -->
 			<canvas id="radar-canvas" width="300" height="300" ></canvas> <!-- width="300" height="300" -->
 		</div>
