@@ -85,8 +85,9 @@ public class DaoMissings extends Dao<Missing>{
 	public Missing[] selectForGroup(String NameGroup){
 		Missing[] ms = new Missing[0];
 		String[] params = {NameGroup};
-		String q = "SELECT Users.pseudo, Missing.late FROM Missing"
-				+ " INNER JOIN  Users on Missing.id_student = Users.id"
+		String q = "SELECT Users.pseudo, Missing.late, DATE_FORMAT(date, '"+ Isep.MYSQL_UTC +"'), "
+				+ " Missing.supporting FROM Missing INNER JOIN  Users"
+				+ " on Missing.id_student = Users.id"
 				+ " WHERE Users.id_group ="
 				+ " (SELECT Groups.id  FROM Groups WHERE Groups.`name` = ?);";
 		try{
@@ -99,8 +100,10 @@ public class DaoMissings extends Dao<Missing>{
 			int i = 0;
 			while(currsor.next()){
 				Missing m = new Missing();
-				m.setStudent(currsor.getString(1));
 				m.setLate(currsor.getBoolean(2));
+				m.setStudent(currsor.getString(1));
+				m.setDate(currsor.getString(3));
+				m.setSupporting(currsor.getString(4));
 				ms[i] = m; i = i + 1;
 			}
 		}catch (SQLException e){

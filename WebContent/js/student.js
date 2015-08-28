@@ -51,7 +51,7 @@ $(document).ready(function(){
 		console.log(data);
 		var Radar = new Chart(ctx).Radar(datum, {scaleShowLabels: false});
 		if(data.result.skills.every(function(e, idx, array){return e.group == 0})){
-			row.hide("slow", function(){row.remove();});
+			row.fadeOut("slow", function(){row.remove();});
 		}
 	});
 	
