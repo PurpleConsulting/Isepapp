@@ -88,25 +88,37 @@ var markByGroup = function(bar){
 	$.post("/Isepapp/ServiceRespoHandler", { "mark-prom": "true"}, function(data, status){
 		var ctx = document.getElementById("barchart-canvas").getContext("2d");
 		var lab = Object.keys(data.result.prom);
-		var datum = {
-				labels: lab,
-				datasets: [
-	               {
-	                   label: "Moyenne de la Promotion",
-	                   fillColor: "rgba(220,220,220,0.5)",
-	                   strokeColor: "rgba(220,220,220,0.8)",
-	                   highlightFill: "rgba(220,220,220,0.75)",
-	                   highlightStroke: "rgba(220,220,220,1)",
-	                   data: lab.map(function(group){return data.result.prom[group]})
-	               }
-               ]
-           };
-		var canvas = $("#barchart-canvas");
-		var barchart = new Chart(ctx).Bar(datum);
-		canvas.click(function(evt){
-		    var activeBars = barchart.getBarsAtEvent(evt);
-		    markByGroup(activeBars);
-		});
+		if(lab.length == 0){
+			var h = $("div.row div.numbers h4");
+			var siblings = h.siblings();
+			siblings.hide("slow", function(){siblings.remove();});
+			$("div.row div.numbers").append('<div class="col-xs-10 col-xs-offset-1 app-empty">' +
+					'<img src="img/empty/nocross.svg" alt="" class="app-empty-img"/>' + 
+					'</div>');
+			$("div.row div.numbers div.app-empty").show("slow");
+		}  else {
+			$("div.row div.numbers div[data-goal='waiting']").hide( "slow", function(){$(this).remove()});
+			var datum = {
+					labels: lab,
+					datasets: [
+		               {
+		                   label: "Moyenne de la Promotion",
+		                   fillColor: "rgba(220,220,220,0.5)",
+		                   strokeColor: "rgba(220,220,220,0.8)",
+		                   highlightFill: "rgba(220,220,220,0.75)",
+		                   highlightStroke: "rgba(220,220,220,1)",
+		                   data: lab.map(function(group){return data.result.prom[group]})
+		               }
+	               ]
+	           };
+			var canvas = $("#barchart-canvas");
+			var barchart = new Chart(ctx).Bar(datum);
+			canvas.click(function(evt){
+			    var activeBars = barchart.getBarsAtEvent(evt);
+			    markByGroup(activeBars);
+			});
+			$("div.row div.numbers div").show("slow");
+		}
 	});
 })();
 

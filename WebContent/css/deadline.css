@@ -10,7 +10,7 @@ div.terminee{
 	  margin-top: 20px;
 }
 div.list{
-	min-height: 200px;
+	min-height: 0px;
 }
 form.group{
 	min-height: 60px;

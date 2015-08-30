@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import org.joda.time.DateTime;
 import org.purple.bean.Missing; 
 import org.purple.constant.Bdd;
 import org.purple.constant.Isep;
@@ -99,11 +100,10 @@ public class DaoMissings extends Dao<Missing>{
 			}
 			int i = 0;
 			while(currsor.next()){
-				Missing m = new Missing();
-				m.setLate(currsor.getBoolean(2));
-				m.setStudent(currsor.getString(1));
-				m.setDate(currsor.getString(3));
-				m.setSupporting(currsor.getString(4));
+				Missing m = new Missing(currsor.getString(1), 
+						currsor.getString(4), 
+						currsor.getString(3), 
+						currsor.getBoolean(2));
 				ms[i] = m; i = i + 1;
 			}
 		}catch (SQLException e){

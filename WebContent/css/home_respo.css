@@ -89,3 +89,8 @@ div.barchart-promo{
 .barchart-prom-legend div ul{
 	padding-left: 10px;
 }
+
+
+div.app-empty{
+	display:none;
+}

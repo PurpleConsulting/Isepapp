@@ -50,7 +50,7 @@
 </div>
 
 <div class="row">
-	<div class="col-xs-offset-1 col-xs-10 missing" >
+	<div class="col-xs-offset-1 col-xs-10 missing" id="missing-div">
 		<h4>Les absences - <c:out value="${fn:length(missings)}"></c:out></h4>
 		<br/>
 		<div id="blk-missing">
@@ -58,7 +58,8 @@
 			<c:if test="${missingRow != null }">
 				<div class="alert alert-${missingRow.getLate() ? 'info' : 'warning'}${status.count <= 3 ? ' active' : ''}" 
 					role="alert" id="blk${status.count}">
-					<strong><c:out value="${missingRow.getLate() ? 'Retard' : 'Absence'}"></c:out></strong>:
+					<strong><c:out value="${missingRow.getStudent()}"></c:out></strong> - 
+					<em><c:out value="${missingRow.getLate() ? 'Retard' : 'Absence'}"></c:out></em>:
 					<c:out value="${missingRow.printDate()}"></c:out>, 
 					<c:out value="${missingRow.getSupporting()}"></c:out>
 					<c:if test="${missingRow.getLate()}">
@@ -100,7 +101,7 @@
 </div>
 
 <div class="row">
-	<div class="col-xs-offset-1 col-xs-10 delivery">
+	<div class="col-xs-offset-1 col-xs-10 delivery" id="delivery-div">
 		<h4>Les livrables</h4>
 		<c:if test="${fn:length(deadlines) == 0}">
 			<div class="col-xs-6 col-xs-offset-3">
