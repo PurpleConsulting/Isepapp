@@ -43,7 +43,7 @@
 				<div class="col-xs-12 col-sm-3"><em>Groupe :</em> <strong class="grp"><a></a></strong></div>
 				<div class="col-xs-12 col-sm-3"><em><a href="#" data-info="missing">Absences :</a></em> <strong class="abs">12</strong></div>
 				<div class="col-xs-12 col-sm-3"><em><a href="#" data-info="delivery">Livrables :</a></em> <strong class="del">2</strong></div>
-				<div class="col-xs-12 col-sm-3"><em></em><span class="fa fa-clock-o"></span></div>
+				<div class="col-xs-12 col-sm-3"><span class="fa fa-book"></span><em class="mk"></em></div>
 			</div>
 		</div>
 		<div class="col-xs-12" style="padding-left:0px;" data-role="more-groups">
@@ -54,10 +54,10 @@
 <div class="row">
 	<div class="col-xs-10 col-xs-offset-1 numbers">
 		<h4>- Les notes -</h4>
-		<div class="col-xs-12 col-xs-offset-0" data-goal="waiting" style="text-align: center;">
-				<span class="fa fa-spinner fa-spin fa-4x" style="margin-top:3%; color:#246482"></span>
+		<div class="col-xs-6 col-xs-offset-3 app-empty" style="display:none;" >
+			<img src="img/empty/nomark.svg" alt="" class="app-empty-img"/>
 		</div>
-		<div class="col-xs-12 col-xs-offset-0" style="display:none;">
+		<div class="col-xs-12 col-xs-offset-0 chart" style="display:none;">
 			<div class="col-xs-5 col-sm-2 col-sm-offset-1 barchart-promo">
 				<label>Moyenne des classes</label>
 				<canvas id="barchart-canvas" width="100" height="100"></canvas>
@@ -66,7 +66,6 @@
 				<div class="col-xs-6 ">
 					<span class="badge" data-info="47">0%</span>
 					<em>d'étudiants notés.<br/> </em>
-					<!-- <em>Cliquez sur le graphe pour avoir les détail par group.</em>-->
 				</div>
 				<div class="col-xs-6">
 					Notes par groupe: <strong id="class"></strong><br/>
@@ -84,14 +83,20 @@
 <div class="row">
 	<div class="col-xs-10 col-xs-offset-1 missings">
 		<h4>- Les absences -</h4>
+		<div class="col-xs-6 col-xs-offset-3 app-empty" style="display:none;" >
+			<img src="img/empty/missing.svg" alt="" class="app-empty-img"/>
+		</div>
+		<div class="col-xs-12 col-xs-offset-0 chart" style="display:none;">
+			<canvas id="linechart-canvas" width="100" height="20"></canvas>
+		</div>
 	</div>
 </div>
 <div class="row">
 	<div class="col-xs-offset-1 col-xs-10 semester">
 		<h4>- Organisation du semestre -</h4>
 		<div class="col-xs-12">
-		<div class="col-xs-12 alert alert-info" style="display: none">
-		</div>
+			<div class="col-xs-12 alert alert-info" style="display: none">
+			</div>
 		</div>
 		<div class="col-xs-12">
 			<form class="subject_file" action="FileHandler" method="post" enctype="multipart/form-data">
@@ -128,7 +133,7 @@
 							 role="progressbar" style="width: 0%">
 						</div>
 					</div>
-					<input type="file" name="backup_file" id="input_backup" class="input-class"  data-show-preview="false" />
+					<input type="file" name="backup_file" id="input_backup" class="input-class"  disabled="true" data-show-preview="false" />
 				</div>
 			</form>
 		</div>

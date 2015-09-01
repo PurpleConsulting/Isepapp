@@ -38,7 +38,11 @@
 		<div id="content" class="container-fluid content">
 			<c:import url="jsp/${pages.getContent()}" charEncoding="UTF-8"></c:import>
 		</div>
-		<footer> </footer>
+		<footer> 
+			<div class="container-fluid">
+				<em class="col-sm-offset-1">Propulsé par l'équipe <3 Purpleconsulting - équipe violette ISEP'15. ---> Qui Sommes nous?</em>
+			</div>
+		</footer>
 		<script type="text/javascript" src="./js/jquery-2.1.3.min.js"></script>
 		<script type="text/javascript" src="./js/jquery-ui.min.js"></script>
 		<script type="text/javascript" src="./js/bootstrap.min.js"></script>

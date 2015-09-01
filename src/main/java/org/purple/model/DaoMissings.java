@@ -4,8 +4,11 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.HashMap;
 
 import org.joda.time.DateTime;
+import org.joda.time.DateTimeZone;
+import org.joda.time.format.DateTimeFormat;
 import org.purple.bean.Missing; 
 import org.purple.constant.Bdd;
 import org.purple.constant.Isep;
@@ -15,6 +18,12 @@ public class DaoMissings extends Dao<Missing>{
 	public DaoMissings(Connection co) {
 		super(co);
 		// TODO Auto-generated constructor stub
+	}
+	
+	public static DateTime dateTimeParse(String date){
+		DateTime d = DateTime.parse(date, DateTimeFormat.forPattern(Isep.JODA_UTC));
+		d = d.withZone(DateTimeZone.forID(Isep.LOCATION));
+		return d;
 	}
 
 	@Override
@@ -48,6 +57,20 @@ public class DaoMissings extends Dao<Missing>{
 	public Missing select(String id) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+	
+	public HashMap<String, Integer> missingCounter(){
+		HashMap<String, Integer> hash = new HashMap<String, Integer>();
+		String q = "SELECT DATE_FORMAT(Missing.`date`, '%M'), "
+				+ " COUNT(*) as `number` FROM Missing GROUP BY DATE_FORMAT(Missing.`date`, '%M'); ";
+		ResultSet cursor = Bdd.prepareExec(this.connect, q, new String[0]);
+		try {
+			while(cursor.next()){
+				hash.put(cursor.getString(1), cursor.getInt(2));
+			}
+		} catch (SQLException e) { }
+		
+		return hash;
 	}
 	
 	public Missing[] selectForStudent(String idStudent){

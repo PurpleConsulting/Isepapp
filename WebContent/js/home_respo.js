@@ -28,10 +28,9 @@ var okBar = function(obj, res){
 
 // -- initialisation
 
-Chart.defaults.global.responsive = true;
+
 (function () {
 	/**  LOAD GROUPS OF THE RESPO IF ANY **/
-	
 	var pseudo = $("h1 small").attr("data-target");
 	$.post("/Isepapp/SeviceTuteurHandler", { isExternal: pseudo }, function(data, status){
 		var template = $("#line-grp-template");
@@ -44,6 +43,8 @@ Chart.defaults.global.responsive = true;
 			// -- abs
 			line.find('a[data-info="missing"]').attr("href", "Groups?scope="+element.name+"#missing-div");
 			line.find("strong.abs").text(element.missings);
+			//-- mark
+			line.find("em.mk").text(" " + element.mark + " / 20");
 			// -- delivery
 			line.find('a[data-info="delivery"]').attr("href", "Groups?scope="+element.name+"#delivery-div");
 			line.find("strong.del").text(element.deliveries);
@@ -84,19 +85,15 @@ var markByGroup = function(bar){
 };
 
 (function () {
+	Chart.defaults.global.responsive = true;
 	/** LOAD THE MARK OF THE PROMOTION **/
 	$.post("/Isepapp/ServiceRespoHandler", { "mark-prom": "true"}, function(data, status){
-		var ctx = document.getElementById("barchart-canvas").getContext("2d");
 		var lab = Object.keys(data.result.prom);
 		if(lab.length == 0){
-			var h = $("div.row div.numbers h4");
-			var siblings = h.siblings();
-			siblings.hide("slow", function(){siblings.remove();});
-			$("div.row div.numbers").append('<div class="col-xs-10 col-xs-offset-1 app-empty">' +
-					'<img src="img/empty/nocross.svg" alt="" class="app-empty-img"/>' + 
-					'</div>');
 			$("div.row div.numbers div.app-empty").show("slow");
-		}  else {
+			$("div.row div.numbers div.chart").remove();
+		} else {
+			var ctx = document.getElementById("barchart-canvas").getContext("2d");
 			$("div.row div.numbers div[data-goal='waiting']").hide( "slow", function(){$(this).remove()});
 			var datum = {
 					labels: lab,
@@ -111,18 +108,64 @@ var markByGroup = function(bar){
 		               }
 	               ]
 	           };
+			$("div.row div.numbers div.chart").show("slow");
 			var canvas = $("#barchart-canvas");
 			var barchart = new Chart(ctx).Bar(datum);
 			canvas.click(function(evt){
 			    var activeBars = barchart.getBarsAtEvent(evt);
 			    markByGroup(activeBars);
 			});
-			$("div.row div.numbers div").show("slow");
+			
 		}
 	});
 })();
 
-
+(function(){
+	$.post("/Isepapp/ServiceRespoHandler", { "missing-prom": "true"}, function(data, status){
+		console.log(data);
+		
+		var node = $("div.row div.missings");
+		if(data.result._all == 0){
+			node.find("div.app-empty").show("slow");	
+		} else {
+			if (Object.keys(data.result.months).indexOf("september") != -1){
+				var halfMonth = ["septembre", "octobre", "novembre", "décembre", "janvier"];
+			} else {
+				var halfMonth = ["février", "mars", "avril", "mai", "juin"];
+			}
+			var figures = [];
+			halfMonth.forEach(function(h){
+				try{
+					var tab = data.result.days[h];
+					var j = tab.reduce(function(a,b, idx, tab){return a + b;});
+					figures.push(j);
+				} catch (e) {
+					figures.push(0);
+				}
+			});
+			
+			var datum = {
+				    labels: halfMonth,
+				    datasets: [
+				        {
+				            label: "Absence de la promotion",
+				            fillColor: "rgba(220,220,220,0.2)",
+				            strokeColor: "rgba(220,220,220,1)",
+				            pointColor: "rgba(220,220,220,1)",
+				            pointStrokeColor: "#fff",
+				            pointHighlightFill: "#fff",
+				            pointHighlightStroke: "rgba(220,220,220,1)",
+				            data: figures
+				        }
+				    ]
+				};
+			node.find("div.chart").show("slow");
+			var ctx = document.getElementById("linechart-canvas").getContext("2d");
+			var barchart = new Chart(ctx).Line(datum, { bezierCurve: false});
+			
+		}
+	});
+})();
 
 $("input.input-class").on("filebatchpreupload", function(){
 	uploadIni();

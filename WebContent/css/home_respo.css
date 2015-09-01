@@ -94,3 +94,11 @@ div.barchart-promo{
 div.app-empty{
 	display:none;
 }
+
+em.mk{
+	color: #246482;
+}
+
+div#linechart-canvas{
+	max-width: 60px;
+}
