@@ -86,7 +86,7 @@
 		<div class="col-xs-6 col-xs-offset-3 app-empty" style="display:none;" >
 			<img src="img/empty/missing.svg" alt="" class="app-empty-img"/>
 		</div>
-		<div class="col-xs-12 col-xs-offset-0 chart" style="display:none;">
+		<div class="col-xs-12 col-xs-offset-0 chart" > <!-- style="display:none;" -->
 			<canvas id="linechart-canvas" width="100" height="20"></canvas>
 		</div>
 	</div>

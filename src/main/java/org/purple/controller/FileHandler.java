@@ -121,13 +121,13 @@ public class FileHandler extends HttpServlet {
 			                
 			            	if(field.equals(this.subjectFile)){
 			                	fileName = Isep.FILE_SUBJECT;
-			                	p.setSuccessMessage("<strong>et voilà, </strong>le chargement du fichier a bien été effectué."
+			                	p.setSuccessMessage("<strong>Et voilà, </strong>le chargement du fichier a bien été effectué."
 			                			+ " Retrouvez le nouveau sujet sur la page <em><a href=\"Subject\">sujet</a><em>.");
 			                	
 			                } else if (field.equals(this.promoFile)) {
 			                	fileName = Isep.FILE_PROMO;
 			                	dg.dropAll();
-			                	p.setSuccessMessage("<strong>et voilà, </strong>les groupes du nouveau semestre "
+			                	p.setSuccessMessage("<strong>Et voilà, </strong>les groupes du nouveau semestre "
 			                			+ "ont été chargés avec succès. Retrouvez dès maintenant la demi-promo sur "
 			                			+ "la page <em><a href=\"Promo\">Classes</a><em>.");
 			                }
@@ -180,11 +180,11 @@ public class FileHandler extends HttpServlet {
 			    } catch (FileUploadException e) {
 			        e.printStackTrace();
 			        p.setSuccess(false);
-			        p.setSuccessMessage("une erreur est survenue lors du chargement du fichier.");
+			        p.setSuccessMessage("Une erreur est survenue lors du chargement du fichier.");
 			    } catch (Exception e) {
 			        e.printStackTrace();
 			        p.setSuccess(false);
-			        p.setSuccessMessage("une erreur est survenue lors du chargement du fichier.");
+			        p.setSuccessMessage("Une erreur est survenue lors du chargement du fichier.");
 			    }
 				
 				JSONObject business = new JSONObject();

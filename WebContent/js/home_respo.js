@@ -122,30 +122,31 @@ var markByGroup = function(bar){
 
 (function(){
 	$.post("/Isepapp/ServiceRespoHandler", { "missing-prom": "true"}, function(data, status){
-		console.log(data);
-		
 		var node = $("div.row div.missings");
 		if(data.result._all == 0){
 			node.find("div.app-empty").show("slow");	
 		} else {
 			if (Object.keys(data.result.months).indexOf("september") != -1){
-				var halfMonth = ["septembre", "octobre", "novembre", "décembre", "janvier"];
+				var monthsFr = ["septembre", "octobre", "novembre", "décembre", "janvier"];
+				var monthsEn = ["september", "october", "november", "december", "january"];
 			} else {
-				var halfMonth = ["février", "mars", "avril", "mai", "juin"];
+				var monthsFr = ["février", "mars", "avril", "mai", "juin"];
+				var monthsEn = ["february", "march", "april", "may", "june"];
 			}
 			var figures = [];
-			halfMonth.forEach(function(h){
+			monthsEn.forEach(function(h){
 				try{
-					var tab = data.result.days[h];
-					var j = tab.reduce(function(a,b, idx, tab){return a + b;});
-					figures.push(j);
+					var n = data.result.months[h];
+					if (typeof n  == "undefined") { throw message || "Assertion failed"; }
+					figures.push(n);
 				} catch (e) {
+					console.log("fail");
 					figures.push(0);
 				}
 			});
 			
 			var datum = {
-				    labels: halfMonth,
+				    labels: monthsFr,
 				    datasets: [
 				        {
 				            label: "Absence de la promotion",
@@ -159,6 +160,8 @@ var markByGroup = function(bar){
 				        }
 				    ]
 				};
+			console.log(data);
+			console.log(figures);
 			node.find("div.chart").show("slow");
 			var ctx = document.getElementById("linechart-canvas").getContext("2d");
 			var barchart = new Chart(ctx).Line(datum, { bezierCurve: false});

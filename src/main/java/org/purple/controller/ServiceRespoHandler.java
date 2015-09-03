@@ -135,7 +135,7 @@ public class ServiceRespoHandler extends HttpServlet {
 			        String key = (String) pair.getKey();
 			        int val = (int)pair.getValue();
 			        months.put(key.toLowerCase(), val);    
-			        System.out.println(pair.getKey() + " = " + pair.getValue());
+			        //System.out.println(pair.getKey() + " = " + pair.getValue());
 			        i = i + val;
 				        it.remove();
 				    }
