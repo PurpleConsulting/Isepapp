@@ -59,11 +59,7 @@
 				</c:if>
 				<input type="hidden" value="${fn:length(deadline)}" name="number"/>
 				<c:set var="length"  value="${fn:length(deadline)}"/>
-				<c:if test="${empty deadline}">
-					<div class="col-xs-8 col-xs-offset-2">
-						<img src="img/empty/deadline.svg" alt=""  class="app-empty-img"/>
-					</div>
-				</c:if>
+				<!-- if test="${empty deadline} -->
 				<c:forEach var="deadline" items="${deadline}" varStatus="status">
 					<c:if test="${deadline.getStatus()==true}">
 						<div class="alert alert-deadline design">

@@ -24,7 +24,8 @@ public class Average extends Avg{
 		this.value = 0.0;
 		this.setMaxVal(maxVal);
 	}
-	
+
+
 	public int getSize(){
 		int i = 0;
 		for(Avg a : this.grid ){

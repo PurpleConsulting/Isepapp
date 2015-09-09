@@ -14,7 +14,7 @@ public class Isep {
 
 		
 		public static final double LANDMARK = 20.0;
-		public static final boolean ISEP_LDAP = Boolean.valueOf(System.getProperty("app-ldap"));
+		public static final boolean ISEP_LDAP =  false; //Boolean.valueOf(System.getProperty("app-ldap"));
 		
 		public static final String ROOT_FILE_SYS = "assets/";
 		public static final String ROOT_FILE_SYS_DEPOSIT = "deposit/";

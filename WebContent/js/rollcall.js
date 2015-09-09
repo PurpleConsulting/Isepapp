@@ -12,6 +12,29 @@ $(document).ready(function(){
 	
 	toDayIsTheDay();
 	
+	var scopeDate = $.makeArray($("select[name='planning'] option").map(function(opt){
+		return $(this).val();
+	}));
+	var days = new Bloodhound({
+		  datumTokenizer: Bloodhound.tokenizers.whitespace,
+		  queryTokenizer: Bloodhound.tokenizers.whitespace,
+		  local: scopeDate
+	});
+	$("input[name='day-skiped']").typeahead({
+  	  minLength: 1,
+  	  highlight: true,
+  	  hint: false
+      },{
+  	  name: 'Days',
+  	  source: days,
+  	  limit: 30,
+  	  templates: {
+  	    header: '<div class="tt-suggestion tt-suggestion-header"><em class="Bloodhound">Dates du planning</em></div>'
+  	  }
+     });
+	
+	console.log(scopeDate);
+	
 	$("input.check_missing").prop("checked", false);
 	
 	$("input.check_missing").on("click", function(){
@@ -56,6 +79,7 @@ $(document).ready(function(){
 		var scopeDate = $("select[name='planning'] option").map(function(opt){
 			return $(this).val();
 		});
+		
 		scopeDate = $.makeArray(scopeDate);
 		
 		if ( scopeDate.indexOf($(this).val()) != -1){
@@ -66,7 +90,6 @@ $(document).ready(function(){
 			$("div.wrong-date").show("slow");
 			toDayIsTheDay();
 		}
-		console.log(scopeDate);
 	});
 });
 

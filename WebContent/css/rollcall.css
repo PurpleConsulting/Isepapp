@@ -47,3 +47,11 @@ select[name="planning"],
 div.wrong-date{
 	 display:none;
 }
+
+form[action="RollCall"] span.twitter-typeahead{
+	width: 100%;
+}
+
+div.tt-suggestion.tt-selectable stong{
+	text-align:center;
+}

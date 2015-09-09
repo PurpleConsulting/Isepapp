@@ -17,39 +17,44 @@ $(document).ready(function(){
 		
 	});
 	
-	// -- chart
-	//Chart.defaults.global.responsive = true;
-	Chart.defaults.global.scaleShowLabels = false;
-	var ctx = document.getElementById("radar-canvas").getContext("2d");
+	Chart.defaults.global.responsive = true;
+	Chart.defaults.global.scaleShowLabels = true;
 	
-	var data = {
-		    labels: ["azertyuiop","aaaaaaa","azertyuiop","azertyuiop","azertyuiop","azertyuiop"],
-		    datasets: [
-		        {
-		            label: "My First dataset",
-		            fillColor: "rgba(220,220,220,0.2)",
-		            strokeColor: "rgba(220,220,220,1)",
-		            pointColor: "rgba(220,220,220,1)",
-		            pointStrokeColor: "#fff",
-		            pointHighlightFill: "#fff",
-		            pointHighlightStroke: "rgba(220,220,220,1)",
-		            data: [65, 59, 90, 81, 56, 55]
-		        },
-		        {
-		            label: "My Second dataset",
-		            fillColor: "rgba(36,100,130,0.2)",
-		            strokeColor: "rgba(36,100,130,1)",
-		            pointColor: "rgba(36,100,130,1)",
-		            pointStrokeColor: "#fff",
-		            pointHighlightFill: "#fff",
-		            pointHighlightStroke: "rgba(151,187,205,1)",
-		            data: [28, 48, 40, 19, 96, 27]
-		        }
-		    ]
+	$.post("/Isepapp/Students", {radar: true, radar_std: $("div.idcard").attr("data-target")}, function(data, status){
+		var row =$('div.radar').parent();
+		var ctx = document.getElementById("radar-canvas").getContext("2d");
+		var datum = {
+				labels: data.result.skills.map(function(s){return s.title.substring(0, 4)}),
+				datasets: [
+		      		        {
+		    		            label: "Note du Groupe",
+		    		            fillColor: "rgba(220,220,220,0.2)",
+		    		            strokeColor: "rgba(220,220,220,1)",
+		    		            pointColor: "rgba(220,220,220,1)",
+		    		            pointStrokeColor: "#fff",
+		    		            pointHighlightFill: "#fff",
+		    		            pointHighlightStroke: "rgba(220,220,220,1)",
+		    		            data: data.result.skills.map(function(s){return s.group})
+		    		        },
+		    		        {
+		    		            label: "Note de l'Etudiant",
+		    		            fillColor: "rgba(36,100,130,0.2)",
+		    		            strokeColor: "rgba(36,100,130,1)",
+		    		            pointColor: "rgba(36,100,130,1)",
+		    		            pointStrokeColor: "#fff",
+		    		            pointHighlightFill: "#fff",
+		    		            pointHighlightStroke: "rgba(151,187,205,1)",
+		    		            data: data.result.skills.map(function(s){return s.student})
+		    		        }
+		    		    ]
 		};
+		console.log(data);
+		var Radar = new Chart(ctx).Radar(datum, {scaleShowLabels: false});
+		if(data.result.skills.every(function(e, idx, array){return e.group == 0})){
+			row.fadeOut("slow", function(){row.remove();});
+		}
+	});
 	
-	
-	var Radar = new Chart(ctx).Radar(data, {scaleShowLabels: false});
 	
 	// -- Pagination for the missing part
 	var missing = $("#blk-missing");
@@ -80,6 +85,5 @@ $(document).ready(function(){
 		}
 	});
 	
-
 });
 

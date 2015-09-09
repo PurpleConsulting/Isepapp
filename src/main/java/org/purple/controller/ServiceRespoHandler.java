@@ -6,6 +6,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -13,6 +15,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.joda.time.DateTime;
 import org.json.JSONObject;
 import org.purple.bean.Group;
 import org.purple.bean.Mark;
@@ -25,6 +28,7 @@ import org.purple.model.Avg;
 import org.purple.model.AvgBuilder;
 import org.purple.model.DaoGroups;
 import org.purple.model.DaoMarks;
+import org.purple.model.DaoMissings;
 import org.purple.model.DaoValues;
 
 /**
@@ -59,6 +63,7 @@ public class ServiceRespoHandler extends HttpServlet {
 		/** AJAX PARAMS **/
 		String markPromParam = request.getParameter("mark-prom");
 		String markGroupParam = request.getParameter("mark-group");
+		String missingPromParam = request.getParameter("missing-prom");
 		
 		////////////////////// OPS \\\\\\\\\\\\\\\\\\\\\\
 		
@@ -70,6 +75,7 @@ public class ServiceRespoHandler extends HttpServlet {
 			Connection bddServletCo = Bdd.getCo();
 			DaoGroups dg = new DaoGroups(bddServletCo);
 			DaoMarks dm = new DaoMarks(bddServletCo);
+			DaoMissings dmg = new DaoMissings(bddServletCo);
 			
 			if(!Isep.nullOrEmpty(markPromParam)){
 				// --------------------------------------------------------------------------------
@@ -114,6 +120,30 @@ public class ServiceRespoHandler extends HttpServlet {
 				
 				result.put("result", new JSONObject().put("groups", groups));
 				
+			} else if (!Isep.nullOrEmpty(missingPromParam)) {
+				// --------------------------------------------------------------------------------
+				// -- JSON SOURCE - PROM MISSING FOR LINE CHART 
+				// --------------------------------------------------------------------------------
+				JSONObject prom = new JSONObject();
+				JSONObject months = new JSONObject();
+				
+				HashMap<String, Integer> hash = dmg.missingCounter();
+			    Iterator it = hash.entrySet().iterator();
+			    int i = 0;
+			    while (it.hasNext()) {
+			        Map.Entry pair = (Map.Entry)it.next();
+			        String key = (String) pair.getKey();
+			        int val = (int)pair.getValue();
+			        months.put(key.toLowerCase(), val);    
+			        //System.out.println(pair.getKey() + " = " + pair.getValue());
+			        i = i + val;
+				        it.remove();
+				    }
+				
+			    prom.put("_all", i);
+				prom.put("months", months);
+				
+				result.put("result", prom);
 				
 			} else {
 				

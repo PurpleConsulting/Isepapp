@@ -48,9 +48,66 @@
 		</c:forEach>
 	</div>
 </div>
+
 <div class="row">
-	<div class="col-xs-offset-1 col-xs-10 delivery">
+	<div class="col-xs-offset-1 col-xs-10 missing" id="missing-div">
+		<h4>Les absences - <c:out value="${fn:length(missings)}"></c:out></h4>
+		<br/>
+		<div id="blk-missing">
+		<c:forEach var="missingRow" items="${missings}" varStatus="status">
+			<c:if test="${missingRow != null }">
+				<div class="alert alert-${missingRow.getLate() ? 'info' : 'warning'}${status.count <= 3 ? ' active' : ''}" 
+					role="alert" id="blk${status.count}">
+					<strong><c:out value="${missingRow.getStudent()}"></c:out></strong> - 
+					<em><c:out value="${missingRow.getLate() ? 'Retard' : 'Absence'}"></c:out></em>:
+					<c:out value="${missingRow.printDate()}"></c:out>, 
+					<c:out value="${missingRow.getSupporting()}"></c:out>
+					<c:if test="${missingRow.getLate()}">
+						/ Heure d'arrivé: <strong><c:out value="${missingRow.printLate()}"/></strong>
+					</c:if>
+				</div>
+			</c:if>
+		</c:forEach>
+		<c:if test="${fn:length(missings) == 0}">
+			<div class="col-xs-6 col-xs-offset-3">
+				<img src="img/empty/missing.svg" alt="" class="app-empty-img"/>
+			</div>
+		</c:if>
+		</div>
+		<c:if test="${fn:length(missings) > 3 }">
+			<nav>
+			  <ul class="pagination">
+			    <li>
+			      <a data-target="1" href="#" aria-label="Previous">
+			        <span aria-hidden="true">&laquo;</span>
+			      </a>
+			    </li>
+			    <c:set var="rowNum" scope="request" value="${1}"/>
+			    <c:forEach var="i" begin="1" end="${fn:length(missings)}" step="3">
+			    	<li ${i == 1 ? 'class="active"' : ''}>
+			    		<a data-target="${rowNum}" href="#">${rowNum}</a>
+			    	</li>
+			    <c:set var="rowNum" scope="request" value="${rowNum + 1}"/>
+			    </c:forEach>
+			    <li>
+			      <a data-target="${rowNum -1}" href="#" aria-label="Next">
+			        <span aria-hidden="true">&raquo;</span>
+			      </a>
+			    </li>
+			  </ul>
+			</nav>
+		</c:if>
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-xs-offset-1 col-xs-10 delivery" id="delivery-div">
 		<h4>Les livrables</h4>
+		<c:if test="${fn:length(deadlines) == 0}">
+			<div class="col-xs-6 col-xs-offset-3">
+				<img src="img/empty/delivery.svg" alt="" class="app-empty-img"/>
+			</div>
+		</c:if>
 		<c:forEach var="dead" items="${deadlines}" varStatus="ddElem">
 			<div class="col-md-3 col-sm-6" >
 				<c:choose>
