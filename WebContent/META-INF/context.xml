@@ -1,9 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Context docBase="Isepapp" path="/Isepapp" crossContext="true" reloadable="true" debug="1">	
   <WatchedResource>WEB-INF/web.xml</WatchedResource>
+  
        <Resource name="jdbc/APPDB" auth="Container" type="javax.sql.DataSource"
                      maxActive="120" maxIdle="100" maxWait="10000"
-                     username="isep" password="paris06"
+                     username="adminYmal6p6" password="ZHUE7AuZdibT"
                      driverClassName="com.mysql.jdbc.Driver"
-                     url="jdbc:mysql://ns370799.ip-91-121-193.eu:6311/APPDB"/>
+                     url="jdbc:mysql://127.8.63.2:3306/APPDB"/>
+
+<!--        <Resource name="jdbc/APPDB" auth="Container" type="javax.sql.DataSource" -->
+<!--                      maxActive="120" maxIdle="100" maxWait="10000" -->
+<!--                      username="isep" password="paris06" -->
+<!--                      driverClassName="com.mysql.jdbc.Driver" -->
+<!--                      url="jdbc:mysql://ns370799.ip-91-121-193.eu:6311/APPDB"/> -->
+
 </Context>
