@@ -13,15 +13,20 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.json.JSONObject;
 import org.purple.bean.Group;
+import org.purple.bean.Mark;
 import org.purple.bean.Page;
 import org.purple.bean.User;
 import org.purple.constant.Bdd;
 import org.purple.constant.Isep;
 import org.purple.model.Auth;
+import org.purple.model.Average;
+import org.purple.model.AvgBuilder;
 import org.purple.model.DaoDeadline;
 import org.purple.model.DaoGroups;
+import org.purple.model.DaoMarks;
 import org.purple.model.DaoMissings;
 import org.purple.model.DaoUsers;
+import org.purple.model.DaoValues;
 
 /**
  * Servlet implementation class SeviceTuteurHandler
@@ -54,18 +59,14 @@ public class SeviceTuteurHandler extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		Page p = new Page();
 		JSONObject result = new JSONObject();
-		/**
-		 * AJAX PARAMETERS PART
-		 */
+		/*$$$ AJAX PARAMETERS PART $$$*/
+		
 		// -- find the group and propose a new password
 		String tutorPseudo = request.getParameter("isExternal");
 		// -- submit a new password
 		String oldPassword = request.getParameter("old-pwd");
 		String newPassword = request.getParameter("new-pwd");
-		/**
-		 * POST PARAMETERS PART
-		 */
-		
+		/*$$$ POST PARAMETERS PART $$$*/
 		
 		if(Auth.isTutor(request) || Auth.isRespo(request)){
 			
@@ -73,6 +74,7 @@ public class SeviceTuteurHandler extends HttpServlet {
 			DaoUsers du = new DaoUsers(bddServletCo);
 			DaoGroups dg = new DaoGroups(bddServletCo);
 			DaoMissings dm = new DaoMissings(bddServletCo);
+			DaoMarks dmk = new DaoMarks(bddServletCo);
 			DaoDeadline dd = new DaoDeadline(bddServletCo);
 			User t = (User)request.getSession().getAttribute("user");
 			
@@ -81,15 +83,21 @@ public class SeviceTuteurHandler extends HttpServlet {
 				boolean extFlag = du.hasPassword(extUser);
 				JSONObject ext = new JSONObject().put("isExt", extFlag);
 				
+				
 				// -- now lets fetch the groups belonging to this tutor
 				Group[] tutorGrps = dg.selectGroupbyTutor(t);
 				ArrayList<JSONObject> jsonGrp = new ArrayList<JSONObject>();
+				double max = DaoValues.fetchMax();
 				for(Group g : tutorGrps){
 					JSONObject obj = new JSONObject();
+					dg.completeMemebers(g);
+					ArrayList<Mark> marks = dmk.selectByGroup(g.getName());
+					Average av = AvgBuilder.groupAverage(marks, g, max);
 					obj.put("id", g.getId());
 					obj.put("name", g.getName());
 					obj.put("missings", dm.selectForGroup(g.getName()).length);
 					obj.put("deliveries", dd.depositPerGroups(g).length);
+					obj.put("mark", av.compute());
 					jsonGrp.add(obj);
 				}
 				

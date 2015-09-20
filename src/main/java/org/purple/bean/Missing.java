@@ -26,6 +26,13 @@ public class Missing {
 		this.setSupporting(supporting);
 	}
 	
+	public Missing(String student, String supporting, String StringDate, boolean late ){
+		this.setStudent(student);
+		this.setDate(StringDate);
+		this.setLate(late);
+		this.setSupporting(supporting);
+	}
+	
 	public String getId() {
 		return id;
 	}

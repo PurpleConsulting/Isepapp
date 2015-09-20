@@ -28,10 +28,9 @@ var okBar = function(obj, res){
 
 // -- initialisation
 
-Chart.defaults.global.responsive = true;
+
 (function () {
 	/**  LOAD GROUPS OF THE RESPO IF ANY **/
-	
 	var pseudo = $("h1 small").attr("data-target");
 	$.post("/Isepapp/SeviceTuteurHandler", { isExternal: pseudo }, function(data, status){
 		var template = $("#line-grp-template");
@@ -44,6 +43,8 @@ Chart.defaults.global.responsive = true;
 			// -- abs
 			line.find('a[data-info="missing"]').attr("href", "Groups?scope="+element.name+"#missing-div");
 			line.find("strong.abs").text(element.missings);
+			//-- mark
+			line.find("em.mk").text(" " + element.mark + " / 20");
 			// -- delivery
 			line.find('a[data-info="delivery"]').attr("href", "Groups?scope="+element.name+"#delivery-div");
 			line.find("strong.del").text(element.deliveries);
@@ -84,33 +85,90 @@ var markByGroup = function(bar){
 };
 
 (function () {
+	Chart.defaults.global.responsive = true;
 	/** LOAD THE MARK OF THE PROMOTION **/
 	$.post("/Isepapp/ServiceRespoHandler", { "mark-prom": "true"}, function(data, status){
-		var ctx = document.getElementById("barchart-canvas").getContext("2d");
 		var lab = Object.keys(data.result.prom);
-		var datum = {
-				labels: lab,
-				datasets: [
-	               {
-	                   label: "Moyenne de la Promotion",
-	                   fillColor: "rgba(220,220,220,0.5)",
-	                   strokeColor: "rgba(220,220,220,0.8)",
-	                   highlightFill: "rgba(220,220,220,0.75)",
-	                   highlightStroke: "rgba(220,220,220,1)",
-	                   data: lab.map(function(group){return data.result.prom[group]})
-	               }
-               ]
-           };
-		var canvas = $("#barchart-canvas");
-		var barchart = new Chart(ctx).Bar(datum);
-		canvas.click(function(evt){
-		    var activeBars = barchart.getBarsAtEvent(evt);
-		    markByGroup(activeBars);
-		});
+		if(lab.length == 0){
+			$("div.row div.numbers div.app-empty").show("slow");
+			$("div.row div.numbers div.chart").remove();
+		} else {
+			var ctx = document.getElementById("barchart-canvas").getContext("2d");
+			$("div.row div.numbers div[data-goal='waiting']").hide( "slow", function(){$(this).remove()});
+			var datum = {
+					labels: lab,
+					datasets: [
+		               {
+		                   label: "Moyenne de la Promotion",
+		                   fillColor: "rgba(220,220,220,0.5)",
+		                   strokeColor: "rgba(220,220,220,0.8)",
+		                   highlightFill: "rgba(220,220,220,0.75)",
+		                   highlightStroke: "rgba(220,220,220,1)",
+		                   data: lab.map(function(group){return data.result.prom[group]})
+		               }
+	               ]
+	           };
+			$("div.row div.numbers div.chart").show("slow");
+			var canvas = $("#barchart-canvas");
+			var barchart = new Chart(ctx).Bar(datum);
+			canvas.click(function(evt){
+			    var activeBars = barchart.getBarsAtEvent(evt);
+			    markByGroup(activeBars);
+			});
+			
+		}
 	});
 })();
 
-
+(function(){
+	$.post("/Isepapp/ServiceRespoHandler", { "missing-prom": "true"}, function(data, status){
+		var node = $("div.row div.missings");
+		if(data.result._all == 0){
+			node.find("div.app-empty").show("slow");	
+		} else {
+			if (Object.keys(data.result.months).indexOf("september") != -1){
+				var monthsFr = ["septembre", "octobre", "novembre", "décembre", "janvier"];
+				var monthsEn = ["september", "october", "november", "december", "january"];
+			} else {
+				var monthsFr = ["février", "mars", "avril", "mai", "juin"];
+				var monthsEn = ["february", "march", "april", "may", "june"];
+			}
+			var figures = [];
+			monthsEn.forEach(function(h){
+				try{
+					var n = data.result.months[h];
+					if (typeof n  == "undefined") { throw message || "Assertion failed"; }
+					figures.push(n);
+				} catch (e) {
+					console.log("fail");
+					figures.push(0);
+				}
+			});
+			
+			var datum = {
+				    labels: monthsFr,
+				    datasets: [
+				        {
+				            label: "Absence de la promotion",
+				            fillColor: "rgba(220,220,220,0.2)",
+				            strokeColor: "rgba(220,220,220,1)",
+				            pointColor: "rgba(220,220,220,1)",
+				            pointStrokeColor: "#fff",
+				            pointHighlightFill: "#fff",
+				            pointHighlightStroke: "rgba(220,220,220,1)",
+				            data: figures
+				        }
+				    ]
+				};
+			console.log(data);
+			console.log(figures);
+			node.find("div.chart").show("slow");
+			var ctx = document.getElementById("linechart-canvas").getContext("2d");
+			var barchart = new Chart(ctx).Line(datum, { bezierCurve: false});
+			
+		}
+	});
+})();
 
 $("input.input-class").on("filebatchpreupload", function(){
 	uploadIni();

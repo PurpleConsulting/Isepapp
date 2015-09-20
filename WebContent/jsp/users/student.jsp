@@ -11,7 +11,7 @@
 	<c:import url="/jsp/alert.jsp" charEncoding="UTF-8"></c:import>
 </div>
 <div class="row">	
-	<div class="col-xs-offset-1 col-xs-10 idcard">
+	<div class="col-xs-offset-1 col-xs-10 idcard" data-target="${student.getPseudo()}">
 		<div class="col-md-offset-1 col-md-4 col-sm-offset-1 col-sm-10 col-xs-offset-1 col-xs-10  ">
 			<img src="./img/photo.jpg" alt="Photo de l'étudiant" />
 		</div>
@@ -40,8 +40,10 @@
 	</div>
 </div>
 <div class="row">
-	<div class="col-xs-offset-1 col-xs-10 mark" >
-		<h4>Compétences - <a class="btn btn-default" href="PersoControls?pseudo=${student.getPseudo()}" role="button"><span class="fa fa-pencil"> </span>  Noter</a></h4> 
+	<div class="col-xs-offset-1 col-xs-10 mark">
+		<h4>Compétences - <a class="btn btn-default" href="PersoControls?pseudo=${student.getPseudo()}" role="button">
+		<span class="fa fa-pencil"> </span>  Noter</a>
+		</h4> 
 		<div role="tabpanel">
 		  <!-- Nav tabs -->
 		  <ul class="nav nav-tabs" role="tablist">
@@ -55,7 +57,7 @@
 			</c:forEach>	
 		    </ul>
 		  <!-- Tab panes -->
-		  <div class="tab-content">
+		  <div class="tab-content" >
 		    <div role="tabpanel" class="tab-pane active" id="tab0">
 		    	<div class="col-sm-offset-1 col-sm-2 global-average">
 		    		<div><c:out value="${fn:substring(average.compute(),0,4)}"></c:out></div>
@@ -105,7 +107,8 @@
 </div>
 <div class="row">
 	<div class="col-xs-offset-1 col-xs-10 radar">
-		<div class="col-sm-8 col-xs-12">
+		<h4><span style="color:#246482;">Notes d'étudiant</span> / Notes de groupe</h4>
+		<div class=" col-xs-4 col-xs-offset-4  col-canvas"><!-- col-xs-10 col-xs-offset-1 -->
 			<canvas id="radar-canvas" width="300" height="300" ></canvas> <!-- width="300" height="300" -->
 		</div>
 	</div>
