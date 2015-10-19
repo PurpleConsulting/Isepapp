@@ -19,8 +19,9 @@ $(document).ready(function() {
 			editable: true,
 			contentHeight: 300
 			});			 
-};	
-	var today = new Date();
+	};
+	
+	var today = new Date(2015, 09, 01);
 	
 	if(parseInt(today.getMonth()) > 5){
 		firstOffset = 0;
@@ -30,14 +31,14 @@ $(document).ready(function() {
 		secoundOffset = 0;
 	}
 	
-	firtTerm = parseInt(today.getFullYear()) + firstOffset;
+	firstTerm = parseInt(today.getFullYear()) + firstOffset;
 	secoundTerm = parseInt(today.getFullYear()) + secoundOffset;
 	
-	displayCalendar('september', firtTerm + '-09-01');
-	displayCalendar('october', firtTerm + '-10-01');
-	displayCalendar('november', firtTerm + '-11-01');
-	displayCalendar('december', firtTerm + '-12-01');
-	displayCalendar('january', firtTerm + '-01-01');
+	displayCalendar('september', firstTerm + '-09-01');
+	displayCalendar('october', firstTerm + '-10-01');
+	displayCalendar('november', firstTerm + '-11-01');
+	displayCalendar('december', firstTerm + '-12-01');
+	displayCalendar('january', secoundTerm + '-01-01');
 	
 	displayCalendar('february', secoundTerm + '-02-01');
 	displayCalendar('march', secoundTerm + '-03-01');
