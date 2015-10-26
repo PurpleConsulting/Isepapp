@@ -1,4 +1,5 @@
 # Isepapp
+###### by The Purple Team
 ![Isepapp header](https://dl.dropboxusercontent.com/s/8xhosfp0xb0bzvm/isepapp-header.png?dl=0)
 Web Technologies Project ISEP - 2015 ([@ISEP](http://www.isep.fr))
 
@@ -13,13 +14,10 @@ The system must allow us to:
 - [ ] Raize a warrning for an under threshold average
 
 ![PurpleConsulting logo](https://dl.dropboxusercontent.com/s/ritubunlz1j4b79/purplelogo.png?dl=0)
-Isepapp is the response proposed by the PurpleConsulting Team.     
-The Team:     
-Zozo -> @zkaneswa   
-Dede -> @dchanthavong   
-Billy -> @nrasolom    
-Sherya -> @shreyamittal17   
-Loïc -> @DivLoic    
+
+
+Isepapp is the response proposed by the PurpleConsulting Team. 
+The Team: @zkaneswa @dchanthavong @nrasolom @shreyamittal17 @DivLoic    
 
 ### Technos:
 This project include j2ee, Tomcat sever 7, MySql jstl core taglib, junit framework, bootstrap, jquery(ui), chart.js, FullCalendar.
