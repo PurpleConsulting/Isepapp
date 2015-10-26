@@ -15,8 +15,8 @@ The system must allow us to:
 
 ![PurpleConsulting logo](https://dl.dropboxusercontent.com/s/ritubunlz1j4b79/purplelogo.png?dl=0)
 
+Isepapp is the response proposed by the PurpleConsulting Team.
 
-Isepapp is the response proposed by the PurpleConsulting Team. 
 The Team: @zkaneswa @dchanthavong @nrasolom @shreyamittal17 @DivLoic    
 
 ### Technos:
