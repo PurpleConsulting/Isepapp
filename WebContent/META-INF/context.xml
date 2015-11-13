@@ -4,7 +4,7 @@
   
        <Resource name="jdbc/APPDB" auth="Container" type="javax.sql.DataSource"
                      maxActive="120" maxIdle="100" maxWait="10000"
-                     username="adminYmal6p6" password="ZHUE7AuZdibT"
+                     username="adminezDKjLx" password="yPUI3j1wTjl3"
                      driverClassName="com.mysql.jdbc.Driver"
                      url="jdbc:mysql://127.8.63.2:3306/APPDB"/>
 
