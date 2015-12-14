@@ -57,8 +57,8 @@ public class Signin extends HttpServlet {
 		String ajPseudo = request.getParameter("Ajaxpseudo"); // -- trigged by the blur input
 		
 		/*$$$ FORM PARAMS $$$*/
-		String pseudo = request.getParameter("pseudo");
-		String pwd = request.getParameter("password");
+		String pseudo = "apprespo";//request.getParameter("pseudo");
+		String pwd = "apprespo"; //request.getParameter("password");
 		
 		////////////////////// OPS \\\\\\\\\\\\\\\\\\\\\\
 		

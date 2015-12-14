@@ -36,7 +36,7 @@
 				<div class="row">
 				  <div class="form-group col-md-7 has-feedback">
 				    <label for="id">Identifiant:</label>
-				    <input type="text" class="form-control" name="pseudo" id="pseudo" placeholder="Use apprespo for pseudo...">
+				    <input type="text" class="form-control" name="pseudo" id="pseudo" placeholder="JUST HIT ENTER ;) !" disabled>
 				  </div>
 				  <div style="display:none" class="col-xs-offset-1 col-xs-10 col-md-offset-0 col-md-5 alert alert-warning alert_input" role="alert">
 
@@ -45,7 +45,7 @@
 				<div class="row">
 			  	<div class="form-group col-md-7">
 				    <label for="password">Mot de passe:</label>
-				    <input type="password" class="form-control" name="password" id="password" placeholder="and apprespo for password">
+				    <input type="password" class="form-control" name="password" id="password" placeholder="JUST HIT ENTER ;) !" disabled>
 				  </div>
 				</div>
 			  <button type="submit" class="btn btn-default">Entrer</button>

@@ -271,7 +271,7 @@ var waiting = function(){
 
 $("a#csv-reminder").on("click", function(e) {
 	e.preventDefault();
-	$.get("jsp/home/modal_csv_reminder.jsp", {}, function(data, status){
+	/*$.get("jsp/home/modal_csv_reminder.jsp", {}, function(data, status){
 		var node = $( data );
 		bootbox.dialog({
 		title: 'Disposition attendu pour le fichier .csv',
@@ -285,14 +285,14 @@ $("a#csv-reminder").on("click", function(e) {
 			}
 		});
 		$("div.modal-header").addClass("primary-header");
-	});
+	});*/
 });
 
 
 
 $("a#backup-reminder").on("click", function(e) {
 	e.preventDefault();
-	$.get("jsp/home/modal_backup_reminder.jsp", {}, function(data, status){
+	/*$.get("jsp/home/modal_backup_reminder.jsp", {}, function(data, status){
 		var node = $( data );
 		bootbox.dialog({
 		title: 'Contnue du .zip de sauvegarde.',
@@ -306,7 +306,7 @@ $("a#backup-reminder").on("click", function(e) {
 			}
 		});
 		$("div.modal-header").addClass("primary-header");
-	});
+	});*/
 });
 
 

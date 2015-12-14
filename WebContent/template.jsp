@@ -18,6 +18,7 @@
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<title><c:out value="${pages.getTitle()}"></c:out></title>
+		<link rel="icon" type="image/png" href="./img/favicon_isep.png" />
 		<link rel="stylesheet" href="./css/bootstrap.min.css">
 		<link rel="stylesheet" href="./css/font-awesome.min.css">
 		<link rel="stylesheet" href="./css/main.css">

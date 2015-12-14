@@ -120,7 +120,7 @@
 							 role="progressbar" style="width: 0%">
 						</div>
 					</div>
-					<input type="file" name="promo_file" id="input_promo" class="input-class"  data-show-preview="false" />
+					<input type="file" name="promo_file" id="input_promo" class="input-class"  disabled="true" data-show-preview="false" />
 				</div>
 			</form>
 		</div>
