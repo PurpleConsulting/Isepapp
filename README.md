@@ -11,7 +11,7 @@ The system must allow us to:
 - [x] Specify the level of each student for those skills
 - [x] Convert the levels into Mark and compute an average
 - [ ] Get deliveries (pdf format) and count missing
-- [ ] Raize a warrning for an under threshold average
+- [ ] Rise a warrning for an under threshold average
 
 ![PurpleConsulting logo](https://dl.dropboxusercontent.com/s/ritubunlz1j4b79/purplelogo.png?dl=0)
 
