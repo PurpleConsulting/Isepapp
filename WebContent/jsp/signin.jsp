@@ -52,7 +52,11 @@
 			</form>
 			</div>
 		</div>
-		<footer></footer>
+		<footer style="text-align:center">
+			<span style="color:#246482;">
+				/!\ This site is just a school project and has nothing to do with isep.fr /!\
+			</span>
+		</footer>
 		<script type="text/javascript" src="./js/jquery-2.1.3.min.js"></script>
 		<script type="text/javascript" src="./js/jquery-ui.min.js"></script>
 		<script type="text/javascript" src="./js/bootstrap.min.js"></script>
