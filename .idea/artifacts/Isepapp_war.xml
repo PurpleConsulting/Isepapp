@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="Isepapp:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <root id="archive" name="Isepapp.war">
+      <element id="artifact" artifact-name="Isepapp:war exploded" />
+    </root>
+  </artifact>
+</component>
