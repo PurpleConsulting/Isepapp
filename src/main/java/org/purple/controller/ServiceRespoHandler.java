@@ -133,7 +133,7 @@ public class ServiceRespoHandler extends HttpServlet {
 			    while (it.hasNext()) {
 			        Map.Entry pair = (Map.Entry)it.next();
 			        String key = (String) pair.getKey();
-			        int val = (int)pair.getValue();
+			        int val = Integer.parseInt(pair.getValue().toString());
 			        months.put(key.toLowerCase(), val);    
 			        //System.out.println(pair.getKey() + " = " + pair.getValue());
 			        i = i + val;
