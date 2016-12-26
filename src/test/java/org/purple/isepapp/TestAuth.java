@@ -1,14 +1,16 @@
 package org.purple.isepapp;
 
-import static org.junit.Assert.*;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.purple.bean.User;
 import org.purple.model.Auth;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
+import static org.junit.Assert.fail;
 
 public class TestAuth {
 	private HttpServletRequest[] reqs = new HttpServletRequest[4];

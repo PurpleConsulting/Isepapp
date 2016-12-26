@@ -1,0 +1,9 @@
+isepapp:
+  image: purplesql
+  environment:
+  - MYSQL_USER=mysql
+  - MYSQL_DATABASE=APPDB
+  - MYSQL_ROOT_PASSWORD=paris06
+  - STARTUP_SQL=/docker-entrypoint-initdb.d/isepapp.sql
+  ports:
+  - "3306:3306"

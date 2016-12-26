@@ -1,27 +1,22 @@
 package org.purple.isepapp;
 
-import static org.junit.Assert.*;
-
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Random;
-
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.Assert;
 import org.purple.bean.Group;
 import org.purple.bean.Mark;
 import org.purple.bean.User;
-import org.purple.constant.Isep;
 import org.purple.model.Auth;
 import org.purple.model.Average;
 import org.purple.model.Avg;
 import org.purple.model.AvgBuilder;
+
+import java.io.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Random;
+
+import static org.junit.Assert.*;
 
 public class TestAvgBuilder {
 
@@ -57,7 +52,7 @@ public class TestAvgBuilder {
 	
 	@Before
 	public void setUp() throws IOException{
-		this.path = new File(".").getCanonicalPath() + "/src/test/";
+		this.path = new File(".").getCanonicalPath() + "/src/test/resources/";
 		this.g9z.setMembers(zozo);this.g9z.setMembers(dede); this.g9z.setMembers(billy);this.g9z.setMembers(loic);
 		zozo.setGroup("G5A"); dede.setGroup("G5B"); billy.setGroup("G6C"); loic.setGroup("G09");
 		
@@ -68,11 +63,13 @@ public class TestAvgBuilder {
 		grp = this.loadMarkFile(this.grpFile);
 		grpCross = this.loadMarkFile(this.grpFileLimitCross);
 		grpBlank = this.loadMarkFile(this.grpFileLimitBlank);
-		
-		String[] promNames = {"G5A", "G5B", "G5C", "G5D",
+
+		String[] promNames = {
+				"G5A", "G5B", "G5C", "G5D",
 				"G6A", "G6B", "G6C", "G6D",
 				"G7A", "G7B", "G7C", "G7D",
-				"G8A", "G8B", "G8C", "G8D"};
+				"G8A", "G8B", "G8C", "G8D"
+		};
 		
 		for(String name : promNames){
 			this.prm.put(name, loadMarkFile("test_avg_prom/"+name+".csv"));
@@ -149,17 +146,17 @@ public class TestAvgBuilder {
 
 		assertEquals(4, a.getGrid().size());
 	    assertNotEquals(0.0, a.compute());
-	    System.out.print("Promo 2016 S2 <3: "+ a.compute() +"\n");
+	    //System.out.print("Promo 2016 S2 <3: "+ a.compute() +"\n");
 		
 		for(Avg _classAVG : a.getGrid()){
 			assertNotEquals(0, _classAVG.status());
-			System.out.print(_classAVG.getTitle() + ": "+ _classAVG.compute() +"\n");
+			//System.out.print(_classAVG.getTitle() + ": "+ _classAVG.compute() +"\n");
 			
 			Average _classAverage = (Average)_classAVG;
 			
 			for(Avg groupAVG : _classAverage.getGrid()){
 				assertNotEquals(0, groupAVG.status());
-				System.out.print(groupAVG.getTitle() +" : "+ groupAVG.compute() + "\n");
+				//System.out.print(groupAVG.getTitle() +" : "+ groupAVG.compute() + "\n");
 				
 				Average groupAverage = (Average)groupAVG;
 				
@@ -169,7 +166,7 @@ public class TestAvgBuilder {
 				}
 			}
 			
-			System.out.print( "\n");
+			//System.out.print( "\n");
 		}
 		
 		assertEquals(14.13, a.byTitle("G5").compute(), 0.1);

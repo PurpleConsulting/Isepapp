@@ -1,16 +1,15 @@
 package org.purple.isepapp;
 
-import java.io.IOException;
+import org.purple.bean.Page;
+import org.purple.constant.Isep;
+import org.purple.model.Auth;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import org.purple.bean.Page;
-import org.purple.constant.Isep;
-import org.purple.model.Auth;
+import java.io.IOException;
 
 /**
  * Servlet implementation class Exemple

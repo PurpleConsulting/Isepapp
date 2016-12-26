@@ -3,7 +3,7 @@
   <WatchedResource>WEB-INF/web.xml</WatchedResource>
        <Resource name="jdbc/APPDB" auth="Container" type="javax.sql.DataSource"
                      maxActive="120" maxIdle="100" maxWait="10000"
-                     username="isep" password="paris06"
+                     username="root" password="paris06"
                      driverClassName="com.mysql.jdbc.Driver"
-                     url="jdbc:mysql://ns370799.ip-91-121-193.eu:6311/APPDB"/>
+                     url="jdbc:mysql:/localhost:3306/APPDB"/>
 </Context>
